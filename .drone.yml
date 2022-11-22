@@ -150,7 +150,7 @@ type: docker
 name: release by git tag
 
 steps:
-    - name: remove same sha1 folder
+    - name: remove same sha1 folder 
       image: appleboy/drone-ssh
       settings:
           host: 10.10.177.53
