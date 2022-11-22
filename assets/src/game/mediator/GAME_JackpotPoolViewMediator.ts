@@ -1,0 +1,205 @@
+import { _decorator } from 'cc';
+import BaseMediator from '../../base/BaseMediator';
+import { Logger } from '../../core/utils/Logger';
+import { SceneManager } from '../../core/utils/SceneManager';
+import { GameDataProxy } from '../../sgv3/proxy/GameDataProxy';
+import { JackpotPoolProxy } from '../../sgv3/proxy/JackpotPoolProxy';
+import { GameStateProxyEvent, JackpotPool, SceneEvent, ScreenEvent } from '../../sgv3/util/Constant';
+import { GameScene } from '../../sgv3/vo/data/GameScene';
+import { JackpotPoolObj } from '../../sgv3/vo/jackpot/JackpotPoolObj';
+import { JackpotTypeObj } from '../../sgv3/vo/jackpot/JackpotTypeObj';
+import { PoolHitInfo } from '../../sgv3/vo/result/PoolHitInfo';
+import { GAME_JackpotPoolView } from '../view/GAME_JackpotPoolView';
+const { ccclass } = _decorator;
+
+@ccclass('GAME_JackpotPoolViewMediator')
+export class GAME_JackpotPoolViewMediator extends BaseMediator<GAME_JackpotPoolView> {
+    public static readonly NAME: string = 'GAME_JackpotPoolViewMediator';
+
+    constructor(name?: string, component?: any) {
+        super(name, component);
+        Logger.i('[GAME_JackpotPoolViewMediator] constructor()');
+    }
+
+    protected lazyEventListener(): void {}
+
+    public listNotificationInterests(): Array<any> {
+        let eventList = [
+            ScreenEvent.ON_BET_CHANGE,
+            SceneManager.EV_ORIENTATION_VERTICAL,
+            SceneManager.EV_ORIENTATION_HORIZONTAL,
+            SceneEvent.LOAD_BASE_COMPLETE,
+            JackpotPool.CHANGE_SCENE,
+            JackpotPool.POOL_VALUE_UPDATE,
+            JackpotPool.HIT_JACKPOT_TO_POOL_VALUE_INIT,
+            JackpotPool.HIT_JACKPOT_TO_POOL_VALUE_UPDATE,
+            GameStateProxyEvent.ON_SCENE_BEFORE_CHANGE
+        ];
+        return eventList;
+    }
+
+    public handleNotification(notification: puremvc.INotification): void {
+        let name = notification.getName();
+        switch (name) {
+            case SceneManager.EV_ORIENTATION_HORIZONTAL:
+                this.onOrientationHorizontal();
+                this.setJpPoolPos();
+                break;
+            case SceneManager.EV_ORIENTATION_VERTICAL:
+                this.onOrientationVertical();
+                this.setJpPoolPos();
+                break;
+            case ScreenEvent.ON_BET_CHANGE:
+                this.onBetLevelChange();
+                break;
+            case SceneEvent.LOAD_BASE_COMPLETE:
+                this.view.node.active = true;
+                this.initView();
+                break;
+            case JackpotPool.CHANGE_SCENE:
+                this.setJpPoolPos();
+                break;
+            case JackpotPool.POOL_VALUE_UPDATE:
+                if (
+                    this.gameDataProxy.curScene == GameScene.Init ||
+                    (this.gameDataProxy.curScene == GameScene.Game_1 && this.gameDataProxy.canUpdateJackpotPool)
+                ) {
+                    this.updatePoolValue(notification.getBody(), false);
+                }
+                break;
+            case JackpotPool.HIT_JACKPOT_TO_POOL_VALUE_INIT:
+                this.hitJackpotToInitPoolValue();
+                break;
+            case JackpotPool.HIT_JACKPOT_TO_POOL_VALUE_UPDATE:
+                this.hitJackpotToUpdatePoolValue(notification.getBody());
+                break;
+            case GameStateProxyEvent.ON_SCENE_BEFORE_CHANGE:
+                this.view.changeOrientation(this.gameDataProxy.orientationEvent, this.gameDataProxy.curScene);
+                break;
+        }
+    }
+
+    /** 執行橫式轉換 */
+    protected onOrientationHorizontal(): void {
+        let curScene = this.gameDataProxy.curScene;
+        this.view?.changeOrientation(SceneManager.EV_ORIENTATION_HORIZONTAL, curScene);
+    }
+
+    /** 執行直式轉換 */
+    protected onOrientationVertical(): void {
+        let curScene = this.gameDataProxy.curScene;
+        this.view?.changeOrientation(SceneManager.EV_ORIENTATION_VERTICAL, curScene);
+    }
+
+    private onBetLevelChange() {
+        const first = 0;
+        const jpPoolData = this.gameDataProxy.initEventData.executeSetting.jackpotSetting.jackpotPoolData[first];
+        const wayBetList = this.gameDataProxy.initEventData.executeSetting.baseGameSetting.betSpec.waysBetList;
+        const curBetIndex = wayBetList.findIndex((bet) => bet == this.gameDataProxy.curBet);
+        const betRangeMapIndex = jpPoolData.jackpotExtendSetting.betRangeMap[curBetIndex];
+        let newPoolInitValue = [];
+        for (let i = 0; i < jpPoolData.jackpotExtendSetting.poolInitValue[betRangeMapIndex].length; i++) {
+            newPoolInitValue.push(
+                this.gameDataProxy.convertCredit2Cash(
+                    jpPoolData.jackpotExtendSetting.poolInitValue[betRangeMapIndex][i]
+                )
+            );
+        }
+        this.view.updateBonusPoolByBetRange(newPoolInitValue);
+        this.view.updateFortuneMultiplier(betRangeMapIndex);
+    }
+
+    protected initView(): void {
+        this.view.init(this.gameDataProxy.language);
+
+        this.initBonusPool();
+
+        this.onBetLevelChange();
+
+        this.view.curTimingStart();
+    }
+
+    protected initBonusPool() {
+        const jpPoolData = this.gameDataProxy.initEventData.executeSetting.jackpotSetting.jackpotPoolData[0];
+        const betIndex = this.gameDataProxy.totalBetList.length - 1 - this.gameDataProxy.totalBetIdx;
+        const betRangeMapIndex = jpPoolData.jackpotExtendSetting.betRangeMap[betIndex];
+
+        let newPoolInitValue = [];
+        for (let i = 0; i < jpPoolData.jackpotExtendSetting.poolInitValue[betRangeMapIndex].length; i++) {
+            if (i < this.jackpotPoolProxy.jackpotTypeObj.typeItems.length) {
+                newPoolInitValue.push(this.jackpotPoolProxy.jackpotTypeObj.typeItems[i].poolValue);
+            } else {
+                newPoolInitValue.push(
+                    this.gameDataProxy.convertCredit2Cash(
+                        jpPoolData.jackpotExtendSetting.poolInitValue[betRangeMapIndex][i]
+                    )
+                );
+            }
+        }
+
+        // 做 Jackpot 則要抓取 jackpotSetting
+        this.view.initBonusPool(newPoolInitValue);
+    }
+
+    protected hitJackpotToInitPoolValue() {
+        const hitJackpotPoolType = this.gameDataProxy.hitJackpotPoolType;
+        const jpPoolData = this.gameDataProxy.initEventData.executeSetting.jackpotSetting.jackpotPoolData[0];
+        const initJackpotValue = this.gameDataProxy.convertCredit2Cash(
+            jpPoolData.jackpotExtendSetting.poolInitValue[0][hitJackpotPoolType - 1]
+        );
+
+        this.runPoolLabel(initJackpotValue, hitJackpotPoolType, true);
+    }
+
+    protected hitJackpotToUpdatePoolValue(hitInfos: PoolHitInfo[]) {
+        let jpObject: JackpotTypeObj = new JackpotTypeObj();
+        jpObject.typeItems = [];
+        for (let i = 0; i < 2; i++) {
+            let jackpotPoolObj: JackpotPoolObj = new JackpotPoolObj();
+            jackpotPoolObj.poolId = hitInfos[i].hitPool;
+            jackpotPoolObj.poolValue = hitInfos[i].hitAmount / 100;
+            jpObject.typeItems.push(jackpotPoolObj);
+        }
+        this.updatePoolValue(jpObject, true);
+    }
+
+    protected updatePoolValue(jpObject: JackpotTypeObj, forceUpdate: boolean) {
+        for (let i = 0; i < jpObject.typeItems.length; i++) {
+            let poolItem = jpObject.typeItems[i];
+            this.runPoolLabel(poolItem.poolValue, poolItem.poolId, forceUpdate);
+        }
+    }
+
+    /** 開始彩金滾分
+    @_beginAmount 起始分數
+    @_totalAmount 結束分數
+    @poolId 彩金池id
+    @isForce 是否強制更新值
+    */
+    protected runPoolLabel(_totalAmount: number, poolId: number, isForce: boolean): void {
+        this.view.runAmount(_totalAmount, poolId, 3, isForce);
+    }
+
+    private setJpPoolPos() {
+        this.view.enterGamePos(this.gameDataProxy.curScene);
+    }
+
+    // ======================== Get Set ========================
+    private _gameDataProxy: GameDataProxy;
+    public get gameDataProxy(): GameDataProxy {
+        if (!this._gameDataProxy) {
+            this._gameDataProxy = this.facade.retrieveProxy(GameDataProxy.NAME) as GameDataProxy;
+        }
+
+        return this._gameDataProxy;
+    }
+
+    private _jackpotPoolProxy: JackpotPoolProxy;
+    public get jackpotPoolProxy(): JackpotPoolProxy {
+        if (!this._jackpotPoolProxy) {
+            this._jackpotPoolProxy = this.facade.retrieveProxy(JackpotPoolProxy.NAME) as JackpotPoolProxy;
+        }
+
+        return this._jackpotPoolProxy;
+    }
+}

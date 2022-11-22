@@ -1,0 +1,259 @@
+################################################
+#             Master 更新到RD Server           #
+################################################
+kind: pipeline
+type: docker
+name: push rd site
+
+clone:
+    disable: true
+
+steps:
+    - name: remove same sha1 folder
+      image: appleboy/drone-ssh
+      settings:
+          host: 10.10.177.53
+          port: 22
+          username:
+              from_secret: CI_Acc
+          password:
+              from_secret: CI_Pass
+          script:
+              - powershell ./remove.cmd ${DRONE_COMMIT_SHA:0:8}
+
+    - name: download from git
+      image: appleboy/drone-ssh
+      settings:
+          host: 10.10.177.53
+          port: 22
+          username:
+              from_secret: CI_Acc
+          password:
+              from_secret: CI_Pass
+          script:
+              - git clone -b ${DRONE_BRANCH} ssh://git@bitbucket.jumbogames.com.tw:7999/hsg/jhs1023.git ./cocos/${DRONE_COMMIT_SHA:0:8}
+
+    - name: copy help to build-templates
+      image: appleboy/drone-ssh
+      settings:
+          host: 10.10.177.53
+          port: 22
+          username:
+              from_secret: CI_Acc
+          password:
+              from_secret: CI_Pass
+          script:
+              - echo D | xcopy /S /Y "./cocos/${DRONE_COMMIT_SHA:0:8}/preview-template/help" "./cocos/${DRONE_COMMIT_SHA:0:8}/build-templates/web-mobile/help"
+
+    - name: build a mock version of the game with docker
+      image: appleboy/drone-ssh
+      settings:
+          host: 10.10.177.53
+          port: 22
+          username:
+              from_secret: CI_Acc
+          password:
+              from_secret: CI_Pass
+          script:
+              - powershell ./build.cmd 3.3.2 ${DRONE_COMMIT_SHA:0:8} buildConfig-dev ${DRONE_COMMIT_SHA:0:8}-mock
+
+    - name: build a common version of the game with docker
+      image: appleboy/drone-ssh
+      settings:
+          host: 10.10.177.53
+          port: 22
+          username:
+              from_secret: CI_Acc
+          password:
+              from_secret: CI_Pass
+          script:
+              - powershell ./build.cmd 3.3.2 ${DRONE_COMMIT_SHA:0:8} buildConfig ${DRONE_COMMIT_SHA:0:8}
+
+    - name: send tgz to storage
+      image: appleboy/drone-ssh
+      settings:
+          host: 10.10.177.53
+          port: 22
+          username:
+              from_secret: CI_Acc
+          password:
+              from_secret: CI_Pass
+          script:
+              - powershell ./sendStorage.cmd 1 1023 ${DRONE_COMMIT_SHA:0:8}
+
+    - name: deploy game to RD download
+      image: appleboy/drone-ssh
+      settings:
+          host: 10.10.177.190
+          port: 22
+          username:
+              from_secret: CI_USERNAME
+          key:
+              from_secret: CI_PRIVATE_KEY
+          script:
+              - cd /opt/download-server
+              - sudo sh deploy-game.sh 1 1023 ${DRONE_COMMIT_SHA:0:8}-mock
+              - sudo sh deploy-game.sh 1 1023 ${DRONE_COMMIT_SHA:0:8}
+
+    - name: update RD version
+      image: curlimages/curl
+      commands:
+          - curl -X POST -d 'action=8&mType=1023&gameVersion=${DRONE_COMMIT_SHA:0:8}-mock' http://10.10.177.189:5050/admin.do
+
+    - name: send telegram notification
+      image: appleboy/drone-telegram
+      settings:
+          token: 5285589922:AAHJBcwohHcBd5jLMJYEbhfW9bXDi3GoiIM
+          to: -667876452 #JIRD03_team
+          format: markdown
+          message: >
+              {{#success build.status}}
+                ✅ Build #{{build.number}} of `{{repo.name}}` succeeded.
+
+                📝 Commit by 👷‍♂️`{{commit.author}}` on `{{commit.branch}}`:
+                ```
+                {{commit.message}}
+                ```
+
+                🌏 {{ build.link }}
+
+              {{else}}
+                ❌ Build #{{build.number}} of `{{repo.name}}` failed. 🙏FIX me please.
+
+                📝 Commit by 👷‍♂️{{commit.author}} on `{{commit.branch}}`: 
+                ```
+                {{commit.message}}
+                ```    
+
+                🌏 {{ build.link }} 
+              {{/success}}
+      when:
+          status:
+              - success
+              - failure
+
+trigger:
+    branch:
+        include:
+            - master
+    event:
+        include:
+            - push
+            - pull_request
+
+---
+################################################
+#         production 使用 git tag 發動部署       #
+################################################
+kind: pipeline
+type: docker
+name: release by git tag
+
+steps:
+    - name: remove same sha1 folder
+      image: appleboy/drone-ssh
+      settings:
+          host: 10.10.177.53
+          port: 22
+          username:
+              from_secret: CI_Acc
+          password:
+              from_secret: CI_Pass
+          script:
+              - powershell ./remove.cmd ${DRONE_COMMIT_SHA:0:8}
+
+    - name: download from git
+      image: appleboy/drone-ssh
+      settings:
+          host: 10.10.177.53
+          port: 22
+          username:
+              from_secret: CI_Acc
+          password:
+              from_secret: CI_Pass
+          script:
+              - git clone -b ${DRONE_BRANCH} ssh://git@bitbucket.jumbogames.com.tw:7999/hsg/jhs1023.git ./cocos/${DRONE_COMMIT_SHA:0:8}
+
+    - name: copy help to build-templates
+      image: appleboy/drone-ssh
+      settings:
+          host: 10.10.177.53
+          port: 22
+          username:
+              from_secret: CI_Acc
+          password:
+              from_secret: CI_Pass
+          script:
+              - echo D | xcopy /S /Y "./cocos/${DRONE_COMMIT_SHA:0:8}/preview-template/help" "./cocos/${DRONE_COMMIT_SHA:0:8}/build-templates/web-mobile/help"
+
+    - name: build a mock version of the game with docker
+      image: appleboy/drone-ssh
+      settings:
+          host: 10.10.177.53
+          port: 22
+          username:
+              from_secret: CI_Acc
+          password:
+              from_secret: CI_Pass
+          script:
+              - powershell ./build.cmd 3.3.2 ${DRONE_COMMIT_SHA:0:8} buildConfig-dev ${DRONE_COMMIT_SHA:0:8}-mock
+
+    - name: build a common version of the game with docker
+      image: appleboy/drone-ssh
+      settings:
+          host: 10.10.177.53
+          port: 22
+          username:
+              from_secret: CI_Acc
+          password:
+              from_secret: CI_Pass
+          script:
+              - powershell ./build.cmd 3.3.2 ${DRONE_COMMIT_SHA:0:8} buildConfig ${DRONE_COMMIT_SHA:0:8}
+
+    - name: send tgz to storage
+      image: appleboy/drone-ssh
+      settings:
+          host: 10.10.177.53
+          port: 22
+          username:
+              from_secret: CI_Acc
+          password:
+              from_secret: CI_Pass
+          script:
+              - powershell ./sendStorage.cmd 1 1023 ${DRONE_COMMIT_SHA:0:8}
+
+    - name: send telegram notification
+      image: appleboy/drone-telegram
+      settings:
+          token: 5285589922:AAHJBcwohHcBd5jLMJYEbhfW9bXDi3GoiIM
+          to: -667876452 #JIRD03_team
+          format: markdown
+          message: >
+              {{#success build.status}}
+                ✅ Build `{{repo.name}}` succeeded, by Tag: `${DRONE_TAG}`
+
+                📝 Commit by 👷‍♂️`{{commit.author}}` on `{{commit.branch}}`:
+                ```
+                {{commit.message}}
+                ```
+
+                🌏 {{ build.link }}
+
+              {{else}}
+                ❌ Build #{{build.number}} of `{{repo.name}}` failed. 🙏FIX me please.
+
+                📝 Commit by 👷‍♂️`{{commit.author}}` on `{{commit.branch}}`: 
+                ```
+                {{commit.message}}
+                ```    
+
+                🌏 {{ build.link }} 
+              {{/success}}
+      when:
+          status:
+              - success
+              - failure
+
+trigger:
+    event:
+        - tag

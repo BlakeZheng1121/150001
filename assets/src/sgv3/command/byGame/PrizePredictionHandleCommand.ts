@@ -1,0 +1,142 @@
+import { _decorator } from 'cc';
+import { GameDataProxy } from '../../proxy/GameDataProxy';
+import { GameScene } from '../../vo/data/GameScene';
+import { BaseGameResult } from '../../vo/result/BaseGameResult';
+import { CommonGameResult } from '../../vo/result/CommonGameResult';
+import { FreeGameOneRoundResult } from '../../vo/result/FreeGameOneRoundResult';
+import { TopUpGameOneRoundResult } from '../../vo/result/TopUpGameOneRoundResult';
+const { ccclass } = _decorator;
+
+@ccclass('PrizePredictionHandleCommand')
+export class PrizePredictionHandleCommand extends puremvc.SimpleCommand {
+    public static readonly NAME: string = 'PrizePredictionHandleCommand';
+    public execute(notification: puremvc.INotification): void {
+        this.handleData();
+    }
+
+    handleData() {
+        this.gameDataProxy.spinEventData.gameStateResult.forEach((gameStateResult) => {
+            switch (gameStateResult.gameSceneName) {
+                case GameScene.Game_1:
+                    gameStateResult.roundResult.forEach(this.checkBaseGame, this);
+                    break;
+                case GameScene.Game_2:
+                    gameStateResult.roundResult.forEach(this.checkFreeGame, this);
+                    break;
+                case GameScene.Game_4:
+                    gameStateResult.roundResult.forEach(this.checkDragonUp, this);
+                    break;
+            }
+        });
+    }
+    /**
+     * check Base Game Prediction
+     * 大獎預告:
+     * 1. M Symbol 5連線 贏分是押分的25倍(含)以上，80%機率觸發大獎預告
+     * 2. 盤面出現8顆C1以上
+     * 3. 盤面出現6顆C1以上並觸發MiniGame
+     * 瞇牌:
+     * 同上1. 必定瞇牌
+     * @param result BaseGameResult
+     */
+    checkBaseGame(result: BaseGameResult): void {
+        const totalBet = this.gameDataProxy.curTotalBet;
+        const odds = this.gameDataProxy.convertCredit2Cash(result.baseGameTotalWin) / totalBet;
+        const isMSymbolFiveOfKind = result.waysGameResult.waysResult.some(
+            (result) => result.hitNumber == 5 && result.symbolID >= 2 && result.symbolID <= 7
+        );
+
+        const ballCount = result.extendInfoForbaseGameResult.ballCount;
+        const hitMiniGame = this.gameDataProxy.spinEventData.gameStateResult.some(
+            (gameStateResult) => gameStateResult.gameSceneName == GameScene.Game_3
+        );
+        const randomNumber = this.getRandomNumber(result, GameScene.Game_1);
+
+        const prizePredictionCondition =
+            (odds >= 25 && isMSymbolFiveOfKind && randomNumber < 0.8) ||
+            ballCount >= 8 ||
+            (ballCount >= 6 && hitMiniGame);
+        const displayMethodCondition = odds >= 25 && isMSymbolFiveOfKind;
+
+        result.displayInfo.prizePredictionType = prizePredictionCondition ? 'TYPE_1' : 'NoPrizePredictionType';
+        result.displayInfo.displayMethod = Array.from([false, false, false, false, displayMethodCondition], (x) => [x]);
+    }
+    /**
+     * check Free Game Prediction
+     * 大獎預告:
+     * 1. M Symbol 5連線 贏分是押分的25倍(含)以上，80%機率觸發大獎預告
+     * 瞇牌:
+     * 同上1. 必定瞇牌
+     * 2. 第一滾輪三顆wild
+     * @param result FreeGameOneRoundResult
+     */
+    checkFreeGame(result: FreeGameOneRoundResult): void {
+        if (result.extendInfoForFreeGameResult.isRespinFeature) {
+            this.checkRespin(result);
+        } else {
+            const totalBet = this.gameDataProxy.curTotalBet;
+            let odds = this.gameDataProxy.convertCredit2Cash(result.playerWin) / totalBet;
+            const isMSymbolFiveOfKind = result.waysGameResult.waysResult.some(
+                (result) => result.hitNumber == 5 && result.symbolID >= 2 && result.symbolID <= 7
+            );
+            const reel1StackWW = result.screenSymbol[0].filter((id) => id == 0).length == 3;
+            const randomNumber = this.getRandomNumber(result, GameScene.Game_1);
+
+            const prizePredictionCondition = odds >= 25 && isMSymbolFiveOfKind && randomNumber < 0.8;
+            const displayCondition = (odds >= 25 && isMSymbolFiveOfKind) || reel1StackWW;
+
+            result.displayInfo.prizePredictionType = prizePredictionCondition ? 'TYPE_1' : 'NoPrizePredictionType';
+            result.displayInfo.displayMethod = Array.from([false, false, false, false, displayCondition], (x) => [x]);
+        }
+    }
+
+    checkRespin(result: FreeGameOneRoundResult): void {
+        const displayCondition = result.waysGameResult.waysResult.some((result) => result.hitNumber >= 3);
+
+        result.displayInfo.displayMethod = Array.from([false, false, false, displayCondition, false], (x) => [x]);
+    }
+
+    /**
+     * check Dragon Up Prediction
+     * 當前累積%數達300%以上，且此次Spin滾出C2 2顆以上
+     * @param result TopUpGameOneRoundResult
+     */
+    checkDragonUp(result: TopUpGameOneRoundResult): void {
+        //spec:
+        const convert2dTo1dArray = (prev, curr) => prev.concat(curr);
+        let multi = result.extendInfoForTopUpGameResult.accumulateMultiplier;
+        multi = result.extendInfoForTopUpGameResult.goldMultiplierScreenLabel
+            .reduce(convert2dTo1dArray, [])
+            .reduce((prev, curr) => prev - curr, multi);
+        let newC2Count = result.extendInfoForTopUpGameResult.goldCreditBallScreenLabel
+            .reduce(convert2dTo1dArray, [])
+            .filter((value) => value > 0).length;
+        if (multi >= 300 && newC2Count >= 2) {
+            result.displayInfo.prizePredictionType = 'TYPE_1';
+        }
+    }
+
+    /**
+     * get random number by using first reel pos and first reel length
+     * @param result GameResult
+     * @param gameScene gameScene
+     * @returns random number between 0 to 1(excluding 1)
+     */
+    getRandomNumber(result: CommonGameResult, gameScene: GameScene): Number {
+        const firstReelID = 0;
+        const rngPos = result.displayInfo.rngInfo[0][firstReelID];
+        const reelLength = this.gameDataProxy.initEventData.gameStateSettings.find(
+            (setting) => setting.gameSceneId == gameScene
+        ).wheelData[this.gameDataProxy.sceneSetting.defaultMathTableIndex][firstReelID].wheelLength;
+        const randomNumber = rngPos / reelLength;
+        return randomNumber;
+    }
+
+    protected _gameDataProxy: GameDataProxy;
+    public get gameDataProxy(): GameDataProxy {
+        if (!this._gameDataProxy) {
+            this._gameDataProxy = this.facade.retrieveProxy(GameDataProxy.NAME) as GameDataProxy;
+        }
+        return this._gameDataProxy;
+    }
+}

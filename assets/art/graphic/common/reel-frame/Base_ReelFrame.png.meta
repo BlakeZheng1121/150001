@@ -1,0 +1,78 @@
+{
+  "ver": "1.0.21",
+  "importer": "image",
+  "imported": true,
+  "uuid": "dde48e60-f68e-4c8a-86ea-2d39f3e472cd",
+  "files": [
+    ".png",
+    ".json"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "dde48e60-f68e-4c8a-86ea-2d39f3e472cd@6c48a",
+      "displayName": "Base_ReelFrame",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "clamp-to-edge",
+        "wrapModeT": "clamp-to-edge",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "dde48e60-f68e-4c8a-86ea-2d39f3e472cd"
+      },
+      "ver": "1.0.21",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "dde48e60-f68e-4c8a-86ea-2d39f3e472cd@f9941",
+      "displayName": "Base_ReelFrame",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "none",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 0,
+        "trimY": 0,
+        "width": 70,
+        "height": 136,
+        "rawWidth": 70,
+        "rawHeight": 136,
+        "borderTop": 61,
+        "borderBottom": 70,
+        "borderLeft": 25,
+        "borderRight": 27,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "dde48e60-f68e-4c8a-86ea-2d39f3e472cd@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "hasAlpha": true,
+    "type": "sprite-frame",
+    "redirect": "dde48e60-f68e-4c8a-86ea-2d39f3e472cd@f9941",
+    "flipVertical": false,
+    "compressSettings": {
+      "useCompressTexture": false
+    }
+  }
+}

@@ -1,0 +1,50 @@
+import { BGMClipsEnum } from '../../../game/vo/enum/SoundMap';
+import { AudioManager } from '../../../ta/tool/AudioManager';
+import { StateMachineProxy } from '../../proxy/StateMachineProxy';
+import { SoundEvent, BaseSoundParms, WinEvent, ViewMediatorEvent } from '../../util/Constant';
+import { GameStateId } from '../../vo/data/GameStateId';
+import { AutoPlayOnSpinProcessCommand } from '../autoplay/AutoPlayOnSpinProcessCommand';
+import { CheckGameFlowCommand } from '../CheckGameFlowCommand';
+import { ClearRecoveryDataCommand } from '../recovery/ClearRecoveryDataCommand';
+import { SpinRequestCommand } from '../spin/SpinRequestCommand';
+import { StateCommand } from './StateCommand';
+
+export class Game1SpinCommand extends StateCommand {
+    public static readonly NAME = StateMachineProxy.GAME1_EV_SPIN;
+
+    public execute(notification: puremvc.INotification): void {
+        this.notifyWebControl();
+        this.gameDataProxy.runWinComplete = false;
+        this.gameDataProxy.readySpin = false;
+
+        // 重連線中不允許spin
+        if (this.gameDataProxy.isMaintaining) return;
+
+        this.sendNotification(WinEvent.FORCE_WIN_DISPOSE); // 清除之前的贏分表演
+
+        //是否 Recovery表演流程
+        if (
+            this.gameDataProxy.reStateResult == undefined ||
+            this.gameDataProxy.reStateResult.gameStateId == GameStateId.END
+        ) {
+            this.gameDataProxy.resetGameParams(); // 這邊為做贏分表演相關參數重置
+            this.sendNotification(SpinRequestCommand.NAME);
+        } else {
+            this.sendNotification(CheckGameFlowCommand.NAME); //有數學資料，表示取得 Recovery資料
+            this.sendNotification(ClearRecoveryDataCommand.NAME); //完成 Recovery動作，清除資料
+        }
+
+        this.sendNotification(SoundEvent.SOUNDCMD, [SoundEvent.PLAY_SCENEBG, BaseSoundParms.GAME1]);
+
+        this.gameDataProxy.isSpinning = true;
+        // 滾輪滾動，將 Web Spin 按鈕改變圖示
+        // this.webBridgeProxy.setElementStyle('spinBtn', 'stop', 'add');
+
+        this.webBridgeProxy.updateHtmlPlayerWin(0); //清除Win欄位
+        this.sendNotification(ViewMediatorEvent.JACKPOT_WON_CLOSE); //清除jackpot贏分顯示
+
+        if (this.gameDataProxy.onAutoPlay) {
+            this.sendNotification(AutoPlayOnSpinProcessCommand.NAME);
+        }
+    }
+}

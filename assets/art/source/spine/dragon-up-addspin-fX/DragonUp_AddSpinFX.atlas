@@ -1,0 +1,27 @@
+
+DragonUp_AddSpinFX.png
+size: 512,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Circle_01
+  rotate: false
+  xy: 194, 2
+  size: 81, 78
+  orig: 81, 78
+  offset: 0, 0
+  index: -1
+Circle_02
+  rotate: true
+  xy: 194, 82
+  size: 94, 89
+  orig: 144, 145
+  offset: 24, 27
+  index: -1
+light_02
+  rotate: false
+  xy: 2, 7
+  size: 190, 169
+  orig: 194, 174
+  offset: 2, 2
+  index: -1

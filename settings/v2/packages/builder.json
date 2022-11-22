@@ -1,0 +1,42 @@
+{
+  "__version__": "1.2.9",
+  "splash-setting": {
+    "totalTime": 0,
+    "displayWatermark": false
+  },
+  "textureCompressConfig": {
+    "userPreset": {
+      "c2DD1UYRdP47cNPKyrDZCN": {
+        "name": "graphic",
+        "options": {
+          "web": {
+            "png": 80
+          },
+          "ios": {
+            "etc2_rgba": "fast"
+          },
+          "miniGame": {},
+          "android": {
+            "etc1_rgb_a": "fast"
+          }
+        }
+      },
+      "1cv0A7cB1K+b7s9TfHOPof": {
+        "name": "jpg",
+        "options": {
+          "web": {
+            "jpg": 80
+          }
+        }
+      },
+      "5ddR6rFitIPLDljs+R/xZ2": {
+        "name": "ui-frame",
+        "options": {
+          "web": {
+            "png": 100
+          }
+        }
+      }
+    }
+  }
+}

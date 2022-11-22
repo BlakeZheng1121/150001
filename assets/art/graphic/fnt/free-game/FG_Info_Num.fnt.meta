@@ -1,0 +1,55 @@
+{
+  "ver": "1.0.5",
+  "importer": "bitmap-font",
+  "imported": true,
+  "uuid": "71b10d76-e295-419b-ac1c-5b05daefb613",
+  "files": [
+    ".json"
+  ],
+  "subMetas": {},
+  "userData": {
+    "_fntConfig": {
+      "commonHeight": 38,
+      "fontSize": 38,
+      "atlasName": "FG_Info_Num_0.png",
+      "fontDefDictionary": {
+        "49": {
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 24,
+            "height": 32
+          },
+          "xOffset": 0,
+          "yOffset": 0,
+          "xAdvance": 24
+        },
+        "50": {
+          "rect": {
+            "x": 24,
+            "y": 0,
+            "width": 24,
+            "height": 32
+          },
+          "xOffset": 0,
+          "yOffset": 0,
+          "xAdvance": 24
+        },
+        "51": {
+          "rect": {
+            "x": 48,
+            "y": 0,
+            "width": 24,
+            "height": 32
+          },
+          "xOffset": 0,
+          "yOffset": 0,
+          "xAdvance": 24
+        }
+      },
+      "kerningDict": {}
+    },
+    "fontSize": 38,
+    "textureUuid": "baac4211-d970-4f11-add6-2da8d6bba068"
+  }
+}

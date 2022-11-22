@@ -1,0 +1,533 @@
+[
+  {
+    "__type__": "cc.Prefab",
+    "_name": "",
+    "_objFlags": 0,
+    "_native": "",
+    "data": {
+      "__id__": 1
+    },
+    "optimizationPolicy": 0,
+    "asyncLoadAssets": false
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "ReSpin",
+    "_objFlags": 0,
+    "_parent": null,
+    "_children": [
+      {
+        "__id__": 2
+      }
+    ],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 22
+      },
+      {
+        "__id__": 24
+      },
+      {
+        "__id__": 26
+      }
+    ],
+    "_prefab": {
+      "__id__": 28
+    },
+    "_lpos": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_lrot": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_lscale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "_layer": 4,
+    "_euler": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_id": ""
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "DragonUp_AddSpinShow",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 1
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 3
+      },
+      {
+        "__id__": 5
+      },
+      {
+        "__id__": 7
+      }
+    ],
+    "_prefab": {
+      "__id__": 21
+    },
+    "_lpos": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_lrot": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_lscale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "_layer": 4,
+    "_euler": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_id": ""
+  },
+  {
+    "__type__": "cc.UITransform",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 2
+    },
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 4
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 0,
+      "height": 0
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "a1C30n7/lD86rilZ5bpl2P"
+  },
+  {
+    "__type__": "sp.Skeleton",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 2
+    },
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 6
+    },
+    "_visFlags": 0,
+    "_customMaterial": null,
+    "_srcBlendFactor": 2,
+    "_dstBlendFactor": 4,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "loop": false,
+    "_premultipliedAlpha": true,
+    "_timeScale": 1,
+    "_useTint": false,
+    "_preCacheMode": 0,
+    "_cacheMode": 0,
+    "_defaultCacheMode": 0,
+    "_debugBones": false,
+    "_debugSlots": false,
+    "_skeletonData": {
+      "__uuid__": "30e59385-156d-4043-9c3c-0827d5074e1e",
+      "__expectedType__": "sp.SkeletonData"
+    },
+    "defaultSkin": "default",
+    "defaultAnimation": "",
+    "_sockets": [],
+    "_debugMesh": false,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "f750RhKtVLN4Nk0JWriRce"
+  },
+  {
+    "__type__": "689c2Mu1jJHJ6TjpvKfr3by",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 2
+    },
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 8
+    },
+    "DefaultActive": true,
+    "SpineAnimationIndex": [
+      "%+1Spin",
+      "%+2Spin",
+      "%+3Spin",
+      "+1Spin",
+      "+2Spin",
+      "+3Spin"
+    ],
+    "AnimationList": [
+      {
+        "__id__": 9
+      },
+      {
+        "__id__": 11
+      },
+      {
+        "__id__": 13
+      },
+      {
+        "__id__": 15
+      },
+      {
+        "__id__": 17
+      },
+      {
+        "__id__": 19
+      }
+    ],
+    "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "bffrroqEtHiJN4r7aKUMui"
+  },
+  {
+    "__type__": "AnimationList",
+    "List_Name": "%+1Spin",
+    "AnimationFlowIsDependOnCocosAnimation": false,
+    "DelayTime": 0,
+    "AnimationState": [
+      {
+        "__id__": 10
+      }
+    ],
+    "IsAnimationOverActiveType": true,
+    "ListLoop": false
+  },
+  {
+    "__type__": "AnimationState",
+    "ccAnimation設定面板": true,
+    "Spine2D設定面板": true,
+    "Spine2D混合動畫設定面板": false,
+    "粒子設定面板": false,
+    "音效設定面板": false,
+    "IsAnimationPlay": false,
+    "CocosAnimationState": 0,
+    "IsSpine2DPlay": true,
+    "Spine2DAnimationState": 0,
+    "IsSpineAnimationLoop": false,
+    "IsSpine2DAddPlay": false,
+    "Spine2DAddAnimationTrack": 1,
+    "Spine2DAddAnimationState": 0,
+    "IsSpineAnimationAddLoop": false,
+    "PlayParticle": [],
+    "StopParticle": [],
+    "PlayAudio_Name": [],
+    "StopAudio_Name": []
+  },
+  {
+    "__type__": "AnimationList",
+    "List_Name": "%+2Spin",
+    "AnimationFlowIsDependOnCocosAnimation": false,
+    "DelayTime": 0,
+    "AnimationState": [
+      {
+        "__id__": 12
+      }
+    ],
+    "IsAnimationOverActiveType": true,
+    "ListLoop": false
+  },
+  {
+    "__type__": "AnimationState",
+    "ccAnimation設定面板": true,
+    "Spine2D設定面板": true,
+    "Spine2D混合動畫設定面板": false,
+    "粒子設定面板": false,
+    "音效設定面板": false,
+    "IsAnimationPlay": false,
+    "CocosAnimationState": 0,
+    "IsSpine2DPlay": true,
+    "Spine2DAnimationState": 1,
+    "IsSpineAnimationLoop": false,
+    "IsSpine2DAddPlay": false,
+    "Spine2DAddAnimationTrack": 1,
+    "Spine2DAddAnimationState": 0,
+    "IsSpineAnimationAddLoop": false,
+    "PlayParticle": [],
+    "StopParticle": [],
+    "PlayAudio_Name": [],
+    "StopAudio_Name": []
+  },
+  {
+    "__type__": "AnimationList",
+    "List_Name": "%+3Spin",
+    "AnimationFlowIsDependOnCocosAnimation": false,
+    "DelayTime": 0,
+    "AnimationState": [
+      {
+        "__id__": 14
+      }
+    ],
+    "IsAnimationOverActiveType": true,
+    "ListLoop": false
+  },
+  {
+    "__type__": "AnimationState",
+    "ccAnimation設定面板": true,
+    "Spine2D設定面板": true,
+    "Spine2D混合動畫設定面板": false,
+    "粒子設定面板": false,
+    "音效設定面板": false,
+    "IsAnimationPlay": false,
+    "CocosAnimationState": 0,
+    "IsSpine2DPlay": true,
+    "Spine2DAnimationState": 2,
+    "IsSpineAnimationLoop": false,
+    "IsSpine2DAddPlay": false,
+    "Spine2DAddAnimationTrack": 1,
+    "Spine2DAddAnimationState": 0,
+    "IsSpineAnimationAddLoop": false,
+    "PlayParticle": [],
+    "StopParticle": [],
+    "PlayAudio_Name": [],
+    "StopAudio_Name": []
+  },
+  {
+    "__type__": "AnimationList",
+    "List_Name": "+1Spin",
+    "AnimationFlowIsDependOnCocosAnimation": false,
+    "DelayTime": 0,
+    "AnimationState": [
+      {
+        "__id__": 16
+      }
+    ],
+    "IsAnimationOverActiveType": true,
+    "ListLoop": false
+  },
+  {
+    "__type__": "AnimationState",
+    "ccAnimation設定面板": true,
+    "Spine2D設定面板": true,
+    "Spine2D混合動畫設定面板": false,
+    "粒子設定面板": false,
+    "音效設定面板": false,
+    "IsAnimationPlay": false,
+    "CocosAnimationState": 0,
+    "IsSpine2DPlay": true,
+    "Spine2DAnimationState": 3,
+    "IsSpineAnimationLoop": false,
+    "IsSpine2DAddPlay": false,
+    "Spine2DAddAnimationTrack": 1,
+    "Spine2DAddAnimationState": 0,
+    "IsSpineAnimationAddLoop": false,
+    "PlayParticle": [],
+    "StopParticle": [],
+    "PlayAudio_Name": [],
+    "StopAudio_Name": []
+  },
+  {
+    "__type__": "AnimationList",
+    "List_Name": "+2Spin",
+    "AnimationFlowIsDependOnCocosAnimation": false,
+    "DelayTime": 0,
+    "AnimationState": [
+      {
+        "__id__": 18
+      }
+    ],
+    "IsAnimationOverActiveType": true,
+    "ListLoop": false
+  },
+  {
+    "__type__": "AnimationState",
+    "ccAnimation設定面板": true,
+    "Spine2D設定面板": true,
+    "Spine2D混合動畫設定面板": false,
+    "粒子設定面板": false,
+    "音效設定面板": false,
+    "IsAnimationPlay": false,
+    "CocosAnimationState": 0,
+    "IsSpine2DPlay": true,
+    "Spine2DAnimationState": 4,
+    "IsSpineAnimationLoop": false,
+    "IsSpine2DAddPlay": false,
+    "Spine2DAddAnimationTrack": 1,
+    "Spine2DAddAnimationState": 0,
+    "IsSpineAnimationAddLoop": false,
+    "PlayParticle": [],
+    "StopParticle": [],
+    "PlayAudio_Name": [],
+    "StopAudio_Name": []
+  },
+  {
+    "__type__": "AnimationList",
+    "List_Name": "+3Spin",
+    "AnimationFlowIsDependOnCocosAnimation": false,
+    "DelayTime": 0,
+    "AnimationState": [
+      {
+        "__id__": 20
+      }
+    ],
+    "IsAnimationOverActiveType": true,
+    "ListLoop": false
+  },
+  {
+    "__type__": "AnimationState",
+    "ccAnimation設定面板": true,
+    "Spine2D設定面板": true,
+    "Spine2D混合動畫設定面板": false,
+    "粒子設定面板": false,
+    "音效設定面板": false,
+    "IsAnimationPlay": false,
+    "CocosAnimationState": 0,
+    "IsSpine2DPlay": true,
+    "Spine2DAnimationState": 5,
+    "IsSpineAnimationLoop": false,
+    "IsSpine2DAddPlay": false,
+    "Spine2DAddAnimationTrack": 1,
+    "Spine2DAddAnimationState": 0,
+    "IsSpineAnimationAddLoop": false,
+    "PlayParticle": [],
+    "StopParticle": [],
+    "PlayAudio_Name": [],
+    "StopAudio_Name": []
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__id__": 0
+    },
+    "fileId": "beJ/FYGHtBqagg593v0ohj"
+  },
+  {
+    "__type__": "c6c8bIoBrlExpJIMCKhai/y",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 23
+    },
+    "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "94mFnHwixMAbKuLMSZf/zU"
+  },
+  {
+    "__type__": "5d3a1p111ZHZLukTSMGlVFy",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 25
+    },
+    "symbolType": 20,
+    "animation": {
+      "__id__": 7
+    },
+    "labelText": null,
+    "subSprite": null,
+    "respinNumFrames": [],
+    "hasReSpinPos": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 20,
+      "z": 0
+    },
+    "normalPos": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "goldFont": null,
+    "multipleFont": null,
+    "baseFont": null,
+    "specialFont": null,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "825TWazohCP5iNHVOPLan/"
+  },
+  {
+    "__type__": "4589dyHBaJOcK2fo1KiHumX",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 27
+    },
+    "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "755CUj7X9Dt5fyB3kjfHnB"
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__id__": 0
+    },
+    "fileId": "94FCsldaFLebw67YlljhS1"
+  }
+]

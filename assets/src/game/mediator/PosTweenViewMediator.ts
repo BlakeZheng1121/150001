@@ -1,0 +1,263 @@
+import { Vec2, _decorator } from 'cc';
+import BaseMediator from '../../base/BaseMediator';
+import { StateMachineCommand } from '../../core/command/StateMachineCommand';
+import { StateMachineObject } from '../../core/proxy/CoreStateMachineProxy';
+import { MathUtil } from '../../core/utils/MathUtil';
+import { ReelDataProxy } from '../../sgv3/proxy/ReelDataProxy';
+import { StateMachineProxy } from '../../sgv3/proxy/StateMachineProxy';
+import { DragonUpEvent, ViewMediatorEvent } from '../../sgv3/util/Constant';
+import { GlobalTimer } from '../../sgv3/util/GlobalTimer';
+import { GameScene } from '../../sgv3/vo/data/GameScene';
+import { AudioManager } from '../../ta/tool/AudioManager';
+import { GAME_GameDataProxy } from '../proxy/GAME_GameDataProxy';
+import { PosTweenView } from '../view/dragon-up/PosTweenView';
+import { AudioClipsEnum } from '../vo/enum/SoundMap';
+const { ccclass } = _decorator;
+
+@ccclass('PosTweenViewMediator')
+export class PosTweenViewMediator extends BaseMediator<PosTweenView> {
+    public static readonly NAME: string = 'PosTweenViewMediator';
+
+    private targertCollectSequence: Array<Vec2> | null = null;
+
+    private baseCreditCollectSequence: Array<Vec2> | null = null;
+
+    private curTargertSequenceIndex: number = 0;
+
+    private curbaseSequenceIndex: number = 0;
+
+    private curTargertCredit: number = 0;
+
+    public constructor(name?: string, component?: any) {
+        super(name, component);
+    }
+
+    protected lazyEventListener(): void {}
+
+    public listNotificationInterests(): Array<any> {
+        return [
+            DragonUpEvent.ON_ALL_CREDIT_COLLECT_START,
+            DragonUpEvent.ON_TARGERT_COLLECT_START,
+            ViewMediatorEvent.COLLECT_CREDIT_BALL
+        ];
+    }
+
+    public handleNotification(notification: puremvc.INotification): void {
+        let name = notification.getName();
+        if (this.gameDataProxy.curScene != GameScene.Game_4) return;
+        switch (name) {
+            case DragonUpEvent.ON_ALL_CREDIT_COLLECT_START:
+                this.onAllCreditCollectStart(notification.getBody());
+                break;
+            case DragonUpEvent.ON_TARGERT_COLLECT_START:
+                this.onTargertCollectStart();
+                break;
+            case ViewMediatorEvent.COLLECT_CREDIT_BALL:
+                this.onCollectCreditBall(notification.getBody());
+                break;
+        }
+    }
+    /** 設定結尾收集表演 */
+    private onCollectCreditBall(array: Array<any>) {
+        let pos: Vec2 = array[0];
+        this.view.onCollectCredit2Ball(this.reelDataProxy.getFovPos(pos.y * 5 + pos.x, 0));
+    }
+
+    /** 當把起始設定 處理參數Reset */
+    private onAllCreditCollectStart(array: Array<Array<Vec2>>) {
+        this.baseCreditCollectSequence = array[0];
+        this.targertCollectSequence = array[1];
+        this.curTargertSequenceIndex = 0;
+        this.curbaseSequenceIndex = 0;
+        this.curTargertCredit = 0;
+
+        this.sendNotification(DragonUpEvent.ON_TARGERT_COLLECT_START);
+    }
+
+    /** 目標金球開始收集設定 若球上有倍數 先處理倍數表演 */
+    private onTargertCollectStart() {
+        if (this.reelDataProxy.symbolFeature[this.curTargertSequence.x][this.curTargertSequence.y].multiple > 0) {
+            let targertPos = this.reelDataProxy.getFovPos(
+                this.curTargertSequence.y * this.reelDataProxy.symbolFeature.length + this.curTargertSequence.x,
+                0
+            );
+            let hasRespin =
+                this.reelDataProxy.symbolFeature[this.curTargertSequence.x][this.curTargertSequence.y].ReSpinNum > 0;
+            //設定資料
+            this.view.clonePrefab();
+            this.view.curObject.setMultipleSetting(
+                this.reelDataProxy.symbolFeature[this.curTargertSequence.x][this.curTargertSequence.y].multiple
+            );
+            this.view.scheduleOnce(() => {
+                this.sendNotification(DragonUpEvent.ON_MULTIPLE_ACCUMULATE_START, this.curTargertSequence);
+            }, 0.1);
+            //累積倍數表演
+            this.view.onMultipleAccumulate(targertPos, hasRespin, () => this.BoardMultipleRoll());
+        } else {
+            this.onBaseCreditCollectStart();
+        }
+    }
+
+    private BoardMultipleRoll() {
+        this.view.BoardmultipleRoll(
+            this.reelDataProxy.symbolFeature[this.curTargertSequence.x][this.curTargertSequence.y].multiple,
+            () => this.onMultipleAccumulateEnd()
+        );
+    }
+
+    /** 每顆金球上 倍數表演累積完成時 設定 */
+    private onMultipleAccumulateEnd() {
+        this.sendNotification(DragonUpEvent.ON_MULTIPLE_ACCUMULATE_END);
+        this.onBaseCreditCollectStart();
+    }
+
+    /** 每顆 C1球要開始收集至金球上時 */
+    private onBaseCreditCollectStart() {
+        let basePos = this.reelDataProxy.getFovPos(
+            this.curBaseSequence.y * this.reelDataProxy.symbolFeature.length + this.curBaseSequence.x,
+            0
+        );
+        let targertPos = this.reelDataProxy.getFovPos(
+            this.curTargertSequence.y * this.reelDataProxy.symbolFeature.length + this.curTargertSequence.x,
+            0
+        );
+        //設定資料
+        this.view.clonePrefab();
+        this.view.curObject.setBaseCreditSetting(
+            this.reelDataProxy.symbolFeature[this.curBaseSequence.x][this.curBaseSequence.y].isSpecial,
+            this.reelDataProxy.symbolFeature[this.curBaseSequence.x][this.curBaseSequence.y].creditCent
+        );
+
+        //BaseCredit收集表演
+        this.view.onBaseCreditCollect(basePos, targertPos, () => this.onBaseCreditCollectEnd());
+        //飛行音效播放
+        AudioManager.Instance.play(AudioClipsEnum.DragonUp_C1Collect);
+        this.sendNotification(
+            DragonUpEvent.ON_BASE_CREDIT_COLLECT_START,
+            this.curBaseSequence.y * this.reelDataProxy.symbolFeature.length + this.curBaseSequence.x
+        );
+    }
+
+    /** 每顆 C1球已經收集至金球上時  */
+    private onBaseCreditCollectEnd() {
+        let tempArray = new Array<number>();
+        let targertIndex =
+            this.curTargertSequence.y * this.reelDataProxy.symbolFeature.length + this.curTargertSequence.x;
+        this.curTargertCredit = MathUtil.add(
+            this.curTargertCredit,
+            this.reelDataProxy.symbolFeature[this.curBaseSequence.x][this.curBaseSequence.y].creditCent
+        );
+        tempArray.push(targertIndex); //index 0: 表示金球TargertIndex
+        tempArray.push(this.curTargertCredit); //Index 1: 表示金球當前累積金額
+        this.sendNotification(DragonUpEvent.ON_BASE_CREDIT_COLLECT_END, tempArray);
+        this.curbaseSequenceIndex++;
+
+        if (this.curbaseSequenceIndex >= this.baseCreditCollectSequence.length) {
+            AudioManager.Instance.play(AudioClipsEnum.DragonUp_C1CollectHit01);
+            this.onGetMultipleResult();
+        } else {
+            let curAudioBaseSequenceName = (this.curbaseSequenceIndex % 7) + 1; //打擊音效設定
+            //打擊音效播放
+            AudioManager.Instance.play(this.getAudioBaseSequenceName(curAudioBaseSequenceName));
+            this.onBaseCreditCollectStart();
+        }
+    }
+
+    /** 每顆金球收集結束後 到倍數加成階段時  */
+    private onGetMultipleResult() {
+        let targertIndex =
+            this.curTargertSequence.y * this.reelDataProxy.symbolFeature.length + this.curTargertSequence.x;
+        let targertPos = this.reelDataProxy.getFovPos(
+            this.curTargertSequence.y * this.reelDataProxy.symbolFeature.length + this.curTargertSequence.x,
+            0
+        );
+
+        this.sendNotification(DragonUpEvent.ON_GET_MULTIPLE_RESULT_START, targertIndex);
+
+        if (this.isHasMultipleResult) {
+            //設定資料
+            this.view.clonePrefab();
+            this.view.curObject.setMultipleSetting(this.view.multipleBoard.multiple);
+            this.view.onGetMultipleResult(targertPos, () => this.onCheckTargertIndex(true));
+
+            // AudioManager.Instance.play(AudioClipsEnum.DragonUp_PercentCollect02);
+        } else {
+            this.onCheckTargertIndex(false);
+        }
+    }
+
+    /** 當下金球流程表演完時 判定是否要進行下一顆金球表演 */
+    private onCheckTargertIndex(hasMultiple: boolean) {
+        if (hasMultiple) {
+            let targertIndex =
+                this.curTargertSequence.y * this.reelDataProxy.symbolFeature.length + this.curTargertSequence.x;
+            let targertCreditResult =
+                this.reelDataProxy.symbolFeature[this.curTargertSequence.x][this.curTargertSequence.y].creditCent;
+            let tempArray = new Array<number>();
+            tempArray.push(targertIndex); //index 0: 表示金球TargertIndex
+            tempArray.push(targertCreditResult); //Index 1: 表示金球累積金額
+            this.sendNotification(DragonUpEvent.ON_GET_MULTIPLE_RESULT_END, tempArray);
+
+            AudioManager.Instance.play(AudioClipsEnum.DragonUp_PercentHit);
+        }
+
+        this.curTargertSequenceIndex++;
+        this.curbaseSequenceIndex = 0;
+        this.curTargertCredit = 0;
+        let waitTime = hasMultiple ? 0.6 : 0.3;
+
+        GlobalTimer.getInstance().registerTimer('onNextTargertIndex', waitTime, this.onNextTargertIndex, this).start();
+    }
+
+    private onNextTargertIndex() {
+        if (this.curTargertSequenceIndex >= this.targertCollectSequence.length) {
+            this.view.clearPool(); //物件池清除
+            this.baseCreditCollectSequence = [];
+            this.targertCollectSequence = [];
+            this.sendNotification(DragonUpEvent.ON_ALL_CREDIT_COLLECT_END);
+            this.sendNotification(StateMachineCommand.NAME, new StateMachineObject(StateMachineProxy.GAME4_AFTERSHOW));
+        } else {
+            this.sendNotification(DragonUpEvent.ON_TARGERT_COLLECT_START, this.curTargertSequence);
+        }
+        GlobalTimer.getInstance().removeTimer('onNextTargertIndex');
+    }
+
+    // ======================== Get Set ========================
+
+    protected _reelDataProxy: ReelDataProxy;
+    protected get reelDataProxy(): ReelDataProxy {
+        if (!this._reelDataProxy) {
+            this._reelDataProxy = this.facade.retrieveProxy(ReelDataProxy.NAME) as ReelDataProxy;
+        }
+        return this._reelDataProxy;
+    }
+
+    protected _gameDataProxy: GAME_GameDataProxy;
+    protected get gameDataProxy(): GAME_GameDataProxy {
+        if (!this._gameDataProxy) {
+            this._gameDataProxy = this.facade.retrieveProxy(GAME_GameDataProxy.NAME) as GAME_GameDataProxy;
+        }
+        return this._gameDataProxy;
+    }
+
+    protected getAudioBaseSequenceName(value: number): AudioClipsEnum {
+        return AudioClipsEnum.DragonUp_C1CollectHit01
+    }
+
+    protected get curBaseSequence(): Vec2 {
+        return this.baseCreditCollectSequence[this.curbaseSequenceIndex];
+    }
+
+    protected get curTargertSequence(): Vec2 {
+        return this.targertCollectSequence[this.curTargertSequenceIndex];
+    }
+
+    protected get isHasMultipleResult(): boolean {
+        return (
+            this.reelDataProxy.symbolFeature[this.curTargertSequence.x][this.curTargertSequence.y].creditCent !=
+            this.gameDataProxy.convertCredit2Cash(
+                this.gameDataProxy.spinEventData.baseGameResult.extendInfoForbaseGameResult.ballTotalCredit
+            )
+        );
+    }
+}

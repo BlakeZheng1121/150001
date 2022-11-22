@@ -1,0 +1,87 @@
+import { Vec3, _decorator, math, Material } from 'cc';
+import { UIViewBase } from '../../../../core/uiview/UIViewBase';
+import { TSMap } from '../../../../core/utils/TSMap';
+import { Layer } from '../../../vo/enum/Layer';
+import { SymbolPartType } from '../../../vo/enum/Reel';
+import { SymbolContentBase } from './SymbolContentBase';
+import { SymbolPart } from './SymbolPart';
+const { ccclass } = _decorator;
+
+@ccclass('UISymbol')
+export class UISymbol extends UIViewBase {
+    //// Internal Member
+    private _symbolContent: SymbolContentBase | null = null;
+    ////
+
+    //// property
+    public get symbolContent() {
+        if (this._symbolContent == null) {
+            this._symbolContent = this.getComponent(SymbolContentBase);
+        }
+        return this._symbolContent;
+    }
+
+    public get symbolPos(){
+        return this.node.position;
+    }
+
+    public set symbolPos(value: Vec3){
+       this.setSymbolPos(value);
+    }
+    ////
+
+    //// API
+    public init(){      
+        if(this.symbolContent.parts == null){
+            this.symbolContent.parts = new TSMap<SymbolPartType, SymbolPart>();
+            let parts = this.node.getComponentsInChildren(SymbolPart);
+            for(let i in parts){
+                this.symbolContent.parts.set(parts[i].partType,parts[i]);      
+            }
+        }    
+    }
+
+    public recyclePart(){
+        this.symbolContent.parts.forEach((part) => {
+            part.node.setParent(this.node);
+        })
+    }
+
+    public setSibling(index: number){
+        this.symbolContent.parts.forEach((part) => {
+            part.node.setSiblingIndex(index);
+        })
+    }
+
+    public setSharedMaterial(material: Material){
+        this.symbolContent.parts.forEach((part) => {
+            part.renderable2D.customMaterial = material;
+        })
+    }
+
+    public setColor(color: Readonly<math.Color>){
+        this.symbolContent.parts.forEach((part) => {
+            part.renderable2D.color = color;
+        })
+    }
+
+    public setSymbolPos(movePos: Vec3){
+        this.node.setPosition(movePos);
+        this.symbolContent.parts.forEach((part) => {
+            part.setPartPos(this.node.worldPosition);
+        })
+    }
+
+    public setLayer(layer: Layer) {
+        this.symbolContent.parts.forEach((part) => {
+            part.node.layer = layer;
+        })
+    }
+    ////
+
+    //// Hook
+    ////
+
+    ////Internal Method
+    ////
+}

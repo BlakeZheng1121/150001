@@ -1,0 +1,83 @@
+
+C1_Trail.png
+size: 512,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+C2_lightcircle_2
+  rotate: false
+  xy: 338, 78
+  size: 115, 115
+  orig: 115, 115
+  offset: 0, 0
+  index: -1
+ScoreBoard
+  rotate: false
+  xy: 2, 195
+  size: 167, 312
+  orig: 167, 312
+  offset: 0, 0
+  index: -1
+cuplight
+  rotate: true
+  xy: 171, 196
+  size: 286, 140
+  orig: 286, 140
+  offset: 0, 0
+  index: -1
+fire_00
+  rotate: false
+  xy: 313, 342
+  size: 81, 166
+  orig: 144, 180
+  offset: 31, 14
+  index: -1
+fp0
+  rotate: false
+  xy: 179, 22
+  size: 157, 171
+  orig: 157, 171
+  offset: 0, 0
+  index: -1
+light2
+  rotate: false
+  xy: 313, 195
+  size: 135, 135
+  orig: 135, 135
+  offset: 0, 0
+  index: -1
+light3
+  rotate: false
+  xy: 2, 32
+  size: 175, 161
+  orig: 175, 161
+  offset: 0, 0
+  index: -1
+light_beam
+  rotate: true
+  xy: 395, 340
+  size: 68, 79
+  orig: 68, 79
+  offset: 0, 0
+  index: -1
+oplight2
+  rotate: false
+  xy: 395, 410
+  size: 97, 97
+  orig: 97, 97
+  offset: 0, 0
+  index: -1
+plight_0
+  rotate: false
+  xy: 2, 2
+  size: 28, 28
+  orig: 28, 28
+  offset: 0, 0
+  index: -1
+plight_1
+  rotate: true
+  xy: 338, 15
+  size: 61, 63
+  orig: 63, 63
+  offset: 0, 0
+  index: -1

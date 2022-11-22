@@ -1,0 +1,74 @@
+{
+  "ver": "1.0.21",
+  "importer": "image",
+  "imported": true,
+  "uuid": "ffeaae95-f4d2-4231-b5d4-b2be794a86cf",
+  "files": [
+    ".png",
+    ".json"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "ffeaae95-f4d2-4231-b5d4-b2be794a86cf@6c48a",
+      "displayName": "GrandJpMSG_Board",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "clamp-to-edge",
+        "wrapModeT": "clamp-to-edge",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "ffeaae95-f4d2-4231-b5d4-b2be794a86cf"
+      },
+      "ver": "1.0.21",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "ffeaae95-f4d2-4231-b5d4-b2be794a86cf@f9941",
+      "displayName": "GrandJpMSG_Board",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 0,
+        "trimY": 0,
+        "width": 60,
+        "height": 57,
+        "rawWidth": 60,
+        "rawHeight": 57,
+        "borderTop": 25,
+        "borderBottom": 25,
+        "borderLeft": 25,
+        "borderRight": 25,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "ffeaae95-f4d2-4231-b5d4-b2be794a86cf@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "hasAlpha": true,
+    "type": "sprite-frame",
+    "redirect": "ffeaae95-f4d2-4231-b5d4-b2be794a86cf@f9941"
+  }
+}

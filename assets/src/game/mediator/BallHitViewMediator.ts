@@ -1,0 +1,240 @@
+import { Vec2, _decorator } from 'cc';
+import BaseMediator from '../../base/BaseMediator';
+import { SceneManager } from '../../core/utils/SceneManager';
+import { BalanceUtil } from '../../sgv3/util/BalanceUtil';
+
+import {
+    DragonUpEvent,
+    FreeGameEvent,
+    GameStateProxyEvent,
+    ReelEvent,
+    SceneEvent,
+    StateWinEvent,
+    ViewMediatorEvent
+} from '../../sgv3/util/Constant';
+import { GameScene } from '../../sgv3/vo/data/GameScene';
+import { AudioManager } from '../../ta/tool/AudioManager';
+
+import { GAME_4_CreditCollectResultCommand } from '../command/dragon-up/GAME_4_CreditCollectResultCommand';
+import { MathUtil } from '../../core/utils/MathUtil';
+import { GAME_GameDataProxy } from '../proxy/GAME_GameDataProxy';
+import { BallHitView } from '../view/BallHitView';
+import { BGMClipsEnum } from '../vo/enum/SoundMap';
+import { GlobalTimer } from '../../sgv3/util/GlobalTimer';
+
+const { ccclass } = _decorator;
+
+@ccclass('BallHitViewMediator')
+export class BallHitViewMediator extends BaseMediator<BallHitView> {
+    public static readonly NAME: string = 'BallHitViewMediator';
+
+    public constructor(name?: string, component?: any) {
+        super(name, component);
+        this.view.callBack = this;
+    }
+
+    private numInBall: number = 0;
+    private ballTotalCount: number = 0;
+    private ballSequenceIndex: number = 0;
+
+    protected lazyEventListener(): void {}
+
+    public listNotificationInterests(): Array<any> {
+        return [
+            ReelEvent.ON_REELS_PERFORM_END,
+            SceneEvent.LOAD_BASE_COMPLETE,
+            StateWinEvent.ON_GAME1_TRANSITIONS,
+            StateWinEvent.ON_GAME2_TRANSITIONS,
+            StateWinEvent.ON_GAME3_TRANSITIONS,
+            StateWinEvent.ON_GAME3_RECOVERY,
+            StateWinEvent.ON_GAME4_TRANSITIONS,
+            ViewMediatorEvent.PREPARE_COLLECT_BALL,
+            ViewMediatorEvent.COLLECT_CREDIT_BALL,
+            DragonUpEvent.ON_ALL_CREDIT_COLLECT_START,
+            DragonUpEvent.ON_C2_COUNT_UPDATE,
+            SceneManager.EV_ORIENTATION_VERTICAL,
+            SceneManager.EV_ORIENTATION_HORIZONTAL,
+            GameStateProxyEvent.ON_SCENE_BEFORE_CHANGE,
+            GAME_4_CreditCollectResultCommand.NAME,
+            FreeGameEvent.ON_BEFORE_END_SCORE_SHOW
+        ];
+    }
+
+    public handleNotification(notification: puremvc.INotification): void {
+        let name = notification.getName();
+        switch (name) {
+            case ReelEvent.ON_REELS_PERFORM_END:
+                this.ballHitShow();
+                break;
+            case SceneEvent.LOAD_BASE_COMPLETE:
+                this.view.node.active = true;
+                break;
+            case StateWinEvent.ON_GAME1_TRANSITIONS:
+                this.baseGameTransition();
+                break;
+            case StateWinEvent.ON_GAME2_TRANSITIONS:
+                if (notification.getBody() == false) this.freeGameTransition();
+                break;
+            case StateWinEvent.ON_GAME4_TRANSITIONS:
+                if (notification.getBody() == false) this.topUpGameTransition();
+                break;
+            case StateWinEvent.ON_GAME3_TRANSITIONS:
+                if (notification.getBody() == true) this.view.miniGameTransition();
+                break;
+            case StateWinEvent.ON_GAME3_RECOVERY:
+                this.view.miniGameRecovery();
+                break;
+            case ViewMediatorEvent.PREPARE_COLLECT_BALL:
+                this.prepareCollectBall();
+                break;
+            case ViewMediatorEvent.COLLECT_CREDIT_BALL:
+                this.collectCreditBall(notification.getBody());
+                break;
+            case DragonUpEvent.ON_C2_COUNT_UPDATE:
+                this.updateBallCount(notification.getBody());
+                break;
+            case GAME_4_CreditCollectResultCommand.NAME:
+                this.hideBallCountInfo();
+                break;
+            case SceneManager.EV_ORIENTATION_VERTICAL:
+                this.onOrientationVertical();
+                break;
+            case SceneManager.EV_ORIENTATION_HORIZONTAL:
+                this.onOrientationHorizontal();
+                break;
+            case GameStateProxyEvent.ON_SCENE_BEFORE_CHANGE:
+                this.view.changeOrientation(this.gameDataProxy.orientationEvent, this.gameDataProxy.curScene);
+                break;
+            case FreeGameEvent.ON_BEFORE_END_SCORE_SHOW:
+                this.freeGameBallScoreSumShow(notification.getBody());
+                break;
+        }
+    }
+
+    private ballHitShow() {
+        if (this.gameDataProxy.curScene != GameScene.Game_1) return;
+        let ballHitInfo = this.gameDataProxy.spinEventData.baseGameResult.extendInfoForbaseGameResult;
+        if (ballHitInfo['ballCount'] > 0) {
+            this.view.ballHitShow(ballHitInfo);
+        }
+    }
+
+    private baseGameTransition() {
+        switch (this.gameDataProxy.preScene) {
+            case GameScene.Game_3:
+                this.view.ballInit();
+                break;
+            case GameScene.Game_2:
+            case GameScene.Game_4:
+                this.hideBallCountInfo();
+                this.hideBallCredit();
+                this.view.ballBaseGameIdle();
+                break;
+        }
+        //this.view.dragonInit();
+    }
+
+    private freeGameTransition() {
+        this.view.freeGameTransition();
+        this.view.ballFreeGameIdle();
+        this.numInBall = this.gameDataProxy.ballTotalCredit;
+        let ballCash = BalanceUtil.formatBalance(this.numInBall);
+        this.view.setBallCredit(ballCash, 4, GameScene.Game_2);
+    }
+
+    private topUpGameTransition() {
+        this.view.freeGameTransition();
+        this.view.holdSpinIdle();
+        this.hideBallCredit();
+        this.numInBall = this.gameDataProxy.ballTotalCount;
+        this.ballTotalCount = this.numInBall;
+        this.view.showBallCountInfo(this.numInBall.toString());
+    }
+
+    //** free game 結算前 加總 特色 */
+    private freeGameBallScoreSumShow(runningTime: number) {
+        let self = this;
+        self.view.ballScoreSumShow();
+        GlobalTimer.getInstance()
+            .registerTimer(
+                FreeGameEvent.ON_SIDE_BALL_SHOW,
+                runningTime,
+                function () {
+                    self.sendNotification(FreeGameEvent.ON_BEFORE_END_SCORE_SHOW_SKIP, runningTime);
+                    GlobalTimer.getInstance().removeTimer(FreeGameEvent.ON_SIDE_BALL_SHOW);
+                }.bind(self),
+                self
+            )
+            .start();
+    }
+    // 準備收集龍珠分數的表演，直式需放大龍珠
+    private prepareCollectBall() {
+        //this.view.ballFreeGameIdle();
+        AudioManager.Instance.stop(BGMClipsEnum.BGM_Base).fade(0, 0.5);
+        AudioManager.Instance.stop(BGMClipsEnum.BGM_BaseIdle).fade(0, 0.5);
+        AudioManager.Instance.play(BGMClipsEnum.BGM_FeatureSelection).loop(true).volume(0).fade(1, 0.5);
+    }
+
+    // 龍珠分數收集
+    private collectCreditBall(infoArray: Array<any>) {
+        let pos: Vec2 = infoArray[0]; // index 0: 位置資訊Index
+        this.numInBall = MathUtil.add(this.numInBall, infoArray[1]); // index 1: 顯示數值資訊
+        let index = Number(pos.x * 3 + pos.y);
+        let ballCash = BalanceUtil.formatBalance(this.numInBall);
+        switch (this.gameDataProxy.curScene) {
+            case GameScene.Game_1:
+                this.view.setBallCredit(ballCash, 0, GameScene.Game_1);
+                break;
+            case GameScene.Game_2:
+                this.view.performTrailOnBall(index, ballCash, 1, 0.3, GameScene.Game_2);
+                break;
+            case GameScene.Game_4:
+                this.ballSequenceIndex++;
+                if (this.ballSequenceIndex >= this.ballTotalCount) this.ballSequenceIndex = 0;
+                this.view.performTrailOnBall(index, ballCash, 2, 0.2, GameScene.Game_4, this.ballSequenceIndex);
+                break;
+        }
+    }
+
+    // 更新龍珠數量
+    private updateBallCount(ballInfo: number) {
+        this.numInBall += ballInfo;
+        this.ballTotalCount = this.numInBall;
+        this.view.showBallCountInfo(this.numInBall.toString());
+    }
+
+    private hideBallCredit() {
+        this.numInBall = 0;
+        this.view.hideBallCredit();
+    }
+
+    private hideBallCountInfo() {
+        this.numInBall = 0;
+        this.ballSequenceIndex = 0;
+        this.view.hideBallCountInfo();
+    }
+
+    public finishBallTransition() {
+        this.sendNotification(StateWinEvent.ON_GAME3_SHOW_SELECTION);
+    }
+
+    /** 執行橫式轉換 */
+    protected onOrientationHorizontal(): void {
+        let curScene = this.gameDataProxy.curScene;
+        this.view?.changeOrientation(SceneManager.EV_ORIENTATION_HORIZONTAL, curScene);
+    }
+
+    /** 執行直式轉換 */
+    protected onOrientationVertical(): void {
+        let curScene = this.gameDataProxy.curScene;
+        this.view?.changeOrientation(SceneManager.EV_ORIENTATION_VERTICAL, curScene);
+    }
+
+    private _gameDataProxy: GAME_GameDataProxy;
+    private get gameDataProxy(): GAME_GameDataProxy {
+        if (!this._gameDataProxy) {
+            this._gameDataProxy = this.facade.retrieveProxy(GAME_GameDataProxy.NAME) as GAME_GameDataProxy;
+        }
+        return this._gameDataProxy;
+    }
+}

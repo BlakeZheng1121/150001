@@ -1,0 +1,183 @@
+import { DEBUG } from 'cc/env';
+import { BalanceUtil } from '../../sgv3/util/BalanceUtil';
+import { SceneEvent } from '../../sgv3/util/Constant';
+import { CoreGameDataProxy } from '../proxy/CoreGameDataProxy';
+import { CoreWebBridgeProxy } from '../proxy/CoreWebBridgeProxy';
+import { Logger } from '../utils/Logger';
+import * as i18n from '../../../../extensions/i18n/assets/LanguageData';
+import { ServiceProvider } from '../vo/NetworkType';
+
+export class SetupGameConfigCommand extends puremvc.SimpleCommand {
+    public static readonly NAME: string = 'SetupGameConfigCommand';
+
+    private servInfo: any;
+    private userInfo: any;
+    private gameData: any;
+    private gameVer: any;
+    private uiVersion: any;
+
+    public execute(notification: puremvc.INotification): void {
+        const self = this;
+        if (DEBUG) {
+            self.servInfo = self.getServInfo();
+            self.userInfo = self.getUserInfo();
+            self.gameData = self.getGameData();
+            self.gameVer = self.getGameVer();
+            self.uiVersion = self.getUIVersion();
+            self.setupServInfo(self.servInfo);
+            self.setupUserInfo(self.userInfo);
+            self.setupGameData(self.gameData);
+            self.setupGameVer(self.gameVer);
+            self.setupUIVersion(self.uiVersion);
+        } else {
+            self.getServInfoRequest();
+            self.getUserInfoRequest();
+            self.getGameDataRequest();
+            self.getGameVerRequest();
+            self.getUIVersionRequest();
+            self.getLogoUrlRequest();
+        }
+    }
+
+    public handleContainerMsg(e: MessageEvent) {
+        const self = this;
+        let data = JSON.parse(e.data).data;
+        switch (JSON.parse(e.data).name) {
+            case 'servInfo':
+                self.servInfo = data;
+                self.setupServInfo(self.servInfo);
+                break;
+            case 'userInfo':
+                self.userInfo = data;
+                self.setupUserInfo(self.userInfo);
+                break;
+            case 'gameData':
+                self.gameData = data;
+                self.setupGameData(self.gameData);
+                break;
+            case 'gameVer':
+                self.gameVer = data;
+                self.setupGameVer(self.gameVer);
+                break;
+            case 'getUIVersion':
+                self.uiVersion = data;
+                self.setupUIVersion(self.uiVersion);
+                break;
+            case 'getLogoUrl':
+                let logoUrl = data;
+                self.setupLogoUrl(logoUrl);
+                break;
+        }
+    }
+
+    protected setupLogoUrl(url: any) {
+        if(window['serviceProvider'] === ServiceProvider.OTHERS 
+        || url === undefined 
+        || url === null ) {  
+            return;
+        }
+        this.sendNotification(SceneEvent.LOAD_LOGO_URL,url);
+    }
+
+    protected setupServInfo(servInfo: any) {
+        let gameDataProxy: CoreGameDataProxy = this.getGameDataProxy();
+        gameDataProxy.host = servInfo['gameHost'];
+        Logger.enable = String(servInfo['enableInfoLog']) == 'true' ? true : false;
+    }
+
+    protected setupUserInfo(userInfo: any) {
+        let gameDataProxy: CoreGameDataProxy = this.getGameDataProxy();
+        gameDataProxy.language = userInfo['lang'];
+        i18n.init(gameDataProxy.language);
+        i18n.updateSceneRenderers();
+        gameDataProxy.useDollarSign = userInfo['useDollarSign'];
+        gameDataProxy.dollarSign = userInfo['currencySymbol'];
+        gameDataProxy.dollarCurrency = userInfo['currency'];
+        //BalanceUtil.dollarSign = gameDataProxy.useDollarSign ? gameDataProxy.dollarSign : '';
+        BalanceUtil.dollarSign = gameDataProxy.dollarCurrency;
+        this.sendNotification(SceneEvent.LOAD_USER_INFO_COMPLETE);
+    }
+
+    protected setupGameData(gameData: any) {
+        let gameDataProxy: CoreGameDataProxy = this.getGameDataProxy();
+        gameDataProxy.isDemoGame = gameData['isDemo'];
+        gameDataProxy.hasGoHome = gameData['isShowGoHome'];
+        gameDataProxy.hasPlayerReport = gameData['isShowPlayerReport'];
+        this.sendNotification(SceneEvent.LOAD_GAME_DATA_COMPLETE);
+    }
+
+    protected setupGameVer(gameVer: any) {
+        let gameDataProxy: CoreGameDataProxy = this.getGameDataProxy();
+        gameDataProxy.gameVer = gameVer;
+        gameDataProxy.resPath = `${gameDataProxy.host}${gameDataProxy.gameType}/${gameDataProxy.machineType}/${gameDataProxy.gameVer}/`;
+    }
+
+    protected setupUIVersion(uiVersion: any) {
+        let gameDataProxy: CoreGameDataProxy = this.getGameDataProxy();
+        gameDataProxy.gameAndUiVer = `v${uiVersion.version} / v${uiVersion.gameVersion}`;
+        gameDataProxy.gameVer = uiVersion.gameVersion;
+        this.sendNotification(SceneEvent.LOAD_UI_VERSION_COMPLETE);
+    }
+
+    protected getGameDataProxy(): CoreGameDataProxy {
+        return this.facade.retrieveProxy(CoreGameDataProxy.NAME) as CoreGameDataProxy;
+    }
+
+    protected getWebBridgeProxy(): CoreWebBridgeProxy {
+        return this.facade.retrieveProxy(CoreWebBridgeProxy.NAME) as CoreWebBridgeProxy;
+    }
+
+    protected getGameData(): any {
+        return this.getWebBridgeProxy().getWebObj('gameData');
+    }
+
+    protected getInitTicket(): any {
+        return this.getWebBridgeProxy().getWebObj('initTicket');
+    }
+
+    protected getServInfo(): any {
+        return this.getWebBridgeProxy().getWebObj('servInfo');
+    }
+
+    protected getUserInfo(): any {
+        return this.getWebBridgeProxy().getWebObj('userInfo');
+    }
+
+    protected getGameVer(): any {
+        return this.getWebBridgeProxy().getWebObj('gameVer');
+    }
+
+    protected getUIVersion(): any {
+        return this.getWebBridgeProxy().getWebFun('getUIVersion');
+    }
+
+    protected getGameDataRequest() {
+        this.getWebBridgeProxy().getWebObjRequest(this, 'gameData');
+    }
+
+    protected getInitTicketRequest() {
+        this.getWebBridgeProxy().getWebObjRequest(this, 'initTicket');
+    }
+
+    protected getServInfoRequest() {
+        this.getWebBridgeProxy().getWebObjRequest(this, 'servInfo');
+    }
+
+    protected getUserInfoRequest() {
+        this.getWebBridgeProxy().getWebObjRequest(this, 'userInfo');
+    }
+
+    protected getGameVerRequest() {
+        this.getWebBridgeProxy().getWebObjRequest(this, 'gameVer');
+    }
+
+    protected getLogoUrlRequest() {
+        this.getWebBridgeProxy().getWebObjRequest(this, 'getLogoUrl');
+    }
+
+    protected getUIVersionRequest(): any {
+        return this.getWebBridgeProxy().getWebFunRequest(this, 'getUIVersion');
+    }
+
+
+}

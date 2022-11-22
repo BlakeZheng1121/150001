@@ -1,0 +1,27 @@
+
+Raise_JackpotFX.png
+size: 512,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+GRAND_light
+  rotate: false
+  xy: 2, 97
+  size: 335, 95
+  orig: 356, 99
+  offset: 10, 3
+  index: -1
+MAJOR_light
+  rotate: false
+  xy: 2, 2
+  size: 305, 93
+  orig: 328, 105
+  offset: 11, 8
+  index: -1
+MINOR_light
+  rotate: true
+  xy: 339, 20
+  size: 172, 73
+  orig: 172, 75
+  offset: 0, 2
+  index: -1

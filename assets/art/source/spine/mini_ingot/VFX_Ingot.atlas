@@ -1,0 +1,76 @@
+
+VFX_Ingot.png
+size: 457,368
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+BallLightpng
+  rotate: true
+  xy: 124, 2
+  size: 103, 110
+  orig: 128, 128
+  offset: 22, 0
+  index: -1
+C1_fire_00
+  rotate: false
+  xy: 2, 46
+  size: 120, 120
+  orig: 120, 120
+  offset: 0, 0
+  index: -1
+Light CircleBlur
+  rotate: true
+  xy: 187, 107
+  size: 124, 128
+  orig: 128, 128
+  offset: 4, 0
+  index: -1
+front
+  rotate: false
+  xy: 187, 233
+  size: 133, 133
+  orig: 133, 133
+  offset: 0, 0
+  index: -1
+front2
+  rotate: false
+  xy: 322, 233
+  size: 133, 133
+  orig: 133, 133
+  offset: 0, 0
+  index: -1
+fx
+  rotate: false
+  xy: 2, 168
+  size: 183, 198
+  orig: 183, 198
+  offset: 0, 0
+  index: -1
+lightpointBlur
+  rotate: false
+  xy: 371, 30
+  size: 74, 75
+  orig: 75, 75
+  offset: 0, 0
+  index: -1
+rilmlightCircle
+  rotate: false
+  xy: 317, 107
+  size: 125, 124
+  orig: 128, 128
+  offset: 2, 2
+  index: -1
+side
+  rotate: true
+  xy: 236, 21
+  size: 7, 133
+  orig: 7, 133
+  offset: 0, 0
+  index: -1
+side_02
+  rotate: true
+  xy: 236, 38
+  size: 67, 133
+  orig: 67, 133
+  offset: 0, 0
+  index: -1
