@@ -1,9 +1,9 @@
 import { instantiate, NodePool, Prefab, Vec3, _decorator, Node, tween, CCFloat, Tween } from 'cc';
+import { ParticleContentTool } from '../../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
 import { BaseScene } from '../../../base/BaseScene';
 import { PoolManager } from '../../../sgv3/PoolManager';
 import { BezierUtils } from '../../../sgv3/util/BezierUtils';
 import { AudioManager } from '../../../ta/tool/AudioManager';
-import { ParticleContentTool } from '../../../ta/tool/particle-tool/ParticleContentTool';
 import { AudioClipsEnum } from '../../vo/enum/SoundMap';
 import { MultipleBoard } from './MultipleBoard';
 

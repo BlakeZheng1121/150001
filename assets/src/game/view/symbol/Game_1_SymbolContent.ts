@@ -1,7 +1,7 @@
 
 import { Font, Label, Prefab, _decorator } from 'cc';
+import { ParticleContentTool } from '../../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
 import { SymbolContentBase } from '../../../sgv3/view/reel/symbol/SymbolContentBase';
-import { ParticleContentTool } from '../../../ta/tool/particle-tool/ParticleContentTool';
 const { ccclass, property } = _decorator;
 
  

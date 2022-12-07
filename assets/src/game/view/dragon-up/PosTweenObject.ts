@@ -1,9 +1,9 @@
 
 import { _decorator, Component, Label, Font, Sprite, TweenEasing, CCFloat, CCInteger, Vec3, Animation } from 'cc';
+import { ParticleContentTool } from '../../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
 import { UIOrientation } from '../../../core/ui/UIOrientation';
 import { BalanceUtil } from '../../../sgv3/util/BalanceUtil';
 import { CocosAnimationMultiTool } from '../../../ta/tool/cocos-animation-tool/CocosAnimationMultiTool';
-import { ParticleContentTool } from '../../../ta/tool/particle-tool/ParticleContentTool';
 const { ccclass, property } = _decorator;
  
 @ccclass('PosTweenObject')

@@ -1,11 +1,11 @@
 import { _decorator, Label, tween, Vec3, Prefab } from 'cc';
+import { ParticleContentTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
 import { BaseScene } from '../../base/BaseScene';
 import { PoolManager } from '../../sgv3/PoolManager';
 import { BalanceUtil } from '../../sgv3/util/BalanceUtil';
 import { GlobalTimer } from '../../sgv3/util/GlobalTimer';
 import { AnimationTimeLineTool } from '../../ta/tool/animation-timeline-tool/AnimationTimeLineTool';
 import { AudioManager } from '../../ta/tool/AudioManager';
-import { ParticleContentTool } from '../../ta/tool/particle-tool/ParticleContentTool';
 import { AudioClipsEnum, BGMClipsEnum, ScoringClipsEnum } from '../vo/enum/SoundMap';
 const { ccclass, property } = _decorator;
 

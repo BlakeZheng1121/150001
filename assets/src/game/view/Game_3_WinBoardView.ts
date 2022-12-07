@@ -1,10 +1,10 @@
 import { _decorator, Label, tween, Tween, Prefab, Vec3 } from 'cc';
+import { ParticleContentTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
 import { BaseScene } from '../../base/BaseScene';
 import { UIOrientation } from '../../core/ui/UIOrientation';
 import { PoolManager } from '../../sgv3/PoolManager';
 import { BalanceUtil } from '../../sgv3/util/BalanceUtil';
 import { MiniResultBoard } from '../../ta/mini-result-board/MiniResultBoard';
-import { ParticleContentTool } from '../../ta/tool/particle-tool/ParticleContentTool';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_3_WinBoardView')

@@ -1,11 +1,11 @@
 
 import { _decorator } from 'cc';
+import { ParticleContentTool } from '../../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
 import { UIViewStateBase } from '../../../core/uiview/UIViewStateRegister';
 import { PoolManager } from '../../../sgv3/PoolManager';
 import { BalanceUtil } from '../../../sgv3/util/BalanceUtil';
 import { SymbolHideState, SymbolRollCycledState, SymbolShowState, SymbolStateRegisterBase } from '../../../sgv3/view/reel/symbol/SymbolStateRegisterBase';
 import { SymbolId, SymbolPerformType } from '../../../sgv3/vo/enum/Reel';
-import { ParticleContentTool } from '../../../ta/tool/particle-tool/ParticleContentTool';
 import { Game_1_SymbolContent } from './Game_1_SymbolContent';
 const { ccclass } = _decorator;
  

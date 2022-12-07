@@ -14,13 +14,13 @@ import {
     UIOpacity,
     Tween
 } from 'cc';
+import { ParticleContentTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
 import { BaseScene } from '../../base/BaseScene';
 import { UIOrientation } from '../../core/ui/UIOrientation';
 import { GameUILayer } from '../../game/vo/GameUILayer';
 import { GameUIOrientationSetting } from '../../game/vo/GameUIOrientationSetting';
 import { BalanceUtil } from '../../sgv3/util/BalanceUtil';
 import { GlobalTimer } from '../../sgv3/util/GlobalTimer';
-import { ParticleContentTool } from '../../ta/tool/particle-tool/ParticleContentTool';
 import { AutoPlayButton } from './AutoPlayButton';
 import { BetMenu } from './BetMenu';
 import { BetMenuButton } from './BetMenuButton';

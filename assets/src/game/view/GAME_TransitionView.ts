@@ -1,9 +1,7 @@
 import { _decorator, Component, Node, game } from 'cc';
+import { ParticleContentTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
 import { BaseScene } from '../../base/BaseScene';
-import { AudioManager } from '../../ta/tool/AudioManager';
 import { CocosAnimationMultiTool } from '../../ta/tool/cocos-animation-tool/CocosAnimationMultiTool';
-import { ParticleContentTool } from '../../ta/tool/particle-tool/ParticleContentTool';
-import { AudioClipsEnum } from '../vo/enum/SoundMap';
 
 const { ccclass, property } = _decorator;
 

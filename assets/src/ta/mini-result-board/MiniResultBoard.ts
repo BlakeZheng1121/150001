@@ -1,7 +1,7 @@
 import { _decorator, Component, Color, Sprite, SpriteFrame } from 'cc';
+import { ParticleContentTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
 
 import { CocosAnimationMultiTool } from '../tool/cocos-animation-tool/CocosAnimationMultiTool';
-import { ParticleContentTool } from '../tool/particle-tool/ParticleContentTool';
 
 const { ccclass, property } = _decorator;
 
