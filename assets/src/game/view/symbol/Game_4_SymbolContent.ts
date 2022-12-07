@@ -1,7 +1,6 @@
 
 import { _decorator, Label, Sprite, Font, SpriteFrame, Vec3, Prefab } from 'cc';
 import { SymbolContentBase } from '../../../sgv3/view/reel/symbol/SymbolContentBase';
-import { ParticleContentTool } from '../../../ta/tool/particle-tool/ParticleContentTool';
 const { ccclass, property } = _decorator;
  
 @ccclass('Game_4_SymbolContent')

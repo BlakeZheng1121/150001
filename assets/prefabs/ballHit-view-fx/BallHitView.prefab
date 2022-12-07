@@ -871,7 +871,7 @@
     "__prefab": {
       "__id__": 39
     },
-    "dragonBall": {
+    "effectTarget": {
       "__id__": 3
     },
     "trailPrefab": {

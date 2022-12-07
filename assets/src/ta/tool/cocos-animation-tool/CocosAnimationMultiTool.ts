@@ -1,6 +1,6 @@
 import { _decorator, Component, Animation, sp, CCString, AnimationClip } from 'cc';
+import { ParticleContentTool } from '../../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
 import { AudioManager } from '../AudioManager';
-import { ParticleContentTool } from '../particle-tool/ParticleContentTool';
 
 const { ccclass, property } = _decorator;
 

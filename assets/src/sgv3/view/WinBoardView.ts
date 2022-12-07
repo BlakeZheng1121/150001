@@ -1,6 +1,6 @@
 import { _decorator, Tween, tween, Label, SystemEvent,Node } from 'cc';
+import { TimeLineTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
 import { BaseScene } from '../../base/BaseScene';
-import { TimeLineTool } from '../../ta/tool/timeline-tool/TimeLineTool';
 import { BalanceUtil } from '../util/BalanceUtil';
 import { LevelWinType, WinType } from '../vo/enum/WinType';
 

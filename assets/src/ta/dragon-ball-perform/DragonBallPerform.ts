@@ -1,8 +1,8 @@
 import { _decorator, Component, Label, Prefab, Node } from 'cc';
+import { ParticleContentTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
 import { PoolManager } from '../../sgv3/PoolManager';
 
 import { CocosAnimationMultiTool } from '../tool/cocos-animation-tool/CocosAnimationMultiTool';
-import { ParticleContentTool } from '../tool/particle-tool/ParticleContentTool';
 
 const { ccclass, property } = _decorator;
 

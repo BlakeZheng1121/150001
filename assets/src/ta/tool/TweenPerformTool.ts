@@ -1,6 +1,6 @@
 
 import { _decorator, Component, Node, systemEvent, SystemEvent, EventKeyboard, KeyCode, tween, CCFloat, CurveRange, Vec3, Tween } from 'cc';
-import { ParticleContentTool } from './particle-tool/ParticleContentTool';
+import { ParticleContentTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
 const { ccclass, property } = _decorator;
 
  
