@@ -1,4 +1,5 @@
 import { _decorator, Component, Prefab, Node, CCInteger } from 'cc';
+import { TimeLineTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
 import { PoolManager } from '../../sgv3/PoolManager';
 import { CocosAnimationMultiTool } from '../tool/cocos-animation-tool/CocosAnimationMultiTool';
 
@@ -6,8 +7,8 @@ const { ccclass, property } = _decorator;
 
 @ccclass('SpineTailPerform')
 export class SpineTailPerform extends Component {
-    @property({ type: Node, visible: true })
-    public effectTarget: Node | null = null;
+    @property({ type: TimeLineTool, visible: true })
+    public effectTarget: TimeLineTool | null = null;
     @property({ type: Prefab, visible: true })
     public trailPrefab: Prefab | null = null;
     @property({ type: Prefab, visible: true })
@@ -51,7 +52,7 @@ export class SpineTailPerform extends Component {
 
         if (this.spineDragonTrailHit.length < 2) {
             let trailHit: CocosAnimationMultiTool = PoolManager.instance
-                .getNode(this.trailHitPrefab, this.effectTarget)
+                .getNode(this.trailHitPrefab, this.effectTarget.node)
                 .getComponent(CocosAnimationMultiTool);
 
             this.spineDragonTrailHit.push(trailHit);
@@ -95,6 +96,6 @@ export class SpineTailPerform extends Component {
 
     private spineDragonTrailHitPerform() {
         //TO DO
-        //this.spineDragonTrailHit[this.HitBackID]?.OnPlay(0);
+        this.effectTarget?.play('Base_Hit_FX');
     }
 }
