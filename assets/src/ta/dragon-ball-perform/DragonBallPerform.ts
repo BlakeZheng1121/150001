@@ -1,14 +1,13 @@
 import { _decorator, Component, Label, Prefab, Node } from 'cc';
 import { ParticleContentTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
+import { TimeLineTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
 import { PoolManager } from '../../sgv3/PoolManager';
-
-import { CocosAnimationMultiTool } from '../tool/cocos-animation-tool/CocosAnimationMultiTool';
 
 const { ccclass, property } = _decorator;
 
 @ccclass('DragonBallPerform')
 export class DragonBallPerform extends Component {
-    @property(CocosAnimationMultiTool) private DragonBallFxAnimation: CocosAnimationMultiTool | null = null;
+    @property(TimeLineTool) private DragonBallFxAnimation: TimeLineTool | null = null;
 
     //@property({ type: Node, visible: true })
     //public dragon: Node | null = null;
@@ -29,12 +28,12 @@ export class DragonBallPerform extends Component {
     start() {
         this.IsAnimatPlay = false;
 
-        this.DragonBallFxAnimation?.OnPlay(0);
+        this.DragonBallFxAnimation?.play('Idle_NoBoard');
     }
 
     public OnDragonBallHit(Lv: number) {
         if (this.IsJackPotHit == false) {
-            this.DragonBallFxAnimation?.OnPlay(0);
+            this.DragonBallFxAnimation?.play('Base_Hit_FX');
         }
 
         if (this.IsAnimatPlay == false) {
@@ -55,8 +54,7 @@ export class DragonBallPerform extends Component {
 
         particle02.ParticlePlay();
         particle01.ParticlePlay();
-        this.DragonBallFxAnimation?.OnPlay(0);
-        this.DragonBallFxAnimation?.OnPlay(4);
+        this.DragonBallFxAnimation?.play('Mini_Transition');
 
         this.scheduleOnce(() => {
             PoolManager.instance.putNode(particle01.node);
@@ -71,7 +69,7 @@ export class DragonBallPerform extends Component {
     }
 
     public OnBallInit() {
-        this.DragonBallFxAnimation?.OnPlay(0);
+        this.DragonBallFxAnimation?.play('Idle_NoBoard');
     }
 
     public OnBallHide() {
@@ -79,18 +77,18 @@ export class DragonBallPerform extends Component {
     }
 
     public OnBaseIdle() {
-        this.DragonBallFxAnimation?.OnPlay(0);
+        this.DragonBallFxAnimation?.play('Idle_NoBoard');
     }
 
     public OnHoldSpinIdle() {
-        this.DragonBallFxAnimation?.OnPlay(1);
+        this.DragonBallFxAnimation?.play('Idle_Board');
     }
 
     public onHoldSpinEnd(){
-        this.DragonBallFxAnimation?.OnPlay(2);
+        this.DragonBallFxAnimation?.play('Idle_Collect');
     }
 
     public OnFreeIdle() {
-        this.DragonBallFxAnimation?.OnPlay(3);
+        this.DragonBallFxAnimation?.play('Idle_Board');
     }
 }
