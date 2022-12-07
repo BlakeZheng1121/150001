@@ -2,7 +2,7 @@ import { Logger } from '../../../core/utils/Logger';
 import { GameDataProxy } from '../../proxy/GameDataProxy';
 import { StateMachineProxy } from '../../proxy/StateMachineProxy';
 import { WebBridgeProxy } from '../../proxy/WebBridgeProxy';
-import { AutoPlayEvent, ScreenEvent } from '../../util/Constant';
+import { AutoPlayEvent, ScreenEvent, StateWinEvent } from '../../util/Constant';
 import { GlobalTimer } from '../../util/GlobalTimer';
 
 /**
@@ -24,6 +24,7 @@ export class AutoPlayClickOptionCommand extends puremvc.SimpleCommand {
             this.gameDataProxy.onAutoPlay = false;
             this.gameDataProxy.curAutoTimes = this.gameDataProxy.maxAutoTimes = 0;
             this.sendNotification(AutoPlayEvent.ON_TIMES_CHANGE);
+            this.sendNotification(StateWinEvent.ON_BTN_STATE_CHANGED);
             this.webBridgeProxy.updateWebAutoTimesSpan('pause');
         } else if (_curTimes < _maxTimes) {
             this.gameDataProxy.onAutoPlay = true;
