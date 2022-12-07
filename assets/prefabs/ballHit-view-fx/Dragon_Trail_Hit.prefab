@@ -29,7 +29,7 @@
       }
     ],
     "_prefab": {
-      "__id__": 14
+      "__id__": 18
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -72,8 +72,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 562.9378662109375,
-      "height": 253.96978759765625
+      "width": 0,
+      "height": 0
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -118,7 +118,7 @@
     "_debugBones": false,
     "_debugSlots": false,
     "_skeletonData": {
-      "__uuid__": "9048cc6a-5439-49a3-a0cd-8e0be794542a",
+      "__uuid__": "cc96aa85-a610-4ace-932f-c7fc327db7cf",
       "__expectedType__": "sp.SkeletonData"
     },
     "defaultSkin": "default",
@@ -144,9 +144,11 @@
     },
     "DefaultActive": false,
     "SpineAnimationIndex": [
-      "TrailHit0",
-      "TrailHit1",
-      "TrailHit2"
+      "Trail0",
+      "Trail1",
+      "Trail2",
+      "Trail3",
+      "Trail4"
     ],
     "AnimationList": [
       {
@@ -157,6 +159,12 @@
       },
       {
         "__id__": 12
+      },
+      {
+        "__id__": 14
+      },
+      {
+        "__id__": 16
       }
     ],
     "_id": ""
@@ -260,6 +268,76 @@
     "CocosAnimationState": 0,
     "IsSpine2DPlay": true,
     "Spine2DAnimationState": 2,
+    "IsSpineAnimationLoop": false,
+    "IsSpine2DAddPlay": false,
+    "Spine2DAddAnimationTrack": 1,
+    "Spine2DAddAnimationState": 0,
+    "IsSpineAnimationAddLoop": false,
+    "PlayParticle": [],
+    "StopParticle": [],
+    "PlayAudio_Name": [],
+    "StopAudio_Name": []
+  },
+  {
+    "__type__": "AnimationList",
+    "List_Name": "回擊4",
+    "AnimationFlowIsDependOnCocosAnimation": false,
+    "DelayTime": 0,
+    "AnimationState": [
+      {
+        "__id__": 15
+      }
+    ],
+    "IsAnimationOverActiveType": false,
+    "ListLoop": false
+  },
+  {
+    "__type__": "AnimationState",
+    "ccAnimation": false,
+    "Spine2D": true,
+    "Spine2DAdd": false,
+    "Particle": false,
+    "Audio": false,
+    "Adjust": null,
+    "IsAnimationPlay": false,
+    "CocosAnimationState": 0,
+    "IsSpine2DPlay": true,
+    "Spine2DAnimationState": 3,
+    "IsSpineAnimationLoop": false,
+    "IsSpine2DAddPlay": false,
+    "Spine2DAddAnimationTrack": 1,
+    "Spine2DAddAnimationState": 0,
+    "IsSpineAnimationAddLoop": false,
+    "PlayParticle": [],
+    "StopParticle": [],
+    "PlayAudio_Name": [],
+    "StopAudio_Name": []
+  },
+  {
+    "__type__": "AnimationList",
+    "List_Name": "回擊5",
+    "AnimationFlowIsDependOnCocosAnimation": false,
+    "DelayTime": 0,
+    "AnimationState": [
+      {
+        "__id__": 17
+      }
+    ],
+    "IsAnimationOverActiveType": false,
+    "ListLoop": false
+  },
+  {
+    "__type__": "AnimationState",
+    "ccAnimation": false,
+    "Spine2D": true,
+    "Spine2DAdd": false,
+    "Particle": false,
+    "Audio": false,
+    "Adjust": null,
+    "IsAnimationPlay": false,
+    "CocosAnimationState": 0,
+    "IsSpine2DPlay": true,
+    "Spine2DAnimationState": 4,
     "IsSpineAnimationLoop": false,
     "IsSpine2DAddPlay": false,
     "Spine2DAddAnimationTrack": 1,
