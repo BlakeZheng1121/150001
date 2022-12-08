@@ -122,7 +122,7 @@ export class JackPotPerformControl extends Component {
                 .getComponent(ScoreCollectHandler);
         }
         this.TopCountNum.node.active = true;
-        this.TopCountNum.node.position = new Vec3(0, -10, 0);
+        this.TopCountNum.node.position = new Vec3(0, 350, 0);
         this.TopCountNum.ballCountUpdate(count);
     }
 
