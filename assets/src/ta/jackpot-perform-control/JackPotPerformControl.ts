@@ -110,15 +110,7 @@ export class JackPotPerformControl extends Component {
                 .getNode(this.scorePrefab, this.DragonBallPerform.node)
                 .getComponent(ScoreCollectHandler);
         }
-        switch (gameScene) {
-            case GameScene.Game_1:
-                this.TopCountNum.node.position = new Vec3(0, 0, 0);
-                break;
-            case GameScene.Game_2:
-            case GameScene.Game_4:
-                this.TopCountNum.node.position = new Vec3(0, 35, 0);
-                break;
-        }
+        this.TopCountNum.node.position = new Vec3(0, 187, 0);
         this.TopCountNum.node.active = true;
         this.TopCountNum.onScoreCollect(score, playType);
     }

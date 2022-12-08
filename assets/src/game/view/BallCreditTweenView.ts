@@ -39,7 +39,7 @@ export class BallCreditTweenView extends BaseScene {
         this.callback = () => callback();
         this.curObject.node.worldPosition = basePos;
         let axisX = (this.dragonBall.worldPosition.x - basePos.x) * 0.7 + basePos.x;
-        let axisY = (this.dragonBall.worldPosition.y - basePos.y) * 0.3 + basePos.y;
+        let axisY = (this.dragonBall.worldPosition.y + 187 - basePos.y) * 0.3 + basePos.y;
         let convertPos = new Vec3(axisX, axisY);
         this.curTween = tween(this.curObject.node)
             .delay(this.curObject.delayTime)
@@ -47,7 +47,8 @@ export class BallCreditTweenView extends BaseScene {
                 this.getBezierToTween(
                     basePos,
                     convertPos,
-                    this.dragonBall.worldPosition,
+                    new Vec3(this.dragonBall.worldPosition.x
+                        , this.dragonBall.worldPosition.y + 187),
                     this.curObject.ptCount,
                     this.curObject.timeInterval
                 )
