@@ -8663,7 +8663,7 @@
       "SpineAnimationIndex",
       "0"
     ],
-    "value": "Show"
+    "value": "DragonUp_AddSpinFX"
   },
   {
     "__type__": "cc.TargetInfo",
