@@ -78,8 +78,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 178,
-      "height": 457
+      "width": 54,
+      "height": 434
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -247,7 +247,7 @@
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 2,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -279,8 +279,8 @@
     "partType": 3,
     "offsetPos": {
       "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
+      "x": 53.5,
+      "y": 440,
       "z": 0
     },
     "_id": ""
