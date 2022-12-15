@@ -32,10 +32,6 @@ export class DragonBallPerform extends Component {
     }
 
     public OnDragonBallHit(Lv: number) {
-        if (this.IsJackPotHit == false) {
-            this.DragonBallFxAnimation?.play('Base_Hit_FX');
-        }
-
         if (this.IsAnimatPlay == false) {
             this.IsAnimatPlay = true;
         }
