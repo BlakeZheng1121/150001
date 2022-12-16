@@ -1,27 +1,104 @@
 
 DragonUp_AddSpinFX.png
-size: 512,256
+size: 237,439
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-Circle_01
+blur
   rotate: false
-  xy: 194, 2
-  size: 81, 78
-  orig: 81, 78
-  offset: 0, 0
+  xy: 164, 190
+  size: 59, 59
+  orig: 66, 66
+  offset: 4, 3
   index: -1
-Circle_02
-  rotate: true
-  xy: 194, 82
-  size: 94, 89
-  orig: 144, 145
-  offset: 24, 27
-  index: -1
-light_02
+new/Energy24
   rotate: false
-  xy: 2, 7
-  size: 190, 169
-  orig: 194, 174
-  offset: 2, 2
+  xy: 166, 251
+  size: 57, 59
+  orig: 90, 90
+  offset: 16, 17
+  index: -1
+new/Energy26
+  rotate: false
+  xy: 168, 45
+  size: 65, 67
+  orig: 90, 90
+  offset: 12, 13
+  index: -1
+new/Energy28
+  rotate: false
+  xy: 163, 114
+  size: 72, 74
+  orig: 90, 90
+  offset: 9, 9
+  index: -1
+new/Energy30
+  rotate: false
+  xy: 86, 190
+  size: 76, 79
+  orig: 90, 90
+  offset: 7, 7
+  index: -1
+new/Energy32
+  rotate: false
+  xy: 86, 355
+  size: 79, 82
+  orig: 90, 90
+  offset: 5, 5
+  index: -1
+new/Energy34
+  rotate: false
+  xy: 2, 2
+  size: 81, 84
+  orig: 90, 90
+  offset: 4, 4
+  index: -1
+new/Energy36
+  rotate: false
+  xy: 2, 88
+  size: 82, 85
+  orig: 90, 90
+  offset: 4, 4
+  index: -1
+new/Energy38
+  rotate: false
+  xy: 2, 351
+  size: 82, 86
+  orig: 90, 90
+  offset: 4, 3
+  index: -1
+new/Energy40
+  rotate: false
+  xy: 2, 263
+  size: 82, 86
+  orig: 90, 90
+  offset: 4, 3
+  index: -1
+new/Energy42
+  rotate: false
+  xy: 2, 175
+  size: 82, 86
+  orig: 90, 90
+  offset: 4, 3
+  index: -1
+new/Energy44
+  rotate: false
+  xy: 85, 2
+  size: 81, 84
+  orig: 90, 90
+  offset: 4, 4
+  index: -1
+new/Energy48
+  rotate: false
+  xy: 86, 271
+  size: 78, 82
+  orig: 90, 90
+  offset: 6, 5
+  index: -1
+new/Energy50
+  rotate: false
+  xy: 86, 109
+  size: 75, 79
+  orig: 90, 90
+  offset: 7, 7
   index: -1
