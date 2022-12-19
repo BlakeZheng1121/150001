@@ -946,7 +946,7 @@
     },
     "_materials": [
       {
-        "__uuid__": "3b7aed8b-167e-4706-baf3-d75dcf25bf02",
+        "__uuid__": "d5693565-ca19-493d-a981-b1fa6b08443e",
         "__expectedType__": "cc.Material"
       }
     ],
@@ -1583,7 +1583,7 @@
     "_lengthScale": 1,
     "_mesh": null,
     "_mainTexture": {
-      "__uuid__": "3e257794-6a9f-4336-aca7-c7770bfaf2e6@6c48a",
+      "__uuid__": "dce78207-6c53-4889-9a22-1f6c62871578@6c48a",
       "__expectedType__": "cc.Texture2D"
     },
     "_useGPU": false
@@ -3220,7 +3220,7 @@
     "_debugBones": false,
     "_debugSlots": false,
     "_skeletonData": {
-      "__uuid__": "f1342ff4-5a9d-46e3-bbcc-4ed24b5008b9",
+      "__uuid__": "6724d6f4-1b92-4621-99ac-a9e33c542b3f",
       "__expectedType__": "sp.SkeletonData"
     },
     "defaultSkin": "default",
@@ -3281,11 +3281,11 @@
     },
     "DefaultActive": false,
     "SpineAnimationIndex": [
-      "Ingot_NoSelect",
-      "ingot_Idle",
-      "ingot_In",
-      "ingot_Out",
-      "ingot_hide"
+      "Mini_selectIcon_NoSelect",
+      "Mini_selectIcon_Idle",
+      "Mini_selectIcon_in",
+      "Mini_selectIcon_Out",
+      "Mini_selectIcon_hide"
     ],
     "AnimationList": [
       {
