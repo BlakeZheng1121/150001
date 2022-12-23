@@ -1,18 +1,18 @@
 import { _decorator, Label } from 'cc';
+import { TimeLineTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
 import { BaseScene } from '../../base/BaseScene';
 import { UIOrientation } from '../../core/ui/UIOrientation';
 import { SceneManager } from '../../core/utils/SceneManager';
 import { BalanceUtil } from '../../sgv3/util/BalanceUtil';
 import { GameScene } from '../../sgv3/vo/data/GameScene';
 import { AudioManager } from '../../ta/tool/AudioManager';
-import { CocosAnimationMultiTool } from '../../ta/tool/cocos-animation-tool/CocosAnimationMultiTool';
 import { AudioClipsEnum, BGMClipsEnum } from '../vo/enum/SoundMap';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_2_ResultBoardView')
 export class Game_2_ResultBoardView extends BaseScene {
-    @property(CocosAnimationMultiTool)
-    public resultBoard: CocosAnimationMultiTool | null = null;
+    @property(TimeLineTool)
+    public resultBoard: TimeLineTool | null = null;
 
     @property(Label)
     private resultLabel: Label;
@@ -39,7 +39,7 @@ export class Game_2_ResultBoardView extends BaseScene {
         }
         let self = this;
         self.resultLabel.string = BalanceUtil.formatBalance(score);
-        self.resultBoard.OnPlay(0, self.winBoardEnd.bind(self));
+        self.resultBoard.play('Perform', self.winBoardEnd.bind(self));
         if (curScene == GameScene.Game_2) {
             AudioManager.Instance.stop(BGMClipsEnum.BGM_FreeGame).fade(0, 1);
             AudioManager.Instance.play(AudioClipsEnum.Result).volume(0).fade(1, 0.5);
