@@ -20,24 +20,27 @@ export class TimeLineTool extends Component {
       this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.timelineSpine.skeletonData.getAnimsEnum(),
       this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.timelineSpineName
     ).value;
-    this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.timelineSpine.setCompleteListener(() => {
-      this.scheduleOnce(() => {
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.timelineSpine.setCompleteListener(null);
-        if (this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.isLoop === true) {
-          return;
-        }
-        this.checkTimelineEnd(timelineIndex);
-        if (this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.isEndClose === true) {
-          this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.timelineSpine.clearTracks();
-          this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.timelineSpine.node.active = false;
-        }
-      });
-    });
+
     this.scheduleOnce(() => {
       this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.timelineSpine.node.active = true;
       this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.timelineSpine.timeScale =
         this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.timeScale;
       this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.timelineSpine.clearTracks();
+
+      this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.timelineSpine.setCompleteListener(() => {
+        this.scheduleOnce(() => {
+          this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.timelineSpine.setCompleteListener(null);
+          if (this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.isLoop === true) {
+            return;
+          }
+          this.checkTimelineEnd(timelineIndex);
+          if (this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.isEndClose === true) {
+            this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.timelineSpine.clearTracks();
+            this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.timelineSpine.node.active = false;
+          }
+        });
+      });
+
       this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.timelineSpine.setAnimation(
         0,
         timlineSpineName,
@@ -52,18 +55,20 @@ export class TimeLineTool extends Component {
         this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.spine.skeletonData.getAnimsEnum(),
         this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.spineName
       ).value;
-      this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.spine.setCompleteListener(() => {
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.spine.setCompleteListener(null);
-        if (this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.isEndClose) {
-          this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.spine.clearTracks();
-
-          this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.spine.node.active = false;
-        }
-      });
 
       this.scheduleOnce(() => {
         this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.spine.node.active = true;
         this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.spine.clearTracks();
+
+        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.spine.setCompleteListener(() => {
+          this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.spine.setCompleteListener(null);
+          if (this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.isEndClose) {
+            this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.spine.clearTracks();
+  
+            this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.spine.node.active = false;
+          }
+        });
+
         this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.spine.timeScale =
           this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.timeScale;
         this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.spine.setAnimation(
@@ -134,17 +139,18 @@ export class TimeLineTool extends Component {
         this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.spineName
       ).value;
 
-      this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.spine.setCompleteListener(() => {
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.spine.setCompleteListener(null);
-        if (this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.isEndClose) {
-          this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.spine.clearTrack;
-          this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.spine.node.active = false;
-        }
-      });
-
       this.scheduleOnce(() => {
         this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.spine.node.active = true;
         this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.spine.clearTracks();
+
+        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.spine.setCompleteListener(() => {
+          this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.spine.setCompleteListener(null);
+          if (this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.isEndClose) {
+            this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.spine.clearTrack;
+            this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.spine.node.active = false;
+          }
+        });
+
         this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.spine.timeScale =
           this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.timeScale;
         this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.spine.setAnimation(
@@ -195,17 +201,18 @@ export class TimeLineTool extends Component {
         this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.spineName
       ).value;
 
-      this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.spine.setCompleteListener(() => {
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.spine.setCompleteListener(null);
-        if (this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.isEndClose === true) {
-          this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.spine.clearTracks();
-          this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.spine.node.active = false;
-        }
-      });
-
       this.scheduleOnce(() => {
         this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.spine.node.active = true;
         this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.spine.clearTracks();
+
+        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.spine.setCompleteListener(() => {
+          this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.spine.setCompleteListener(null);
+          if (this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.isEndClose === true) {
+            this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.spine.clearTracks();
+            this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.spine.node.active = false;
+          }
+        });
+
         this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.spine.timeScale =
           this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.timeScale;
         this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.spine.setAnimation(
@@ -307,7 +314,7 @@ export class TimeLineTool extends Component {
             this.arrayTimelineData[index].timelineData[i].timelineSpine.timelineSpine.setCompleteListener(null);
             break;
           case TimelineType.Animation:
-            this.arrayTimelineData[index].timelineData[i].timelineAnimation.timelineAnimation.off(Animation.EventType.FINISHED);
+              this.arrayTimelineData[index].timelineData[i].timelineAnimation.timelineAnimation.off(Animation.EventType.FINISHED);
             break;
           default:
             break;
