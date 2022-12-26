@@ -1,5 +1,5 @@
 import { _decorator, Component, Label } from 'cc';
-import { GlobalTimer } from '../../sgv3/util/GlobalTimer';
+import { TimeLineTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
 import { CocosAnimationMultiTool } from '../../ta/tool/cocos-animation-tool/CocosAnimationMultiTool';
 const { ccclass, property } = _decorator;
 
@@ -8,8 +8,8 @@ export class RemainSpinInfo extends Component {
     @property({ type: Label })
     private curRemainSpinTimes: Label;
     // 加場次特效
-    @property({ type: CocosAnimationMultiTool })
-    private remainSpinFX: CocosAnimationMultiTool;
+    @property({ type: TimeLineTool })
+    private remainSpinFX: TimeLineTool;
 
     private curSpinTime: number = 0;
 
@@ -26,17 +26,7 @@ export class RemainSpinInfo extends Component {
     public updateReSpinInfo(reSpinTime: number) {
         this.curSpinTime = this.curSpinTime + reSpinTime;
         this.node.active = this.curSpinTime > 0;
-        this.remainSpinFX.OnPlay(0);
-        GlobalTimer.getInstance().removeTimer('DelayChangeSpinTime');
-        GlobalTimer.getInstance()
-            .registerTimer(
-                'DelayChangeSpinTime',
-                0.5,
-                () => {
-                    this.curRemainSpinTimes.string = String(this.curSpinTime);
-                },
-                this
-            )
-            .start();
+        this.curRemainSpinTimes.string = String(this.curSpinTime);
+        this.remainSpinFX.play('FreeGameAddSpin');
     }
 }
