@@ -10136,6 +10136,7 @@
         "__id__": 507
       }
     ],
+    "_prefab": null,
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 450,
@@ -20588,7 +20589,7 @@
   {
     "__type__": "cc.TargetInfo",
     "localID": [
-      "c2hHalBCBPWKmSx+l5EbS4"
+      "d431vCPq9DDZTSAh0HU9cq"
     ]
   }
 ]

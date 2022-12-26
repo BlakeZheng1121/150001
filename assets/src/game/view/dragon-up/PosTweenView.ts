@@ -45,7 +45,6 @@ export class PosTweenView extends BaseScene {
 
     public clonePrefab() {
         this.curObject = this.clone(this.node).getComponent(PosTweenObject);
-        this.curObject.uiOrientation.changeOrientation(this.ishorizontalMode);
     }
 
     public clearPool() {

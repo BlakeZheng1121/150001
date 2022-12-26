@@ -1,10 +1,7 @@
 import { Tween, tween, _decorator, Node, Vec3 } from 'cc';
-import { GameProxy } from '../../../core/proxy/GameProxy';
 import { UIViewStateBase, UIViewStateRegister } from '../../../core/uiview/UIViewStateRegister';
 import { BalanceUtil } from '../../../sgv3/util/BalanceUtil';
 import { LockType, SymbolId, SymbolPerformType } from '../../../sgv3/vo/enum/Reel';
-import { AudioManager } from '../../../ta/tool/AudioManager';
-import { AudioClipsEnum } from '../../vo/enum/SoundMap';
 import { SymbolFXContent } from './SymbolFXContent';
 const { ccclass } = _decorator;
 
@@ -15,7 +12,6 @@ export class SymbolFXStateRegister extends UIViewStateRegister {
     private get content() {
         if (this._content == null) {
             this._content = this.getComponent(SymbolFXContent);
-            this._content.animation.onLoad();
         }
         return this._content;
     }
@@ -94,11 +90,16 @@ export class SymbolFXShowState extends UIViewStateBase {
             }
         }
         if (this.content.symbolId === SymbolId.WILD) {
-            if (this.content.language === 'en') animationIndex = 0;
-            else animationIndex = 1;
+            if (this.content.language === 'en') {
+                animationIndex = 0;
+                this.content.animation.play('PlayWin_EN');
+            }else {
+                animationIndex = 1;
+                this.content.animation.play('PlayWin_CN');
+            }
+        }else{
+            this.content.animation.play('PlayWin');
         }
-
-        this.content.animation.OnPlay(animationIndex);
         //TO DO: Perform Time CallBack;
         this.tempTween = tween(this.content.node)
             .delay(2)
@@ -132,11 +133,8 @@ export class SymbolFXReSpinState extends UIViewStateBase {
             this.onEffectFinished();
             return;
         }
-        if (this.content.credit > 0) {
-            this.content.animation.OnPlay(this.content.reSpinNum - 1, () => this.onEffectFinished());
-        } else {
-            this.content.animation.OnPlay(this.content.reSpinNum + 2, () => this.onEffectFinished());
-        }
+        let animString = this.content.credit > 0 ? ('PercentAndAddSpin' + this.content.reSpinNum) : ('AddSpin' + this.content.reSpinNum);
+        this.content.animation.play(animString, () => this.onEffectFinished());
     }
 }
 
@@ -157,7 +155,7 @@ export class SymbolFXBaseCreditUpdateState extends UIViewStateBase {
     //// Hook
     onPlay() {
         if (this.content.animation) {
-            this.content.animation.OnPlay(2, () => this.onEffectFinished());
+            this.content.animation.play('BeginEffect', () => this.onEffectFinished());
         }
     }
 }
@@ -179,7 +177,7 @@ export class SymbolFXTargertCreditUpdateState extends UIViewStateBase {
     //// Hook
     onPlay() {
         if (this.content.animation) {
-            this.content.animation.OnPlay(2);
+            this.content.animation.play('PlayCollect');
         }
         this.content.labelText.string = String();
         this.content.labelText.enabled = this.content.credit > 0;
@@ -219,7 +217,7 @@ export class SymbolFXGetTargertCreditResultState extends UIViewStateBase {
     onPlay() {
         this.content.labelText.string = String();
         if (this.content.animation) {
-            this.content.animation.OnPlay(3);
+            this.content.animation.play('PlayLastCollect')
         }
         this.onEffectFinished();
     }

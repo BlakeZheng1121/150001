@@ -1,14 +1,14 @@
 import { _decorator, Label, Font, Component, Enum, Sprite, SpriteFrame, Vec3 } from 'cc';
+import { TimeLineTool } from '../../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
 import { LockType, SymbolId } from '../../../sgv3/vo/enum/Reel';
-import { CocosAnimationMultiTool } from '../../../ta/tool/cocos-animation-tool/CocosAnimationMultiTool';
 const { ccclass, property } = _decorator;
 
 @ccclass('SymbolFXContent')
 export class SymbolFXContent extends Component {
     @property({ type: Enum(SymbolId), visible: true })
     public symbolType: SymbolId = SymbolId.C1;
-    @property({ type: CocosAnimationMultiTool })
-    public animation: CocosAnimationMultiTool | null = null;
+    @property({ type: TimeLineTool })
+    public animation: TimeLineTool | null = null;
 
     @property({
         type: Label,
