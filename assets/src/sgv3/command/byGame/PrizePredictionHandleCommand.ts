@@ -11,7 +11,7 @@ const { ccclass } = _decorator;
 export class PrizePredictionHandleCommand extends puremvc.SimpleCommand {
     public static readonly NAME: string = 'PrizePredictionHandleCommand';
     public execute(notification: puremvc.INotification): void {
-        this.handleData();
+        //this.handleData();
     }
 
     handleData() {
