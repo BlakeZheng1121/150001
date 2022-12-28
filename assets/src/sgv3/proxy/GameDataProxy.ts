@@ -445,6 +445,14 @@ export class GameDataProxy extends CoreGameDataProxy {
         this._gameData.totalBetList = _val;
     }
 
+    /** Jackpot投注所有列表 */
+    public get jackpotAllBetList(): number[] {
+        return this._gameData.jackpotAllBetList;
+    }
+    public set jackpotAllBetList(_val: number[]) {
+        this._gameData.jackpotAllBetList = _val;
+    }
+
     /** 投注組合index */
     public get totalBetIdx(): number {
         return this._gameData.totalBetIdx;
@@ -1070,6 +1078,15 @@ export class GameDataProxy extends CoreGameDataProxy {
         }
 
         this.initEventData.singleBetCombinations = _newCombinations;
+    }
+
+    public getJackpotPoolRangeIndexWithBet(): number {
+        const jpPoolData = this.initEventData.executeSetting.jackpotSetting.jackpotPoolData[0];
+        const wayBetList = this.initEventData.executeSetting.baseGameSetting.betSpec.waysBetList;
+        const curBetIndex = wayBetList.findIndex((bet) => bet == this.curBet);
+        const betRangeMapIndex = jpPoolData.jackpotExtendSetting.betRangeMap[curBetIndex];
+
+        return betRangeMapIndex;
     }
 
     /** 是否為 Free Play 模式 */

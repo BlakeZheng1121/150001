@@ -65,6 +65,25 @@ export class WAY_DefaultSettingCommand extends CoreDefaultSettingCommand {
         );
     }
 
+    protected setJackpotAllBetList() {
+        let _tempKey: string = '';
+        let _tempBet = NaN;
+        let _param: string[] = [];
+
+        // 加入初始化重設totalBetList
+        this.gameDataProxy.jackpotAllBetList = [];
+        for (_tempKey in this.gameDataProxy.initEventData.singleBetCombinations) {
+            _param = _tempKey.split('_');
+            _tempBet = MathUtil.mul(+this.gameDataProxy.initEventData.singleBetCombinations[_tempKey], +_param[0], 0.001);
+            this.gameDataProxy.jackpotAllBetList.push(+_param[1])
+        }
+
+        this.gameDataProxy.jackpotAllBetList.sort(function (a, b) {
+            return a - b;
+        });
+        this.gameDataProxy.jackpotAllBetList.reverse();
+    }
+
     // ======================== Get Set ========================
     protected _gameDataProxy: WAY_GameDataProxy;
     protected get gameDataProxy(): WAY_GameDataProxy {

@@ -221,6 +221,7 @@ export class CtrlPanelBtnState {
     public static DISABLED: number = 0;
     public static CAN_CLICK: number = 1;
     public static CREATE_BET_MENU: string = 'createBetMenu';
+    public static CREATE_BONUS_UPGRADE_BET_RANGE_INFO: string = 'createBonusUpgradeBetRangeInfo';
 }
 
 export class DragonUpEvent {

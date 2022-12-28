@@ -94,9 +94,7 @@ export class GAME_JackpotPoolViewMediator extends BaseMediator<GAME_JackpotPoolV
     private onBetLevelChange() {
         const first = 0;
         const jpPoolData = this.gameDataProxy.initEventData.executeSetting.jackpotSetting.jackpotPoolData[first];
-        const wayBetList = this.gameDataProxy.initEventData.executeSetting.baseGameSetting.betSpec.waysBetList;
-        const curBetIndex = wayBetList.findIndex((bet) => bet == this.gameDataProxy.curBet);
-        const betRangeMapIndex = jpPoolData.jackpotExtendSetting.betRangeMap[curBetIndex];
+        const betRangeMapIndex = this.gameDataProxy.getJackpotPoolRangeIndexWithBet();
         let newPoolInitValue = [];
         for (let i = 0; i < jpPoolData.jackpotExtendSetting.poolInitValue[betRangeMapIndex].length; i++) {
             newPoolInitValue.push(
