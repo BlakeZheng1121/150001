@@ -21,12 +21,16 @@ export abstract class CoreDefaultSettingCommand extends puremvc.SimpleCommand {
         this.setInitHitPattern();
         // 設定Totalbet init列表，該值會隨line or way調整
         this.setTotalBetList();
+        // 設定 Jackpot資料 所有的 Bet值
+        this.setJackpotAllBetList();
         // 檢查是否有已經存在的組合
         this.resetStorageTotalBet();
         // 設定web顯示的線數，該值會隨line or way調整
         this.setWebLine();
         // 設定 Control Panel的Bet Menu
         this.sendNotification(CtrlPanelBtnState.CREATE_BET_MENU);
+        // 設定 Bet Menu旁 切換 Bet會有 Bonus Upgrade的資訊
+        this.sendNotification(CtrlPanelBtnState.CREATE_BONUS_UPGRADE_BET_RANGE_INFO);
     }
 
     public handleContainerMsg(e: MessageEvent) {
@@ -121,6 +125,11 @@ export abstract class CoreDefaultSettingCommand extends puremvc.SimpleCommand {
      * 設定totalbetList
      */
     protected setTotalBetList() {}
+
+    /**
+     * 設定 Jackpot所有 BetList
+     */
+    protected setJackpotAllBetList() {}
 
     /**
      * 設定gamedataproxy betline and bet

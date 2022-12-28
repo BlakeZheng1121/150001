@@ -66,6 +66,8 @@ export class GameData extends CoreGameData {
     public betCombinationKeys: string[] = [];
     /** 投注組合列表 */
     public totalBetList: number[] = [];
+    /** Jackpot投注所有列表 */
+    public jackpotAllBetList: number[] = [];
     /** 投注組合index */
     public totalBetIdx: number = 0;
     /** 選擇哪個feature */

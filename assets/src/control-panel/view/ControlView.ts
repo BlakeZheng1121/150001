@@ -14,13 +14,13 @@ import {
     UIOpacity,
     Tween
 } from 'cc';
-import { ParticleContentTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
 import { BaseScene } from '../../base/BaseScene';
 import { UIOrientation } from '../../core/ui/UIOrientation';
 import { GameUILayer } from '../../game/vo/GameUILayer';
 import { GameUIOrientationSetting } from '../../game/vo/GameUIOrientationSetting';
 import { BalanceUtil } from '../../sgv3/util/BalanceUtil';
 import { GlobalTimer } from '../../sgv3/util/GlobalTimer';
+import { ParticleContentTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
 import { AutoPlayButton } from './AutoPlayButton';
 import { BetMenu } from './BetMenu';
 import { BetMenuButton } from './BetMenuButton';
@@ -32,6 +32,7 @@ import { SettingButton } from './SettingButton';
 import { SettingMenuButton } from './SettingMenuButton';
 import { SoundToggleButton } from './SoundToggleButton';
 import { SpinButton } from './SpinButton';
+import { BonusUpgrade } from './BonusUpgrade';
 const { ccclass, property } = _decorator;
 
 @ccclass('ControlView')
@@ -148,6 +149,9 @@ export class ControlView extends BaseScene {
     @property({ type: ParticleContentTool })
     public winSumAnim: ParticleContentTool;
 
+    @property({ type: BonusUpgrade })
+    public bonusUpgrade: BonusUpgrade;
+
     public curTotalJackpotWonValue: number = 0;
 
     public betMenuButtons: Array<BetMenuButton> = new Array<BetMenuButton>();
@@ -233,9 +237,9 @@ export class ControlView extends BaseScene {
     /** 更改orientation mode */
     public changeOrientation(mode: string, scene: string) {
         let ishorizontal = mode == ControlView.HORIZONTAL;
-        for (let i = 0; i < this.uiOrientation.length; i++) {
-            this.uiOrientation[i].changeOrientation(ishorizontal);
-        }
+        // for (let i = 0; i < this.uiOrientation.length; i++) {
+        //     this.uiOrientation[i].changeOrientation(ishorizontal);
+        // }
 
         for (let i = 0; i < this.gameUIOrientation.length; i++) {
             this.gameUIOrientation[i].changeOrientation(ishorizontal, scene);
@@ -338,10 +342,15 @@ export class ControlView extends BaseScene {
         return betBtn;
     }
 
+    public createBonusUpgradeBetRangeInfo(minBets: number[], maxBets: number[]) {
+        this.bonusUpgrade.setBonusUpgradeInfo(minBets, maxBets);
+    }
+
     public hideAllMenu() {
         this.hideAutoMenu();
         this.buttonCallback.closeSettingMenu();
         this.hideBetMenu();
+        this.hideBonusUpgradeMessage();
     }
 
     /** 隱藏 auto play 選單 */
@@ -351,6 +360,24 @@ export class ControlView extends BaseScene {
 
     public hideBetMenu() {
         this.betMenu.node.active = false;
+    }
+
+    public onBetLevelChange(betIndex: number) {
+        this.bonusUpgrade.onBetLevelChange(betIndex);
+    }
+
+    /**
+     * Only Never Click BetOption Button Can Show The Hint
+     */
+    public hideBonudUpgradeHint() {
+        this.bonusUpgrade.bonusUpgradeHint.active = false;
+    }
+
+    public showBonusUpgradeMessage() {
+        this.bonusUpgrade.bonusUpgradeMessage.active = true;
+    }
+    public hideBonusUpgradeMessage() {
+        this.bonusUpgrade.bonusUpgradeMessage.active = false;
     }
 
     public checkMenuStatus() {

@@ -88,6 +88,7 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
             ViewMediatorEvent.CLOSE_FREE_SPIN_MSG,
             ViewMediatorEvent.SHOW_RETRIGGER_BOARD,
             CtrlPanelBtnState.CREATE_BET_MENU,
+            CtrlPanelBtnState.CREATE_BONUS_UPGRADE_BET_RANGE_INFO,
             StateWinEvent.ON_GAME2_EXITING,
             ViewMediatorEvent.SHOW_FEATURE_SELECTION,
             DragonUpEvent.ON_RESPIN_NEXT_END,
@@ -158,6 +159,9 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
                 break;
             case CtrlPanelBtnState.CREATE_BET_MENU:
                 this.createBetMenu();
+                break;
+            case CtrlPanelBtnState.CREATE_BONUS_UPGRADE_BET_RANGE_INFO:
+                this.createBonusUpgradeBetRangeInfo();
                 break;
             case this.stateMachineProxy['stateEventMap'].game2Init:
             case this.stateMachineProxy['stateEventMap'].game3Init:
@@ -306,6 +310,7 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
                     : ControlView.VERTICAL,
                 this.gameDataProxy.curScene
             );
+            this.changeBonusUpgradeInfo();
         }
     }
 
@@ -330,9 +335,9 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
                 break;
             case GameScene.Game_4:
                 this.view.remainSpinInfo.setCurSpinTime(roundInfo[1] - roundInfo[0]);
-                if(roundInfo[1] - roundInfo[0] == 0){
+                if (roundInfo[1] - roundInfo[0] == 0) {
                     this.view.showMaxSpinInfo(false);
-                }   
+                }
                 break;
         }
     }
@@ -406,6 +411,7 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
 
     public spin() {
         window['onSpinBtnClick']();
+        this.view.hideBonudUpgradeHint();
     }
 
     // 使用鍵盤 spin
@@ -532,6 +538,48 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
         this.view.createBetMenu(this.gameDataProxy.totalBetList, (betMenuBtn) => this.onClickBetOption(betMenuBtn));
     }
 
+    private createBonusUpgradeBetRangeInfo() {
+        const jpPoolData = this.gameDataProxy.initEventData.executeSetting.jackpotSetting.jackpotPoolData[0];
+        const wayBetList = this.gameDataProxy.initEventData.executeSetting.baseGameSetting.betSpec.waysBetList;
+        const betRangeMap = jpPoolData.jackpotExtendSetting.betRangeMap;
+
+        // 須將 JackpotBet 結合顯示出來
+        let betRangeMapGroup: Map<number, number[]> = new Map<number, number[]>();
+        for (let i = 0; i < betRangeMap.length; i++) {
+            if (betRangeMapGroup.has(betRangeMap[i])) {
+                betRangeMapGroup.get(betRangeMap[i]).push(wayBetList[i]);
+            } else {
+                let bet: number[] = [];
+                bet.push(wayBetList[i]);
+                betRangeMapGroup.set(betRangeMap[i], bet);
+            }
+        }
+
+        // For totalBetList Index
+        let tempMinBetIndex: number = NaN;
+        let tempMaxBetIndex: number = NaN;
+        let minBets: number[] = [];
+        let maxBets: number[] = [];
+        betRangeMapGroup.forEach((value, key) => {
+            let tempMaxBet = this.gameDataProxy.jackpotAllBetList[this.gameDataProxy.jackpotAllBetList.length - 1];
+            for (let i = 0; i < this.gameDataProxy.jackpotAllBetList.length; i++) {
+                if (this.gameDataProxy.jackpotAllBetList[i] == value[0]) {
+                    tempMinBetIndex = i;
+                }
+                tempMaxBet = Math.min(
+                    value[value.length - 1],
+                    Math.max(tempMaxBet, this.gameDataProxy.jackpotAllBetList[i])
+                );
+            }
+            tempMaxBetIndex = this.gameDataProxy.jackpotAllBetList.findIndex((bet) => bet == tempMaxBet);
+
+            minBets.push(this.gameDataProxy.totalBetList[tempMinBetIndex]);
+            maxBets.push(this.gameDataProxy.totalBetList[tempMaxBetIndex]);
+        });
+
+        this.view.createBonusUpgradeBetRangeInfo(minBets, maxBets);
+    }
+
     /** 點擊total bet 開啟選單*/
     public totalBet() {
         if (this.checkControlPanelBtnEnable() !== CtrlPanelBtnState.CAN_CLICK) return;
@@ -554,6 +602,8 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
             }
             this.view.betMenu.node.active = true;
             this.networkProxy.changeOptionStatus(true);
+            this.view.hideBonudUpgradeHint();
+            this.view.showBonusUpgradeMessage();
         }
 
         this.sendNotification(SoundEvent.BUTTON_DOWN_SOUND);
@@ -657,6 +707,12 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
         this.sendNotification(SoundEvent.BUTTON_DOWN_SOUND);
         this.updateTotalBetTxt();
         this.clearPlayerWinTxt();
+        this.changeBonusUpgradeInfo();
+    }
+
+    private changeBonusUpgradeInfo() {
+        const betRangeMapIndex = this.gameDataProxy.getJackpotPoolRangeIndexWithBet();
+        this.view.onBetLevelChange(betRangeMapIndex);
     }
 
     /** 
