@@ -42,6 +42,8 @@ export class Game_3_WinBoardViewMediator
 
     protected lastSetupEventList: string[];
 
+    protected curScoringEnum: string = '';
+
     private totalWin: number;
 
     protected defaultInterestList: string[] = [ViewMediatorEvent.LEAVE, GameStateProxyEvent.ON_SCENE_BEFORE_CHANGE];
@@ -202,18 +204,22 @@ export class Game_3_WinBoardViewMediator
             case JackpotPool.GRAND:
                 timer = grandTime;
                 this.mySceneData.bonusCanSkipRunCreditsTime = 5;
+                this.curScoringEnum = ScoringClipsEnum.Scoring_JPWinLoop01;
                 break;
             case JackpotPool.MAJOR:
                 timer = majorTime;
                 this.mySceneData.bonusCanSkipRunCreditsTime = 5;
+                this.curScoringEnum = ScoringClipsEnum.Scoring_JPWinLoop02;
                 break;
             case JackpotPool.MINOR:
                 timer = minorTime;
                 this.mySceneData.bonusCanSkipRunCreditsTime = 3;
+                this.curScoringEnum = ScoringClipsEnum.Scoring_JPWinLoop03;
                 break;
             case JackpotPool.MINI:
                 timer = miniTime;
                 this.mySceneData.bonusCanSkipRunCreditsTime = 3;
+                this.curScoringEnum = ScoringClipsEnum.Scoring_JPWinLoop04;
                 break;
         }
         return timer;
@@ -257,7 +263,7 @@ export class Game_3_WinBoardViewMediator
 
     playRunCreditsCompletedSound(): void {
         AudioManager.Instance.stop(ScoringClipsEnum.Scoring_JPWinIntro);
-        AudioManager.Instance.stop(ScoringClipsEnum.Scoring_JPWinLoop).fade(0, 0.3);;
+        AudioManager.Instance.stop(this.curScoringEnum).fade(0, 0.3);;
         AudioManager.Instance.play(ScoringClipsEnum.Scoring_JPWinEnd).volume(0).fade(1, 0.3);
     }
 
@@ -274,7 +280,7 @@ export class Game_3_WinBoardViewMediator
 
     playSoundScoringJPWin(): void {
         AudioManager.Instance.stop(BGMClipsEnum.BGM_Mini).fade(0, 1);
-        let audio = AudioManager.Instance.play(ScoringClipsEnum.Scoring_JPWinLoop).volume(0).loop(true);
+        let audio = AudioManager.Instance.play(this.curScoringEnum).volume(0).loop(true);
         AudioManager.Instance.play(ScoringClipsEnum.Scoring_JPWinIntro).callback(() => {
             audio.volume(1).replay();
         });
