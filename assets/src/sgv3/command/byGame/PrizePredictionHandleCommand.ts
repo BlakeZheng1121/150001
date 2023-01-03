@@ -11,7 +11,7 @@ const { ccclass } = _decorator;
 export class PrizePredictionHandleCommand extends puremvc.SimpleCommand {
     public static readonly NAME: string = 'PrizePredictionHandleCommand';
     public execute(notification: puremvc.INotification): void {
-        //this.handleData();
+        this.handleData();
     }
 
     handleData() {
@@ -46,19 +46,7 @@ export class PrizePredictionHandleCommand extends puremvc.SimpleCommand {
             (result) => result.hitNumber == 5 && result.symbolID >= 2 && result.symbolID <= 7
         );
 
-        const ballCount = result.extendInfoForbaseGameResult.ballCount;
-        const hitMiniGame = this.gameDataProxy.spinEventData.gameStateResult.some(
-            (gameStateResult) => gameStateResult.gameSceneName == GameScene.Game_3
-        );
-        const randomNumber = this.getRandomNumber(result, GameScene.Game_1);
-
-        const prizePredictionCondition =
-            (odds >= 25 && isMSymbolFiveOfKind && randomNumber < 0.8) ||
-            ballCount >= 8 ||
-            (ballCount >= 6 && hitMiniGame);
         const displayMethodCondition = odds >= 25 && isMSymbolFiveOfKind;
-
-        result.displayInfo.prizePredictionType = prizePredictionCondition ? 'TYPE_1' : 'NoPrizePredictionType';
         result.displayInfo.displayMethod = Array.from([false, false, false, false, displayMethodCondition], (x) => [x]);
     }
     /**
@@ -80,12 +68,7 @@ export class PrizePredictionHandleCommand extends puremvc.SimpleCommand {
                 (result) => result.hitNumber == 5 && result.symbolID >= 2 && result.symbolID <= 7
             );
             const reel1StackWW = result.screenSymbol[0].filter((id) => id == 0).length == 3;
-            const randomNumber = this.getRandomNumber(result, GameScene.Game_1);
-
-            const prizePredictionCondition = odds >= 25 && isMSymbolFiveOfKind && randomNumber < 0.8;
             const displayCondition = (odds >= 25 && isMSymbolFiveOfKind) || reel1StackWW;
-
-            result.displayInfo.prizePredictionType = prizePredictionCondition ? 'TYPE_1' : 'NoPrizePredictionType';
             result.displayInfo.displayMethod = Array.from([false, false, false, false, displayCondition], (x) => [x]);
         }
     }
@@ -102,18 +85,7 @@ export class PrizePredictionHandleCommand extends puremvc.SimpleCommand {
      * @param result TopUpGameOneRoundResult
      */
     checkDragonUp(result: TopUpGameOneRoundResult): void {
-        //spec:
-        const convert2dTo1dArray = (prev, curr) => prev.concat(curr);
-        let multi = result.extendInfoForTopUpGameResult.accumulateMultiplier;
-        multi = result.extendInfoForTopUpGameResult.goldMultiplierScreenLabel
-            .reduce(convert2dTo1dArray, [])
-            .reduce((prev, curr) => prev - curr, multi);
-        let newC2Count = result.extendInfoForTopUpGameResult.goldCreditBallScreenLabel
-            .reduce(convert2dTo1dArray, [])
-            .filter((value) => value > 0).length;
-        if (multi >= 300 && newC2Count >= 2) {
-            result.displayInfo.prizePredictionType = 'TYPE_1';
-        }
+        //spec
     }
 
     /**
