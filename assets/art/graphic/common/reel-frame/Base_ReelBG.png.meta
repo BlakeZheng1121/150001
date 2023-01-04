@@ -46,9 +46,9 @@
         "trimX": 0,
         "trimY": 0,
         "width": 168,
-        "height": 172,
+        "height": 168,
         "rawWidth": 168,
-        "rawHeight": 172,
+        "rawHeight": 168,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
@@ -67,7 +67,7 @@
     }
   },
   "userData": {
-    "hasAlpha": true,
+    "hasAlpha": false,
     "type": "sprite-frame",
     "redirect": "bc6ce5ec-693a-495d-8b7f-663ae086cb3b@f9941"
   }
