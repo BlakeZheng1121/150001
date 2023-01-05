@@ -51,14 +51,6 @@ export class FeatureSelectionView extends BaseScene {
 
     public autoStartTimeKey: string = String('AutoStartTime');
 
-    private _scrollUILayout: UILayout | null = null;
-    private get scrollUILayout() {
-        if (this._scrollUILayout == null) {
-            this._scrollUILayout = this.getComponentInChildren(UILayout);
-        }
-        return this._scrollUILayout;
-    }
-
     private _uiOrientation: Array<UIOrientation> | null = null;
 
     private get uiOrientation() {
@@ -109,7 +101,6 @@ export class FeatureSelectionView extends BaseScene {
     /** 更改orientation mode */
     public changeOrientation(orientation: string) {
         let ishorizontal = orientation == SceneManager.EV_ORIENTATION_HORIZONTAL;
-        this.scrollUILayout.changeOrientation(ishorizontal);
         for (let i = 0; i < this.uiOrientation.length; i++) {
             this.uiOrientation[i].changeOrientation(ishorizontal);
         }
