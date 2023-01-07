@@ -716,7 +716,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 364.774,
+      "y": 690,
       "z": 0
     },
     "_lrot": {
@@ -752,8 +752,8 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 697,
-      "height": 742
+      "width": 540,
+      "height": 180
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -785,7 +785,7 @@
     "_spriteFrame": null,
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -890,7 +890,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -390,
+      "y": 310,
       "z": 0
     },
     "_lrot": {
@@ -926,8 +926,8 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 473,
-      "height": 242
+      "width": 700,
+      "height": 550
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -959,7 +959,7 @@
     "_spriteFrame": null,
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -1009,7 +1009,7 @@
     "position": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -390,
+      "y": 330,
       "z": 0
     }
   },
@@ -1019,7 +1019,7 @@
     "position": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -355,
+      "y": 330,
       "z": 0
     }
   },
@@ -1047,7 +1047,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -130,
+      "y": -210,
       "z": 0
     },
     "_lrot": {
@@ -1083,8 +1083,8 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 477,
-      "height": 200
+      "width": 700,
+      "height": 560
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1116,7 +1116,7 @@
     "_spriteFrame": null,
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
