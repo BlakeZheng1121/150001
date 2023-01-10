@@ -251,17 +251,15 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
                 }
                 break;
             case GameScene.Game_2:
-                let sideCreditBallWeight: Array<Array<number>> =
+                let c1DisplayWeight: Array<Array<number>> =
                     this.gameDataProxy.initEventData.executeSetting.freeGameSetting.freeGameExtendSetting
-                        .sideCreditBallWeight;
+                        .c1DisplayWeight;
                 let freeGameType =
                     this.gameDataProxy.spinEventData.freeGameResult.freeGameOneRoundResult[0].specialHitInfo;
                 if (freeGameType == null) freeGameType = 'freeGame_03';
                 for (let i = 0; i < this.reelView.reelsList.length; i++) {
                     let content = this.reelView.reelsList[i].singleReelContent as SingleReelContent;
-                    content.freeCreditWeight = this.getWeight(
-                        sideCreditBallWeight[SpecialHitInfo[freeGameType] - 1]
-                    );
+                    content.freeCreditWeight = c1DisplayWeight[SpecialHitInfo[freeGameType] - 1];
                     content.isTriggerFeatureReSpin = false;
                 }
                 break;
