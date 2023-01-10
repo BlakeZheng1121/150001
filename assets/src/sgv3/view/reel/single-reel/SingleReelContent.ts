@@ -5,7 +5,6 @@ const { ccclass } = _decorator;
 
 @ccclass('SingleReelContent')
 export class SingleReelContent extends SingleReelContentBase {
-
     public fovFeature: Array<SymbolPosData> = [];
 
     public creditWeight: Array<number> | null = null;
@@ -36,6 +35,10 @@ export class SingleReelContent extends SingleReelContentBase {
 
     public get creditMaxFreeWeight(): number {
         return this.freeCreditWeight[this.freeCreditWeight.length - 1];
+    }
+
+    public get creditMinFreeWeight(): number {
+        return this.freeCreditWeight[0];
     }
 
     public get multipleMaxWeight(): number {
@@ -98,13 +101,15 @@ export class SingleReelContent extends SingleReelContentBase {
     }
 
     private getRandomFreeCredit(): number {
-        let randomValue = Math.floor(Math.random() * this.creditMaxFreeWeight);
-        for (let i = 1; i < this.freeCreditWeight.length; i++) {
-            if (randomValue >= this.freeCreditWeight[i - 1] && randomValue < this.freeCreditWeight[i]) {
-                if (i - 1 == 0) return 1;
-                else return 0;
-            }
+        if (this.freeCreditWeight.length > 1) {
+            let weightAppear = this.creditMinFreeWeight;
+            let weightNoAppear = this.creditMinFreeWeight + this.creditMaxFreeWeight;
+            let randomValue = Math.floor(Math.random() * weightNoAppear);
+            
+            if (randomValue < this.creditMinFreeWeight) return 1;
+            else if (randomValue >= weightAppear && randomValue < weightNoAppear) return 0;
         }
+
         return -1; ///ERROR
     }
 
