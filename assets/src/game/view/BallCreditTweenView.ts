@@ -7,7 +7,7 @@ const { ccclass, property } = _decorator;
 @ccclass('BallCreditTweenView')
 export class BallCreditTweenView extends BaseScene {
     @property({ type: Node })
-    private dragonBall: Node | null = null;
+    private effectTarget: Node | null = null;
     @property({ type: Prefab })
     private prefab: Prefab | null = null;
 
@@ -28,7 +28,6 @@ export class BallCreditTweenView extends BaseScene {
 
     public clonePrefab() {
         this.curObject = this.clone(this.node).getComponent(CreditTweenObject);
-        this.curObject.uiOrientation.changeOrientation(this.isHorizontalMode);
     }
 
     public clearPool() {
@@ -38,8 +37,8 @@ export class BallCreditTweenView extends BaseScene {
     public onBaseCreditCollect(basePos: Vec3, callback: Function | null = null) {
         this.callback = () => callback();
         this.curObject.node.worldPosition = basePos;
-        let axisX = (this.dragonBall.worldPosition.x - basePos.x) * 0.7 + basePos.x;
-        let axisY = (this.dragonBall.worldPosition.y + 187 - basePos.y) * 0.3 + basePos.y;
+        let axisX = (this.effectTarget.worldPosition.x - basePos.x) * 0.7 + basePos.x;
+        let axisY = (this.effectTarget.worldPosition.y - basePos.y) * 0.3 + basePos.y;
         let convertPos = new Vec3(axisX, axisY);
         this.curTween = tween(this.curObject.node)
             .delay(this.curObject.delayTime)
@@ -47,8 +46,7 @@ export class BallCreditTweenView extends BaseScene {
                 this.getBezierToTween(
                     basePos,
                     convertPos,
-                    new Vec3(this.dragonBall.worldPosition.x
-                        , this.dragonBall.worldPosition.y + 187),
+                    this.effectTarget.worldPosition,
                     this.curObject.ptCount,
                     this.curObject.timeInterval
                 )

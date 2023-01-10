@@ -1,8 +1,7 @@
-import { Label, _decorator } from 'cc';
+import { _decorator } from 'cc';
 import { BaseScene } from '../../base/BaseScene';
 import { SceneManager } from '../../core/utils/SceneManager';
 import { GlobalTimer } from '../../sgv3/util/GlobalTimer';
-import { GameScene } from '../../sgv3/vo/data/GameScene';
 import { JackPotPerformControl } from '../../ta/jackpot-perform-control/JackPotPerformControl';
 import { AudioManager } from '../../ta/tool/AudioManager';
 import { BallHitViewMediator } from '../mediator/BallHitViewMediator';
@@ -16,25 +15,17 @@ export class BallHitView extends BaseScene {
     @property(JackPotPerformControl)
     private jackPotPerformControl: JackPotPerformControl;
 
-    public ballInit() {
-        this.jackPotPerformControl.DragonBallInit();
+    public baseGameIdle() {
+        this.jackPotPerformControl.baseIdle();
     }
 
-    public ballBaseGameIdle() {
-        this.jackPotPerformControl.DragonBallBaseIdle();
+    public fadeInBaseGameIdle() {
+        this.jackPotPerformControl.fadeInBaseIdle();
     }
 
-    public ballFreeGameIdle() {
-        this.jackPotPerformControl.DragonBallFreeIdle();
+    public freeGameIdle() {
+        this.jackPotPerformControl.freeIdle();
     }
-
-    public holdSpinIdle() {
-        this.jackPotPerformControl.holdSpinIdle();
-    }
-
-    /*public dragonInit() {
-        this.jackPotPerformControl.DragonCoinInit();
-    }*/
 
     public ballHitShow(hitInfo) {
         AudioManager.Instance.play(AudioClipsEnum.Base_C1Collect);
@@ -54,14 +45,20 @@ export class BallHitView extends BaseScene {
                 0.7,
                 () => {
                     GlobalTimer.getInstance().removeTimer('ballHitShow');
-                    AudioManager.Instance.play(AudioClipsEnum.Base_C1CollectHit);
-                    if (ballCount >= 6) {
+                    if (ballCount < 6) {
+                        AudioManager.Instance.play(AudioClipsEnum.Base_C1CollectHit);
+                    } else {
                         AudioManager.Instance.play(AudioClipsEnum.Base_C1CollectHitAlarm);
                     }
                 },
                 this
             )
             .start();
+    }
+
+    //** 清除前一把C1打擊所觸發的魔燈動畫 */
+    public ballHitClearShowOnBase() {
+        this.jackPotPerformControl.ClearBaseTrailSchedule();
     }
 
     //** 結算分數加總 表演*/
@@ -82,7 +79,6 @@ export class BallHitView extends BaseScene {
         score: string,
         playType: number,
         trailDelayTime: number,
-        gameScene: GameScene,
         sequenceId?: number
     ) {
         GlobalTimer.getInstance()
@@ -104,18 +100,26 @@ export class BallHitView extends BaseScene {
         GlobalTimer.getInstance()
             .registerTimer(
                 'setBallCredit' + index,
-                trailDelayTime + 0.2,
+                trailDelayTime + 0.4,
                 () => {
                     GlobalTimer.getInstance().removeTimer('setBallCredit' + index);
-                    this.setBallCredit(score, playType, gameScene);
+                    this.setBallCredit(score, playType);
                 },
                 this
             )
             .start();
     }
 
-    public setBallCredit(score: string, playType: number, gameScene: GameScene) {
-        this.jackPotPerformControl.OnScoreCollect(score, playType, gameScene);
+    public setFreeGameBallHit() {
+        this.jackPotPerformControl.OnFreeGameBallHit();
+    }
+
+    public setHoldAndWinBallHit() {
+        this.jackPotPerformControl.OnHoldAndWinBallHit();
+    }
+
+    public setBallCredit(score: string, playType: number) {
+        this.jackPotPerformControl.OnScoreCollect(score, playType);
     }
 
     public hideBallCredit() {
@@ -132,7 +136,7 @@ export class BallHitView extends BaseScene {
 
     // Base game 轉 Free game
     public freeGameTransition() {
-        //this.jackPotPerformControl.DragonCoinHide();
+        this.freeGameIdle();
     }
 
     // Base game 轉 Mini game
@@ -144,7 +148,7 @@ export class BallHitView extends BaseScene {
         GlobalTimer.getInstance()
             .registerTimer(
                 'ballTransition',
-                5.6,
+                4.3,
                 () => {
                     GlobalTimer.getInstance().removeTimer('ballTransition');
                     this.callBack.finishBallTransition();
@@ -155,7 +159,7 @@ export class BallHitView extends BaseScene {
     }
 
     public miniGameRecovery() {
-        this.jackPotPerformControl.DragonBallFallImmediately();
+        this.jackPotPerformControl.fallImmediately();
     }
 
     // 數字左邊補零

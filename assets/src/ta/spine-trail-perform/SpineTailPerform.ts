@@ -1,5 +1,4 @@
 import { _decorator, Component, Prefab, Node, CCInteger } from 'cc';
-import { TimeLineTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
 import { PoolManager } from '../../sgv3/PoolManager';
 import { CocosAnimationMultiTool } from '../tool/cocos-animation-tool/CocosAnimationMultiTool';
 
@@ -7,14 +6,10 @@ const { ccclass, property } = _decorator;
 
 @ccclass('SpineTailPerform')
 export class SpineTailPerform extends Component {
-    @property({ type: TimeLineTool, visible: true })
-    public effectTarget: TimeLineTool | null = null;
+    @property({ type: Node, visible: true })
+    public effectTarget: Node | null = null;
     @property({ type: Prefab, visible: true })
     public trailPrefab: Prefab | null = null;
-    @property({ type: Prefab, visible: true })
-    public trailHitPrefab: Prefab | null = null;
-    @property({ type: Prefab, visible: true })
-    public miniTransitionPrefab: Prefab | null = null;
 
     public spineDragonTrailHit: CocosAnimationMultiTool[] = [];
 
@@ -31,15 +26,6 @@ export class SpineTailPerform extends Component {
     private dragonBallPos: Array<number> = [10, 5, 0, 11, 6, 1, 12, 7, 2, 13, 8, 3, 14, 9, 4]; // symbol items pos (3 X 5)
     private miniEntryPos: Array<number> = [8, 4, 0, 9, 5, 1, 10, 6, 2, 11, 7, 3]; // miniGame items pos (3 X 4)
 
-    public SpineMiniTransitionPerform() {
-        let miniTransition: CocosAnimationMultiTool = PoolManager.instance
-            .getNode(this.miniTransitionPrefab, this.node)
-            .getComponent(CocosAnimationMultiTool);
-        miniTransition.OnPlay(0, () => {
-            PoolManager.instance.putNode(miniTransition.node);
-        });
-    }
-
     public UpdateAnimationObjectID(index: number) {
         let trail: CocosAnimationMultiTool = PoolManager.instance
             .getNode(this.trailPrefab, this.node)
@@ -49,14 +35,6 @@ export class SpineTailPerform extends Component {
         trail.SpineAnimationIndex = [String(this.TRAIL_STRING) + this.dragonBallPos[this.listIndex]];
 
         this.spineDragonTrail.push(trail);
-
-        if (this.spineDragonTrailHit.length < 2) {
-            let trailHit: CocosAnimationMultiTool = PoolManager.instance
-                .getNode(this.trailHitPrefab, this.effectTarget.node)
-                .getComponent(CocosAnimationMultiTool);
-
-            this.spineDragonTrailHit.push(trailHit);
-        }
     }
 
     public SpineTrailEffect() {
@@ -95,7 +73,11 @@ export class SpineTailPerform extends Component {
     }
 
     private spineDragonTrailHitPerform() {
-        //TO DO
-        this.effectTarget?.play('Base_Hit_FX');
+        var spineDragonTrailHitAnimatID = Math.floor(Math.random() * 5);
+        this.spineDragonTrailHit[this.HitBackID]?.OnPlay(spineDragonTrailHitAnimatID);
+        this.HitBackID++;
+        if (this.HitBackID > 1) {
+            this.HitBackID = 0;
+        }
     }
 }
