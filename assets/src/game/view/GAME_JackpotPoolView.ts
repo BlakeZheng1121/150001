@@ -1,6 +1,5 @@
 import { _decorator, Label, Tween, tween, Node } from 'cc';
 import { BaseScene } from '../../base/BaseScene';
-import { UIOrientation } from '../../core/ui/UIOrientation';
 import { Logger } from '../../core/utils/Logger';
 import { SceneManager } from '../../core/utils/SceneManager';
 import { BalanceUtil } from '../../sgv3/util/BalanceUtil';
@@ -67,16 +66,6 @@ export class GAME_JackpotPoolView extends BaseScene {
     }
 
     // 直橫式轉換
-
-    private _uiOrientation: Array<UIOrientation> | null = null;
-
-    private get uiOrientation() {
-        if (this._uiOrientation == null) {
-            this._uiOrientation = this.getComponentsInChildren(UIOrientation);
-        }
-        return this._uiOrientation;
-    }
-
     private _gameUIOrientation: Array<GameUIOrientationSetting> | null = null;
 
     private get gameUIOrientation() {
@@ -88,9 +77,6 @@ export class GAME_JackpotPoolView extends BaseScene {
 
     public changeOrientation(orientation: string, scene: string) {
         let ishorizontal = orientation == SceneManager.EV_ORIENTATION_HORIZONTAL;
-        for (let i = 0; i < this.uiOrientation.length; i++) {
-            this.uiOrientation[i].changeOrientation(ishorizontal);
-        }
         for (let i = 0; i < this.gameUIOrientation.length; i++) {
             this.gameUIOrientation[i].changeOrientation(ishorizontal, scene);
         }
