@@ -561,17 +561,18 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
         let minBets: number[] = [];
         let maxBets: number[] = [];
         betRangeMapGroup.forEach((value, key) => {
-            let tempMaxBet = this.gameDataProxy.jackpotAllBetList[this.gameDataProxy.jackpotAllBetList.length - 1];
-            for (let i = 0; i < this.gameDataProxy.jackpotAllBetList.length; i++) {
-                if (this.gameDataProxy.jackpotAllBetList[i] == value[0]) {
+            for (let i = this.gameDataProxy.jackpotAllBetList.length - 1; i >= 0; i--) {
+                if (this.gameDataProxy.jackpotAllBetList[i] >= value[0]) {
                     tempMinBetIndex = i;
+                    break;
                 }
-                tempMaxBet = Math.min(
-                    value[value.length - 1],
-                    Math.max(tempMaxBet, this.gameDataProxy.jackpotAllBetList[i])
-                );
             }
-            tempMaxBetIndex = this.gameDataProxy.jackpotAllBetList.findIndex((bet) => bet == tempMaxBet);
+            for (let i = 0; i < this.gameDataProxy.jackpotAllBetList.length; i++) {
+                if (this.gameDataProxy.jackpotAllBetList[i] <= value[value.length - 1]) {
+                    tempMaxBetIndex = i;
+                    break;
+                }
+            }
 
             minBets.push(this.gameDataProxy.totalBetList[tempMinBetIndex]);
             maxBets.push(this.gameDataProxy.totalBetList[tempMaxBetIndex]);
