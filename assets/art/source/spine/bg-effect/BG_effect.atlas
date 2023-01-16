@@ -1,0 +1,48 @@
+
+BG_effect.png
+size: 436,428
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+TV_Light
+  rotate: false
+  xy: 2, 224
+  size: 220, 202
+  orig: 220, 202
+  offset: 0, 0
+  index: -1
+TV_light_FG2
+  rotate: false
+  xy: 2, 20
+  size: 220, 202
+  orig: 220, 202
+  offset: 0, 0
+  index: -1
+lightlamp2
+  rotate: false
+  xy: 352, 160
+  size: 59, 51
+  orig: 67, 67
+  offset: 5, 8
+  index: -1
+spotlight
+  rotate: true
+  xy: 224, 160
+  size: 266, 103
+  orig: 266, 103
+  offset: 0, 0
+  index: -1
+spotlight_s01
+  rotate: false
+  xy: 329, 268
+  size: 105, 158
+  orig: 105, 158
+  offset: 0, 0
+  index: -1
+spotlight_s02
+  rotate: false
+  xy: 224, 2
+  size: 126, 156
+  orig: 126, 156
+  offset: 0, 0
+  index: -1
