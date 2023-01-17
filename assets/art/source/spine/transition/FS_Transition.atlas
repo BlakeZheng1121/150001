@@ -1,0 +1,83 @@
+
+FS_Transition.png
+size: 1024,888
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+BG
+  rotate: false
+  xy: 304, 322
+  size: 360, 564
+  orig: 360, 564
+  offset: 0, 0
+  index: -1
+BG-later
+  rotate: true
+  xy: 932, 526
+  size: 361, 77
+  orig: 361, 320
+  offset: 0, 0
+  index: -1
+LED
+  rotate: true
+  xy: 666, 587
+  size: 299, 264
+  orig: 299, 264
+  offset: 0, 0
+  index: -1
+MEN
+  rotate: false
+  xy: 2, 86
+  size: 301, 800
+  orig: 301, 800
+  offset: 0, 0
+  index: -1
+TV_light_FG2
+  rotate: 270
+  xy: 666, 233
+  size: 352, 321
+  orig: 352, 323
+  offset: 0, 0
+  index: -1
+arena-L
+  rotate: false
+  xy: 696, 161
+  size: 110, 80
+  orig: 110, 80
+  offset: 0, 0
+  index: -1
+arena-R
+  rotate: false
+  xy: 809, 118
+  size: 110, 80
+  orig: 110, 80
+  offset: 0, 0
+  index: -1
+arena-middle
+  rotate: false
+  xy: 667, 65
+  size: 158, 51
+  orig: 158, 51
+  offset: 0, 0
+  index: -1
+floor
+  rotate: false
+  xy: 304, 3
+  size: 361, 91
+  orig: 361, 91
+  offset: 0, 0
+  index: -1
+reelframe01
+  rotate: false
+  xy: 304, 96
+  size: 360, 224
+  orig: 360, 224
+  offset: 0, 0
+  index: -1
+spotlight
+  rotate: false
+  xy: 809, 200
+  size: 213, 82
+  orig: 213, 82
+  offset: 0, 0
+  index: -1

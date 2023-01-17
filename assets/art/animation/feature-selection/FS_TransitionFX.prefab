@@ -15,73 +15,21 @@
     "_name": "FS_TransitionFX",
     "_objFlags": 0,
     "_parent": null,
-    "_children": [
-      {
-        "__id__": 2
-      }
-    ],
-    "_active": true,
-    "_components": [
-      {
-        "__id__": 14
-      }
-    ],
-    "_prefab": {
-      "__id__": 16
-    },
-    "_lpos": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_lrot": {
-      "__type__": "cc.Quat",
-      "x": 0,
-      "y": 0,
-      "z": 0,
-      "w": 1
-    },
-    "_lscale": {
-      "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
-      "z": 1
-    },
-    "_layer": 16,
-    "_euler": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_id": ""
-  },
-  {
-    "__type__": "cc.Node",
-    "_name": "Dragon_Flyup",
-    "_objFlags": 0,
-    "_parent": {
-      "__id__": 1
-    },
     "_children": [],
     "_active": true,
     "_components": [
       {
-        "__id__": 3
+        "__id__": 2
       },
       {
-        "__id__": 5
+        "__id__": 4
       },
       {
-        "__id__": 7
-      },
-      {
-        "__id__": 11
+        "__id__": 6
       }
     ],
     "_prefab": {
-      "__id__": 13
+      "__id__": 19
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -102,7 +50,7 @@
       "y": 1,
       "z": 1
     },
-    "_layer": 16,
+    "_layer": 33554432,
     "_euler": {
       "__type__": "cc.Vec3",
       "x": 0,
@@ -116,11 +64,11 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 2
+      "__id__": 1
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 4
+      "__id__": 3
     },
     "_contentSize": {
       "__type__": "cc.Size",
@@ -136,18 +84,18 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "4byDQIa21IW7VTbaGn+zPH"
+    "fileId": "86W9ttSrZJ8ZWuMY7GIePL"
   },
   {
     "__type__": "sp.Skeleton",
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 2
+      "__id__": 1
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 6
+      "__id__": 5
     },
     "_visFlags": 0,
     "_customMaterial": null,
@@ -158,9 +106,9 @@
       "r": 255,
       "g": 255,
       "b": 255,
-      "a": 0
+      "a": 255
     },
-    "loop": false,
+    "loop": true,
     "_premultipliedAlpha": true,
     "_timeScale": 1,
     "_useTint": false,
@@ -170,7 +118,7 @@
     "_debugBones": false,
     "_debugSlots": false,
     "_skeletonData": {
-      "__uuid__": "e91c61e1-c02e-4467-9fd3-ab7d1738dc5a",
+      "__uuid__": "12db1055-2a93-4689-ab16-031b12ca523e",
       "__expectedType__": "sp.SkeletonData"
     },
     "defaultSkin": "default",
@@ -181,129 +129,147 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "fev2gM4EBObJYo5NJHCxNG"
+    "fileId": "80DSHD+TJDh5IayNGwfZAw"
   },
   {
-    "__type__": "689c2Mu1jJHJ6TjpvKfr3by",
+    "__type__": "1bae5dN+VdF06mRB63nwC33",
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 2
+      "__id__": 1
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 8
+      "__id__": 7
     },
-    "DefaultActive": false,
-    "SpineAnimationIndex": [
-      "Dragon_Flyup_H"
+    "arrayTimelineData": [
+      {
+        "__id__": 8
+      }
     ],
-    "AnimationList": [
+    "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "89nLSIQ25Idam7w0GgrHt6"
+  },
+  {
+    "__type__": "Timeline",
+    "timelineName": "FS_Transition",
+    "timelineData": [
       {
         "__id__": 9
       }
-    ],
-    "_id": ""
+    ]
   },
   {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "ebqEwqIfBEQb3JXFrTpCz5"
-  },
-  {
-    "__type__": "AnimationList",
-    "List_Name": "",
-    "AnimationFlowIsDependOnCocosAnimation": false,
-    "DelayTime": 0,
-    "AnimationState": [
-      {
-        "__id__": 10
-      }
-    ],
-    "IsAnimationOverActiveType": false,
-    "ListLoop": false
-  },
-  {
-    "__type__": "AnimationState",
-    "ccAnimation": true,
-    "Spine2D": true,
-    "Spine2DAdd": false,
-    "Particle": false,
-    "Audio": false,
-    "IsAnimationPlay": true,
-    "CocosAnimationState": 0,
-    "IsSpine2DPlay": true,
-    "Spine2DAnimationState": 0,
-    "IsSpineAnimationLoop": false,
-    "IsSpine2DAddPlay": false,
-    "Spine2DAddAnimationTrack": 1,
-    "Spine2DAddAnimationState": 0,
-    "IsSpineAnimationAddLoop": false,
-    "PlayParticle": [],
-    "StopParticle": [],
-    "PlayAudio_Name": [],
-    "StopAudio_Name": []
-  },
-  {
-    "__type__": "cc.Animation",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 2
+    "__type__": "TimelineSetupData",
+    "timelineType": 0,
+    "timelineAnimation": {
+      "__id__": 10
     },
-    "_enabled": true,
-    "__prefab": {
+    "timelineSpine": {
+      "__id__": 13
+    },
+    "timelineTime": {
+      "__id__": 16
+    }
+  },
+  {
+    "__type__": "TimelineAnimationSetupData",
+    "timelineAnimation": null,
+    "timelineAnimationName": 0,
+    "delayTime": 0,
+    "useSpine": false,
+    "useAnim": false,
+    "useParticle": false,
+    "spineSetupData": {
+      "__id__": 11
+    },
+    "animSetupData": {
       "__id__": 12
     },
-    "playOnLoad": false,
-    "_clips": [
-      {
-        "__uuid__": "5e9dae8b-6817-425f-90a9-b689f22e74ae",
-        "__expectedType__": "cc.AnimationClip"
-      }
-    ],
-    "_defaultClip": null,
-    "_id": ""
+    "particleData": []
   },
   {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "b4/R0QxTRLAYhYzgWH+NCp"
+    "__type__": "SpineSetupData",
+    "spine": null,
+    "spineName": 0,
+    "timeScale": 1,
+    "delayTime": 0,
+    "isLoop": false,
+    "isEndClose": false
   },
   {
-    "__type__": "cc.PrefabInfo",
-    "root": {
-      "__id__": 1
-    },
-    "asset": {
-      "__id__": 0
-    },
-    "fileId": "f7d2Fgw5ZH35r6B6TcSshD"
+    "__type__": "AnimationSetupData",
+    "animation": null,
+    "animationName": 0,
+    "delayTime": 0
   },
   {
-    "__type__": "cc.UITransform",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
+    "__type__": "TimelineSpineSetupData",
+    "timelineSpine": {
+      "__id__": 4
     },
-    "_enabled": true,
-    "__prefab": {
+    "timelineSpineName": 1,
+    "timeScale": 1,
+    "delayTime": 0,
+    "isEndClose": false,
+    "isLoop": false,
+    "useSpine": false,
+    "useAnim": false,
+    "useParticle": false,
+    "spineSetupData": {
+      "__id__": 14
+    },
+    "animSetupData": {
       "__id__": 15
     },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 100,
-      "height": 100
-    },
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
-    },
-    "_id": ""
+    "particleData": []
   },
   {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "9bok9v/wlE+o4Sgsra4F8g"
+    "__type__": "SpineSetupData",
+    "spine": null,
+    "spineName": 0,
+    "timeScale": 1,
+    "delayTime": 0,
+    "isLoop": false,
+    "isEndClose": false
+  },
+  {
+    "__type__": "AnimationSetupData",
+    "animation": null,
+    "animationName": 0,
+    "delayTime": 0
+  },
+  {
+    "__type__": "TimelineTimeSetupData",
+    "toNextStateTime": 0,
+    "useSpine": false,
+    "useAnim": false,
+    "useParticle": false,
+    "spineSetupData": {
+      "__id__": 17
+    },
+    "animSetupData": {
+      "__id__": 18
+    },
+    "particleData": []
+  },
+  {
+    "__type__": "SpineSetupData",
+    "spine": null,
+    "spineName": 0,
+    "timeScale": 1,
+    "delayTime": 0,
+    "isLoop": false,
+    "isEndClose": false
+  },
+  {
+    "__type__": "AnimationSetupData",
+    "animation": null,
+    "animationName": 0,
+    "delayTime": 0
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -313,6 +279,6 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "ec2gN1+SVGgqcLwEcaangJ"
+    "fileId": "d89JwuYYpB+KpYz2QIhnqP"
   }
 ]

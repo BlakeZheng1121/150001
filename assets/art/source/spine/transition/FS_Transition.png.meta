@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "9ea65563-c563-4cf9-9ecf-b07a6e4ce2f8",
+  "uuid": "e2d672b7-a528-45e7-bb40-3bf0c06025c5",
   "files": [
     ".png",
     ".json"
@@ -10,8 +10,8 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "9ea65563-c563-4cf9-9ecf-b07a6e4ce2f8@6c48a",
-      "displayName": "Dragon_Flyup",
+      "uuid": "e2d672b7-a528-45e7-bb40-3bf0c06025c5@6c48a",
+      "displayName": "FS_Transition",
       "id": "6c48a",
       "name": "texture",
       "userData": {
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "9ea65563-c563-4cf9-9ecf-b07a6e4ce2f8"
+        "imageUuidOrDatabaseUri": "e2d672b7-a528-45e7-bb40-3bf0c06025c5"
       },
       "ver": "1.0.21",
       "imported": true,
@@ -35,6 +35,6 @@
   "userData": {
     "hasAlpha": true,
     "type": "texture",
-    "redirect": "9ea65563-c563-4cf9-9ecf-b07a6e4ce2f8@6c48a"
+    "redirect": "e2d672b7-a528-45e7-bb40-3bf0c06025c5@6c48a"
   }
 }
