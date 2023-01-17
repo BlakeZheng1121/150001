@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "04054288-34b6-4432-a304-9d183a65c474",
+  "uuid": "bb3c1d32-ff98-4101-88a9-a67a52be050f",
   "files": [
     ".png",
     ".json"
@@ -10,8 +10,8 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "04054288-34b6-4432-a304-9d183a65c474@6c48a",
-      "displayName": "ReelFX_SS",
+      "uuid": "bb3c1d32-ff98-4101-88a9-a67a52be050f@6c48a",
+      "displayName": "COM_ReelFX_SS",
       "id": "6c48a",
       "name": "texture",
       "userData": {
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "04054288-34b6-4432-a304-9d183a65c474"
+        "imageUuidOrDatabaseUri": "bb3c1d32-ff98-4101-88a9-a67a52be050f"
       },
       "ver": "1.0.21",
       "imported": true,
@@ -35,6 +35,6 @@
   "userData": {
     "hasAlpha": true,
     "type": "texture",
-    "redirect": "04054288-34b6-4432-a304-9d183a65c474@6c48a"
+    "redirect": "bb3c1d32-ff98-4101-88a9-a67a52be050f@6c48a"
   }
 }
