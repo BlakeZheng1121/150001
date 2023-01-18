@@ -90,20 +90,15 @@ export class BallHitViewMediator extends BaseMediator<BallHitView> {
             case ViewMediatorEvent.COLLECT_CREDIT_BALL:
                 this.collectCreditBall(notification.getBody());
                 break;
-            case DragonUpEvent.ON_C2_COUNT_UPDATE:
+            case DragonUpEvent.ON_ALL_CREDIT_COLLECT_START:
                 this.updateBallCount(notification.getBody());
                 break;
             case GAME_4_CreditCollectResultCommand.NAME:
                 this.hideBallCountInfo();
                 break;
-            case SceneManager.EV_ORIENTATION_VERTICAL:
-                this.onOrientationVertical();
-                break;
-            case SceneManager.EV_ORIENTATION_HORIZONTAL:
-                this.onOrientationHorizontal();
-                break;
             case GameStateProxyEvent.ON_SCENE_BEFORE_CHANGE:
                 this.view.changeOrientation(this.gameDataProxy.orientationEvent, this.gameDataProxy.curScene);
+                this.loadingTransition();
                 break;
             case FreeGameEvent.ON_BEFORE_END_SCORE_SHOW:
                 this.freeGameBallScoreSumShow(notification.getBody());
@@ -119,32 +114,42 @@ export class BallHitViewMediator extends BaseMediator<BallHitView> {
         }
     }
 
+    private ballHitClearShow() {
+        this.view.ballHitClearShowOnBase();
+    }
+
+    private loadingTransition() {
+        if (
+            String(this.gameDataProxy.preScene) == String(GameScene.Init) &&
+            String(this.gameDataProxy.curScene) == String(GameScene.Game_1)
+        ) {
+            this.view.baseGameIdle();
+        }
+    }
+
     private baseGameTransition() {
         switch (this.gameDataProxy.preScene) {
             case GameScene.Game_3:
-                this.view.ballInit();
+                this.view.fadeInBaseGameIdle();
                 break;
             case GameScene.Game_2:
             case GameScene.Game_4:
+                this.view.baseGameIdle();
                 this.hideBallCountInfo();
                 this.hideBallCredit();
-                this.view.ballBaseGameIdle();
                 break;
         }
-        //this.view.dragonInit();
     }
 
     private freeGameTransition() {
         this.view.freeGameTransition();
-        this.view.ballFreeGameIdle();
         this.numInBall = this.gameDataProxy.ballTotalCredit;
         let ballCash = BalanceUtil.formatBalance(this.numInBall);
-        this.view.setBallCredit(ballCash, 4, GameScene.Game_2);
+        this.view.setBallCredit(ballCash, 4);
     }
 
     private topUpGameTransition() {
         this.view.freeGameTransition();
-        this.view.holdSpinIdle();
         this.hideBallCredit();
         this.numInBall = this.gameDataProxy.ballTotalCount;
         this.ballTotalCount = this.numInBall;
@@ -183,22 +188,22 @@ export class BallHitViewMediator extends BaseMediator<BallHitView> {
         let ballCash = BalanceUtil.formatBalance(this.numInBall);
         switch (this.gameDataProxy.curScene) {
             case GameScene.Game_1:
-                this.view.setBallCredit(ballCash, 0, GameScene.Game_1);
+                this.view.setBallCredit(ballCash, 0);
                 break;
             case GameScene.Game_2:
-                this.view.performTrailOnBall(index, ballCash, 1, 0.3, GameScene.Game_2);
+                this.view.performTrailOnBall(index, ballCash, 1, 0.3);
                 break;
             case GameScene.Game_4:
                 this.ballSequenceIndex++;
                 if (this.ballSequenceIndex >= this.ballTotalCount) this.ballSequenceIndex = 0;
-                this.view.performTrailOnBall(index, ballCash, 2, 0.2, GameScene.Game_4, this.ballSequenceIndex);
+                this.view.performTrailOnBall(index, ballCash, 2, 0.2, this.ballSequenceIndex);
                 break;
         }
     }
 
     // 更新龍珠數量
-    private updateBallCount(ballInfo: number) {
-        this.numInBall += ballInfo;
+    private updateBallCount(ballInfo: Array<Array<Vec2>>) {
+        this.numInBall += ballInfo[1].length;
         this.ballTotalCount = this.numInBall;
         this.view.showBallCountInfo(this.numInBall.toString());
     }
@@ -216,18 +221,6 @@ export class BallHitViewMediator extends BaseMediator<BallHitView> {
 
     public finishBallTransition() {
         this.sendNotification(StateWinEvent.ON_GAME3_SHOW_SELECTION);
-    }
-
-    /** 執行橫式轉換 */
-    protected onOrientationHorizontal(): void {
-        let curScene = this.gameDataProxy.curScene;
-        this.view?.changeOrientation(SceneManager.EV_ORIENTATION_HORIZONTAL, curScene);
-    }
-
-    /** 執行直式轉換 */
-    protected onOrientationVertical(): void {
-        let curScene = this.gameDataProxy.curScene;
-        this.view?.changeOrientation(SceneManager.EV_ORIENTATION_VERTICAL, curScene);
     }
 
     private _gameDataProxy: GAME_GameDataProxy;
