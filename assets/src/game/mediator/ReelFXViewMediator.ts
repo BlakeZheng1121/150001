@@ -14,8 +14,6 @@ export class ReelFXViewMediator extends BaseMediator<ReelFXView> {
         return [
             ReelEvent.ON_SINGLE_REEL_START_DAMPING,
             SceneEvent.LOAD_BASE_COMPLETE,
-            SceneManager.EV_ORIENTATION_HORIZONTAL,
-            SceneManager.EV_ORIENTATION_VERTICAL
         ];
     }
 
@@ -27,12 +25,6 @@ export class ReelFXViewMediator extends BaseMediator<ReelFXView> {
                 break;
             case SceneEvent.LOAD_BASE_COMPLETE:
                 this.view.node.active = true;
-                break;
-            case SceneManager.EV_ORIENTATION_HORIZONTAL:
-                this.onOrientationHorizontal();
-                break;
-            case SceneManager.EV_ORIENTATION_VERTICAL:
-                this.onOrientationVertical();
                 break;
         }
     }
@@ -57,16 +49,6 @@ export class ReelFXViewMediator extends BaseMediator<ReelFXView> {
                     break;
             }
         }
-    }
-
-    /** 執行橫式轉換 */
-    protected onOrientationHorizontal(): void {
-        this.view.changeOrientation(true);
-    }
-
-    /** 執行直式轉換 */
-    protected onOrientationVertical(): void {
-        this.view.changeOrientation(false);
     }
 
     protected _reelDataProxy: ReelDataProxy;
