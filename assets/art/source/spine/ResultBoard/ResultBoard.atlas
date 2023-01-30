@@ -1,60 +1,53 @@
 
 ResultBoard.png
-size: 443,217
+size: 437,199
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 Board_R
   rotate: true
-  xy: 187, 40
+  xy: 187, 22
   size: 175, 169
   orig: 176, 169
   offset: 0, 0
   index: -1
-Flag_R
-  rotate: true
-  xy: 358, 75
-  size: 141, 73
-  orig: 141, 73
-  offset: 0, 0
-  index: -1
 Frame_R
   rotate: false
-  xy: 2, 19
-  size: 183, 196
+  xy: 2, 2
+  size: 183, 195
   orig: 183, 196
-  offset: 0, 0
+  offset: 0, 1
   index: -1
 Wheel
-  rotate: false
-  xy: 358, 3
-  size: 83, 70
-  orig: 83, 71
-  offset: 0, 1
+  rotate: true
+  xy: 358, 4
+  size: 193, 77
+  orig: 193, 77
+  offset: 0, 0
   index: -1
 
 ResultBoard2.png
-size: 330,99
+size: 310,99
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 FX/BG_light
+  rotate: false
+  xy: 139, 2
+  size: 116, 95
+  orig: 116, 95
+  offset: 0, 0
+  index: -1
+FX/BG_particle
   rotate: false
   xy: 2, 2
   size: 136, 95
   orig: 136, 95
   offset: 0, 0
   index: -1
-FX/BG_particle
-  rotate: false
-  xy: 140, 2
-  size: 136, 95
-  orig: 136, 95
-  offset: 0, 0
-  index: -1
 FX/Board_Light
   rotate: true
-  xy: 277, 45
+  xy: 257, 45
   size: 53, 51
   orig: 53, 51
   offset: 0, 0
