@@ -1,118 +1,76 @@
 
 COM_ReelFX_SS.png
-size: 997,884
+size: 545,368
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 images/ReelFX_idle/ReelFX_00
   rotate: false
-  xy: 177, 2
-  size: 173, 292
-  orig: 176, 292
-  offset: 3, 0
-  index: -1
-images/ReelFX_idle/ReelFX_01
-  rotate: false
-  xy: 178, 590
-  size: 173, 292
-  orig: 176, 292
-  offset: 3, 0
-  index: -1
-images/ReelFX_idle/ReelFX_02
-  rotate: false
-  xy: 178, 296
-  size: 173, 292
-  orig: 176, 292
-  offset: 3, 0
+  xy: 2, 2
+  size: 107, 181
+  orig: 110, 182
+  offset: 2, 0
   index: -1
 images/ReelFX_idle/ReelFX_03
   rotate: false
-  xy: 2, 590
-  size: 174, 292
-  orig: 176, 292
+  xy: 111, 185
+  size: 107, 181
+  orig: 110, 182
   offset: 2, 0
   index: -1
 images/ReelFX_idle/ReelFX_04
   rotate: false
-  xy: 352, 2
-  size: 173, 292
-  orig: 176, 292
-  offset: 3, 0
+  xy: 111, 2
+  size: 107, 181
+  orig: 110, 182
+  offset: 2, 0
   index: -1
 images/ReelFX_idle/ReelFX_05
   rotate: false
-  xy: 528, 590
-  size: 172, 292
-  orig: 176, 292
-  offset: 4, 0
+  xy: 329, 185
+  size: 106, 181
+  orig: 110, 182
+  offset: 3, 0
   index: -1
 images/ReelFX_idle/ReelFX_06
   rotate: false
-  xy: 353, 590
-  size: 173, 292
-  orig: 176, 292
-  offset: 3, 0
+  xy: 220, 185
+  size: 107, 181
+  orig: 110, 182
+  offset: 2, 0
   index: -1
 images/ReelFX_idle/ReelFX_07
   rotate: false
-  xy: 2, 296
-  size: 174, 292
-  orig: 176, 292
+  xy: 220, 2
+  size: 107, 181
+  orig: 110, 182
   offset: 2, 0
   index: -1
-images/ReelFX_idle/ReelFX_08
-  rotate: false
-  xy: 353, 296
-  size: 173, 292
-  orig: 176, 292
-  offset: 3, 0
-  index: -1
-images/ReelFX_idle/ReelFX_09
-  rotate: false
-  xy: 527, 2
-  size: 173, 292
-  orig: 176, 292
-  offset: 3, 0
-  index: -1
 images/ReelFX_idle/ReelFX_10
-  rotate: true
-  xy: 702, 709
-  size: 173, 292
-  orig: 176, 292
+  rotate: false
+  xy: 329, 2
+  size: 106, 181
+  orig: 110, 182
   offset: 3, 0
   index: -1
 images/ReelFX_idle/ReelFX_11
   rotate: false
-  xy: 528, 296
-  size: 173, 292
-  orig: 176, 292
+  xy: 437, 185
+  size: 106, 181
+  orig: 110, 182
   offset: 3, 0
   index: -1
 images/ReelFX_idle/ReelFX_12
-  rotate: true
-  xy: 702, 121
-  size: 173, 292
-  orig: 176, 292
+  rotate: false
+  xy: 437, 2
+  size: 106, 181
+  orig: 110, 182
   offset: 3, 0
-  index: -1
-images/ReelFX_idle/ReelFX_13
-  rotate: true
-  xy: 703, 534
-  size: 173, 292
-  orig: 176, 292
-  offset: 3, 0
-  index: -1
-images/ReelFX_idle/ReelFX_14
-  rotate: true
-  xy: 703, 360
-  size: 172, 292
-  orig: 176, 292
-  offset: 4, 0
   index: -1
 images/ReelFX_idle/ReelFX_15
   rotate: false
-  xy: 2, 2
-  size: 173, 292
-  orig: 176, 292
-  offset: 3, 0
+  xy: 2, 185
+  size: 107, 181
+  orig: 110, 182
+  offset: 2, 0
   index: -1
