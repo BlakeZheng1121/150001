@@ -30,24 +30,16 @@ module.exports = Editor.Panel.define({
     template: `
     <div class="content">
         <header>
-            <ui-button class="transparent add"
-                @confirm="add()"
-            >
+            <ui-button class="transparent add" @confirm="add()">
                 <ui-icon value="add"></ui-icon>
             </ui-button>
-            <ui-button class="transparent clear" 
-                @confirm="clear()"
-            >
-                <ui-icon value="del"></ui-icon>
+            <ui-button tooltip="i18n:clear" class="transparent clear"  @confirm="clear()">
+                <ui-icon value="clear"></ui-icon>
             </ui-button>
-            <ui-button class="transparent restore"
-                @confirm="restore()"
-            >
-                <ui-icon value="refresh"></ui-icon>
+            <ui-button tooltip="i18n:magic" class="transparent magic" @confirm="magic()">
+                <ui-icon value="effect"></ui-icon>
             </ui-button>
-            <ui-button class="transparent refresh"
-                @confirm="refresh()"
-            >
+            <ui-button class="transparent refresh" @confirm="refresh()">
                 <ui-icon value="refresh"></ui-icon>
             </ui-button>
         </header>
@@ -121,26 +113,14 @@ module.exports = Editor.Panel.define({
                         vm.$refs.addInput.focus();
                     });
                 },
-                cache() {
-                    Editor.Message.send('scene', 'execute-scene-script', {
-                        name: 'i18n',
-                        method: 'cacheSpriteUuid',
-                        args: ['']
-                    });
-                },
                 clear() {
                     Editor.Message.send('scene', 'execute-scene-script', {
                         name: 'i18n',
-                        method: 'cleanSpriteRef',
+                        method: 'clearRef',
                         args: ['']
                     });
                 },
-                restore() {
-                    Editor.Message.send('scene', 'execute-scene-script', {
-                        name: 'i18n',
-                        method: 'restoreSprite',
-                        args: ['']
-                    });
+                magic() {
                     Editor.Message.request('scene', 'soft-reload');
                 },
                 select(language: string) {

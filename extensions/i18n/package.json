@@ -1,21 +1,22 @@
 {
     "package_version": 2,
-    "version": "1.0.1",
+    "version": "1.1.5",
     "name": "i18n",
     "description": "i18n:i18n.description",
     "main": "./dist/main.js",
     "devDependencies": {
         "@types/node": "^16.9.1",
         "@types/vue": "^2.0.0",
-        "typescript": "^4.3.4"
+        "typescript": "^4.3.4",
+	"@types/fs-extra": "^5.0.4"
     },
     "panels": {
         "default": {
-            "title": "本地化控制面板",
+            "title": "i18n:i18n.title",
             "main": "./dist/panels/default.js"
         }
     },
-    "author": "VisualSJ",
+    "author": "jumbo",
     "editor": ">=3.1.0",
     "scripts": {
         "build": "tsc -b",
@@ -23,17 +24,17 @@
     },
     "contributions": {
         "messages": {
-            "open-default-panel": {
+            "open-panel": {
                 "methods": [
-                    "openDefaultPanel"
+                    "openPanel"
                 ]
             }
         },
         "menu": [
             {
                 "path": "i18n:menu.extension",
-                "label": "I18n Settings",
-                "message": "open-default-panel"
+                "label": "i18n:i18n.menu",
+                "message": "open-panel"
             }
         ],
         "scene": {
@@ -52,9 +53,10 @@
                     "default": false
                 }
             }
-        }
+        },
+        "builder": "./dist/builder.js"
     },
     "dependencies": {
-        "vue": "^2.6.14"
+        "vue": "2.6.14"
     }
 }
