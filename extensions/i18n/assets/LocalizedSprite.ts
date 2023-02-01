@@ -1,16 +1,20 @@
 import * as i18n from './LanguageData';
 
 import { _decorator, Sprite, SpriteFrame, assetManager, Component } from 'cc';
-const { ccclass, property, executeInEditMode } = _decorator;
+import { BaseLocalized } from './BaseLocalized';
+const { ccclass, property, executeInEditMode, requireComponent, menu } = _decorator;
 
 @ccclass('LocalizedSprite')
 @executeInEditMode
-export class LocalizedSprite extends Component {
+@requireComponent(Sprite)
+@menu('i18n/LocalizedSprite')
+export class LocalizedSprite extends BaseLocalized {
     @property({
         readonly: true,
         visible: true
     })
     private spriteUrl: string = '';
+    private retryInterval: number = 500;
 
     private _sprite: Sprite = null;
     private get sprite() {
@@ -27,7 +31,7 @@ export class LocalizedSprite extends Component {
                 // i18n.init('en');
                 return;
             }
-            this.updateSprite();
+            this.updateRenderer();
         }
     }
 
@@ -41,20 +45,32 @@ export class LocalizedSprite extends Component {
         }
     }
 
-    async updateSprite() {
+    async updateRenderer() {
         // @ts-ignore
         if (CC_EDITOR) {
             this.removeListener();
             i18n._language;
             let uuid = await Editor.Message.request('asset-db', 'query-uuid', eval('`' + this.spriteUrl + '`'));
-            let spriteFrame = new SpriteFrame();
-            spriteFrame.initDefault(uuid);
-            this.sprite.spriteFrame = spriteFrame;
+            await Editor.Message.request('scene', 'set-property', {
+                uuid: this.node.uuid,
+                path: `__comps__.1.spriteFrame`,
+                dump: {
+                    type: 'cc.SpriteFrame',
+                    value: {
+                        uuid: uuid
+                    }
+                }
+            });
             this.addListener();
         } else {
             this.downloadBundle()
                 .then((bundle) => this.loadSprite(bundle))
-                .catch((err) => console.error(err));
+                .catch((err) => {
+                    // 一段時間後retry
+                    setTimeout(() => {
+                        this.updateRenderer();
+                    }, this.retryInterval);
+                });
         }
     }
 
@@ -75,13 +91,10 @@ export class LocalizedSprite extends Component {
     loadSprite(bundle) {
         return new Promise<void>((resolve, reject) => {
             // db://assets/art/language/${i18n._language}/xxx/yyy.png@zzzzz
-            // 1. 將i18n._language帶入 db://assets/art/language/en/xxx/yyy.png@zzzzz
-            // 2. 將多國語系前面刪除 xxx/yyy.png@zzzzz
-            // 3. 將.png後移除 xxx/yyy
-            // 4. 補上spriteFrame檔 xxx/yyy/spriteFrame
-            let path = this.spriteUrl
-                    .split("${i18n._language}/")[1]
-                    .split('.png')[0] + '/spriteFrame';
+            // 1. 將多國語系前面刪除 xxx/yyy.png@zzzzz
+            // 2. 將.png後移除 xxx/yyy
+            // 3. 補上spriteFrame檔 xxx/yyy/spriteFrame
+            let path = this.spriteUrl.split('${i18n._language}/')[1].split('.png')[0] + '/spriteFrame';
             bundle.load(path, SpriteFrame, (err, spriteFrame) => {
                 if (err) {
                     return reject(err);
@@ -120,5 +133,9 @@ export class LocalizedSprite extends Component {
 
     private removeListener() {
         this.node.off(Sprite.EventType.SPRITE_FRAME_CHANGED, (comp: Sprite) => this.cachePath(comp));
+    }
+
+    clearRef() {
+        this.sprite.spriteFrame = null;
     }
 }

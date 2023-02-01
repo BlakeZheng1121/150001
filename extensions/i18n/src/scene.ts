@@ -16,24 +16,10 @@ export const methods = {
         // @ts-ignore
         cce.Engine.repaintInEditMode();
     },
-    cacheSpriteUuid() {
+    clearRef() {
         const win = window as any;
         debugger;
-        win._languageData.cacheSpriteUuid();
-        // @ts-ignore
-        cce.Engine.repaintInEditMode();
-    },
-    cleanSpriteRef() {
-        const win = window as any;
-        debugger;
-        win._languageData.cleanSpriteRef();
-        // @ts-ignore
-        cce.Engine.repaintInEditMode();
-    },
-    restoreSprite() {
-        const win = window as any;
-        debugger;
-        win._languageData.restoreSprite();
+        win._languageData.clearRef();
         // @ts-ignore
         cce.Engine.repaintInEditMode();
     }

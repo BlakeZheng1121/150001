@@ -11,7 +11,7 @@ const package_json_1 = __importDefault(require("../package.json"));
  * @zh 为扩展的主进程的注册方法
  */
 exports.methods = {
-    openDefaultPanel() {
+    openPanel() {
         Editor.Panel.open(package_json_1.default.name);
     }
 };

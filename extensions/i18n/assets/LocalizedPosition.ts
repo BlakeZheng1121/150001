@@ -1,16 +1,8 @@
-
 import * as i18n from './LanguageData';
 
-import { _decorator, Component, Label, Vec3 } from 'cc';
+import { _decorator, Vec3 } from 'cc';
+import { BaseLocalized } from './BaseLocalized';
 const { ccclass, property, executeInEditMode } = _decorator;
-
-@ccclass('PositionInfo')
-class PositionInfo {
-    @property({
-        type: Vec3
-    })
-    position: Vec3 = new Vec3();
-}
 
 @ccclass('LocalizedPositionInfo')
 class LocalizedPositionInfo {
@@ -24,7 +16,7 @@ class LocalizedPositionInfo {
 
 @ccclass('LocalizedPosition')
 @executeInEditMode
-export class LocalizedPosition extends Component {
+export class LocalizedPosition extends BaseLocalized {
     @property({
         type: LocalizedPositionInfo
     })
@@ -39,10 +31,12 @@ export class LocalizedPosition extends Component {
             // i18n.init('en');
             return;
         }
-        this.updatePosition();
+        this.updateRenderer();
     }
 
-    updatePosition () {
-        this.node.position = this.localizedPositionInfo?.position;
+    updateRenderer() {
+        if (this.localizedPositionInfo) {
+            this.node.position = this.localizedPositionInfo.position;
+        }
     }
 }

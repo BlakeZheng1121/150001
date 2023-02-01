@@ -1,13 +1,21 @@
-
 import * as i18n from './LanguageData';
 
 import { _decorator, Component, Label } from 'cc';
-const { ccclass, property, executeInEditMode } = _decorator;
+import { BaseLocalized } from './BaseLocalized';
+const { ccclass, property, executeInEditMode, requireComponent, menu } = _decorator;
 
 @ccclass('LocalizedLabel')
 @executeInEditMode
-export class LocalizedLabel extends Component {
-    label: Label | null = null;
+@requireComponent(Label)
+@menu('i18n/LocalizedLabel')
+export class LocalizedLabel extends BaseLocalized {
+    private _label: Label = null;
+    private get label() {
+        if (!this._label) {
+            this._label = this.getComponent(Label);
+        }
+        return this._label;
+    }
 
     @property({ visible: false })
     key: string = '';
@@ -17,8 +25,8 @@ export class LocalizedLabel extends Component {
         return this.key;
     }
     set _key(str: string) {
-        this.updateLabel();
         this.key = str;
+        this.updateRenderer();
     }
 
     onLoad() {
@@ -26,19 +34,10 @@ export class LocalizedLabel extends Component {
             // i18n.init('en');
             return;
         }
-        this.fetchRender();
+        this.updateRenderer();
     }
 
-    fetchRender () {
-        let label = this.getComponent('cc.Label') as Label;
-        if (label) {
-            this.label = label;
-            this.updateLabel();
-            return;
-        } 
-    }
-
-    updateLabel () {
+    updateRenderer() {
         this.label && (this.label.string = i18n.t(this.key));
     }
 }

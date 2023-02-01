@@ -5,7 +5,7 @@ import packageJSON from '../package.json';
  * @zh 为扩展的主进程的注册方法
  */
 export const methods: { [key: string]: (...any: any) => any } = {
-    openDefaultPanel() {
+    openPanel() {
         Editor.Panel.open(packageJSON.name);
     }
 };

@@ -1,4 +1,7 @@
 import { director } from 'cc';
+import { BaseLocalized } from './BaseLocalized';
+import { LocalizedSkeleton } from './LocalizedSkeleton';
+import { LocalizedSprite } from './LocalizedSprite';
 
 export let _language = 'en';
 
@@ -38,81 +41,35 @@ export function t(key: string) {
 export function updateSceneRenderers() {
     // very costly iterations
     const rootNodes = director.getScene()!.children;
-    // walk all nodes with localize label and update
-    const allLocalizedLabels: any[] = [];
+    // walk all nodes with localize skeleton and update
+    const allLocalizedSkeletons: any[] = [];
     for (let i = 0; i < rootNodes.length; ++i) {
-        let labels = rootNodes[i].getComponentsInChildren('LocalizedLabel');
-        Array.prototype.push.apply(allLocalizedLabels, labels);
+        let skeletons = rootNodes[i].getComponentsInChildren('LocalizedSkeleton');
+        Array.prototype.push.apply(allLocalizedSkeletons, skeletons);
     }
-    for (let i = 0; i < allLocalizedLabels.length; ++i) {
-        let label = allLocalizedLabels[i];
-        if (!label.node.active) continue;
-        label.updateLabel();
-    }
-    // walk all nodes with localize sprite and update
-    const allLocalizedSprites: any[] = [];
-    for (let i = 0; i < rootNodes.length; ++i) {
-        let sprites = rootNodes[i].getComponentsInChildren('LocalizedSprite');
-        Array.prototype.push.apply(allLocalizedSprites, sprites);
-    }
-    for (let i = 0; i < allLocalizedSprites.length; ++i) {
-        let sprite = allLocalizedSprites[i];
-        if (!sprite.node.active) continue;
-        sprite.updateSprite();
+    for (let i = 0; i < allLocalizedSkeletons.length; ++i) {
+        let skeletons = allLocalizedSkeletons[i];
+        if (!skeletons.node.active) continue;
+        skeletons.updateRenderer();
     }
 
-    // walk all nodes with localize position and update
-    const allLocalizedPositions: any[] = [];
-    for (let i = 0; i < rootNodes.length; ++i) {
-        let positions = rootNodes[i].getComponentsInChildren('LocalizedPosition');
-        Array.prototype.push.apply(allLocalizedPositions, positions);
-    }
-    for (let i = 0; i < allLocalizedPositions.length; ++i) {
-        let positions = allLocalizedPositions[i];
-        if (!positions.node.active) continue;
-        positions.updatePosition();
+    const allObjects = director.getScene().getComponentsInChildren(BaseLocalized);
+    for (let i = 0; i < allObjects.length; ++i) {
+        allObjects[i].updateRenderer();
     }
 }
 
-export function cacheSpriteUuid() {
-    const rootNodes = director.getScene()!.children;
-    const allLocalizedSprites: any[] = [];
-    for (let i = 0; i < rootNodes.length; ++i) {
-        let sprites = rootNodes[i].getComponentsInChildren('LocalizedSprite');
-        Array.prototype.push.apply(allLocalizedSprites, sprites);
-    }
+export function clearRef() {
+    const allLocalizedSprites = director.getScene().getComponentsInChildren(LocalizedSprite);
     for (let i = 0; i < allLocalizedSprites.length; ++i) {
         let sprite = allLocalizedSprites[i];
-        if (!sprite.node.active) continue;
-        sprite.cacheSpriteUuid();
+        sprite.clearRef();
     }
-}
 
-export function cleanSpriteRef() {
-    const rootNodes = director.getScene()!.children;
-    const allLocalizedSprites: any[] = [];
-    for (let i = 0; i < rootNodes.length; ++i) {
-        let sprites = rootNodes[i].getComponentsInChildren('LocalizedSprite');
-        Array.prototype.push.apply(allLocalizedSprites, sprites);
-    }
-    for (let i = 0; i < allLocalizedSprites.length; ++i) {
-        let sprite = allLocalizedSprites[i];
-        if (!sprite.node.active) continue;
-        sprite.cleanSpriteRef();
-    }
-}
-
-export function restoreSprite() {
-    const rootNodes = director.getScene()!.children;
-    const allLocalizedSprites: any[] = [];
-    for (let i = 0; i < rootNodes.length; ++i) {
-        let sprites = rootNodes[i].getComponentsInChildren('LocalizedSprite');
-        Array.prototype.push.apply(allLocalizedSprites, sprites);
-    }
-    for (let i = 0; i < allLocalizedSprites.length; ++i) {
-        let sprite = allLocalizedSprites[i];
-        if (!sprite.node.active) continue;
-        sprite.restoreSprite();
+    const allLocalizedSkeleton = director.getScene().getComponentsInChildren(LocalizedSkeleton);
+    for (let i = 0; i < allLocalizedSkeleton.length; ++i) {
+        let skeleton = allLocalizedSkeleton[i];
+        skeleton.clearRef();
     }
 }
 
@@ -128,13 +85,7 @@ win._languageData = {
     updateSceneRenderers() {
         updateSceneRenderers();
     },
-    cacheSpriteUuid() {
-        cacheSpriteUuid();
-    },
-    cleanSpriteRef() {
-        cleanSpriteRef();
-    },
-    restoreSprite() {
-        restoreSprite();
+    clearRef() {
+        clearRef();
     }
 };
