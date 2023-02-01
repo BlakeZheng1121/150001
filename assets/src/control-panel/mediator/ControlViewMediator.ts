@@ -172,6 +172,7 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
                 } else {
                     this.view.autoPlayButton.disabledBtn(false);
                 }
+                this.view.showMaxSpinInfo(false);
                 break;
             case this.stateMachineProxy['stateEventMap'].game1Idle:
                 this.view.autoPlayButton.disabledBtn(false);
