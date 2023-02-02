@@ -3,11 +3,11 @@ const win = window as any;
 
 export const languages = {
     // Data
-    loading: "LOADING ANOTHER SCENE ASSETS...",
+    loading: "กําลังเชื่อมต่อ...",
 };
 
 if (!win.languages) {
     win.languages = {};
 }
 
-win.languages.en = languages;
+win.languages.th = languages;
