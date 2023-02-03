@@ -1,15 +1,12 @@
 import { IBuildTaskOption } from '../@types';
-import { IBuildResult } from '../@types';
 import fs from 'fs';
 import { join } from 'path';
 
 interface IOptions {
-    enterCocos: string;
-    remoteAddress: string;
     develop: boolean;
 }
 
-const PACKAGE_NAME = 'cocos-build-template';
+const PACKAGE_NAME = 'cocos-remove-mock';
 
 interface ITaskOptions extends IBuildTaskOption {
     packages: {
@@ -21,14 +18,7 @@ function log(...arg: any[]) {
     return console.log(`[${PACKAGE_NAME}] `, ...arg);
 }
 
-let allAssets = [];
-
 export const throwError = true;
-
-export async function load() {
-    console.log(`[${PACKAGE_NAME}] Load cocos plugin example in builder.`);
-    allAssets = await Editor.Message.request('asset-db', 'query-assets');
-}
 
 export async function onBeforeBuild(options: ITaskOptions) {
     // Todo some thing
@@ -64,7 +54,7 @@ async function removeReference() {
                 const mockLeftIndex = data.indexOf('{', mockStartIndex);
                 const mockRightIndex = data.indexOf('}', mockStartIndex);
                 data = data
-                    .slice(0, mockLeftIndex - 1)
+                    .slice(0, mockLeftIndex)
                     .concat('null')
                     .concat(data.slice(mockRightIndex + 1));
                 fs.writeFile(path, data, (err) => {
@@ -77,27 +67,6 @@ async function removeReference() {
         });
     });
 }
-
-export async function onBeforeBuildAssets(options: ITaskOptions, result: IBuildResult) {
-    // Todo some thing
-    log(`${PACKAGE_NAME}.webTestOption`, 'onBeforeBuildAssets');
-}
-
-export async function onBeforeCompressSettings(options: ITaskOptions, result: IBuildResult) {
-    const pkgOptions = options.packages[PACKAGE_NAME];
-    if (pkgOptions.webTestOption) {
-        console.debug('webTestOption', true);
-    }
-    // Todo some thing
-    console.debug('get settings test', result);
-}
-
-export async function onAfterCompressSettings(options: ITaskOptions, result: IBuildResult) {
-    // Todo some thing
-    console.log('webTestOption', 'onAfterCompressSettings');
-}
-
-export async function onAfterBuild(options: ITaskOptions, result: IBuildResult) {}
 
 export function unload() {
     console.log(`[${PACKAGE_NAME}] Unload cocos plugin example in builder.`);
