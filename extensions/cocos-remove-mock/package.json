@@ -1,10 +1,10 @@
 {
-    "name": "cocos-build-template",
-    "title": "cocos-build-template",
+    "name": "cocos-remove-mock",
+    "title": "cocos-remove-mock",
     "package_version": 2,
     "version": "1.0.0",
     "author": "Cocos Creator",
-    "description": "i18n:cocos-build-template.description",
+    "description": "i18n:cocos-remove-mock.description",
     "contributions": {
         "builder": "./dist/builder.js"
     },
@@ -15,5 +15,8 @@
     "scripts": {
         "build": "tsc -b",
         "watch": "tsc -w"
+    },
+    "devDependencies": {
+        "typescript": "^4.9.5"
     }
 }
