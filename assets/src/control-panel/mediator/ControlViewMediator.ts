@@ -412,7 +412,7 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
 
     public spin() {
         window['onSpinBtnClick']();
-        this.view.hideBonudUpgradeHint();
+        this.view.hideBonusUpgradeHint();
     }
 
     // 使用鍵盤 spin
@@ -604,7 +604,7 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
             }
             this.view.betMenu.node.active = true;
             this.networkProxy.changeOptionStatus(true);
-            this.view.hideBonudUpgradeHint();
+            this.view.hideBonusUpgradeHint();
             this.view.showBonusUpgradeMessage();
         }
 
@@ -677,6 +677,7 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
     /** 點擊自動玩面板選單 */
     private onClickAutoOption(autoCountNum: string): void {
         this.hideAllMenu();
+        this.view.hideBonusUpgradeHint();
 
         this.view.autoPlayButton.changeState(AutoPlayButton.STATUS_PAUSE);
         this.sendNotification(AutoPlayClickOptionCommand.NAME, [0, +autoCountNum]);
