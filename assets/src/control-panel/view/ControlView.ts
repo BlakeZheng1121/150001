@@ -369,7 +369,7 @@ export class ControlView extends BaseScene {
     /**
      * Only Never Click BetOption Button Can Show The Hint
      */
-    public hideBonudUpgradeHint() {
+    public hideBonusUpgradeHint() {
         this.bonusUpgrade.bonusUpgradeHint.active = false;
     }
 
