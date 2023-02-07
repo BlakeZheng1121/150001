@@ -34,7 +34,7 @@
       "services": [],
       "__version__": "3.0.1"
     },
-    "cocos-build-template": {
+    "cocos-remove-mock": {
       "develop": false,
       "__version__": "1.0.0"
     }
