@@ -447,6 +447,7 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
         this.gameDataProxy.resetBetInfo(this.gameDataProxy.totalBetList[this.gameDataProxy.totalBetIdx]);
         this.updateTotalBetTxt();
         this.clearPlayerWinTxt();
+        this.changeBonusUpgradeInfo();
     }
 
     /** 點擊增加押注*/
@@ -461,6 +462,7 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
         this.gameDataProxy.resetBetInfo(this.gameDataProxy.totalBetList[this.gameDataProxy.totalBetIdx]);
         this.updateTotalBetTxt();
         this.clearPlayerWinTxt();
+        this.changeBonusUpgradeInfo();
     }
 
     /** 點擊turbo按鈕 */
