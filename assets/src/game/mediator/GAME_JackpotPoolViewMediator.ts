@@ -142,8 +142,9 @@ export class GAME_JackpotPoolViewMediator extends BaseMediator<GAME_JackpotPoolV
     protected hitJackpotToInitPoolValue() {
         const hitJackpotPoolType = this.gameDataProxy.hitJackpotPoolType;
         const jpPoolData = this.gameDataProxy.initEventData.executeSetting.jackpotSetting.jackpotPoolData[0];
+        const poolIndex = this.gameDataProxy.getJackpotPoolRangeIndexWithBet();
         const initJackpotValue = this.gameDataProxy.convertCredit2Cash(
-            jpPoolData.jackpotExtendSetting.poolInitValue[0][hitJackpotPoolType - 1]
+            jpPoolData.jackpotExtendSetting.poolInitValue[poolIndex][hitJackpotPoolType - 1]
         );
 
         this.runPoolLabel(initJackpotValue, hitJackpotPoolType, true);
