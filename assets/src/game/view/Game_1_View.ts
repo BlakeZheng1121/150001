@@ -1,4 +1,5 @@
 import { _decorator } from 'cc';
+import { TimeLineTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
 import { BaseScene } from '../../base/BaseScene';
 import { UIOrientation } from '../../core/ui/UIOrientation';
 import { SceneManager } from '../../core/utils/SceneManager';
@@ -7,7 +8,7 @@ import { GameUIOrientationSetting } from '../vo/GameUIOrientationSetting';
 // import { GAME_EffectView } from './GAME_EffectView';
 // import { GAME_FortuneBallView } from './GAME_FortuneBallView';
 
-const { ccclass } = _decorator;
+const { ccclass, property } = _decorator;
 
 @ccclass('Game_1_View')
 export class Game_1_View extends BaseScene {
@@ -15,6 +16,9 @@ export class Game_1_View extends BaseScene {
     public static readonly VERTICAL: string = 'vertical';
 
     private _uiOrientation: Array<UIOrientation> | null = null;
+
+    @property({ type: TimeLineTool })
+    private bg_effect: TimeLineTool = null;
 
     private get uiOrientation() {
         if (this._uiOrientation == null) {
@@ -42,6 +46,7 @@ export class Game_1_View extends BaseScene {
         // this.fortuneballView.mySceneName =
         //     this.effectView.mySceneName =
         //     this.showView.mySceneName =
+        this.bg_effect.play("base");
     }
 
     public changeOrientation(orientation: string, scene: string) {

@@ -1,4 +1,5 @@
 import { director, instantiate, Label, Prefab, _decorator } from 'cc';
+import { TimeLineTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
 import { BaseScene } from '../../base/BaseScene';
 import { UIOrientation } from '../../core/ui/UIOrientation';
 import { SceneManager } from '../../core/utils/SceneManager';
@@ -9,6 +10,10 @@ const { ccclass, property } = _decorator;
 export class Game_2_View extends BaseScene {
     @property({ type: [Prefab], visible: true })
     private loadPrefab: Array<Prefab> | null = [];
+
+
+    @property({ type: TimeLineTool })
+    private bg_effect: TimeLineTool;
 
     // @property({ type: Label, visible: true })
     // private awardLabel: Label;
@@ -43,6 +48,7 @@ export class Game_2_View extends BaseScene {
             director.getScene().addChild(loadPrefab);
             loadPrefab.parent = this.node;
         }
+        this.bg_effect.play('free');
     }
 
     /** 更新 award 場次 */
