@@ -1,5 +1,6 @@
 import { _decorator, Component, Node, game } from 'cc';
 import { ParticleContentTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
+import { TimeLineTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
 import { BaseScene } from '../../base/BaseScene';
 import { CocosAnimationMultiTool } from '../../ta/tool/cocos-animation-tool/CocosAnimationMultiTool';
 
@@ -15,8 +16,8 @@ export class GAME_TransitionView extends BaseScene {
     @property(ParticleContentTool)
     private coinFall: ParticleContentTool;
 
-    @property(CocosAnimationMultiTool)
-    private DragonFlyUp: CocosAnimationMultiTool | null = null;
+    @property(TimeLineTool)
+    private transition: TimeLineTool = null;
 
     protected isTransitionBG: boolean = false; //判斷是否進行轉場.
 
@@ -34,7 +35,7 @@ export class GAME_TransitionView extends BaseScene {
     public showDragonFlyUp(): void {
         const self = this;
         this.setNodeActivity(true);
-        this.DragonFlyUp?.OnPlay(1);
+        this.transition?.play('FS_Transition');
     }
 
     public showCoinFall(delay: number) {
