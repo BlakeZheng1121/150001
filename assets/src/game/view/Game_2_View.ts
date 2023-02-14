@@ -48,7 +48,6 @@ export class Game_2_View extends BaseScene {
             director.getScene().addChild(loadPrefab);
             loadPrefab.parent = this.node;
         }
-        this.bg_effect.play('free');
     }
 
     /** 更新 award 場次 */
@@ -75,4 +74,11 @@ export class Game_2_View extends BaseScene {
     //     };
     //     return award[curGameOperation];
     // }
+
+    protected onEnable () {
+        this.bg_effect.play("free");
+    }
+    protected onDisable () {
+        this.bg_effect.stop();
+    }
 }

@@ -46,7 +46,6 @@ export class Game_1_View extends BaseScene {
         // this.fortuneballView.mySceneName =
         //     this.effectView.mySceneName =
         //     this.showView.mySceneName =
-        this.bg_effect.play("base");
     }
 
     public changeOrientation(orientation: string, scene: string) {
@@ -58,5 +57,12 @@ export class Game_1_View extends BaseScene {
         for (let i = 0; i < this.gameUIOrientation.length; i++) {
             this.gameUIOrientation[i].changeOrientation(ishorizontal, scene);
         }
+    }
+
+    protected onEnable () {
+        this.bg_effect.play("base");
+    }
+    protected onDisable () {
+        this.bg_effect.stop();
     }
 }
