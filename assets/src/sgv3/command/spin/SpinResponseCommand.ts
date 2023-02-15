@@ -9,6 +9,7 @@ import { GameStateId } from '../../vo/data/GameStateId';
 import { NetworkProxy } from '../../../core/proxy/NetworkProxy';
 import { ByGameHandleCommand } from './ByGameHandleCommand';
 import { StateMachineProxy } from '../../proxy/StateMachineProxy';
+import { MathUtil } from '../../../core/utils/MathUtil';
 
 /**
  * 接收到Server打過來的資料後進行處理
@@ -50,7 +51,8 @@ export class SpinResponseCommand extends puremvc.SimpleCommand {
         if (self.gameDataProxy.spinEventData.bonusGameResult) {
             this.gameDataProxy.tempWonCredit =
                 self.gameDataProxy.playerTotalWin +
-                self.gameDataProxy.spinEventData.bonusGameResult.bonusGameTotalWin / 100;
+                MathUtil.div(self.gameDataProxy.spinEventData.bonusGameResult.bonusGameTotalWin, 100) +
+                MathUtil.div(self.gameDataProxy.spinEventData.bonusGameResult.jackpotTotalWin, 100);
 
             this.gameDataProxy.canUpdateJackpotPool = false;
         } else {
