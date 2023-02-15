@@ -2,12 +2,12 @@
   "ver": "2.0.3",
   "importer": "animation-clip",
   "imported": true,
-  "uuid": "046e5ba4-9608-44c9-95cb-1976f9fd3364",
+  "uuid": "d22b4fd1-a78d-46fe-b8eb-d7aa8c85de40",
   "files": [
     ".cconb"
   ],
   "subMetas": {},
   "userData": {
-    "name": "BigWin_Show"
+    "name": "big-win-loop"
   }
 }

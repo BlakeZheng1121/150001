@@ -2,12 +2,12 @@
   "ver": "2.0.3",
   "importer": "animation-clip",
   "imported": true,
-  "uuid": "b2986dfc-8270-4f85-abcc-093023ad799c",
+  "uuid": "318b501b-809c-4ca6-a0d8-60d209a1688e",
   "files": [
     ".cconb"
   ],
   "subMetas": {},
   "userData": {
-    "name": "BigWin_PlayShow"
+    "name": "big-win-stack"
   }
 }

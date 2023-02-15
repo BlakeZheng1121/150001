@@ -2,12 +2,12 @@
   "ver": "2.0.3",
   "importer": "animation-clip",
   "imported": true,
-  "uuid": "acdfcf9b-c6d9-465a-bfc9-02a50c885f4a",
+  "uuid": "8837ea6b-70db-4eaf-a6cb-5d410918a5a1",
   "files": [
     ".cconb"
   ],
   "subMetas": {},
   "userData": {
-    "name": "BigWin_PlayHide"
+    "name": "big-win-end"
   }
 }
