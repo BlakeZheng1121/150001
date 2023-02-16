@@ -215,11 +215,11 @@
     "playOnLoad": false,
     "_clips": [
       {
-        "__uuid__": "0adbf7bf-477b-490b-9bf9-3a5a2aef0059",
+        "__uuid__": "f17a8f5a-4c35-4911-9138-4efae3a32ccb",
         "__expectedType__": "cc.AnimationClip"
       },
       {
-        "__uuid__": "9d66b8be-7ba4-41e1-8e37-4dd3df873771",
+        "__uuid__": "b1027227-7f78-467e-9398-52bfae0d609f",
         "__expectedType__": "cc.AnimationClip"
       }
     ],
@@ -14123,51 +14123,6 @@
     "fileId": "adURI5XANDDYnTycfUv5cS"
   },
   {
-    "__type__": "sp.Skeleton",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1110
-    },
-    "_enabled": true,
-    "__prefab": {
-      "__id__": 1120
-    },
-    "_visFlags": 0,
-    "_customMaterial": null,
-    "_srcBlendFactor": 2,
-    "_dstBlendFactor": 4,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "loop": false,
-    "_premultipliedAlpha": true,
-    "_timeScale": 1,
-    "_useTint": false,
-    "_preCacheMode": 0,
-    "_cacheMode": 0,
-    "_defaultCacheMode": 0,
-    "_debugBones": false,
-    "_debugSlots": false,
-    "_skeletonData": {
-      "__uuid__": "1144438b-af49-4368-bd3e-8885feb09a2e",
-      "__expectedType__": "sp.SkeletonData"
-    },
-    "defaultSkin": "default",
-    "defaultAnimation": "",
-    "_sockets": [],
-    "_debugMesh": false,
-    "_id": ""
-  },
-  {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "c5inXdNMNJLZTa9cfH4JIq"
-  },
-  {
     "__type__": "cc.Animation",
     "_name": "",
     "_objFlags": 0,
@@ -14176,7 +14131,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 1122
+      "__id__": 1120
     },
     "playOnLoad": false,
     "_clips": [
@@ -14203,6 +14158,49 @@
   {
     "__type__": "cc.CompPrefabInfo",
     "fileId": "ab/kaGrsdHGYcSevEf4Sc7"
+  },
+  {
+    "__type__": "bf9bd2hdtBJ9avGqkId64Bl",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1110
+    },
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 1122
+    },
+    "_visFlags": 0,
+    "_customMaterial": null,
+    "_srcBlendFactor": 2,
+    "_dstBlendFactor": 4,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "loop": true,
+    "_premultipliedAlpha": true,
+    "_timeScale": 1,
+    "_useTint": false,
+    "_preCacheMode": 0,
+    "_cacheMode": 0,
+    "_defaultCacheMode": 0,
+    "_debugBones": false,
+    "_debugSlots": false,
+    "_skeletonData": null,
+    "defaultSkin": "",
+    "defaultAnimation": "",
+    "_sockets": [],
+    "_debugMesh": false,
+    "url": "db://assets/art/language/${i18n._language}/spine/big-win-show/BigWinShow.skel",
+    "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "3cC9srOGdDfbnhKrTeO2K9"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -15994,7 +15992,7 @@
   {
     "__type__": "TimelineAnimationSetupData",
     "timelineAnimation": {
-      "__id__": 1121
+      "__id__": 1119
     },
     "timelineAnimationName": 0,
     "delayTime": 0,
@@ -16019,7 +16017,7 @@
   {
     "__type__": "SpineSetupData",
     "spine": {
-      "__id__": 1119
+      "__id__": 1121
     },
     "spineName": 1,
     "timeScale": 1,
@@ -16073,9 +16071,7 @@
   },
   {
     "__type__": "TimelineSpineSetupData",
-    "timelineSpine": {
-      "__id__": 1119
-    },
+    "timelineSpine": null,
     "timelineSpineName": 1,
     "timeScale": 1,
     "delayTime": 0,
@@ -16111,7 +16107,7 @@
   {
     "__type__": "AnimationSetupData",
     "animation": {
-      "__id__": 1121
+      "__id__": 1119
     },
     "animationName": 0,
     "delayTime": 0
@@ -16197,7 +16193,7 @@
   {
     "__type__": "TimelineAnimationSetupData",
     "timelineAnimation": {
-      "__id__": 1121
+      "__id__": 1119
     },
     "timelineAnimationName": 1,
     "delayTime": 0,
@@ -16214,9 +16210,7 @@
   },
   {
     "__type__": "SpineSetupData",
-    "spine": {
-      "__id__": 1119
-    },
+    "spine": null,
     "spineName": 1,
     "timeScale": 1,
     "delayTime": 0,
@@ -16231,9 +16225,7 @@
   },
   {
     "__type__": "TimelineSpineSetupData",
-    "timelineSpine": {
-      "__id__": 1119
-    },
+    "timelineSpine": null,
     "timelineSpineName": 1,
     "timeScale": 1,
     "delayTime": 0,
@@ -16322,7 +16314,7 @@
   {
     "__type__": "TimelineAnimationSetupData",
     "timelineAnimation": {
-      "__id__": 1121
+      "__id__": 1119
     },
     "timelineAnimationName": 2,
     "delayTime": 0,
@@ -16344,7 +16336,7 @@
   {
     "__type__": "SpineSetupData",
     "spine": {
-      "__id__": 1119
+      "__id__": 1121
     },
     "spineName": 1,
     "timeScale": 1,
@@ -16455,7 +16447,7 @@
   {
     "__type__": "TimelineAnimationSetupData",
     "timelineAnimation": {
-      "__id__": 1121
+      "__id__": 1119
     },
     "timelineAnimationName": 3,
     "delayTime": 0,
@@ -16472,9 +16464,7 @@
   },
   {
     "__type__": "SpineSetupData",
-    "spine": {
-      "__id__": 1119
-    },
+    "spine": null,
     "spineName": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -16491,9 +16481,7 @@
   },
   {
     "__type__": "TimelineSpineSetupData",
-    "timelineSpine": {
-      "__id__": 1119
-    },
+    "timelineSpine": null,
     "timelineSpineName": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -16582,7 +16570,7 @@
   {
     "__type__": "TimelineAnimationSetupData",
     "timelineAnimation": {
-      "__id__": 1121
+      "__id__": 1119
     },
     "timelineAnimationName": 0,
     "delayTime": 0,
@@ -16607,7 +16595,7 @@
   {
     "__type__": "SpineSetupData",
     "spine": {
-      "__id__": 1119
+      "__id__": 1121
     },
     "spineName": 3,
     "timeScale": 1,
@@ -16716,9 +16704,7 @@
   },
   {
     "__type__": "SpineSetupData",
-    "spine": {
-      "__id__": 1119
-    },
+    "spine": null,
     "spineName": 4,
     "timeScale": 1,
     "delayTime": 0.2,
@@ -16785,7 +16771,7 @@
   {
     "__type__": "TimelineAnimationSetupData",
     "timelineAnimation": {
-      "__id__": 1121
+      "__id__": 1119
     },
     "timelineAnimationName": 1,
     "delayTime": 0,
@@ -16906,7 +16892,7 @@
   {
     "__type__": "TimelineAnimationSetupData",
     "timelineAnimation": {
-      "__id__": 1121
+      "__id__": 1119
     },
     "timelineAnimationName": 2,
     "delayTime": 0,
@@ -16928,7 +16914,7 @@
   {
     "__type__": "SpineSetupData",
     "spine": {
-      "__id__": 1119
+      "__id__": 1121
     },
     "spineName": 3,
     "timeScale": 1,
@@ -17039,7 +17025,7 @@
   {
     "__type__": "TimelineAnimationSetupData",
     "timelineAnimation": {
-      "__id__": 1121
+      "__id__": 1119
     },
     "timelineAnimationName": 3,
     "delayTime": 0,
@@ -17162,7 +17148,7 @@
   {
     "__type__": "TimelineAnimationSetupData",
     "timelineAnimation": {
-      "__id__": 1121
+      "__id__": 1119
     },
     "timelineAnimationName": 0,
     "delayTime": 0,
@@ -17187,7 +17173,7 @@
   {
     "__type__": "SpineSetupData",
     "spine": {
-      "__id__": 1119
+      "__id__": 1121
     },
     "spineName": 4,
     "timeScale": 1,
@@ -17318,7 +17304,7 @@
   {
     "__type__": "TimelineAnimationSetupData",
     "timelineAnimation": {
-      "__id__": 1121
+      "__id__": 1119
     },
     "timelineAnimationName": 1,
     "delayTime": 0,
@@ -17439,7 +17425,7 @@
   {
     "__type__": "TimelineAnimationSetupData",
     "timelineAnimation": {
-      "__id__": 1121
+      "__id__": 1119
     },
     "timelineAnimationName": 2,
     "delayTime": 0,
@@ -17461,7 +17447,7 @@
   {
     "__type__": "SpineSetupData",
     "spine": {
-      "__id__": 1119
+      "__id__": 1121
     },
     "spineName": 4,
     "timeScale": 1,
@@ -17572,7 +17558,7 @@
   {
     "__type__": "TimelineAnimationSetupData",
     "timelineAnimation": {
-      "__id__": 1121
+      "__id__": 1119
     },
     "timelineAnimationName": 3,
     "delayTime": 0,
@@ -17695,7 +17681,7 @@
   {
     "__type__": "TimelineAnimationSetupData",
     "timelineAnimation": {
-      "__id__": 1121
+      "__id__": 1119
     },
     "timelineAnimationName": 0,
     "delayTime": 0,
@@ -17720,7 +17706,7 @@
   {
     "__type__": "SpineSetupData",
     "spine": {
-      "__id__": 1119
+      "__id__": 1121
     },
     "spineName": 2,
     "timeScale": 1,
@@ -17851,7 +17837,7 @@
   {
     "__type__": "TimelineAnimationSetupData",
     "timelineAnimation": {
-      "__id__": 1121
+      "__id__": 1119
     },
     "timelineAnimationName": 1,
     "delayTime": 0,
@@ -17972,7 +17958,7 @@
   {
     "__type__": "TimelineAnimationSetupData",
     "timelineAnimation": {
-      "__id__": 1121
+      "__id__": 1119
     },
     "timelineAnimationName": 2,
     "delayTime": 0,
@@ -17994,7 +17980,7 @@
   {
     "__type__": "SpineSetupData",
     "spine": {
-      "__id__": 1119
+      "__id__": 1121
     },
     "spineName": 2,
     "timeScale": 1,
@@ -18105,7 +18091,7 @@
   {
     "__type__": "TimelineAnimationSetupData",
     "timelineAnimation": {
-      "__id__": 1121
+      "__id__": 1119
     },
     "timelineAnimationName": 3,
     "delayTime": 0,
