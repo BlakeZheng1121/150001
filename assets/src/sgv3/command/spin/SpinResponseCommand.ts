@@ -49,10 +49,11 @@ export class SpinResponseCommand extends puremvc.SimpleCommand {
         // 刷新 Credit
         self.webBridgeProxy.updateHtmlCredit();
         if (self.gameDataProxy.spinEventData.bonusGameResult) {
-            this.gameDataProxy.tempWonCredit =
-                self.gameDataProxy.playerTotalWin +
-                MathUtil.div(self.gameDataProxy.spinEventData.bonusGameResult.bonusGameTotalWin, 100) +
-                MathUtil.div(self.gameDataProxy.spinEventData.bonusGameResult.jackpotTotalWin, 100);
+            this.gameDataProxy.tempWonCredit = MathUtil.add(
+                self.gameDataProxy.playerTotalWin,
+                MathUtil.div(self.gameDataProxy.spinEventData.bonusGameResult.bonusGameTotalWin, 100),
+                MathUtil.div(self.gameDataProxy.spinEventData.bonusGameResult.jackpotTotalWin, 100)
+            );
 
             this.gameDataProxy.canUpdateJackpotPool = false;
         } else {
