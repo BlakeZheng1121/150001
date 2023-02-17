@@ -5518,7 +5518,7 @@
     "_spriteFrame": null,
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 0,
+    "_sizeMode": 1,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -6858,6 +6858,16 @@
       "__type__": "cc.Vec3",
       "x": 67,
       "y": 3,
+      "z": 0
+    }
+  },
+  {
+    "__type__": "LocalizedPositionInfo",
+    "language": "th",
+    "position": {
+      "__type__": "cc.Vec3",
+      "x": 57,
+      "y": 0,
       "z": 0
     }
   },

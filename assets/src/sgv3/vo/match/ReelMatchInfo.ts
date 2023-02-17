@@ -63,10 +63,10 @@ export class SymbolData {
 
     public checkLanguage(language: string) {
         if (this.isUseLanguage === false) return;
-        if (language === 'en') {
-            this._mainSpriteFrame = this._mainSpriteFrame_EN;
-        } else {
+        if (language === 'zh') {
             this._mainSpriteFrame = this._mainSpriteFrame_ZH;
+        } else {
+            this._mainSpriteFrame = this._mainSpriteFrame_EN;
         }
     }
 }
