@@ -6862,6 +6862,16 @@
     }
   },
   {
+    "__type__": "LocalizedPositionInfo",
+    "language": "th",
+    "position": {
+      "__type__": "cc.Vec3",
+      "x": 57,
+      "y": 0,
+      "z": 0
+    }
+  },
+  {
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 1
