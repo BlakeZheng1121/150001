@@ -1,83 +1,76 @@
 
 FS_Transition.png
-size: 1024,888
+size: 994,991
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 BG
   rotate: false
-  xy: 304, 322
-  size: 360, 564
-  orig: 360, 564
+  xy: 2, 284
+  size: 450, 705
+  orig: 450, 705
   offset: 0, 0
   index: -1
-BG-later
-  rotate: true
-  xy: 932, 526
-  size: 361, 77
-  orig: 361, 320
-  offset: 0, 0
-  index: -1
-LED
-  rotate: true
-  xy: 666, 587
-  size: 299, 264
-  orig: 299, 264
-  offset: 0, 0
-  index: -1
-MEN
+LEDTV
   rotate: false
-  xy: 2, 86
-  size: 301, 800
-  orig: 301, 800
+  xy: 454, 256
+  size: 374, 330
+  orig: 374, 330
   offset: 0, 0
   index: -1
 TV_light_FG2
-  rotate: 270
-  xy: 666, 233
-  size: 352, 321
-  orig: 352, 323
+  rotate: false
+  xy: 454, 588
+  size: 440, 401
+  orig: 440, 404
   offset: 0, 0
   index: -1
-arena-L
+arena_L
   rotate: false
-  xy: 696, 161
-  size: 110, 80
-  orig: 110, 80
+  xy: 722, 38
+  size: 138, 100
+  orig: 138, 100
   offset: 0, 0
   index: -1
-arena-R
-  rotate: false
-  xy: 809, 118
-  size: 110, 80
-  orig: 110, 80
+arena_M
+  rotate: true
+  xy: 830, 389
+  size: 197, 64
+  orig: 197, 64
   offset: 0, 0
   index: -1
-arena-middle
+arena_R
   rotate: false
-  xy: 667, 65
-  size: 158, 51
-  orig: 158, 51
+  xy: 830, 287
+  size: 137, 100
+  orig: 137, 100
   offset: 0, 0
   index: -1
 floor
   rotate: false
-  xy: 304, 3
-  size: 361, 91
-  orig: 361, 91
+  xy: 454, 140
+  size: 451, 114
+  orig: 451, 114
+  offset: 0, 0
+  index: -1
+peaple
+  rotate: true
+  xy: 896, 538
+  size: 451, 96
+  orig: 451, 400
   offset: 0, 0
   index: -1
 reelframe01
   rotate: false
-  xy: 304, 96
-  size: 360, 224
-  orig: 360, 224
+  xy: 2, 2
+  size: 450, 280
+  orig: 450, 280
   offset: 0, 0
   index: -1
 spotlight
   rotate: false
-  xy: 809, 200
-  size: 213, 82
-  orig: 213, 82
+  xy: 454, 35
+  size: 266, 103
+  orig: 266, 103
   offset: 0, 0
   index: -1
