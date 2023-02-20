@@ -174,10 +174,9 @@ export class BallHitViewMediator extends BaseMediator<BallHitView> {
     }
     // 準備收集龍珠分數的表演，直式需放大龍珠
     private prepareCollectBall() {
-        //this.view.ballFreeGameIdle();
-        AudioManager.Instance.stop(BGMClipsEnum.BGM_Base).fade(0, 0.5);
-        AudioManager.Instance.stop(BGMClipsEnum.BGM_BaseIdle).fade(0, 0.5);
-        AudioManager.Instance.play(BGMClipsEnum.BGM_FeatureSelection).loop(true).volume(0).fade(1, 0.5);
+        // this.view.ballFreeGameIdle();
+        AudioManager.Instance.stop(BGMClipsEnum.BGM_Base).fade(0, 1);
+        AudioManager.Instance.play(BGMClipsEnum.BGM_FeatureSelection).loop(true).volume(0).fade(1, 1);
     }
 
     // 龍珠分數收集
