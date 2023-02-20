@@ -1,5 +1,6 @@
 import { _decorator, Label, tween } from 'cc';
 import { BaseScene } from '../../base/BaseScene';
+import { SceneManager } from '../../core/utils/SceneManager';
 import { AudioManager } from '../../ta/tool/AudioManager';
 import { CocosAnimationMultiTool } from '../../ta/tool/cocos-animation-tool/CocosAnimationMultiTool';
 import { AudioClipsEnum } from '../vo/enum/SoundMap';
@@ -22,6 +23,9 @@ export class ExpansionWildsView extends BaseScene {
         this.animL.OnPlay(0);
         this.animR.OnPlay(1);
         AudioManager.Instance.play(AudioClipsEnum.Free_ExpandWild);
+        setTimeout(() => {
+            SceneManager.instance.shakeScreen();
+        }, 600);
     }
 
     public win(fiveOfKind: boolean, language: string, callBack?: Function): void {

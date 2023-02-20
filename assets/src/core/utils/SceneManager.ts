@@ -1,4 +1,4 @@
-import { _decorator, Component, game, Node, view, ResolutionPolicy, Prefab, instantiate } from 'cc';
+import { _decorator, Component, game, view, ResolutionPolicy, Prefab, instantiate, tween, Vec3, Camera, director} from 'cc';
 import { AppFacade } from '../AppFacade';
 import { CoreWebBridgeProxy } from '../proxy/CoreWebBridgeProxy';
 import { Logger } from './Logger';
@@ -46,7 +46,7 @@ export class SceneManager extends Component {
     @property({ type: Prefab })
     public prefabMockTool: Prefab;
 
-    private static instance: SceneManager = null;
+    public static instance: SceneManager = null;
 
     protected onLoad() {
         if (SceneManager.instance === null) {
@@ -155,5 +155,39 @@ export class SceneManager extends Component {
                 }
             }
         });
+    }
+
+    public shakeScreen () {
+        this.shake('View/Common-Panel');
+        this.shake('View/Game_2');
+    }
+
+    public shake(url) {
+        let target = director.getScene().getChildByPath(url);
+        let z = 0;
+        if (target.getComponent(Camera)) {
+            z = 1000;
+        }
+        tween(target)
+            .to(0.02, { position: new Vec3(5, 7, z) })
+            .to(0.02, { position: new Vec3(-6, 7, z) })
+            .to(0.02, { position: new Vec3(-13, 3, z) })
+            .to(0.02, { position: new Vec3(3, -6, z) })
+            .to(0.02, { position: new Vec3(-5, 5, z) })
+            .to(0.02, { position: new Vec3(2, -8, z) })
+            .to(0.02, { position: new Vec3(-8, -10, z) })
+            .to(0.02, { position: new Vec3(3, 10, z) })
+            .to(0.02, { position: new Vec3(0, 0, z) })
+            .delay(0.2)
+            .to(0.02, { position: new Vec3(5, 7, z) })
+            .to(0.02, { position: new Vec3(-6, 7, z) })
+            .to(0.02, { position: new Vec3(-13, 3, z) })
+            .to(0.02, { position: new Vec3(3, -6, z) })
+            .to(0.02, { position: new Vec3(-5, 5, z) })
+            .to(0.02, { position: new Vec3(2, -8, z) })
+            .to(0.02, { position: new Vec3(-8, -10, z) })
+            .to(0.02, { position: new Vec3(3, 10, z) })
+            .to(0.02, { position: new Vec3(0, 0, z) })
+            .start();
     }
 }
