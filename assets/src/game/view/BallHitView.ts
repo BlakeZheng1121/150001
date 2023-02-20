@@ -5,7 +5,7 @@ import { GlobalTimer } from '../../sgv3/util/GlobalTimer';
 import { JackPotPerformControl } from '../../ta/jackpot-perform-control/JackPotPerformControl';
 import { AudioManager } from '../../ta/tool/AudioManager';
 import { BallHitViewMediator } from '../mediator/BallHitViewMediator';
-import { AudioClipsEnum, BGMClipsEnum } from '../vo/enum/SoundMap';
+import { AudioClipsEnum } from '../vo/enum/SoundMap';
 import { GameUIOrientationSetting } from '../vo/GameUIOrientationSetting';
 
 const { ccclass, property } = _decorator;
@@ -104,6 +104,20 @@ export class BallHitView extends BaseScene {
                 () => {
                     GlobalTimer.getInstance().removeTimer('setBallCredit' + index);
                     this.setBallCredit(score, playType);
+                    if (playType == 1) {
+                        AudioManager.Instance.play(AudioClipsEnum.Free_C1CollectHit);
+                        this.setFreeGameBallHit();
+                    } else {
+                        let soundName: string = AudioClipsEnum.DragonUp_C2CollectHit01;
+                        soundName = soundName.slice(0, soundName.length - 2);
+                        if (sequenceId > 0) {
+                            soundName += this.prefixInteger(sequenceId, 2);
+                        } else {
+                            soundName += 'Last';
+                        }
+                        AudioManager.Instance.play(soundName);
+                        this.setHoldAndWinBallHit();
+                    }
                 },
                 this
             )
@@ -141,14 +155,14 @@ export class BallHitView extends BaseScene {
 
     // Base game 轉 Mini game
     public miniGameTransition() {
-        AudioManager.Instance.stop(BGMClipsEnum.BGM_Base).fade(0, 0.5);
-        AudioManager.Instance.play(AudioClipsEnum.Mini_GemFall);
+        //AudioManager.Instance.play(AudioClipsEnum.JP_Slogan);
+        AudioManager.Instance.play(AudioClipsEnum.Mini_DrangonBallFall);
         this.jackPotPerformControl.JackPotHit();
         GlobalTimer.getInstance().removeTimer('ballTransition');
         GlobalTimer.getInstance()
             .registerTimer(
                 'ballTransition',
-                4.3,
+                3.0,
                 () => {
                     GlobalTimer.getInstance().removeTimer('ballTransition');
                     this.callBack.finishBallTransition();
