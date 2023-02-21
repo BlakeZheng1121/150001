@@ -1,237 +1,237 @@
 
 Emblem.png
-size: 1023,804
+size: 1024,971
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 Emblem_Sweep/emblem_sweep_05
   rotate: false
-  xy: 958, 685
-  size: 46, 28
-  orig: 83, 83
-  offset: 18, 0
+  xy: 867, 138
+  size: 51, 31
+  orig: 91, 91
+  offset: 20, 0
   index: -1
 Emblem_Sweep/emblem_sweep_06
-  rotate: false
-  xy: 952, 535
-  size: 46, 34
-  orig: 83, 83
-  offset: 18, 0
+  rotate: true
+  xy: 980, 217
+  size: 51, 37
+  orig: 91, 91
+  offset: 20, 0
   index: -1
 Emblem_Sweep/emblem_sweep_07
   rotate: false
-  xy: 958, 715
-  size: 50, 41
-  orig: 83, 83
-  offset: 16, 0
+  xy: 960, 88
+  size: 55, 45
+  orig: 91, 91
+  offset: 18, 0
   index: -1
 Emblem_Sweep/emblem_sweep_08
   rotate: false
-  xy: 958, 758
-  size: 61, 44
-  orig: 83, 83
-  offset: 11, 4
+  xy: 391, 39
+  size: 67, 48
+  orig: 91, 91
+  offset: 12, 5
   index: -1
 Emblem_Sweep/emblem_sweep_09
   rotate: false
-  xy: 941, 473
-  size: 77, 44
-  orig: 83, 83
-  offset: 3, 12
+  xy: 774, 71
+  size: 85, 48
+  orig: 91, 91
+  offset: 3, 13
   index: -1
 Emblem_Sweep/emblem_sweep_10
   rotate: false
-  xy: 913, 158
-  size: 83, 44
-  orig: 83, 83
-  offset: 0, 19
+  xy: 774, 121
+  size: 91, 48
+  orig: 91, 91
+  offset: 0, 21
   index: -1
 Emblem_Sweep/emblem_sweep_11
   rotate: false
-  xy: 913, 112
-  size: 83, 44
-  orig: 83, 83
-  offset: 0, 27
+  xy: 926, 135
+  size: 91, 49
+  orig: 91, 91
+  offset: 0, 29
   index: -1
 Emblem_Sweep/emblem_sweep_12
   rotate: false
-  xy: 910, 66
-  size: 83, 44
-  orig: 83, 83
-  offset: 0, 34
+  xy: 867, 86
+  size: 91, 47
+  orig: 91, 91
+  offset: 0, 38
   index: -1
 Emblem_Sweep/emblem_sweep_13
   rotate: false
-  xy: 600, 42
-  size: 83, 42
-  orig: 83, 83
-  offset: 0, 41
+  xy: 298, 41
+  size: 91, 46
+  orig: 91, 91
+  offset: 0, 45
   index: -1
 Emblem_Sweep/emblem_sweep_14
   rotate: false
-  xy: 790, 105
-  size: 83, 35
-  orig: 83, 83
-  offset: 0, 48
+  xy: 846, 265
+  size: 91, 38
+  orig: 91, 91
+  offset: 0, 53
   index: -1
 Emblem_Sweep/emblem_sweep_15
   rotate: false
-  xy: 904, 35
-  size: 83, 29
-  orig: 83, 83
-  offset: 0, 54
+  xy: 861, 52
+  size: 91, 32
+  orig: 91, 91
+  offset: 0, 59
   index: -1
 Emblem_Sweep/emblem_sweep_16
-  rotate: false
-  xy: 600, 16
-  size: 83, 24
-  orig: 83, 83
-  offset: 0, 59
+  rotate: true
+  xy: 996, 614
+  size: 91, 26
+  orig: 91, 91
+  offset: 0, 65
   index: -1
 Emblem_Sweep/emblem_sweep_17
   rotate: false
-  xy: 452, 142
-  size: 77, 19
-  orig: 83, 83
-  offset: 3, 64
+  xy: 850, 29
+  size: 85, 21
+  orig: 91, 91
+  offset: 3, 70
   index: -1
 Emblem_Sweep/emblem_sweep_98
   rotate: false
-  xy: 952, 571
-  size: 50, 41
-  orig: 83, 83
-  offset: 16, 0
+  xy: 960, 41
+  size: 55, 45
+  orig: 91, 91
+  offset: 18, 0
   index: -1
 Emblem_Sweep/emblem_sweep_99
   rotate: false
-  xy: 913, 204
-  size: 83, 51
-  orig: 83, 83
-  offset: 0, 27
+  xy: 926, 523
+  size: 91, 56
+  orig: 91, 91
+  offset: 0, 29
   index: -1
 MG/bg
-  rotate: false
-  xy: 697, 142
-  size: 214, 250
-  orig: 214, 250
+  rotate: true
+  xy: 497, 29
+  size: 235, 275
+  orig: 235, 275
   offset: 0, 0
   index: -1
 MG/board
   rotate: true
-  xy: 452, 394
-  size: 408, 388
-  orig: 440, 512
-  offset: 32, 124
+  xy: 497, 520
+  size: 449, 427
+  orig: 484, 563
+  offset: 35, 136
   index: -1
 MG/laurels
   rotate: 270
-  xy: 722, 21
-  size: 120, 186
-  orig: 120, 186
+  xy: 773, 172
+  size: 131, 205
+  orig: 131, 205
   offset: 0, 0
   index: -1
 MG/laurels-blue
-  rotate: true
-  xy: 913, 257
-  size: 69, 107
-  orig: 69, 107
+  rotate: false
+  xy: 926, 743
+  size: 76, 117
+  orig: 76, 117
   offset: 0, 0
   index: -1
 MG/line1
   rotate: false
-  xy: 2, 2
-  size: 229, 800
-  orig: 229, 800
+  xy: 2, 89
+  size: 252, 880
+  orig: 252, 880
   offset: 0, 0
   index: -1
 MG/line3
   rotate: false
-  xy: 233, 2
-  size: 217, 800
-  orig: 217, 800
+  xy: 256, 89
+  size: 239, 880
+  orig: 239, 880
   offset: 0, 0
   index: -1
 black
   rotate: false
-  xy: 1010, 746
-  size: 10, 10
-  orig: 10, 10
+  xy: 1004, 849
+  size: 11, 11
+  orig: 11, 11
   offset: 0, 0
   index: -1
 cup
   rotate: false
-  xy: 452, 163
-  size: 243, 229
-  orig: 245, 229
+  xy: 497, 266
+  size: 267, 252
+  orig: 269, 252
   offset: 1, 0
   index: -1
 cup_glow
-  rotate: true
-  xy: 842, 680
-  size: 123, 115
-  orig: 123, 115
+  rotate: false
+  xy: 766, 393
+  size: 135, 126
+  orig: 135, 126
   offset: 0, 0
   index: -1
 cup_levelup
   rotate: false
-  xy: 452, 86
-  size: 268, 54
-  orig: 268, 54
+  xy: 2, 28
+  size: 295, 59
+  orig: 295, 59
   offset: 0, 0
   index: -1
 cup_light_down
-  rotate: true
-  xy: 685, 17
-  size: 68, 33
-  orig: 83, 40
-  offset: 7, 7
+  rotate: false
+  xy: 774, 34
+  size: 75, 36
+  orig: 91, 44
+  offset: 8, 8
   index: -1
 cuplight
-  rotate: true
-  xy: 872, 519
-  size: 159, 78
-  orig: 159, 78
+  rotate: false
+  xy: 766, 306
+  size: 175, 86
+  orig: 175, 86
   offset: 0, 0
   index: -1
 light3
-  rotate: false
-  xy: 842, 427
-  size: 97, 90
-  orig: 97, 90
+  rotate: true
+  xy: 902, 411
+  size: 107, 98
+  orig: 107, 98
   offset: 0, 0
   index: -1
 light_beam
   rotate: false
-  xy: 941, 430
-  size: 38, 41
-  orig: 38, 44
-  offset: 0, 3
+  xy: 942, 270
+  size: 63, 67
+  orig: 63, 73
+  offset: 0, 6
   index: -1
 lightcircle
   rotate: false
-  xy: 952, 614
-  size: 64, 64
-  orig: 64, 64
+  xy: 942, 339
+  size: 70, 70
+  orig: 70, 70
   offset: 0, 0
   index: -1
 plight_1
-  rotate: false
-  xy: 981, 436
-  size: 33, 35
-  orig: 35, 35
+  rotate: true
+  xy: 298, 2
+  size: 37, 39
+  orig: 39, 39
   offset: 1, 0
   index: -1
 ribbon
-  rotate: true
-  xy: 452, 4
-  size: 80, 146
-  orig: 80, 146
+  rotate: false
+  xy: 926, 581
+  size: 87, 161
+  orig: 87, 161
   offset: 0, 0
   index: -1
 ribbon2
   rotate: true
-  xy: 913, 328
-  size: 97, 86
-  orig: 97, 86
+  xy: 926, 862
+  size: 107, 94
+  orig: 107, 94
   offset: 0, 0
   index: -1
