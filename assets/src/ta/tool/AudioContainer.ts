@@ -71,10 +71,7 @@ export class AudioContainer extends Component {
     init() {
         this._playCallback = null;
         this._stopCallback = null;
-        if (this.fadeTween) {
-            this.fadeTween.stop();
-            this.fadeTween = null;
-        }
+        this.fadeTween?.stop();
         AudioManager.Instance.returnToPool(this);
     }
 
