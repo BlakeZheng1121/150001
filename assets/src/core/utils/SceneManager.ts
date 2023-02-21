@@ -1,4 +1,4 @@
-import { _decorator, Component, game, view, ResolutionPolicy, Prefab, instantiate, tween, Vec3, Camera, director} from 'cc';
+import { _decorator, Component, game, view, ResolutionPolicy, Prefab, instantiate, tween, Vec3, director } from 'cc';
 import { AppFacade } from '../AppFacade';
 import { CoreWebBridgeProxy } from '../proxy/CoreWebBridgeProxy';
 import { Logger } from './Logger';
@@ -157,37 +157,34 @@ export class SceneManager extends Component {
         });
     }
 
-    public shakeScreen () {
-        this.shake('View/Common-Panel');
+    public shakeScreen() {
+        this.shake('View/Common-Panel/Base_Reel_View');
         this.shake('View/Game_2/Expansion_Wilds_View');
     }
 
     public shake(url) {
         let target = director.getScene().getChildByPath(url);
-        let z = 0;
-        if (target.getComponent(Camera)) {
-            z = 1000;
-        }
+
         tween(target)
-            .to(0.02, { position: new Vec3(5, 7, z) })
-            .to(0.02, { position: new Vec3(-6, 7, z) })
-            .to(0.02, { position: new Vec3(-13, 3, z) })
-            .to(0.02, { position: new Vec3(3, -6, z) })
-            .to(0.02, { position: new Vec3(-5, 5, z) })
-            .to(0.02, { position: new Vec3(2, -8, z) })
-            .to(0.02, { position: new Vec3(-8, -10, z) })
-            .to(0.02, { position: new Vec3(3, 10, z) })
-            .to(0.02, { position: new Vec3(0, 0, z) })
+            .by(0.02, { position: new Vec3(5, 7, 0) })
+            .by(0.02, { position: new Vec3(-11, 0, 0) })
+            .by(0.02, { position: new Vec3(-7, -4, 0) })
+            .by(0.02, { position: new Vec3(16, -9, 0) })
+            .by(0.02, { position: new Vec3(-8, 11, 0) })
+            .by(0.02, { position: new Vec3(7, -13, 0) })
+            .by(0.02, { position: new Vec3(-10, -2, 0) })
+            .by(0.02, { position: new Vec3(11, 20, 0) })
+            .by(0.02, { position: new Vec3(-3, -10, 0) })
             .delay(0.2)
-            .to(0.02, { position: new Vec3(5, 7, z) })
-            .to(0.02, { position: new Vec3(-6, 7, z) })
-            .to(0.02, { position: new Vec3(-13, 3, z) })
-            .to(0.02, { position: new Vec3(3, -6, z) })
-            .to(0.02, { position: new Vec3(-5, 5, z) })
-            .to(0.02, { position: new Vec3(2, -8, z) })
-            .to(0.02, { position: new Vec3(-8, -10, z) })
-            .to(0.02, { position: new Vec3(3, 10, z) })
-            .to(0.02, { position: new Vec3(0, 0, z) })
+            .by(0.02, { position: new Vec3(5, 7, 0) })
+            .by(0.02, { position: new Vec3(-11, 0, 0) })
+            .by(0.02, { position: new Vec3(-7, -4, 0) })
+            .by(0.02, { position: new Vec3(16, -9, 0) })
+            .by(0.02, { position: new Vec3(-8, 11, 0) })
+            .by(0.02, { position: new Vec3(7, -13, 0) })
+            .by(0.02, { position: new Vec3(-10, -2, 0) })
+            .by(0.02, { position: new Vec3(11, 20, 0) })
+            .by(0.02, { position: new Vec3(-3, -10, 0) })
             .start();
     }
 }
