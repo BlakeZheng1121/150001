@@ -549,7 +549,9 @@
     </body>
     <script>
         let originUrl =
-            window.location.ancestorOrigins.length != 0 ? window.location.ancestorOrigins[0] : window.location.origin;
+            !!window.location.ancestorOrigins && window.location.ancestorOrigins.length != 0
+                ? window.location.ancestorOrigins[0]
+                : window.location.origin;
 
         var openGameHelp = (boolean) => {
             window.parent.postMessage(JSON.stringify({ name: 'openGameHelp', data: false }), originUrl);
