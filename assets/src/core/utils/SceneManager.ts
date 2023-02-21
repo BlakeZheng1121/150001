@@ -159,7 +159,7 @@ export class SceneManager extends Component {
 
     public shakeScreen () {
         this.shake('View/Common-Panel');
-        this.shake('View/Game_2');
+        this.shake('View/Game_2/Expansion_Wilds_View');
     }
 
     public shake(url) {
