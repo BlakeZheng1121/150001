@@ -235,6 +235,13 @@ body
   orig: 499, 398
   offset: 0, 0
   index: -1
+dark
+  rotate: true
+  xy: 655, 657
+  size: 26, 13
+  orig: 26, 13
+  offset: 0, 0
+  index: -1
 eye_L
   rotate: false
   xy: 977, 354
