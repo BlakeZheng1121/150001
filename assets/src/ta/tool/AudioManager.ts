@@ -1,5 +1,4 @@
-import { _decorator, Component, AudioClip, game, Prefab, resources } from 'cc';
-import { Logger } from '../../core/utils/Logger';
+import { _decorator, Component, AudioClip, Prefab, resources } from 'cc';
 import { PoolManager } from '../../sgv3/PoolManager';
 import { AudioContainer } from './AudioContainer';
 import { AudioSourcePool } from './AudioSourcePool';
@@ -38,8 +37,7 @@ export class AudioManager extends Component {
     private preloadList: string[] = ['Preload'];
 
     private loadList: string[] = ['SFX', 'BGM', 'Scoring', 'Vocal'];
-
-    private activeAudioMaxCount: number = 32;
+    private retryInterval: number = 500;
 
     onLoad() {
         AudioManager._instance = this;
@@ -54,7 +52,11 @@ export class AudioManager extends Component {
     preloadAudio() {
         let promiseList = [];
         this.preloadList.forEach((value) => promiseList.push(this.downloadClip(this.getAudioPath(value))));
-        Promise.all(promiseList);
+        Promise.all(promiseList).catch((err) => {
+            setTimeout(() => {
+                this.preloadAudio();
+            }, this.retryInterval);
+        });
     }
 
     //聲音名稱與clip Mapping
@@ -64,7 +66,13 @@ export class AudioManager extends Component {
             let value = this.loadList.pop();
             promiseList.push(this.downloadClip(this.getAudioPath(value)));
         }
-        Promise.all(promiseList).finally(() => this.resumeClip());
+        Promise.all(promiseList)
+            .then((msg) => this.resumeClip())
+            .catch((err) => {
+                setTimeout(() => {
+                    this.loadAudio();
+                }, this.retryInterval);
+            });
     }
 
     private getAudioPath(name) {
@@ -93,21 +101,17 @@ export class AudioManager extends Component {
                 if (audio.audioSource.loop == true) {
                     audio.audioSource.clip = this.audioClipsMap.get(audio.clipName);
                     audio.audioSource.play();
-                }
-                else {
+                } else {
                     this.returnToPool(audio);
                 }
             }, this);
     }
 
     play(clipName: string) {
-        if (this.activePool.length >= this.activeAudioMaxCount) {
-            Logger.w('音效播放數量已達上限,當前音效量: ' + this.activePool.length);
-        }
         let audioContainer = this.createAudioContainerFromPool({ clipName: clipName });
-        
-        if(audioContainer.audioSource.clip == null) {
-            audioContainer.init();
+
+        if (audioContainer.audioSource.clip == null) {
+            audioContainer.stop();
         }
 
         const options = {
@@ -213,14 +217,3 @@ export interface audioContainerPara {
     clipName: string;
     mute?: boolean;
 }
-
-/**
- * [1] Class member could be defined like this.
- * [2] Use `property` decorator if your want the member to be serializable.
- * [3] Your initialization goes here.
- * [4] Your update function goes here.
- *
- * Learn more about scripting: https://docs.cocos.com/creator/3.3/manual/en/scripting/
- * Learn more about CCClass: https://docs.cocos.com/creator/3.3/manual/en/scripting/ccclass.html
- * Learn more about life-cycle callbacks: https://docs.cocos.com/creator/3.3/manual/en/scripting/life-cycle-callbacks.html
- */

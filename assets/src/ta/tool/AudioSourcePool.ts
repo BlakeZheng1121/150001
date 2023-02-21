@@ -8,13 +8,13 @@ export class AudioSourcePool {
     private getNewAudioSource(audioClip: AudioClip): AudioSource {
         const audioSource = new AudioSource();
         audioSource.clip = audioClip;
+        audioSource.playOnAwake = false;
         return audioSource;
     }
 
     getAudioSource(clip: AudioClip): AudioSource {
         let index = this.reservedPool.findIndex((audioSource) => audioSource && audioSource.clip == clip);
         let audioSource = index != -1 ? this.reservedPool.splice(index, 1)[0] : this.getNewAudioSource(clip);
-        //this.returnAudioSource(audioSource);
         return audioSource;
     }
 

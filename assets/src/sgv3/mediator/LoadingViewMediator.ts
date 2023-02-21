@@ -1,4 +1,4 @@
-import { assetManager, Component, director, instantiate, Prefab, Node, SystemEvent, _decorator, find } from 'cc';
+import { assetManager, Component, director, instantiate, Prefab, Node, _decorator } from 'cc';
 import BaseMediator from '../../base/BaseMediator';
 import { ChangeBalanceCommand } from '../../core/command/ChangeBalanceCommand';
 import { SFLoginCommand } from '../../core/command/SFLoginCommand';
@@ -22,7 +22,7 @@ import { SGGameLoginReturn } from '../vo/result/SGGameLoginReturn';
 const { ccclass } = _decorator;
 
 @ccclass('LoadingViewMediator')
-export default class LoadingViewMediator extends BaseMediator<LoadingView> /*puremvc.Mediator implements puremvc.IMediator*/ {
+export default class LoadingViewMediator extends BaseMediator<LoadingView> {
     protected rootView: Component;
     protected baseLoadList: string[] = [];
     protected extraLoadList: string[] = [];
@@ -36,6 +36,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> /*pur
 
     private totalAssetsNum: number = 0; // 所有載入資源數量
     private finishedAssetsNum: number = 0; // 完成載入資源數量
+    private retryInterval: number = 500;
 
     /** preload 要預載的資源 */
     protected baseList(): string[] {
@@ -175,6 +176,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> /*pur
 
     /** 因為一開始的loading畫面，如果沒有delay會看到loading bar未載完就進入遊戲的狀況 */
     protected delayEnterLobby(): void {
+        //進行 Recovery流程
         this.sendNotification(CheckRecoveryFlowCommand.NAME);
 
         this.isEnterGame = true;
@@ -201,12 +203,20 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> /*pur
                 .then(() => this.downloadBundle('scenes'))
                 .then(() => this.downloadBundle('control-panel'))
                 .then(() => this.loadAssetsBundle(this.baseLoadList))
-                .catch((error) => console.log(error));
+                .catch((error) => {
+                    // 一段時間後retry
+                    setTimeout(() => {
+                        this.afterInitData();
+                    }, this.retryInterval);
+                });
         }
     }
 
     downloadBundle(bundleName) {
         return new Promise((resolve, reject) => {
+            let existBundle = assetManager.getBundle(bundleName);
+            if (existBundle) return resolve(existBundle);
+
             assetManager.loadBundle(bundleName, (error, bundle) => {
                 if (error) {
                     return reject(error);
@@ -329,11 +339,11 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> /*pur
      */
     protected notifyBaseResComplete() {
         const self = this;
-        AudioManager.Instance.loadAudio();
         self.sendNotification(CoreDefaultSettingCommand.NAME);
         self.sendNotification(SceneEvent.LOAD_BASE_COMPLETE);
         self.sendNotification(self.gameDataProxy.orientationEvent);
         this.webBridgeProxy.notifyGameReady();
+        AudioManager.Instance.loadAudio();
     }
 
     /** 觸發 pendloading */
