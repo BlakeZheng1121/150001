@@ -2143,7 +2143,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 0,
+      "y": 8,
       "z": 0
     },
     "_lrot": {
@@ -2220,7 +2220,7 @@
     "_string": "",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 16,
+    "_actualFontSize": 32,
     "_fontSize": 54,
     "_fontFamily": "Arial",
     "_lineHeight": 60,
@@ -2296,9 +2296,9 @@
     "baseCreditEasing": "fade",
     "accelerateDelayTime": 0.75,
     "acceleratePtCount": 5,
-    "accelerateTimeBase": 0.125,
+    "accelerateTimeBase": 0.095,
     "getResultPtCount": 5,
-    "getResultTimeBase": 0.12,
+    "getResultTimeBase": 0.09,
     "_id": ""
   },
   {
