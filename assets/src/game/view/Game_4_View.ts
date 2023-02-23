@@ -1,6 +1,5 @@
 import { _decorator } from 'cc';
 import { BaseScene } from '../../base/BaseScene';
-import { UIOrientation } from '../../core/ui/UIOrientation';
 import { SceneManager } from '../../core/utils/SceneManager';
 import { GameUIOrientationSetting } from '../vo/GameUIOrientationSetting';
 import { PosTweenView } from './dragon-up/PosTweenView';
@@ -10,15 +9,6 @@ const { ccclass } = _decorator;
 export class Game_4_View extends BaseScene {
     public static readonly HORIZONTAL: string = 'horizontal';
     public static readonly VERTICAL: string = 'vertical';
-
-    private _uiOrientation: Array<UIOrientation> | null = null;
-
-    private get uiOrientation() {
-        if (this._uiOrientation == null) {
-            this._uiOrientation = this.getComponentsInChildren(UIOrientation);
-        }
-        return this._uiOrientation;
-    }
 
     private _posTweenView: PosTweenView | null = null;
 
@@ -48,13 +38,9 @@ export class Game_4_View extends BaseScene {
 
     public changeOrientation(orientation: string, scene: string) {
         let ishorizontal = orientation == SceneManager.EV_ORIENTATION_HORIZONTAL;
-        for (let i = 0; i < this.uiOrientation.length; i++) {
-            this.uiOrientation[i].changeOrientation(ishorizontal);
-        }
 
         for (let i = 0; i < this.gameUIOrientation.length; i++) {
             this.gameUIOrientation[i].changeOrientation(ishorizontal, scene);
         }
-        this.posTweenView.changeOrientation(ishorizontal);
     }
 }

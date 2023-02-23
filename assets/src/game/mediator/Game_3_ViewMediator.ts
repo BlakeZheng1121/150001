@@ -156,16 +156,14 @@ export class Game_3_ViewMediator extends BaseMediator<Game_3_View> {
         if (self.gameDataProxy.curScene !== self.mySceneName) return;
         self.view.node.active = true;
         self.webBridgeProxy.sendGameState('BonusGame');
-        this.view.countdown.node.parent.active = true;
 
         self.resetSymbolClickState();
-        self.setMiniGameResultData();    
+        self.setMiniGameResultData();
 
         AudioManager.Instance.play(BGMClipsEnum.BGM_Mini).loop(true).volume(0).fade(1, 1);
 
-        if (self.gameDataProxy.reStateResult == null) {
-            self.view.enterView();
-        }
+        self.view.enterView();
+        self.view.enableCountdown(true);
         self.openingSeqArr = [];
 
         self.grandCnt = 0;
@@ -248,7 +246,6 @@ export class Game_3_ViewMediator extends BaseMediator<Game_3_View> {
         const self = this;
         self.view.showWonCreditBoard();
         self.facade.sendNotification(JackpotPool.MINIGAME_WINBOARD);
-        self.view.countdown.node.parent.active = false;
         // 移除已經表演過的bonus資料
         const removeResult = (result: BonusGameOneRoundResult) =>
             result.specialHitInfo != SpecialHitInfo[SpecialHitInfo.bonusGame_01];
@@ -417,6 +414,7 @@ export class Game_3_ViewMediator extends BaseMediator<Game_3_View> {
 
     private onMiniGameEnd() {
         const self = this;
+        self.view.enableCountdown(false);
         GlobalTimer.getInstance().removeTimer(this.countdownTimerKey);
         GlobalTimer.getInstance().removeTimer(this.autoStartTimerKey);
         GlobalTimer.getInstance().removeTimer('WinJP');
@@ -425,7 +423,7 @@ export class Game_3_ViewMediator extends BaseMediator<Game_3_View> {
                 'WinJP',
                 this.mySceneData.bonusGameWinSymbolShowTime,
                 () => {
-                    self.playMiniGameEndSound();
+                    //self.playMiniGameEndSound();
                     self.facade.sendNotification(
                         StateMachineCommand.NAME,
                         new StateMachineObject(StateMachineProxy.GAME3_SHOWWIN)
@@ -495,7 +493,7 @@ export class Game_3_ViewMediator extends BaseMediator<Game_3_View> {
             case MiniGameSymbol.Grand:
                 if (self.grandCnt == 2) {
                     self.view.expectationSymbol(resultID, this.openingSeqArr);
-                    AudioManager.Instance.play(AudioClipsEnum.Mini_Expectation).loop(true);
+                    AudioManager.Instance.play(AudioClipsEnum.Mini_Expectation);
                 }
                 break;
             case MiniGameSymbol.Major:
@@ -518,7 +516,6 @@ export class Game_3_ViewMediator extends BaseMediator<Game_3_View> {
 
     private registerAutoClickSymbolTimer() {
         this.view.countdown.string = this.view.autoStartTime.toString();
-        
         GlobalTimer.getInstance().removeTimer(this.countdownTimerKey);
         GlobalTimer.getInstance()
             .registerTimer(
@@ -527,9 +524,9 @@ export class Game_3_ViewMediator extends BaseMediator<Game_3_View> {
                 () => {
                     let curSeconds = parseInt(this.view.countdown.string) - 1;
                     this.view.countdown.string = String(curSeconds);
-                    if(curSeconds == 0) {
+                    if (this.view.countdown.string == '0') {
                         this.isAutoClick = true;
-                        this.view.countdown.node.parent.active = false;
+                        this.view.enableCountdown(false);
                     }
                     this.playCountdownSound(curSeconds);
                 },
@@ -575,9 +572,9 @@ export class Game_3_ViewMediator extends BaseMediator<Game_3_View> {
     }
 
     private playCountdownSound(curSeconds: number) {
-        if(curSeconds == 0) {
+        if (curSeconds == 0) {
             AudioManager.Instance.play(AudioClipsEnum.MiniCountdown02);
-        } else if(curSeconds <= 5 && curSeconds >0) {
+        } else if (curSeconds <= 5 && curSeconds > 0) {
             AudioManager.Instance.play(AudioClipsEnum.MiniCountdown01);
         }
     }

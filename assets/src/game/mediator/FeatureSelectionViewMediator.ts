@@ -44,14 +44,7 @@ export class FeatureSelectionViewMediator extends BaseMediator<FeatureSelectionV
     public handleNotification(notification: puremvc.INotification): void {
         let name = notification.getName();
         switch (name) {
-            case SceneManager.EV_ORIENTATION_VERTICAL:
-                this.onOrientation(SceneManager.EV_ORIENTATION_VERTICAL);
-                break;
-            case SceneManager.EV_ORIENTATION_HORIZONTAL:
-                this.onOrientation(SceneManager.EV_ORIENTATION_HORIZONTAL);
-                break;
             case ViewMediatorEvent.SHOW_FEATURE_SELECTION:
-                this.onOrientation(this.gameDataProxy.orientationEvent);
                 this.view.showFeatureSelection(notification.getBody());
                 break;
             case ViewMediatorEvent.ENTER:
@@ -65,7 +58,6 @@ export class FeatureSelectionViewMediator extends BaseMediator<FeatureSelectionV
     }
 
     protected onOrientation(orientation: string) {
-        this.view?.changeOrientation(orientation);
         this.view?.setButtonParticlePos(this.gameDataProxy.curGameOperation);
     }
 

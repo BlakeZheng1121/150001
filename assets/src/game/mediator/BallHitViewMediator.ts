@@ -21,6 +21,7 @@ import { GAME_GameDataProxy } from '../proxy/GAME_GameDataProxy';
 import { BallHitView } from '../view/BallHitView';
 import { BGMClipsEnum } from '../vo/enum/SoundMap';
 import { GlobalTimer } from '../../sgv3/util/GlobalTimer';
+import { StateMachineProxy } from '../../sgv3/proxy/StateMachineProxy';
 
 const { ccclass } = _decorator;
 
@@ -37,6 +38,9 @@ export class BallHitViewMediator extends BaseMediator<BallHitView> {
     private ballTotalCount: number = 0;
     private ballSequenceIndex: number = 0;
 
+    private bCanUseSkip: boolean = false;
+    protected tempFunc: Function;
+
     protected lazyEventListener(): void {}
 
     public listNotificationInterests(): Array<any> {
@@ -50,13 +54,14 @@ export class BallHitViewMediator extends BaseMediator<BallHitView> {
             StateWinEvent.ON_GAME4_TRANSITIONS,
             ViewMediatorEvent.PREPARE_COLLECT_BALL,
             ViewMediatorEvent.COLLECT_CREDIT_BALL,
+            ViewMediatorEvent.COLLECT_CREDIT_BALL_SKIP_CALLBACK,
             DragonUpEvent.ON_ALL_CREDIT_COLLECT_START,
-            DragonUpEvent.ON_C2_COUNT_UPDATE,
             SceneManager.EV_ORIENTATION_VERTICAL,
             SceneManager.EV_ORIENTATION_HORIZONTAL,
             GameStateProxyEvent.ON_SCENE_BEFORE_CHANGE,
             GAME_4_CreditCollectResultCommand.NAME,
-            FreeGameEvent.ON_BEFORE_END_SCORE_SHOW
+            FreeGameEvent.ON_BEFORE_END_SCORE_SHOW,
+            ScreenEvent.ON_SPIN_DOWN
         ];
     }
 
@@ -90,6 +95,9 @@ export class BallHitViewMediator extends BaseMediator<BallHitView> {
             case ViewMediatorEvent.COLLECT_CREDIT_BALL:
                 this.collectCreditBall(notification.getBody());
                 break;
+            case ViewMediatorEvent.COLLECT_CREDIT_BALL_SKIP_CALLBACK:
+                this.collectCreditBallOnSkip(notification.getBody());
+                break;
             case DragonUpEvent.ON_ALL_CREDIT_COLLECT_START:
                 this.updateBallCount(notification.getBody());
                 break;
@@ -102,6 +110,9 @@ export class BallHitViewMediator extends BaseMediator<BallHitView> {
                 break;
             case FreeGameEvent.ON_BEFORE_END_SCORE_SHOW:
                 this.freeGameBallScoreSumShow(notification.getBody());
+                break;
+            case ScreenEvent.ON_SPIN_DOWN:
+                this.onSpinDown();
                 break;
         }
     }
@@ -200,6 +211,15 @@ export class BallHitViewMediator extends BaseMediator<BallHitView> {
         }
     }
 
+    private collectCreditBallOnSkip(cb: Function) {
+        this.tempFunc = cb;
+        this.bCanUseSkip = false;
+        GlobalTimer.getInstance().removeTimer('canSkipTimer');
+        GlobalTimer.getInstance()
+            .registerTimer('canSkipTimer', 1.25, () => (this.bCanUseSkip = true), this)
+            .start();
+    }
+
     // 更新龍珠數量
     private updateBallCount(ballInfo: Array<Array<Vec2>>) {
         this.numInBall += ballInfo[1].length;
@@ -220,6 +240,14 @@ export class BallHitViewMediator extends BaseMediator<BallHitView> {
 
     public finishBallTransition() {
         this.sendNotification(StateWinEvent.ON_GAME3_SHOW_SELECTION);
+    }
+
+    private onSpinDown() {
+        if (this.gameDataProxy.gameState == StateMachineProxy.GAME4_END) {
+            if (this.bCanUseSkip == false) return;
+            this.bCanUseSkip = false;
+            this.tempFunc();
+        }
     }
 
     private _gameDataProxy: GAME_GameDataProxy;

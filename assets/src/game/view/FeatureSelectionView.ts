@@ -51,14 +51,6 @@ export class FeatureSelectionView extends BaseScene {
 
     public autoStartTimeKey: string = String('AutoStartTime');
 
-    private _uiOrientation: Array<UIOrientation> | null = null;
-
-    private get uiOrientation() {
-        if (this._uiOrientation == null) {
-            this._uiOrientation = this.getComponentsInChildren(UIOrientation);
-        }
-        return this._uiOrientation;
-    }
 
     public initView() {
         const self = this;
@@ -98,14 +90,6 @@ export class FeatureSelectionView extends BaseScene {
         });
     }
 
-    /** 更改orientation mode */
-    public changeOrientation(orientation: string) {
-        let ishorizontal = orientation == SceneManager.EV_ORIENTATION_HORIZONTAL;
-        for (let i = 0; i < this.uiOrientation.length; i++) {
-            this.uiOrientation[i].changeOrientation(ishorizontal);
-        }
-    }
-
     public showFeatureSelection(data: any) {
         let ballCount: number = data[0];
         let ballTotalCredit: number = data[1];
@@ -116,12 +100,6 @@ export class FeatureSelectionView extends BaseScene {
         this.uiOpacity.opacity = 0;
         this.node.active = true;
         this.occupiedButtons.forEach((featureBtn) => featureBtn.showButton());
-        let FeatureSelection_Crowd_Volume = 1;
-        let FeatureSelection_Crowd_FadeTime = 2;
-        AudioManager.Instance.play(AudioClipsEnum.FeatureSelection_Crowd)
-            .volume(0)
-            .loop(true)
-            .fade(FeatureSelection_Crowd_Volume, FeatureSelection_Crowd_FadeTime);
         this.showTween.start();
     }
 
@@ -163,23 +141,8 @@ export class FeatureSelectionView extends BaseScene {
         self.AnimBlackBG.play('BlackBG_PlayShow');
         self.setButtonParticlePos(operation);
         self.showButtonParticle();
-        let FeatureSelection_Crowd_Volume = 0;
-        let FeatureSelection_Crowd_FadeTime = 2;
-        AudioManager.Instance.stop(AudioClipsEnum.FeatureSelection_Crowd).fade(
-            FeatureSelection_Crowd_Volume,
-            FeatureSelection_Crowd_FadeTime
-        );
         AudioManager.Instance.play(AudioClipsEnum.FeatureSelection_BestChoice);
-        switch (operation) {
-            case 'freeGame_01':
-                AudioManager.Instance.play(BGMClipsEnum.BGM_FreeGame).loop(true).volume(0).fade(1, 1);
-                //AudioManager.Instance.fade(BGMClipsEnum.BGM_FreeGame, 1, 0.7);
-                break;
-            case 'topUpGame_01':
-                AudioManager.Instance.play(BGMClipsEnum.BGM_DragonUp).loop(true).volume(0).fade(1, 1);
-                //AudioManager.Instance.fade(BGMClipsEnum.BGM_DragonUp, 1, 0.7);
-                break;
-        }
+
         this.stopAutoStartTimer();
         
     }

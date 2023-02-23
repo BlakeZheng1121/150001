@@ -1,9 +1,10 @@
-
 const win = window as any;
 
 export const languages = {
     // Data
-    loading: "กําลังเชื่อมต่อ...",
+    loading: 'LOADING ANOTHER SCENE ASSETS...',
+    jackpotUpgradeBet: 'ยอดเดิมพันสูงสุดสามารถ \nอัพเกรด',
+    jackpotUpgradeBetRange: 'เดิมพัน , ถึง ',
 };
 
 if (!win.languages) {

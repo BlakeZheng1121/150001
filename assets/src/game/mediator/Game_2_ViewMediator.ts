@@ -110,7 +110,7 @@ export class Game_2_ViewMediator extends BaseGameViewMediator<Game_2_View> {
             StateMachineCommand.NAME,
             new StateMachineObject(StateMachineProxy.GAME2_TRANSITIONS)
         );
-        //AudioManager.Instance.play(BGMClipsEnum.BGM_FreeGame).loop(true).volume(0).fade(1, 1);
+        AudioManager.Instance.play(BGMClipsEnum.BGM_FreeGame).loop(true).volume(0).fade(1, 1);
     }
 
     /** 離開場景處理 */

@@ -93,12 +93,15 @@ export class PosTweenViewMediator extends BaseMediator<PosTweenView> {
             }, 0.1);
             //累積倍數表演
             this.view.onMultipleAccumulate(targertPos, hasRespin, () => this.BoardMultipleRoll());
+            AudioManager.Instance.play(AudioClipsEnum.DragonUp_PercentCollect01);
         } else {
             this.onBaseCreditCollectStart();
         }
     }
 
     private BoardMultipleRoll() {
+        AudioManager.Instance.play(AudioClipsEnum.DragonUp_PercentHit);
+        AudioManager.Instance.play(AudioClipsEnum.DragonUp_PercentSpin);
         this.view.BoardmultipleRoll(
             this.reelDataProxy.symbolFeature[this.curTargertSequence.x][this.curTargertSequence.y].multiple,
             () => this.onMultipleAccumulateEnd()
@@ -113,53 +116,75 @@ export class PosTweenViewMediator extends BaseMediator<PosTweenView> {
 
     /** 每顆 C1球要開始收集至金球上時 */
     private onBaseCreditCollectStart() {
-        let basePos = this.reelDataProxy.getFovPos(
-            this.curBaseSequence.y * this.reelDataProxy.symbolFeature.length + this.curBaseSequence.x,
-            0
-        );
-        let targertPos = this.reelDataProxy.getFovPos(
-            this.curTargertSequence.y * this.reelDataProxy.symbolFeature.length + this.curTargertSequence.x,
-            0
-        );
-        //設定資料
-        this.view.clonePrefab();
-        this.view.curObject.setBaseCreditSetting(
-            this.reelDataProxy.symbolFeature[this.curBaseSequence.x][this.curBaseSequence.y].isSpecial,
-            this.reelDataProxy.symbolFeature[this.curBaseSequence.x][this.curBaseSequence.y].creditCent
-        );
+        for (let i = 0; i < this.baseCreditCollectSequence.length; i++) {
+            GlobalTimer.getInstance()
+                .registerTimer(
+                    'collectEffect' + i,
+                    i * 0.225,
+                    () => {
+                        GlobalTimer.getInstance().removeTimer('collectEffect' + this.curbaseSequenceIndex);
 
-        //BaseCredit收集表演
-        this.view.onBaseCreditCollect(basePos, targertPos, () => this.onBaseCreditCollectEnd());
-        //飛行音效播放
-        AudioManager.Instance.play(AudioClipsEnum.DragonUp_C1Collect);
-        this.sendNotification(
-            DragonUpEvent.ON_BASE_CREDIT_COLLECT_START,
-            this.curBaseSequence.y * this.reelDataProxy.symbolFeature.length + this.curBaseSequence.x
-        );
+                        let basePos = this.reelDataProxy.getFovPos(
+                            this.curBaseSequence.y * this.reelDataProxy.symbolFeature.length +
+                                this.curBaseSequence.x,
+                            0
+                        );
+                        let targertPos = this.reelDataProxy.getFovPos(
+                            this.curTargertSequence.y * this.reelDataProxy.symbolFeature.length +
+                                this.curTargertSequence.x,
+                            0
+                        );
+
+                        //設定資料
+                        this.view.cloneArrayPrefab();
+                        this.view.arrayObject[this.curbaseSequenceIndex].setBaseCreditSetting(
+                            this.reelDataProxy.symbolFeature[this.curBaseSequence.x][this.curBaseSequence.y]
+                                .isSpecial,
+                            this.reelDataProxy.symbolFeature[this.curBaseSequence.x][this.curBaseSequence.y]
+                                .creditCent
+                        );
+                        //BaseCredit收集表演
+                        this.view.onBaseCreditCollect(this.curbaseSequenceIndex, basePos, targertPos, (idx: number) =>
+                            this.onBaseCreditCollectEnd(idx)
+                        );
+
+                        //飛行音效播放
+                        AudioManager.Instance.play(AudioClipsEnum.DragonUp_C1Collect);
+                        this.sendNotification(
+                            DragonUpEvent.ON_BASE_CREDIT_COLLECT_START,
+                            this.curBaseSequence.y * this.reelDataProxy.symbolFeature.length +
+                                this.curBaseSequence.x
+                        );
+
+                        this.curbaseSequenceIndex++;
+                    },
+                    this
+                )
+                .start();
+
+        }
     }
 
     /** 每顆 C1球已經收集至金球上時  */
-    private onBaseCreditCollectEnd() {
+    private onBaseCreditCollectEnd(sequenceIndex: number) {
         let tempArray = new Array<number>();
         let targertIndex =
             this.curTargertSequence.y * this.reelDataProxy.symbolFeature.length + this.curTargertSequence.x;
         this.curTargertCredit = MathUtil.add(
             this.curTargertCredit,
-            this.reelDataProxy.symbolFeature[this.curBaseSequence.x][this.curBaseSequence.y].creditCent
+            this.reelDataProxy.symbolFeature[this.getCurBaseSequenceByIndex(sequenceIndex).x][this.getCurBaseSequenceByIndex(sequenceIndex).y].creditCent
         );
         tempArray.push(targertIndex); //index 0: 表示金球TargertIndex
         tempArray.push(this.curTargertCredit); //Index 1: 表示金球當前累積金額
         this.sendNotification(DragonUpEvent.ON_BASE_CREDIT_COLLECT_END, tempArray);
-        this.curbaseSequenceIndex++;
 
-        if (this.curbaseSequenceIndex >= this.baseCreditCollectSequence.length) {
-            AudioManager.Instance.play(AudioClipsEnum.DragonUp_C1CollectHit01);
+        if (sequenceIndex >= this.baseCreditCollectSequence.length - 1) {
+            AudioManager.Instance.play(AudioClipsEnum.DragonUp_C1CollectHitEnd);
             this.onGetMultipleResult();
         } else {
-            let curAudioBaseSequenceName = (this.curbaseSequenceIndex % 7) + 1; //打擊音效設定
+            let curAudioBaseSequenceName = (sequenceIndex % 7) + 1; //打擊音效設定
             //打擊音效播放
             AudioManager.Instance.play(this.getAudioBaseSequenceName(curAudioBaseSequenceName));
-            this.onBaseCreditCollectStart();
         }
     }
 
@@ -180,7 +205,7 @@ export class PosTweenViewMediator extends BaseMediator<PosTweenView> {
             this.view.curObject.setMultipleSetting(this.view.multipleBoard.multiple);
             this.view.onGetMultipleResult(targertPos, () => this.onCheckTargertIndex(true));
 
-            // AudioManager.Instance.play(AudioClipsEnum.DragonUp_PercentCollect02);
+            AudioManager.Instance.play(AudioClipsEnum.DragonUp_PercentCollect02);
         } else {
             this.onCheckTargertIndex(false);
         }
@@ -206,6 +231,7 @@ export class PosTweenViewMediator extends BaseMediator<PosTweenView> {
         this.curTargertCredit = 0;
         let waitTime = hasMultiple ? 0.6 : 0.3;
 
+        this.view.clearArray();
         GlobalTimer.getInstance().registerTimer('onNextTargertIndex', waitTime, this.onNextTargertIndex, this).start();
     }
 
@@ -241,7 +267,24 @@ export class PosTweenViewMediator extends BaseMediator<PosTweenView> {
     }
 
     protected getAudioBaseSequenceName(value: number): AudioClipsEnum {
-        return AudioClipsEnum.DragonUp_C1CollectHit01
+        switch (value) {
+            case 1:
+                return AudioClipsEnum.DragonUp_C1CollectHit01;
+            case 2:
+                return AudioClipsEnum.DragonUp_C1CollectHit02;
+            case 3:
+                return AudioClipsEnum.DragonUp_C1CollectHit03;
+            case 4:
+                return AudioClipsEnum.DragonUp_C1CollectHit04;
+            case 5:
+                return AudioClipsEnum.DragonUp_C1CollectHit05;
+            case 6:
+                return AudioClipsEnum.DragonUp_C1CollectHit06;
+            case 7:
+                return AudioClipsEnum.DragonUp_C1CollectHit07;
+            default:
+                return AudioClipsEnum.DragonUp_C1CollectHit01;
+        }
     }
 
     protected get curBaseSequence(): Vec2 {
@@ -250,6 +293,10 @@ export class PosTweenViewMediator extends BaseMediator<PosTweenView> {
 
     protected get curTargertSequence(): Vec2 {
         return this.targertCollectSequence[this.curTargertSequenceIndex];
+    }
+
+    protected getCurBaseSequenceByIndex(index): Vec2 {
+        return this.baseCreditCollectSequence[index];
     }
 
     protected get isHasMultipleResult(): boolean {

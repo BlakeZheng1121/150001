@@ -94,10 +94,10 @@ export class ReelEffect_DampingSoundCommand extends puremvc.SimpleCommand {
                 }
                 //設定C2滾停音效 同把兩顆以上 需做處理
                 if (this.reelDataProxy.symbolFeature[i][j].lockType == LockType.NEW_LOCK && this.hitNum == 0) {
-                    curSequence.push(AudioClipsEnum.Base_C1Hit01);
+                    curSequence.push(AudioClipsEnum.DragonUp_C2Hit01);
                     this.hitNum++;
                 } else if (this.reelDataProxy.symbolFeature[i][j].lockType == LockType.NEW_LOCK) {
-                    curSequence.push(AudioClipsEnum.Base_C1Hit02);
+                    curSequence.push(AudioClipsEnum.DragonUp_C2Hit02);
                 }
             }
         }
@@ -119,10 +119,10 @@ export class ReelEffect_DampingSoundCommand extends puremvc.SimpleCommand {
             return curSequence;
         }
         if (curSequenceIndex == 3) {
-            return ballCount >= 3 ? curSequence : [AudioClipsEnum.SpinStop04];
+            return ballCount >= 3 ? curSequence : [AudioClipsEnum.SpinStop];
         }
         if (curSequenceIndex == 4) {
-            return ballCount >= 6 ? curSequence : [AudioClipsEnum.SpinStop05];
+            return ballCount >= 6 ? curSequence : [AudioClipsEnum.SpinStop];
         }
         return curSequence;
     }
@@ -131,7 +131,9 @@ export class ReelEffect_DampingSoundCommand extends puremvc.SimpleCommand {
         for (let i = this.spinStopSequenceLength - 1; i >= 0; i--) {
             for (let j = 0; j < this.reelDataProxy.symbolFeature[i].length; j++) {
                 if (this.reelDataProxy.symbolFeature[i][j].creditCent > 0) {
-                    this.reelDataProxy.reelStopSoundSequence[i][1] = AudioClipsEnum.Base_C1Hit01;
+                    this.reelDataProxy.reelStopSoundSequence[i][1] = this.reelDataProxy.symbolFeature[i][j].isSpecial
+                        ? AudioClipsEnum.Base_C1Hit888Last
+                        : AudioClipsEnum.Base_C1HitLast;
                     return;
                 }
             }
@@ -139,7 +141,18 @@ export class ReelEffect_DampingSoundCommand extends puremvc.SimpleCommand {
     }
 
     protected getHitC1SoundType(isSpecial: boolean): AudioClipsEnum {
-        return isSpecial ? AudioClipsEnum.Base_C1Hit02 : AudioClipsEnum.Base_C1Hit01;
+        switch (this.hitNum) {
+            case 0:
+                return isSpecial ? AudioClipsEnum.Base_C1Hit8881 : AudioClipsEnum.Base_C1Hit01;
+            case 1:
+                return isSpecial ? AudioClipsEnum.Base_C1Hit8882 : AudioClipsEnum.Base_C1Hit02;
+            case 2:
+                return isSpecial ? AudioClipsEnum.Base_C1Hit8883 : AudioClipsEnum.Base_C1Hit03;
+            case 3:
+                return isSpecial ? AudioClipsEnum.Base_C1Hit8884 : AudioClipsEnum.Base_C1Hit04;
+            case 4:
+                return isSpecial ? AudioClipsEnum.Base_C1Hit888Last : AudioClipsEnum.Base_C1HitLast;
+        }
     }
 
     protected handleBigWinHit() {

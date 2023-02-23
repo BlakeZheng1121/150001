@@ -11,23 +11,12 @@ import { LINE_GameDataProxy } from '../../sgv3line/proxy/LINE_GameDataProxy';
 import { WAY_GameDataProxy } from '../../sgv3way/proxy/WAY_GameDataProxy';
 
 export class GAME_GameDataProxy extends WAY_GameDataProxy {
-
-    private _isTriggerBaseBGMChange: boolean = false;
-
     private _ballTotalCount: number = 0;
     private _ballTotalCredit: number = 0;
-
     public constructor() {
         super();
         this._sceneSetting = new GAME_SceneSetting();
         this._commonSetting = new GAME_CommonSetting();
-    }
-
-    public get isTriggerBaseBGMChange(): boolean {
-        return this._isTriggerBaseBGMChange;
-    }
-    public set isTriggerBaseBGMChange(_val: boolean) {
-        this._isTriggerBaseBGMChange = _val;
     }
 
     public get gameState(): string {

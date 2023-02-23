@@ -94,7 +94,6 @@ export class Game_1_ViewMediator extends BaseGameViewMediator<Game_1_View> {
             this.view.node.active = false;
         }
         AudioManager.Instance.stop(BGMClipsEnum.BGM_Base).fade(0, 1);
-        this.gameDataProxy.isTriggerBaseBGMChange = false;
     }
 
     /** 執行橫式轉換 */

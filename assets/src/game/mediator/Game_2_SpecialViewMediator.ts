@@ -22,13 +22,6 @@ export class Game_2_SpecialViewMediator extends BaseMediator<Game_2_SpecialView>
 
     public constructor(name?: string, component?: any) {
         super(name, component);
-
-        this.view.changeOrientation(
-            this.gameDataProxy.orientationEvent === SceneManager.EV_ORIENTATION_HORIZONTAL
-                ? ControlView.HORIZONTAL
-                : ControlView.VERTICAL
-        );
-
         this.view.init(this.gameDataProxy.language);
     }
 
@@ -52,12 +45,6 @@ export class Game_2_SpecialViewMediator extends BaseMediator<Game_2_SpecialView>
         let self = this;
         if (self.gameDataProxy.curScene != GameScene.Game_2) return;
         switch (name) {
-            case SceneManager.EV_ORIENTATION_VERTICAL:
-                self.view.changeOrientation(ControlView.VERTICAL);
-                break;
-            case SceneManager.EV_ORIENTATION_HORIZONTAL:
-                self.view.changeOrientation(ControlView.HORIZONTAL);
-                break;
             case ViewMediatorEvent.SHOW_RETRIGGER_BOARD:
                 self.showRetriggerBoard(notification.getBody()[0]);
                 break;

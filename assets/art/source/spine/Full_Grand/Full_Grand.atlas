@@ -1,0 +1,209 @@
+
+Full_Grand.png
+size: 961,850
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+20
+  rotate: true
+  xy: 558, 212
+  size: 280, 92
+  orig: 280, 92
+  offset: 0, 0
+  index: -1
+Black
+  rotate: false
+  xy: 252, 2
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+C1
+  rotate: false
+  xy: 592, 647
+  size: 202, 201
+  orig: 220, 220
+  offset: 9, 10
+  index: -1
+C1_Light/C1_Light_00
+  rotate: false
+  xy: 943, 119
+  size: 16, 17
+  orig: 55, 55
+  offset: 2, 2
+  index: -1
+C1_Light/C1_Light_01
+  rotate: false
+  xy: 769, 611
+  size: 25, 34
+  orig: 55, 55
+  offset: 2, 2
+  index: -1
+C1_Light/C1_Light_02
+  rotate: false
+  xy: 358, 15
+  size: 40, 44
+  orig: 55, 55
+  offset: 2, 2
+  index: -1
+C1_Light/C1_Light_03
+  rotate: false
+  xy: 146, 10
+  size: 51, 49
+  orig: 55, 55
+  offset: 2, 2
+  index: -1
+C1_Light/C1_Light_04
+  rotate: true
+  xy: 199, 10
+  size: 49, 51
+  orig: 55, 55
+  offset: 4, 2
+  index: -1
+C1_Light/C1_Light_05
+  rotate: true
+  xy: 252, 12
+  size: 47, 51
+  orig: 55, 55
+  offset: 6, 2
+  index: -1
+C1_Light/C1_Light_06
+  rotate: true
+  xy: 305, 13
+  size: 46, 51
+  orig: 55, 55
+  offset: 7, 2
+  index: -1
+C1_Light/C1_Light_07
+  rotate: false
+  xy: 400, 18
+  size: 41, 44
+  orig: 55, 55
+  offset: 12, 9
+  index: -1
+C1_Light/C1_Light_08
+  rotate: true
+  xy: 769, 576
+  size: 30, 31
+  orig: 55, 55
+  offset: 19, 22
+  index: -1
+C1_Light/C1_Light_09
+  rotate: false
+  xy: 387, 471
+  size: 19, 21
+  orig: 55, 55
+  offset: 30, 32
+  index: -1
+C1_Shine_2
+  rotate: false
+  xy: 631, 510
+  size: 136, 135
+  orig: 149, 151
+  offset: 6, 6
+  index: -1
+C2
+  rotate: false
+  xy: 387, 644
+  size: 203, 204
+  orig: 220, 220
+  offset: 9, 10
+  index: -1
+Circle
+  rotate: false
+  xy: 2, 211
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+Frame
+  rotate: true
+  xy: 2, 2
+  size: 207, 142
+  orig: 207, 142
+  offset: 0, 0
+  index: -1
+FrameLight/FrameLight_00
+  rotate: true
+  xy: 260, 225
+  size: 242, 146
+  orig: 244, 150
+  offset: 1, 2
+  index: -1
+FrameLight/FrameLight_01
+  rotate: false
+  xy: 387, 494
+  size: 242, 148
+  orig: 244, 150
+  offset: 1, 1
+  index: -1
+FrameLight/FrameLight_02
+  rotate: true
+  xy: 408, 252
+  size: 240, 148
+  orig: 244, 150
+  offset: 2, 1
+  index: -1
+FrameLight/FrameLight_03
+  rotate: true
+  xy: 796, 608
+  size: 240, 148
+  orig: 244, 150
+  offset: 2, 1
+  index: -1
+FrameLight/FrameLight_04
+  rotate: true
+  xy: 652, 268
+  size: 240, 148
+  orig: 244, 150
+  offset: 2, 1
+  index: -1
+FrameLight/FrameLight_05
+  rotate: false
+  xy: 146, 61
+  size: 238, 148
+  orig: 244, 150
+  offset: 3, 1
+  index: -1
+FrameLight/FrameLight_06
+  rotate: true
+  xy: 802, 138
+  size: 226, 148
+  orig: 244, 150
+  offset: 9, 1
+  index: -1
+FrameLight/FrameLight_07
+  rotate: true
+  xy: 802, 366
+  size: 240, 148
+  orig: 244, 150
+  offset: 2, 1
+  index: -1
+FrameLight/FrameLight_08
+  rotate: true
+  xy: 652, 26
+  size: 240, 148
+  orig: 244, 150
+  offset: 2, 1
+  index: -1
+FrameLight/FrameLight_09
+  rotate: false
+  xy: 386, 64
+  size: 240, 146
+  orig: 244, 150
+  offset: 2, 2
+  index: -1
+light
+  rotate: false
+  xy: 2, 469
+  size: 383, 379
+  orig: 383, 379
+  offset: 0, 0
+  index: -1
+light05
+  rotate: false
+  xy: 802, 8
+  size: 139, 128
+  orig: 139, 128
+  offset: 0, 0
+  index: -1

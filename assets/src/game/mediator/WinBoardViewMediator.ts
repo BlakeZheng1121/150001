@@ -5,7 +5,7 @@ const { ccclass } = _decorator;
 
 @ccclass('WinBoardViewMediator')
 export class WinBoardViewMediator extends BaseWinBoardViewMediator<WinBoardView> implements IWinBoardViewMediator {
-    public constructor(name?: string, component?: any) {      
+    public constructor(name?: string, component?: any) {
         super(component);
         this.view.buttonCallback = this;
         this.view.registerButton();
