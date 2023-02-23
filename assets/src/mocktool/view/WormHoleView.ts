@@ -6,11 +6,11 @@ import {
     Vec2,
     systemEvent,
     UITransform,
-    Sprite,
     math,
     tween,
     Tween,
-    Camera
+    Camera,
+    UIOpacity
 } from 'cc';
 import { BaseScene } from '../../base/BaseScene';
 const { ccclass } = _decorator;
@@ -21,9 +21,12 @@ export class WormHoleView extends BaseScene {
 
     private clickedCount: number;
     private holeRadius: number;
-    private holeSprite: Sprite;
-    private holeTween: Tween<math.Color>;
+    private holeTween: Tween<UIOpacity>;
+    private holeOpacity: UIOpacity;
     private camera: Camera;
+
+    private opacityOpaque: number = 255;
+    private opacityTransparent: number = 0;
 
     protected onLoad() {
         super.onLoad();
@@ -41,8 +44,8 @@ export class WormHoleView extends BaseScene {
 
         self.camera = self.node.parent.getComponentInChildren(Camera);
         self.holeRadius = self.node.getComponent(UITransform).contentSize.width * 0.5;
-        self.holeSprite = self.node.getComponentInChildren(Sprite);
-        self.holeSprite.color.set(math.Color.TRANSPARENT);
+        self.holeOpacity = self.node.getComponentInChildren(UIOpacity);
+        self.holeOpacity.opacity = this.opacityTransparent;
     }
 
     private onMove(evt?: any): void {
@@ -59,17 +62,17 @@ export class WormHoleView extends BaseScene {
             pos.y = touchPos.y - parentNode.position.y;
 
             self.node.setWorldPosition(pos);
-            self.holeSprite.color.set(math.Color.WHITE);
+            self.holeOpacity.opacity = this.opacityOpaque;
         }
     }
 
     private onClick(evt: EventTouch): void {
         const self = this;
 
-        self.holeSprite.color.set(math.Color.WHITE);
+        self.holeOpacity.opacity = this.opacityOpaque;
 
         if (self.holeTween == null) {
-            self.holeTween = tween(self.holeSprite.color).to(0.5, { a: 0 }).union();
+            self.holeTween = tween(self.holeOpacity).to(0.5, { opacity: 0 }).union();
         }
         self.holeTween.stop();
         self.holeTween.start();

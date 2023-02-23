@@ -13,6 +13,7 @@ import { TakeWinCommand } from '../balance/TakeWinCommand';
 export class WinBoardRunCompleteCommand extends puremvc.SimpleCommand {
     public static readonly NAME: string = 'WinBoardRunCompleteCommand';
     protected timerName = 'WinBoardRunComplete';
+    protected miniGameDelayTime: number = 1.0;
 
     public execute(notification: puremvc.INotification) {
         const self = this;
@@ -44,24 +45,9 @@ export class WinBoardRunCompleteCommand extends puremvc.SimpleCommand {
         if (self.gameDataProxy.isHitSpecial() || self.gameDataProxy.preScene == 'Game_3') {
             // 檢查 下一Round 是否為特殊中獎(free_game, bonus_game)
             // 檢查 是否從MiniGame回來，是的話直接往下走
-            self.sendNotification(StateMachineCommand.NAME, new StateMachineObject(StateMachineProxy.GAME1_AFTERSHOW));
+            self.game1DelayAfterShow(self.miniGameDelayTime);
         } else if (self.gameDataProxy.onAutoPlay) {
-            GlobalTimer.getInstance().removeTimer(this.timerName);
-            GlobalTimer.getInstance()
-                .registerTimer(
-                    this.timerName,
-                    self.gameDataProxy.commonSetting.endWinDelayTime,
-                    () => {
-                        GlobalTimer.getInstance().removeTimer(this.timerName);
-                        if (self.gameDataProxy.gameState == StateMachineProxy.GAME1_SHOWWIN)
-                            self.sendNotification(
-                                StateMachineCommand.NAME,
-                                new StateMachineObject(StateMachineProxy.GAME1_AFTERSHOW)
-                            );
-                    },
-                    self
-                )
-                .start();
+            self.game1DelayAfterShow(self.gameDataProxy.commonSetting.endWinDelayTime);
             self.sendNotification(TakeWinCommand.NAME); //贏分加入表底
         } else {
             self.sendNotification(TakeWinCommand.NAME); //贏分加入表底
@@ -70,6 +56,26 @@ export class WinBoardRunCompleteCommand extends puremvc.SimpleCommand {
                 self.sendNotification(MaintainGame1ShowwinCommand.NAME);
             }
         }
+    }
+
+    private game1DelayAfterShow(delaytime: number = 0) {
+        const self = this;
+        GlobalTimer.getInstance().removeTimer(this.timerName);
+        GlobalTimer.getInstance()
+            .registerTimer(
+                this.timerName,
+                delaytime,
+                () => {
+                    GlobalTimer.getInstance().removeTimer(this.timerName);
+                    if (self.gameDataProxy.gameState == StateMachineProxy.GAME1_SHOWWIN)
+                        self.sendNotification(
+                            StateMachineCommand.NAME,
+                            new StateMachineObject(StateMachineProxy.GAME1_AFTERSHOW)
+                        );
+                },
+                self
+            )
+            .start();
     }
 
     /** Game2處理最後滾分事件 */

@@ -1,5 +1,3 @@
-import { BGMClipsEnum } from '../../../game/vo/enum/SoundMap';
-import { AudioManager } from '../../../ta/tool/AudioManager';
 import { StateMachineProxy } from '../../proxy/StateMachineProxy';
 import { SoundEvent, BaseSoundParms, WinEvent, ViewMediatorEvent } from '../../util/Constant';
 import { GameStateId } from '../../vo/data/GameStateId';

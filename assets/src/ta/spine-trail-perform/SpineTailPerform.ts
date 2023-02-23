@@ -10,6 +10,8 @@ export class SpineTailPerform extends Component {
     public effectTarget: Node | null = null;
     @property({ type: Prefab, visible: true })
     public trailPrefab: Prefab | null = null;
+    @property({ type: Prefab, visible: true })
+    public trailHitPrefab: Prefab | null = null;
 
     public spineDragonTrailHit: CocosAnimationMultiTool[] = [];
 
@@ -35,6 +37,14 @@ export class SpineTailPerform extends Component {
         trail.SpineAnimationIndex = [String(this.TRAIL_STRING) + this.dragonBallPos[this.listIndex]];
 
         this.spineDragonTrail.push(trail);
+
+        if (this.spineDragonTrailHit.length < 2) {
+            let trailHit: CocosAnimationMultiTool = PoolManager.instance
+                .getNode(this.trailHitPrefab, this.effectTarget)
+                .getComponent(CocosAnimationMultiTool);
+
+            this.spineDragonTrailHit.push(trailHit);
+        }
     }
 
     public SpineTrailEffect() {

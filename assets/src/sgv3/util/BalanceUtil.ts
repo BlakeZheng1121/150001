@@ -28,39 +28,39 @@ export class BalanceUtil {
         return StringUtil.formatCash(value, MathUtil.decimalPlace);
     }
 
-       /**
+    /**
      * 將cash無條件捨去後再轉換顯示給玩家的cash樣式，增加K及M的單位，並一律捨去單位的小數點
      *
      * @param cash 錢
      * @returns 格式化後的金錢樣式
      */
-        public static formatBalanceWithExpressingUnits(cash: number): string {
-            let formatValue: string = '';
-            let expressingWord: string = '';
-            let expressingUnit: number = 1;
-            const kThreshold: number = 1000; // K (thousand) : 1000
-            const mThreshold: number = 1000000; // M (million) : 1000000
-            if (cash >= kThreshold) {
-                expressingUnit = cash >= mThreshold ? mThreshold : kThreshold;
-                expressingWord = cash >= mThreshold ? 'M' : 'K';
-            }
-    
-            const convertValue: number = MathUtil.div(cash, expressingUnit);
-            const integerValue: number = MathUtil.floor(convertValue, 0);
-            const decimalPlacesValue: number = MathUtil.floor(
-                MathUtil.sub(convertValue, integerValue),
-                MathUtil.decimalPlace
-            );
-            if (decimalPlacesValue > 0) {
-                let remainderString: string[] = decimalPlacesValue.toString().split('.');
-                formatValue = StringUtil.formatCash(integerValue, 0) + '.' + remainderString[1];
-            } else {
-                formatValue = StringUtil.formatCash(integerValue, 0);
-            }
-            if (cash >= kThreshold) formatValue += expressingWord;
-    
-            return formatValue;
+    public static formatBalanceWithExpressingUnits(cash: number): string {
+        let formatValue: string = '';
+        let expressingWord: string = '';
+        let expressingUnit: number = 1;
+        const kThreshold: number = 1000; // K (thousand) : 1000
+        const mThreshold: number = 1000000; // M (million) : 1000000
+        if (cash >= kThreshold) {
+            expressingUnit = cash >= mThreshold ? mThreshold : kThreshold;
+            expressingWord = cash >= mThreshold ? 'M' : 'K';
         }
+
+        const convertValue: number = MathUtil.div(cash, expressingUnit);
+        const integerValue: number = MathUtil.floor(convertValue, 0);
+        const decimalPlacesValue: number = MathUtil.floor(
+            MathUtil.sub(convertValue, integerValue),
+            MathUtil.decimalPlace
+        );
+        if (decimalPlacesValue > 0) {
+            let remainderString: string[] = decimalPlacesValue.toString().split('.');
+            formatValue = StringUtil.formatCash(integerValue, 0) + '.' + remainderString[1];
+        } else {
+            formatValue = StringUtil.formatCash(integerValue, 0);
+        }
+        if (cash >= kThreshold) formatValue += expressingWord;
+
+        return formatValue;
+    }
 
     public static formatBalanceWithDollarSign(cash: number): string {
         let dollarSign = this.dollarSign;

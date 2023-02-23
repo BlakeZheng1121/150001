@@ -20,11 +20,13 @@ export class ResetGame1CanSpinCommand extends puremvc.SimpleCommand {
                 this.sendNotification(WinEvent.HIDE_BOARD_REQUEST);
             } else if (this.gameDataProxy.runWinComplete) {
                 // 滾分滾停後，再次點擊 Spin 按鈕時，切狀態到 IDLE 並直接 Spin 流程.
-                this.sendNotification(
-                    StateMachineCommand.NAME,
-                    new StateMachineObject(StateMachineProxy.GAME1_AFTERSHOW)
-                );
-                this.gameDataProxy.readySpin = true;
+                if (!this.gameDataProxy.isHitSpecial()) {
+                    this.sendNotification(
+                        StateMachineCommand.NAME,
+                        new StateMachineObject(StateMachineProxy.GAME1_AFTERSHOW)
+                    );
+                    this.gameDataProxy.readySpin = true;
+                }
             }
         }
     }

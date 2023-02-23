@@ -278,7 +278,7 @@ export class GameDataProxy extends CoreGameDataProxy {
     public set onHitJackpot(_val: boolean) {
         this._gameData.onHitJackpot = _val;
     }
-    
+
     /** 是否可以更新 Jackpot Pool */
     public get canUpdateJackpotPool(): boolean {
         return this._gameData.canUpdateJackpotPool;
@@ -317,7 +317,7 @@ export class GameDataProxy extends CoreGameDataProxy {
 
     public set tempWonCredit(_val: number) {
         this._tempWonCredit = _val;
-        this._cash = this.realCash - this._tempWonCredit;
+        this._cash = MathUtil.sub(this.realCash, this._tempWonCredit);
     }
 
     public resetTempWonCredit() {
@@ -387,6 +387,7 @@ export class GameDataProxy extends CoreGameDataProxy {
     public set isShowTurboModeMsg(_val: boolean) {
         this._gameData.isShowTurboModeMsg = _val;
     }
+
     /** 玩家選擇的遊戲狀態operation - GameOperation(Enum String) */
     public get curGameOperation(): string {
         return this._gameData.curGameOperation;
@@ -751,8 +752,8 @@ export class GameDataProxy extends CoreGameDataProxy {
      */
     public setBmd(value: number, isBalance: boolean = false) {
         this.realCash = value;
-        this._cash = this.realCash - this._tempWonCredit;
-        let denom = MathUtil.sub(this.curDenom, 0.001);
+        this._cash = MathUtil.sub(this.realCash, this._tempWonCredit);
+        let denom = MathUtil.mul(this.curDenom, 0.001);
         this.credit = MathUtil.div(this._cash, denom);
     }
 

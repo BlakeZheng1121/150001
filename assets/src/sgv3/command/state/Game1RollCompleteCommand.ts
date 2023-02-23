@@ -13,7 +13,6 @@ export class Game1RollCompleteCommand extends StateCommand {
         this.webBridgeProxy.setElementStyle('spinBtn', 'stop', 'remove');
         // 進入Roll代表可以重置preScene為當前的Scene
         this.gameDataProxy.preScene = GameScene.Game_1;
-        
 
         // 判斷是否有特殊獎項
         if (

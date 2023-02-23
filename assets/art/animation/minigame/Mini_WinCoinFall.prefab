@@ -50,11 +50,11 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
+      "x": 0.6,
+      "y": 0.6,
       "z": 1
     },
-    "_layer": 8,
+    "_layer": 64,
     "_euler": {
       "__type__": "cc.Vec3",
       "x": 0,
@@ -106,7 +106,7 @@
       "y": 50,
       "z": 1
     },
-    "_layer": 8,
+    "_layer": 64,
     "_euler": {
       "__type__": "cc.Vec3",
       "x": 0,
@@ -289,7 +289,7 @@
   {
     "__type__": "cc.CurveRange",
     "mode": 0,
-    "constant": 2,
+    "constant": 2.7,
     "multiplier": 1
   },
   {
@@ -913,7 +913,7 @@
       "a": 255
     },
     "LoopOverTime": 0,
-    "ClearObjectTime": 4,
+    "ClearObjectTime": 2,
     "_id": ""
   },
   {

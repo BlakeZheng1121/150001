@@ -192,15 +192,15 @@ export abstract class BaseWinBoardViewMediator<T extends WinBoardView> extends B
 
     /**winboard滾分結束-恢復BGM音量 停delay秒後才收掉animation*/
     public winboardLabelComplete(winType: WinType, targetAmount: number, delay: number = 2.7) {
-        this.fadeBGM(1, 0.3);
         this.view?.updateWinboardText(targetAmount);
+        this.fadeBGM(1, 0.3);
         this.view?.stopWinboard();
         GlobalTimer.getInstance().removeTimer(this.waitSecondsForShowTimerName);
         GlobalTimer.getInstance()
             .registerTimer(
                 this.waitSecondsForShowTimerName,
                 delay,
-                () => {             
+                () => {
                     this.sendNotification(WinBoardRunCompleteCommand.NAME);
                     if (this.gameDataProxy.winBoardState != WinBoardState.HIDE) {
                         this.webBridgeProxy.sendGameState(WebBridgeProxy.curScene, WebGameState.WINBOARD_HIDE);
@@ -246,6 +246,14 @@ export abstract class BaseWinBoardViewMediator<T extends WinBoardView> extends B
 
     public showWinboardAnimation(winType: WinType) {
         let language = this.gameDataProxy.language;
+        switch (this.gameDataProxy.language) {
+            case 'en':
+            case 'zh':
+                language = this.gameDataProxy.language;
+            default:
+                language = 'en';
+                break;
+        }
         if (winType >= WinType.bigWin) {
             this.gameDataProxy.scrollingWinLabelCanSkip = false;
             this.view?.startWinboard(winType, language);

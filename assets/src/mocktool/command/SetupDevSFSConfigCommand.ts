@@ -11,8 +11,8 @@ export class SetupDevSFSConfigCommand extends SetupSFSConfigCommand {
 
         let rndUid: number = Math.floor(Math.random() * 2999) + 1000;
         
-        config.userName = 'jbpl30@JB';
-        config.uid = 'jbpl30@JB';
+        config.userName = 'jbpl33@JB';
+        config.uid = 'jbpl33@JB';
 
         config.t = 'dev.net';
         config.host = '10.10.177.191';

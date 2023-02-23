@@ -36,6 +36,12 @@ export enum SymbolPerformType {
 export enum SymbolId {
     WILD = 0,
     C1 = 1,
+    M1 = 2,
+    M2 = 3,
+    M3 = 4,
+    M4 = 5,
+    M5 = 6,
+    M6 = 7,
     C2 = 9,
 
     SUB = 20,
