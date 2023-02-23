@@ -35,6 +35,10 @@
   "userData": {
     "hasAlpha": false,
     "type": "texture",
-    "redirect": "0bc8a0f8-3000-4a04-9d25-336907be8ad4@6c48a"
+    "redirect": "0bc8a0f8-3000-4a04-9d25-336907be8ad4@6c48a",
+    "compressSettings": {
+      "useCompressTexture": true,
+      "presetId": "b02XZfxTZD26OVIuSrFN88"
+    }
   }
 }

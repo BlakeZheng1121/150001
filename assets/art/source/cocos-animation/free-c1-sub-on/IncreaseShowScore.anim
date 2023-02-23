@@ -25,6 +25,9 @@
       },
       {
         "__id__": 44
+      },
+      {
+        "__id__": 49
       }
     ],
     "_exoticAnimation": null,
@@ -77,7 +80,7 @@
         "__type__": "cc.RealKeyframeValue",
         "interpolationMode": 0,
         "tangentWeightMode": 0,
-        "value": 0.30000001192092896,
+        "value": 0.32,
         "rightTangent": 0,
         "rightTangentWeight": 1,
         "leftTangent": 0,
@@ -116,7 +119,7 @@
         "__type__": "cc.RealKeyframeValue",
         "interpolationMode": 0,
         "tangentWeightMode": 0,
-        "value": 0.30000001192092896,
+        "value": 0.32,
         "rightTangent": 0,
         "rightTangentWeight": 1,
         "leftTangent": 0,
@@ -237,7 +240,7 @@
         "__type__": "cc.RealKeyframeValue",
         "interpolationMode": 0,
         "tangentWeightMode": 0,
-        "value": 46,
+        "value": 58,
         "rightTangent": 0,
         "rightTangentWeight": 1,
         "leftTangent": 0,
@@ -276,7 +279,7 @@
         "__type__": "cc.RealKeyframeValue",
         "interpolationMode": 0,
         "tangentWeightMode": 0,
-        "value": -40,
+        "value": -47,
         "rightTangent": 0,
         "rightTangentWeight": 1,
         "leftTangent": 0,
@@ -742,25 +745,68 @@
     "postExtrapolation": 1
   },
   {
-    "__type__": "cc.animation.VectorTrack",
+    "__type__": "cc.animation.ObjectTrack",
     "_binding": {
       "__type__": "cc.animation.TrackBinding",
       "path": {
         "__id__": 45
       }
     },
+    "_channel": {
+      "__id__": 47
+    }
+  },
+  {
+    "__type__": "cc.animation.TrackPath",
+    "_paths": [
+      {
+        "__id__": 46
+      },
+      "spriteFrame"
+    ]
+  },
+  {
+    "__type__": "cc.animation.ComponentPath",
+    "component": "cc.Sprite"
+  },
+  {
+    "__type__": "cc.animation.Channel",
+    "_curve": {
+      "__id__": 48
+    }
+  },
+  {
+    "__type__": "cc.ObjectCurve",
+    "_times": [
+      0
+    ],
+    "_values": [
+      {
+        "__uuid__": "36591a9a-d8e1-4570-ac79-fad4dd6424d2@f9941",
+        "__expectedType__": "cc.SpriteFrame"
+      }
+    ]
+  },
+  {
+    "__type__": "cc.animation.VectorTrack",
+    "_binding": {
+      "__type__": "cc.animation.TrackBinding",
+      "path": {
+        "__id__": 50
+      }
+    },
     "_channels": [
       {
-        "__id__": 47
+        "__id__": 52
       },
       {
-        "__id__": 49
+        "__id__": 54
       },
       {
-        "__id__": 51
+        "__id__": 56
       },
       {
-        "__id__": 53
+        "__id__": 58
       }
     ],
     "_nComponents": 3
@@ -769,7 +815,7 @@
     "__type__": "cc.animation.TrackPath",
     "_paths": [
       {
-        "__id__": 46
+        "__id__": 51
       },
       "scale"
     ]
@@ -781,7 +827,7 @@
   {
     "__type__": "cc.animation.Channel",
     "_curve": {
-      "__id__": 48
+      "__id__": 53
     }
   },
   {
@@ -880,7 +926,7 @@
   {
     "__type__": "cc.animation.Channel",
     "_curve": {
-      "__id__": 50
+      "__id__": 55
     }
   },
   {
@@ -979,7 +1025,7 @@
   {
     "__type__": "cc.animation.Channel",
     "_curve": {
-      "__id__": 52
+      "__id__": 57
     }
   },
   {
@@ -1078,7 +1124,7 @@
   {
     "__type__": "cc.animation.Channel",
     "_curve": {
-      "__id__": 54
+      "__id__": 59
     }
   },
   {
