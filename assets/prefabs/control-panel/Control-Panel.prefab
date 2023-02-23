@@ -665,7 +665,10 @@
       "b": 180,
       "a": 255
     },
-    "_spriteFrame": null,
+    "_spriteFrame": {
+      "__uuid__": "ba005fbb-e133-4723-9195-64033493b14b@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
     "_type": 0,
     "_fillType": 0,
     "_sizeMode": 1,
@@ -1170,7 +1173,10 @@
       "b": 180,
       "a": 255
     },
-    "_spriteFrame": null,
+    "_spriteFrame": {
+      "__uuid__": "88034b61-4ba1-46d0-aa28-3e897be9651c@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
     "_type": 0,
     "_fillType": 0,
     "_sizeMode": 1,
@@ -1730,7 +1736,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 265,
+      "width": 290.17,
       "height": 90.4
     },
     "_anchorPoint": {
@@ -1766,7 +1772,7 @@
       "b": 255,
       "a": 255
     },
-    "_string": "   提高投注可以升级\n",
+    "_string": "Increased your bet to \nupgrade",
     "_horizontalAlign": 0,
     "_verticalAlign": 1,
     "_actualFontSize": 30,
@@ -1844,7 +1850,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -66,
+      "x": 20,
       "y": 0,
       "z": 0
     },
@@ -1883,8 +1889,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 89,
-      "height": 34
+      "width": 120,
+      "height": 32
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1919,7 +1925,10 @@
       "b": 255,
       "a": 255
     },
-    "_spriteFrame": null,
+    "_spriteFrame": {
+      "__uuid__": "3867415a-86a8-43ab-98d7-a5185dcac322@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
     "_type": 0,
     "_fillType": 0,
     "_sizeMode": 1,
@@ -2053,7 +2062,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 50,
+      "x": 125,
       "y": 0,
       "z": 0
     },
@@ -2092,8 +2101,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 90,
-      "height": 34
+      "width": 86,
+      "height": 32
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -2128,7 +2137,10 @@
       "b": 255,
       "a": 255
     },
-    "_spriteFrame": null,
+    "_spriteFrame": {
+      "__uuid__": "49296ab4-e551-4b3b-9e70-28afa3b7f376@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
     "_type": 0,
     "_fillType": 0,
     "_sizeMode": 1,
@@ -2491,7 +2503,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": -5,
-      "y": 128,
+      "y": 125,
       "z": 0
     },
     "_lrot": {
@@ -2565,7 +2577,10 @@
       "b": 255,
       "a": 255
     },
-    "_spriteFrame": null,
+    "_spriteFrame": {
+      "__uuid__": "78ec9410-9d79-477c-90a2-fc4289f821c7@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
     "_type": 0,
     "_fillType": 0,
     "_sizeMode": 1,
@@ -2825,7 +2840,7 @@
       "b": 255,
       "a": 255
     },
-    "_string": "Bet 9,999.99 To 9,999.99",
+    "_string": "Bet , To ",
     "_horizontalAlign": 0,
     "_verticalAlign": 1,
     "_actualFontSize": 30,
@@ -3120,7 +3135,7 @@
       "b": 255,
       "a": 255
     },
-    "_string": "Bet 9,999.99 To 9,999.99",
+    "_string": "Bet , To ",
     "_horizontalAlign": 0,
     "_verticalAlign": 1,
     "_actualFontSize": 30,
@@ -3270,7 +3285,10 @@
       "b": 255,
       "a": 255
     },
-    "_spriteFrame": null,
+    "_spriteFrame": {
+      "__uuid__": "3867415a-86a8-43ab-98d7-a5185dcac322@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
     "_type": 0,
     "_fillType": 0,
     "_sizeMode": 1,
@@ -3382,8 +3400,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 90,
-      "height": 34
+      "width": 86,
+      "height": 32
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -3418,7 +3436,10 @@
       "b": 255,
       "a": 255
     },
-    "_spriteFrame": null,
+    "_spriteFrame": {
+      "__uuid__": "49296ab4-e551-4b3b-9e70-28afa3b7f376@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
     "_type": 0,
     "_fillType": 0,
     "_sizeMode": 1,
@@ -3846,7 +3867,7 @@
       "b": 255,
       "a": 255
     },
-    "_string": "Bet 9,999.99 To MAX",
+    "_string": "Bet , To ",
     "_horizontalAlign": 0,
     "_verticalAlign": 1,
     "_actualFontSize": 30,
@@ -3996,7 +4017,10 @@
       "b": 255,
       "a": 255
     },
-    "_spriteFrame": null,
+    "_spriteFrame": {
+      "__uuid__": "3867415a-86a8-43ab-98d7-a5185dcac322@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
     "_type": 0,
     "_fillType": 0,
     "_sizeMode": 1,
@@ -4144,7 +4168,10 @@
       "b": 255,
       "a": 255
     },
-    "_spriteFrame": null,
+    "_spriteFrame": {
+      "__uuid__": "49296ab4-e551-4b3b-9e70-28afa3b7f376@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
     "_type": 0,
     "_fillType": 0,
     "_sizeMode": 1,
@@ -5555,7 +5582,10 @@
       "b": 180,
       "a": 255
     },
-    "_spriteFrame": null,
+    "_spriteFrame": {
+      "__uuid__": "55b25ba0-2845-4baa-a61a-0376e1aebbba@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
     "_type": 0,
     "_fillType": 0,
     "_sizeMode": 1,
@@ -6063,9 +6093,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 250,
-      "g": 171,
-      "b": 208,
+      "r": 255,
+      "g": 209,
+      "b": 107,
       "a": 255
     },
     "_spriteFrame": {
@@ -6244,9 +6274,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 250,
-      "g": 171,
-      "b": 208,
+      "r": 255,
+      "g": 209,
+      "b": 107,
       "a": 255
     },
     "_spriteFrame": {
@@ -6301,9 +6331,9 @@
     },
     "disableColor": {
       "__type__": "cc.Color",
-      "r": 250,
-      "g": 171,
-      "b": 208,
+      "r": 255,
+      "g": 209,
+      "b": 107,
       "a": 255
     },
     "_id": ""
@@ -6514,9 +6544,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 250,
-      "g": 171,
-      "b": 208,
+      "r": 255,
+      "g": 209,
+      "b": 107,
       "a": 255
     },
     "_spriteFrame": {
@@ -6819,9 +6849,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 250,
-      "g": 171,
-      "b": 208,
+      "r": 255,
+      "g": 209,
+      "b": 107,
       "a": 255
     },
     "_spriteFrame": {
@@ -7120,9 +7150,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 250,
-      "g": 171,
-      "b": 208,
+      "r": 255,
+      "g": 209,
+      "b": 107,
       "a": 255
     },
     "_spriteFrame": {
@@ -7401,9 +7431,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 250,
-      "g": 171,
-      "b": 208,
+      "r": 255,
+      "g": 209,
+      "b": 107,
       "a": 255
     },
     "_spriteFrame": {
@@ -7775,9 +7805,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 250,
-      "g": 171,
-      "b": 208,
+      "r": 255,
+      "g": 209,
+      "b": 107,
       "a": 255
     },
     "_spriteFrame": {
@@ -8001,9 +8031,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 250,
-      "g": 171,
-      "b": 208,
+      "r": 255,
+      "g": 209,
+      "b": 107,
       "a": 255
     },
     "_spriteFrame": {
@@ -8330,9 +8360,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 250,
-      "g": 171,
-      "b": 208,
+      "r": 255,
+      "g": 209,
+      "b": 107,
       "a": 255
     },
     "_spriteFrame": {
@@ -9856,7 +9886,10 @@
       "b": 255,
       "a": 255
     },
-    "_spriteFrame": null,
+    "_spriteFrame": {
+      "__uuid__": "12537c61-3d39-442e-a4b8-eed424cca0c3@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
     "_type": 0,
     "_fillType": 0,
     "_sizeMode": 2,
@@ -10465,8 +10498,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 204,
-      "height": 24
+      "width": 150,
+      "height": 55
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -10501,7 +10534,10 @@
       "b": 255,
       "a": 255
     },
-    "_spriteFrame": null,
+    "_spriteFrame": {
+      "__uuid__": "53f75520-8ebb-454c-85b3-123471a24e51@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
     "_type": 0,
     "_fillType": 0,
     "_sizeMode": 1,
@@ -11002,8 +11038,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 91,
-      "height": 26
+      "width": 85,
+      "height": 22
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -11038,7 +11074,10 @@
       "b": 255,
       "a": 255
     },
-    "_spriteFrame": null,
+    "_spriteFrame": {
+      "__uuid__": "ff3afb82-b311-43fc-a4da-67617f24d3ae@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
     "_type": 0,
     "_fillType": 0,
     "_sizeMode": 1,
@@ -11692,7 +11731,10 @@
       "b": 255,
       "a": 255
     },
-    "_spriteFrame": null,
+    "_spriteFrame": {
+      "__uuid__": "7a4c9eac-b265-433b-aef2-29cbadf443ad@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
     "_type": 0,
     "_fillType": 0,
     "_sizeMode": 2,
@@ -12252,7 +12294,7 @@
   {
     "__type__": "cc.TargetInfo",
     "localID": [
-      "a1Y0pI85dFH4tVBVLGn0zO"
+      "d431vCPq9DDZTSAh0HU9cq"
     ]
   }
 ]

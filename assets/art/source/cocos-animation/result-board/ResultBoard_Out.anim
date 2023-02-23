@@ -572,9 +572,9 @@
     "__type__": "cc.RealCurve",
     "_times": [
       0,
-      0.4000000059604645,
-      0.5333333611488342,
-      0.6666666865348816
+      0.13333334028720856,
+      0.2666666805744171,
+      0.4000000059604645
     ],
     "_values": [
       {
@@ -592,7 +592,7 @@
         "__type__": "cc.RealKeyframeValue",
         "interpolationMode": 0,
         "tangentWeightMode": 0,
-        "value": 1,
+        "value": 0.4000000059604645,
         "rightTangent": 0,
         "rightTangentWeight": 1,
         "leftTangent": 0,
@@ -603,7 +603,7 @@
         "__type__": "cc.RealKeyframeValue",
         "interpolationMode": 0,
         "tangentWeightMode": 0,
-        "value": 1.2000000476837158,
+        "value": 2,
         "rightTangent": 0,
         "rightTangentWeight": 1,
         "leftTangent": 0,
@@ -614,7 +614,7 @@
         "__type__": "cc.RealKeyframeValue",
         "interpolationMode": 0,
         "tangentWeightMode": 0,
-        "value": 0,
+        "value": 2,
         "rightTangent": 0,
         "rightTangentWeight": 1,
         "leftTangent": 0,
@@ -635,9 +635,9 @@
     "__type__": "cc.RealCurve",
     "_times": [
       0,
-      0.4000000059604645,
-      0.5333333611488342,
-      0.6666666865348816
+      0.13333334028720856,
+      0.2666666805744171,
+      0.4000000059604645
     ],
     "_values": [
       {
@@ -655,7 +655,7 @@
         "__type__": "cc.RealKeyframeValue",
         "interpolationMode": 0,
         "tangentWeightMode": 0,
-        "value": 1,
+        "value": 1.600000023841858,
         "rightTangent": 0,
         "rightTangentWeight": 1,
         "leftTangent": 0,
@@ -666,7 +666,7 @@
         "__type__": "cc.RealKeyframeValue",
         "interpolationMode": 0,
         "tangentWeightMode": 0,
-        "value": 1.2000000476837158,
+        "value": 0.10000000149011612,
         "rightTangent": 0,
         "rightTangentWeight": 1,
         "leftTangent": 0,
@@ -698,9 +698,9 @@
     "__type__": "cc.RealCurve",
     "_times": [
       0,
-      0.4000000059604645,
-      0.5333333611488342,
-      0.6666666865348816
+      0.13333334028720856,
+      0.2666666805744171,
+      0.4000000059604645
     ],
     "_values": [
       {
