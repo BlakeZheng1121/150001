@@ -1,8 +1,9 @@
 import { _decorator, Component, Node, game } from 'cc';
-import { ParticleContentTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
 import { TimeLineTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
 import { BaseScene } from '../../base/BaseScene';
+import { AudioManager } from '../../ta/tool/AudioManager';
 import { CocosAnimationMultiTool } from '../../ta/tool/cocos-animation-tool/CocosAnimationMultiTool';
+import { AudioClipsEnum } from '../vo/enum/SoundMap';
 
 const { ccclass, property } = _decorator;
 
@@ -13,11 +14,8 @@ export class GAME_TransitionView extends BaseScene {
 
     public currentState = '';
 
-    @property(ParticleContentTool)
-    private coinFall: ParticleContentTool;
-
     @property(TimeLineTool)
-    private transition: TimeLineTool = null;
+    private Transition: TimeLineTool | null = null;
 
     protected isTransitionBG: boolean = false; //判斷是否進行轉場.
 
@@ -32,16 +30,11 @@ export class GAME_TransitionView extends BaseScene {
     }
 
     /** 轉場動畫*/
-    public showDragonFlyUp(): void {
+    public showTransition(): void {
         const self = this;
         this.setNodeActivity(true);
-        this.transition?.play('FS_Transition');
-    }
-
-    public showCoinFall(delay: number) {
-        const self = this;
-        this.setNodeActivity(true);
-        self.coinFall.ParticlePlay(true, delay);
+        this.Transition?.play('FS_Transition');
+        AudioManager.Instance.play(AudioClipsEnum.FeatureSelection_DragonRoar);
     }
 
     public setNodeActivity(active: boolean) {

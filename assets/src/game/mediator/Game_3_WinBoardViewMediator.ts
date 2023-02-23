@@ -125,13 +125,7 @@ export class Game_3_WinBoardViewMediator
     }
 
     /** 建立畫面 */
-    protected initView(): void {
-        this.view?.changeOrientation(
-            this.gameDataProxy.orientationEvent === SceneManager.EV_ORIENTATION_HORIZONTAL
-                ? Game_3_WinBoardView.HORIZONTAL
-                : Game_3_WinBoardView.VERTICAL
-        );
-    }
+    protected initView(): void {}
 
     private onSpinDown() {
         const self = this;
