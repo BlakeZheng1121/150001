@@ -37,9 +37,20 @@ export class GrandViewMediator extends BaseMediator<GrandView> {
 
     hitGrand(callBack: Function) {
         this.sendNotification(JackpotPool.HIGHLIGHT_HIT_POOL, MiniGameSymbol.Grand);
-        this.view.showUp(this.gameDataProxy.curScene, () => this.onShowUpComplete());
+        this.view.showUp(this.gameDataProxy.language, () => this.onShowUpComplete());
         this.hitGrandComplete = callBack;
 
+        switch (this.gameDataProxy.curScene) {
+            case 'Game_1':
+                AudioManager.Instance.fade(BGMClipsEnum.BGM_Base, 0, 0.7);
+                break;
+            case 'Game_2':
+                AudioManager.Instance.fade(BGMClipsEnum.BGM_FreeGame, 0, 0.7);
+                break;
+            case 'Game_4':
+                AudioManager.Instance.fade(BGMClipsEnum.BGM_DragonUp, 0, 0.7);
+                break;
+        }
     }
 
     onShowUpComplete() {

@@ -1,10 +1,10 @@
 import { _decorator, Component, Label, Vec2, Prefab, Vec3 } from 'cc';
-import { ParticleContentTool } from '../../../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
 import { PoolManager } from '../../../../sgv3/PoolManager';
 import { BalanceUtil } from '../../../../sgv3/util/BalanceUtil';
 import { GlobalTimer } from '../../../../sgv3/util/GlobalTimer';
 import { AnimationTimeLineTool } from '../../../../ta/tool/animation-timeline-tool/AnimationTimeLineTool';
 import { AudioManager } from '../../../../ta/tool/AudioManager';
+import { ParticleContentTool } from '../../../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
 import { AudioClipsEnum } from '../../../vo/enum/SoundMap';
 
 const { ccclass, property } = _decorator;
@@ -26,7 +26,7 @@ export class FreeC1SubOnPerform extends Component {
 
     readonly SPECIAL_HIT_END: string = 'sprcialHitEnd';
 
-    readonly SPECIAL_HIT_END_TIMEOUT = 0.75;
+    readonly SPECIAL_HIT_END_TIMEOUT = 1;
 
     private sideBallCount = 0;
 

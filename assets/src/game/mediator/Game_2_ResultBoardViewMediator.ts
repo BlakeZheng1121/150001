@@ -33,29 +33,10 @@ export class Game_2_ResultBoardViewMediator extends BaseMediator<Game_2_ResultBo
         let self = this;
         if (self.gameDataProxy.curScene == GameScene.Game_3) return;
         switch (name) {
-            case SceneManager.EV_ORIENTATION_HORIZONTAL:
-                self.onOrientationHorizontal();
-                break;
-            case SceneManager.EV_ORIENTATION_VERTICAL:
-                self.onOrientationVertical();
-                break;
             case StateWinEvent.SHOW_LAST_CREDIT_BOARD:
-                // AudioManager.Instance.stopBGM();
                 self.showWinBoard(notification.getBody());
                 break;
         }
-    }
-
-    /** 執行橫式轉換 */
-    protected onOrientationHorizontal(): void {
-        let curScene = this.gameDataProxy.curScene;
-        this.view?.changeOrientation(SceneManager.EV_ORIENTATION_HORIZONTAL, curScene);
-    }
-
-    /** 執行直式轉換 */
-    protected onOrientationVertical(): void {
-        let curScene = this.gameDataProxy.curScene;
-        this.view?.changeOrientation(SceneManager.EV_ORIENTATION_VERTICAL, curScene);
     }
 
     private showWinBoard(score: number) {

@@ -3,11 +3,9 @@
 
 /** WAY GAME 需要 import的元件 */
 import { WAY_RegisterStateCommand } from '../../sgv3way/command/WAY_RegisterStateCommand';
-import { GAME_Game1BeforeShowCommand } from './state/GAME_Game1BeforeShowCommand';
 import { GAME_Game1FeatureSelectionCommand } from './state/GAME_Game1FeatureSelectionCommand';
 import { GAME_Game1HitSpecialCommand } from './state/GAME_Game1HitSpecialCommand';
 import { GAME_Game1RollCompleteCommand } from './state/GAME_Game1RollCompleteCommand';
-import { GAME_Game1SpinCommand } from './state/GAME_Game1SpinCommand';
 import { GAME_Game2BeforeShowCommand } from './state/GAME_Game2BeforeShowCommand';
 import { GAME_Game2EndCommand } from './state/GAME_Game2EndCommand';
 import { GAME_Game2HitSpecialCommand } from './state/GAME_Game2HitSpecialCommand';
@@ -24,8 +22,7 @@ export class GAME_RegisterStateCommand extends WAY_RegisterStateCommand {
         this.facade.registerCommand(GAME_Game1RollCompleteCommand.NAME, GAME_Game1RollCompleteCommand);
         this.facade.registerCommand(GAME_Game1HitSpecialCommand.NAME, GAME_Game1HitSpecialCommand);
         this.facade.registerCommand(GAME_Game1FeatureSelectionCommand.NAME, GAME_Game1FeatureSelectionCommand);
-        this.facade.registerCommand(GAME_Game1BeforeShowCommand.NAME,GAME_Game1BeforeShowCommand);
-        this.facade.registerCommand(GAME_Game1SpinCommand.NAME,GAME_Game1SpinCommand);
+
         /** Game2 */
         this.facade.registerCommand(GAME_Game2RollCompleteCommand.NAME, GAME_Game2RollCompleteCommand);
         this.facade.registerCommand(GAME_Game2HitSpecialCommand.NAME, GAME_Game2HitSpecialCommand);

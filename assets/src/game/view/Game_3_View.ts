@@ -12,6 +12,8 @@ const { ccclass, property } = _decorator;
 export class Game_3_View extends BaseScene {
     public static readonly HORIZONTAL: string = 'horizontal';
     public static readonly VERTICAL: string = 'vertical';
+    /** 是否為贏分面板時間 */
+    private creditBoardTime: boolean = false;
 
     /* 記錄獎項按鈕是否已按 */
     public clickData: TSMap<string, boolean>;
@@ -48,6 +50,7 @@ export class Game_3_View extends BaseScene {
     public init(lang: string) {
         const self = this;
 
+        self.language = lang;
         self.clickData = new TSMap<string, boolean>();
 
         self.changeLocale(lang);
@@ -69,6 +72,7 @@ export class Game_3_View extends BaseScene {
 
         self.showContent();
 
+        self.creditBoardTime = false;
         self.countdown.string = self.autoStartTime.toString();
     }
 
@@ -105,7 +109,8 @@ export class Game_3_View extends BaseScene {
     /** 贏分結算面板 */
     public showWonCreditBoard(): void {
         const self = this;
-        self.hideAllBoard();
+        this.creditBoardTime = true;
+        // self.hideAllBoard();
     }
 
     /**
@@ -171,7 +176,12 @@ export class Game_3_View extends BaseScene {
 
     public hideContent() {
         const self = this;
+        self.hideAllBoard();
         self.uiOpacity.opacity = 255;
         self.hideTween.start();
+    }
+
+    public enableCountdown(enable: boolean) {
+        this.countdown.node.parent.active = enable;
     }
 }

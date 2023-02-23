@@ -61,7 +61,6 @@ export enum AudioClipsEnum {
 
 export enum BGMClipsEnum {
     BGM_Base = 'BGM_Base',
-    BGM_BaseIdle = 'BGM_BaseIdle',
     BGM_DragonUp = 'BGM_DragonUp',
     BGM_FeatureSelection = 'BGM_FeatureSelection',
     BGM_FreeGame = 'BGM_FreeGame',

@@ -44,7 +44,7 @@ export class Game1InitCommand extends StateCommand {
             case GameScene.Game_2:
             //AudioManager.Instance.stop(BGMClipsEnum.BGM_FreeGame).fade(0, 1);
             case GameScene.Game_4:
-                //AudioManager.Instance.stop(BGMClipsEnum.BGM_DrangonUp).fade(0, 1);
+                //AudioManager.Instance.stop(BGMClipsEnum.BGM_DragonUp).fade(0, 1);
                 this.sendNotification(ReelEvent.ON_REELS_INIT); //Reel Init
                 this.sendNotification(ReelEffect_SymbolFeatureCommand.name);
                 if (this.gameDataProxy.stateWinData.totalAmount() > 0) {
@@ -58,7 +58,7 @@ export class Game1InitCommand extends StateCommand {
                     this.changeState(StateMachineProxy.GAME1_END);
                 }
                 break;
-            default:
+            default: //Reel Init
                 /** 判斷是否有 Recovery紀錄資料，需要進行處理 */
                 if (
                     this.gameDataProxy.spinEventData != undefined &&
@@ -74,10 +74,10 @@ export class Game1InitCommand extends StateCommand {
                     this.webBridgeProxy.updateHtmlPlayerWin(0); //清除Win欄位
                     this.changeState(StateMachineProxy.GAME1_IDLE);
                 }
-                this.sendNotification(ReelEvent.ON_REELS_INIT); //Reel Init
+                this.sendNotification(ReelEvent.ON_REELS_INIT);
                 break;
         }
-        AudioManager.Instance.play(BGMClipsEnum.BGM_BaseIdle).loop(true).volume(0).fade(1, 1);
+        AudioManager.Instance.play(BGMClipsEnum.BGM_Base).loop(true).volume(0).fade(1, 1);
         this.sendNotification(WinEvent.FORCE_WIN_DISPOSE);
     }
 

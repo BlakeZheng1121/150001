@@ -21,17 +21,6 @@ export class Game_2_View extends BaseScene {
     public static readonly HORIZONTAL: string = 'horizontal';
     public static readonly VERTICAL: string = 'vertical';
 
-    private language: string;
-
-    private _uiOrientation: Array<UIOrientation> | null = null;
-
-    private get uiOrientation() {
-        if (this._uiOrientation == null) {
-            this._uiOrientation = this.getComponentsInChildren(UIOrientation);
-        }
-        return this._uiOrientation;
-    }
-
     private _gameUIOrientation: Array<GameUIOrientationSetting> | null = null;
 
     private get gameUIOrientation() {
@@ -57,10 +46,6 @@ export class Game_2_View extends BaseScene {
 
     public changeOrientation(orientation: string, scene: string) {
         let ishorizontal = orientation == SceneManager.EV_ORIENTATION_HORIZONTAL;
-        for (let i = 0; i < this.uiOrientation.length; i++) {
-            this.uiOrientation[i].changeOrientation(ishorizontal);
-        }
-
         for (let i = 0; i < this.gameUIOrientation.length; i++) {
             this.gameUIOrientation[i].changeOrientation(ishorizontal, scene);
         }

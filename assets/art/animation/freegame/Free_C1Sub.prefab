@@ -16,7 +16,7 @@
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 2
@@ -54,7 +54,7 @@
       "__type__": "cc.Vec3",
       "x": 2,
       "y": 2,
-      "z": 2
+      "z": 1
     },
     "_layer": 4,
     "_euler": {
@@ -78,8 +78,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 54,
-      "height": 434
+      "width": 108,
+      "height": 108
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -194,6 +194,7 @@
     "__type__": "cc.Animation",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 1
     },
@@ -238,16 +239,16 @@
       "__type__": "cc.Color",
       "r": 255,
       "g": 255,
-      "b": 0,
+      "b": 255,
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "953fdabe-df4d-4024-a0ee-0e3fb4edd975@f9941",
+      "__uuid__": "b884e5b3-f1dd-443d-b594-dcfb7767bd65@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 0,
+    "_sizeMode": 2,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -279,8 +280,8 @@
     "partType": 3,
     "offsetPos": {
       "__type__": "cc.Vec3",
-      "x": 53.5,
-      "y": 440,
+      "x": 0,
+      "y": 0,
       "z": 0
     },
     "_id": ""

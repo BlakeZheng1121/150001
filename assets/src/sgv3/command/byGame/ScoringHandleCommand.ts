@@ -15,6 +15,8 @@ const { ccclass } = _decorator;
 export class ScoringHandleCommand extends puremvc.SimpleCommand {
     public static NAME: string = 'ScoringHandleCommand';
     protected timerKey: string = 'scoringTimer';
+    protected timerKey_Sound: string = 'scoringSoundTimer';
+    protected winTypeDelayScoringTime: number = 0.5;
 
     // 記錄該把總贏分
     protected finalWinAmount: number = 0;
@@ -72,14 +74,28 @@ export class ScoringHandleCommand extends puremvc.SimpleCommand {
         this.finalScoringTime = scoringTime;
         // 得分音樂
         this.playScoring(this.finalWinType);
-        this.setScoringData(startAmount, targetAmount, winBoardTargetAmount);
+        this.setScoringData(this.finalWinType, startAmount, targetAmount, winBoardTargetAmount);
     }
 
-    protected setScoringData(startAmount: number, targetAmount: number, winBoardTargetAmount: number) {
+    protected setScoringData(
+        winType: WinType,
+        startAmount: number,
+        targetAmount: number,
+        winBoardTargetAmount: number
+    ) {
         if (this.needQuickScoringTime()) {
             this.finalScoringTime = this.getQuickScoringTime(this.finalWinType);
         }
-        this.scoringNormal(startAmount, targetAmount, winBoardTargetAmount, this.finalScoringTime);
+
+        let delayTime = winType >= WinType.bigWin ? this.winTypeDelayScoringTime : 0;
+        GlobalTimer.getInstance()
+            .registerTimer(
+                this.timerKey_Sound,
+                delayTime,
+                () => this.scoringNormal(startAmount, targetAmount, winBoardTargetAmount, this.finalScoringTime),
+                this
+            )
+            .start();
     }
 
     /**
@@ -150,7 +166,9 @@ export class ScoringHandleCommand extends puremvc.SimpleCommand {
     private playScoringEnd(isForceComplete: boolean) {
         let winType = this.finalWinType;
         GlobalTimer.getInstance().stop(this.timerKey);
+        GlobalTimer.getInstance().stop(this.timerKey_Sound);
         GlobalTimer.getInstance().removeTimer(this.timerKey);
+        GlobalTimer.getInstance().removeTimer(this.timerKey_Sound);
         if (this.gameDataProxy.winBoardState == WinBoardState.SHOW) {
             if (isForceComplete || this.needQuickScoringTime()) {
                 switch (winType) {

@@ -1,10 +1,8 @@
 import { instantiate, NodePool, Prefab, Vec3, _decorator, Node, tween, CCFloat, Tween } from 'cc';
-import { ParticleContentTool } from '../../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
 import { BaseScene } from '../../../base/BaseScene';
 import { PoolManager } from '../../../sgv3/PoolManager';
 import { BezierUtils } from '../../../sgv3/util/BezierUtils';
-import { AudioManager } from '../../../ta/tool/AudioManager';
-import { AudioClipsEnum } from '../../vo/enum/SoundMap';
+import { ParticleContentTool } from '../../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
 import { MultipleBoard } from './MultipleBoard';
 
 import { PosTweenObject } from './PosTweenObject';
@@ -24,8 +22,6 @@ export class PosTweenView extends BaseScene {
 
     private defaultMultiple: number = 100;
 
-    private ishorizontalMode: boolean = true;
-
     private prefabPool: NodePool | null = null;
 
     private callback: Function | null = null;
@@ -33,6 +29,10 @@ export class PosTweenView extends BaseScene {
     public curTween: Tween<Node> | null = null;
 
     public curObject: PosTweenObject | null = null;
+
+    public arrayObject: Array<PosTweenObject> = new Array<PosTweenObject>();
+
+    private arrayIndex: Array<number> = new Array<number>();
 
     public get multipleBoard() {
         return this._multipleBoard;
@@ -45,6 +45,10 @@ export class PosTweenView extends BaseScene {
 
     public clonePrefab() {
         this.curObject = this.clone(this.node).getComponent(PosTweenObject);
+    }
+
+    public cloneArrayPrefab() {
+        this.arrayObject.push(this.clone(this.node).getComponent(PosTweenObject));
     }
 
     public clearPool() {
@@ -69,12 +73,11 @@ export class PosTweenView extends BaseScene {
 
     public onMultipleAccumulate(targertPos: Vec3, hasRespin: boolean, callback: Function | null = null) {
         this.callback = () => callback();
-        this.curObject.node.worldPosition = hasRespin ? new Vec3(targertPos.x, targertPos.y + 20, 0) : targertPos;
+        this.curObject.node.worldPosition = hasRespin
+            ? new Vec3(targertPos.x, targertPos.y - 8, 0)
+            : new Vec3(targertPos.x, targertPos.y - 8, 0);
         let convertPos = new Vec3(targertPos.x, this.multipleBoard.node.worldPosition.y);
         this.curTween = tween(this.curObject.node)
-            .call(() => {
-                AudioManager.Instance.play(AudioClipsEnum.DragonUp_PercentCollect);
-            })
             .delay(this.curObject.accelerateDelayTime)
             .then(
                 this.getBezierToTween(
@@ -96,18 +99,26 @@ export class PosTweenView extends BaseScene {
         this.multipleBoard.rollMultiple(multiple, () => callback());
     }
 
-    public onBaseCreditCollect(basePos: Vec3, targertPos: Vec3, callback: Function | null = null) {
-        this.callback = () => callback();
-        this.curObject.node.worldPosition = basePos;
-        this.curTween = tween(this.curObject.node)
+    public onBaseCreditCollect(
+        sequenceIndex: number,
+        basePos: Vec3,
+        targertPos: Vec3,
+        callback: Function | null = null
+    ) {
+        this.arrayIndex.push(sequenceIndex);
+        this.callback = (idx) => callback(idx);
+        this.arrayObject[sequenceIndex].node.worldPosition = basePos;
+        tween(this.arrayObject[sequenceIndex].node)
             .to(
-                this.curObject.baseCreditTime,
+                this.arrayObject[sequenceIndex].baseCreditTime,
                 { worldPosition: targertPos },
-                { easing: this.curObject.baseCreditEasing }
+                { easing: this.arrayObject[sequenceIndex].baseCreditEasing }
             )
             .union()
             .call(() => {
-                this.onObjectFinished();
+                if (this.callback != null) {
+                    this.callback(this.arrayIndex[sequenceIndex]);
+                }
             })
             .start();
     }
@@ -116,7 +127,7 @@ export class PosTweenView extends BaseScene {
         this.callback = () => callback();
         this.curObject.node.worldPosition = new Vec3(
             this.multipleBoard.node.worldPosition.x,
-            this.multipleBoard.node.worldPosition.y + 5,
+            this.multipleBoard.node.worldPosition.y + 6,
             this.multipleBoard.node.worldPosition.z
         );
         let convertPos = new Vec3(this.multipleBoard.node.worldPosition.x, targertPos.y);
@@ -127,7 +138,6 @@ export class PosTweenView extends BaseScene {
             .delay(this.curObject.accelerateDelayTime)
             .call(() => {
                 this.multipleBoard.labelText.enabled = true;
-                AudioManager.Instance.play(AudioClipsEnum.DragonUp_PercentCollect02);
             })
             .then(
                 this.getBezierToTween(
@@ -145,24 +155,6 @@ export class PosTweenView extends BaseScene {
             .start();
     }
 
-    /** 更改orientation mode */
-    public changeOrientation(ishorizontal: boolean) {
-        if (this.ishorizontalMode == ishorizontal) {
-            return;
-        }
-
-        if (this.curTween != null) {
-            this.curTween.stop();
-            this.curTween.removeSelf();
-        }
-
-        this.ishorizontalMode = ishorizontal;
-        if (this.curObject != null) {
-            this.onObjectFinished();
-        }
-        this.multipleBoard.labelText.enabled = true;
-    }
-
     public onObjectFinished() {
         if (this.curObject != null) {
             for (let i in this.curObject.Particle) {
@@ -175,6 +167,24 @@ export class PosTweenView extends BaseScene {
         }
         if (this.callback != null) {
             this.callback();
+        }
+    }
+
+    clearArray() {
+        if (this.arrayIndex.length > 0) {
+            this.arrayIndex = [];
+        }
+        if (this.arrayObject.length > 0) {
+            this.arrayObject.forEach((value) => {
+                for (let i in value.Particle) {
+                    value.Particle[i].ParticleClear();
+                    value.Particle[i].ParticleStop();
+                }
+                value.labelText.string = String();
+                this.recycled(value.node);
+                value = null;
+            });
+            this.arrayObject = [];
         }
     }
 

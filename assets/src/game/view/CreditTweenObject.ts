@@ -1,5 +1,4 @@
 import { _decorator, Component, Node, Label, Font, CCFloat, TweenEasing, CCInteger } from 'cc';
-import { UIOrientation } from '../../core/ui/UIOrientation';
 import { BalanceUtil } from '../../sgv3/util/BalanceUtil';
 const { ccclass, property } = _decorator;
 
@@ -18,15 +17,6 @@ export class CreditTweenObject extends Component {
     public ptCount: number = 0;
     @property({ type: CCFloat, visible: true })
     public timeInterval: number = 0;
-
-    private _uiOrientation: UIOrientation | null = null;
-
-    public get uiOrientation() {
-        if (this._uiOrientation == null) {
-            this._uiOrientation = this.getComponent(UIOrientation);
-        }
-        return this._uiOrientation;
-    }
 
     public setBaseCreditSetting(isSpecial: boolean, credit: number) {
         this.labelText.font = isSpecial ? this.specialFont : this.baseFont;

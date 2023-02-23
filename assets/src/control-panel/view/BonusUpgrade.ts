@@ -21,8 +21,9 @@ export class BonusUpgrade extends Component {
 
     public setBonusUpgradeInfo(minBets: number[], maxBets: number[]) {
         for (let i = 0; i < this.betInRangeLabel.length; i++) {
+            let str: string[] = this.betInRangeLabel[i].string.split(',');
             this.betInRangeLabel[i].string =
-                'Bet ' + BalanceUtil.formatBalance(minBets[i]) + ' to ' + BalanceUtil.formatBalance(maxBets[i]);
+                str[0] + BalanceUtil.formatBalance(minBets[i]) + str[1] + BalanceUtil.formatBalance(maxBets[i]);
         }
     }
 

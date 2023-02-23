@@ -1,27 +1,15 @@
-import { _decorator, Label, tween, Tween, Prefab, Vec3 } from 'cc';
-import { ParticleContentTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
+import { _decorator, Label, tween, Tween } from 'cc';
 import { BaseScene } from '../../base/BaseScene';
-import { UIOrientation } from '../../core/ui/UIOrientation';
-import { PoolManager } from '../../sgv3/PoolManager';
 import { BalanceUtil } from '../../sgv3/util/BalanceUtil';
 import { MiniResultBoard } from '../../ta/mini-result-board/MiniResultBoard';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_3_WinBoardView')
 export class Game_3_WinBoardView extends BaseScene {
-    public static readonly HORIZONTAL: string = 'horizontal';
-    public static readonly VERTICAL: string = 'vertical';
-
-    @property({ type: Prefab })
-    public particlePrefab: Prefab | null = null;
-
-    private orientationState: string;
-
     public callback: IGame_3_WinBoardViewMediator;
 
+    @property(MiniResultBoard)
     private miniResultBoard: MiniResultBoard;
-
-    private winCoinFall: ParticleContentTool;
 
     // 結算畫面的總分數字
     @property({ type: Label })
@@ -36,12 +24,6 @@ export class Game_3_WinBoardView extends BaseScene {
 
     protected onLoad() {
         super.onLoad();
-        this.miniResultBoard = this.getComponent(MiniResultBoard);
-    }
-
-    /** 更改orientation mode */
-    public changeOrientation(mode: string) {
-        this.orientationState = mode;
     }
 
     /**更改語系 */
@@ -68,13 +50,8 @@ export class Game_3_WinBoardView extends BaseScene {
         const self = this;
         let lang = _lang == 'en' ? 0 : 1;
 
-        this.winCoinFall = PoolManager.instance
-            .getNode(this.particlePrefab, this.node)
-            .getComponent(ParticleContentTool);
-
-        self.winCoinFall.node.position = new Vec3(0, 700, 0);
-        self.winCoinFall.ParticlePlay(true, 0.5);
         self.miniResultBoard.OnBoardPlay(wonType1, lang);
+        self.miniResultBoard.playWinCoinFall();
         self.showWonCreditBoard(credit / 100, runTimer);
     }
 
@@ -90,10 +67,7 @@ export class Game_3_WinBoardView extends BaseScene {
     }
 
     public stopWinCoinFall() {
-        this.winCoinFall.ParticleStop();
-        this.scheduleOnce(() => {
-            PoolManager.instance.putNode(this.winCoinFall.node);
-        }, this.winCoinFall.PutPoolTimes);
+        this.miniResultBoard.stopWinCoinFall();
     }
 
     public runCreditsCompleted() {

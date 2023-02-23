@@ -13,7 +13,6 @@ import { WAY_SpinRequestCommand } from '../../sgv3way/command/WAY_SpinRequestCom
 import { GAME_ParseStateWinResultCommand } from './GAME_ParseStateWinResultCommand';
 import { GAME_4_CreditCollectResultCommand } from './dragon-up/GAME_4_CreditCollectResultCommand';
 import { ReelEffect_SymbolFeatureCommand } from './reelEffect/ReelEffect_SymbolFeatureCommand';
-import { GAME_WinBoardRunCompleteCommand } from './GAME_WinBoardRunCompleteCommand';
 
 export class GAME_RegisterPuremvcCommand extends WAY_RegisterPuremvcCommand {
     /**
@@ -47,8 +46,6 @@ export class GAME_RegisterPuremvcCommand extends WAY_RegisterPuremvcCommand {
 
         // Reel 表演資料處理
         this.facade.registerCommand(ReelEffect_SymbolFeatureCommand.name, ReelEffect_SymbolFeatureCommand);
-        // 
-        this.facade.registerCommand(GAME_WinBoardRunCompleteCommand.NAME, GAME_WinBoardRunCompleteCommand);
     }
 
     /**

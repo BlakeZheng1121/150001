@@ -1,6 +1,6 @@
-import { _decorator, Tween, tween, Label, SystemEvent,Node } from 'cc';
-import { TimeLineTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
+import { _decorator, Tween, tween, Label, SystemEvent, Node } from 'cc';
 import { BaseScene } from '../../base/BaseScene';
+import { TimeLineTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
 import { BalanceUtil } from '../util/BalanceUtil';
 import { LevelWinType, WinType } from '../vo/enum/WinType';
 
@@ -8,6 +8,8 @@ const { ccclass, property } = _decorator;
 
 @ccclass('WinBoardView')
 export abstract class WinBoardView extends BaseScene {
+    public static readonly HORIZONTAL: string = 'horizontal';
+    public static readonly VERTICAL: string = 'vertical';
 
     @property({ type: Label })
     public winBoardScore: Label;
@@ -34,11 +36,11 @@ export abstract class WinBoardView extends BaseScene {
     //將從Mediator中更新BBW的function存下來以在急停時更新數值，
     public BBWCompleteCallback: Function;
     public winboardCompleteCallback: () => void;
-    private winType: LevelWinType = LevelWinType.NONE; 
-    private languageType: String = String(); 
+    private winType: LevelWinType = LevelWinType.NONE;
+    private languageType: String = String();
 
-    private startString: String = String('_start_');
-    private stopString: String = String('_stop_');
+    private startString: String = String('start');
+    private stopString: String = String('stop');
 
     onLoad() {
         super.onLoad();
@@ -56,12 +58,12 @@ export abstract class WinBoardView extends BaseScene {
                 this.winType = LevelWinType.BIG_WIN;
                 break;
             //MegaWin
-            case WinType.megaWin:    
+            case WinType.megaWin:
                 this.winType = LevelWinType.MEGA_WIN;
                 break;
             //SuperWin
-            case WinType.superWin:     
-                this.winType = LevelWinType.SUPER_WIN;   
+            case WinType.superWin:
+                this.winType = LevelWinType.SUPER_WIN;
                 break;
             //JumboWin
             case WinType.jumboWin:
@@ -74,27 +76,30 @@ export abstract class WinBoardView extends BaseScene {
             if (!this.node.active) {
                 this.node.active = true;
             }
-            if(!this.mask.active) {
+            if (!this.mask.active) {
                 this.mask.active = true;
             }
-            this.winBoardAnimationComponent.play(this.winType + this.startString + language);
+            this.winBoardAnimationComponent.play(this.winType + '-win-' + this.startString);
         }
     }
 
     public registerButton() {
-        this.mask.on(SystemEvent.EventType.TOUCH_END,() =>{
-            this.buttonCallback.onSkip();
-        } , this.buttonCallback);
+        this.mask.on(
+            SystemEvent.EventType.TOUCH_END,
+            () => {
+                this.buttonCallback.onSkip();
+            },
+            this.buttonCallback
+        );
     }
 
     public stopWinboard() {
-        this.winBoardAnimationComponent.play(this.winType 
-            + this.stopString + this.languageType
-            , () => {
-                this.mask.active = false;
-            });
+        this.winBoardAnimationComponent.play(this.winType + '-win-' + this.stopString, () => {
+            this.mask.active = false;
+        });
         this.winType = LevelWinType.NONE;
     }
+
     public runWinboardLabelComplete(targetAmount: number) {
         this.updateWinboardText(targetAmount);
         this.winboardCompleteCallback?.();

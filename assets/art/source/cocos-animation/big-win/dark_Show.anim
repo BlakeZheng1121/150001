@@ -1,14 +1,14 @@
 [
   {
     "__type__": "cc.AnimationClip",
-    "_name": "dark_anim",
+    "_name": "dark_Show",
     "_objFlags": 0,
     "_native": "",
     "sample": 60,
     "speed": 1,
     "wrapMode": 1,
     "enableTrsBlending": false,
-    "_duration": 0.5,
+    "_duration": 0.08333333333333333,
     "_hash": 500763545,
     "_tracks": [
       {
@@ -63,9 +63,21 @@
   {
     "__type__": "cc.RealCurve",
     "_times": [
-      0.5
+      0,
+      0.0833333358168602
     ],
     "_values": [
+      {
+        "__type__": "cc.RealKeyframeValue",
+        "interpolationMode": 0,
+        "tangentWeightMode": 0,
+        "value": 0,
+        "rightTangent": 0,
+        "rightTangentWeight": 1,
+        "leftTangent": 0,
+        "leftTangentWeight": 1,
+        "easingMethod": 0
+      },
       {
         "__type__": "cc.RealKeyframeValue",
         "interpolationMode": 0,
@@ -90,9 +102,21 @@
   {
     "__type__": "cc.RealCurve",
     "_times": [
-      0.5
+      0,
+      0.0833333358168602
     ],
     "_values": [
+      {
+        "__type__": "cc.RealKeyframeValue",
+        "interpolationMode": 0,
+        "tangentWeightMode": 0,
+        "value": 0,
+        "rightTangent": 0,
+        "rightTangentWeight": 1,
+        "leftTangent": 0,
+        "leftTangentWeight": 1,
+        "easingMethod": 0
+      },
       {
         "__type__": "cc.RealKeyframeValue",
         "interpolationMode": 0,
@@ -117,9 +141,21 @@
   {
     "__type__": "cc.RealCurve",
     "_times": [
-      0.5
+      0,
+      0.0833333358168602
     ],
     "_values": [
+      {
+        "__type__": "cc.RealKeyframeValue",
+        "interpolationMode": 0,
+        "tangentWeightMode": 0,
+        "value": 0,
+        "rightTangent": 0,
+        "rightTangentWeight": 1,
+        "leftTangent": 0,
+        "leftTangentWeight": 1,
+        "easingMethod": 0
+      },
       {
         "__type__": "cc.RealKeyframeValue",
         "interpolationMode": 0,
@@ -145,7 +181,7 @@
     "__type__": "cc.RealCurve",
     "_times": [
       0,
-      0.5
+      0.0833333358168602
     ],
     "_values": [
       {

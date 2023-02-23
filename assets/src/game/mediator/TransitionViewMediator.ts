@@ -13,8 +13,6 @@ export class TransitionViewMediator extends BaseMediator<GAME_TransitionView> {
 
     public transitionView: GAME_TransitionView = null;
 
-    private wonSpinsBoard: Node = null;
-
     constructor(name?: string, component?: any) {
         super(TransitionViewMediator.NAME, component);
         Logger.i('[TransitionMediator] constructor()');
@@ -30,7 +28,6 @@ export class TransitionViewMediator extends BaseMediator<GAME_TransitionView> {
             SceneManager.EV_ORIENTATION_HORIZONTAL,
             StateWinEvent.ON_GAME2_TRANSITIONS,
             StateWinEvent.ON_GAME4_TRANSITIONS,
-            ViewMediatorEvent.COIN_FALL_SHOW,
             ViewMediatorEvent.CHANGE_DISPLAY_CONTAINER
         ];
         return eventList;
@@ -51,13 +48,6 @@ export class TransitionViewMediator extends BaseMediator<GAME_TransitionView> {
             case StateWinEvent.ON_GAME4_TRANSITIONS:
                 if (notification.getBody() == true) self.onTransitionBGEffect();
                 break;
-            case ViewMediatorEvent.COIN_FALL_SHOW:
-                self.coinFallShowEvent(notification.getBody());
-                break;
-            // case ViewMediatorEvent.CHANGE_DISPLAY_CONTAINER:
-            //     self.wonSpinsBoard = notification.getBody();
-            //     self.transitionView.addChildAt(self.wonSpinsBoard, 5);
-            //     break;
         }
     }
 
@@ -83,15 +73,10 @@ export class TransitionViewMediator extends BaseMediator<GAME_TransitionView> {
                 1.3,
                 () => {
                     GlobalTimer.getInstance().removeTimer('onTransitionBGEffect');
-                    this.transitionView.showDragonFlyUp();
+                    this.transitionView.showTransition();
                 },
                 this
             )
             .start();
-    }
-
-    private coinFallShowEvent(timer: number): void {
-        const self = this;
-        self.view.showCoinFall(timer);
     }
 }

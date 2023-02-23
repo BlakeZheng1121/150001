@@ -93,7 +93,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 5.716,
-      "y": 180.067,
+      "y": 299.075,
       "z": 0
     },
     "_lrot": {
@@ -272,7 +272,7 @@
     },
     "enableCulling": false,
     "_prewarm": false,
-    "_capacity": 20,
+    "_capacity": 25,
     "_simulationSpace": 1,
     "_id": ""
   },
@@ -294,7 +294,7 @@
   {
     "__type__": "cc.CurveRange",
     "mode": 0,
-    "constant": 100,
+    "constant": 120,
     "multiplier": 1
   },
   {
@@ -447,8 +447,8 @@
     "randomDirectionAmount": 0,
     "sphericalDirectionAmount": 0,
     "randomPositionAmount": 0,
-    "radius": 1,
-    "radiusThickness": 1,
+    "radius": 0.8,
+    "radiusThickness": 0.2,
     "arcMode": 0,
     "arcSpread": 0,
     "arcSpeed": {
@@ -475,8 +475,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 100,
-      "y": 10,
+      "x": 150,
+      "y": 150,
       "z": 1
     },
     "_arc": 6.283185307179586,
@@ -1933,7 +1933,7 @@
       "__expectedType__": "sp.SkeletonData"
     },
     "defaultSkin": "default",
-    "defaultAnimation": "",
+    "defaultAnimation": "Base_Hit_FX",
     "_sockets": [],
     "_debugMesh": false,
     "_id": ""

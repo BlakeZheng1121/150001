@@ -1,7 +1,6 @@
 import { _decorator } from 'cc';
 import { TimeLineTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
 import { BaseScene } from '../../base/BaseScene';
-import { UIOrientation } from '../../core/ui/UIOrientation';
 import { SceneManager } from '../../core/utils/SceneManager';
 import { GameUIOrientationSetting } from '../vo/GameUIOrientationSetting';
 // import { GAME_ShowView } from './GAME_ShowView';
@@ -15,17 +14,9 @@ export class Game_1_View extends BaseScene {
     public static readonly HORIZONTAL: string = 'horizontal';
     public static readonly VERTICAL: string = 'vertical';
 
-    private _uiOrientation: Array<UIOrientation> | null = null;
-
     @property({ type: TimeLineTool })
     private bg_effect: TimeLineTool = null;
 
-    private get uiOrientation() {
-        if (this._uiOrientation == null) {
-            this._uiOrientation = this.getComponentsInChildren(UIOrientation);
-        }
-        return this._uiOrientation;
-    }
 
     private _gameUIOrientation: Array<GameUIOrientationSetting> | null = null;
 
@@ -50,10 +41,6 @@ export class Game_1_View extends BaseScene {
 
     public changeOrientation(orientation: string, scene: string) {
         let ishorizontal = orientation == SceneManager.EV_ORIENTATION_HORIZONTAL;
-        for (let i = 0; i < this.uiOrientation.length; i++) {
-            this.uiOrientation[i].changeOrientation(ishorizontal);
-        }
-
         for (let i = 0; i < this.gameUIOrientation.length; i++) {
             this.gameUIOrientation[i].changeOrientation(ishorizontal, scene);
         }

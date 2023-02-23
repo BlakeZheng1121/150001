@@ -14,23 +14,7 @@ export class ReelEffect_SpinStopSoundCommand extends puremvc.SimpleCommand {
         ).reelSpinStopSequence.length;
 
         for (let i = 0; i < this.spinStopSequenceLength; i++) {
-            switch (i) {
-                case 0:
-                    this.reelDataProxy.reelStopSoundSequence[i] = [AudioClipsEnum.SpinStop01];
-                    break;
-                case 1:
-                    this.reelDataProxy.reelStopSoundSequence[i] = [AudioClipsEnum.SpinStop02];
-                    break;
-                case 2:
-                    this.reelDataProxy.reelStopSoundSequence[i] = [AudioClipsEnum.SpinStop03];
-                    break;
-                case 3:
-                    this.reelDataProxy.reelStopSoundSequence[i] = [AudioClipsEnum.SpinStop04];
-                    break;
-                case 4:
-                    this.reelDataProxy.reelStopSoundSequence[i] = [AudioClipsEnum.SpinStop05];
-                    break;
-            }
+            this.reelDataProxy.reelStopSoundSequence[i] = [AudioClipsEnum.SpinStop];
         }
     }
 

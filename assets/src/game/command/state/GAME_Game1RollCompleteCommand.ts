@@ -23,7 +23,7 @@ export class GAME_Game1RollCompleteCommand extends Game1RollCompleteCommand {
         let delayTime: number = 0;
         let ballCount = curRoundResult.extendInfoForbaseGameResult.ballCount;
         if (ballCount >= 6 && this.isHitGrand == false) {
-            delayTime = 2.6;
+            delayTime = 1.2;
         } else if (ballCount > 0) {
             delayTime = 0.1;
         }
