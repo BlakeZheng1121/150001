@@ -1,7 +1,7 @@
 import { _decorator, Component, Color, Sprite, SpriteFrame } from 'cc';
-import { ParticleContentTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
 
 import { CocosAnimationMultiTool } from '../tool/cocos-animation-tool/CocosAnimationMultiTool';
+import { ParticleContentTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
 
 const { ccclass, property } = _decorator;
 
@@ -13,13 +13,15 @@ export class MiniIngot extends Component {
 
     @property(Sprite) private IconSprite: Sprite | null = null;
 
-    @property(Sprite) private IconSpriteLight: Sprite | null = null;
+    @property(Sprite) private TextSprite: Sprite | null = null;
 
-    @property([Sprite]) private SpriteTextArray: Array<Sprite> = [];
+    @property(Sprite) private IconSpriteLight: Sprite | null = null;
 
     @property(SpriteFrame) private SpriteIconFrame: SpriteFrame[] = [];
 
     @property(SpriteFrame) private IconSpriteLightFrame: SpriteFrame[] = [];
+
+    @property(Sprite) private SpriteTextArray: Array<Sprite> = [];
 
     @property(ParticleContentTool) private Particle: ParticleContentTool | null = null;
 
@@ -28,6 +30,8 @@ export class MiniIngot extends Component {
     @property(Color) private ParticleColor: Color[] = [];
 
     private ThisSingleJackPotType = 0;
+
+    private CallBack: any = null;
 
     start() {
         this.IconSpriteLight.node.active = false;
@@ -39,7 +43,7 @@ export class MiniIngot extends Component {
     }
 
     public OnIngotPlayShow() {
-        this.scheduleOnce(() => this.IngotAnimation?.OnPlay(1), Math.random() * 0.2);
+        this.scheduleOnce(() => this.IngotAnimation?.OnPlay(0), Math.random() * 0.2);
         this.IconSpriteLight.node.active = false;
     }
 
@@ -63,13 +67,13 @@ export class MiniIngot extends Component {
         this.IconSprite.spriteFrame = this.SpriteIconFrame[this.ThisSingleJackPotType];
 
         for (let i = 0; i < this.SpriteTextArray.length; i++) {
-            this.SpriteTextArray[i].node.active = (i == this.ThisSingleJackPotType);
+            this.SpriteTextArray[i].node.active = i == JackPotType;
         }
 
         if (playAnim) {
-            this.IngotAnimation?.OnPlay(3);  
-        } else {             
-            this.IngotAnimation?.OnPlay(4);  
+            this.IngotAnimation?.OnPlay(1);
+        } else {
+            this.IngotAnimation?.OnPlay(2);
         }
     }
 
@@ -96,13 +100,13 @@ export class MiniIngot extends Component {
     }
 
     public OnIngotPlayNoSelect() {
-        this.IngotAnimation?.OnPlay(0);
+        this.IngotAnimation?.OnPlay(3);
     }
 
     public OnIconHide() {
         this.IconSpriteLight.node.active = false;
 
-        this.IngotAnimation?.OnPlay(4);
+        this.IngotAnimation?.OnPlay(2);
 
         this.IconAnimation?.OnPlay(0);
     }

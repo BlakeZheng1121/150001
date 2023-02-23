@@ -7,7 +7,7 @@ export class Game3InitCommand extends StateCommand {
     public static readonly NAME = StateMachineProxy.GAME3_EV_INIT;
 
     protected timerKey = 'Game3Init';
-    private delayTimeNormal = 5;
+    private delayTimeNormal = 2.0;
     private delayTimeRecovery = 0;
 
     public execute(notification: puremvc.INotification): void {
@@ -25,7 +25,7 @@ export class Game3InitCommand extends StateCommand {
             delayTime = self.delayTimeNormal;
         }
         GlobalTimer.getInstance().registerTimer(self.timerKey, delayTime, self.endGame3Init, self).start();
-        
+
         this.checkJackpotPool();
     }
 

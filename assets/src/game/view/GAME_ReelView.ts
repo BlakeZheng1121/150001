@@ -37,7 +37,12 @@ export class GAME_ReelView extends ReelView {
     ////
 
     //// property
-
+    public get winScoreText() {
+        return this._winScoreText;
+    }
+    public get winMask() {
+        return this._winMask;
+    }
 
     public isSymbolPlaying(): boolean {
         const self = this;
@@ -185,8 +190,8 @@ export class GAME_ReelView extends ReelView {
     }
 
     public skipReelWin() {
-        if (this._winScoreText != null) {
-            this._winScoreText.node.active = false;
+        if (this.winScoreText != null) {
+            this.winScoreText.node.active = false;
         }
         this.animManager.putAllAnims();
         this.setReelWinMask(false);
@@ -200,7 +205,7 @@ export class GAME_ReelView extends ReelView {
     }
 
     public setReelWinMask(active: boolean) {
-        this._winMask.active = active;
+        this.winMask.active = active;
     }
 
     public changeOrientation() {
@@ -219,8 +224,8 @@ export class GAME_ReelView extends ReelView {
 
     //// Hook
     protected onLoad() {
-        if (this._winScoreText != null) {
-            this._winScoreText.node.active = false;
+        if (this.winScoreText != null) {
+            this.winScoreText.node.active = false;
         }
         super.onLoad('ReelViewMediator', `ReelViewMediator`);
     }

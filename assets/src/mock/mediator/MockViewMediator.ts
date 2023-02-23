@@ -6,6 +6,7 @@ import { MockSpinScatterNowinCommand } from '../command/MockSpinScatterNowinComm
 import { MockWinboardCommand } from '../command/MockWinboardCommand';
 import { MockPrizePredictionCommand } from '../command/MockPrizePredictionCommand';
 import { Component } from 'cc';
+import { MockToContainerIconPosCommand } from '../command/MockToContainerIconPosCommand';
 
 export class MockViewMediator extends puremvc.Mediator {
     private parentView: Component = null;
@@ -53,7 +54,8 @@ export class MockViewMediator extends puremvc.Mediator {
             Disconnection: MockDisconnectionCommand.NAME,
             Reconnect: MockMaintenanceCommand.NAME,
             ScatterNoWin: MockSpinScatterNowinCommand.NAME,
-            FakeSymbolReel: MockReelSymbolCommand.NAME
+            FakeSymbolReel: MockReelSymbolCommand.NAME,
+            ToContainerIconPos: MockToContainerIconPosCommand.NAME
         };
         const self = this;
         self.facade.registerCommand(MockWinboardCommand.NAME, MockWinboardCommand);
@@ -63,6 +65,7 @@ export class MockViewMediator extends puremvc.Mediator {
         self.facade.registerCommand(MockSpinScatterNowinCommand.NAME, MockSpinScatterNowinCommand);
         self.facade.registerCommand(MockReelSymbolCommand.NAME, MockReelSymbolCommand);
         self.facade.registerCommand(MockDisconnectionCommand.NAME, MockReelSymbolCommand);
+        self.facade.registerCommand(MockToContainerIconPosCommand.NAME, MockToContainerIconPosCommand);
         self.sendNotification('onAddExtraCase', caseList);
     }
 

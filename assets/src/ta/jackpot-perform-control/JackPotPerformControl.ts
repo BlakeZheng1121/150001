@@ -1,4 +1,5 @@
 import { _decorator, Component, Prefab, Node } from 'cc';
+import { ParticleContentTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
 import { TimeLineTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
 import { ScoreCollectHandler } from '../../game/view/ScoreCollectHandler';
 import { AudioClipsEnum } from '../../game/vo/enum/SoundMap';
@@ -14,6 +15,8 @@ export class JackPotPerformControl extends Component {
     @property(SpineTailPerform) private DragonSpineTrailPerform: SpineTailPerform | null = null;
 
     @property(TimeLineTool) private JackpotAvatar: TimeLineTool | null = null;
+
+    @property(ParticleContentTool) private transitionParticle: ParticleContentTool | null = null;
 
     @property private PerDargonHitValue: number = 0;
 
@@ -90,14 +93,15 @@ export class JackPotPerformControl extends Component {
         this.JackpotAvatar?.play('Mini_Transition');
 
         this.scheduleOnce(() => {
-            //AudioManager.Instance.play(AudioClipsEnum.Mini_DragonBreath);
+            AudioManager.Instance.play(AudioClipsEnum.Mini_DragonBreath);
         }, 0.5);
         this.scheduleOnce(() => {
-            AudioManager.Instance.play(AudioClipsEnum.Mini_Expectation);
-        }, 2.0);
+            AudioManager.Instance.play(AudioClipsEnum.Mini_DragonBallExplosion);
+        }, 1.0);
 
         this.scheduleOnce(() => {
             () => cb();
+            this.transitionParticle?.ParticleClear();
         }, 5.3);
     }
 

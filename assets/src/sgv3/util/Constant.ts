@@ -174,8 +174,6 @@ export class ViewMediatorEvent {
     /** 切換物件容器 */
     public static readonly CHANGE_DISPLAY_CONTAINER: string = 'changeDisplayContainer';
 
-    public static readonly COIN_FALL_SHOW: string = 'coinFallShow';
-
     public static readonly FORTUNE_LEVEL_CHANGE: string = 'fortuneLevelChange';
 
     public static readonly JACKPOT_WON_SHOW: string = 'jackpotWonShow';
@@ -186,6 +184,7 @@ export class ViewMediatorEvent {
     public static readonly PREPARE_COLLECT_BALL: string = 'prepareCollectBall';
     public static readonly ON_CREDIT_BALL_COLLECT_START: string = 'onCreditBallCollectStart';
     public static readonly COLLECT_CREDIT_BALL: string = 'collectCreditBall';
+    public static readonly COLLECT_CREDIT_BALL_SKIP_CALLBACK: string = 'collectCreditBallSkipCallback';
 
     public static readonly RECOVERY_LOAD_VIEW: string = 'recoveryLoadView';
 
@@ -228,8 +227,6 @@ export class DragonUpEvent {
     /** Retrigger 加場次 事件 */
     public static ON_RESPIN_NEXT_START: string = 'onRespinNextStart';
     public static ON_RESPIN_NEXT_END: string = 'onRespinNextEnd';
-
-    public static ON_C2_COUNT_UPDATE: string = 'onC2CountUpdate';
     /** 全部金球的起始與結束 事件 */
     public static ON_ALL_CREDIT_COLLECT_START: string = 'onAllCreditCollectStart';
     public static ON_ALL_CREDIT_COLLECT_END: string = 'onAllCreditCollectEnd';

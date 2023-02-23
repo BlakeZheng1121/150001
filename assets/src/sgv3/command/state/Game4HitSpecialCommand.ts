@@ -16,7 +16,7 @@ export class Game4HitSpecialCommand extends StateCommand {
 
     protected timerKey_Retrigger_End = 'game4Retriggerend';
 
-    protected retriggertime: number = 2.5;
+    protected retriggertime: number = 2;
 
     public execute(notification: puremvc.INotification): void {
         let isHitGrand: boolean = (notification.getBody() as StateMachineObject).body;

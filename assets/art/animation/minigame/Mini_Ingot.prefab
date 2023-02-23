@@ -435,7 +435,7 @@
       "r": 255,
       "g": 255,
       "b": 255,
-      "a": 1
+      "a": 255
     },
     "time": 0
   },
@@ -879,6 +879,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 3
     },
@@ -900,12 +901,13 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "2dPUq633xJdLfdZ/8/qytY"
+    "fileId": "54TevMvphOTKsN/rwZzi4W"
   },
   {
     "__type__": "cc.UIMeshRenderer",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 3
     },
@@ -917,7 +919,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "8eK1x1Zy9Ge4JJtUf8kVVh"
+    "fileId": "3d9nXegcRNS7VO208qvOpq"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -927,7 +929,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "4cI8R3q5xMjrTNYV05YrjH"
+    "fileId": "7eDr65tkdGHJpsurZUDft+"
   },
   {
     "__type__": "cc.Node",
@@ -1720,6 +1722,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 70
     },
@@ -1741,12 +1744,13 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "c8HjwvdoxM0bKcZ5yuaRps"
+    "fileId": "86joXIfNdMeL2ZavC4Igam"
   },
   {
     "__type__": "cc.UIMeshRenderer",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 70
     },
@@ -1758,7 +1762,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "fbNbbKkuRK1orHNTnfnLPa"
+    "fileId": "2f6B9tEYJIvYVlCRaOA0ZV"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -1768,7 +1772,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "c5BdiEKjRA+aoqRof+VDo6"
+    "fileId": "7eFe8DczZEmoaKwUkklFlP"
   },
   {
     "__type__": "cc.Node",
@@ -2561,6 +2565,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 136
     },
@@ -2582,12 +2587,13 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "aaoR2sjLhBKoHqY+NLKkKi"
+    "fileId": "9coM+Y5jVIRZYYzVETRlMC"
   },
   {
     "__type__": "cc.UIMeshRenderer",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 136
     },
@@ -2599,7 +2605,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "ce4hpiwJtIfZQWJ9VF61t3"
+    "fileId": "62b86qZNRHX73TyhyMRsI/"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -2609,13 +2615,12 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "854hvJixBNDaYeL/gA/N1q"
+    "fileId": "eenD8hYcRBeLvNx1kNDxA/"
   },
   {
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
-    "__editorExtras__": {},
     "node": {
       "__id__": 2
     },
@@ -2637,13 +2642,12 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "8ciYWCZmZASrvG6D4WvuWI"
+    "fileId": "33zRTbF+VHxpfsfR7rr+Wo"
   },
   {
     "__type__": "200e7cueHpF9oO/55msUhzu",
     "_name": "",
     "_objFlags": 0,
-    "__editorExtras__": {},
     "node": {
       "__id__": 2
     },
@@ -2665,7 +2669,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "88LLQxf7VIC5jf1omAUVhT"
+    "fileId": "262LkYImNMP6wMUFAweUi/"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -2675,7 +2679,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "7bw6M1FJhI+qqnmS0GKopI"
+    "fileId": "79o2VF7rFE/6XL/exN7FtP"
   },
   {
     "__type__": "cc.Node",
@@ -2892,8 +2896,8 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
+      "x": 0,
+      "y": 0,
       "z": 1
     },
     "_layer": 8,
@@ -2918,8 +2922,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 189,
-      "height": 189
+      "width": 180,
+      "height": 180
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -2930,7 +2934,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "19k6wjYHNF970eHdKvzdnZ"
+    "fileId": "26zEL94IVJ5rdfpp4YaNJK"
   },
   {
     "__type__": "cc.Sprite",
@@ -2952,7 +2956,7 @@
       "r": 255,
       "g": 255,
       "b": 255,
-      "a": 0
+      "a": 255
     },
     "_spriteFrame": {
       "__uuid__": "08425c94-7634-46df-91d6-9bc56b543abd@f9941",
@@ -2975,7 +2979,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "19KPt9BHRBGYPQAxbH23aE"
+    "fileId": "f3GaUCFsROSqdl6li5fQZr"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -2985,7 +2989,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "83sPQeP89Ed6+5hVDrkqvH"
+    "fileId": "fbz/cd13BH/rTFhw2T5hIN"
   },
   {
     "__type__": "cc.Node",
@@ -3048,8 +3052,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 150,
-      "height": 150
+      "width": 151,
+      "height": 160
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -3060,7 +3064,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "6ckDtw1eNBQYLd3xEkpDtS"
+    "fileId": "4fd//ZtrFNfpK+CUOIGdbi"
   },
   {
     "__type__": "cc.Sprite",
@@ -3090,7 +3094,7 @@
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 0,
+    "_sizeMode": 1,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -3105,7 +3109,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "4dsLLz1AVG87CTyigDxmoe"
+    "fileId": "a7nUVPA3xAzJaD1WWAXaQw"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -3115,7 +3119,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "bcSmEOyUFDQL0TMRuPB7Rr"
+    "fileId": "6dE/ezUu9DKZ146OFK5GMx"
   },
   {
     "__type__": "cc.Node",
@@ -3182,7 +3186,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 216,
+      "width": 136,
       "height": 68
     },
     "_anchorPoint": {
@@ -3194,7 +3198,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "85shnxnalCQJg6ehmQ3TEQ"
+    "fileId": "95lbjlAY1B27uGSB/2bVJd"
   },
   {
     "__type__": "cc.Sprite",
@@ -3236,7 +3240,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "8eIJLLpzJIR7XxDPx3CoND"
+    "fileId": "55zAnQXoVAurO3FdAMxhZW"
   },
   {
     "__type__": "c05c25C4xNAupWYMB93tIzp",
@@ -3254,7 +3258,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "05WmhigT5L1IX99MU9B5BA"
+    "fileId": "5fPOPAJ25GWq1jW9kwd6Wh"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -3264,7 +3268,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "6apatRrQtHRKbuDG9Zj11C"
+    "fileId": "40c5ncoPpBYou6Hko7uUEY"
   },
   {
     "__type__": "cc.Node",
@@ -3331,8 +3335,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 216,
-      "height": 68
+      "width": 196,
+      "height": 51
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -3343,7 +3347,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "a4Qag2NgxCG4GsaamzvmXu"
+    "fileId": "efmYNQLMdBh7u3s5tsDNuD"
   },
   {
     "__type__": "cc.Sprite",
@@ -3385,7 +3389,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "58A1Fc6oBFF759iid5yn7n"
+    "fileId": "54vi2M4XBKQ5NFH0XV2FRw"
   },
   {
     "__type__": "c05c25C4xNAupWYMB93tIzp",
@@ -3403,7 +3407,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "d6nxOFcKNH+qhMnIvTwfx4"
+    "fileId": "d1saTuRplKNrKzy2yIctur"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -3413,7 +3417,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "97jIPaV95G0JaHzNdPw3ix"
+    "fileId": "4ey56b9nVMp7xlXGqA9+hN"
   },
   {
     "__type__": "cc.Node",
@@ -3480,8 +3484,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 216,
-      "height": 68
+      "width": 186,
+      "height": 51
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -3492,7 +3496,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "f8LaseFrVK868w0h/RHBh1"
+    "fileId": "3d2sqXw6hLmYNgV5ByJB4s"
   },
   {
     "__type__": "cc.Sprite",
@@ -3534,7 +3538,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "f5HXpw/uJER5M4CXTCmZoz"
+    "fileId": "e8XXFD0DxBEbEYaeUM1gpr"
   },
   {
     "__type__": "c05c25C4xNAupWYMB93tIzp",
@@ -3552,7 +3556,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "ea1xBfzmZAubcVQvuknvCp"
+    "fileId": "ccuRPli0NMMbjC6xo0+m9B"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -3562,7 +3566,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "e1NyEpvmxJ26y9/ggN1ybZ"
+    "fileId": "0az+OX2qJLpZFeqq/6jBTN"
   },
   {
     "__type__": "cc.Node",
@@ -3629,8 +3633,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 216,
-      "height": 68
+      "width": 126,
+      "height": 50
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -3641,7 +3645,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "7fUT3+725KsbBOj7yOy4fX"
+    "fileId": "71kOBEpolCh7jDGzVaM/Ux"
   },
   {
     "__type__": "cc.Sprite",
@@ -3683,7 +3687,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "98gssGjBxCfYzcX9JZKz9H"
+    "fileId": "8aGM6IAbFKnJ28ocsjQbeR"
   },
   {
     "__type__": "c05c25C4xNAupWYMB93tIzp",
@@ -3701,7 +3705,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "61qQPECqZGF7pOcA9uAOxy"
+    "fileId": "a8xrJavnpOV7oKf9C0lQ0/"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -3711,7 +3715,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "830vh1BWlAk5+CCvGxcJSg"
+    "fileId": "ddMYbqjYhKSbrSF8R3bVAk"
   },
   {
     "__type__": "cc.UITransform",
@@ -3738,7 +3742,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "e9JjuMXrhGLrZX7DBbj3mD"
+    "fileId": "c6KJkZE3JM+a0HuZVwLKg7"
   },
   {
     "__type__": "cc.Animation",
@@ -3786,7 +3790,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "34udpoVfRJ+KgRjeuOL4ym"
+    "fileId": "8dU4Wq2NtILbEcI6XujaqG"
   },
   {
     "__type__": "689c2Mu1jJHJ6TjpvKfr3by",
@@ -3825,7 +3829,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "fePQWcKaJNL5dcgi9sbjWZ"
+    "fileId": "81Sm7l46ZMZY8qcVaK0HpK"
   },
   {
     "__type__": "AnimationList",
@@ -3862,7 +3866,7 @@
         "__id__": 268
       }
     ],
-    "PlayAudio_Name": "",
+    "PlayAudio_Name": [],
     "StopAudio_Name": []
   },
   {
@@ -3903,7 +3907,7 @@
     "IsSpineAnimationAddLoop": false,
     "PlayParticle": [],
     "StopParticle": [],
-    "PlayAudio_Name": "",
+    "PlayAudio_Name": [],
     "StopAudio_Name": []
   },
   {
@@ -3975,7 +3979,7 @@
       }
     ],
     "StopParticle": [],
-    "PlayAudio_Name": "",
+    "PlayAudio_Name": [],
     "StopAudio_Name": []
   },
   {
@@ -4013,9 +4017,7 @@
       }
     ],
     "StopParticle": [],
-    "PlayAudio_Name": [
-      "dfhhf"
-    ],
+    "PlayAudio_Name": [],
     "StopAudio_Name": []
   },
   {
@@ -4053,7 +4055,7 @@
         "__id__": 279
       }
     ],
-    "PlayAudio_Name": "",
+    "PlayAudio_Name": [],
     "StopAudio_Name": []
   },
   {
@@ -4071,13 +4073,17 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "f9gVJE4nlGPIi3Ov/nboap"
+    "fileId": "88/yob13lH/oGnGrkIxeIx"
   },
   {
     "__type__": "cc.Node",
     "_name": "VFX_Ingot",
     "_objFlags": 0,
-    "__editorExtras__": {},
+    "__editorExtras__": {
+      "mountedRoot": {
+        "__id__": 208
+      }
+    },
     "_parent": {
       "__id__": 1
     },
@@ -4094,7 +4100,7 @@
         "__id__": 286
       },
       {
-        "__id__": 288
+        "__id__": 299
       }
     ],
     "_prefab": {
@@ -4154,7 +4160,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "61arVoCEND+6PKGsjHI3Qo"
+    "fileId": "56++FvTf1JcYboT6DUHv7R"
   },
   {
     "__type__": "sp.Skeleton",
@@ -4179,7 +4185,7 @@
       "b": 255,
       "a": 0
     },
-    "loop": false,
+    "loop": true,
     "_premultipliedAlpha": true,
     "_timeScale": 1,
     "_useTint": false,
@@ -4200,41 +4206,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "683qmjZB5H05otvzjbHm7Y"
-  },
-  {
-    "__type__": "cc.Animation",
-    "_name": "",
-    "_objFlags": 0,
-    "__editorExtras__": {},
-    "node": {
-      "__id__": 281
-    },
-    "_enabled": true,
-    "__prefab": {
-      "__id__": 287
-    },
-    "playOnLoad": true,
-    "_clips": [
-      {
-        "__uuid__": "3197f503-059d-4e0a-b8e9-9e38cd42cd95",
-        "__expectedType__": "cc.AnimationClip"
-      },
-      {
-        "__uuid__": "5e9dae8b-6817-425f-90a9-b689f22e74ae",
-        "__expectedType__": "cc.AnimationClip"
-      },
-      {
-        "__uuid__": "93a0ef11-02ec-4827-905c-5ef505ee0da2",
-        "__expectedType__": "cc.AnimationClip"
-      }
-    ],
-    "_defaultClip": null,
-    "_id": ""
-  },
-  {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "4coZY/8IFKNYRoMxs7GDr2"
+    "fileId": "99U3yiihBOMo432tOUdx1Q"
   },
   {
     "__type__": "689c2Mu1jJHJ6TjpvKfr3by",
@@ -4246,47 +4218,50 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 289
+      "__id__": 287
     },
     "DefaultActive": false,
     "SpineAnimationIndex": [
-      "Mini_selectIcon_NoSelect",
-      "Mini_selectIcon_Idle",
       "Mini_selectIcon_in",
+      "Mini_selectIcon_Idle",
       "Mini_selectIcon_Out",
-      "Mini_selectIcon_hide"
+      "Mini_selectIcon_hide",
+      "Mini_selectIcon_NoSelect"
     ],
     "AnimationList": [
       {
-        "__id__": 290
+        "__id__": 288
       },
       {
-        "__id__": 292
+        "__id__": 291
+      },
+      {
+        "__id__": 293
       },
       {
         "__id__": 295
       },
       {
         "__id__": 297
-      },
-      {
-        "__id__": 299
       }
     ],
     "_id": ""
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "5f9V1JDqBKXKfEFXfGYw9H"
+    "fileId": "6e98sflzJJYqDEm21Ntwrq"
   },
   {
     "__type__": "AnimationList",
-    "List_Name": "壓暗_金幣未被選擇",
-    "AnimationFlowIsDependOnCocosAnimation": true,
+    "List_Name": "MiniGame元寶出現到晃動",
+    "AnimationFlowIsDependOnCocosAnimation": false,
     "DelayTime": 0,
     "AnimationState": [
       {
-        "__id__": 291
+        "__id__": 289
+      },
+      {
+        "__id__": 290
       }
     ],
     "IsAnimationOverActiveType": true,
@@ -4299,7 +4274,6 @@
     "Spine2DAdd": false,
     "Particle": false,
     "Audio": false,
-    "Adjust": null,
     "IsAnimationPlay": true,
     "CocosAnimationState": 1,
     "IsSpine2DPlay": true,
@@ -4315,53 +4289,12 @@
     "StopAudio_Name": []
   },
   {
-    "__type__": "AnimationList",
-    "List_Name": "金幣跳躍進場",
-    "AnimationFlowIsDependOnCocosAnimation": false,
-    "DelayTime": 0,
-    "AnimationState": [
-      {
-        "__id__": 293
-      },
-      {
-        "__id__": 294
-      }
-    ],
-    "IsAnimationOverActiveType": true,
-    "ListLoop": false
-  },
-  {
     "__type__": "AnimationState",
     "ccAnimation": true,
     "Spine2D": true,
     "Spine2DAdd": false,
     "Particle": false,
     "Audio": false,
-    "Adjust": null,
-    "IsAnimationPlay": true,
-    "CocosAnimationState": 2,
-    "IsSpine2DPlay": true,
-    "Spine2DAnimationState": 2,
-    "IsSpineAnimationLoop": false,
-    "IsSpine2DAddPlay": false,
-    "Spine2DAddAnimationTrack": 1,
-    "Spine2DAddAnimationState": 0,
-    "IsSpineAnimationAddLoop": false,
-    "PlayParticle": [],
-    "StopParticle": [],
-    "PlayAudio_Name": [
-      "MiniOpen"
-    ],
-    "StopAudio_Name": []
-  },
-  {
-    "__type__": "AnimationState",
-    "ccAnimation": true,
-    "Spine2D": true,
-    "Spine2DAdd": false,
-    "Particle": false,
-    "Audio": false,
-    "Adjust": null,
     "IsAnimationPlay": true,
     "CocosAnimationState": 2,
     "IsSpine2DPlay": true,
@@ -4378,8 +4311,76 @@
   },
   {
     "__type__": "AnimationList",
-    "List_Name": "金幣待機",
-    "AnimationFlowIsDependOnCocosAnimation": true,
+    "List_Name": "MiniGame元寶選擇",
+    "AnimationFlowIsDependOnCocosAnimation": false,
+    "DelayTime": 0,
+    "AnimationState": [
+      {
+        "__id__": 292
+      }
+    ],
+    "IsAnimationOverActiveType": false,
+    "ListLoop": false
+  },
+  {
+    "__type__": "AnimationState",
+    "ccAnimation": true,
+    "Spine2D": true,
+    "Spine2DAdd": false,
+    "Particle": false,
+    "Audio": false,
+    "IsAnimationPlay": true,
+    "CocosAnimationState": 2,
+    "IsSpine2DPlay": true,
+    "Spine2DAnimationState": 2,
+    "IsSpineAnimationLoop": false,
+    "IsSpine2DAddPlay": false,
+    "Spine2DAddAnimationTrack": 1,
+    "Spine2DAddAnimationState": 0,
+    "IsSpineAnimationAddLoop": false,
+    "PlayParticle": [],
+    "StopParticle": [],
+    "PlayAudio_Name": [],
+    "StopAudio_Name": []
+  },
+  {
+    "__type__": "AnimationList",
+    "List_Name": "MiniGame元寶隱藏",
+    "AnimationFlowIsDependOnCocosAnimation": false,
+    "DelayTime": 0,
+    "AnimationState": [
+      {
+        "__id__": 294
+      }
+    ],
+    "IsAnimationOverActiveType": false,
+    "ListLoop": false
+  },
+  {
+    "__type__": "AnimationState",
+    "ccAnimation": true,
+    "Spine2D": true,
+    "Spine2DAdd": false,
+    "Particle": false,
+    "Audio": false,
+    "IsAnimationPlay": true,
+    "CocosAnimationState": 0,
+    "IsSpine2DPlay": true,
+    "Spine2DAnimationState": 3,
+    "IsSpineAnimationLoop": false,
+    "IsSpine2DAddPlay": false,
+    "Spine2DAddAnimationTrack": 1,
+    "Spine2DAddAnimationState": 0,
+    "IsSpineAnimationAddLoop": false,
+    "PlayParticle": [],
+    "StopParticle": [],
+    "PlayAudio_Name": [],
+    "StopAudio_Name": []
+  },
+  {
+    "__type__": "AnimationList",
+    "List_Name": "元寶沒選擇到狀態",
+    "AnimationFlowIsDependOnCocosAnimation": false,
     "DelayTime": 0,
     "AnimationState": [
       {
@@ -4396,6 +4397,41 @@
     "Spine2DAdd": false,
     "Particle": false,
     "Audio": false,
+    "Adjust": null,
+    "IsAnimationPlay": true,
+    "CocosAnimationState": 3,
+    "IsSpine2DPlay": true,
+    "Spine2DAnimationState": 4,
+    "IsSpineAnimationLoop": false,
+    "IsSpine2DAddPlay": false,
+    "Spine2DAddAnimationTrack": 1,
+    "Spine2DAddAnimationState": 0,
+    "IsSpineAnimationAddLoop": false,
+    "PlayParticle": [],
+    "StopParticle": [],
+    "PlayAudio_Name": [],
+    "StopAudio_Name": []
+  },
+  {
+    "__type__": "AnimationList",
+    "List_Name": "元寶直接出現",
+    "AnimationFlowIsDependOnCocosAnimation": false,
+    "DelayTime": 0,
+    "AnimationState": [
+      {
+        "__id__": 298
+      }
+    ],
+    "IsAnimationOverActiveType": true,
+    "ListLoop": false
+  },
+  {
+    "__type__": "AnimationState",
+    "ccAnimation": true,
+    "Spine2D": true,
+    "Spine2DAdd": false,
+    "Particle": false,
+    "Audio": false,
     "IsAnimationPlay": true,
     "CocosAnimationState": 2,
     "IsSpine2DPlay": true,
@@ -4411,73 +4447,42 @@
     "StopAudio_Name": []
   },
   {
-    "__type__": "AnimationList",
-    "List_Name": "金幣跳躍離場",
-    "AnimationFlowIsDependOnCocosAnimation": false,
-    "DelayTime": 0,
-    "AnimationState": [
+    "__type__": "cc.Animation",
+    "_name": "",
+    "_objFlags": 0,
+    "__editorExtras__": {},
+    "node": {
+      "__id__": 281
+    },
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 300
+    },
+    "playOnLoad": false,
+    "_clips": [
       {
-        "__id__": 298
+        "__uuid__": "3197f503-059d-4e0a-b8e9-9e38cd42cd95",
+        "__expectedType__": "cc.AnimationClip"
+      },
+      {
+        "__uuid__": "5e9dae8b-6817-425f-90a9-b689f22e74ae",
+        "__expectedType__": "cc.AnimationClip"
+      },
+      {
+        "__uuid__": "93a0ef11-02ec-4827-905c-5ef505ee0da2",
+        "__expectedType__": "cc.AnimationClip"
+      },
+      {
+        "__uuid__": "2dd8ea65-2cfd-44d2-a2df-7c168ad3d0c3",
+        "__expectedType__": "cc.AnimationClip"
       }
     ],
-    "IsAnimationOverActiveType": false,
-    "ListLoop": false
+    "_defaultClip": null,
+    "_id": ""
   },
   {
-    "__type__": "AnimationState",
-    "ccAnimation": true,
-    "Spine2D": true,
-    "Spine2DAdd": false,
-    "Particle": false,
-    "Audio": false,
-    "Adjust": null,
-    "IsAnimationPlay": true,
-    "CocosAnimationState": 2,
-    "IsSpine2DPlay": true,
-    "Spine2DAnimationState": 3,
-    "IsSpineAnimationLoop": false,
-    "IsSpine2DAddPlay": false,
-    "Spine2DAddAnimationTrack": 1,
-    "Spine2DAddAnimationState": 0,
-    "IsSpineAnimationAddLoop": false,
-    "PlayParticle": [],
-    "StopParticle": [],
-    "PlayAudio_Name": [],
-    "StopAudio_Name": []
-  },
-  {
-    "__type__": "AnimationList",
-    "List_Name": "金幣直接消失",
-    "AnimationFlowIsDependOnCocosAnimation": false,
-    "DelayTime": 0,
-    "AnimationState": [
-      {
-        "__id__": 300
-      }
-    ],
-    "IsAnimationOverActiveType": false,
-    "ListLoop": false
-  },
-  {
-    "__type__": "AnimationState",
-    "ccAnimation": true,
-    "Spine2D": true,
-    "Spine2DAdd": false,
-    "Particle": false,
-    "Audio": false,
-    "IsAnimationPlay": true,
-    "CocosAnimationState": 2,
-    "IsSpine2DPlay": true,
-    "Spine2DAnimationState": 4,
-    "IsSpineAnimationLoop": false,
-    "IsSpine2DAddPlay": false,
-    "Spine2DAddAnimationTrack": 1,
-    "Spine2DAddAnimationState": 0,
-    "IsSpineAnimationAddLoop": false,
-    "PlayParticle": [],
-    "StopParticle": [],
-    "PlayAudio_Name": [],
-    "StopAudio_Name": []
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "9afcCEW4BIXqy8w65Coc9o"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -4487,12 +4492,13 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "946+unzctD6amw6z7GWWN6"
+    "fileId": "a2LtFoXg1IYoBeMeeyQf/3"
   },
   {
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 1
     },
@@ -4514,12 +4520,13 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "87p7ufy/ZGbIPBmGqefpzh"
+    "fileId": "92dDBZXElA+JLEs0+a6wkz"
   },
   {
     "__type__": "5853eoXRLpJr6E5SSA2NVcz",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 1
     },
@@ -4528,7 +4535,7 @@
       "__id__": 305
     },
     "IngotAnimation": {
-      "__id__": 288
+      "__id__": 286
     },
     "IconAnimation": {
       "__id__": 264
@@ -4536,23 +4543,12 @@
     "IconSprite": {
       "__id__": 225
     },
+    "TextSprite": {
+      "__id__": 231
+    },
     "IconSpriteLight": {
       "__id__": 219
     },
-    "SpriteTextArray": [
-      {
-        "__id__": 231
-      },
-      {
-        "__id__": 239
-      },
-      {
-        "__id__": 247
-      },
-      {
-        "__id__": 255
-      }
-    ],
     "SpriteIconFrame": [
       {
         "__uuid__": "55dae4bf-866e-4f8f-8d26-4b71a99aae68@f9941",
@@ -4589,6 +4585,20 @@
         "__expectedType__": "cc.SpriteFrame"
       }
     ],
+    "SpriteTextArray": [
+      {
+        "__id__": 231
+      },
+      {
+        "__id__": 239
+      },
+      {
+        "__id__": 247
+      },
+      {
+        "__id__": 255
+      }
+    ],
     "Particle": {
       "__id__": 204
     },
@@ -4603,14 +4613,14 @@
       {
         "__type__": "cc.Color",
         "r": 255,
-        "g": 107,
+        "g": 85,
         "b": 248,
         "a": 255
       },
       {
         "__type__": "cc.Color",
-        "r": 100,
-        "g": 169,
+        "r": 0,
+        "g": 113,
         "b": 255,
         "a": 255
       },
@@ -4632,9 +4642,9 @@
       },
       {
         "__type__": "cc.Color",
-        "r": 124,
+        "r": 149,
         "g": 0,
-        "b": 129,
+        "b": 155,
         "a": 255
       },
       {
@@ -4656,7 +4666,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "48XUoKtzdPIqx0O2/W6Np3"
+    "fileId": "2fX7LtJclHn4rg89siWwxB"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -4666,6 +4676,6 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "ffJR7TvoBGer+cDimkTfIu"
+    "fileId": "a0YCcDoLhBjqllc6V6Aa8i"
   }
 ]

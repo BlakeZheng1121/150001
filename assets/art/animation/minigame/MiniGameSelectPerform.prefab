@@ -34,7 +34,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -125,
+      "y": -40,
       "z": 0
     },
     "_lrot": {
@@ -90,7 +90,6 @@
     "__type__": "92b795zE3pONboC8PExNSyv",
     "_name": "",
     "_objFlags": 0,
-    "__editorExtras__": {},
     "node": {
       "__id__": 1
     },
@@ -106,12 +105,12 @@
       "height": 150
     },
     "_startAxis": 0,
-    "_paddingLeft": 22,
+    "_paddingLeft": 0,
     "_paddingRight": 0,
     "_paddingTop": 0,
     "_paddingBottom": 0,
-    "_spacingX": -5,
-    "_spacingY": 25,
+    "_spacingX": 5,
+    "_spacingY": 40,
     "_verticalDirection": 1,
     "_horizontalDirection": 0,
     "_constraint": 2,
@@ -136,9 +135,9 @@
     "paddingLeft": 0,
     "paddingRight": 0,
     "paddingTop": 0,
-    "paddingBottom": 25,
-    "spacingX": 250,
-    "spacingY": 250,
+    "paddingBottom": 0,
+    "spacingX": 5,
+    "spacingY": 40,
     "constraint": 0,
     "constraintNum": 0
   },
@@ -149,8 +148,8 @@
     "paddingRight": 0,
     "paddingTop": 0,
     "paddingBottom": 0,
-    "spacingX": 250,
-    "spacingY": 250,
+    "spacingX": 5,
+    "spacingY": 40,
     "constraint": 0,
     "constraintNum": 0
   },

@@ -1,4 +1,4 @@
-import { AudioClip, _decorator } from 'cc';
+import { _decorator } from 'cc';
 import { DEBUG } from 'cc/env';
 import BaseMediator from '../../../base/BaseMediator';
 import { StateMachineCommand } from '../../../core/command/StateMachineCommand';
@@ -201,7 +201,6 @@ export class BaseReelViewMediator<T extends ReelView> extends BaseMediator<T> {
                     }
                     if (!self.gameDataProxy.onAutoPlay && self.gameDataProxy.curScene == GameScene.Game_1) {
                         AudioManager.Instance.play(AudioClipsEnum.Button_Spin);
-                        AudioManager.Instance.play(AudioClipsEnum.Button_SpinReel).loop(true);
                     }
                 }
                 break;
@@ -293,7 +292,6 @@ export class BaseReelViewMediator<T extends ReelView> extends BaseMediator<T> {
                 );
                 break;
         }
-        AudioManager.Instance.stop(AudioClipsEnum.Button_SpinReel);
         this.webBridgeProxy.sendGameState(WebBridgeProxy.curScene, WebGameState.ROLLCOMPLETE);
     }
 

@@ -9,6 +9,7 @@ import {
     GameStateProxyEvent,
     ReelEvent,
     SceneEvent,
+    ScreenEvent,
     StateWinEvent,
     ViewMediatorEvent
 } from '../../sgv3/util/Constant';

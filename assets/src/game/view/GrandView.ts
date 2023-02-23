@@ -1,26 +1,27 @@
-import { _decorator, Label, tween, Vec3, Prefab } from 'cc';
-import { ParticleContentTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
+import { _decorator, Label, tween } from 'cc';
+import { TimeLineTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
 import { BaseScene } from '../../base/BaseScene';
-import { PoolManager } from '../../sgv3/PoolManager';
 import { BalanceUtil } from '../../sgv3/util/BalanceUtil';
 import { GlobalTimer } from '../../sgv3/util/GlobalTimer';
-import { AnimationTimeLineTool } from '../../ta/tool/animation-timeline-tool/AnimationTimeLineTool';
+import { MiniGameSymbol } from '../../sgv3/vo/enum/MiniGameSymbolType';
+import { MiniResultBoard } from '../../ta/mini-result-board/MiniResultBoard';
 import { AudioManager } from '../../ta/tool/AudioManager';
-import { AudioClipsEnum, BGMClipsEnum, ScoringClipsEnum } from '../vo/enum/SoundMap';
+import { AudioClipsEnum, ScoringClipsEnum } from '../vo/enum/SoundMap';
 const { ccclass, property } = _decorator;
 
 @ccclass('GrandView')
 export class GrandView extends BaseScene {
-    @property(AnimationTimeLineTool)
-    private anim: AnimationTimeLineTool;
-    @property({ type: Prefab })
-    public particlePrefab: Prefab | null = null;
+    @property(TimeLineTool)
+    private anim: TimeLineTool;
+    @property(MiniResultBoard)
+    private miniResultBoard: MiniResultBoard;
     @property(Label)
     private scoreTxt: Label;
     private _score = 0;
     private canSkip = false;
     private skipFunction: Function;
     private canSkipScoringGrandTimerKey: string = 'canSkipScoringGrand';
+    private callBackFunction: Function;
 
     public get score(): number {
         return this._score;
@@ -30,51 +31,46 @@ export class GrandView extends BaseScene {
         this._score = value;
         this.scoreTxt.string = BalanceUtil.formatBalanceWithDollarSign(value);
     }
-    private grandTime = 60; //Game_3_WinBoardViewMediator.getWinBoardRunTimer
+    private grandTime = 7; // 60s, Game_3_WinBoardViewMediator.getWinBoardRunTimer
     private bonusCanSkipRunCreditsTime = 5; //Game_3_WinBoardViewMediator.getWinBoardRunTimer
 
     onLoad() {
         super.onLoad('GrandViewMediator', `${this.node.parent.name}_GrandViewMediator`);
     }
 
-    public showUp(curScene: string, callBack?: Function): void {
+    public showUp(_lang: string, callBack?: Function): void {
+        let lang = _lang == 'en' ? 0 : 1;
+        this.miniResultBoard.SetEffectType(MiniGameSymbol.Grand, lang);
+        this.callBackFunction = callBack;
+
         this.score = 0;
-        GlobalTimer.getInstance().removeTimer('GrandJPAudio');
-        GlobalTimer.getInstance()
-            .registerTimer(
-                'GrandJPAudio',
-                4,
-                () => {
-                    AudioManager.Instance.play(AudioClipsEnum.JP_GrandHit);
-                },
-                this
-            )
-            .start();
-        GlobalTimer.getInstance().removeTimer('GrandJPLoop');
+        this.scheduleOnce(() => {
+            AudioManager.Instance.play(AudioClipsEnum.JP_GrandHit);
+        }, 0.5);
+        /*GlobalTimer.getInstance().removeTimer('GrandJPLoop');
         GlobalTimer.getInstance()
             .registerTimer(
                 'GrandJPLoop',
-                6.5,
+                7.8,
                 () => {
-                    switch (curScene) {
-                        case 'Game_1':
-                            AudioManager.Instance.fade(BGMClipsEnum.BGM_Base, 0, 0.7);
-                            break;
-                        case 'Game_2':
-                            AudioManager.Instance.fade(BGMClipsEnum.BGM_FreeGame, 0, 0.7);
-                            break;
-                        case 'Game_4':
-                            AudioManager.Instance.fade(BGMClipsEnum.BGM_DragonUp, 0, 0.7);
-                            break;
-                    }
-                    AudioManager.Instance.play(ScoringClipsEnum.Scoring_JPWinLoop).loop(true);
+                    AudioManager.Instance.play(ScoringClipsEnum.Scoring_JPWinLoop04).loop(true);
+                    this.miniResultBoard.playWinCoinFall();
                 },
                 this
             )
-            .start();
+            .start();*/
 
-        this.anim.OnPlay(0, () => callBack());
+        this.anim.play('Show');
+        this.miniResultBoard.OnBoardDelayPlay(() => this.showMiniResultBoard());
     }
+
+    private showMiniResultBoard() {
+        AudioManager.Instance.play(ScoringClipsEnum.Scoring_JPWin04).loop(false);
+        this.miniResultBoard.playWinCoinFall();
+
+        this.callBackFunction?.();
+    }
+
     private setCanUseSkip() {
         this.canSkip = true;
     }
@@ -85,12 +81,6 @@ export class GrandView extends BaseScene {
         GlobalTimer.getInstance()
             .registerTimer(this.canSkipScoringGrandTimerKey, this.bonusCanSkipRunCreditsTime, this.setCanUseSkip, this)
             .start();
-
-        const coinFall = PoolManager.instance
-            .getNode(this.particlePrefab, this.node)
-            .getComponent(ParticleContentTool);
-
-        coinFall.ParticlePlay();
 
         const scoringTween = tween<GrandView>(this)
             .to(
@@ -106,14 +96,11 @@ export class GrandView extends BaseScene {
             scoringTween.stop();
             this.score = grand;
 
-            coinFall.ParticleStop();
-            this.scheduleOnce(() => {
-            PoolManager.instance.putNode(coinFall.node);
-            }, coinFall.PutPoolTimes);
+            this.miniResultBoard.stopWinCoinFall();
 
             AudioManager.Instance.stop(ScoringClipsEnum.Scoring_JPWinIntro);
-            AudioManager.Instance.stop(ScoringClipsEnum.Scoring_JPWinLoop);
-            AudioManager.Instance.play(ScoringClipsEnum.Scoring_JPWinEnd);
+            AudioManager.Instance.stop(ScoringClipsEnum.Scoring_JPWin04);
+            AudioManager.Instance.play(ScoringClipsEnum.Scoring_JPWinEnd04);
             this.skipFunction = null;
             GlobalTimer.getInstance()
                 .registerTimer(
@@ -130,7 +117,8 @@ export class GrandView extends BaseScene {
     }
 
     public closeBoard(callBack?: Function): void {
-        this.anim.OnPlay(1, () => callBack?.());
+        this.miniResultBoard.OnBoardClose();
+        callBack?.();
     }
 
     public skipScoring() {
