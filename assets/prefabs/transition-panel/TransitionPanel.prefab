@@ -200,7 +200,7 @@
     "propertyPath": [
       "_layer"
     ],
-    "value": 16
+    "value": 8
   },
   {
     "__type__": "cc.TargetInfo",
@@ -216,7 +216,7 @@
     "propertyPath": [
       "_layer"
     ],
-    "value": 16
+    "value": 1
   },
   {
     "__type__": "cc.TargetInfo",
