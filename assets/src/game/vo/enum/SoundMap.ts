@@ -128,7 +128,11 @@ export enum ScoringClipsEnum {
     Scoring_Win01 = 'Scoring_Win01',
     Scoring_Win02 = 'Scoring_Win02',
     Scoring_Win03 = 'Scoring_Win03',
-    Scoring_Win04 = 'Scoring_Win04'
+    Scoring_Win04 = 'Scoring_Win04',
+    Scoring_Win01_end = 'Scoring_Win01_end',
+    Scoring_Win02_end = 'Scoring_Win02_end',
+    Scoring_Win03_end = 'Scoring_Win03_end',
+    Scoring_Win04_end = 'Scoring_Win04_end'
 }
 export enum BaseScoringDuration {
     Scoring01 = 0.5,
