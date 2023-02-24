@@ -4117,7 +4117,7 @@
       "__uuid__": "b08c80cb-b828-4f7f-9f84-a6a4ebdc9f92",
       "__expectedType__": "cc.Prefab"
     },
-    "fileId": "5aa71LZwBLLJvDUaKQO9Bb",
+    "fileId": "3ajNtZrdlCqqmlx3xgMe+Y",
     "instance": {
       "__id__": 266
     },
@@ -4181,7 +4181,7 @@
     "value": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 0,
+      "y": -175,
       "z": 0
     }
   },
@@ -4256,7 +4256,7 @@
   },
   {
     "__type__": "cc.PrefabInstance",
-    "fileId": "c9/wNNwIpBrr2Q5CnC/7qe",
+    "fileId": "2euv2UM5FL/7MsG7oKwOg2",
     "prefabRootNode": {
       "__id__": 264
     },

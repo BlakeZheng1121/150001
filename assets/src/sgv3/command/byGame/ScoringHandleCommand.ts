@@ -174,15 +174,19 @@ export class ScoringHandleCommand extends puremvc.SimpleCommand {
                 switch (winType) {
                     case WinType.bigWin:
                         AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win01).fade(0, 0.5);
+                        AudioManager.Instance.play(ScoringClipsEnum.Scoring_Win01_end);
                         break;
                     case WinType.megaWin:
                         AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win02).fade(0, 0.5);
+                        AudioManager.Instance.play(ScoringClipsEnum.Scoring_Win02_end);
                         break;
                     case WinType.superWin:
                         AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win03).fade(0, 0.5);
+                        AudioManager.Instance.play(ScoringClipsEnum.Scoring_Win03_end);
                         break;
                     case WinType.jumboWin:
                         AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win04).fade(0, 0.5);
+                        AudioManager.Instance.play(ScoringClipsEnum.Scoring_Win04_end);
                         break;
                 }
             }
