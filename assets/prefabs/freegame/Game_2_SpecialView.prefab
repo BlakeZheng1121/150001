@@ -153,20 +153,6 @@
       "__uuid__": "51648d43-3130-4939-8003-aa22469b1952",
       "__expectedType__": "cc.Prefab"
     },
-    "freeSpinSprite": [
-      {
-        "__uuid__": "1dea01f8-4ca1-4082-b2a5-77656bada914@f9941",
-        "__expectedType__": "cc.SpriteFrame"
-      },
-      {
-        "__uuid__": "a15c24fd-b9e4-47ea-9a8f-ec63f5e70b79@f9941",
-        "__expectedType__": "cc.SpriteFrame"
-      },
-      {
-        "__uuid__": "15a56e59-6799-4717-af3c-23eaa473f5d8@f9941",
-        "__expectedType__": "cc.SpriteFrame"
-      }
-    ],
     "_id": ""
   },
   {

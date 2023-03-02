@@ -1,8 +1,9 @@
 import { Vec3, Node } from 'cc';
 import { AudioClipsEnum } from '../../game/vo/enum/SoundMap';
 import { ReelEvent, ReelDataProxyEvent } from '../util/Constant';
+import { UISymbol } from '../view/reel/symbol/UISymbol';
 import { WheelData } from '../vo/data/WheelData';
-import { LockType } from '../vo/enum/Reel';
+import { LockType, SymbolPartType } from '../vo/enum/Reel';
 import { WheelUsePattern } from '../vo/enum/WheelUsePattern';
 import { GameStateSetting } from '../vo/setting/GameStateSetting';
 import { GameDataProxy } from './GameDataProxy';
@@ -101,7 +102,8 @@ export class ReelDataProxy extends puremvc.Proxy {
         this.symbolsNode.forEach((symbols) => {
             symbols.sort(this.positionCompare);
         });
-        return this.symbolsNode[reelIndex][fovIndex + 1].worldPosition;
+        //return this.symbolsNode[reelIndex][fovIndex + 1].worldPosition;
+        return this.symbolsNode[reelIndex][fovIndex + 1].getComponent(UISymbol).getSymbolPosWithType(SymbolPartType.LABEL);
     }
 
     public setSymbolsNode(symbols: Array<Array<Node>>) {

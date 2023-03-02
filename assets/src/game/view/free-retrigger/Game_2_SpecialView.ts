@@ -16,14 +16,8 @@ export class Game_2_SpecialView extends BaseScene {
     @property(FreeC1SubOnPerform)
     private freeC1SubOnPerform: FreeC1SubOnPerform | null = null;
 
-    // @property(Prefab)
-    // private free_Wild: Prefab | null = null;
-
     @property(Prefab)
     private free_RetriggerBoard: Prefab | null = null;
-
-    @property(SpriteFrame)
-    private freeSpinSprite: Array<SpriteFrame> = new Array();
 
     private onSpecialEndCallBack: Function = null;
 
@@ -41,32 +35,16 @@ export class Game_2_SpecialView extends BaseScene {
 
     private _freeRetriggerBoard: Free_RetriggerBoard | null = null;
 
-    private _freeWild: FreeWild | null = null;
-
     private get freeRetriggerBoard() {
         return this._freeRetriggerBoard.retriggerBoard;
-    }
-
-    private get FSpin() {
-        return this._freeRetriggerBoard.FSpin;
-    }
-
-    private get freeWild() {
-        return this._freeWild;
     }
 
     public onLoad() {
         super.onLoad();
         let self = this;
-
-        // let wild = instantiate(self.free_Wild);
         let retriggerBoard = instantiate(self.free_RetriggerBoard);
 
-        // wild.parent = this.node;
-        // self._freeWild = wild.getComponent(FreeWild);
-
         retriggerBoard.parent = this.node;
-        retriggerBoard.position = new Vec3(0, 176, 0);
         self._freeRetriggerBoard = retriggerBoard.getComponent(Free_RetriggerBoard);
 
         let animTools = this.node.getComponentsInChildren(CocosAnimationMultiTool);
@@ -91,7 +69,6 @@ export class Game_2_SpecialView extends BaseScene {
     //** show retriger board */
     public retriggerShow(addRound: number) {
         let self = this;
-        self.FSpin.spriteFrame = self.freeSpinSprite[addRound - 1];
         self.freeRetriggerBoard?.OnPlay(0);
 
         AudioManager.Instance.play(AudioClipsEnum.Free_Retrigger);

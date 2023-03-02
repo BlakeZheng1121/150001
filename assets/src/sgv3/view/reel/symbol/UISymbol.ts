@@ -28,6 +28,11 @@ export class UISymbol extends UIViewBase {
     public set symbolPos(value: Vec3){
        this.setSymbolPos(value);
     }
+
+    public getSymbolPosWithType(type: SymbolPartType) {
+        if (this.symbolContent.parts.get(type)) return this.symbolContent.parts.get(type).node.worldPosition;
+        else return this.node.worldPosition;
+    }
     ////
 
     //// API
