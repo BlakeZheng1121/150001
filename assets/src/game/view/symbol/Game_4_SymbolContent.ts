@@ -25,7 +25,7 @@ export class Game_4_SymbolContent extends SymbolContentBase {
     public reSpinFrames: Array<SpriteFrame> = [];
 
     @property({visible: true })
-    public hasMultiplePos: Vec3 = new Vec3(0,20,0);
+    public hasMultiplePos: Vec3 = new Vec3(0,30,0);
 
     @property({visible: true })
     public normalPos: Vec3 = new Vec3();

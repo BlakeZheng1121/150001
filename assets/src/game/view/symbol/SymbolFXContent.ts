@@ -39,7 +39,14 @@ export class SymbolFXContent extends Component {
             return this.symbolType == SymbolId.C2;
         }
     })
-    public hasReSpinPos: Vec3 = new Vec3(0, 20, 0);
+    public hasReSpinPos: Vec3 = new Vec3(0, 30, 0);
+
+    @property({
+        visible() {
+            return this.symbolType == SymbolId.C2;
+        }
+    })
+    public multiPos: Vec3 = new Vec3(0, 26, 0);
 
     @property({
         visible() {

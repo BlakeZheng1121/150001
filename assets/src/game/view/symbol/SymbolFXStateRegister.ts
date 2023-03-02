@@ -81,7 +81,7 @@ export class SymbolFXShowState extends UIViewStateBase {
                         this.content.labelText.string =
                             this.content.multiple > 0 ? String(this.content.multiple + '%') : String();
                         this.content.labelText.node.position =
-                            this.content.reSpinNum > 0 ? this.content.hasReSpinPos : this.content.normalPos;
+                            this.content.reSpinNum > 0 ? this.content.hasReSpinPos : this.content.multiPos;
                     } else {
                         this.content.labelText.string = String(BalanceUtil.formatBalance(this.content.credit));
                         this.content.labelText.node.position = this.content.normalPos;
@@ -191,9 +191,9 @@ export class SymbolFXTargertCreditUpdateState extends UIViewStateBase {
                 break;
             case SymbolId.C2:
                 this.content.labelText.font = this.content.goldFont;
+                this.content.labelText.node.setPosition(this.content.normalPos);
                 break;
         }
-        this.content.labelText.node.setPosition(new Vec3());
         this.onEffectFinished();
     }
     ////
@@ -217,7 +217,7 @@ export class SymbolFXGetTargertCreditResultState extends UIViewStateBase {
     onPlay() {
         this.content.labelText.string = String();
         if (this.content.animation) {
-            this.content.animation.play('PlayLastCollect')
+            this.content.animation.play('PlayLastCollect');
         }
         this.onEffectFinished();
     }
