@@ -90,12 +90,12 @@ export class SymbolFXShowState extends UIViewStateBase {
             }
         }
         if (this.content.symbolId === SymbolId.WILD) {
-            if (this.content.language === 'en') {
+            if (this.content.language === 'zh') {
                 animationIndex = 0;
-                this.content.animation.play('PlayWin_EN');
+                this.content.animation.play('PlayWin_CN');
             }else {
                 animationIndex = 1;
-                this.content.animation.play('PlayWin_CN');
+                this.content.animation.play('PlayWin_EN');
             }
         }else{
             this.content.animation.play('PlayWin');
