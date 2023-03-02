@@ -5,7 +5,7 @@ import { SceneManager } from '../../core/utils/SceneManager';
 import { ClearRecoveryDataCommand } from '../../sgv3/command/recovery/ClearRecoveryDataCommand';
 import { SpinRequestCommand } from '../../sgv3/command/spin/SpinRequestCommand';
 import { GameDataProxy } from '../../sgv3/proxy/GameDataProxy';
-import { ViewMediatorEvent } from '../../sgv3/util/Constant';
+import { StateWinEvent, ViewMediatorEvent } from '../../sgv3/util/Constant';
 import { GameSceneData } from '../../sgv3/vo/config/GameSceneData';
 import { GameScene } from '../../sgv3/vo/data/GameScene';
 import { AudioManager } from '../../ta/tool/AudioManager';
@@ -37,7 +37,8 @@ export class FeatureSelectionViewMediator extends BaseMediator<FeatureSelectionV
             SceneManager.EV_ORIENTATION_VERTICAL,
             SceneManager.EV_ORIENTATION_HORIZONTAL,
             ViewMediatorEvent.SHOW_FEATURE_SELECTION,
-            ViewMediatorEvent.ENTER
+            StateWinEvent.ON_GAME2_TRANSITIONS,
+            StateWinEvent.ON_GAME4_TRANSITIONS
         ];
     }
 
@@ -47,14 +48,11 @@ export class FeatureSelectionViewMediator extends BaseMediator<FeatureSelectionV
             case ViewMediatorEvent.SHOW_FEATURE_SELECTION:
                 this.view.showFeatureSelection(notification.getBody());
                 break;
-            case ViewMediatorEvent.ENTER:
-                this.enterMediator();
+            case StateWinEvent.ON_GAME2_TRANSITIONS:
+            case StateWinEvent.ON_GAME4_TRANSITIONS:
+                this.view.hideFeatureSelection();
                 break;
         }
-    }
-
-    protected enterMediator() {
-        if (this.gameDataProxy.curScene != GameScene.Game_1) this.view.hideFeatureSelection();
     }
 
     protected onOrientation(orientation: string) {
@@ -65,11 +63,14 @@ export class FeatureSelectionViewMediator extends BaseMediator<FeatureSelectionV
         if (this.view.isShowComplete) {
             this.gameDataProxy.curGameOperation = operation;
             this.view.onFeatureSelect(operation);
-            this.sendNotification(SpinRequestCommand.NAME);
-            if (this.gameDataProxy.reStateResult != undefined) {
-                this.sendNotification(ClearRecoveryDataCommand.NAME);
-            }
-            AudioManager.Instance.stop(BGMClipsEnum.BGM_FeatureSelection).fade(0, 1);
+            AudioManager.Instance.stop(BGMClipsEnum.BGM_FeatureSelection)
+                .fade(0, 1)
+                .callback(() => {
+                    this.sendNotification(SpinRequestCommand.NAME);
+                    if (this.gameDataProxy.reStateResult != undefined) {
+                        this.sendNotification(ClearRecoveryDataCommand.NAME);
+                    }
+                });
         }
     }
 
