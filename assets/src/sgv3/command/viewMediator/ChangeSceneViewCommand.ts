@@ -59,7 +59,7 @@ export class ChangeSceneViewCommand extends puremvc.SimpleCommand {
                     this.sendNotification(StateWinEvent.ON_GAME2_TRANSITIONS, true); //通知轉場動畫
                     this.sendNotification(WinEvent.FORCE_WIN_DISPOSE);
                     GlobalTimer.getInstance()
-                        .registerTimer('Game2_TransitionBG', 3.0, this.Game2TransitionsBG, this)
+                        .registerTimer('Game2_TransitionBG', 1.7, this.Game2TransitionsBG, this)
                         .start();
                     return;
                 }
@@ -89,7 +89,7 @@ export class ChangeSceneViewCommand extends puremvc.SimpleCommand {
                 } else {
                     this.sendNotification(StateWinEvent.ON_GAME4_TRANSITIONS, true); //通知入場的轉場動畫
                     GlobalTimer.getInstance()
-                        .registerTimer('Game4_TransitionBG', 3.0, this.Game4TransitionsBG, this)
+                        .registerTimer('Game4_TransitionBG', 1.7, this.Game4TransitionsBG, this)
                         .start();
                     return;
                 }
