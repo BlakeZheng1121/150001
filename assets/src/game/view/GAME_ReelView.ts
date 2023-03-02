@@ -275,7 +275,10 @@ export class GAME_ReelView extends ReelView {
     }
 
     protected get scoreTextPosSubtract() {
-        let sub: number = 60;
+        let sub: number = 53;
+        if (!this.reelsList[0].singleReelContent.ishorizontalMode) {
+            sub = 40;
+        }
         return sub;
     }
 
