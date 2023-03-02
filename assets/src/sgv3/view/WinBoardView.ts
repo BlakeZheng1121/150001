@@ -137,7 +137,7 @@ export abstract class WinBoardView extends BaseScene {
                         updateCallback?.();
                     },
                     onComplete: () => {
-                        completeCallback?.();
+                        completeCallback?.(false);
                     }
                 }
             )
