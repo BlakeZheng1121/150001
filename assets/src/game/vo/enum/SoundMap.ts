@@ -61,7 +61,7 @@ export enum AudioClipsEnum {
     DragonUp_C2CollectHitLast = 'DragonUp_C2CollectHitLast',
     DragonUp_C2Hit01 = 'DragonUp_C2Hit01',
     DragonUp_C2Hit02 = 'DragonUp_C2Hit02',
-    DragonUp_PercentCollect = 'DragonUp_PercentCollect',
+    DragonUp_PercentCollect01 = 'DragonUp_PercentCollect01',
     DragonUp_PercentCollect02 = 'DragonUp_PercentCollect02',
     DragonUp_PercentHit = 'DragonUp_PercentHit',
     DragonUp_PercentSpin = 'DragonUp_PercentSpin',
