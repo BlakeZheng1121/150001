@@ -76,6 +76,7 @@ export enum AudioClipsEnum {
     Free_C1FireThrough = 'Free_C1FireThrough',
     Free_C1GrowUp = 'Free_C1GrowUp',
     Free_C1Hit01 = 'Free_C1Hit01',
+    Free_Wild = 'Free_Wild',
     Free_WStack01 = 'Free_WStack01',
     Free_WStack02 = 'Free_WStack02',
     Free_Calculation = 'Free_Calculation',
@@ -150,10 +151,10 @@ export enum BaseScoringDuration {
     Scoring13 = 13,
     Scoring14 = 21,
     Scoring15 = 25,
-    Scoring_Win01 = 13.5,
-    Scoring_Win02 = 13.5,
-    Scoring_Win03 = 13.5,
-    Scoring_Win04 = 13.5
+    Scoring_Win01 = 6,
+    Scoring_Win02 = 6,
+    Scoring_Win03 = 6,
+    Scoring_Win04 = 6
 }
 
 export enum QuickScoringDuration {
