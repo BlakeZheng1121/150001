@@ -14,6 +14,8 @@ export class ExpansionWildsView extends BaseScene {
     @property(CocosAnimationMultiTool)
     private animR: CocosAnimationMultiTool;
 
+    private isWildSoundPlaying = false;
+
     onLoad() {
         super.onLoad();
     }
@@ -26,12 +28,17 @@ export class ExpansionWildsView extends BaseScene {
         setTimeout(() => {
             SceneManager.instance.shakeScreen();
         }, 600);
+        this.isWildSoundPlaying = false;
     }
 
     public win(fiveOfKind: boolean, language: string, callBack?: Function): void {
         let lang = language == 'en' ? 3 : 2;
         if (fiveOfKind) this.animR.OnPlay(lang);
         this.animL.OnPlay(lang);
+        if (this.isWildSoundPlaying == false) {
+            AudioManager.Instance.play(AudioClipsEnum.Free_Wild);
+            this.isWildSoundPlaying = true;
+        }
     }
 
     public hide() {
