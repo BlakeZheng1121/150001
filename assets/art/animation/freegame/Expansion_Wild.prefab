@@ -255,8 +255,8 @@
     "DefaultActive": true,
     "SpineAnimationIndex": [
       "BigWinPrediction",
-      "FreePlayWin_Loop_CN",
       "FreePlayWin_Loop_EN",
+      "FreePlayWin_Loop_CN",
       "FreePlayWin_Show"
     ],
     "AnimationList": [
