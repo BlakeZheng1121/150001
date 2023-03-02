@@ -32,7 +32,7 @@ export class ExpansionWildsView extends BaseScene {
     }
 
     public win(fiveOfKind: boolean, language: string, callBack?: Function): void {
-        let lang = language == 'en' ? 3 : 2;
+        let lang = language == 'zh' ? 3 : 2;
         if (fiveOfKind) this.animR.OnPlay(lang);
         this.animL.OnPlay(lang);
         if (this.isWildSoundPlaying == false) {
