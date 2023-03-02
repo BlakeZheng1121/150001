@@ -2,16 +2,16 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "44a4f949-2109-4a81-8f38-5ca00f94928a",
+  "uuid": "de73ebfd-04d1-4043-9ac6-005dece4f4d8",
   "files": [
-    ".png",
+    ".jpg",
     ".json"
   ],
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "44a4f949-2109-4a81-8f38-5ca00f94928a@6c48a",
-      "displayName": "DragonUP_M1",
+      "uuid": "de73ebfd-04d1-4043-9ac6-005dece4f4d8@6c48a",
+      "displayName": "DragonUP_M5",
       "id": "6c48a",
       "name": "texture",
       "userData": {
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "44a4f949-2109-4a81-8f38-5ca00f94928a"
+        "imageUuidOrDatabaseUri": "de73ebfd-04d1-4043-9ac6-005dece4f4d8"
       },
       "ver": "1.0.21",
       "imported": true,
@@ -33,8 +33,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "44a4f949-2109-4a81-8f38-5ca00f94928a@f9941",
-      "displayName": "DragonUP_M1",
+      "uuid": "de73ebfd-04d1-4043-9ac6-005dece4f4d8@f9941",
+      "displayName": "DragonUP_M5",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -55,7 +55,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "44a4f949-2109-4a81-8f38-5ca00f94928a@6c48a",
+        "imageUuidOrDatabaseUri": "de73ebfd-04d1-4043-9ac6-005dece4f4d8@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,6 @@
   "userData": {
     "hasAlpha": false,
     "type": "sprite-frame",
-    "redirect": "44a4f949-2109-4a81-8f38-5ca00f94928a@f9941"
+    "redirect": "de73ebfd-04d1-4043-9ac6-005dece4f4d8@f9941"
   }
 }
