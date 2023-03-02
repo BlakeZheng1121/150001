@@ -186,8 +186,8 @@ export class Game_3_WinBoardViewMediator
 
         let miniTime = 7;
         let minorTime = 7;
-        let majorTime = 7;
-        let grandTime = 7;
+        let majorTime = 14;
+        let grandTime = 14;
 
         let biggestSymbol = JackpotPool.MINI;
         for (let i = 0; i < hitInfo.length; i++) {

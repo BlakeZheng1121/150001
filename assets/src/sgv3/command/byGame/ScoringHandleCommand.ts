@@ -73,8 +73,18 @@ export class ScoringHandleCommand extends puremvc.SimpleCommand {
         this.finalWinType = winType;
         this.finalScoringTime = scoringTime;
         // 得分音樂
-        this.playScoring(this.finalWinType);
-        this.setScoringData(this.finalWinType, startAmount, targetAmount, winBoardTargetAmount);
+
+        let delayTime = winType >= WinType.bigWin ? this.winTypeDelayScoringTime : 0;
+        GlobalTimer.getInstance()
+            .registerTimer(
+                this.timerKey_Sound,
+                delayTime,
+                () => {
+                    this.playScoring(this.finalWinType);
+                    this.setScoringData(this.finalWinType, startAmount, targetAmount, winBoardTargetAmount);},
+                this
+            )
+            .start();
     }
 
     protected setScoringData(
@@ -86,16 +96,7 @@ export class ScoringHandleCommand extends puremvc.SimpleCommand {
         if (this.needQuickScoringTime()) {
             this.finalScoringTime = this.getQuickScoringTime(this.finalWinType);
         }
-
-        let delayTime = winType >= WinType.bigWin ? this.winTypeDelayScoringTime : 0;
-        GlobalTimer.getInstance()
-            .registerTimer(
-                this.timerKey_Sound,
-                delayTime,
-                () => this.scoringNormal(startAmount, targetAmount, winBoardTargetAmount, this.finalScoringTime),
-                this
-            )
-            .start();
+        this.scoringNormal(startAmount, targetAmount, winBoardTargetAmount, this.finalScoringTime);
     }
 
     /**
@@ -173,20 +174,40 @@ export class ScoringHandleCommand extends puremvc.SimpleCommand {
             if (isForceComplete || this.needQuickScoringTime()) {
                 switch (winType) {
                     case WinType.bigWin:
-                        AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win01).fade(0, 0.5);
-                        AudioManager.Instance.play(ScoringClipsEnum.Scoring_Win01_end);
+                        AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win01);
+                        AudioManager.Instance.play(ScoringClipsEnum.Scoring_Win01_end).volume(1);
                         break;
                     case WinType.megaWin:
-                        AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win02).fade(0, 0.5);
-                        AudioManager.Instance.play(ScoringClipsEnum.Scoring_Win02_end);
+                        AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win02);
+                        AudioManager.Instance.play(ScoringClipsEnum.Scoring_Win02_end).volume(1);
                         break;
                     case WinType.superWin:
-                        AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win03).fade(0, 0.5);
-                        AudioManager.Instance.play(ScoringClipsEnum.Scoring_Win03_end);
+                        AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win03);
+                        AudioManager.Instance.play(ScoringClipsEnum.Scoring_Win03_end).volume(1);
                         break;
                     case WinType.jumboWin:
-                        AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win04).fade(0, 0.5);
-                        AudioManager.Instance.play(ScoringClipsEnum.Scoring_Win04_end);
+                        AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win04);
+                        AudioManager.Instance.play(ScoringClipsEnum.Scoring_Win04_end).volume(1);
+                        break;
+                }
+            }
+            else {
+                switch (winType) {
+                    case WinType.bigWin:
+                        AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win01).fade(0, 0.3);
+                        AudioManager.Instance.play(ScoringClipsEnum.Scoring_Win01_end).volume(0).fade(1, 0.3);
+                        break;
+                    case WinType.megaWin:
+                        AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win02).fade(0, 0.3);
+                        AudioManager.Instance.play(ScoringClipsEnum.Scoring_Win02_end).volume(0).fade(1, 0.3);
+                        break;
+                    case WinType.superWin:
+                        AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win03).fade(0, 0.3);
+                        AudioManager.Instance.play(ScoringClipsEnum.Scoring_Win03_end).volume(0).fade(1, 0.3);
+                        break;
+                    case WinType.jumboWin:
+                        AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win04).fade(0, 0.3);
+                        AudioManager.Instance.play(ScoringClipsEnum.Scoring_Win04_end).volume(0).fade(1, 0.3);
                         break;
                 }
             }
