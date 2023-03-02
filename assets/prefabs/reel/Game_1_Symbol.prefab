@@ -133,8 +133,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 210,
-      "height": 210
+      "width": 220,
+      "height": 220
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -281,7 +281,6 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
-    "__editorExtras__": {},
     "node": {
       "__id__": 10
     },
@@ -292,7 +291,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 150,
-      "height": 64
+      "height": 60
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -309,7 +308,6 @@
     "__type__": "cc.Label",
     "_name": "",
     "_objFlags": 0,
-    "__editorExtras__": {},
     "node": {
       "__id__": 10
     },
@@ -328,13 +326,13 @@
       "b": 255,
       "a": 255
     },
-    "_string": "98.00",
+    "_string": "99.00",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 59,
-    "_fontSize": 100,
+    "_actualFontSize": 54,
+    "_fontSize": 54,
     "_fontFamily": "Arial",
-    "_lineHeight": 54,
+    "_lineHeight": 60,
     "_overflow": 2,
     "_enableWrapText": false,
     "_font": {
@@ -357,7 +355,6 @@
     "__type__": "a6b6bmgL6JJe4cJpKczxXsW",
     "_name": "",
     "_objFlags": 0,
-    "__editorExtras__": {},
     "node": {
       "__id__": 10
     },
@@ -369,7 +366,7 @@
     "offsetPos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 0,
+      "y": 10,
       "z": 0
     },
     "_id": ""
