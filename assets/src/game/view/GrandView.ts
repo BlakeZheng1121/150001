@@ -46,7 +46,7 @@ export class GrandView extends BaseScene {
         this.score = 0;
         this.scheduleOnce(() => {
             AudioManager.Instance.play(AudioClipsEnum.JP_GrandHit);
-        }, 0.5);
+        }, 0.75);
         /*GlobalTimer.getInstance().removeTimer('GrandJPLoop');
         GlobalTimer.getInstance()
             .registerTimer(

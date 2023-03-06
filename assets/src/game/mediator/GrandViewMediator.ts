@@ -2,6 +2,7 @@ import { _decorator } from 'cc';
 import BaseMediator from '../../base/BaseMediator';
 import { GameDataProxy } from '../../sgv3/proxy/GameDataProxy';
 import { JackpotPool, ScreenEvent, ViewMediatorEvent, WinEvent } from '../../sgv3/util/Constant';
+import { GlobalTimer } from '../../sgv3/util/GlobalTimer';
 import { MiniGameSymbol } from '../../sgv3/vo/enum/MiniGameSymbolType';
 import { SpecialHitInfo } from '../../sgv3/vo/enum/SpecialHitInfo';
 import { BonusGameOneRoundResult } from '../../sgv3/vo/result/BonusGameOneRoundResult';
@@ -36,21 +37,25 @@ export class GrandViewMediator extends BaseMediator<GrandView> {
     }
 
     hitGrand(callBack: Function) {
-        this.sendNotification(JackpotPool.HIGHLIGHT_HIT_POOL, MiniGameSymbol.Grand);
-        this.view.showUp(this.gameDataProxy.language, () => this.onShowUpComplete());
-        this.hitGrandComplete = callBack;
-
-        switch (this.gameDataProxy.curScene) {
-            case 'Game_1':
-                AudioManager.Instance.fade(BGMClipsEnum.BGM_Base, 0, 0.7);
-                break;
-            case 'Game_2':
-                AudioManager.Instance.fade(BGMClipsEnum.BGM_FreeGame, 0, 0.7);
-                break;
-            case 'Game_4':
-                AudioManager.Instance.fade(BGMClipsEnum.BGM_DragonUp, 0, 0.7);
-                break;
-        }
+        GlobalTimer.getInstance().registerTimer('delayHitGrand', 2.5, ()=>{
+            GlobalTimer.getInstance().removeTimer('delayHitGrand');
+            this.sendNotification(JackpotPool.HIGHLIGHT_HIT_POOL, MiniGameSymbol.Grand);
+            this.view.showUp(this.gameDataProxy.language, () => this.onShowUpComplete());
+            this.hitGrandComplete = callBack;
+    
+            switch (this.gameDataProxy.curScene) {
+                case 'Game_1':
+                    AudioManager.Instance.fade(BGMClipsEnum.BGM_Base, 0, 0.7);
+                    break;
+                case 'Game_2':
+                    AudioManager.Instance.fade(BGMClipsEnum.BGM_FreeGame, 0, 0.7);
+                    break;
+                case 'Game_4':
+                    AudioManager.Instance.fade(BGMClipsEnum.BGM_DragonUp, 0, 0.7);
+                    break;
+            }
+        },this).start();
+        
     }
 
     onShowUpComplete() {
