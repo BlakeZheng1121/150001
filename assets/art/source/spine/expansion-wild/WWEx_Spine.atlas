@@ -1,6 +1,6 @@
 
 WWEx_Spine.png
-size: 993,1009
+size: 1009,1009
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
@@ -12,8 +12,8 @@ BG
   offset: 0, 0
   index: -1
 FIre/WILD_Fire_00
-  rotate: true
-  xy: 197, 28
+  rotate: false
+  xy: 941, 533
   size: 37, 148
   orig: 37, 148
   offset: 0, 0
@@ -26,127 +26,127 @@ FIre/WILD_Fire_02
   offset: 0, 0
   index: -1
 FIre/WILD_Fire_04
-  rotate: false
-  xy: 355, 11
+  rotate: true
+  xy: 541, 346
   size: 37, 148
   orig: 37, 148
   offset: 0, 0
   index: -1
 FIre/WILD_Fire_06
-  rotate: false
-  xy: 394, 74
+  rotate: true
+  xy: 528, 307
   size: 37, 148
   orig: 37, 148
   offset: 0, 0
   index: -1
 FIre/WILD_Fire_08
-  rotate: false
-  xy: 433, 74
+  rotate: true
+  xy: 528, 268
   size: 37, 148
   orig: 37, 148
   offset: 0, 0
   index: -1
 FIre/WILD_Fire_10
-  rotate: false
-  xy: 653, 335
+  rotate: true
+  xy: 528, 229
   size: 37, 148
   orig: 37, 148
   offset: 0, 0
   index: -1
 FIre/WILD_Fire_12
-  rotate: false
-  xy: 692, 352
+  rotate: true
+  xy: 528, 190
   size: 37, 148
   orig: 37, 148
   offset: 0, 0
   index: -1
 FIre/WILD_Fire_14
   rotate: false
-  xy: 731, 352
+  xy: 678, 196
   size: 37, 148
   orig: 37, 148
   offset: 0, 0
   index: -1
 FIre/WILD_Fire_16
   rotate: false
-  xy: 873, 382
+  xy: 717, 224
   size: 37, 148
   orig: 37, 148
   offset: 0, 0
   index: -1
 FIre/WILD_Fire_18
-  rotate: true
-  xy: 461, 337
+  rotate: false
+  xy: 756, 224
   size: 37, 148
   orig: 37, 148
   offset: 0, 0
   index: -1
 FIre/WILD_Fire_20
-  rotate: false
-  xy: 472, 89
+  rotate: true
+  xy: 197, 28
   size: 37, 148
   orig: 37, 148
   offset: 0, 0
   index: -1
 FIre/WILD_Fire_22
   rotate: false
-  xy: 511, 89
+  xy: 795, 224
   size: 37, 148
   orig: 37, 148
   offset: 0, 0
   index: -1
 FIre/WILD_Fire_24
   rotate: false
-  xy: 550, 89
+  xy: 834, 224
   size: 37, 148
   orig: 37, 148
   offset: 0, 0
   index: -1
 FIre/WILD_Fire_26
   rotate: false
-  xy: 589, 89
+  xy: 873, 235
   size: 37, 148
   orig: 37, 148
   offset: 0, 0
   index: -1
 FIre/WILD_Fire_28
   rotate: false
-  xy: 628, 89
+  xy: 912, 235
   size: 37, 148
   orig: 37, 148
   offset: 0, 0
   index: -1
 FIre/WILD_Fire_30
-  rotate: false
-  xy: 667, 89
+  rotate: true
+  xy: 722, 185
   size: 37, 148
   orig: 37, 148
   offset: 0, 0
   index: -1
 FIre/WILD_Fire_32
   rotate: true
-  xy: 705, 251
+  xy: 722, 146
   size: 37, 148
   orig: 37, 148
   offset: 0, 0
   index: -1
 FIre/WILD_Fire_34
   rotate: true
-  xy: 706, 114
+  xy: 722, 107
   size: 37, 148
   orig: 37, 148
   offset: 0, 0
   index: -1
 FIre/WILD_Fire_36
   rotate: true
-  xy: 748, 75
+  xy: 722, 68
   size: 37, 148
   orig: 37, 148
   offset: 0, 0
   index: -1
 FIre/WILD_Fire_38
   rotate: true
-  xy: 748, 36
+  xy: 706, 29
   size: 37, 148
   orig: 37, 148
   offset: 0, 0
@@ -167,49 +167,49 @@ Frame_down
   index: -1
 Word_D
   rotate: false
-  xy: 782, 499
+  xy: 355, 58
   size: 69, 101
   orig: 69, 101
   offset: 0, 0
   index: -1
 Word_I
-  rotate: false
-  xy: 560, 239
+  rotate: true
+  xy: 347, 11
   size: 45, 96
   orig: 45, 96
   offset: 0, 0
   index: -1
 Word_L
   rotate: true
-  xy: 394, 13
+  xy: 394, 163
   size: 59, 96
   orig: 59, 96
   offset: 0, 0
   index: -1
 Word_W
   rotate: false
-  xy: 900, 722
+  xy: 916, 908
   size: 91, 99
   orig: 91, 99
   offset: 0, 0
   index: -1
 Word_bai
   rotate: false
-  xy: 706, 153
+  xy: 628, 92
   size: 92, 96
   orig: 92, 96
   offset: 0, 0
   index: -1
 Word_da
   rotate: false
-  xy: 670, 502
+  xy: 541, 385
   size: 110, 98
   orig: 110, 98
   offset: 0, 0
   index: -1
 angry_mouth
   rotate: false
-  xy: 889, 132
+  xy: 445, 7
   size: 71, 52
   orig: 73, 55
   offset: 2, 0
@@ -244,28 +244,28 @@ dark
   index: -1
 eye_L
   rotate: false
-  xy: 977, 354
+  xy: 706, 76
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
   index: -1
 eye_R
   rotate: false
-  xy: 977, 354
+  xy: 706, 76
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
   index: -1
 eyebrow_L
   rotate: true
-  xy: 611, 335
+  xy: 503, 612
   size: 43, 20
   orig: 43, 20
   offset: 0, 0
   index: -1
 eyebrow_R
   rotate: true
-  xy: 503, 612
+  xy: 983, 772
   size: 43, 20
   orig: 43, 20
   offset: 0, 0
@@ -292,36 +292,36 @@ face
   offset: 0, 0
   index: -1
 hand_L
-  rotate: false
-  xy: 541, 380
+  rotate: true
+  xy: 733, 573
   size: 110, 103
   orig: 110, 103
   offset: 0, 0
   index: -1
 hand_R
   rotate: false
-  xy: 770, 394
+  xy: 838, 567
   size: 101, 103
   orig: 101, 103
   offset: 0, 0
   index: -1
 hand_R_noSD
-  rotate: false
-  xy: 770, 290
+  rotate: true
+  xy: 733, 470
   size: 101, 102
   orig: 101, 102
   offset: 0, 0
   index: -1
 light05
   rotate: false
-  xy: 873, 275
+  xy: 837, 472
   size: 102, 93
   orig: 102, 94
   offset: 0, 0
   index: -1
 mouth
-  rotate: true
-  xy: 955, 578
+  rotate: false
+  xy: 461, 354
   size: 54, 20
   orig: 54, 20
   offset: 0, 0
@@ -334,78 +334,78 @@ pant
   offset: 0, 0
   index: -1
 pant_bottom_L
-  rotate: false
-  xy: 670, 602
+  rotate: true
+  xy: 838, 672
   size: 164, 81
   orig: 164, 81
   offset: 0, 0
   index: -1
 pant_bottom_R
   rotate: true
-  xy: 916, 823
+  xy: 670, 499
   size: 184, 61
   orig: 184, 61
   offset: 0, 0
   index: -1
 punch/Hit_punch2_07
-  rotate: true
-  xy: 900, 634
+  rotate: false
+  xy: 921, 817
   size: 86, 89
   orig: 93, 93
   offset: 3, 2
   index: -1
 punch/Hit_punch2_08
   rotate: false
-  xy: 800, 161
+  xy: 528, 2
   size: 87, 88
   orig: 93, 93
   offset: 2, 3
   index: -1
 punch/Hit_punch2_09
   rotate: false
-  xy: 889, 186
+  xy: 617, 3
   size: 87, 87
   orig: 93, 93
   offset: 2, 3
   index: -1
 punch/Hit_punch2_10
   rotate: false
-  xy: 492, 2
+  xy: 837, 385
   size: 85, 85
   orig: 93, 93
   offset: 2, 4
   index: -1
 punch/Hit_punch2_11
-  rotate: false
-  xy: 579, 3
+  rotate: true
+  xy: 653, 385
   size: 83, 84
   orig: 93, 93
   offset: 3, 6
   index: -1
 punch/Hit_punch2_12
   rotate: false
-  xy: 664, 5
+  xy: 924, 388
   size: 82, 82
   orig: 93, 93
   offset: 3, 8
   index: -1
 punch/Hit_punch2_13
-  rotate: true
-  xy: 912, 449
+  rotate: false
+  xy: 873, 154
   size: 81, 79
   orig: 93, 93
   offset: 3, 10
   index: -1
 punch/Hit_punch2_14
-  rotate: true
-  xy: 912, 370
+  rotate: false
+  xy: 872, 73
   size: 77, 79
   orig: 93, 93
   offset: 4, 10
   index: -1
 punch/Hit_punch2_15
   rotate: false
-  xy: 898, 61
+  xy: 872, 2
   size: 68, 69
   orig: 93, 93
   offset: 10, 16
@@ -419,28 +419,28 @@ punch/fireparticle
   index: -1
 punch/punch1
   rotate: false
-  xy: 460, 239
+  xy: 528, 92
   size: 98, 96
   orig: 111, 111
   offset: 6, 5
   index: -1
 punch/punch2
   rotate: false
-  xy: 853, 532
+  xy: 426, 61
   size: 100, 100
   orig: 111, 111
   offset: 5, 2
   index: -1
 punch/punch3
   rotate: false
-  xy: 607, 239
+  xy: 739, 374
   size: 96, 94
   orig: 111, 111
   offset: 6, 1
   index: -1
 tail
   rotate: false
-  xy: 838, 704
+  xy: 921, 683
   size: 60, 132
   orig: 60, 132
   offset: 0, 0
