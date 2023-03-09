@@ -12,7 +12,8 @@ steps:
     - name: remove same sha1 folder
       image: appleboy/drone-ssh
       settings:
-          host: 10.10.177.53
+          host: 
+              from_secret: BUILD_GAME_SERVER
           port: 22
           username:
               from_secret: CI_Acc
@@ -24,7 +25,8 @@ steps:
     - name: download from git
       image: appleboy/drone-ssh
       settings:
-          host: 10.10.177.53
+          host: 
+              from_secret: BUILD_GAME_SERVER
           port: 22
           username:
               from_secret: CI_Acc
@@ -36,7 +38,8 @@ steps:
     - name: copy help to build-templates
       image: appleboy/drone-ssh
       settings:
-          host: 10.10.177.53
+          host: 
+              from_secret: BUILD_GAME_SERVER
           port: 22
           username:
               from_secret: CI_Acc
@@ -48,7 +51,8 @@ steps:
     - name: build a mock version of the game with docker
       image: appleboy/drone-ssh
       settings:
-          host: 10.10.177.53
+          host: 
+              from_secret: BUILD_GAME_SERVER
           port: 22
           username:
               from_secret: CI_Acc
@@ -60,7 +64,8 @@ steps:
     - name: build a common version of the game with docker
       image: appleboy/drone-ssh
       settings:
-          host: 10.10.177.53
+          host: 
+              from_secret: BUILD_GAME_SERVER
           port: 22
           username:
               from_secret: CI_Acc
@@ -72,7 +77,8 @@ steps:
     - name: send tgz to storage
       image: appleboy/drone-ssh
       settings:
-          host: 10.10.177.53
+          host: 
+              from_secret: BUILD_GAME_SERVER
           port: 22
           username:
               from_secret: CI_Acc
@@ -81,10 +87,11 @@ steps:
           script:
               - powershell ./sendStorage.cmd 1 1023 ${DRONE_COMMIT_SHA:0:8}
 
-    - name: deploy game to RD download
+    - name: deploy game to RD download and update RD version
       image: appleboy/drone-ssh
       settings:
-          host: 10.10.177.190
+          host: 
+              from_secret: RD_GAME_HOST
           port: 22
           username:
               from_secret: CI_USERNAME
@@ -94,11 +101,7 @@ steps:
               - cd /opt/download-server
               - sudo sh deploy-game.sh 1 1023 ${DRONE_COMMIT_SHA:0:8}-mock
               - sudo sh deploy-game.sh 1 1023 ${DRONE_COMMIT_SHA:0:8}
-
-    - name: update RD version
-      image: curlimages/curl
-      commands:
-          - curl -X POST -d 'action=8&mType=1023&gameVersion=${DRONE_COMMIT_SHA:0:8}-mock' http://10.10.177.189:5050/admin.do
+              - sudo sh update-gameVersion.sh 1023 ${DRONE_COMMIT_SHA:0:8}
 
     - name: send telegram notification
       image: appleboy/drone-telegram
@@ -153,7 +156,8 @@ steps:
     - name: remove same sha1 folder 
       image: appleboy/drone-ssh
       settings:
-          host: 10.10.177.53
+          host: 
+              from_secret: BUILD_GAME_SERVER
           port: 22
           username:
               from_secret: CI_Acc
@@ -165,7 +169,8 @@ steps:
     - name: download from git
       image: appleboy/drone-ssh
       settings:
-          host: 10.10.177.53
+          host: 
+              from_secret: BUILD_GAME_SERVER
           port: 22
           username:
               from_secret: CI_Acc
@@ -177,7 +182,8 @@ steps:
     - name: copy help to build-templates
       image: appleboy/drone-ssh
       settings:
-          host: 10.10.177.53
+          host: 
+              from_secret: BUILD_GAME_SERVER
           port: 22
           username:
               from_secret: CI_Acc
@@ -189,7 +195,8 @@ steps:
     - name: build a mock version of the game with docker
       image: appleboy/drone-ssh
       settings:
-          host: 10.10.177.53
+          host: 
+              from_secret: BUILD_GAME_SERVER
           port: 22
           username:
               from_secret: CI_Acc
@@ -201,7 +208,8 @@ steps:
     - name: build a common version of the game with docker
       image: appleboy/drone-ssh
       settings:
-          host: 10.10.177.53
+          host: 
+              from_secret: BUILD_GAME_SERVER
           port: 22
           username:
               from_secret: CI_Acc
@@ -213,7 +221,8 @@ steps:
     - name: send tgz to storage
       image: appleboy/drone-ssh
       settings:
-          host: 10.10.177.53
+          host: 
+              from_secret: BUILD_GAME_SERVER
           port: 22
           username:
               from_secret: CI_Acc
