@@ -57,6 +57,7 @@ export class BallHitViewMediator extends BaseMediator<BallHitView> {
             ViewMediatorEvent.COLLECT_CREDIT_BALL,
             ViewMediatorEvent.COLLECT_CREDIT_BALL_SKIP_CALLBACK,
             DragonUpEvent.ON_ALL_CREDIT_COLLECT_START,
+            DragonUpEvent.ON_C2_COUNT_UPDATE,
             SceneManager.EV_ORIENTATION_VERTICAL,
             SceneManager.EV_ORIENTATION_HORIZONTAL,
             GameStateProxyEvent.ON_SCENE_BEFORE_CHANGE,
@@ -99,7 +100,7 @@ export class BallHitViewMediator extends BaseMediator<BallHitView> {
             case ViewMediatorEvent.COLLECT_CREDIT_BALL_SKIP_CALLBACK:
                 this.collectCreditBallOnSkip(notification.getBody());
                 break;
-            case DragonUpEvent.ON_ALL_CREDIT_COLLECT_START:
+            case DragonUpEvent.ON_C2_COUNT_UPDATE:
                 this.updateBallCount(notification.getBody());
                 break;
             case GAME_4_CreditCollectResultCommand.NAME:
@@ -222,8 +223,8 @@ export class BallHitViewMediator extends BaseMediator<BallHitView> {
     }
 
     // 更新龍珠數量
-    private updateBallCount(ballInfo: Array<Array<Vec2>>) {
-        this.numInBall += ballInfo[1].length;
+    private updateBallCount(ballInfo: number) {
+        this.numInBall += ballInfo;
         this.ballTotalCount = this.numInBall;
         this.view.showBallCountInfo(this.numInBall.toString());
     }
