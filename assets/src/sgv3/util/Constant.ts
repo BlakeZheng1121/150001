@@ -227,6 +227,8 @@ export class DragonUpEvent {
     /** Retrigger 加場次 事件 */
     public static ON_RESPIN_NEXT_START: string = 'onRespinNextStart';
     public static ON_RESPIN_NEXT_END: string = 'onRespinNextEnd';
+
+    public static ON_C2_COUNT_UPDATE: string = 'onC2CountUpdate';
     /** 全部金球的起始與結束 事件 */
     public static ON_ALL_CREDIT_COLLECT_START: string = 'onAllCreditCollectStart';
     public static ON_ALL_CREDIT_COLLECT_END: string = 'onAllCreditCollectEnd';
