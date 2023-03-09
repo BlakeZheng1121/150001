@@ -36,6 +36,14 @@
             "png": 100
           }
         }
+      },
+      "b02XZfxTZD26OVIuSrFN88": {
+        "name": "alphaEffectPNG",
+        "options": {
+          "web": {
+            "png": 20
+          }
+        }
       }
     }
   }
