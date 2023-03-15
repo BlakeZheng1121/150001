@@ -35,15 +35,16 @@ export class QuickSpinMsg extends Component {
     public changeLocale(locale: string) {
         switch (locale) {
             case 'en':
-                this.quickSpinTxt = 'Quick Spin ';
-                this.quickSpinEnabled = 'Enabled';
-                this.quickSpinDisabled = 'Disabled';
-
+                this.quickSpinEnabled = 'Quick Spin Enabled';
+                this.quickSpinDisabled = 'Quick Spin Disabled';
                 break;
             case 'zh':
-                this.quickSpinTxt = '快速旋转';
-                this.quickSpinEnabled = '开启';
-                this.quickSpinDisabled = '关闭';
+                this.quickSpinEnabled = '快速旋转开启';
+                this.quickSpinDisabled = '快速旋转关闭';
+                break;
+            case 'th':
+                this.quickSpinEnabled = 'เปิดอย่างรวดเร็ว';
+                this.quickSpinDisabled = 'ปิดอย่างรวดเร็ว';
                 break;
         }
     }
@@ -52,7 +53,7 @@ export class QuickSpinMsg extends Component {
         if (!isShow) return;
         this.node.active = true;
         this.uiOpacity.opacity = 0;
-        this.quickSpinMsgLabel.string = this.quickSpinTxt + (state ? this.quickSpinEnabled : this.quickSpinDisabled);
+        this.quickSpinMsgLabel.string = state ? this.quickSpinEnabled : this.quickSpinDisabled;
 
         this.showTween.stop();
         this.showTween.start();
