@@ -1,33 +1,40 @@
 
 Raise_JackpotFX.png
-size: 240,127
+size: 462,123
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 TrailLight_00
-  rotate: true
-  xy: 205, 27
+  rotate: false
+  xy: 2, 25
   size: 99, 32
   orig: 138, 64
   offset: 17, 32
   index: -1
 light_inside
   rotate: false
-  xy: 206, 3
+  xy: 102, 32
   size: 24, 22
   orig: 24, 22
   offset: 0, 0
   index: -1
+major_light_outside
+  rotate: false
+  xy: 2, 58
+  size: 254, 63
+  orig: 254, 63
+  offset: 0, 0
+  index: -1
 mini_light_outside
   rotate: false
-  xy: 2, 66
+  xy: 258, 62
   size: 201, 59
   orig: 206, 59
   offset: 2, 0
   index: -1
 minor_light_outside
   rotate: false
-  xy: 2, 6
+  xy: 258, 2
   size: 202, 58
   orig: 202, 58
   offset: 0, 0
