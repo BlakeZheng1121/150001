@@ -3,7 +3,7 @@ const win = window as any;
 export const languages = {
     // Data
     loading: 'กําลังเชื่อมต่อ...',
-    jackpotUpgradeBet: 'ยอดเดิมพันสูงสุดสามารถ \nอัพเกรด',
+    jackpotUpgradeBet: 'ยอดเดิมพันสูงสุดสามารถ อัพเกรด\n',
     jackpotUpgradeBetRange: 'เดิมพัน , ถึง ',
 };
 
