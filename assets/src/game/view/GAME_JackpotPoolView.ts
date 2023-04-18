@@ -125,7 +125,7 @@ export class GAME_JackpotPoolView extends BaseScene {
                     //this.tempGrandAmount = tempValue;
                     break;
                 case JackpotPool.MAJOR:
-                    //this.tempMajorAmount = tempValue;
+                    this.tempMajorAmount = tempValue;
                     break;
                 case JackpotPool.MINOR:
                     this.tempMinorAmount = tempValue;
@@ -135,6 +135,7 @@ export class GAME_JackpotPoolView extends BaseScene {
                     break;
             }
         }
+        this.updateMajorAmount();
         this.updateMinorAmount();
         this.updateMiniAmount();
     }

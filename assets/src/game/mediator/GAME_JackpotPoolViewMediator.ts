@@ -153,7 +153,7 @@ export class GAME_JackpotPoolViewMediator extends BaseMediator<GAME_JackpotPoolV
     protected hitJackpotToUpdatePoolValue(hitInfos: PoolHitInfo[]) {
         let jpObject: JackpotTypeObj = new JackpotTypeObj();
         jpObject.typeItems = [];
-        for (let i = 0; i < 2; i++) {
+        for (let i = 0; i < JackpotPool.GRAND; i++) {
             let jackpotPoolObj: JackpotPoolObj = new JackpotPoolObj();
             jackpotPoolObj.poolId = hitInfos[i].hitPool;
             jackpotPoolObj.poolValue = hitInfos[i].hitAmount / 100;
