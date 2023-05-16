@@ -34,7 +34,7 @@ steps:
       password:
         from_secret: CI_Pass
       script:
-        - git clone -b ${DRONE_BRANCH} git@gitlab.jigames.com.tw:h5_slot_game/jhs1030.git ./cocos/${DRONE_COMMIT_SHA:0:8}
+        - git clone -b ${DRONE_BRANCH} git@gitlab.jigames.com.tw:h5_slot_game/1030.git ./cocos/${DRONE_COMMIT_SHA:0:8}
 
   - name: copy help to build-templates
     image: appleboy/drone-ssh
@@ -178,7 +178,7 @@ steps:
       password: 
         from_secret: CI_Pass
       script:
-        - git clone --single-branch --branch ${DRONE_TAG} git@gitlab.jigames.com.tw:h5_slot_game/jhs1030.git ./cocos/${DRONE_COMMIT_SHA:0:8}
+        - git clone --single-branch --branch ${DRONE_TAG} git@gitlab.jigames.com.tw:h5_slot_game/1030.git ./cocos/${DRONE_COMMIT_SHA:0:8}
 
   - name: copy help to build-templates
     image: appleboy/drone-ssh
