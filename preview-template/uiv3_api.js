@@ -1,5 +1,5 @@
 var gameType = 1;
-var machineType = 1023;
+var machineType = 1030;
 
 var initTicket = {
     gameType: gameType,
