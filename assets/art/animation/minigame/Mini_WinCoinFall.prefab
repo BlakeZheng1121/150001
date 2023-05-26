@@ -700,10 +700,10 @@
   {
     "__type__": "cc.TextureAnimationModule",
     "_enable": true,
-    "_numTilesX": 4,
-    "numTilesX": 4,
-    "_numTilesY": 3,
-    "numTilesY": 3,
+    "_numTilesX": 6,
+    "numTilesX": 6,
+    "_numTilesY": 6,
+    "numTilesY": 6,
     "_mode": 0,
     "animation": 0,
     "frameOverTime": {
