@@ -43,12 +43,12 @@
         "rotated": false,
         "offsetX": 0,
         "offsetY": 0,
-        "trimX": 0,
-        "trimY": 0,
-        "width": 128,
-        "height": 128,
-        "rawWidth": 128,
-        "rawHeight": 128,
+        "trimX": 2,
+        "trimY": 1,
+        "width": 252,
+        "height": 254,
+        "rawWidth": 256,
+        "rawHeight": 256,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
@@ -69,10 +69,6 @@
   "userData": {
     "type": "sprite-frame",
     "hasAlpha": true,
-    "redirect": "e7bd8bfb-c82a-481c-b154-d86430ffe1e2@f9941",
-    "compressSettings": {
-      "useCompressTexture": true,
-      "presetId": "b02XZfxTZD26OVIuSrFN88"
-    }
+    "redirect": "e7bd8bfb-c82a-481c-b154-d86430ffe1e2@f9941"
   }
 }
