@@ -1,34 +1,48 @@
 
 DragonEffect_Vertical.png
-size: 399,194
+size: 486,400
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-C2_lightcircle_2
+Dragon1
   rotate: false
-  xy: 268, 8
-  size: 128, 128
-  orig: 128, 128
+  xy: 244, 2
+  size: 240, 76
+  orig: 240, 76
   offset: 0, 0
   index: -1
-fire_00
+Dragon_00
   rotate: false
-  xy: 178, 8
-  size: 90, 184
-  orig: 160, 200
-  offset: 35, 16
+  xy: 2, 80
+  size: 240, 76
+  orig: 240, 76
+  offset: 0, 0
   index: -1
-fp0
+Dragon_01
+  rotate: false
+  xy: 244, 80
+  size: 240, 76
+  orig: 240, 76
+  offset: 0, 0
+  index: -1
+Dragon_02
   rotate: false
   xy: 2, 2
-  size: 174, 190
-  orig: 174, 190
+  size: 240, 76
+  orig: 240, 76
   offset: 0, 0
   index: -1
-plight_0
+Light CircleBlur
   rotate: false
-  xy: 268, 138
-  size: 31, 31
-  orig: 31, 31
+  xy: 2, 158
+  size: 240, 240
+  orig: 240, 240
+  offset: 0, 0
+  index: -1
+rilmlightCircle
+  rotate: false
+  xy: 244, 158
+  size: 240, 240
+  orig: 240, 240
   offset: 0, 0
   index: -1

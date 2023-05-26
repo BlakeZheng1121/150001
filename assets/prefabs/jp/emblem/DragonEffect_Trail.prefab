@@ -75,8 +75,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1735.8460693359375,
-      "height": 2029.24853515625
+      "width": 1233.21875,
+      "height": 2195.00341796875
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -124,7 +124,7 @@
       "__uuid__": "cc96aa85-a610-4ace-932f-c7fc327db7cf",
       "__expectedType__": "sp.SkeletonData"
     },
-    "defaultSkin": "default",
+    "defaultSkin": "",
     "defaultAnimation": "",
     "_sockets": [],
     "_debugMesh": false,
@@ -180,11 +180,11 @@
   },
   {
     "__type__": "AnimationState",
-    "ccAnimation設定面板": true,
-    "Spine2D設定面板": true,
-    "Spine2D混合動畫設定面板": false,
-    "粒子設定面板": false,
-    "音效設定面板": false,
+    "ccAnimation": true,
+    "Spine2D": true,
+    "Spine2DAdd": false,
+    "Particle": false,
+    "Audio": false,
     "IsAnimationPlay": false,
     "CocosAnimationState": 0,
     "IsSpine2DPlay": true,
@@ -214,11 +214,11 @@
   },
   {
     "__type__": "AnimationState",
-    "ccAnimation設定面板": true,
-    "Spine2D設定面板": true,
-    "Spine2D混合動畫設定面板": false,
-    "粒子設定面板": false,
-    "音效設定面板": false,
+    "ccAnimation": true,
+    "Spine2D": true,
+    "Spine2DAdd": false,
+    "Particle": false,
+    "Audio": false,
     "IsAnimationPlay": false,
     "CocosAnimationState": 0,
     "IsSpine2DPlay": true,
