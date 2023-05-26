@@ -228,7 +228,7 @@
     "timelineSpine": {
       "__id__": 4
     },
-    "timelineSpineName": 2,
+    "timelineSpineName": 1,
     "timeScale": 1,
     "delayTime": 0,
     "isEndClose": false,
@@ -462,6 +462,12 @@
       "__type__": "cc.Vec3",
       "x": 0,
       "y": 20,
+      "z": 0
+    },
+    "multiPos": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 26,
       "z": 0
     },
     "normalPos": {

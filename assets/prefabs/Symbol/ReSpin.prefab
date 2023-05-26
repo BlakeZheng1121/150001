@@ -176,7 +176,7 @@
       "__uuid__": "30e59385-156d-4043-9c3c-0827d5074e1e",
       "__expectedType__": "sp.SkeletonData"
     },
-    "defaultSkin": "default",
+    "defaultSkin": "",
     "defaultAnimation": "",
     "_sockets": [],
     "_debugMesh": false,
@@ -980,6 +980,12 @@
       "__type__": "cc.Vec3",
       "x": 0,
       "y": 20,
+      "z": 0
+    },
+    "multiPos": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 26,
       "z": 0
     },
     "normalPos": {
