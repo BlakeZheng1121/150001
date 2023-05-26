@@ -29,7 +29,7 @@
       }
     ],
     "_prefab": {
-      "__id__": 18
+      "__id__": 10
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -72,8 +72,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1735.8460693359375,
-      "height": 2029.24853515625
+      "width": 1233.21875,
+      "height": 2195.00341796875
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -144,27 +144,11 @@
     },
     "DefaultActive": false,
     "SpineAnimationIndex": [
-      "TrailHit0",
-      "TrailHit1",
-      "TrailHit2",
-      "TrailHit3",
-      "TrailHit4"
+      "TrailHit2"
     ],
     "AnimationList": [
       {
         "__id__": 8
-      },
-      {
-        "__id__": 10
-      },
-      {
-        "__id__": 12
-      },
-      {
-        "__id__": 14
-      },
-      {
-        "__id__": 16
       }
     ],
     "_id": ""
@@ -175,7 +159,7 @@
   },
   {
     "__type__": "AnimationList",
-    "List_Name": "回擊1",
+    "List_Name": "回擊2",
     "AnimationFlowIsDependOnCocosAnimation": false,
     "DelayTime": 0,
     "AnimationState": [
@@ -188,151 +172,16 @@
   },
   {
     "__type__": "AnimationState",
-    "ccAnimation設定面板": true,
-    "Spine2D設定面板": true,
-    "Spine2D混合動畫設定面板": false,
-    "粒子設定面板": false,
-    "音效設定面板": false,
-    "IsAnimationPlay": true,
+    "ccAnimation": true,
+    "Spine2D": true,
+    "Spine2DAdd": false,
+    "Particle": false,
+    "Audio": false,
+    "Adjust": null,
+    "IsAnimationPlay": false,
     "CocosAnimationState": 0,
     "IsSpine2DPlay": true,
     "Spine2DAnimationState": 0,
-    "IsSpineAnimationLoop": false,
-    "IsSpine2DAddPlay": false,
-    "Spine2DAddAnimationTrack": 1,
-    "Spine2DAddAnimationState": 0,
-    "IsSpineAnimationAddLoop": false,
-    "PlayParticle": [],
-    "StopParticle": [],
-    "PlayAudio_Name": [],
-    "StopAudio_Name": []
-  },
-  {
-    "__type__": "AnimationList",
-    "List_Name": "回擊2",
-    "AnimationFlowIsDependOnCocosAnimation": false,
-    "DelayTime": 0,
-    "AnimationState": [
-      {
-        "__id__": 11
-      }
-    ],
-    "IsAnimationOverActiveType": false,
-    "ListLoop": false
-  },
-  {
-    "__type__": "AnimationState",
-    "ccAnimation設定面板": true,
-    "Spine2D設定面板": true,
-    "Spine2D混合動畫設定面板": false,
-    "粒子設定面板": false,
-    "音效設定面板": false,
-    "IsAnimationPlay": false,
-    "CocosAnimationState": 0,
-    "IsSpine2DPlay": true,
-    "Spine2DAnimationState": 1,
-    "IsSpineAnimationLoop": false,
-    "IsSpine2DAddPlay": false,
-    "Spine2DAddAnimationTrack": 1,
-    "Spine2DAddAnimationState": 0,
-    "IsSpineAnimationAddLoop": false,
-    "PlayParticle": [],
-    "StopParticle": [],
-    "PlayAudio_Name": [],
-    "StopAudio_Name": []
-  },
-  {
-    "__type__": "AnimationList",
-    "List_Name": "回擊3",
-    "AnimationFlowIsDependOnCocosAnimation": false,
-    "DelayTime": 0,
-    "AnimationState": [
-      {
-        "__id__": 13
-      }
-    ],
-    "IsAnimationOverActiveType": false,
-    "ListLoop": false
-  },
-  {
-    "__type__": "AnimationState",
-    "ccAnimation設定面板": true,
-    "Spine2D設定面板": true,
-    "Spine2D混合動畫設定面板": false,
-    "粒子設定面板": false,
-    "音效設定面板": false,
-    "IsAnimationPlay": false,
-    "CocosAnimationState": 0,
-    "IsSpine2DPlay": true,
-    "Spine2DAnimationState": 2,
-    "IsSpineAnimationLoop": false,
-    "IsSpine2DAddPlay": false,
-    "Spine2DAddAnimationTrack": 1,
-    "Spine2DAddAnimationState": 0,
-    "IsSpineAnimationAddLoop": false,
-    "PlayParticle": [],
-    "StopParticle": [],
-    "PlayAudio_Name": [],
-    "StopAudio_Name": []
-  },
-  {
-    "__type__": "AnimationList",
-    "List_Name": "回擊4",
-    "AnimationFlowIsDependOnCocosAnimation": false,
-    "DelayTime": 0,
-    "AnimationState": [
-      {
-        "__id__": 15
-      }
-    ],
-    "IsAnimationOverActiveType": false,
-    "ListLoop": false
-  },
-  {
-    "__type__": "AnimationState",
-    "ccAnimation設定面板": true,
-    "Spine2D設定面板": true,
-    "Spine2D混合動畫設定面板": false,
-    "粒子設定面板": false,
-    "音效設定面板": false,
-    "IsAnimationPlay": false,
-    "CocosAnimationState": 0,
-    "IsSpine2DPlay": true,
-    "Spine2DAnimationState": 3,
-    "IsSpineAnimationLoop": false,
-    "IsSpine2DAddPlay": false,
-    "Spine2DAddAnimationTrack": 1,
-    "Spine2DAddAnimationState": 0,
-    "IsSpineAnimationAddLoop": false,
-    "PlayParticle": [],
-    "StopParticle": [],
-    "PlayAudio_Name": [],
-    "StopAudio_Name": []
-  },
-  {
-    "__type__": "AnimationList",
-    "List_Name": "回擊5",
-    "AnimationFlowIsDependOnCocosAnimation": false,
-    "DelayTime": 0,
-    "AnimationState": [
-      {
-        "__id__": 17
-      }
-    ],
-    "IsAnimationOverActiveType": false,
-    "ListLoop": false
-  },
-  {
-    "__type__": "AnimationState",
-    "ccAnimation設定面板": true,
-    "Spine2D設定面板": true,
-    "Spine2D混合動畫設定面板": false,
-    "粒子設定面板": false,
-    "音效設定面板": false,
-    "IsAnimationPlay": false,
-    "CocosAnimationState": 0,
-    "IsSpine2DPlay": true,
-    "Spine2DAnimationState": 4,
     "IsSpineAnimationLoop": false,
     "IsSpine2DAddPlay": false,
     "Spine2DAddAnimationTrack": 1,
