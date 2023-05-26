@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "e2d672b7-a528-45e7-bb40-3bf0c06025c5",
+  "uuid": "ed914903-44bd-474d-a7ba-cc4e63ad2e9a",
   "files": [
     ".png",
     ".json"
@@ -10,8 +10,8 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "e2d672b7-a528-45e7-bb40-3bf0c06025c5@6c48a",
-      "displayName": "FS_Transition",
+      "uuid": "ed914903-44bd-474d-a7ba-cc4e63ad2e9a@6c48a",
+      "displayName": "DragonSoreCollectLight",
       "id": "6c48a",
       "name": "texture",
       "userData": {
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "e2d672b7-a528-45e7-bb40-3bf0c06025c5"
+        "imageUuidOrDatabaseUri": "ed914903-44bd-474d-a7ba-cc4e63ad2e9a"
       },
       "ver": "1.0.21",
       "imported": true,
@@ -35,6 +35,6 @@
   "userData": {
     "hasAlpha": true,
     "type": "texture",
-    "redirect": "e2d672b7-a528-45e7-bb40-3bf0c06025c5@6c48a"
+    "redirect": "ed914903-44bd-474d-a7ba-cc4e63ad2e9a@6c48a"
   }
 }

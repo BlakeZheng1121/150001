@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "d80f6f52-907a-45ac-8e28-731e337d44b0",
+  "uuid": "ef254dc4-5fa7-4a8c-9d1b-9730dbb12cd0",
   "files": [
     ".png",
     ".json"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "d80f6f52-907a-45ac-8e28-731e337d44b0@6c48a",
+      "uuid": "ef254dc4-5fa7-4a8c-9d1b-9730dbb12cd0@6c48a",
       "displayName": "BG_effect",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "d80f6f52-907a-45ac-8e28-731e337d44b0"
+        "imageUuidOrDatabaseUri": "ef254dc4-5fa7-4a8c-9d1b-9730dbb12cd0"
       },
       "ver": "1.0.21",
       "imported": true,
@@ -35,6 +35,6 @@
   "userData": {
     "hasAlpha": true,
     "type": "texture",
-    "redirect": "d80f6f52-907a-45ac-8e28-731e337d44b0@6c48a"
+    "redirect": "ef254dc4-5fa7-4a8c-9d1b-9730dbb12cd0@6c48a"
   }
 }
