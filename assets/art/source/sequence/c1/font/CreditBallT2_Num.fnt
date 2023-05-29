@@ -1,18 +1,18 @@
-info face="CreditBallT2_Num_0" size=62 bold=0 italic=0 charset="" unicode=1 stretchH=100 smooth=1 aa=4 padding=0,0,0,0 spacing=1,1 outline=0
-common lineHeight=62 base=50 scaleW=280 scaleH=128 pages=1 packed=0 alphaChnl=1 redChnl=0 greenChnl=0 blueChnl=0
+info face="Arial" size=50 bold=0 italic=0 charset="" unicode=1 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=1,1 outline=0
+common lineHeight=50 base=40 scaleW=256 scaleH=128 pages=1 packed=0 alphaChnl=1 redChnl=0 greenChnl=0 blueChnl=0
 page id=0 file="CreditBallT2_Num_0.png"
 chars count=14
-char id=44   x=0     y=0     width=17    height=59    xoffset=0     yoffset=0     xadvance=17    page=0  chnl=15
-char id=46   x=18    y=0     width=16    height=59    xoffset=0     yoffset=0     xadvance=16    page=0  chnl=15
-char id=48   x=194   y=0     width=36    height=50    xoffset=0     yoffset=0     xadvance=36    page=0  chnl=15
-char id=49   x=177   y=51    width=26    height=49    xoffset=0     yoffset=0     xadvance=26    page=0  chnl=15
-char id=50   x=231   y=0     width=36    height=50    xoffset=0     yoffset=0     xadvance=36    page=0  chnl=15
-char id=51   x=78    y=0     width=38    height=50    xoffset=0     yoffset=0     xadvance=38    page=0  chnl=15
-char id=52   x=143   y=51    width=33    height=50    xoffset=0     yoffset=0     xadvance=33    page=0  chnl=15
-char id=53   x=156   y=0     width=37    height=50    xoffset=0     yoffset=0     xadvance=37    page=0  chnl=15
-char id=54   x=37    y=51    width=35    height=50    xoffset=0     yoffset=0     xadvance=35    page=0  chnl=15
-char id=55   x=73    y=51    width=34    height=50    xoffset=0     yoffset=0     xadvance=34    page=0  chnl=15
-char id=56   x=0     y=60    width=36    height=50    xoffset=0     yoffset=0     xadvance=36    page=0  chnl=15
-char id=57   x=108   y=51    width=34    height=50    xoffset=0     yoffset=0     xadvance=34    page=0  chnl=15
-char id=75   x=117   y=0     width=38    height=50    xoffset=0     yoffset=0     xadvance=38    page=0  chnl=15
-char id=77   x=35    y=0     width=42    height=50    xoffset=0     yoffset=0     xadvance=42    page=0  chnl=15
+char id=44   x=173   y=59    width=16    height=58    xoffset=0     yoffset=0     xadvance=16    page=0  chnl=15
+char id=46   x=155   y=59    width=17    height=58    xoffset=0     yoffset=0     xadvance=17    page=0  chnl=15
+char id=48   x=179   y=0     width=32    height=58    xoffset=0     yoffset=0     xadvance=32    page=0  chnl=15
+char id=49   x=128   y=59    width=26    height=58    xoffset=0     yoffset=0     xadvance=26    page=0  chnl=15
+char id=50   x=212   y=0     width=32    height=58    xoffset=0     yoffset=0     xadvance=32    page=0  chnl=15
+char id=51   x=111   y=0     width=33    height=58    xoffset=0     yoffset=0     xadvance=33    page=0  chnl=15
+char id=52   x=41    y=0     width=34    height=58    xoffset=0     yoffset=0     xadvance=34    page=0  chnl=15
+char id=53   x=0     y=59    width=32    height=58    xoffset=0     yoffset=0     xadvance=32    page=0  chnl=15
+char id=54   x=145   y=0     width=33    height=58    xoffset=0     yoffset=0     xadvance=33    page=0  chnl=15
+char id=55   x=99    y=59    width=28    height=58    xoffset=0     yoffset=0     xadvance=28    page=0  chnl=15
+char id=56   x=33    y=59    width=32    height=58    xoffset=0     yoffset=0     xadvance=32    page=0  chnl=15
+char id=57   x=66    y=59    width=32    height=58    xoffset=0     yoffset=0     xadvance=32    page=0  chnl=15
+char id=75   x=76    y=0     width=34    height=58    xoffset=0     yoffset=0     xadvance=34    page=0  chnl=15
+char id=77   x=0     y=0     width=40    height=58    xoffset=0     yoffset=0     xadvance=40    page=0  chnl=15
