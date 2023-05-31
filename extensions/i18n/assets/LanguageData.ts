@@ -3,17 +3,30 @@ import { BaseLocalized } from './BaseLocalized';
 import { LocalizedSkeleton } from './LocalizedSkeleton';
 import { LocalizedSprite } from './LocalizedSprite';
 
-export let _language = 'en';
+const _default = 'en';
+export let _language = '';
 
 export let ready: boolean = false;
 
 /**
  * 初始化
- * @param language
+ * @param lang
  */
-export function init(language: string) {
+export function init(lang: string) {
+    _language = getSupportedLanguage(lang);
     ready = true;
-    _language = language;
+    updateSceneRenderers();
+}
+
+export function getSupportedLanguage(lang: string) {
+    if (win.languages) {
+        if (win.languages[lang]) {
+            return lang;
+        } else {
+            return _default;
+        }
+    }
+    throw new Error('No Language Support');
 }
 
 /**
@@ -40,7 +53,7 @@ export function t(key: string) {
 
 export function updateSceneRenderers() {
     // very costly iterations
-    const rootNodes = director.getScene()!.children;
+    const rootNodes = director.getScene()?.children;
     // walk all nodes with localize skeleton and update
     const allLocalizedSkeletons: any[] = [];
     for (let i = 0; i < rootNodes.length; ++i) {
@@ -81,6 +94,9 @@ win._languageData = {
     },
     init(lang: string) {
         init(lang);
+    },
+    getSupportedLanguage(lang: string) {
+        return getSupportedLanguage(lang);
     },
     updateSceneRenderers() {
         updateSceneRenderers();
