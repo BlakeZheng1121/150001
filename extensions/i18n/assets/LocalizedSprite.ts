@@ -53,7 +53,7 @@ export class LocalizedSprite extends BaseLocalized {
             let uuid = await Editor.Message.request('asset-db', 'query-uuid', eval('`' + this.spriteUrl + '`'));
             await Editor.Message.request('scene', 'set-property', {
                 uuid: this.node.uuid,
-                path: `__comps__.1.spriteFrame`,
+                path: `__comps__.${this.getComponents(Component).findIndex(val=>val==this.sprite)}.spriteFrame`,
                 dump: {
                     type: 'cc.SpriteFrame',
                     value: {

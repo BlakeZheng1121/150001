@@ -2,12 +2,36 @@
 
 ## Deprecated Features
 
+## 1.1.10
+### Added
+- 加入LocalizedPosition擴增功能，在上面可做node座標的即時編輯，並且加入存檔功能
+
+## 1.1.9
+### Changed
+- 優化用AddLocalizedScript掛載LocalizedSkeleton變數只有保留SkeletonData改成全部
+### Fixed
+- 修正Component順序會導致set-property取直錯誤，改由動態去取得順序在塞值
+
+## 1.1.8
+### Fixed
+- 修正 LocalizedPosition 新增語系會清空原先設定問題
+
+## 1.1.7
+- 提供查詢語系是否支援，如不支援回傳default語系（目前設為en）
+- 初始語系直接更新場上語系資源
+
+## 1.1.6
+- 如果帶入語系不支援改採用預設"en"
+### Fixed
+- 修正空場景報錯
+- 修正LocalizedPosition 警告
+
 ## 1.1.5
 - 固定package中vue的版本，避免新版不相容的問題
 - LocalizedSprite新增bundle載入失敗的重載功能
 
 ## 1.1.4
-### Fix
+### Fixed
 - 修正多國語系移除圖檔判斷有誤，已經移除圖檔的物件會損壞
 - 修正多國語系Spine檔runtime錯誤
 

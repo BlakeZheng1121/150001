@@ -1,6 +1,6 @@
 import * as i18n from './LanguageData';
 
-import { _decorator, assetManager, sp } from 'cc';
+import { Component, _decorator, assetManager, sp } from 'cc';
 const { ccclass, property, executeInEditMode, menu } = _decorator;
 
 @ccclass('LocalizedSkeleton')
@@ -48,7 +48,7 @@ export class LocalizedSkeleton extends sp.Skeleton {
             let uuid = await Editor.Message.request('asset-db', 'query-uuid', url);
             await Editor.Message.request('scene', 'set-property', {
                 uuid: this.node.uuid,
-                path: `__comps__.1.skeletonData`,
+                path: `__comps__.${this.getComponents(Component).findIndex(val=>val==this)}.skeletonData`,
                 dump: {
                     type: 'sp.SkeletonData',
                     value: {
