@@ -136,7 +136,7 @@ export class GAME_JackpotPoolViewMediator extends BaseMediator<GAME_JackpotPoolV
             let jpValue = jpPoolData.jackpotExtendSetting.poolInitValue[betRangeMapIndex][i];
             switch (jpType) {
                 case JackpotPoolValueType.Credit:
-                    newPoolInitValue.push(this.gameDataProxy.convertCredit2Cash(jpValue));
+                    newPoolInitValue.push(this.jackpotPoolProxy.jackpotTypeObj.typeItems[i].poolValue);
                     break;
                 case JackpotPoolValueType.Multiplier:
                     let mulValue = this.gameDataProxy.totalBetList[this.gameDataProxy.totalBetIdx] * jpValue;
