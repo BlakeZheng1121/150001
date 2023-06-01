@@ -7,4 +7,5 @@ export class JackpotExtendSetting {
     public fortuneMultiplier: number[];
     public betRangeMap: number[];
     public poolInitValue: Array<number[]>;
+    public poolInitValueType: Array<string>;
 }
