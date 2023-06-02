@@ -311,7 +311,6 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
                     : ControlView.VERTICAL,
                 this.gameDataProxy.curScene
             );
-            this.changeBonusUpgradeInfo();
         }
     }
 
@@ -412,7 +411,6 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
 
     public spin() {
         window['onSpinBtnClick']();
-        this.view.hideBonusUpgradeHint();
     }
 
     // 使用鍵盤 spin
@@ -447,7 +445,6 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
         this.gameDataProxy.resetBetInfo(this.gameDataProxy.totalBetList[this.gameDataProxy.totalBetIdx]);
         this.updateTotalBetTxt();
         this.clearPlayerWinTxt();
-        this.changeBonusUpgradeInfo();
     }
 
     /** 點擊增加押注*/
@@ -462,7 +459,6 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
         this.gameDataProxy.resetBetInfo(this.gameDataProxy.totalBetList[this.gameDataProxy.totalBetIdx]);
         this.updateTotalBetTxt();
         this.clearPlayerWinTxt();
-        this.changeBonusUpgradeInfo();
     }
 
     /** 點擊turbo按鈕 */
@@ -580,8 +576,6 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
             minBets.push(this.gameDataProxy.totalBetList[tempMinBetIndex]);
             maxBets.push(this.gameDataProxy.totalBetList[tempMaxBetIndex]);
         });
-
-        this.view.createBonusUpgradeBetRangeInfo(minBets, maxBets);
     }
 
     /** 點擊total bet 開啟選單*/
@@ -606,8 +600,6 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
             }
             this.view.betMenu.node.active = true;
             this.networkProxy.changeOptionStatus(true);
-            this.view.hideBonusUpgradeHint();
-            this.view.showBonusUpgradeMessage();
         }
 
         this.sendNotification(SoundEvent.BUTTON_DOWN_SOUND);
@@ -679,7 +671,6 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
     /** 點擊自動玩面板選單 */
     private onClickAutoOption(autoCountNum: string): void {
         this.hideAllMenu();
-        this.view.hideBonusUpgradeHint();
 
         this.view.autoPlayButton.changeState(AutoPlayButton.STATUS_PAUSE);
         this.sendNotification(AutoPlayClickOptionCommand.NAME, [0, +autoCountNum]);
@@ -712,12 +703,6 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
         this.sendNotification(SoundEvent.BUTTON_DOWN_SOUND);
         this.updateTotalBetTxt();
         this.clearPlayerWinTxt();
-        this.changeBonusUpgradeInfo();
-    }
-
-    private changeBonusUpgradeInfo() {
-        const betRangeMapIndex = this.gameDataProxy.getJackpotPoolRangeIndexWithBet();
-        this.view.onBetLevelChange(betRangeMapIndex);
     }
 
     /** 
