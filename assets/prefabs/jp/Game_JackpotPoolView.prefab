@@ -813,7 +813,7 @@
     "__type__": "OriSetting",
     "isChangeScale": false,
     "isChangeContentSize": false,
-    "isChangePosition": true,
+    "isChangePosition": false,
     "position": {
       "__type__": "cc.Vec3",
       "x": 9,
