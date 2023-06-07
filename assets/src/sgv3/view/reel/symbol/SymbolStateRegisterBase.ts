@@ -40,9 +40,9 @@ export class SymbolHideState extends UIViewStateBase {
     }
 
     onPlay() {
-        //if(this.symbolContent.backgroundSprite != null){
-        //    this.symbolContent.backgroundSprite.enabled = false;
-        //}
+        if (this.symbolContent.backgroundSprite != null) {
+            this.symbolContent.backgroundSprite.enabled = false;
+        }
         this.symbolContent.mainSprite.enabled = false;
         this.onEffectFinished();
     }
@@ -68,14 +68,17 @@ export class SymbolAllWinState extends UIViewStateBase {
             this.symbolContent.tween = tween(this.symbolContent.mainSprite.node)
                 .call(() => {
                     this.symbolContent.mainSprite.enabled = false;
+                    this.symbolContent.backgroundSprite.enabled = false;
                 })
                 .delay(this.symbolContent.duration)
                 .call(() => {
                     this.symbolContent.mainSprite.enabled = true;
+                    this.symbolContent.backgroundSprite.enabled = true;
                 })
                 .delay(this.symbolContent.duration)
                 .call(() => {
                     this.symbolContent.mainSprite.enabled = true;
+                    this.symbolContent.backgroundSprite.enabled = true;
                     this.onEffectFinished();
                     this.symbolContent.tween = null;
                 })
@@ -179,9 +182,9 @@ export class SymbolShowState extends UIViewStateBase {
     }
 
     onPlay() {
-        //if (this.symbolContent.backgroundSprite != null) {
-        //    this.symbolContent.backgroundSprite.enabled = true;
-        //}
+        if (this.symbolContent.backgroundSprite != null) {
+            this.symbolContent.backgroundSprite.enabled = true;
+        }
         if (this.symbolContent.mainSprite != null) {
             this.symbolContent.mainSprite.enabled = true;
         }
