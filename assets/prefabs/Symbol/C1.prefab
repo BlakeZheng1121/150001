@@ -170,6 +170,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 3
     },
@@ -179,8 +180,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 210,
-      "height": 210
+      "width": 280,
+      "height": 280
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -197,6 +198,7 @@
     "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 3
     },
@@ -850,6 +852,12 @@
       "__type__": "cc.Vec3",
       "x": 0,
       "y": 20,
+      "z": 0
+    },
+    "multiPos": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 26,
       "z": 0
     },
     "normalPos": {

@@ -133,8 +133,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 220,
-      "height": 220
+      "width": 280,
+      "height": 280
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -550,6 +550,7 @@
     "__prefab": {
       "__id__": 27
     },
+    "_backgroundSprite": null,
     "_mainSprite": {
       "__id__": 5
     },
