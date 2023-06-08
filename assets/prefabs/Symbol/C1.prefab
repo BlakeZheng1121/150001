@@ -713,7 +713,7 @@
     "timelineAnimationName": 2,
     "delayTime": 0,
     "useSpine": false,
-    "useAnim": false,
+    "useAnim": true,
     "useParticle": false,
     "spineSetupData": {
       "__id__": 44
@@ -734,9 +734,11 @@
   },
   {
     "__type__": "AnimationSetupData",
-    "animation": null,
+    "animation": {
+      "__id__": 15
+    },
     "animationName": 0,
-    "delayTime": 0
+    "delayTime": 0.2
   },
   {
     "__type__": "TimelineSpineSetupData",

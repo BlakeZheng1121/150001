@@ -3343,7 +3343,7 @@
     "timelineAnimationName": 2,
     "delayTime": 0,
     "useSpine": false,
-    "useAnim": false,
+    "useAnim": true,
     "useParticle": true,
     "spineSetupData": {
       "__id__": 249
@@ -3368,9 +3368,11 @@
   },
   {
     "__type__": "AnimationSetupData",
-    "animation": null,
+    "animation": {
+      "__id__": 219
+    },
     "animationName": 0,
-    "delayTime": 0
+    "delayTime": 0.2
   },
   {
     "__type__": "ParticleSetupData",
@@ -3483,7 +3485,7 @@
     "timelineAnimationName": 3,
     "delayTime": 0,
     "useSpine": false,
-    "useAnim": false,
+    "useAnim": true,
     "useParticle": true,
     "spineSetupData": {
       "__id__": 261
@@ -3508,9 +3510,11 @@
   },
   {
     "__type__": "AnimationSetupData",
-    "animation": null,
+    "animation": {
+      "__id__": 219
+    },
     "animationName": 0,
-    "delayTime": 0
+    "delayTime": 0.5
   },
   {
     "__type__": "ParticleSetupData",
