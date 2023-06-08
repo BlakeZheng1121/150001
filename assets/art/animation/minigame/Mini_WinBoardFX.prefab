@@ -23,14 +23,14 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 241
+        "__id__": 235
       },
       {
-        "__id__": 243
+        "__id__": 237
       }
     ],
     "_prefab": {
-      "__id__": 246
+      "__id__": 240
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -87,38 +87,35 @@
         "__id__": 152
       },
       {
-        "__id__": 158
+        "__id__": 160
       },
       {
-        "__id__": 166
+        "__id__": 168
       },
       {
-        "__id__": 174
+        "__id__": 176
       },
       {
-        "__id__": 182
-      },
-      {
-        "__id__": 190
+        "__id__": 184
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 196
+        "__id__": 190
       },
       {
-        "__id__": 198
+        "__id__": 192
       },
       {
-        "__id__": 200
+        "__id__": 194
       },
       {
-        "__id__": 238
+        "__id__": 232
       }
     ],
     "_prefab": {
-      "__id__": 240
+      "__id__": 234
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -2232,136 +2229,6 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Gem",
-    "_objFlags": 0,
-    "_parent": {
-      "__id__": 2
-    },
-    "_children": [],
-    "_active": true,
-    "_components": [
-      {
-        "__id__": 153
-      },
-      {
-        "__id__": 155
-      }
-    ],
-    "_prefab": {
-      "__id__": 157
-    },
-    "_lpos": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 255,
-      "z": 0
-    },
-    "_lrot": {
-      "__type__": "cc.Quat",
-      "x": null,
-      "y": null,
-      "z": null,
-      "w": null
-    },
-    "_lscale": {
-      "__type__": "cc.Vec3",
-      "x": 1.25,
-      "y": 1.25,
-      "z": 0
-    },
-    "_layer": 64,
-    "_euler": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_id": ""
-  },
-  {
-    "__type__": "cc.UITransform",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 152
-    },
-    "_enabled": true,
-    "__prefab": {
-      "__id__": 154
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 342,
-      "height": 372
-    },
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
-    },
-    "_id": ""
-  },
-  {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "f9wshg4G1Ix7NS8v2jAyKg"
-  },
-  {
-    "__type__": "cc.Sprite",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 152
-    },
-    "_enabled": true,
-    "__prefab": {
-      "__id__": 156
-    },
-    "_visFlags": 0,
-    "_customMaterial": null,
-    "_srcBlendFactor": 2,
-    "_dstBlendFactor": 4,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_spriteFrame": {
-      "__uuid__": "03de25f8-3d01-414f-a301-70fa474c3c64@f9941",
-      "__expectedType__": "cc.SpriteFrame"
-    },
-    "_type": 0,
-    "_fillType": 0,
-    "_sizeMode": 2,
-    "_fillCenter": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
-    },
-    "_fillStart": 0,
-    "_fillRange": 0,
-    "_isTrimmedMode": false,
-    "_useGrayscale": false,
-    "_atlas": null,
-    "_id": ""
-  },
-  {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "46d32B7qBA4JvuYXBpRW5V"
-  },
-  {
-    "__type__": "cc.PrefabInfo",
-    "root": {
-      "__id__": 1
-    },
-    "asset": {
-      "__id__": 0
-    },
-    "fileId": "09FosYhFZNpp/ewtjWc02k"
-  },
-  {
-    "__type__": "cc.Node",
     "_name": "GrandWinText",
     "_objFlags": 0,
     "_parent": {
@@ -2371,17 +2238,17 @@
     "_active": false,
     "_components": [
       {
-        "__id__": 159
+        "__id__": 153
       },
       {
-        "__id__": 161
+        "__id__": 155
       },
       {
-        "__id__": 163
+        "__id__": 157
       }
     ],
     "_prefab": {
-      "__id__": 165
+      "__id__": 159
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -2416,11 +2283,11 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 158
+      "__id__": 152
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 160
+      "__id__": 154
     },
     "_contentSize": {
       "__type__": "cc.Size",
@@ -2443,11 +2310,11 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 158
+      "__id__": 152
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 162
+      "__id__": 156
     },
     "_visFlags": 0,
     "_customMaterial": null,
@@ -2485,11 +2352,11 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 158
+      "__id__": 152
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 164
+      "__id__": 158
     },
     "spriteUrl": "db://assets/art/language/${i18n._language}/minigame/mini-result/WinText_GrandBoard.png@f9941",
     "_id": ""
@@ -2519,17 +2386,17 @@
     "_active": false,
     "_components": [
       {
-        "__id__": 167
+        "__id__": 161
       },
       {
-        "__id__": 169
+        "__id__": 163
       },
       {
-        "__id__": 171
+        "__id__": 165
       }
     ],
     "_prefab": {
-      "__id__": 173
+      "__id__": 167
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -2564,11 +2431,11 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 166
+      "__id__": 160
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 168
+      "__id__": 162
     },
     "_contentSize": {
       "__type__": "cc.Size",
@@ -2591,11 +2458,11 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 166
+      "__id__": 160
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 170
+      "__id__": 164
     },
     "_visFlags": 0,
     "_customMaterial": null,
@@ -2633,11 +2500,11 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 166
+      "__id__": 160
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 172
+      "__id__": 166
     },
     "spriteUrl": "db://assets/art/language/${i18n._language}/minigame/mini-result/WinText_MajorBoard.png@f9941",
     "_id": ""
@@ -2667,17 +2534,17 @@
     "_active": false,
     "_components": [
       {
-        "__id__": 175
+        "__id__": 169
       },
       {
-        "__id__": 177
+        "__id__": 171
       },
       {
-        "__id__": 179
+        "__id__": 173
       }
     ],
     "_prefab": {
-      "__id__": 181
+      "__id__": 175
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -2712,11 +2579,11 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 174
+      "__id__": 168
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 176
+      "__id__": 170
     },
     "_contentSize": {
       "__type__": "cc.Size",
@@ -2739,11 +2606,11 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 174
+      "__id__": 168
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 178
+      "__id__": 172
     },
     "_visFlags": 0,
     "_customMaterial": null,
@@ -2781,11 +2648,11 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 174
+      "__id__": 168
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 180
+      "__id__": 174
     },
     "spriteUrl": "db://assets/art/language/${i18n._language}/minigame/mini-result/WinText_MinorBoard.png@f9941",
     "_id": ""
@@ -2815,17 +2682,17 @@
     "_active": false,
     "_components": [
       {
-        "__id__": 183
+        "__id__": 177
       },
       {
-        "__id__": 185
+        "__id__": 179
       },
       {
-        "__id__": 187
+        "__id__": 181
       }
     ],
     "_prefab": {
-      "__id__": 189
+      "__id__": 183
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -2860,11 +2727,11 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 182
+      "__id__": 176
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 184
+      "__id__": 178
     },
     "_contentSize": {
       "__type__": "cc.Size",
@@ -2887,11 +2754,11 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 182
+      "__id__": 176
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 186
+      "__id__": 180
     },
     "_visFlags": 0,
     "_customMaterial": null,
@@ -2929,11 +2796,11 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 182
+      "__id__": 176
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 188
+      "__id__": 182
     },
     "spriteUrl": "db://assets/art/language/${i18n._language}/minigame/mini-result/WinText_MiniBoard.png@f9941",
     "_id": ""
@@ -2963,14 +2830,14 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 191
+        "__id__": 185
       },
       {
-        "__id__": 193
+        "__id__": 187
       }
     ],
     "_prefab": {
-      "__id__": 195
+      "__id__": 189
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -3005,11 +2872,11 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 190
+      "__id__": 184
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 192
+      "__id__": 186
     },
     "_contentSize": {
       "__type__": "cc.Size",
@@ -3032,11 +2899,11 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 190
+      "__id__": 184
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 194
+      "__id__": 188
     },
     "_visFlags": 0,
     "_customMaterial": null,
@@ -3094,7 +2961,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 197
+      "__id__": 191
     },
     "_contentSize": {
       "__type__": "cc.Size",
@@ -3122,7 +2989,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 199
+      "__id__": 193
     },
     "playOnLoad": false,
     "_clips": [
@@ -3164,17 +3031,17 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 201
+      "__id__": 195
     },
     "arrayTimelineData": [
       {
-        "__id__": 202
+        "__id__": 196
       },
       {
-        "__id__": 214
+        "__id__": 208
       },
       {
-        "__id__": 226
+        "__id__": 220
       }
     ],
     "_id": ""
@@ -3188,7 +3055,7 @@
     "timelineName": "Show",
     "timelineData": [
       {
-        "__id__": 203
+        "__id__": 197
       }
     ]
   },
@@ -3196,19 +3063,19 @@
     "__type__": "TimelineSetupData",
     "timelineType": 1,
     "timelineAnimation": {
-      "__id__": 204
+      "__id__": 198
     },
     "timelineSpine": {
-      "__id__": 208
+      "__id__": 202
     },
     "timelineTime": {
-      "__id__": 211
+      "__id__": 205
     }
   },
   {
     "__type__": "TimelineAnimationSetupData",
     "timelineAnimation": {
-      "__id__": 198
+      "__id__": 192
     },
     "timelineAnimationName": 1,
     "delayTime": 0,
@@ -3216,14 +3083,14 @@
     "useAnim": false,
     "useParticle": true,
     "spineSetupData": {
-      "__id__": 205
+      "__id__": 199
     },
     "animSetupData": {
-      "__id__": 206
+      "__id__": 200
     },
     "particleData": [
       {
-        "__id__": 207
+        "__id__": 201
       }
     ]
   },
@@ -3272,10 +3139,10 @@
     "useAnim": false,
     "useParticle": false,
     "spineSetupData": {
-      "__id__": 209
+      "__id__": 203
     },
     "animSetupData": {
-      "__id__": 210
+      "__id__": 204
     },
     "particleData": []
   },
@@ -3301,10 +3168,10 @@
     "useAnim": false,
     "useParticle": false,
     "spineSetupData": {
-      "__id__": 212
+      "__id__": 206
     },
     "animSetupData": {
-      "__id__": 213
+      "__id__": 207
     },
     "particleData": []
   },
@@ -3328,7 +3195,7 @@
     "timelineName": "Hide",
     "timelineData": [
       {
-        "__id__": 215
+        "__id__": 209
       }
     ]
   },
@@ -3336,19 +3203,19 @@
     "__type__": "TimelineSetupData",
     "timelineType": 1,
     "timelineAnimation": {
-      "__id__": 216
+      "__id__": 210
     },
     "timelineSpine": {
-      "__id__": 220
+      "__id__": 214
     },
     "timelineTime": {
-      "__id__": 223
+      "__id__": 217
     }
   },
   {
     "__type__": "TimelineAnimationSetupData",
     "timelineAnimation": {
-      "__id__": 198
+      "__id__": 192
     },
     "timelineAnimationName": 3,
     "delayTime": 0,
@@ -3356,14 +3223,14 @@
     "useAnim": false,
     "useParticle": true,
     "spineSetupData": {
-      "__id__": 217
+      "__id__": 211
     },
     "animSetupData": {
-      "__id__": 218
+      "__id__": 212
     },
     "particleData": [
       {
-        "__id__": 219
+        "__id__": 213
       }
     ]
   },
@@ -3412,10 +3279,10 @@
     "useAnim": false,
     "useParticle": false,
     "spineSetupData": {
-      "__id__": 221
+      "__id__": 215
     },
     "animSetupData": {
-      "__id__": 222
+      "__id__": 216
     },
     "particleData": []
   },
@@ -3441,10 +3308,10 @@
     "useAnim": false,
     "useParticle": false,
     "spineSetupData": {
-      "__id__": 224
+      "__id__": 218
     },
     "animSetupData": {
-      "__id__": 225
+      "__id__": 219
     },
     "particleData": []
   },
@@ -3468,7 +3335,7 @@
     "timelineName": "DelayShow",
     "timelineData": [
       {
-        "__id__": 227
+        "__id__": 221
       }
     ]
   },
@@ -3476,19 +3343,19 @@
     "__type__": "TimelineSetupData",
     "timelineType": 1,
     "timelineAnimation": {
-      "__id__": 228
+      "__id__": 222
     },
     "timelineSpine": {
-      "__id__": 232
+      "__id__": 226
     },
     "timelineTime": {
-      "__id__": 235
+      "__id__": 229
     }
   },
   {
     "__type__": "TimelineAnimationSetupData",
     "timelineAnimation": {
-      "__id__": 198
+      "__id__": 192
     },
     "timelineAnimationName": 4,
     "delayTime": 4.2,
@@ -3496,14 +3363,14 @@
     "useAnim": false,
     "useParticle": true,
     "spineSetupData": {
-      "__id__": 229
+      "__id__": 223
     },
     "animSetupData": {
-      "__id__": 230
+      "__id__": 224
     },
     "particleData": [
       {
-        "__id__": 231
+        "__id__": 225
       }
     ]
   },
@@ -3552,10 +3419,10 @@
     "useAnim": false,
     "useParticle": false,
     "spineSetupData": {
-      "__id__": 233
+      "__id__": 227
     },
     "animSetupData": {
-      "__id__": 234
+      "__id__": 228
     },
     "particleData": []
   },
@@ -3581,10 +3448,10 @@
     "useAnim": false,
     "useParticle": false,
     "spineSetupData": {
-      "__id__": 236
+      "__id__": 230
     },
     "animSetupData": {
-      "__id__": 237
+      "__id__": 231
     },
     "particleData": []
   },
@@ -3613,7 +3480,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 239
+      "__id__": 233
     },
     "_opacity": 0,
     "_id": ""
@@ -3642,7 +3509,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 242
+      "__id__": 236
     },
     "_contentSize": {
       "__type__": "cc.Size",
@@ -3670,10 +3537,10 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 244
+      "__id__": 238
     },
     "BoardAnimation": {
-      "__id__": 200
+      "__id__": 194
     },
     "BoardSprite": [
       {
@@ -3683,11 +3550,8 @@
         "__id__": 149
       }
     ],
-    "GemSprite": {
-      "__id__": 155
-    },
     "TextSprite": {
-      "__id__": 161
+      "__id__": 155
     },
     "SpriteLight": {
       "__id__": 137
@@ -3710,36 +3574,18 @@
         "__expectedType__": "cc.SpriteFrame"
       }
     ],
-    "SpriteGemFrame": [
-      {
-        "__uuid__": "03de25f8-3d01-414f-a301-70fa474c3c64@f9941",
-        "__expectedType__": "cc.SpriteFrame"
-      },
-      {
-        "__uuid__": "a1bdaf94-aa61-4c93-940a-be7916ca27d4@f9941",
-        "__expectedType__": "cc.SpriteFrame"
-      },
-      {
-        "__uuid__": "bad5b764-b254-4729-8c23-18e9bde2e413@f9941",
-        "__expectedType__": "cc.SpriteFrame"
-      },
-      {
-        "__uuid__": "944ac73d-ddfc-46e6-b349-a1703ce5b944@f9941",
-        "__expectedType__": "cc.SpriteFrame"
-      }
-    ],
     "SpriteTextArray": [
       {
-        "__id__": 161
+        "__id__": 155
       },
       {
-        "__id__": 169
+        "__id__": 163
       },
       {
-        "__id__": 177
+        "__id__": 171
       },
       {
-        "__id__": 185
+        "__id__": 179
       }
     ],
     "SpriteLightColor": [
@@ -3774,7 +3620,7 @@
     ],
     "ParticleEffects": [
       {
-        "__id__": 245
+        "__id__": 239
       }
     ],
     "particlePrefab": {
