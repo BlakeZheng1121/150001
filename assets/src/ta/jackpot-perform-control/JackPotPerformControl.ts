@@ -68,7 +68,7 @@ export class JackPotPerformControl extends Component {
 
             var DragonBallInt = Math.floor(this.DragonBallHitLV);
 
-            this.JackpotAvatar?.play('Base_Hit_FX');
+            this.JackpotAvatar?.play('Base_Hit_FX', () => this.OnDragonBallHitComplete());
 
             if (DragonBallInt != Math.floor(this.DragonBallCurrentLV)) {
                 var lv = DragonBallInt - 1;
@@ -78,6 +78,10 @@ export class JackPotPerformControl extends Component {
             }
             this.DragonBallCurrentLV = this.DragonBallHitLV;
         }
+    }
+
+    private OnDragonBallHitComplete() {
+        this.baseIdle();
     }
 
     public OnFreeGameBallHit() {
