@@ -37,8 +37,7 @@ export class FeatureSelectionViewMediator extends BaseMediator<FeatureSelectionV
             SceneManager.EV_ORIENTATION_VERTICAL,
             SceneManager.EV_ORIENTATION_HORIZONTAL,
             ViewMediatorEvent.SHOW_FEATURE_SELECTION,
-            StateWinEvent.ON_GAME2_TRANSITIONS,
-            StateWinEvent.ON_GAME4_TRANSITIONS
+            ViewMediatorEvent.ENTER
         ];
     }
 
@@ -48,11 +47,14 @@ export class FeatureSelectionViewMediator extends BaseMediator<FeatureSelectionV
             case ViewMediatorEvent.SHOW_FEATURE_SELECTION:
                 this.view.showFeatureSelection(notification.getBody());
                 break;
-            case StateWinEvent.ON_GAME2_TRANSITIONS:
-            case StateWinEvent.ON_GAME4_TRANSITIONS:
-                this.view.hideFeatureSelection();
+            case ViewMediatorEvent.ENTER:
+                this.enterMediator();
                 break;
         }
+    }
+
+    protected enterMediator() {
+        if (this.gameDataProxy.curScene != GameScene.Game_1) this.view.hideFeatureSelection();
     }
 
     protected onOrientation(orientation: string) {

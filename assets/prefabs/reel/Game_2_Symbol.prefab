@@ -137,7 +137,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 168,
-      "height": 148
+      "height": 168
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -525,13 +525,13 @@
     "freeC1": null,
     "C1TrailOffsetPos": {
       "__type__": "cc.Vec3",
-      "x": 58,
+      "x": 43,
       "y": 328,
       "z": 0
     },
     "C1HitOffsetPos": {
       "__type__": "cc.Vec3",
-      "x": 58,
+      "x": 43,
       "y": -47,
       "z": 0
     },
