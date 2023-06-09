@@ -107,6 +107,11 @@ export class JackPotPerformControl extends Component {
             () => cb();
             this.transitionParticle?.ParticleClear();
         }, 5.3);
+
+        this.scheduleOnce(() => {
+            () => cb();
+            this.MiniEntryTrail();
+        }, 6);
     }
 
     private MiniEntryTrail() {

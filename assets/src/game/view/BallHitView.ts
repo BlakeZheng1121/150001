@@ -162,7 +162,7 @@ export class BallHitView extends BaseScene {
         GlobalTimer.getInstance()
             .registerTimer(
                 'ballTransition',
-                3.0,
+                7,
                 () => {
                     GlobalTimer.getInstance().removeTimer('ballTransition');
                     this.callBack.finishBallTransition();
