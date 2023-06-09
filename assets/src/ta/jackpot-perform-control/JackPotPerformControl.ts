@@ -104,7 +104,6 @@ export class JackPotPerformControl extends Component {
         }, 1.0);
 
         this.scheduleOnce(() => {
-            () => cb();
             this.transitionParticle?.ParticleClear();
         }, 5.3);
 

@@ -7,7 +7,7 @@ export class Game3InitCommand extends StateCommand {
     public static readonly NAME = StateMachineProxy.GAME3_EV_INIT;
 
     protected timerKey = 'Game3Init';
-    private delayTimeNormal = 2.0;
+    private delayTimeNormal = 5.0;
     private delayTimeRecovery = 0;
 
     public execute(notification: puremvc.INotification): void {
