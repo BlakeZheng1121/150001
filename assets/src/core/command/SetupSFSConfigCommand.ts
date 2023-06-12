@@ -46,7 +46,7 @@ export class SetupSFSConfigCommand extends puremvc.SimpleCommand {
         let gameDataProxy: CoreGameDataProxy = this.getGameDataProxy();
         gameDataProxy.gameType = ticket['gameType'];
         gameDataProxy.machineType = ticket['machineType'];
-        gameDataProxy.currency = ticket['currency'];
+        gameDataProxy.currency = ticket['currencySystemName'];
         gameDataProxy.connectedTimeout = ticket['gameConnectionTimeout'];
         gameDataProxy.resLoadingTimeout = ticket['gameResourceTimeout'];
     }
