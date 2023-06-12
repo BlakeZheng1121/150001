@@ -73,6 +73,7 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
             SceneEvent.LOAD_USER_INFO_COMPLETE,
             SceneEvent.LOAD_UI_VERSION_COMPLETE,
             SceneEvent.LOAD_GAME_DATA_COMPLETE,
+            SceneEvent.LOAD_SPIN_LOGO_URL,
             GameStateProxyEvent.ON_WIN_STATE_CHANGED,
             ReelEvent.ON_TURBO_STATE_CHANGE,
             AutoPlayEvent.ON_TIMES_CHANGE,
@@ -166,7 +167,7 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
             case this.stateMachineProxy['stateEventMap'].game2Init:
             case this.stateMachineProxy['stateEventMap'].game3Init:
             case this.stateMachineProxy['stateEventMap'].game4Init:
-	        this.gameDataProxy.isShowTurboModeMsg = true;
+                this.gameDataProxy.isShowTurboModeMsg = true;
                 if (!this.gameDataProxy.onAutoPlay) {
                     this.view.autoPlayButton.disabledBtn(true);
                 } else {
@@ -188,15 +189,17 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
             case StateWinEvent.ON_GAME1_TRANSITIONS:
                 this.gameDataProxy.isShowTurboModeMsg = false;
                 this.view.quickSpinButton.disabledBtn(false);
-                if(this.gameDataProxy.curTurboMode) {
+                if (this.gameDataProxy.curTurboMode) {
                     this.reelDataProxy.isTurboMode = this.gameDataProxy.curTurboMode;
                 }
-                 this.view.transitionMode(false);
+                this.view.transitionMode(false);
 
                 break;
             case StateWinEvent.ON_BTN_STATE_CHANGED:
                 if (!this.view) return;
-                this.view.spinButton.changeState(this.checkSpinBtnState(notification.getBody()));
+                let spinBtnState: string = this.checkSpinBtnState(notification.getBody());
+                this.view.spinButton.changeState(spinBtnState);
+                this.view.providerInfo.disableBtn(spinBtnState !== SpinButton.STATUS_ON);
                 // 改按鈕狀態
                 switch (this.checkControlPanelBtnEnable()) {
                     case CtrlPanelBtnState.DISABLED:
@@ -270,7 +273,7 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
             case DragonUpEvent.ON_RESPIN_NEXT_END:
                 let infoArray: Array<any> = notification.getBody();
                 this.view.remainSpinInfo.updateReSpinInfo(infoArray[0]);
-                this.view.showMaxSpinInfo((infoArray[0] == 0) ? false : infoArray[1]);
+                this.view.showMaxSpinInfo(infoArray[0] == 0 ? false : infoArray[1]);
                 break;
             case FreeGameEvent.ON_BEFORE_END_SCORE_SHOW_SKIP:
                 this.winScoreSum();
@@ -280,7 +283,7 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
                 this.gameDataProxy.isShowTurboModeMsg = false;
                 this.view.quickSpinButton.disabledBtn(true);
                 this.gameDataProxy.curTurboMode = this.reelDataProxy.isTurboMode;
-                if(this.reelDataProxy.isTurboMode) {
+                if (this.reelDataProxy.isTurboMode) {
                     this.reelDataProxy.isTurboMode = false;
                 }
                 break;
@@ -289,6 +292,9 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
                 break;
             case KeyboardProxy.EV_KEY_DOWN:
                 this.spinByKeyboard(notification.getBody());
+                break;
+            case SceneEvent.LOAD_SPIN_LOGO_URL:
+                this.initLogo(notification.getBody() as string);
                 break;
         }
     }
@@ -312,6 +318,7 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
                 this.gameDataProxy.curScene
             );
         }
+        this.initLogo(this.gameDataProxy.providerLogoUrl);
     }
 
     public onLoadGameDataComplete() {
@@ -392,6 +399,7 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
     */
     private toggleAutoNum(status: boolean) {
         this.view.spinButton.disableBtn(status);
+        this.view.providerInfo.disableBtn(status);
         this.view.autoCountTxt.node.active = status;
     }
 
@@ -463,8 +471,10 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
 
     /** 點擊turbo按鈕 */
     public quickSpin() {
-        if(this.gameDataProxy.curScene !== GameScene.Game_1  
-        ||  this.gameDataProxy.gameState === StateMachineProxy.GAME1_FEATURESELECTION) {
+        if (
+            this.gameDataProxy.curScene !== GameScene.Game_1 ||
+            this.gameDataProxy.gameState === StateMachineProxy.GAME1_FEATURESELECTION
+        ) {
             return;
         }
         this.hideAllMenu();
@@ -525,8 +535,6 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
             this.sendNotification(AutoPlayClickOptionCommand.NAME, [0, 0]);
             this.view.autoPlayButton.changeState(AutoPlayButton.STATUS_ON);
         }
-        // this.soundProxy.play(SoundDataMap.BUTTON_PRESS); // no use
-        this.sendNotification(StateWinEvent.ON_BTN_STATE_CHANGED);
         this.sendNotification(SoundEvent.BUTTON_DOWN_SOUND);
         if (this.gameDataProxy.curScene !== GameScene.Game_1 && !this.gameDataProxy.onAutoPlay) {
             this.view.autoPlayButton.disabledBtn(true);
@@ -713,30 +721,15 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
     public checkSpinBtnState(state?: boolean | null): string | undefined {
         const self = this;
 
-        if (
-            self.gameDataProxy.gameState === StateMachineProxy.GAME1_SPIN ||
-            self.gameDataProxy.gameState === StateMachineProxy.GAME2_SPIN ||
-            self.gameDataProxy.gameState === StateMachineProxy.GAME4_SPIN
-        )
-            return SpinButton.STATUS_SPEED_ROTATE;
-        if (
-            self.gameDataProxy.gameState === StateMachineProxy.GAME1_BEFORESHOW ||
-            self.gameDataProxy.gameState === StateMachineProxy.GAME2_BEFORESHOW ||
-            self.gameDataProxy.gameState === StateMachineProxy.GAME4_BEFORESHOW ||
-            self.gameDataProxy.gameState === StateMachineProxy.GAME1_FEATURESELECTION ||
-            self.gameDataProxy.curScene === GameScene.Game_3
-        )
-            return SpinButton.STATUS_STOP;
-
-        if (
-            self.gameDataProxy.gameState === StateMachineProxy.GAME1_IDLE ||
-            self.gameDataProxy.gameState === StateMachineProxy.GAME2_IDLE ||
-            self.gameDataProxy.gameState === StateMachineProxy.GAME4_IDLE ||
-            state != null
-        ) {
-            return SpinButton.STATUS_ON;
+        if (!this.gameDataProxy.onAutoPlay) {
+            if (
+                self.gameDataProxy.gameState === StateMachineProxy.GAME1_IDLE ||
+                (state != null && this.gameDataProxy.curScene === GameScene.Game_1)
+            ) {
+                return SpinButton.STATUS_ON;
+            }
         }
-        return undefined;
+        return SpinButton.STATUS_STOP;
     }
 
     /**
@@ -769,6 +762,11 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
 
     public setTempTotalWon(tempValue: number) {
         this.gameDataProxy.tempWonCredit = tempValue;
+    }
+
+    protected initLogo(url: string) {
+        this.view.providerInfo.url = url;
+        this.view.providerInfo.updateFrame();
     }
 
     // ======================== Get Set ========================

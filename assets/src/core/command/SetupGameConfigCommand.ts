@@ -36,6 +36,7 @@ export class SetupGameConfigCommand extends puremvc.SimpleCommand {
             self.getGameVerRequest();
             self.getUIVersionRequest();
             self.getLogoUrlRequest();
+            self.getSpinLogoUrlRequest();
         }
     }
 
@@ -67,16 +68,28 @@ export class SetupGameConfigCommand extends puremvc.SimpleCommand {
                 let logoUrl = data;
                 self.setupLogoUrl(logoUrl);
                 break;
+            case 'getSpinLogoUrl':
+                let spinLogoUrl = data;
+                self.setupSpinLogoUrl(spinLogoUrl);
+                break;
         }
     }
 
     protected setupLogoUrl(url: any) {
-        if(window['serviceProvider'] === ServiceProvider.OTHERS 
-        || url === undefined 
-        || url === null ) {  
+        if (window['serviceProvider'] === ServiceProvider.OTHERS || url === undefined || url === null) {
             return;
         }
-        this.sendNotification(SceneEvent.LOAD_LOGO_URL,url);
+        this.sendNotification(SceneEvent.LOAD_LOGO_URL, url);
+    }
+
+    protected setupSpinLogoUrl(url: any) {
+        if (window['serviceProvider'] === ServiceProvider.OTHERS || url === undefined || url === null) {
+            return;
+        }
+        this.sendNotification(SceneEvent.LOAD_SPIN_LOGO_URL, url);
+
+        let gameDataProxy: CoreGameDataProxy = this.getGameDataProxy();
+        gameDataProxy.providerLogoUrl = url;
     }
 
     protected setupServInfo(servInfo: any) {
@@ -175,9 +188,11 @@ export class SetupGameConfigCommand extends puremvc.SimpleCommand {
         this.getWebBridgeProxy().getWebObjRequest(this, 'getLogoUrl');
     }
 
+    protected getSpinLogoUrlRequest() {
+        this.getWebBridgeProxy().getWebObjRequest(this, 'getSpinLogoUrl');
+    }
+
     protected getUIVersionRequest(): any {
         return this.getWebBridgeProxy().getWebFunRequest(this, 'getUIVersion');
     }
-
-
 }

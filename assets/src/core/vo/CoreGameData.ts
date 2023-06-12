@@ -134,4 +134,7 @@ export class CoreGameData {
 
     /** lobby url */
     public lobbyUrl: string;
+
+    /** ProviderLogo url for SpinBtn */
+    public providerLogoUrl: string;
 }

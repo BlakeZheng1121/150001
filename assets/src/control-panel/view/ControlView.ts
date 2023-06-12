@@ -16,6 +16,7 @@ import {
 } from 'cc';
 import { BaseScene } from '../../base/BaseScene';
 import { UIOrientation } from '../../core/ui/UIOrientation';
+import { UrlLogoSetting } from '../../core/ui/UrlLogoSetting';
 import { GameUILayer } from '../../game/vo/GameUILayer';
 import { GameUIOrientationSetting } from '../../game/vo/GameUIOrientationSetting';
 import { BalanceUtil } from '../../sgv3/util/BalanceUtil';
@@ -147,6 +148,9 @@ export class ControlView extends BaseScene {
 
     @property({ type: ParticleContentTool })
     public winSumAnim: ParticleContentTool;
+
+    @property({ type: UrlLogoSetting })
+    public providerInfo: UrlLogoSetting;
 
     public curTotalJackpotWonValue: number = 0;
 
