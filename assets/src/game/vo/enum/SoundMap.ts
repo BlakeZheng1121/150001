@@ -97,7 +97,9 @@ export enum AudioClipsEnum {
     MiniHit04 = 'MiniHit04',
     MiniCountdown01 = 'MiniCountdown01',
     MiniCountdown02 = 'MiniCountdown02',
-    PrizePrediction = 'PrizePrediction',
+    PrizePrediction01 = 'PrizePrediction01',
+    PrizePrediction02 = 'PrizePrediction02',
+    PrizePrediction03 = 'PrizePrediction03',
     SpinStop = 'SpinStop',
 
     JPResult_en = 'JPResult_en',
