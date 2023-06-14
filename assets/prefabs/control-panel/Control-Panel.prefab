@@ -658,14 +658,11 @@
     "_color": {
       "__type__": "cc.Color",
       "r": 255,
-      "g": 209,
-      "b": 107,
+      "g": 255,
+      "b": 155,
       "a": 255
     },
-    "_spriteFrame": {
-      "__uuid__": "ba005fbb-e133-4723-9195-64033493b14b@f9941",
-      "__expectedType__": "cc.SpriteFrame"
-    },
+    "_spriteFrame": null,
     "_type": 0,
     "_fillType": 0,
     "_sizeMode": 1,
@@ -1166,14 +1163,11 @@
     "_color": {
       "__type__": "cc.Color",
       "r": 255,
-      "g": 209,
-      "b": 107,
+      "g": 255,
+      "b": 155,
       "a": 255
     },
-    "_spriteFrame": {
-      "__uuid__": "88034b61-4ba1-46d0-aa28-3e897be9651c@f9941",
-      "__expectedType__": "cc.SpriteFrame"
-    },
+    "_spriteFrame": null,
     "_type": 0,
     "_fillType": 0,
     "_sizeMode": 1,
@@ -2324,14 +2318,11 @@
     "_color": {
       "__type__": "cc.Color",
       "r": 255,
-      "g": 209,
-      "b": 107,
+      "g": 255,
+      "b": 155,
       "a": 255
     },
-    "_spriteFrame": {
-      "__uuid__": "55b25ba0-2845-4baa-a61a-0376e1aebbba@f9941",
-      "__expectedType__": "cc.SpriteFrame"
-    },
+    "_spriteFrame": null,
     "_type": 0,
     "_fillType": 0,
     "_sizeMode": 1,
@@ -2839,9 +2830,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 209,
-      "b": 107,
+      "r": 248,
+      "g": 182,
+      "b": 121,
       "a": 255
     },
     "_spriteFrame": {
@@ -3020,9 +3011,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 209,
-      "b": 107,
+      "r": 248,
+      "g": 182,
+      "b": 121,
       "a": 255
     },
     "_spriteFrame": {
@@ -3077,9 +3068,9 @@
     },
     "disableColor": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 209,
-      "b": 107,
+      "r": 248,
+      "g": 182,
+      "b": 121,
       "a": 255
     },
     "_id": ""
@@ -3290,9 +3281,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 209,
-      "b": 107,
+      "r": 248,
+      "g": 182,
+      "b": 121,
       "a": 255
     },
     "_spriteFrame": {
@@ -3595,9 +3586,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 209,
-      "b": 107,
+      "r": 248,
+      "g": 182,
+      "b": 121,
       "a": 255
     },
     "_spriteFrame": {
@@ -3896,9 +3887,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 209,
-      "b": 107,
+      "r": 248,
+      "g": 182,
+      "b": 121,
       "a": 255
     },
     "_spriteFrame": {
@@ -4177,9 +4168,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 209,
-      "b": 107,
+      "r": 248,
+      "g": 182,
+      "b": 121,
       "a": 255
     },
     "_spriteFrame": {
@@ -4551,9 +4542,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 209,
-      "b": 107,
+      "r": 248,
+      "g": 182,
+      "b": 121,
       "a": 255
     },
     "_spriteFrame": {
@@ -4777,9 +4768,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 209,
-      "b": 107,
+      "r": 248,
+      "g": 182,
+      "b": 121,
       "a": 255
     },
     "_spriteFrame": {
@@ -5106,9 +5097,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 209,
-      "b": 107,
+      "r": 248,
+      "g": 182,
+      "b": 121,
       "a": 255
     },
     "_spriteFrame": {
