@@ -55,7 +55,6 @@
 
             // get url parm
             let url = new URL(window.location.href);
-            let gameLocale = url.searchParams.get('locale') ? url.searchParams.get('locale') : 'en';
             let serviceProvider = url.searchParams.get('serviceProvider');
             if (!serviceProvider && url.searchParams.toString() != '') {
                 serviceProvider = 'others';
@@ -66,12 +65,19 @@
 
             // help iframe
             let gameHelp = document.getElementById('gameHelp');
-            var openGameHelp = (boolean) => {
-                if (boolean) {
-                    gameHelp.src = `./help/help_${gameLocale}.html`;
-                    gameHelp.style.display = 'block';
-                } else {
-                    gameHelp.style.display = 'none';
+            var openGameHelp = (gameLocale) => {
+                gameHelp.src = `./help/help_${gameLocale}.html`;
+                gameHelp.style.display = UrlExists(gameHelp.src) ? 'block' : 'none';
+            };
+
+            var UrlExists = (url) => {
+                var http = new XMLHttpRequest();
+                http.open('HEAD', url, false);
+                http.send();
+                if (http.status != 404) return true;
+                else {
+                    console.warn(`Page( ${url} ) not found!`);
+                    return false;
                 }
             };
 
