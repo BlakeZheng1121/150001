@@ -1,6 +1,7 @@
 import { _decorator } from 'cc';
 import { GameDataProxy } from '../../proxy/GameDataProxy';
 import { GameScene } from '../../vo/data/GameScene';
+import { SymbolId } from '../../vo/enum/Reel';
 import { BaseGameResult } from '../../vo/result/BaseGameResult';
 import { CommonGameResult } from '../../vo/result/CommonGameResult';
 import { FreeGameOneRoundResult } from '../../vo/result/FreeGameOneRoundResult';
@@ -43,10 +44,21 @@ export class PrizePredictionHandleCommand extends puremvc.SimpleCommand {
         const totalBet = this.gameDataProxy.curTotalBet;
         const odds = this.gameDataProxy.convertCredit2Cash(result.baseGameTotalWin) / totalBet;
         const isMSymbolFiveOfKind = result.waysGameResult.waysResult.some(
-            (result) => result.hitNumber == 5 && result.symbolID >= 2 && result.symbolID <= 7
+            (result) => result.hitNumber == 5 && result.symbolID >= SymbolId.M1 && result.symbolID <= SymbolId.M6
         );
+        const ballCount = result.extendInfoForbaseGameResult.ballCount;
+        const hitMiniGame = this.gameDataProxy.spinEventData.gameStateResult.some(
+            (gameStateResult) => gameStateResult.gameSceneName == GameScene.Game_3
+        );
+        const randomNumber = this.getRandomNumber(result, GameScene.Game_1);
 
+        const prizePredictionCondition =
+            (odds >= 25 && isMSymbolFiveOfKind && randomNumber < 0.8) ||
+            ballCount >= 8 ||
+            (ballCount >= 6 && hitMiniGame);
         const displayMethodCondition = odds >= 25 && isMSymbolFiveOfKind;
+
+        result.displayInfo.prizePredictionType = prizePredictionCondition ? 'TYPE_1' : 'NoPrizePredictionType';
         result.displayInfo.displayMethod = Array.from([false, false, false, false, displayMethodCondition], (x) => [x]);
     }
     /**
@@ -55,28 +67,21 @@ export class PrizePredictionHandleCommand extends puremvc.SimpleCommand {
      * 1. M Symbol 5連線 贏分是押分的25倍(含)以上，80%機率觸發大獎預告
      * 瞇牌:
      * 同上1. 必定瞇牌
-     * 2. 第一滾輪三顆wild
      * @param result FreeGameOneRoundResult
      */
     checkFreeGame(result: FreeGameOneRoundResult): void {
-        if (result.extendInfoForFreeGameResult.isRespinFeature) {
-            this.checkRespin(result);
-        } else {
-            const totalBet = this.gameDataProxy.curTotalBet;
-            let odds = this.gameDataProxy.convertCredit2Cash(result.playerWin) / totalBet;
-            const isMSymbolFiveOfKind = result.waysGameResult.waysResult.some(
-                (result) => result.hitNumber == 5 && result.symbolID >= 2 && result.symbolID <= 7
-            );
-            const reel1StackWW = result.screenSymbol[0].filter((id) => id == 0).length == 3;
-            const displayCondition = (odds >= 25 && isMSymbolFiveOfKind) || reel1StackWW;
-            result.displayInfo.displayMethod = Array.from([false, false, false, false, displayCondition], (x) => [x]);
-        }
-    }
+        const totalBet = this.gameDataProxy.curTotalBet;
+        const odds = this.gameDataProxy.convertCredit2Cash(result.playerWin) / totalBet;
+        const isMSymbolFiveOfKind = result.waysGameResult.waysResult.some(
+            (result) => result.hitNumber == 5 && result.symbolID >= SymbolId.M1 && result.symbolID <= SymbolId.M6
+        );
+        const randomNumber = this.getRandomNumber(result, GameScene.Game_1);
 
-    checkRespin(result: FreeGameOneRoundResult): void {
-        const displayCondition = result.waysGameResult.waysResult.some((result) => result.hitNumber >= 3);
+        const prizePredictionCondition = odds >= 25 && isMSymbolFiveOfKind && randomNumber < 0.8;
+        const displayMethodCondition = odds >= 25 && isMSymbolFiveOfKind;
 
-        result.displayInfo.displayMethod = Array.from([false, false, false, displayCondition, false], (x) => [x]);
+        result.displayInfo.prizePredictionType = prizePredictionCondition ? 'TYPE_1' : 'NoPrizePredictionType';
+        result.displayInfo.displayMethod = Array.from([false, false, false, false, displayMethodCondition], (x) => [x]);
     }
 
     /**
@@ -85,7 +90,18 @@ export class PrizePredictionHandleCommand extends puremvc.SimpleCommand {
      * @param result TopUpGameOneRoundResult
      */
     checkDragonUp(result: TopUpGameOneRoundResult): void {
-        //spec
+        //spec:
+        const convert2dTo1dArray = (prev, curr) => prev.concat(curr);
+        let multi = result.extendInfoForTopUpGameResult.accumulateMultiplier;
+        multi = result.extendInfoForTopUpGameResult.goldMultiplierScreenLabel
+            .reduce(convert2dTo1dArray, [])
+            .reduce((prev, curr) => prev - curr, multi);
+        let newC2Count = result.extendInfoForTopUpGameResult.goldCreditBallScreenLabel
+            .reduce(convert2dTo1dArray, [])
+            .filter((value) => value > 0).length;
+        if (multi >= 300 && newC2Count >= 2) {
+            result.displayInfo.prizePredictionType = 'TYPE_1';
+        }
     }
 
     /**
@@ -94,7 +110,7 @@ export class PrizePredictionHandleCommand extends puremvc.SimpleCommand {
      * @param gameScene gameScene
      * @returns random number between 0 to 1(excluding 1)
      */
-    getRandomNumber(result: CommonGameResult, gameScene: GameScene): Number {
+    getRandomNumber(result: CommonGameResult, gameScene: GameScene): number {
         const firstReelID = 0;
         const rngPos = result.displayInfo.rngInfo[0][firstReelID];
         const reelLength = this.gameDataProxy.initEventData.gameStateSettings.find(
