@@ -1937,9 +1937,9 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
-      "z": 1
+      "x": 0.55,
+      "y": 0.55,
+      "z": 0.55
     },
     "_layer": 8,
     "_euler": {
@@ -1977,7 +1977,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -115,
+      "y": -146,
       "z": 0
     },
     "_lrot": {
@@ -1989,9 +1989,9 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
-      "z": 1
+      "x": 1.15,
+      "y": 1.15,
+      "z": 1.15
     },
     "_layer": 8,
     "_euler": {
@@ -2126,7 +2126,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 331,
+      "y": 372,
       "z": 0
     },
     "_lrot": {
@@ -2349,7 +2349,7 @@
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 30,
-    "_fontSize": 34,
+    "_fontSize": 38,
     "_fontFamily": "Arial",
     "_lineHeight": 40,
     "_overflow": 2,

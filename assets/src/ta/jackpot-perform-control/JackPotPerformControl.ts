@@ -85,7 +85,7 @@ export class JackPotPerformControl extends Component {
     }
 
     public OnFreeGameBallHit() {
-        this.JackpotAvatar?.play('Free_Hit_FX');
+        this.JackpotAvatar?.play('Free_Hit_FX', () => this.freeIdle());
     }
 
     public OnHoldAndWinBallHit() {
@@ -157,7 +157,7 @@ export class JackPotPerformControl extends Component {
     }
 
     public freeIdle() {
-        //this.JackpotAvatar?.play('Idle_Board');
+        this.JackpotAvatar?.play('Idle_NoBoard');
     }
 
     public fallImmediately() {
