@@ -74,10 +74,11 @@ export class CoreWebBridgeProxy extends puremvc.Proxy {
     /**
      * 開啟 Help
      */
-    public openHelp(curTotalBet: number, curVersion: string): void {
-        window['openGameHelp'](true);
-        window['curGameVersion'](curVersion);
-        window['curTotalBet'](curTotalBet);
+    public openHelp(message: any): void {
+        var data = JSON.parse(message);
+        window['openGameHelp'](data.lang);
+        window['curGameVersion'](data.gameVer);
+        window['curTotalBet'](data.bet);
         this.getWebFunRequest(this, 'gameClientMsg', { event: 'toggleHelpPage', value: true });
     }
     /**

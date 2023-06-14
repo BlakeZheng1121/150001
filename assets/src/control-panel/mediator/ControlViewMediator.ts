@@ -628,7 +628,14 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
     /** 開啟Help */
     public openHelp() {
         try {
-            this.webBridgeProxy.openHelp(this.gameDataProxy.curTotalBet, this.gameDataProxy.gameVer);
+            // this.webBridgeProxy.openHelp(this.gameDataProxy.curTotalBet, this.gameDataProxy.gameVer);
+            this.webBridgeProxy.openHelp(
+                JSON.stringify({
+                    lang: this.gameDataProxy.language,
+                    bet: this.gameDataProxy.curTotalBet,
+                    gameVer: this.gameDataProxy.gameVer
+                })
+            );
             this.view.settingMenu.active = false;
         } catch (error) {
             Logger.e(error);

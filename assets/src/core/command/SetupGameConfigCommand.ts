@@ -100,15 +100,21 @@ export class SetupGameConfigCommand extends puremvc.SimpleCommand {
 
     protected setupUserInfo(userInfo: any) {
         let gameDataProxy: CoreGameDataProxy = this.getGameDataProxy();
-        gameDataProxy.language = userInfo['lang'];
-        i18n.init(gameDataProxy.language);
-        i18n.updateSceneRenderers();
+        this.setupSupportedLanguage(userInfo['lang']);
         gameDataProxy.useDollarSign = userInfo['useDollarSign'];
         gameDataProxy.dollarSign = userInfo['currencySymbol'];
-        gameDataProxy.dollarCurrency = userInfo['currency'];
+        gameDataProxy.dollarCurrency = userInfo['currencySystemName'];
         //BalanceUtil.dollarSign = gameDataProxy.useDollarSign ? gameDataProxy.dollarSign : '';
         BalanceUtil.dollarSign = gameDataProxy.dollarCurrency;
         this.sendNotification(SceneEvent.LOAD_USER_INFO_COMPLETE);
+    }
+
+    private setupSupportedLanguage(lang: string) {
+        lang = String(lang).toLowerCase().slice(0, 2);
+        i18n.init(lang);
+
+        let gameDataProxy: CoreGameDataProxy = this.getGameDataProxy();
+        gameDataProxy.language = i18n.getSupportedLanguage(lang);
     }
 
     protected setupGameData(gameData: any) {
