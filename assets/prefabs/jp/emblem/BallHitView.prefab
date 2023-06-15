@@ -353,7 +353,7 @@
   },
   {
     "__type__": "OriSetting",
-    "isChangeScale": false,
+    "isChangeScale": true,
     "isChangeContentSize": false,
     "isChangePosition": true,
     "position": {
@@ -364,9 +364,9 @@
     },
     "scale": {
       "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
+      "x": 1,
+      "y": 1,
+      "z": 1
     },
     "size": {
       "__type__": "cc.Size",
@@ -427,20 +427,20 @@
   },
   {
     "__type__": "OriSetting",
-    "isChangeScale": false,
+    "isChangeScale": true,
     "isChangeContentSize": false,
     "isChangePosition": true,
     "position": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 448,
+      "y": 458,
       "z": 0
     },
     "scale": {
       "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
+      "x": 1.55,
+      "y": 1.55,
+      "z": 1.55
     },
     "size": {
       "__type__": "cc.Size",
@@ -501,20 +501,20 @@
   },
   {
     "__type__": "OriSetting",
-    "isChangeScale": false,
+    "isChangeScale": true,
     "isChangeContentSize": false,
     "isChangePosition": true,
     "position": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 416,
+      "y": 428,
       "z": 0
     },
     "scale": {
       "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
+      "x": 1.55,
+      "y": 1.55,
+      "z": 1.55
     },
     "size": {
       "__type__": "cc.Size",
