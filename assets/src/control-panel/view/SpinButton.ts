@@ -1,4 +1,4 @@
-import { _decorator, Component, tween, Vec3, UIOpacity, Tween, Color, Sprite, SpriteFrame } from 'cc';
+import { _decorator, Component, UIOpacity, Color, Sprite, SpriteFrame } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('SpinButton')
@@ -20,6 +20,8 @@ export class SpinButton extends Component {
 
     private uiOpacity: UIOpacity;
     private currentState = '';
+
+    private static readonly OPACITY_LOWEST_LIMIT: number = 1; /* 避免opacity為 0 時切換圖檔有機率顯示大小錯誤 */
 
     protected onLoad() {
         this.changeState(SpinButton.STATUS_ON);
@@ -47,7 +49,7 @@ export class SpinButton extends Component {
 
     public disableBtn(disabled: boolean) {
         if (disabled) {
-            this.uiOpacity.opacity = 0;
+            this.uiOpacity.opacity = SpinButton.OPACITY_LOWEST_LIMIT;
         } else {
             this.uiOpacity.opacity = 255;
         }
