@@ -21,7 +21,7 @@ export class SpinButton extends Component {
     private uiOpacity: UIOpacity;
     private currentState = '';
 
-    private static readonly OPACITY_LOWEST_LIMIT: number = 1; /* Á×§Kopacity¬° 0 ®É¤Á´«¹ÏÀÉ¦³¾÷²vÅã¥Ü¤j¤p¿ù»~ */
+    private static readonly OPACITY_LOWEST_LIMIT: number = 1; /* é¿å…opacityç‚º 0 æ™‚åˆ‡æ›åœ–æª”æœ‰æ©Ÿç‡é¡¯ç¤ºå¤§å°éŒ¯èª¤ */
 
     protected onLoad() {
         this.changeState(SpinButton.STATUS_ON);
