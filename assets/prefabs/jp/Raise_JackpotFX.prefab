@@ -51,7 +51,7 @@
       "y": 1,
       "z": 1
     },
-    "_layer": 4,
+    "_layer": 8,
     "_euler": {
       "__type__": "cc.Vec3",
       "x": 0,
@@ -99,7 +99,7 @@
       "y": 1,
       "z": 1
     },
-    "_layer": 4,
+    "_layer": 8,
     "_euler": {
       "__type__": "cc.Vec3",
       "x": 0,
