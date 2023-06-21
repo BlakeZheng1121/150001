@@ -8,7 +8,6 @@ export class SymbolDataPlist extends Component {
     @property({ type: [SymbolData], visible: true })
     private list: Array<SymbolData> = [];
     private pool: { [key: string]: SymbolData } = {};
-    private _language: string = '';
 
     ////
 
@@ -22,17 +21,6 @@ export class SymbolDataPlist extends Component {
 
     public getDataByIndex(index: number) {
         return this.list[index];
-    }
-
-    public set language(value: string) {
-        this._language = value;
-        for (let i = 0; i < this.list.length; i++) {
-            this.list[i].checkLanguage(value);
-        }
-    }
-
-    public get language() {
-        return this._language;
     }
     ////
 

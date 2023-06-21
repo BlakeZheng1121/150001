@@ -1035,17 +1035,11 @@
   },
   {
     "__type__": "SymbolData",
-    "isUseLanguage": true,
     "_name": "ww",
     "_id": 0,
     "_orderLayer": 4,
-    "_mainSpriteFrame": null,
-    "_mainSpriteFrame_EN": {
+    "_mainSpriteFrame": {
       "__uuid__": "0597fcca-0074-4b01-b642-19309077d25e@f9941",
-      "__expectedType__": "cc.SpriteFrame"
-    },
-    "_mainSpriteFrame_ZH": {
-      "__uuid__": "409a8f7e-bf28-462a-87a3-019504df5c71@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_bgSpriteFrame": null,
@@ -1053,7 +1047,6 @@
   },
   {
     "__type__": "SymbolData",
-    "isUseLanguage": false,
     "_name": "c1",
     "_id": 1,
     "_orderLayer": 4,
@@ -1061,14 +1054,11 @@
       "__uuid__": "36591a9a-d8e1-4570-ac79-fad4dd6424d2@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
-    "_mainSpriteFrame_EN": null,
-    "_mainSpriteFrame_ZH": null,
     "_bgSpriteFrame": null,
     "_isImprovedFOV": true
   },
   {
     "__type__": "SymbolData",
-    "isUseLanguage": false,
     "_name": "m1",
     "_id": 2,
     "_orderLayer": 2,
@@ -1076,8 +1066,6 @@
       "__uuid__": "9b21b929-9734-4b21-a33b-2793f231c5e8@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
-    "_mainSpriteFrame_EN": null,
-    "_mainSpriteFrame_ZH": null,
     "_bgSpriteFrame": {
       "__uuid__": "3e62c8db-5b93-48f2-ae7b-f75e2206d95b@f9941",
       "__expectedType__": "cc.SpriteFrame"
@@ -1086,7 +1074,6 @@
   },
   {
     "__type__": "SymbolData",
-    "isUseLanguage": false,
     "_name": "m2",
     "_id": 3,
     "_orderLayer": 2,
@@ -1094,8 +1081,6 @@
       "__uuid__": "218b0b1e-e46e-4719-921c-460170679c69@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
-    "_mainSpriteFrame_EN": null,
-    "_mainSpriteFrame_ZH": null,
     "_bgSpriteFrame": {
       "__uuid__": "bc71d9fc-e72e-48b0-a915-e162b2e5b7d4@f9941",
       "__expectedType__": "cc.SpriteFrame"
@@ -1104,7 +1089,6 @@
   },
   {
     "__type__": "SymbolData",
-    "isUseLanguage": false,
     "_name": "m3",
     "_id": 4,
     "_orderLayer": 2,
@@ -1112,8 +1096,6 @@
       "__uuid__": "7ccb46b3-b9e5-4f0a-b352-afea8504e485@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
-    "_mainSpriteFrame_EN": null,
-    "_mainSpriteFrame_ZH": null,
     "_bgSpriteFrame": {
       "__uuid__": "9cbe94c7-5c7e-47e6-8e9e-0d94b578465d@f9941",
       "__expectedType__": "cc.SpriteFrame"
@@ -1122,7 +1104,6 @@
   },
   {
     "__type__": "SymbolData",
-    "isUseLanguage": false,
     "_name": "m4",
     "_id": 5,
     "_orderLayer": 2,
@@ -1130,8 +1111,6 @@
       "__uuid__": "9d2db6ba-013c-4346-9d5c-3ac17292facb@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
-    "_mainSpriteFrame_EN": null,
-    "_mainSpriteFrame_ZH": null,
     "_bgSpriteFrame": {
       "__uuid__": "99a968c7-b9a9-488e-88ea-211bdeb274a2@f9941",
       "__expectedType__": "cc.SpriteFrame"
@@ -1140,7 +1119,6 @@
   },
   {
     "__type__": "SymbolData",
-    "isUseLanguage": false,
     "_name": "m5",
     "_id": 6,
     "_orderLayer": 2,
@@ -1148,14 +1126,11 @@
       "__uuid__": "4d123dce-0592-4da1-bf6e-31505be0f1f8@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
-    "_mainSpriteFrame_EN": null,
-    "_mainSpriteFrame_ZH": null,
     "_bgSpriteFrame": null,
     "_isImprovedFOV": false
   },
   {
     "__type__": "SymbolData",
-    "isUseLanguage": false,
     "_name": "m6",
     "_id": 7,
     "_orderLayer": 2,
@@ -1163,8 +1138,6 @@
       "__uuid__": "3061204d-a91e-4afc-9aae-6a8697602f97@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
-    "_mainSpriteFrame_EN": null,
-    "_mainSpriteFrame_ZH": null,
     "_bgSpriteFrame": null,
     "_isImprovedFOV": false
   },
