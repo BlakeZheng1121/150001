@@ -155,7 +155,7 @@ export class BallHitView extends BaseScene {
 
     // Base game 轉 Mini game
     public miniGameTransition() {
-        //AudioManager.Instance.play(AudioClipsEnum.JP_Slogan);
+        AudioManager.Instance.play(AudioClipsEnum.JP_Slogan);
         AudioManager.Instance.play(AudioClipsEnum.Mini_DrangonBallFall);
         this.jackPotPerformControl.JackPotHit();
         GlobalTimer.getInstance().removeTimer('ballTransition');

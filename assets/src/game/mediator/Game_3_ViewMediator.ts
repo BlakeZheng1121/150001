@@ -423,7 +423,7 @@ export class Game_3_ViewMediator extends BaseMediator<Game_3_View> {
                 'WinJP',
                 this.mySceneData.bonusGameWinSymbolShowTime,
                 () => {
-                    //self.playMiniGameEndSound();
+                    self.playMiniGameEndSound();
                     self.facade.sendNotification(
                         StateMachineCommand.NAME,
                         new StateMachineObject(StateMachineProxy.GAME3_SHOWWIN)
