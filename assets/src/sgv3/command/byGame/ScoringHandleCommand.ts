@@ -71,7 +71,7 @@ export class ScoringHandleCommand extends puremvc.SimpleCommand {
         this.finalWinAmount = targetAmount;
         this.finalWinBoardAmount = winBoardTargetAmount;
         this.finalWinType = winType;
-        this.finalScoringTime = scoringTime - 1; //提早1秒結束，進行音樂 FadeOut動作
+        this.finalScoringTime = scoringTime === 0 ? 0 : scoringTime - 1; //提早1秒結束，進行音樂 FadeOut動作
         // 得分音樂
 
         let delayTime = winType >= WinType.bigWin ? this.winTypeDelayScoringTime : 0;
