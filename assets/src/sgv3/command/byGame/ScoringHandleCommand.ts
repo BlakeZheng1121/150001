@@ -71,7 +71,7 @@ export class ScoringHandleCommand extends puremvc.SimpleCommand {
         this.finalWinAmount = targetAmount;
         this.finalWinBoardAmount = winBoardTargetAmount;
         this.finalWinType = winType;
-        this.finalScoringTime = scoringTime - 1; //提早1秒結束，進行音樂 FadeOut動作
+        this.finalScoringTime = scoringTime;
         // 得分音樂
 
         let delayTime = winType >= WinType.bigWin ? this.winTypeDelayScoringTime : 0;
@@ -212,16 +212,16 @@ export class ScoringHandleCommand extends puremvc.SimpleCommand {
             else {
                 switch (winType) {
                     case WinType.bigWin:
-                        AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win01).fade(0, 0.3);
+                        AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win01).fade(0, 1.0);
                         break;
                     case WinType.megaWin:
-                        AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win02).fade(0, 0.3);
+                        AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win02).fade(0, 1.0);
                         break;
                     case WinType.superWin:
-                        AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win03).fade(0, 0.3);
+                        AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win03).fade(0, 1.0);
                         break;
                     case WinType.jumboWin:
-                        AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win04).fade(0, 0.3);
+                        AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win04).fade(0, 1.0);
                         break;
                 }
             }
