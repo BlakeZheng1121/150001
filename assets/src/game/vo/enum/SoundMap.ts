@@ -159,10 +159,10 @@ export enum BaseScoringDuration {
     Scoring13 = 13,
     Scoring14 = 21,
     Scoring15 = 25,
-    Scoring_Win01 = 13.5,
-    Scoring_Win02 = 16.3,
-    Scoring_Win03 = 20.2,
-    Scoring_Win04 = 24.6
+    Scoring_Win01 = 12.5,
+    Scoring_Win02 = 15.3,
+    Scoring_Win03 = 19.2,
+    Scoring_Win04 = 23.6
 }
 
 export enum QuickScoringDuration {
