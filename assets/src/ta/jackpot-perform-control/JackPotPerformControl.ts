@@ -68,7 +68,7 @@ export class JackPotPerformControl extends Component {
 
             var DragonBallInt = Math.floor(this.DragonBallHitLV);
 
-            this.JackpotAvatar?.play('Base_Hit_FX');
+            this.JackpotAvatar?.play('Base_Hit_FX', () => this.OnDragonBallHitComplete());
 
             if (DragonBallInt != Math.floor(this.DragonBallCurrentLV)) {
                 var lv = DragonBallInt - 1;
@@ -80,8 +80,12 @@ export class JackPotPerformControl extends Component {
         }
     }
 
+    private OnDragonBallHitComplete() {
+        this.baseIdle();
+    }
+
     public OnFreeGameBallHit() {
-        this.JackpotAvatar?.play('Free_Hit_FX');
+        this.JackpotAvatar?.play('Free_Hit_FX', () => this.freeIdle());
     }
 
     public OnHoldAndWinBallHit() {
@@ -100,9 +104,13 @@ export class JackPotPerformControl extends Component {
         }, 1.0);
 
         this.scheduleOnce(() => {
-            () => cb();
             this.transitionParticle?.ParticleClear();
         }, 5.3);
+
+        this.scheduleOnce(() => {
+            () => cb();
+            this.MiniEntryTrail();
+        }, 6);
     }
 
     private MiniEntryTrail() {
@@ -149,7 +157,7 @@ export class JackPotPerformControl extends Component {
     }
 
     public freeIdle() {
-        //this.JackpotAvatar?.play('Idle_Board');
+        this.JackpotAvatar?.play('Idle_NoBoard');
     }
 
     public fallImmediately() {

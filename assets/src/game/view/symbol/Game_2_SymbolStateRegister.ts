@@ -44,9 +44,9 @@ export class Game_2_SymbolShowState extends SymbolShowState {
     }
 
     onPlay() {
-        //if (this.content.backgroundSprite != null) {
-        //    this.content.backgroundSprite.enabled = true;
-        //}
+        if (this.content.backgroundSprite != null) {
+            this.content.backgroundSprite.enabled = true;
+        }
         this.content.mainSprite.enabled = true;
 
         this.onEffectFinished();

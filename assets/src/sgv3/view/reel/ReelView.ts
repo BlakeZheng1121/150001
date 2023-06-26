@@ -122,7 +122,6 @@ export abstract class ReelView extends BaseScene {
         let curPrefab = this.scenesSetting[this.curSceneIndex].reelPrefab;
         for (let i = 0; i < count; i++) {
             let temp = PoolManager.instance.getNode(curPrefab, this._reelsParent);
-            temp.getComponent(SymbolDataPlist).language = language;
             this.reelsList.push(temp.getComponent(SingleReelView)!);
             this.reelsList[i].singleReelContent.id = i;
             this.reelsList[i].singleReelContent.ishorizontalMode = this.ishorizontalMode;

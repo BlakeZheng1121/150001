@@ -33,7 +33,7 @@ var userInfo = {
     lang: 'en',
     uid: 'sptest1987',
     currency:'THB',
-    currencySystemName: 'TB',
+    currencySystemName: 'THB',
     currencySymbol: '$',
     decimalPoint: 2,
     autoPlayList: [5, 10, 100, 300],

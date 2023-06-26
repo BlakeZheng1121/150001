@@ -47,7 +47,7 @@ async function removeReference() {
     });
 }
 function filterFn(info) {
-    return info.type == 'cc.Prefab';
+    return info.type == 'cc.Prefab' || info.type == 'cc.SceneAsset';
 }
 async function setNullToReference(uuid, info) {
     //db://assets/prefabs/Button.prefab

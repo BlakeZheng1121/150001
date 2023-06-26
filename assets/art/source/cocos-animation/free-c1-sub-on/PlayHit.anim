@@ -70,15 +70,15 @@
     "__type__": "cc.RealCurve",
     "_times": [
       0,
-      0.16666666666666666,
-      0.3333333333333333
+      0.1666666716337204,
+      0.3333333432674408
     ],
     "_values": [
       {
         "__type__": "cc.RealKeyframeValue",
         "interpolationMode": 0,
         "tangentWeightMode": 0,
-        "value": 0.32,
+        "value": 0.3199999928474426,
         "rightTangent": 0,
         "rightTangentWeight": 1,
         "leftTangent": 0,
@@ -100,7 +100,7 @@
         "__type__": "cc.RealKeyframeValue",
         "interpolationMode": 0,
         "tangentWeightMode": 0,
-        "value": 0.32,
+        "value": 0.3199999928474426,
         "rightTangent": 0,
         "rightTangentWeight": 1,
         "leftTangent": 0,
@@ -121,15 +121,15 @@
     "__type__": "cc.RealCurve",
     "_times": [
       0,
-      0.16666666666666666,
-      0.3333333333333333
+      0.1666666716337204,
+      0.3333333432674408
     ],
     "_values": [
       {
         "__type__": "cc.RealKeyframeValue",
         "interpolationMode": 0,
         "tangentWeightMode": 0,
-        "value": 0.32,
+        "value": 0.3199999928474426,
         "rightTangent": 0,
         "rightTangentWeight": 1,
         "leftTangent": 0,
@@ -151,7 +151,7 @@
         "__type__": "cc.RealKeyframeValue",
         "interpolationMode": 0,
         "tangentWeightMode": 0,
-        "value": 0.32,
+        "value": 0.3199999928474426,
         "rightTangent": 0,
         "rightTangentWeight": 1,
         "leftTangent": 0,
@@ -172,8 +172,8 @@
     "__type__": "cc.RealCurve",
     "_times": [
       0,
-      0.16666666666666666,
-      0.3333333333333333
+      0.1666666716337204,
+      0.3333333432674408
     ],
     "_values": [
       {
@@ -561,7 +561,7 @@
     "__type__": "cc.RealCurve",
     "_times": [
       0,
-      0.3333333333333333
+      0.3333333432674408
     ],
     "_values": [
       {
@@ -600,7 +600,7 @@
     "__type__": "cc.RealCurve",
     "_times": [
       0,
-      0.3333333333333333
+      0.3333333432674408
     ],
     "_values": [
       {
@@ -639,7 +639,7 @@
     "__type__": "cc.RealCurve",
     "_times": [
       0,
-      0.3333333333333333
+      0.3333333432674408
     ],
     "_values": [
       {
@@ -715,11 +715,56 @@
   {
     "__type__": "cc.ObjectCurve",
     "_times": [
-      0
+      0,
+      0.03333333333333333,
+      0.06666666666666667,
+      0.1,
+      0.13333333333333333,
+      0.16666666666666666,
+      0.2,
+      0.23333333333333334,
+      0.26666666666666666,
+      0.3
     ],
     "_values": [
       {
-        "__uuid__": "36591a9a-d8e1-4570-ac79-fad4dd6424d2@f9941",
+        "__uuid__": "cb31aa0f-ba0f-4a1e-bec8-0028a881a73a@f9941",
+        "__expectedType__": "cc.SpriteFrame"
+      },
+      {
+        "__uuid__": "176cfd48-1888-40b7-b284-b6ac5f170661@f9941",
+        "__expectedType__": "cc.SpriteFrame"
+      },
+      {
+        "__uuid__": "9da189a0-f85e-4643-be31-b55e76fc8a10@f9941",
+        "__expectedType__": "cc.SpriteFrame"
+      },
+      {
+        "__uuid__": "4b484c2d-c230-4172-a99c-7de01e7410a2@f9941",
+        "__expectedType__": "cc.SpriteFrame"
+      },
+      {
+        "__uuid__": "82441a5e-cbc5-4a24-8d79-9c307f293e32@f9941",
+        "__expectedType__": "cc.SpriteFrame"
+      },
+      {
+        "__uuid__": "4e5617a3-c35f-4525-bad8-ed0f1294d69f@f9941",
+        "__expectedType__": "cc.SpriteFrame"
+      },
+      {
+        "__uuid__": "0729a314-bbc1-4ad5-8bdf-e523bf924e1b@f9941",
+        "__expectedType__": "cc.SpriteFrame"
+      },
+      {
+        "__uuid__": "5b8e3d13-79ae-4c88-bcd2-101f76287c99@f9941",
+        "__expectedType__": "cc.SpriteFrame"
+      },
+      {
+        "__uuid__": "6e5541e1-002d-4773-a5f4-c27892e25797@f9941",
+        "__expectedType__": "cc.SpriteFrame"
+      },
+      {
+        "__uuid__": "8e2cb504-4f18-488e-b8b6-51777a78b03b@f9941",
         "__expectedType__": "cc.SpriteFrame"
       }
     ]

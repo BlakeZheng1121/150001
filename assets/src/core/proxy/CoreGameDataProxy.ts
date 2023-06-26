@@ -243,4 +243,12 @@ export class CoreGameDataProxy extends puremvc.Proxy {
     public set lobbyUrl(_val) {
         this.gameData.lobbyUrl = _val;
     }
+
+    /** 取得SPIN鍵的Provider Logo連結 */
+    public get providerLogoUrl() {
+        return this.gameData.providerLogoUrl;
+    }
+    public set providerLogoUrl(_val) {
+        this.gameData.providerLogoUrl = _val;
+    }
 }

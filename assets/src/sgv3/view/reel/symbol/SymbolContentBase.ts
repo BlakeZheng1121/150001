@@ -7,6 +7,9 @@ const { ccclass, property } = _decorator;
 
 @ccclass('SymbolContentBase')
 export class SymbolContentBase extends Component {
+    //// Internal Member
+    @property({ type: Sprite, visible: true })
+    private _backgroundSprite: Sprite | null = null;
     @property({ type: Sprite, visible: true })
     private _mainSprite: Sprite | null = null;
 
@@ -37,6 +40,10 @@ export class SymbolContentBase extends Component {
         return this._symbolData!;
     }
 
+    public get backgroundSprite() {
+        return this._backgroundSprite!;
+    }
+
     public get mainSprite() {
         return this._mainSprite!;
     }
@@ -44,6 +51,9 @@ export class SymbolContentBase extends Component {
     public set symbolData(value: SymbolData) {
         this._symbolData = value;
         this.mainSprite!.spriteFrame = this.symbolData.mainSpriteFrame;
+        if(this.backgroundSprite == null){return;}
+        this.backgroundSprite.enabled = (this.symbolData.bgSpriteFrame != null);
+        this.backgroundSprite.spriteFrame =(this.backgroundSprite.enabled) ? this.symbolData.bgSpriteFrame: null;
     }
 
     public tween: Tween<Node> | null = null;

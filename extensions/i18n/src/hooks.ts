@@ -60,7 +60,7 @@ async function removeReference() {
 }
 
 function filterFn(info: AssetInfo) {
-    return info.type == 'cc.Prefab';
+    return info.type == 'cc.Prefab' || info.type == 'cc.SceneAsset';
 }
 
 async function setNullToReference(uuid: string, info: AssetInfo) {

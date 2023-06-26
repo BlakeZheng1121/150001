@@ -9,7 +9,7 @@ const { ccclass, executeInEditMode, menu } = _decorator;
 @executeInEditMode
 @menu('i18n/AddLocalizedScript')
 export class AddLocalizedScript extends Component {
-    onEnable() {
+    async onEnable() {
         if(this.getComponent(Sprite)) {
             this.addComponent(LocalizedSprite);
         }
@@ -18,10 +18,14 @@ export class AddLocalizedScript extends Component {
         }
         else if(this.getComponent(sp.Skeleton)) {
             const skeleton = this.getComponent(sp.Skeleton);
-            const skeletonData = skeleton.skeletonData;
+            let dump = await Editor.Message.request('scene', 'query-component', skeleton.uuid);
             skeleton._destroyImmediate();
             let localizedSkeleton = this.addComponent(LocalizedSkeleton);
-            localizedSkeleton.skeletonData = skeletonData;
+            await Editor.Message.request('scene', 'set-property', {
+                uuid: this.node.uuid,
+                path: `__comps__.${this.getComponents(Component).findIndex(val=>val == localizedSkeleton)}`,
+                dump: dump
+            });
         }
         else {
             this.addComponent(LocalizedPosition);

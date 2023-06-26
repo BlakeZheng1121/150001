@@ -221,7 +221,7 @@
     "_string": "56.00",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 62,
+    "_actualFontSize": 50,
     "_fontSize": 88,
     "_fontFamily": "Arial",
     "_lineHeight": 64,
@@ -267,8 +267,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 210,
-      "height": 210
+      "width": 280,
+      "height": 280
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -305,7 +305,7 @@
       "a": 166
     },
     "_spriteFrame": {
-      "__uuid__": "36591a9a-d8e1-4570-ac79-fad4dd6424d2@f9941",
+      "__uuid__": "cb31aa0f-ba0f-4a1e-bec8-0028a881a73a@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,
