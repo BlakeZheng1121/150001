@@ -7998,10 +7998,7 @@
     "_defaultCacheMode": 0,
     "_debugBones": false,
     "_debugSlots": false,
-    "_skeletonData": {
-      "__uuid__": "631734a8-c840-4a82-b130-c6bb79a3bbc2",
-      "__expectedType__": "sp.SkeletonData"
-    },
+    "_skeletonData": {},
     "defaultSkin": "default",
     "defaultAnimation": "",
     "_sockets": [],
