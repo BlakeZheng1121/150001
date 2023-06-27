@@ -52,7 +52,7 @@ export class ScoringHandleCommand extends puremvc.SimpleCommand {
                 winType = this.gameDataProxy.curRoundResult.displayInfo.winType;
                 scoringTime = this.gameDataProxy.curRoundResult.displayInfo.scoringTime;
                 winBoardTargetAmount = this.gameDataProxy.convertCredit2Cash(
-                    (this.gameDataProxy.curRoundResult as FreeGameOneRoundResult).playerWin
+                    (this.gameDataProxy.curRoundResult as FreeGameOneRoundResult).waysGameResult.playerWin
                 );
             }
         } else if (this.gameDataProxy.afterGame2) {
