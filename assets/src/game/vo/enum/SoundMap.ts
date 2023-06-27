@@ -97,9 +97,12 @@ export enum AudioClipsEnum {
     MiniHit04 = 'MiniHit04',
     MiniCountdown01 = 'MiniCountdown01',
     MiniCountdown02 = 'MiniCountdown02',
-    PrizePrediction = 'PrizePrediction',
+    PrizePrediction01 = 'PrizePrediction01',
+    PrizePrediction02 = 'PrizePrediction02',
+    PrizePrediction03 = 'PrizePrediction03',
     SpinStop = 'SpinStop',
 
+    JP_Slogan = 'JP_Slogan',
     JPResult_en = 'JPResult_en',
     JPResult_zh = 'JPResult_zh',
 }
@@ -130,10 +133,15 @@ export enum ScoringClipsEnum {
     Scoring_Win02 = 'Scoring_Win02',
     Scoring_Win03 = 'Scoring_Win03',
     Scoring_Win04 = 'Scoring_Win04',
-    Scoring_Win01_end = 'Scoring_Win01_end',
-    Scoring_Win02_end = 'Scoring_Win02_end',
-    Scoring_Win03_end = 'Scoring_Win03_end',
-    Scoring_Win04_end = 'Scoring_Win04_end'
+    
+    ScoringWin01_en = 'ScoringWin01_en',
+    ScoringWin01_zh = 'ScoringWin01_zh',
+    ScoringWin02_en = 'ScoringWin02_en',
+    ScoringWin02_zh = 'ScoringWin02_zh',
+    ScoringWin03_en = 'ScoringWin03_en',
+    ScoringWin03_zh = 'ScoringWin03_zh',
+    ScoringWin04_en = 'ScoringWin04_en',
+    ScoringWin04_zh = 'ScoringWin04_zh'
 }
 export enum BaseScoringDuration {
     Scoring01 = 0.5,
@@ -151,10 +159,10 @@ export enum BaseScoringDuration {
     Scoring13 = 13,
     Scoring14 = 21,
     Scoring15 = 25,
-    Scoring_Win01 = 6,
-    Scoring_Win02 = 6,
-    Scoring_Win03 = 6,
-    Scoring_Win04 = 6
+    Scoring_Win01 = 12.5,
+    Scoring_Win02 = 15.3,
+    Scoring_Win03 = 19.2,
+    Scoring_Win04 = 23.6
 }
 
 export enum QuickScoringDuration {

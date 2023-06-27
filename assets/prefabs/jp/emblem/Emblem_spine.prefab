@@ -54,10 +54,13 @@
       },
       {
         "__id__": 1420
+      },
+      {
+        "__id__": 3214
       }
     ],
     "_prefab": {
-      "__id__": 3214
+      "__id__": 3225
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -40744,6 +40747,257 @@
     "animation": null,
     "animationName": 0,
     "delayTime": 0
+  },
+  {
+    "__type__": "0b603AMVOJO1LTOw5mwb8qW",
+    "_name": "",
+    "_objFlags": 0,
+    "__editorExtras__": {},
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 3215
+    },
+    "sceneOrientationSetting": [
+      {
+        "__id__": 3216
+      },
+      {
+        "__id__": 3219
+      },
+      {
+        "__id__": 3222
+      }
+    ],
+    "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "5dLP7IMHtEY6RXOjyWczOM"
+  },
+  {
+    "__type__": "SceneOrientationSetting",
+    "_scene": 2,
+    "_horizontalSetting": {
+      "__id__": 3217
+    },
+    "_verticalSetting": {
+      "__id__": 3218
+    }
+  },
+  {
+    "__type__": "OriSetting",
+    "isChangeScale": false,
+    "isChangeContentSize": false,
+    "isChangePosition": false,
+    "position": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "scale": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "__type__": "cc.Size",
+      "width": 0,
+      "height": 0
+    },
+    "isChangeRotation": false,
+    "isChangeSprite": false,
+    "rotation": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "sprite": null
+  },
+  {
+    "__type__": "OriSetting",
+    "isChangeScale": true,
+    "isChangeContentSize": false,
+    "isChangePosition": true,
+    "position": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "scale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "size": {
+      "__type__": "cc.Size",
+      "width": 0,
+      "height": 0
+    },
+    "isChangeRotation": false,
+    "isChangeSprite": false,
+    "rotation": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "sprite": null
+  },
+  {
+    "__type__": "SceneOrientationSetting",
+    "_scene": 3,
+    "_horizontalSetting": {
+      "__id__": 3220
+    },
+    "_verticalSetting": {
+      "__id__": 3221
+    }
+  },
+  {
+    "__type__": "OriSetting",
+    "isChangeScale": false,
+    "isChangeContentSize": false,
+    "isChangePosition": false,
+    "position": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "scale": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "__type__": "cc.Size",
+      "width": 0,
+      "height": 0
+    },
+    "isChangeRotation": false,
+    "isChangeSprite": false,
+    "rotation": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "sprite": null
+  },
+  {
+    "__type__": "OriSetting",
+    "isChangeScale": true,
+    "isChangeContentSize": false,
+    "isChangePosition": true,
+    "position": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": -50,
+      "z": 0
+    },
+    "scale": {
+      "__type__": "cc.Vec3",
+      "x": 1.5,
+      "y": 1.5,
+      "z": 1
+    },
+    "size": {
+      "__type__": "cc.Size",
+      "width": 0,
+      "height": 0
+    },
+    "isChangeRotation": false,
+    "isChangeSprite": false,
+    "rotation": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "sprite": null
+  },
+  {
+    "__type__": "SceneOrientationSetting",
+    "_scene": 5,
+    "_horizontalSetting": {
+      "__id__": 3223
+    },
+    "_verticalSetting": {
+      "__id__": 3224
+    }
+  },
+  {
+    "__type__": "OriSetting",
+    "isChangeScale": false,
+    "isChangeContentSize": false,
+    "isChangePosition": false,
+    "position": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "scale": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "__type__": "cc.Size",
+      "width": 0,
+      "height": 0
+    },
+    "isChangeRotation": false,
+    "isChangeSprite": false,
+    "rotation": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "sprite": null
+  },
+  {
+    "__type__": "OriSetting",
+    "isChangeScale": true,
+    "isChangeContentSize": false,
+    "isChangePosition": true,
+    "position": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": -80,
+      "z": 0
+    },
+    "scale": {
+      "__type__": "cc.Vec3",
+      "x": 1.5,
+      "y": 1.5,
+      "z": 1
+    },
+    "size": {
+      "__type__": "cc.Size",
+      "width": 0,
+      "height": 0
+    },
+    "isChangeRotation": false,
+    "isChangeSprite": false,
+    "rotation": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "sprite": null
   },
   {
     "__type__": "cc.PrefabInfo",

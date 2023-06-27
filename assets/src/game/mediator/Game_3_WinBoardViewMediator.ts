@@ -184,10 +184,10 @@ export class Game_3_WinBoardViewMediator
     private getWinBoardRunTimer(hitInfo: number[]): number {
         let timer = 0;
 
-        let miniTime = 7;
-        let minorTime = 7;
-        let majorTime = 14;
-        let grandTime = 14;
+        let miniTime = 15;
+        let minorTime = 15;
+        let majorTime = 27;
+        let grandTime = 27;
 
         let biggestSymbol = JackpotPool.MINI;
         for (let i = 0; i < hitInfo.length; i++) {

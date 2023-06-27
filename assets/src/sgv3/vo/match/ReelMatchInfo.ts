@@ -8,8 +8,6 @@ const { ccclass, property } = _decorator;
  */
 @ccclass('SymbolData')
 export class SymbolData {
-    @property({ type: Boolean })
-    private isUseLanguage: Boolean = false;
     @property({ visible: true })
     private _name: string = '';
     @property({ type: CCInteger, visible: true })
@@ -23,20 +21,6 @@ export class SymbolData {
         }
     })
     private _mainSpriteFrame: SpriteFrame | null = null;
-    @property({
-        type: SpriteFrame,
-        visible() {
-            return this.isUseLanguage;
-        }
-    })
-    private _mainSpriteFrame_EN: SpriteFrame | null = null;
-    @property({
-        type: SpriteFrame,
-        visible() {
-            return this.isUseLanguage;
-        }
-    })
-    private _mainSpriteFrame_ZH: SpriteFrame | null = null;
     @property({ type: SpriteFrame, visible: true })
     private _bgSpriteFrame: SpriteFrame | null = null;
     @property({ visible: true })
@@ -59,15 +43,6 @@ export class SymbolData {
     }
     public get isImprovedFOV() {
         return this._isImprovedFOV;
-    }
-
-    public checkLanguage(language: string) {
-        if (this.isUseLanguage === false) return;
-        if (language === 'zh') {
-            this._mainSpriteFrame = this._mainSpriteFrame_ZH;
-        } else {
-            this._mainSpriteFrame = this._mainSpriteFrame_EN;
-        }
     }
 }
 

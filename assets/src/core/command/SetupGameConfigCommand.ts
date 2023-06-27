@@ -36,6 +36,7 @@ export class SetupGameConfigCommand extends puremvc.SimpleCommand {
             self.getGameVerRequest();
             self.getUIVersionRequest();
             self.getLogoUrlRequest();
+            self.getSpinLogoUrlRequest();
         }
     }
 
@@ -67,16 +68,28 @@ export class SetupGameConfigCommand extends puremvc.SimpleCommand {
                 let logoUrl = data;
                 self.setupLogoUrl(logoUrl);
                 break;
+            case 'getSpinLogoUrl':
+                let spinLogoUrl = data;
+                self.setupSpinLogoUrl(spinLogoUrl);
+                break;
         }
     }
 
     protected setupLogoUrl(url: any) {
-        if(window['serviceProvider'] === ServiceProvider.OTHERS 
-        || url === undefined 
-        || url === null ) {  
+        if (window['serviceProvider'] === ServiceProvider.OTHERS || url === undefined || url === null) {
             return;
         }
-        this.sendNotification(SceneEvent.LOAD_LOGO_URL,url);
+        this.sendNotification(SceneEvent.LOAD_LOGO_URL, url);
+    }
+
+    protected setupSpinLogoUrl(url: any) {
+        if (window['serviceProvider'] === ServiceProvider.OTHERS || url === undefined || url === null) {
+            return;
+        }
+        this.sendNotification(SceneEvent.LOAD_SPIN_LOGO_URL, url);
+
+        let gameDataProxy: CoreGameDataProxy = this.getGameDataProxy();
+        gameDataProxy.providerLogoUrl = url;
     }
 
     protected setupServInfo(servInfo: any) {
@@ -87,15 +100,21 @@ export class SetupGameConfigCommand extends puremvc.SimpleCommand {
 
     protected setupUserInfo(userInfo: any) {
         let gameDataProxy: CoreGameDataProxy = this.getGameDataProxy();
-        gameDataProxy.language = userInfo['lang'];
-        i18n.init(gameDataProxy.language);
-        i18n.updateSceneRenderers();
+        this.setupSupportedLanguage(userInfo['lang']);
         gameDataProxy.useDollarSign = userInfo['useDollarSign'];
         gameDataProxy.dollarSign = userInfo['currencySymbol'];
-        gameDataProxy.dollarCurrency = userInfo['currency'];
+        gameDataProxy.dollarCurrency = userInfo['currencySystemName'];
         //BalanceUtil.dollarSign = gameDataProxy.useDollarSign ? gameDataProxy.dollarSign : '';
         BalanceUtil.dollarSign = gameDataProxy.dollarCurrency;
         this.sendNotification(SceneEvent.LOAD_USER_INFO_COMPLETE);
+    }
+
+    private setupSupportedLanguage(lang: string) {
+        lang = String(lang).toLowerCase().slice(0, 2);
+        i18n.init(lang);
+
+        let gameDataProxy: CoreGameDataProxy = this.getGameDataProxy();
+        gameDataProxy.language = i18n.getSupportedLanguage(lang);
     }
 
     protected setupGameData(gameData: any) {
@@ -175,9 +194,11 @@ export class SetupGameConfigCommand extends puremvc.SimpleCommand {
         this.getWebBridgeProxy().getWebObjRequest(this, 'getLogoUrl');
     }
 
+    protected getSpinLogoUrlRequest() {
+        this.getWebBridgeProxy().getWebObjRequest(this, 'getSpinLogoUrl');
+    }
+
     protected getUIVersionRequest(): any {
         return this.getWebBridgeProxy().getWebFunRequest(this, 'getUIVersion');
     }
-
-
 }

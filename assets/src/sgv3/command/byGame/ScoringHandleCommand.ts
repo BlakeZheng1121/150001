@@ -52,7 +52,7 @@ export class ScoringHandleCommand extends puremvc.SimpleCommand {
                 winType = this.gameDataProxy.curRoundResult.displayInfo.winType;
                 scoringTime = this.gameDataProxy.curRoundResult.displayInfo.scoringTime;
                 winBoardTargetAmount = this.gameDataProxy.convertCredit2Cash(
-                    (this.gameDataProxy.curRoundResult as FreeGameOneRoundResult).playerWin
+                    (this.gameDataProxy.curRoundResult as FreeGameOneRoundResult).waysGameResult.playerWin
                 );
             }
         } else if (this.gameDataProxy.afterGame2) {
@@ -81,14 +81,14 @@ export class ScoringHandleCommand extends puremvc.SimpleCommand {
                 delayTime,
                 () => {
                     this.playScoring(this.finalWinType);
-                    this.setScoringData(this.finalWinType, startAmount, targetAmount, winBoardTargetAmount);},
+                    this.playScoringVocal(this.finalWinType);
+                    this.setScoringData(startAmount, targetAmount, winBoardTargetAmount);},
                 this
             )
             .start();
     }
 
     protected setScoringData(
-        winType: WinType,
         startAmount: number,
         targetAmount: number,
         winBoardTargetAmount: number
@@ -164,6 +164,28 @@ export class ScoringHandleCommand extends puremvc.SimpleCommand {
         }
     }
 
+    private playScoringVocal(winType: WinType) {
+        if (winType >= WinType.bigWin) {
+            let audioSplit = '';
+            switch (winType) {
+                case WinType.bigWin:
+                    audioSplit = ScoringClipsEnum.ScoringWin01_zh;
+                    break;
+                case WinType.megaWin:
+                    audioSplit = ScoringClipsEnum.ScoringWin02_zh;
+                    break;
+                case WinType.superWin:
+                    audioSplit = ScoringClipsEnum.ScoringWin03_zh;
+                    break;
+                case WinType.jumboWin:
+                    audioSplit = ScoringClipsEnum.ScoringWin04_zh;
+                    break;
+            }
+            let audioName = audioSplit.split('_')[0] + '_' + this.gameDataProxy.language;
+            AudioManager.Instance.play(audioName);
+        }
+    }
+
     private playScoringEnd(isForceComplete: boolean) {
         let winType = this.finalWinType;
         GlobalTimer.getInstance().stop(this.timerKey);
@@ -174,40 +196,32 @@ export class ScoringHandleCommand extends puremvc.SimpleCommand {
             if (isForceComplete || this.needQuickScoringTime()) {
                 switch (winType) {
                     case WinType.bigWin:
-                        AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win01);
-                        AudioManager.Instance.play(ScoringClipsEnum.Scoring_Win01_end).volume(1);
+                        AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win01).fade(0, 0.5);
                         break;
                     case WinType.megaWin:
-                        AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win02);
-                        AudioManager.Instance.play(ScoringClipsEnum.Scoring_Win02_end).volume(1);
+                        AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win02).fade(0, 0.5);
                         break;
                     case WinType.superWin:
-                        AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win03);
-                        AudioManager.Instance.play(ScoringClipsEnum.Scoring_Win03_end).volume(1);
+                        AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win03).fade(0, 0.5);
                         break;
                     case WinType.jumboWin:
-                        AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win04);
-                        AudioManager.Instance.play(ScoringClipsEnum.Scoring_Win04_end).volume(1);
+                        AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win04).fade(0, 0.5);
                         break;
                 }
             }
             else {
                 switch (winType) {
                     case WinType.bigWin:
-                        AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win01).fade(0, 0.3);
-                        AudioManager.Instance.play(ScoringClipsEnum.Scoring_Win01_end).volume(0).fade(1, 0.3);
+                        AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win01).fade(0, 1.0);
                         break;
                     case WinType.megaWin:
-                        AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win02).fade(0, 0.3);
-                        AudioManager.Instance.play(ScoringClipsEnum.Scoring_Win02_end).volume(0).fade(1, 0.3);
+                        AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win02).fade(0, 1.0);
                         break;
                     case WinType.superWin:
-                        AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win03).fade(0, 0.3);
-                        AudioManager.Instance.play(ScoringClipsEnum.Scoring_Win03_end).volume(0).fade(1, 0.3);
+                        AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win03).fade(0, 1.0);
                         break;
                     case WinType.jumboWin:
-                        AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win04).fade(0, 0.3);
-                        AudioManager.Instance.play(ScoringClipsEnum.Scoring_Win04_end).volume(0).fade(1, 0.3);
+                        AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win04).fade(0, 1.0);
                         break;
                 }
             }

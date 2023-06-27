@@ -72,7 +72,7 @@ export class ChangeSceneViewCommand extends puremvc.SimpleCommand {
                 } else {
                     this.sendNotification(StateWinEvent.ON_GAME3_TRANSITIONS, true); //通知入場的轉場動畫
                     GlobalTimer.getInstance()
-                        .registerTimer('Game3_TransitionBG', 1.7, this.Game3TransitionsBG, this)
+                        .registerTimer('Game3_TransitionBG', 3.5, this.Game3TransitionsBG, this)
                         .start();
                 }
                 return;

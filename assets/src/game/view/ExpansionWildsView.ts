@@ -25,9 +25,9 @@ export class ExpansionWildsView extends BaseScene {
         this.animL.OnPlay(0);
         this.animR.OnPlay(1);
         AudioManager.Instance.play(AudioClipsEnum.Free_ExpandWild);
-        setTimeout(() => {
+        /*setTimeout(() => {
             SceneManager.instance.shakeScreen();
-        }, 600);
+        }, 600);*/
         this.isWildSoundPlaying = false;
     }
 

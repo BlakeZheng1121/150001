@@ -19,15 +19,11 @@ export class MiniResultBoard extends Component {
 
     @property(Sprite) private BoardSprite: Sprite[] = [];
 
-    @property(Sprite) private GemSprite: Sprite | null = null;
-
     @property(Sprite) private TextSprite: Sprite | null = null;
 
     @property(Sprite) private SpriteLight: Sprite | null = null;
 
     @property(SpriteFrame) private SpriteBoardFrame: SpriteFrame[] = [];
-
-    @property(SpriteFrame) private SpriteGemFrame: SpriteFrame[] = [];
 
     @property(Sprite) private SpriteTextArray: Array<Sprite> = [];
 
@@ -65,8 +61,6 @@ export class MiniResultBoard extends Component {
         for (let i = 0; i < this.SpriteTextArray.length; i++) {
             this.SpriteTextArray[i].node.active = i == JackPotType;
         }
-
-        this.GemSprite.spriteFrame = this.SpriteGemFrame[JackPotType];
 
         this.SpriteLight.color = this.SpriteLightColor[JackPotType];
     }
