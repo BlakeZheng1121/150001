@@ -66,8 +66,12 @@
             // help iframe
             let gameHelp = document.getElementById('gameHelp');
             var openGameHelp = (gameLocale) => {
-                gameHelp.src = `./help/help_${gameLocale}.html`;
-                gameHelp.style.display = UrlExists(gameHelp.src) ? 'block' : 'none';
+                if (gameLocale.toString() === 'false') {
+                    gameHelp.style.display = 'none';
+                } else {
+                    gameHelp.src = `./help/help_${gameLocale}.html`;
+                    gameHelp.style.display = UrlExists(gameHelp.src) ? 'block' : 'none';
+                }
             };
 
             var UrlExists = (url) => {
