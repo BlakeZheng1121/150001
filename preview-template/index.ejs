@@ -52,6 +52,7 @@
             let gameHelp = document.getElementById('gameHelp');
             var openGameHelp = (gameLocale) => {
                 if (gameLocale.toString() === 'false') {
+                    gameHelp.src = '';
                     gameHelp.style.display = 'none';
                 } else {
                     gameHelp.src = `./help/help_${gameLocale}.html`;
