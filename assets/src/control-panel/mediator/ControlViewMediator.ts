@@ -70,7 +70,6 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
     public listNotificationInterests(): string[] {
         let eventList = [
             SceneEvent.LOAD_BASE_COMPLETE,
-            SceneEvent.LOAD_USER_INFO_COMPLETE,
             SceneEvent.LOAD_UI_VERSION_COMPLETE,
             SceneEvent.LOAD_GAME_DATA_COMPLETE,
             SceneEvent.LOAD_SPIN_LOGO_URL,
@@ -115,9 +114,6 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
         let name = notification.getName();
         let freeGameOneRoundResult = this.gameDataProxy.curRoundResult as FreeGameOneRoundResult;
         switch (name) {
-            case SceneEvent.LOAD_USER_INFO_COMPLETE:
-                this.view.setLanguage(this.gameDataProxy.language);
-                break;
             case SceneEvent.LOAD_UI_VERSION_COMPLETE:
                 // 組版本號
                 this.view.versionTxt.string = this.gameDataProxy.gameAndUiVer;
@@ -303,7 +299,6 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
      * 初始化 controlView
      */
     private controlViewInit() {
-        this.view.setLanguage(this.gameDataProxy.language);
         this.createAutoMenu();
         // 組版本號
         this.view.versionTxt.string = this.gameDataProxy.gameAndUiVer;

@@ -195,15 +195,6 @@ export class ControlView extends BaseScene {
         this.quickSpinMsg.init();
     }
 
-    public setLanguage(lang: string) {
-        this.changeLocale(lang);
-    }
-
-    /**更改語系 */
-    protected changeLocale(locale: string) {
-        this.quickSpinMsg.changeLocale(locale);
-    }
-
     private registerPanelButton() {
         this.spinButton.node.on(SystemEvent.EventType.TOUCH_END, this.buttonCallback.spin, this.buttonCallback);
         this.quickSpinButton.node.on(

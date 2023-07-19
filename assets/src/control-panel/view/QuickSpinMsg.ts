@@ -1,11 +1,11 @@
 import { _decorator, Component, Label, UIOpacity, Tween, tween } from 'cc';
+import * as i18n from '../../../../extensions/i18n/assets/LanguageData';
 const { ccclass } = _decorator;
 
 @ccclass('QuickSpinMsg')
 export class QuickSpinMsg extends Component {
-    private quickSpinTxt: string = 'Quick Spin ';
-    private quickSpinEnabled: string = 'Enabled';
-    private quickSpinDisabled: string = 'Disabled';
+    private quickSpinEnabled: string = 'quickSpinEnabled';
+    private quickSpinDisabled: string = 'quickSpinDisabled';
     private quickSpinMsgLabel: Label;
     private uiOpacity: UIOpacity;
     private showTween: Tween<UIOpacity>;
@@ -32,28 +32,11 @@ export class QuickSpinMsg extends Component {
             .union();
     }
 
-    public changeLocale(locale: string) {
-        switch (locale) {
-            case 'en':
-                this.quickSpinEnabled = 'Quick Spin Enabled';
-                this.quickSpinDisabled = 'Quick Spin Disabled';
-                break;
-            case 'zh':
-                this.quickSpinEnabled = '快速旋转开启';
-                this.quickSpinDisabled = '快速旋转关闭';
-                break;
-            case 'th':
-                this.quickSpinEnabled = 'เปิดอย่างรวดเร็ว';
-                this.quickSpinDisabled = 'ปิดอย่างรวดเร็ว';
-                break;
-        }
-    }
-
     public showMsg(state: boolean, isShow: boolean) {
         if (!isShow) return;
         this.node.active = true;
         this.uiOpacity.opacity = 0;
-        this.quickSpinMsgLabel.string = state ? this.quickSpinEnabled : this.quickSpinDisabled;
+        this.quickSpinMsgLabel.string = i18n.t(state ? this.quickSpinEnabled : this.quickSpinDisabled);
 
         this.showTween.stop();
         this.showTween.start();
