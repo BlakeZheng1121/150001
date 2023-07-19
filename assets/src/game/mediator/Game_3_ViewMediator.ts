@@ -59,10 +59,7 @@ export class Game_3_ViewMediator extends BaseMediator<Game_3_View> {
 
     protected lastSetupEventList: string[];
 
-    protected defaultInterestList: string[] = [
-        GameStateProxyEvent.ON_SCENE_BEFORE_CHANGE,
-        ViewMediatorEvent.LEAVE,
-    ];
+    protected defaultInterestList: string[] = [GameStateProxyEvent.ON_SCENE_BEFORE_CHANGE, ViewMediatorEvent.LEAVE];
 
     protected myInterestsList: string[] = [
         GameStateProxyEvent.ON_SCENE_BEFORE_CHANGE,
@@ -72,7 +69,7 @@ export class Game_3_ViewMediator extends BaseMediator<Game_3_View> {
         ViewMediatorEvent.SHOW_WON_SPIN_DATA,
         ViewMediatorEvent.ENTER,
         ViewMediatorEvent.RECOVERY_LOAD_VIEW,
-        ScreenEvent.ON_SPIN_DOWN,
+        ScreenEvent.ON_SPIN_DOWN
     ];
 
     public constructor(name?: string, component?: any) {
@@ -476,13 +473,11 @@ export class Game_3_ViewMediator extends BaseMediator<Game_3_View> {
         let lang = self.gameDataProxy.language;
 
         switch (lang) {
-            case 'en':
-                AudioManager.Instance.play(AudioClipsEnum.JPResult_en);
-                break;
             case 'zh':
                 AudioManager.Instance.play(AudioClipsEnum.JPResult_zh);
                 break;
-            case 'th':
+            default:
+                AudioManager.Instance.play(AudioClipsEnum.JPResult_en);
                 break;
         }
     }
