@@ -47,7 +47,7 @@ export class RespinHandleCommand extends puremvc.SimpleCommand {
                     respinResult.displayLogicInfo.beforeAccumulateWinWithoutBaseGameWin;
                 result.displayLogicInfo.afterAccumulateWinWithBaseGameWin =
                     respinResult.displayLogicInfo.beforeAccumulateWinWithBaseGameWin =
-                        result.extendInfoForFreeGameResult.displayAccumulateWinBeforeRespin + baseGameWin;
+                        result.extendInfoForFreeGameResult.displayAccumulateWinBeforeRespin;
                 result.displayLogicInfo.afterAccumulateWinWithoutBaseGameWin =
                     respinResult.displayLogicInfo.beforeAccumulateWinWithoutBaseGameWin =
                         result.extendInfoForFreeGameResult.displayAccumulateWinBeforeRespin;
