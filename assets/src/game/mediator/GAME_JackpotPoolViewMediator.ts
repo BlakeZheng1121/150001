@@ -70,6 +70,7 @@ export class GAME_JackpotPoolViewMediator extends BaseMediator<GAME_JackpotPoolV
                 break;
             case JackpotPool.HIT_JACKPOT_TO_POOL_VALUE_INIT:
                 this.hitJackpotToInitPoolValue();
+                this.onBetLevelChange();
                 break;
             case JackpotPool.HIT_JACKPOT_TO_POOL_VALUE_UPDATE:
                 this.hitJackpotToUpdatePoolValue(notification.getBody());
