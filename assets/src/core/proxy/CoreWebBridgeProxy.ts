@@ -16,6 +16,8 @@ export class CoreWebBridgeProxy extends puremvc.Proxy {
      */
     public static readonly EV_ENABLE_SOUND: string = 'EV_ENABLE_SOUND';
 
+	public isAccountStatusMultipleLogin: boolean = false;
+
     protected cUrl: string;
     protected _listenerMap: TSMap<any, any>;
 

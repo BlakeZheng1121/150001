@@ -3,21 +3,16 @@ import { CoreGameDataProxy } from '../proxy/CoreGameDataProxy';
 import { CoreStateMachineProxy } from '../proxy/CoreStateMachineProxy';
 import { CoreWebBridgeProxy } from '../proxy/CoreWebBridgeProxy';
 
-export class AccountStatusCommand extends puremvc.SimpleCommand {
-    public static readonly NAME: string = 'gs.SC_ACCOUNT_STATUS';
+export class AccountStatusMultipleLoginCommand extends puremvc.SimpleCommand {
+    public static readonly NAME: string = 'ACCOUNT_STATUS_MULTIPLE_LOGIN';
 
     public execute(notification: puremvc.INotification): void {
         const webBridgeProxy: CoreWebBridgeProxy = this.facade.retrieveProxy(
             CoreWebBridgeProxy.NAME
         ) as CoreWebBridgeProxy;
-        const result = notification.getBody() as SFS2X.SFSObject;
-        const status_code: number = CoreMsgCode.ACCOUNT_STATUS[result.getInt('status_code')];
-        const err_msg: number = result.getInt('err_msg');
-        // 若遇到重複登入狀況 需延後跳出Error訊息 需先保存狀態
-        if (status_code == CoreMsgCode.ACCOUNT_STATUS_MULTIPLE_LOGIN && !this.isCanShowErrorMessage()) {
-            webBridgeProxy.isAccountStatusMultipleLogin = true;
-        } else {
-            webBridgeProxy.sendMsgCode(status_code, err_msg);
+        if (webBridgeProxy.isAccountStatusMultipleLogin && this.isCanShowErrorMessage()) {
+            webBridgeProxy.isAccountStatusMultipleLogin = false;
+            webBridgeProxy.sendMsgCode(CoreMsgCode.ACCOUNT_STATUS_MULTIPLE_LOGIN);
         }
     }
 

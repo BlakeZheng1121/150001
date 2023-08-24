@@ -1,9 +1,11 @@
-import { CoreGameDataProxy } from '../proxy/CoreGameDataProxy';
 import { NetworkProxy } from '../proxy/NetworkProxy';
 import { StateMachineObject, CoreStateMachineProxy } from '../proxy/CoreStateMachineProxy';
 import { CoreSFDisconnectionCommand } from './CoreSFDisconnectionCommand';
 import { CoreSGMaintenanceCommand } from './CoreSGMaintenanceCommand';
 import { StateWinEvent } from '../../sgv3/util/Constant';
+import { CoreWebBridgeProxy } from '../proxy/CoreWebBridgeProxy';
+import { AccountStatusMultipleLoginCommand } from './AccountStatusMultipleLoginCommand';
+import { CoreGameDataProxy } from '../proxy/CoreGameDataProxy';
 
 export class StateMachineCommand extends puremvc.SimpleCommand {
     public static readonly NAME: string = 'StateMachineCommand';
@@ -45,9 +47,15 @@ export class StateMachineCommand extends puremvc.SimpleCommand {
     private handleCommonStatus(): void {
         const self = this;
         const gameDataProxy = self.getGameDataProxy();
+        const webBridgeProxy: CoreWebBridgeProxy = this.facade.retrieveProxy(
+            CoreWebBridgeProxy.NAME
+        ) as CoreWebBridgeProxy;
         if (gameDataProxy.isMaintaining) {
             self.facade.sendNotification(CoreSGMaintenanceCommand.NAME);
-        } else {
+        } else if(webBridgeProxy.isAccountStatusMultipleLogin) {
+            self.facade.sendNotification(AccountStatusMultipleLoginCommand.NAME);
+        }
+         else {
             const netProxy = self.facade.retrieveProxy(NetworkProxy.NAME) as NetworkProxy;
             if (!gameDataProxy.isReconnecting && !netProxy.isConnected()) {
                 self.facade.sendNotification(CoreSFDisconnectionCommand.NAME);
@@ -71,3 +79,4 @@ export class StateMachineCommand extends puremvc.SimpleCommand {
         return self.stateMachineProxy;
     }
 }
+
