@@ -46,7 +46,7 @@ export class SymbolFXContent extends Component {
             return this.symbolType == SymbolId.C2;
         }
     })
-    public multiPos: Vec3 = new Vec3(0, 26, 0);
+    public multiPos: Vec3 = new Vec3(0, 10, 0);
 
     @property({
         visible() {
