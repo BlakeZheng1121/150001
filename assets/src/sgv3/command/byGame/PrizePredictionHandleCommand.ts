@@ -70,18 +70,28 @@ export class PrizePredictionHandleCommand extends puremvc.SimpleCommand {
      * @param result FreeGameOneRoundResult
      */
     checkFreeGame(result: FreeGameOneRoundResult): void {
-        const totalBet = this.gameDataProxy.curTotalBet;
-        const odds = this.gameDataProxy.convertCredit2Cash(result.playerWin) / totalBet;
-        const isMSymbolFiveOfKind = result.waysGameResult.waysResult.some(
-            (result) => result.hitNumber == 5 && result.symbolID >= SymbolId.M1 && result.symbolID <= SymbolId.M6
-        );
-        const randomNumber = this.getRandomNumber(result, GameScene.Game_1);
+        if (result.extendInfoForFreeGameResult.isRespinFeature) {
+            this.checkRespin(result);
+        } else {
+            const totalBet = this.gameDataProxy.curTotalBet;
+            const odds = this.gameDataProxy.convertCredit2Cash(result.playerWin) / totalBet;
+            const isMSymbolFiveOfKind = result.waysGameResult.waysResult.some(
+                (result) => result.hitNumber == 5 && result.symbolID >= SymbolId.M1 && result.symbolID <= SymbolId.M6
+            );
+            const randomNumber = this.getRandomNumber(result, GameScene.Game_1);
 
-        const prizePredictionCondition = odds >= 25 && isMSymbolFiveOfKind && randomNumber < 0.8;
-        const displayMethodCondition = odds >= 25 && isMSymbolFiveOfKind;
+            const prizePredictionCondition = odds >= 25 && isMSymbolFiveOfKind && randomNumber < 0.8;
+            const displayMethodCondition = odds >= 25 && isMSymbolFiveOfKind;
 
-        result.displayInfo.prizePredictionType = prizePredictionCondition ? 'TYPE_1' : 'NoPrizePredictionType';
-        result.displayInfo.displayMethod = Array.from([false, false, false, false, displayMethodCondition], (x) => [x]);
+            result.displayInfo.prizePredictionType = prizePredictionCondition ? 'TYPE_1' : 'NoPrizePredictionType';
+            result.displayInfo.displayMethod = Array.from([false, false, false, false, displayMethodCondition], (x) => [x]);
+        }
+    }
+
+    checkRespin(result: FreeGameOneRoundResult): void {
+        const displayCondition = result.waysGameResult.waysResult.some((result) => result.hitNumber >= 3);
+
+        result.displayInfo.displayMethod = Array.from([false, false, false, displayCondition, false], (x) => [x]);
     }
 
     /**
