@@ -310,7 +310,9 @@ export class ControlView extends BaseScene {
         this.betMenu.transform.height = height + this.betMenu.content.height;
         this.betMenu.titleTransform.width =
             this.BET_MENU_BTN_WIDTH * 2 + layout.paddingLeft + layout.paddingRight + layout.spacingX;
-        this.betMenu.title.string = BalanceUtil.dollarISO;
+		//this.betMenu.title.string = BalanceUtil.dollarISO;
+		this.betMenu.title.string = String();
+
     }
     // TODO: 新增 bet 按鈕
     public addBetButton(i: number, countTxt: number, callback: Function): Node {

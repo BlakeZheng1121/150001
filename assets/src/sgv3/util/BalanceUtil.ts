@@ -13,7 +13,7 @@ export class BalanceUtil {
     }
 
     public static get dollarISO() {
-        if (this.dollarSign != '') return this._dollarSign;
+		if (this._dollarSign != '') return this._dollarSign;
         else return '';
     }
     /**
