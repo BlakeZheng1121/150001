@@ -205,6 +205,11 @@ export class CoreWebBridgeProxy extends puremvc.Proxy {
         );
     }
 
+    // send player data to server for log or record
+    public sendPlayerData(data: {}) {
+        window.parent.postMessage(JSON.stringify(data), this.cUrl);
+    }
+
     // 處理監聽 message
     protected handleContainerMsg(e: MessageEvent) {
         let name = JSON.parse(e.data).name;

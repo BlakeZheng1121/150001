@@ -1,4 +1,5 @@
 import { StartupGameCommand } from '../../sgv3/command/StartupGameCommand';
+import { WebBridgeProxy } from '../../sgv3/proxy/WebBridgeProxy';
 import { GAME_RegisterPuremvcCommand } from './GAME_RegisterPuremvcCommand';
 import { GAME_RegisterStateCommand } from './GAME_RegisterStateCommand';
 
@@ -14,5 +15,21 @@ export class GAME_StartupGameCommand extends StartupGameCommand {
 
     public execute(notification: puremvc.INotification): void {
         super.execute(notification);
+
+        let data = {
+            gameID: "1030",
+            logTag: 'StartupGame',
+        };
+        let pack = {name:'gameLog', data: data};
+        this.webBridgeProxy.sendPlayerData(pack);
+    }
+
+    private _webBridgeProxy: WebBridgeProxy;
+    public get webBridgeProxy(): WebBridgeProxy {
+        if (!this._webBridgeProxy) {
+            this._webBridgeProxy = this.facade.retrieveProxy(WebBridgeProxy.NAME) as WebBridgeProxy;
+        }
+
+        return this._webBridgeProxy;
     }
 }

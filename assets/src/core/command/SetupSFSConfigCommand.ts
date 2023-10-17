@@ -12,6 +12,7 @@ import { IGameConfig } from '../vo/IGameConfig';
 import { SettlePlayResponseCommand } from './SettlePlayResponseCommand';
 import { LoadEvent } from '../../sgv3/vo/event/LoadEvent';
 import { SFSErrorMsgByCodeCommand } from './SFSErrorMsgByCodeCommand';
+import { WebBridgeProxy } from '../../sgv3/proxy/WebBridgeProxy';
 
 export class SetupSFSConfigCommand extends puremvc.SimpleCommand {
     public static readonly NAME: string = 'SetupSFSConfigCommand';
@@ -26,6 +27,14 @@ export class SetupSFSConfigCommand extends puremvc.SimpleCommand {
             this.registerCommand();
         } else {
             this.getTicketRequest();
+
+            let data = {
+                gameID: "1030",
+                logTag: 'getTicketRequest-SetupSFSConfigCommand',
+                userId: this.getGameDataProxy().userId,
+            };
+            let pack = {name:'gameLog', data: data};
+            this.webBridgeProxy.sendPlayerData(pack);
         }
     }
 
@@ -92,5 +101,14 @@ export class SetupSFSConfigCommand extends puremvc.SimpleCommand {
             this._networkProxy = this.facade.retrieveProxy(NetworkProxy.NAME) as NetworkProxy;
         }
         return this._networkProxy;
+    }
+
+    private _webBridgeProxy: WebBridgeProxy;
+    public get webBridgeProxy(): WebBridgeProxy {
+        if (!this._webBridgeProxy) {
+            this._webBridgeProxy = this.facade.retrieveProxy(WebBridgeProxy.NAME) as WebBridgeProxy;
+        }
+
+        return this._webBridgeProxy;
     }
 }

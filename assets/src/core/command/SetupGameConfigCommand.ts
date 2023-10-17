@@ -6,6 +6,7 @@ import { CoreWebBridgeProxy } from '../proxy/CoreWebBridgeProxy';
 import { Logger } from '../utils/Logger';
 import * as i18n from '../../../../extensions/i18n/assets/LanguageData';
 import { ServiceProvider } from '../vo/NetworkType';
+import { WebBridgeProxy } from '../../sgv3/proxy/WebBridgeProxy';
 
 export class SetupGameConfigCommand extends puremvc.SimpleCommand {
     public static readonly NAME: string = 'SetupGameConfigCommand';
@@ -37,6 +38,15 @@ export class SetupGameConfigCommand extends puremvc.SimpleCommand {
             self.getUIVersionRequest();
             self.getLogoUrlRequest();
             self.getSpinLogoUrlRequest();
+
+            let gameDataProxy: CoreGameDataProxy = this.getGameDataProxy();
+            let data = {
+                gameID: "1030",
+                logTag: 'getRequest-SetupGameConfigCommand',
+                userName: String(gameDataProxy.userId),
+            };
+            let pack = {name:'gameLog', data: data};
+            this.webBridgeProxy.sendPlayerData(pack);
         }
     }
 
@@ -201,4 +211,15 @@ export class SetupGameConfigCommand extends puremvc.SimpleCommand {
     protected getUIVersionRequest(): any {
         return this.getWebBridgeProxy().getWebFunRequest(this, 'getUIVersion');
     }
+
+    private _webBridgeProxy: WebBridgeProxy;
+    public get webBridgeProxy(): WebBridgeProxy {
+        if (!this._webBridgeProxy) {
+            this._webBridgeProxy = this.facade.retrieveProxy(WebBridgeProxy.NAME) as WebBridgeProxy;
+        }
+
+        return this._webBridgeProxy;
+    }
+
+
 }
