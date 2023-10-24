@@ -1,4 +1,5 @@
 import { AccountStatusCommand } from '../../../core/command/AccountStatusCommand';
+import { AccountStatusMultipleLoginCommand } from '../../../core/command/AccountStatusMultipleLoginCommand';
 import { NetworkProxy } from '../../../core/proxy/NetworkProxy';
 import { CreditDataProxy } from '../../proxy/CreditDataProxy';
 import { JackpotPoolProxy } from '../../proxy/JackpotPoolProxy';
@@ -64,6 +65,7 @@ export abstract class RegisterPuremvcCommand extends puremvc.SimpleCommand {
      */
     protected registerCommand(): void {
         this.facade.registerCommand(AccountStatusCommand.NAME, AccountStatusCommand);
+		this.facade.registerCommand(AccountStatusMultipleLoginCommand.NAME, AccountStatusMultipleLoginCommand);
         this.facade.registerCommand(InitEventCommand.NAME, InitEventCommand);
         this.facade.registerCommand(SpinResponseCommand.NAME, SpinResponseCommand);
         this.facade.registerCommand(ByGameHandleCommand.NAME, ByGameHandleCommand);
