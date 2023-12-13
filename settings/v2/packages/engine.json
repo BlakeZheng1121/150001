@@ -17,7 +17,7 @@
         "_value": true
       },
       "gfx-webgl2": {
-        "_value": true
+        "_value": false
       },
       "3d": {
         "_value": false
@@ -97,13 +97,12 @@
     "includeModules": [
       "base",
       "gfx-webgl",
-      "gfx-webgl2",
-      "2d",
-      "ui",
-      "particle",
-      "particle-2d",
       "audio",
       "tween",
+      "particle",
+      "2d",
+      "ui",
+      "particle-2d",
       "spine"
     ],
     "noDeprecatedFeatures": {
