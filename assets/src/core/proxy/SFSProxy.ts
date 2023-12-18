@@ -10,7 +10,6 @@ import { GameModule } from '../../sgv3/vo/enum/GameModule';
 import { director, Scheduler, System, macro } from 'cc';
 import { CoreWebBridgeProxy } from './CoreWebBridgeProxy';
 import { CoreMsgCode } from '../constants/CoreMsgCode';
-import { WebBridgeProxy } from '../../sgv3/proxy/WebBridgeProxy';
 
 export class SFSProxy extends GameProxy {
     public static readonly NAME: string = 'SFSProxy';
@@ -200,17 +199,6 @@ export class SFSProxy extends GameProxy {
             self.facade.sendNotification(SFSProxy.EV_ERROR, evtParams);
             Logger.i('SmartFox got the failed connection.');
         }
-
-        let config = self.getConfig();
-        let data = {
-            gameID: "1030",
-            logTag: 'onConnection-SFSProxy',
-            success: String(evtParams.success),
-            userName: String(config.userName),
-        };
-        let pack = {name:'gameLog', data: data};
-        let webBridgeProxy = this.facade.retrieveProxy(WebBridgeProxy.NAME) as WebBridgeProxy;
-        webBridgeProxy.sendPlayerData(pack);
     }
 
     /**
@@ -259,7 +247,7 @@ export class SFSProxy extends GameProxy {
             Logger.d('onExtensionResponse ' + evtParams.cmd);
         }
         if (!self.facade.hasCommand(evtParams.cmd)) {
-            Logger.i('Unavailable extension response: ' + evtParams.cmd);       
+            Logger.i('Unavailable extension response: ' + evtParams.cmd);
             return;
         }
         let result: SFS2X.SFSObject = evtParams.params as SFS2X.SFSObject;
@@ -319,16 +307,7 @@ export class SFSProxy extends GameProxy {
         obj.putUtfString('host', config.host);
         obj.putUtfString('jackpotGroup', config.jackpotGroup ? config.jackpotGroup : '');
 
-
         this.sfs.send(new SFS2X.ExtensionRequest(config.gameLoginName, obj));
-        let data = {
-            gameID: "1030",
-            logTag: 'onLogin-SFSProxy',
-            userName: String(config.userName),
-        };
-        let pack = {name:'gameLog', data: data};
-        let webBridgeProxy = this.facade.retrieveProxy(WebBridgeProxy.NAME) as WebBridgeProxy;
-        webBridgeProxy.sendPlayerData(pack);
     }
 
     /**
@@ -345,16 +324,6 @@ export class SFSProxy extends GameProxy {
         self.initSmartFox();
         self.invokeTimeoutHandler(SFSProxy.KEY_TIMEOUT, timeout);
         self.sfs.connect();
-
-        let config = self.getConfig();
-        let data = {
-            gameID: "1030",
-            logTag: 'connect-SFSProxy',
-            userName: String(config.userName),
-        };
-        let pack = {name:'gameLog', data: data};
-        let webBridgeProxy = this.facade.retrieveProxy(WebBridgeProxy.NAME) as WebBridgeProxy;
-        webBridgeProxy.sendPlayerData(pack);
     }
 
     /**
@@ -369,16 +338,6 @@ export class SFSProxy extends GameProxy {
         Logger.i('Disconnect SFS');
         self.suspendAllTimeoutHandler();
         self.sfs.disconnect();
-
-        let config = self.getConfig();
-        let data = {
-            gameID: "1030",
-            logTag: 'disconnect-SFSProxy',
-            userName: String(config.userName),
-        };
-        let pack = {name:'gameLog', data: data};
-        let webBridgeProxy = this.facade.retrieveProxy(WebBridgeProxy.NAME) as WebBridgeProxy;
-        webBridgeProxy.sendPlayerData(pack);
     }
 
     /**
@@ -395,16 +354,6 @@ export class SFSProxy extends GameProxy {
         req.putSFSObject('entity', entity);
 
         this.sendSFSRequest(responseName, new SFS2X.ExtensionRequest(reqName, req), timeOut);
-        
-        let config = this.getConfig();
-        let data = {
-            gameID: "1030",
-            logTag: 'sendInitRequest-SFSProxy',
-            userName: String(config.userName),
-        };
-        let pack = {name:'gameLog', data: data};
-        let webBridgeProxy = this.facade.retrieveProxy(WebBridgeProxy.NAME) as WebBridgeProxy;
-        webBridgeProxy.sendPlayerData(pack);
     }
 
     /**
@@ -437,7 +386,19 @@ export class SFSProxy extends GameProxy {
 
         req.putSFSObject('entity', entity);
 
-        this.sendSFSRequest(responseName, new SFS2X.ExtensionRequest(reqName, req), timeOut);
+        if (this.isBetLegal(playerBet)) {
+            this.sendSFSRequest(responseName, new SFS2X.ExtensionRequest(reqName, req), timeOut);
+        } else {
+            this.disconnect();
+        }
+    }
+
+    private isBetLegal(playerBet: number): boolean {
+        let isLegal: boolean = true;
+            if (playerBet < 0) {
+                isLegal = false;
+            }
+        return isLegal;
     }
 
     public sendLineSpinRequest(
