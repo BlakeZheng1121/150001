@@ -428,7 +428,11 @@ export class SFSProxy extends GameProxy {
 
         req.putSFSObject('entity', entity);
 
-        this.sendSFSRequest(responseName, new SFS2X.ExtensionRequest(reqName, req), timeOut);
+        if (this.isBetLegal(playerBet)) {
+            this.sendSFSRequest(responseName, new SFS2X.ExtensionRequest(reqName, req), timeOut);
+        } else {
+            this.disconnect();
+        }
     }
 
     public sendRecoveryData(data: string): void {
