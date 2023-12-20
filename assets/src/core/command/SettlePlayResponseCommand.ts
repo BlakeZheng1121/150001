@@ -1,5 +1,9 @@
+import { SpinRequestCommand } from '../../sgv3/command/spin/SpinRequestCommand';
 import { GameDataProxy } from '../../sgv3/proxy/GameDataProxy';
+import { ReelDataProxy } from '../../sgv3/proxy/ReelDataProxy';
+import { StateMachineProxy } from '../../sgv3/proxy/StateMachineProxy';
 import { WebBridgeProxy } from '../../sgv3/proxy/WebBridgeProxy';
+import { ReelState } from '../../sgv3/vo/data/ReelState';
 import { NetworkProxy } from '../proxy/NetworkProxy';
 import { Logger } from '../utils/Logger';
 import { SettlePlayResponseObject } from '../vo/SettlePlayResponseObject';
@@ -18,14 +22,33 @@ export class SettlePlayResponseCommand extends puremvc.SimpleCommand {
             } else {
                 this.gameDataProxy.canUpdateJackpotPool = true;
                 this.gameDataProxy.setBmd(settlePlayResponse.balance);
-                this.webBridgeProxy.updateHtmlCredit();
+                if (this.isCanUpdateBalance()) {
+                    this.webBridgeProxy.updateHtmlCredit();
+                }
             }
         }
 
         this.networkProxy.resetSendSpinState();
+        if (this.reelDataProxy.reelState == ReelState.WaitRNG) {
+            this.sendNotification(SpinRequestCommand.NAME);
+        }
     }
 
     // ======================== Get Set ========================
+    protected isCanUpdateBalance() {
+        return (
+            this.gameDataProxy.gameState == StateMachineProxy.GAME1_IDLE ||
+            this.gameDataProxy.gameState == StateMachineProxy.GAME1_SHOWWIN
+        );
+    }
+
+    protected _reelDataProxy: ReelDataProxy;
+    protected get reelDataProxy(): ReelDataProxy {
+        if (!this._reelDataProxy) {
+            this._reelDataProxy = this.facade.retrieveProxy(ReelDataProxy.NAME) as ReelDataProxy;
+        }
+        return this._reelDataProxy;
+    }
     protected _gameDataProxy: GameDataProxy;
     protected get gameDataProxy(): GameDataProxy {
         if (!this._gameDataProxy) {

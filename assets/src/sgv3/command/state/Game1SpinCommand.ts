@@ -1,3 +1,4 @@
+import { NetworkProxy } from '../../../core/proxy/NetworkProxy';
 import { StateMachineProxy } from '../../proxy/StateMachineProxy';
 import { SoundEvent, BaseSoundParms, WinEvent, ViewMediatorEvent } from '../../util/Constant';
 import { GameStateId } from '../../vo/data/GameStateId';
@@ -19,14 +20,15 @@ export class Game1SpinCommand extends StateCommand {
         if (this.gameDataProxy.isMaintaining) return;
 
         this.sendNotification(WinEvent.FORCE_WIN_DISPOSE); // 清除之前的贏分表演
-
         //是否 Recovery表演流程
         if (
             this.gameDataProxy.reStateResult == undefined ||
             this.gameDataProxy.reStateResult.gameStateId == GameStateId.END
         ) {
             this.gameDataProxy.resetGameParams(); // 這邊為做贏分表演相關參數重置
-            this.sendNotification(SpinRequestCommand.NAME);
+            if(this.networkProxy.getCanSpinState()) {
+                this.sendNotification(SpinRequestCommand.NAME);
+            }
         } else {
             this.sendNotification(CheckGameFlowCommand.NAME); //有數學資料，表示取得 Recovery資料
             this.sendNotification(ClearRecoveryDataCommand.NAME); //完成 Recovery動作，清除資料
@@ -44,5 +46,13 @@ export class Game1SpinCommand extends StateCommand {
         if (this.gameDataProxy.onAutoPlay) {
             this.sendNotification(AutoPlayOnSpinProcessCommand.NAME);
         }
+    }
+
+    protected _networkProxy: NetworkProxy;
+    protected get networkProxy(): NetworkProxy {
+        if (!this._networkProxy) {
+            this._networkProxy = this.facade.retrieveProxy(NetworkProxy.NAME) as NetworkProxy;
+        }
+        return this._networkProxy;
     }
 }

@@ -35,14 +35,17 @@ export class AutoPlayOnIdleProcessCommand extends puremvc.SimpleCommand {
     protected notifySpinDown() {
         GlobalTimer.getInstance().removeTimer(GlobalTimer.KEY_AUTOPLAY);
 
-        if (this.networkProxy.getCanSpinState() === false) {
-            let nextTime = this.isChangeDelaySpinTime() ? this.bigWinSpinTime : this.defaultSpinTime;
-            GlobalTimer.getInstance()
-                .registerTimer(GlobalTimer.KEY_AUTOPLAY, nextTime, () => this.notifySpinDown(), this)
-                .start();
-        } else {
-            this.sendNotification(ScreenEvent.ON_SPIN_DOWN);
-        }
+        let nextTime = this.isChangeDelaySpinTime() ? this.bigWinSpinTime : this.defaultSpinTime;
+        GlobalTimer.getInstance()
+            .registerTimer(
+                GlobalTimer.KEY_AUTOPLAY,
+                nextTime,
+                () => {
+                    this.sendNotification(ScreenEvent.ON_SPIN_DOWN);
+                },
+                this
+            )
+            .start();
     }
 
     /**

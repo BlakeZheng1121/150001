@@ -34,8 +34,6 @@ const { ccclass } = _decorator;
 export class BaseReelViewMediator<T extends ReelView> extends BaseMediator<T> {
     protected stateSetting: GameStateSetting;
     protected reelView: T;
-    /** reel狀態 */
-    protected reelState: ReelState = ReelState.None;
     /** key SequenceIndex value 為尚未Callback reel數*/
     protected keyPool: { [key: number]: number } = {};
     /** 滾停順序,Index為順序,value為ReelIndex */
@@ -55,7 +53,7 @@ export class BaseReelViewMediator<T extends ReelView> extends BaseMediator<T> {
         // 根據場景取得場景狀態基本資料
         self.reelView.mySceneName = self.gameDataProxy.curScene;
         // 設定初始化後，設定reelState為idle
-        self.reelState = ReelState.Idle;
+        self.reelDataProxy.reelState = ReelState.Idle;
         //開啟急停功能.
         self.enableEmergencyStop = true;
     }
@@ -173,7 +171,7 @@ export class BaseReelViewMediator<T extends ReelView> extends BaseMediator<T> {
             self.sendNotification(WinEvent.HIDE_BOARD_REQUEST);
             return;
         }
-        switch (self.reelState) {
+        switch (self.reelDataProxy.reelState) {
             case ReelState.Idle:
                 if (self.gameDataProxy.checkReelCanSpin()) {
                     self.onSpin();
@@ -184,7 +182,7 @@ export class BaseReelViewMediator<T extends ReelView> extends BaseMediator<T> {
                                 new StateMachineObject(StateMachineProxy.GAME1_SPIN)
                             );
                             self.webBridgeProxy.sendGameState(WebBridgeProxy.curScene, WebGameState.SPIN);
-                            self.reelState = ReelState.WaitRNG;
+                            self.reelDataProxy.reelState = ReelState.WaitRNG;
                             break;
                         case GameScene.Game_2:
                             self.sendNotification(
@@ -265,7 +263,7 @@ export class BaseReelViewMediator<T extends ReelView> extends BaseMediator<T> {
         const self = this;
         self.performFinishedNum++;
         if (self.performFinishedNum >= self.reelView.reelsList.length && !self.isTriggerErrorStop) {
-            self.reelState = ReelState.Idle;
+            self.reelDataProxy.reelState = ReelState.Idle;
             self.sendNotification(ReelEvent.ON_REELS_PERFORM_END);
         }
     }
@@ -336,15 +334,15 @@ export class BaseReelViewMediator<T extends ReelView> extends BaseMediator<T> {
                 self.reelView.setTargetRng(infoIndex * rngInfo.length + i, rngInfo[i]);
             }
         }
-        self.reelState = ReelState.WaitEffectComplete;
+        self.reelDataProxy.reelState = ReelState.WaitEffectComplete;
         //讓外部去處理後續Reel模組所需資料
         self.sendNotification(ReelEffectCommand.NAME);
     }
 
     protected stopReel() {
-        if (this.reelState == ReelState.WaitEffectComplete) {
+        if (this.reelDataProxy.reelState == ReelState.WaitEffectComplete) {
             this.reelView.reelsRollAfter(() => this.onCallBack(0, () => this.onSingleReelStartStop()));
-            this.reelState = ReelState.CanStop;
+            this.reelDataProxy.reelState = ReelState.CanStop;
             if (
                 this.reelDataProxy.isTurboMode &&
                 this.gameDataProxy.curRoundResult.displayInfo.prizePredictionType != 'TYPE_1'
@@ -374,7 +372,7 @@ export class BaseReelViewMediator<T extends ReelView> extends BaseMediator<T> {
                 self.reelView.setTargetRng(infoIndex * rngInfo.length + i, rngInfo[i]);
             }
         }
-        self.reelState = ReelState.Idle;
+        this.reelDataProxy.reelState = ReelState.Idle;
         //讓外部去處理後續Reel模組所需資料
         self.sendNotification(ReelEffect_SymbolFeatureCommand.name);
     }

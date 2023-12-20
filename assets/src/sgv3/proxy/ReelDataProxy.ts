@@ -7,6 +7,7 @@ import { LockType, SymbolPartType } from '../vo/enum/Reel';
 import { WheelUsePattern } from '../vo/enum/WheelUsePattern';
 import { GameStateSetting } from '../vo/setting/GameStateSetting';
 import { GameDataProxy } from './GameDataProxy';
+import { ReelState } from '../vo/data/ReelState';
 
 export class ReelDataProxy extends puremvc.Proxy {
     public static NAME: string = 'ReelDataProxy';
@@ -15,6 +16,7 @@ export class ReelDataProxy extends puremvc.Proxy {
 
     public runtimeStrip: number[][] = []; // Runtime Strip, 專門用來讓滾動的滾輪做效果使用
     public isSlowMotionAry: boolean[] = []; // 滾輪瞇牌資訊
+    public reelState: ReelState = ReelState.None;
 
     protected symbolsNode: Array<Array<Node>> = []; //Symbol上 Node資料
     protected reelTable: WheelData[] = [];

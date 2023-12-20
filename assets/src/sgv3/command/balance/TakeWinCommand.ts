@@ -1,5 +1,6 @@
 import { NetworkProxy } from '../../../core/proxy/NetworkProxy';
 import { GameDataProxy } from '../../proxy/GameDataProxy';
+import { WebBridgeProxy } from '../../proxy/WebBridgeProxy';
 
 export class TakeWinCommand extends puremvc.SimpleCommand {
     public static readonly NAME: string = 'TakeWinCommand';
@@ -8,7 +9,8 @@ export class TakeWinCommand extends puremvc.SimpleCommand {
         const self = this;
 
         let totalWin = self.gameDataProxy._tempWonCredit;
-
+        this.gameDataProxy.setBmd(self.gameDataProxy.realCash + totalWin);
+        this.webBridgeProxy.updateHtmlCredit();
         // 滾分完畢，將贏分加入到balance欄位.
         self.gameDataProxy.resetTempWonCredit();
 
@@ -30,5 +32,13 @@ export class TakeWinCommand extends puremvc.SimpleCommand {
             this._networkProxy = this.facade.retrieveProxy(NetworkProxy.NAME) as NetworkProxy;
         }
         return this._networkProxy;
+    }
+
+    protected _webBridgeProxy: WebBridgeProxy;
+    protected get webBridgeProxy(): WebBridgeProxy {
+        if (!this._webBridgeProxy) {
+            this._webBridgeProxy = this.facade.retrieveProxy(WebBridgeProxy.NAME) as WebBridgeProxy;
+        }
+        return this._webBridgeProxy;
     }
 }
