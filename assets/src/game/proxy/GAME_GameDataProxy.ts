@@ -38,7 +38,11 @@ export class GAME_GameDataProxy extends WAY_GameDataProxy {
      * 確認reel可以spin
      */
     public checkReelCanSpin(): boolean {
-        if (this.gameState == StateMachineProxy.GAME1_IDLE && this.checkCreditEnough()) {
+        if (
+            this.gameState == StateMachineProxy.GAME1_IDLE &&
+            this.checkCreditEnough() &&
+            this.networkProxy.isConnected()
+        ) {
             return true;
         } else if (this.gameState == StateMachineProxy.GAME2_IDLE) {
             return true;

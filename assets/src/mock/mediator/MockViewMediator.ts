@@ -7,6 +7,7 @@ import { MockWinboardCommand } from '../command/MockWinboardCommand';
 import { MockPrizePredictionCommand } from '../command/MockPrizePredictionCommand';
 import { Component } from 'cc';
 import { MockToContainerIconPosCommand } from '../command/MockToContainerIconPosCommand';
+import { MockReconnectCommand } from '../command/MockReconnectCommand';
 
 export class MockViewMediator extends puremvc.Mediator {
     private parentView: Component = null;
@@ -52,7 +53,8 @@ export class MockViewMediator extends puremvc.Mediator {
             WinBoard: MockWinboardCommand.NAME,
             PrizePrediction: MockPrizePredictionCommand.NAME,
             Disconnection: MockDisconnectionCommand.NAME,
-            Reconnect: MockMaintenanceCommand.NAME,
+            Maintenance: MockMaintenanceCommand.NAME,
+            Reconncet: MockReconnectCommand.NAME,
             ScatterNoWin: MockSpinScatterNowinCommand.NAME,
             FakeSymbolReel: MockReelSymbolCommand.NAME,
             ToContainerIconPos: MockToContainerIconPosCommand.NAME
@@ -61,11 +63,12 @@ export class MockViewMediator extends puremvc.Mediator {
         self.facade.registerCommand(MockWinboardCommand.NAME, MockWinboardCommand);
         self.facade.registerCommand(MockPrizePredictionCommand.NAME, MockPrizePredictionCommand);
         self.facade.registerCommand(MockDisconnectionCommand.NAME, MockDisconnectionCommand);
+        self.facade.registerCommand(MockReconnectCommand.NAME,MockReconnectCommand);
         self.facade.registerCommand(MockMaintenanceCommand.NAME, MockMaintenanceCommand);
         self.facade.registerCommand(MockSpinScatterNowinCommand.NAME, MockSpinScatterNowinCommand);
         self.facade.registerCommand(MockReelSymbolCommand.NAME, MockReelSymbolCommand);
-        self.facade.registerCommand(MockDisconnectionCommand.NAME, MockReelSymbolCommand);
         self.facade.registerCommand(MockToContainerIconPosCommand.NAME, MockToContainerIconPosCommand);
+        //self.facade.registerCommand(MockDisconnectionCommand.NAME, MockReelSymbolCommand);
         self.sendNotification('onAddExtraCase', caseList);
     }
 

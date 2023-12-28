@@ -23,6 +23,7 @@ export class SpinResponseCommand extends puremvc.SimpleCommand {
         let gameStateResult = RefactoringGameData.RefactoringGameResult(notifyObj.spinResult);
         Logger.i(JSON.stringify(notifyObj));
         this.networkProxy.setGameSeqNo(notifyObj.gameSeq);
+        this.networkProxy.resetSentSpinRequest();
         this.setEndGameStateId(gameStateResult[gameStateResult.length - 1].gameStateId);
 
         const self = this;

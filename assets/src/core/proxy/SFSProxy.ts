@@ -586,6 +586,9 @@ export class SFSProxy extends GameProxy {
 
     public reconnect(): void {
         Logger.i('Reconnecting');
+        if(this.isTimeout) {
+            return;
+        }
         this.connect();
     }
 

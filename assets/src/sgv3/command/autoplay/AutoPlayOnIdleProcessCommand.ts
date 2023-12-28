@@ -19,6 +19,11 @@ export class AutoPlayOnIdleProcessCommand extends puremvc.SimpleCommand {
 
     public execute(notification: puremvc.INotification): void {
         Logger.i('[AutoPlayOnIdleProcess]');
+        if (!this.networkProxy.isConnected()) {
+            Logger.i('[AutoPlayOnIdleProcess] isReconnecting');
+            this.sendNotification(AutoPlayClickOptionCommand.NAME, [0, 0]);
+            return;
+        }
 
         GlobalTimer.getInstance().removeTimer(GlobalTimer.KEY_AUTOPLAY);
         if (this.gameDataProxy.curAutoTimes < this.gameDataProxy.maxAutoTimes) {

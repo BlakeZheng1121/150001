@@ -15,6 +15,7 @@ export class NetworkProxy extends puremvc.Proxy {
 
     protected needSendSpinState: boolean = true;
     protected needSettlePlayState: boolean = false;
+    protected hasSentSpinRequest: boolean = false;
 
     public constructor(proxyName: string = NetworkProxy.NAME) {
         super(NetworkProxy.NAME);
@@ -51,6 +52,7 @@ export class NetworkProxy extends puremvc.Proxy {
     ): void {
         this.protocolProxy.sendSpinRequest(playerBet, extraBetType, denom, operation, waysBet, waysBetColumn);
         this.needSendSpinState = false;
+        this.hasSentSpinRequest= true;
         this.resetSettlePlayState();
     }
 
@@ -64,6 +66,7 @@ export class NetworkProxy extends puremvc.Proxy {
     ): void {
         this.protocolProxy.sendLineSpinRequest(playerBet, extraBetType, denom, operation, betLine, lineBet);
         this.needSendSpinState = false;
+        this.hasSentSpinRequest= true;
         this.resetSettlePlayState();
     }
 
@@ -78,6 +81,14 @@ export class NetworkProxy extends puremvc.Proxy {
         }
         this.needSettlePlayState = false;
         this.protocolProxy.sendSettlePlay(totalWin);
+    }
+
+    public resetSentSpinRequest(): void {
+        this.hasSentSpinRequest = false;
+    }
+
+    public getSentSpinRequest(): boolean {
+        return this.hasSentSpinRequest;
     }
 
     public resetSettlePlayState(): void {

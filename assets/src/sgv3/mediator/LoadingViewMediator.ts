@@ -62,7 +62,6 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
 
     public listNotificationInterests(): Array<any> {
         return [
-            SFLoginCommand.EV_CONNECTION,
             LoadEvent.LOAD_GROUP_COMPLETE,
             LoadEvent.LOAD_ITEM_PROGRESS,
             GameProxyEvent.RESPONSE_INIT,
@@ -78,10 +77,6 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
         const self = this;
         let name = notification.getName();
         switch (name) {
-            case SFLoginCommand.EV_CONNECTION:
-                self.onConnectServer(notification);
-                self.gameDataProxy.loadUserSetting();
-                break;
             case LoadEvent.LOAD_GROUP_COMPLETE:
                 self.onLoadGroupComplete(notification);
                 break;
@@ -110,17 +105,6 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
         this.extraLoadList = _extraList;
         this.totalAssetsNum = this.baseLoadList.length;
         if (this.extraLoadList.length == 0) this.gameDataProxy.isCompletedBatchLoading = true;
-    }
-
-    /** slot 需要取得initData後才行 */
-    protected onConnectServer(notification: puremvc.INotification): void {
-        let gameLoginReturn: SGGameLoginReturn = notification.getBody() as SGGameLoginReturn;
-        // refactor 之後繼承SFSLoginCommand處理
-        this.gameDataProxy.userId = gameLoginReturn.showName;
-        this.gameDataProxy.setBmd(gameLoginReturn.balance, true);
-        this.sendNotification(ChangeBalanceCommand.NAME, gameLoginReturn);
-        // slot 必須在連線後送出初始化要求封包才能繼續做
-        this.netProxy.sendInitRequest();
     }
 
     public onResourceProgress(notification: puremvc.INotification): void {

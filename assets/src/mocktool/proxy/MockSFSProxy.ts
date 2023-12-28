@@ -7,6 +7,7 @@ import { MTTask } from '../vo/MTTask';
 import { MTCaseManager, LoadingCaseListener } from './MTCaseManager';
 import { TaskHandlerListener } from './TaskHandler';
 import { Logger } from '../../core/utils/Logger';
+import { SFConnectionCommand } from '../../core/command/SFConnectionCommand';
 
 export class MockSFSProxy extends GameProxy implements TaskHandlerListener {
     public static MOCK_NAME: string = 'MockSFSProxy';
@@ -17,6 +18,8 @@ export class MockSFSProxy extends GameProxy implements TaskHandlerListener {
     private rawSFSProxy: NetworkProxy;
 
     private isMocked: boolean;
+
+    protected hasSentSpinRequest: boolean = false;
 
     private caseManager: MTCaseManager;
 
@@ -81,10 +84,10 @@ export class MockSFSProxy extends GameProxy implements TaskHandlerListener {
             let task = this.caseManager.getTask('gameLoginReturn');
             if (task) {
                 let data = task.data;
-                this.facade.sendNotification(SFLoginCommand.EV_CONNECTION, data);
                 let jpTask = this.caseManager.getTask('jackpotPoolNotify');
                 let jpData = jpTask.data;
                 this.facade.sendNotification(JackpotPoolCommand.NAME, jpData);
+                this.facade.sendNotification(SFConnectionCommand.NAME, data);
             }
         }
     }
@@ -131,6 +134,7 @@ export class MockSFSProxy extends GameProxy implements TaskHandlerListener {
     ): void {
         let requestName = 'h5.spin';
         this.caseManager.handleTask(requestName, this);
+        this.hasSentSpinRequest= true;
     }
 
     public sendLineSpinRequest(
@@ -143,6 +147,7 @@ export class MockSFSProxy extends GameProxy implements TaskHandlerListener {
     ): void {
         let requestName = 'h5.spin';
         this.caseManager.handleTask(requestName, this);
+        this.hasSentSpinRequest= true;
     }
 
     public getRequestAndPlayConfirm(): boolean {
@@ -174,6 +179,14 @@ export class MockSFSProxy extends GameProxy implements TaskHandlerListener {
 
     public getSettlePlayState(): boolean {
         return false;
+    }
+
+    public resetSentSpinRequest(): void {
+        this.hasSentSpinRequest = false;
+    }
+
+    public getSentSpinRequest(): boolean {
+        return this.hasSentSpinRequest;
     }
 
     public resetSendSpinState(): void {}
