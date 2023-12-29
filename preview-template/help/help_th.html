@@ -569,7 +569,7 @@
         let gameVerSpan = document.getElementById('gameVersionDom');
 
         // dynamic payout
-        const minimalBet = 100;
+
         const symbolPayoutArray = [
             // M1
             250, 80, 30,
@@ -584,17 +584,17 @@
             // M6
             50, 20, 10
         ];
-        let calPayoutCredit = (oddsData, totalBetData) => oddsData * (totalBetData / minimalBet);
+		let calPayoutCredit = (oddsData, totalBetData, baseBet) => oddsData * (totalBetData / baseBet);
 
         let symbolArraySpan = document.getElementsByClassName('payout-font');
-        let updatePayout = function (totalBetData) {
+		let updatePayout = function (totalBetData, baseBet) {
             if (Number.isNaN(Number(totalBetData)) || symbolArraySpan.length !== symbolPayoutArray.length) {
                 Array.prototype.forEach.call(symbolArraySpan, function (el) {
                     el.textContent = Number.NaN;
                 });
             } else {
                 Array.prototype.forEach.call(symbolArraySpan, function (el) {
-                    el.textContent = calPayoutCredit(symbolPayoutArray.shift(), totalBetData).toFixed(2);
+					el.textContent = calPayoutCredit(symbolPayoutArray.shift(), totalBetData, baseBet).toFixed(2);
                 });
             }
         };
@@ -608,7 +608,7 @@
                     gameVerSpan.textContent = '-';
                 }
             } else if (JSON.parse(e.data).name === 'getPayout') {
-                updatePayout(JSON.parse(e.data).data);
+				updatePayout(JSON.parse(e.data).data, JSON.parse(e.data).baseBet);
             }
         });
 

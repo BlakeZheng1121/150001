@@ -628,7 +628,8 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
                 JSON.stringify({
                     lang: this.gameDataProxy.language,
                     bet: this.gameDataProxy.curTotalBet,
-                    gameVer: this.gameDataProxy.gameVer
+					gameVer: this.gameDataProxy.gameVer,
+					baseBet: this.gameDataProxy.initEventData.executeSetting.baseGameSetting.betSpec.baseBet
                 })
             );
             this.view.settingMenu.active = false;
