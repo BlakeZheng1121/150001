@@ -82,7 +82,6 @@ export class CoreWebBridgeProxy extends puremvc.Proxy {
         window['openGameHelp'](data.lang);
         window['curGameVersion'](data.gameVer);
         window['curTotalBet'](data.bet);
-		window['curBaseBet'](data.baseBet);
         this.getWebFunRequest(this, 'gameClientMsg', { event: 'toggleHelpPage', value: true });
     }
     /**
