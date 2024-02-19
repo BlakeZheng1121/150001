@@ -9,7 +9,7 @@ export class TakeWinCommand extends puremvc.SimpleCommand {
         const self = this;
 
         let totalWin = self.gameDataProxy._tempWonCredit;
-        this.gameDataProxy.setBmd(self.gameDataProxy.realCash + totalWin);
+        //this.gameDataProxy.setBmd(self.gameDataProxy.realCash);
         this.webBridgeProxy.updateHtmlCredit();
         // 滾分完畢，將贏分加入到balance欄位.
         self.gameDataProxy.resetTempWonCredit();
