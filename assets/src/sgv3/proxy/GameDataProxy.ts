@@ -1009,7 +1009,7 @@ export class GameDataProxy extends CoreGameDataProxy {
             _totalBet = MathUtil.mul(+self.initEventData.singleBetCombinations[_tempKey], MathUtil.div(_denom, 1000));
 
             // 押分超過最大押分 不加入TotalBetList
-            if (_totalBet > _maxBet) continue;
+            // if (_totalBet > _maxBet) continue;
 
             self.totalBetList.push(_totalBet);
         }
@@ -1037,7 +1037,7 @@ export class GameDataProxy extends CoreGameDataProxy {
                 );
 
                 // 押分超過最大押分 不加入TotalBetList
-                if (_totalBet > _maxBet) continue;
+                // if (_totalBet > _maxBet) continue;
 
                 this.totalBetList.push(
                     MathUtil.mul(+this.initEventData.singleBetCombinations[_tempKey], MathUtil.div(_denom, 1000))
