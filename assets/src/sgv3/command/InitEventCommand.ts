@@ -5,7 +5,7 @@ import { GameProxyEvent } from '../vo/event/GameProxyEvent';
 import { InitEvent } from '../vo/event/InitEvent';
 import { NetworkProxy } from '../../core/proxy/NetworkProxy';
 import { RecoveryData } from '../vo/data/RecoveryData';
-import { GlobalTimer } from '../util/GlobalTimer';
+import { AfterReconnectionCommand } from './connect/AfterReconnectionCommand';
 
 /**
  * 遊戲初始化的parser
@@ -56,10 +56,11 @@ export class InitEventCommand extends puremvc.SimpleCommand {
 
     /** init 結束通知 */
     protected endInit() {
-        GlobalTimer.getInstance().removeTimer('Reconnect');
-        this.gameDataProxy.isReconnecting = false;
-        this.networkProxy.resetSendSpinState();
-        this.sendNotification(GameProxyEvent.RESPONSE_INIT);
+        if (this.gameDataProxy.isReconnecting) {
+            this.sendNotification(AfterReconnectionCommand.NAME);
+        }else{
+            this.sendNotification(GameProxyEvent.RESPONSE_INIT);
+        }
     }
 
     // ======================== Get Set ========================

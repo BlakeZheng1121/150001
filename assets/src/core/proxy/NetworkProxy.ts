@@ -17,6 +17,9 @@ export class NetworkProxy extends puremvc.Proxy {
     protected needSettlePlayState: boolean = false;
     protected hasSentSpinRequest: boolean = false;
 
+    public reconnectionRegister: number = -1;
+    public getTicketRegister: number = -1;
+
     public constructor(proxyName: string = NetworkProxy.NAME) {
         super(NetworkProxy.NAME);
         // if (this.connectNetworkType === ServiceProvider.DEFAULT) {
@@ -36,6 +39,11 @@ export class NetworkProxy extends puremvc.Proxy {
 
     public reconnect() {
         this.protocolProxy.reconnect();
+    }
+
+    public reconnectFail() {
+        const sfsProxy = this.protocolProxy as SFSProxy;
+        sfsProxy.reconnectFail();
     }
 
     public sendInitRequest(): void {

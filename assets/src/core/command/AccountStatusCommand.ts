@@ -13,8 +13,8 @@ export class AccountStatusCommand extends puremvc.SimpleCommand {
         const result = notification.getBody() as SFS2X.SFSObject;
         const status_code: number = CoreMsgCode.ACCOUNT_STATUS[result.getInt('status_code')];
         const err_msg: number = result.getInt('err_msg');
+        webBridgeProxy.isTriggerErrorCode = true;
         // 若遇到重複登入狀況 需延後跳出Error訊息 需先保存狀態
-        webBridgeProxy.accountStatus = result.getInt('status_code');
         if (status_code == CoreMsgCode.ACCOUNT_STATUS_MULTIPLE_LOGIN && !this.isCanShowErrorMessage()) {
             webBridgeProxy.isAccountStatusMultipleLogin = true;
         } else {

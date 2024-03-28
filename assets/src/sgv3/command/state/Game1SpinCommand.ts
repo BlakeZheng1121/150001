@@ -13,6 +13,7 @@ export class Game1SpinCommand extends StateCommand {
 
     public execute(notification: puremvc.INotification): void {
         this.notifyWebControl();
+        this.gameDataProxy.spinEventData = null;
         this.gameDataProxy.runWinComplete = false;
         this.gameDataProxy.readySpin = false;
 

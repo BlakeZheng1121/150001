@@ -6,6 +6,7 @@ import { StateWinEvent } from '../../sgv3/util/Constant';
 import { CoreWebBridgeProxy } from '../proxy/CoreWebBridgeProxy';
 import { AccountStatusMultipleLoginCommand } from './AccountStatusMultipleLoginCommand';
 import { CoreGameDataProxy } from '../proxy/CoreGameDataProxy';
+import { SFReconnectCommand } from './SFReconnectCommand';
 
 export class StateMachineCommand extends puremvc.SimpleCommand {
     public static readonly NAME: string = 'StateMachineCommand';
@@ -52,13 +53,12 @@ export class StateMachineCommand extends puremvc.SimpleCommand {
         ) as CoreWebBridgeProxy;
         if (gameDataProxy.isMaintaining) {
             self.facade.sendNotification(CoreSGMaintenanceCommand.NAME);
-        } else if(webBridgeProxy.isAccountStatusMultipleLogin) {
+        } else if (webBridgeProxy.isAccountStatusMultipleLogin) {
             self.facade.sendNotification(AccountStatusMultipleLoginCommand.NAME);
-        }
-         else {
+        } else {
             const netProxy = self.facade.retrieveProxy(NetworkProxy.NAME) as NetworkProxy;
             if (!gameDataProxy.isReconnecting && !netProxy.isConnected()) {
-                self.facade.sendNotification(CoreSFDisconnectionCommand.NAME);
+                self.facade.sendNotification(SFReconnectCommand.NAME);
             }
         }
     }
@@ -79,4 +79,3 @@ export class StateMachineCommand extends puremvc.SimpleCommand {
         return self.stateMachineProxy;
     }
 }
-

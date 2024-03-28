@@ -9,6 +9,7 @@ import { SetupSFSConfigCommand } from './SetupSFSConfigCommand';
 import { SFReconnectCommand } from './SFReconnectCommand';
 import { SGErrorCommand } from './SGErrorCommand';
 import { StateMachineCommand } from './StateMachineCommand';
+import { AfterReconnectionCommand } from '../../sgv3/command/connect/AfterReconnectionCommand';
 
 export class CoreStartupGameCommand extends puremvc.MacroCommand {
     public static NAME: string = 'StartupGameCommand';
@@ -40,6 +41,7 @@ export class CoreStartupGameCommand extends puremvc.MacroCommand {
         self.facade.registerCommand(CoreSGMaintenanceCommand.NAME, CoreSGMaintenanceCommand);
         self.facade.registerCommand(SetupSFSConfigCommand.NAME, SetupSFSConfigCommand);
         self.facade.registerCommand(SFReconnectCommand.NAME, SFReconnectCommand);
+        self.facade.registerCommand(AfterReconnectionCommand.NAME, AfterReconnectionCommand);
         self.facade.registerCommand(StateMachineCommand.NAME, StateMachineCommand);
         self.facade.registerCommand(SGErrorCommand.NAME, SGErrorCommand);
         // FIXME mediator 建構子依賴到proxy，必需更改依賴的時間點

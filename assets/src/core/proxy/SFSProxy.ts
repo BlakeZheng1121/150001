@@ -7,9 +7,10 @@ import { CoreSFDisconnectionCommand } from '../command/CoreSFDisconnectionComman
 import { CoreGameDataProxy } from './CoreGameDataProxy';
 import { Formula } from '../utils/Formula';
 import { GameModule } from '../../sgv3/vo/enum/GameModule';
-import { director, Scheduler, System, macro } from 'cc';
+import { director, Scheduler, System, macro, log } from 'cc';
 import { CoreWebBridgeProxy } from './CoreWebBridgeProxy';
 import { CoreMsgCode } from '../constants/CoreMsgCode';
+import { SFReconnectCommand } from '../command/SFReconnectCommand';
 
 export class SFSProxy extends GameProxy {
     public static readonly NAME: string = 'SFSProxy';
@@ -58,6 +59,12 @@ export class SFSProxy extends GameProxy {
      * @static
      */
     public static STATE_CONNECTING = 'STATE_CONNECTING';
+    /**
+     * 連線中
+     *
+     * @static
+     */
+    public static STATE_RECONNECT_FAIL = 'STATE_RECONNECT_FAIL';
     /**
      * 註冊中
      *
@@ -154,6 +161,7 @@ export class SFSProxy extends GameProxy {
 
     private initSmartFox(): void {
         const self = this;
+        Logger.i('initSmartFox');
         let config = self.getConfig();
         self.disposeSmartFox();
         Formula.loggerClassContent(config);
@@ -184,6 +192,13 @@ export class SFSProxy extends GameProxy {
 
     private onConnection(evtParams: SFS2X.ICONNECTION): void {
         const self = this;
+        Logger.i('onConnection: ' + evtParams.success);
+        if (self.connectedState == SFSProxy.STATE_RECONNECT_FAIL) {
+            self.suspendAllTimeoutHandler();
+            self.sfs.disconnect();
+            return;
+        }
+
         if (evtParams.success) {
             self.connectedState = SFSProxy.STATE_LOGIN;
             self.suspendTimeoutHandler(SFSProxy.KEY_TIMEOUT);
@@ -215,9 +230,9 @@ export class SFSProxy extends GameProxy {
             case SFTimeoutCommand.NAME:
                 self.facade.sendNotification(cmd, obj);
                 break;
-            case CoreSFDisconnectionCommand.NAME:
+            case SFReconnectCommand.NAME:
                 if (self.isTimeout) break;
-                self.facade.sendNotification(cmd, obj);
+                self.facade.sendNotification(SFReconnectCommand.NAME, obj);
                 break;
         }
     }
@@ -226,7 +241,7 @@ export class SFSProxy extends GameProxy {
         const self = this;
         self.connectedState = SFSProxy.STATE_DISCONNECTION;
         self.disableKeepAlive();
-        self.sendDisconnection(CoreSFDisconnectionCommand.NAME, evtParams);
+        self.sendDisconnection(SFReconnectCommand.NAME, evtParams);
     }
 
     private onLoginError(evtParams: SFS2X.ILOGIN_ERROR): void {
@@ -324,6 +339,7 @@ export class SFSProxy extends GameProxy {
         self.initSmartFox();
         self.invokeTimeoutHandler(SFSProxy.KEY_TIMEOUT, timeout);
         self.sfs.connect();
+        Logger.i('Connected');
     }
 
     /**
@@ -354,6 +370,7 @@ export class SFSProxy extends GameProxy {
         req.putSFSObject('entity', entity);
 
         this.sendSFSRequest(responseName, new SFS2X.ExtensionRequest(reqName, req), timeOut);
+        Logger.i('sendInitRequest');
     }
 
     /**
@@ -395,9 +412,9 @@ export class SFSProxy extends GameProxy {
 
     private isBetLegal(playerBet: number): boolean {
         let isLegal: boolean = true;
-            if (playerBet < 0) {
-                isLegal = false;
-            }
+        if (playerBet < 0) {
+            isLegal = false;
+        }
         return isLegal;
     }
 
@@ -585,11 +602,16 @@ export class SFSProxy extends GameProxy {
     }
 
     public reconnect(): void {
-        Logger.i('Reconnecting');
-        if(this.isTimeout) {
+        if (this.isTimeout) {
             return;
         }
+        Logger.i('Reconnecting');
         this.connect();
+    }
+
+    public reconnectFail(): void {
+        this.connectedState = SFSProxy.STATE_RECONNECT_FAIL;
+        this.disconnect();
     }
 
     public isConnected(): boolean {

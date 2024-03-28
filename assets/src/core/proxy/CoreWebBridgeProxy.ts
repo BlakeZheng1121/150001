@@ -16,8 +16,8 @@ export class CoreWebBridgeProxy extends puremvc.Proxy {
      */
     public static readonly EV_ENABLE_SOUND: string = 'EV_ENABLE_SOUND';
 
-	public isAccountStatusMultipleLogin: boolean = false;
-    public accountStatus: number = 0;
+    public isAccountStatusMultipleLogin: boolean = false;
+    public isTriggerErrorCode: boolean = false;
 
     protected cUrl: string;
     protected _listenerMap: TSMap<any, any>;
@@ -70,6 +70,7 @@ export class CoreWebBridgeProxy extends puremvc.Proxy {
      * 提供前端遊戲訊息代碼
      */
     public sendMsgCode(code: number, value: number = 0): void {
+        this.isTriggerErrorCode = true;
         Logger.i('Show message: ' + code);
         this.getWebFunRequest(this, 'showErrorMsgByCode', code, value);
     }
