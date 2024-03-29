@@ -1,10 +1,11 @@
 import { DEBUG } from 'cc/env';
-import { CoreGameDataProxy } from '../proxy/CoreGameDataProxy';
-import { CoreWebBridgeProxy } from '../proxy/CoreWebBridgeProxy';
-import { IGameConfig } from '../vo/IGameConfig';
+import { CoreStateMachineProxy } from '../proxy/CoreStateMachineProxy';
 import { NetworkProxy } from '../proxy/NetworkProxy';
 import { CoreSFDisconnectionCommand } from './CoreSFDisconnectionCommand';
-import { CoreStateMachineProxy } from '../proxy/CoreStateMachineProxy';
+import { IGameConfig } from '../vo/IGameConfig';
+import { GameDataProxy } from '../../sgv3/proxy/GameDataProxy';
+import { CoreWebBridgeProxy } from '../proxy/CoreWebBridgeProxy';
+import { StateMachineProxy } from '../../sgv3/proxy/StateMachineProxy';
 
 export class SFReconnectCommand extends puremvc.SimpleCommand {
     public static readonly NAME: string = 'EV_RECONNECT';
@@ -49,7 +50,10 @@ export class SFReconnectCommand extends puremvc.SimpleCommand {
         } else {
             const self = this;
             const netProxy = self.facade.retrieveProxy(NetworkProxy.NAME) as NetworkProxy;
-            if (!netProxy.getSentSpinRequest()) {
+            if (
+                !netProxy.getSentSpinRequest() &&
+                this.gameDataProxy.gameState != StateMachineProxy.GAME1_FEATURESELECTION
+            ) {
                 self.retryTime = 0;
                 self.gameDataProxy.isReconnecting = true;
                 self.countdownDisconnect();
@@ -97,22 +101,16 @@ export class SFReconnectCommand extends puremvc.SimpleCommand {
     }
 
     protected setupGameDataProxy(ticket: any) {
-        let gameDataProxy: CoreGameDataProxy = this.getGameDataProxy();
-        gameDataProxy.gameType = ticket['gameType'];
-        gameDataProxy.machineType = ticket['machineType'];
-        gameDataProxy.currency = ticket['currency'];
-        gameDataProxy.connectedTimeout = ticket['gameConnectionTimeout'];
-        gameDataProxy.resLoadingTimeout = ticket['gameResourceTimeout'];
+        this.gameDataProxy.gameType = ticket['gameType'];
+        this.gameDataProxy.machineType = ticket['machineType'];
+        this.gameDataProxy.currency = ticket['currency'];
+        this.gameDataProxy.connectedTimeout = ticket['gameConnectionTimeout'];
+        this.gameDataProxy.resLoadingTimeout = ticket['gameResourceTimeout'];
     }
 
     protected sendGetTicketRequest() {
         this.webBridgeProxy.listenerMap.set('updateTicket', this);
         this.webBridgeProxy.getWebObjRequest(this, 'reconnect');
-        console.log("sendGetTicketRequest");
-    }
-
-    protected getGameDataProxy(): CoreGameDataProxy {
-        return this.facade.retrieveProxy(CoreGameDataProxy.NAME) as CoreGameDataProxy;
     }
 
     protected setupProxy(config: IGameConfig, otherData?: any): void {
@@ -136,10 +134,10 @@ export class SFReconnectCommand extends puremvc.SimpleCommand {
         return this._webBridgeProxy;
     }
 
-    protected _gameDataProxy: CoreGameDataProxy;
-    protected get gameDataProxy(): CoreGameDataProxy {
+    protected _gameDataProxy: GameDataProxy;
+    protected get gameDataProxy(): GameDataProxy {
         if (!this._gameDataProxy) {
-            this._gameDataProxy = this.facade.retrieveProxy(CoreGameDataProxy.NAME) as CoreGameDataProxy;
+            this._gameDataProxy = this.facade.retrieveProxy(GameDataProxy.NAME) as GameDataProxy;
         }
         return this._gameDataProxy;
     }
