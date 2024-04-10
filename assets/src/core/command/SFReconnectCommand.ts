@@ -73,6 +73,7 @@ export class SFReconnectCommand extends puremvc.SimpleCommand {
         self.networkProxy.getTicketRegister = setTimeout(() => {
             self.retryTime++;
             self.sendGetTicketRequest();
+            self.registeringGetTicketRequest();
         }, time);
     }
 
