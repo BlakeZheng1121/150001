@@ -1,5 +1,27 @@
+
 default:
   image: alpine:latest
+
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH   #主線啟動CI/CD
+    - if: $CI_COMMIT_BRANCH =~ /^release/           #release開頭的分支，啟動CI/CD
+    - if: $CI_COMMIT_TAG                            #Tag動作，啟動CI/CD
+      when: always
+    - when: never
+
+include:
+  - project: h5_cicd/gitlab-yml
+    ref: main
+    file: 
+      - game_client/build-game-cocos-command.yaml
+      - game_client/post-result-message-command.yaml     
+  - project: h5_cicd/gitlab-yml
+    ref: main
+    file:
+      - game_client/deploy-game-command.yaml
+    rules:
+      - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 stages:
   - prepare
@@ -8,153 +30,10 @@ stages:
   - deploy
   - notify
 
-workflow:
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH   
-      when: always    
-    - if: $CI_COMMIT_TAG
-      when: always
-    - when: never
-
 variables:
   COCOS_VERSION: '3.3.2'
   GAME_TYPE: '1'
   GAME_ID: '1030'
-  GAME_SIZE: '10' #打包容量判斷，MB為基礎單位
-  GIT_REPOSITORY: 'git@gitlab.jigames.com.tw:h5_game/1030.git'
-  MEMORY: '2g'
+  CHECK_GAME_SIZE: '10' #打包容量判斷，MB為基礎單位
+  CHECK_MEMORY: '2g'
   NEED_COPY_HELP: 'true' #判斷是否需要啟動複製Help頁面工作;預設為false
-
-include: 'config-yml/*.yml'
-
-#================
-#   準備 工作項目
-#================
-remove-same-folder:
-  stage: prepare
-  extends: .ssh-game-builder
-  variables:
-    SSH_COMMAND: >
-      powershell ./remove.cmd  ${CI_COMMIT_SHORT_SHA}
-
-clone-git-project:
-  stage: prepare
-  needs: ["remove-same-folder"]
-  extends: .ssh-game-builder
-  variables:
-    SSH_COMMAND: >
-      git clone -b ${CI_COMMIT_REF_NAME} $GIT_REPOSITORY ./cocos/${CI_COMMIT_SHORT_SHA}
-
-copy-help-templates:
-  stage: prepare
-  needs: ["clone-git-project"]
-  extends: .ssh-game-builder
-  variables:
-    SSH_COMMAND: >
-      echo D | xcopy /S /Y "./cocos/${CI_COMMIT_SHORT_SHA}/preview-template/help" "./cocos/${CI_COMMIT_SHORT_SHA}/build-templates/web-mobile/help"
-  rules:
-  - if: $NEED_COPY_HELP == 'true'
-
-
-#================
-#   CI 工作項目
-#================
-build-mock-version:
-  stage: build
-  extends: .ssh-game-builder
-  variables:
-    SSH_COMMAND: >
-      powershell ./build.cmd $COCOS_VERSION ${CI_COMMIT_SHORT_SHA} buildConfig-dev ${CI_COMMIT_SHORT_SHA}-mock $MEMORY $GAME_SIZE
-
-build-command-version:
-  stage: build
-  needs: ["build-mock-version"]
-  extends: .ssh-game-builder
-  variables:
-    SSH_COMMAND: >
-      powershell ./build.cmd $COCOS_VERSION ${CI_COMMIT_SHORT_SHA} buildConfig ${CI_COMMIT_SHORT_SHA} $MEMORY $GAME_SIZE
-
-send-tgz-storage:
-  stage: publish
-  extends: .ssh-game-builder
-  variables:
-    SSH_COMMAND: >
-      powershell ./sendStorage.cmd $GAME_TYPE $GAME_ID ${CI_COMMIT_SHORT_SHA}
-
-
-#================
-#   CD 工作項目
-#================
-deploy-rd-download:
-  stage: deploy
-  extends: .ssh-rd-site
-  variables:
-    SSH_COMMAND: >
-      cd /opt/download-server &&
-      sudo sh deploy-game.sh $GAME_TYPE $GAME_ID ${CI_COMMIT_SHORT_SHA}-mock || exit $? &&
-      sudo sh deploy-game.sh $GAME_TYPE $GAME_ID ${CI_COMMIT_SHORT_SHA} || exit $?  
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-
-update-rd-version:
-  stage: deploy
-  needs: ["deploy-rd-download"]
-  extends: .ssh-rd-site
-  variables:
-    SSH_COMMAND: >
-      cd /opt/download-server &&
-      sudo sh update-gameVersion.sh $GAME_ID ${CI_COMMIT_SHORT_SHA} || exit $?
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-
-
-#================
-#   Notify 工作項目
-#================
-notify_success:
-  stage: notify
-  extends: .send-message
-  variables:    
-    MESSAGE: >
-      ✅ Build #`${CI_COMMIT_SHORT_SHA}` of project `${CI_PROJECT_NAME}` succeeded.
-
-
-      User 👷‍♂️by : `${GITLAB_USER_LOGIN}` on `${CI_COMMIT_REF_NAME}`
-
-      
-      *---Commit---*
-
-      Title: `${CI_COMMIT_TITLE}`
-
-      Description:
-      ```
-      ${CI_COMMIT_DESCRIPTION}
-      ```
-
-
-      🌏 [GitLab  LINK](${CI_PIPELINE_URL})
-  when: on_success
-
-notify_error:
-  stage: notify
-  extends: .send-message
-  variables:
-    MESSAGE: >
-      ❌ Build #`${CI_COMMIT_SHORT_SHA}` of project `${CI_PROJECT_NAME}` failed. 🙏FIX me please.
-
-
-      User 👷‍♂️by : `${GITLAB_USER_LOGIN}` on `${CI_COMMIT_REF_NAME}`
-      
-
-      *---Commit---*
-
-      Title: `${CI_COMMIT_TITLE}`
-
-      Description:
-      ```
-      ${CI_COMMIT_DESCRIPTION}
-      ```
-
-
-      🌏 [GitLab  LINK](${CI_PIPELINE_URL})
-  when: on_failure
