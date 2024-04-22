@@ -1,9 +1,10 @@
+import { StateMachineProxy } from '../../sgv3/proxy/StateMachineProxy';
+import { WebBridgeProxy } from '../../sgv3/proxy/WebBridgeProxy';
 import { CoreGameDataProxy } from '../proxy/CoreGameDataProxy';
 import { ChangeBalanceEvent } from '../vo/ChangeBalanceEvent';
 
 export class ChangeBalanceCommand extends puremvc.SimpleCommand {
     public static readonly NAME: string = 'gs.changeBalance';
-    public static readonly EV_CHANGE_BALANCE: string = 'EV_CHANGE_BALANCE';
 
     public execute(notification: puremvc.INotification): void {
         const result = notification.getBody();
@@ -17,12 +18,31 @@ export class ChangeBalanceCommand extends puremvc.SimpleCommand {
             balance = result.balance;
             ts = result.ts;
         }
-        const changeBalanceEvent: ChangeBalanceEvent = new ChangeBalanceEvent(ts, balance);
-        const gameDataProxy = this.facade.retrieveProxy(CoreGameDataProxy.NAME) as CoreGameDataProxy;
-        if (changeBalanceEvent.ts > gameDataProxy.tsBmd) {
-            gameDataProxy.tsBmd = changeBalanceEvent.ts;
-            gameDataProxy.setBmd(changeBalanceEvent.balance, true);
-            this.sendNotification(ChangeBalanceCommand.EV_CHANGE_BALANCE, changeBalanceEvent);
+
+        if (ts > this.gameDataProxy.tsBmd && this.checkUpdateBalance()) {
+            this.gameDataProxy.tsBmd = ts;
+            this.gameDataProxy.setBmd(balance, true);
+            this.webBridgeProxy.updateHtmlCredit();
         }
+    }
+
+    protected checkUpdateBalance(): boolean {
+        return this.gameDataProxy.gameState == StateMachineProxy.GAME1_IDLE;
+    }
+
+    protected _gameDataProxy: CoreGameDataProxy;
+    protected get gameDataProxy(): CoreGameDataProxy {
+        if (!this._gameDataProxy) {
+            this._gameDataProxy = this.facade.retrieveProxy(CoreGameDataProxy.NAME) as CoreGameDataProxy;
+        }
+        return this._gameDataProxy;
+    }
+
+    protected _webBridgeProxy: WebBridgeProxy;
+    protected get webBridgeProxy(): WebBridgeProxy {
+        if (!this._webBridgeProxy) {
+            this._webBridgeProxy = this.facade.retrieveProxy(WebBridgeProxy.NAME) as WebBridgeProxy;
+        }
+        return this._webBridgeProxy;
     }
 }

@@ -780,13 +780,11 @@ export class GameDataProxy extends CoreGameDataProxy {
         if (this.curScene != GameScene.Game_1 || this.onFreePlay == true) {
             return true;
         } else {
-            let balance: number = MathUtil.sub(this.cash, this.curTotalBet);
-            if (balance < 0) {
+            if (this.cash < this.curTotalBet) {
                 Logger.i('餘額不足');
                 this.networkProxy.sendNotEnoughMsg();
                 return false;
             } else {
-                this.setBmd(balance);
                 return true;
             }
         }

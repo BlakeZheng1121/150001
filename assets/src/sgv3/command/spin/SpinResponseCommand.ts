@@ -47,8 +47,6 @@ export class SpinResponseCommand extends puremvc.SimpleCommand {
         // 更新 Html SpinNumber 欄位的值.
         self.webBridgeProxy.updateSpinNumber(self.gameDataProxy.spinSequenceNumber);
 
-        // 刷新 Credit
-        self.webBridgeProxy.updateHtmlCredit();
         if (self.gameDataProxy.spinEventData.bonusGameResult) {
             this.gameDataProxy.tempWonCredit = MathUtil.add(
                 self.gameDataProxy.playerTotalWin,
@@ -61,7 +59,9 @@ export class SpinResponseCommand extends puremvc.SimpleCommand {
             this.gameDataProxy.tempWonCredit = self.gameDataProxy.playerTotalWin;
         }
 
-        self.sendNotification(ChangeBalanceCommand.NAME, notifyObj);
+        self.gameDataProxy.setBmd(notifyObj.balance, true);
+        // 刷新 Credit
+        self.webBridgeProxy.updateHtmlCredit();
 
         // 判斷是否為 Feature selection 結果
         if (this.gameDataProxy.gameState == StateMachineProxy.GAME1_FEATURESELECTION) {
