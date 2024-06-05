@@ -1,20 +1,25 @@
 import { _decorator, Component, Sprite, UIOpacity, Color, SpriteFrame } from 'cc';
+import { SpeedMode } from '../../game/vo/enum/Game_UIEnums';
+import { TimeLineTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
 const { ccclass, property } = _decorator;
 
 @ccclass('QuickSpinButton')
 export class QuickSpinButton extends Component {
-    public static readonly STATUS_ON: string = 'on';
-    public static readonly STATUS_OFF: string = 'off';
-    public static readonly STATUS_DISABLED: string = 'disabled';
+    @property({ type: SpriteFrame })
+    public NormalOnSprite: SpriteFrame;
+    @property({ type: Color })
+    public NormalOnColor: Color;
+    @property({ type: SpriteFrame })
+    public QuickOnSprite: SpriteFrame;
+    @property({ type: Color })
+    public QuickOnColor: Color;
+    @property({ type: SpriteFrame })
+    public turboOnSprite: SpriteFrame;
+    @property({ type: Color })
+    public turboOnColor: Color;
 
-    @property({ type: SpriteFrame })
-    public enableSprite: SpriteFrame;
-    @property({ type: Color })
-    public enableColor: Color;
-    @property({ type: SpriteFrame })
-    public disableSprite: SpriteFrame;
-    @property({ type: Color })
-    public disableColor: Color;
+    @property({ type: TimeLineTool })
+    public newIcon: TimeLineTool = null;
 
     private isDisabled: boolean = false;
     public get isDisabledBtn(): boolean {
@@ -32,7 +37,8 @@ export class QuickSpinButton extends Component {
     }
 
     protected start() {
-        this.changeState(QuickSpinButton.STATUS_OFF);
+        this.changeState(SpeedMode.STATUS_NORMAL);
+        this.newIcon.play('sweep');
     }
 
     /**
@@ -42,12 +48,19 @@ export class QuickSpinButton extends Component {
     public changeState(state: string) {
         this.currentState = state;
 
-        if (state === QuickSpinButton.STATUS_OFF) {
-            this.iconImg.spriteFrame = this.disableSprite;
-            this.iconImg.color = this.disableColor;
-        } else if (state === QuickSpinButton.STATUS_ON) {
-            this.iconImg.spriteFrame = this.enableSprite;
-            this.iconImg.color = this.enableColor;
+        switch (state) {
+            case SpeedMode.STATUS_QUICK:
+                this.iconImg.spriteFrame = this.QuickOnSprite;
+                this.iconImg.color = this.QuickOnColor;
+                break;
+            case SpeedMode.STATUS_NORMAL:
+                this.iconImg.spriteFrame = this.NormalOnSprite;
+                this.iconImg.color = this.NormalOnColor;
+                break;
+            case SpeedMode.STATUS_TURBO:
+                this.iconImg.spriteFrame = this.turboOnSprite;
+                this.iconImg.color = this.turboOnColor;
+                break;
         }
     }
 
@@ -58,5 +71,8 @@ export class QuickSpinButton extends Component {
             this.uiOpacity.opacity = 255;
         }
         this.isDisabled = disabled;
+    }
+    public closeNewIcon() {
+        this.newIcon.node.active = false;
     }
 }

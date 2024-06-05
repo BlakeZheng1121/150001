@@ -27,7 +27,7 @@ export class Game1SpinCommand extends StateCommand {
             this.gameDataProxy.reStateResult.gameStateId == GameStateId.END
         ) {
             this.gameDataProxy.resetGameParams(); // 這邊為做贏分表演相關參數重置
-            if(this.networkProxy.getCanSpinState()) {
+            if (this.networkProxy.getCanSpinState()) {
                 this.sendNotification(SpinRequestCommand.NAME);
             }
         } else {
@@ -47,6 +47,18 @@ export class Game1SpinCommand extends StateCommand {
         if (this.gameDataProxy.onAutoPlay) {
             this.sendNotification(AutoPlayOnSpinProcessCommand.NAME);
         }
+
+        //新增加速log
+        let data = {
+            gameID: '1030',
+            userName: this.gameDataProxy.userName,
+            logTag: 'slotSpeedMode',
+            logType: 'behavior',
+            SpeedMode: this._gameDataProxy.curSpeedMode
+        };
+        let pack = { name: 'gameLog', data: data };
+
+        this.webBridgeProxy.sendPlayerData(pack);
     }
 
     protected _networkProxy: NetworkProxy;

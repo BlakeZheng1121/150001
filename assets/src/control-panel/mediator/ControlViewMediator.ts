@@ -42,6 +42,7 @@ import { AudioClipsEnum } from '../../game/vo/enum/SoundMap';
 import { KeyboardProxy } from '../../core/proxy/KeyboardProxy';
 import { DEBUG } from 'cc/env';
 import { ServiceProvider } from '../../core/vo/NetworkType';
+import { SpeedMode } from '../../game/vo/enum/Game_UIEnums';
 const { ccclass } = _decorator;
 
 @ccclass('ControlViewMediator')
@@ -74,7 +75,7 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
             SceneEvent.LOAD_GAME_DATA_COMPLETE,
             SceneEvent.LOAD_SPIN_LOGO_URL,
             GameStateProxyEvent.ON_WIN_STATE_CHANGED,
-            ReelEvent.ON_TURBO_STATE_CHANGE,
+            ReelEvent.ON_QUICK_STATE_CHANGE,
             AutoPlayEvent.ON_TIMES_CHANGE,
             StateWinEvent.ON_GAME1_TRANSITIONS,
             StateWinEvent.ON_BTN_STATE_CHANGED,
@@ -93,7 +94,9 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
             ViewMediatorEvent.SHOW_FEATURE_SELECTION,
             DragonUpEvent.ON_RESPIN_NEXT_END,
             FreeGameEvent.ON_BEFORE_END_SCORE_SHOW_SKIP,
-            ViewMediatorEvent.ENTER
+            ViewMediatorEvent.ENTER,
+            ScreenEvent.ON_SPIN_DOWN,
+            ScreenEvent.SET_QUICK_SPIN_FROM_WEB
         ];
 
         let event: string;
@@ -124,10 +127,12 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
             case SceneEvent.LOAD_BASE_COMPLETE:
                 this.controlViewInit();
                 break;
-            case ReelEvent.ON_TURBO_STATE_CHANGE:
-                this.view.updateQuickSpinMode(this.reelDataProxy.isTurboMode);
-                this.webBridgeProxy.getWebFunRequest(this, 'updateTurboMode', this.reelDataProxy.isTurboMode);
-                this.view.quickSpinMsg.showMsg(this.reelDataProxy.isTurboMode, this.gameDataProxy.isShowTurboModeMsg);
+            case ReelEvent.ON_QUICK_STATE_CHANGE:
+                this.view.updateSpeedMode(
+                    this.reelDataProxy.isQuickSpin ? this.gameDataProxy.curSpeedMode : SpeedMode.STATUS_NORMAL
+                );
+                this.webBridgeProxy.getWebFunRequest(this, 'updateTurboMode', this.reelDataProxy.isQuickSpin);
+                this.view.quickSpinMsg.showMsg(this.reelDataProxy.isQuickSpin, this.gameDataProxy.isShowQuickModeMsg);
                 break;
             case SceneManager.EV_ORIENTATION_VERTICAL:
                 this.gameDataProxy.orientationEvent = name;
@@ -151,7 +156,7 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
                 }
                 break;
             case this.stateMachineProxy['stateEventMap'].game1Init:
-                this.gameDataProxy.isShowTurboModeMsg = true;
+                this.gameDataProxy.isShowQuickModeMsg = true;
                 this.updateTotalBetTxt();
                 break;
             case CtrlPanelBtnState.CREATE_BET_MENU:
@@ -163,7 +168,7 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
             case this.stateMachineProxy['stateEventMap'].game2Init:
             case this.stateMachineProxy['stateEventMap'].game3Init:
             case this.stateMachineProxy['stateEventMap'].game4Init:
-                this.gameDataProxy.isShowTurboModeMsg = true;
+                this.gameDataProxy.isShowQuickModeMsg = true;
                 if (!this.gameDataProxy.onAutoPlay) {
                     this.view.autoPlayButton.disabledBtn(true);
                 } else {
@@ -183,10 +188,10 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
                 }
                 break;
             case StateWinEvent.ON_GAME1_TRANSITIONS:
-                this.gameDataProxy.isShowTurboModeMsg = false;
+                this.gameDataProxy.isShowQuickModeMsg = false;
                 this.view.quickSpinButton.disabledBtn(false);
-                if (this.gameDataProxy.curTurboMode) {
-                    this.reelDataProxy.isTurboMode = this.gameDataProxy.curTurboMode;
+                if (this.gameDataProxy.curQuickMode) {
+                    this.reelDataProxy.isQuickSpin = this.gameDataProxy.curQuickMode;
                 }
                 this.view.transitionMode(false);
 
@@ -216,11 +221,7 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
                         this.view.minusBetButton.changeState(ChangeBetButton.STATUS_ON);
                         this.view.plusBetButton.changeState(ChangeBetButton.STATUS_ON);
                         this.changeTotalBetTxtIcon(TotalBetIcon.STATUS_ON);
-                        if (this.reelDataProxy.isTurboMode) {
-                            this.view.quickSpinButton.changeState(QuickSpinButton.STATUS_ON);
-                        } else {
-                            this.view.quickSpinButton.changeState(QuickSpinButton.STATUS_OFF);
-                        }
+
                         this.view.autoPlayButton.disabledBtn(false);
                         this.view.quickSpinButton.disabledBtn(false);
 
@@ -276,11 +277,11 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
                 break;
             case ViewMediatorEvent.SHOW_FEATURE_SELECTION:
                 this.view.spinButton.isChangeDisableColor(true);
-                this.gameDataProxy.isShowTurboModeMsg = false;
+                this.gameDataProxy.isShowQuickModeMsg = false;
                 this.view.quickSpinButton.disabledBtn(true);
-                this.gameDataProxy.curTurboMode = this.reelDataProxy.isTurboMode;
-                if (this.reelDataProxy.isTurboMode) {
-                    this.reelDataProxy.isTurboMode = false;
+                this.gameDataProxy.curQuickMode = this.reelDataProxy.isQuickSpin;
+                if (this.reelDataProxy.isQuickSpin) {
+                    this.reelDataProxy.isQuickSpin = false;
                 }
                 break;
             case ViewMediatorEvent.ENTER:
@@ -291,6 +292,12 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
                 break;
             case SceneEvent.LOAD_SPIN_LOGO_URL:
                 this.initLogo(notification.getBody() as string);
+                break;
+            case ScreenEvent.ON_SPIN_DOWN:
+                this.view.quickSpinButton.closeNewIcon();
+                break;
+            case ScreenEvent.SET_QUICK_SPIN_FROM_WEB:
+                this.setQuickSpinFromWeb(notification.getBody());
                 break;
         }
     }
@@ -463,18 +470,33 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
         this.updateTotalBetTxt();
         this.clearPlayerWinTxt();
     }
-
-    /** 點擊turbo按鈕 */
-    public quickSpin() {
-        if (
-            this.gameDataProxy.curScene !== GameScene.Game_1 ||
-            this.gameDataProxy.gameState === StateMachineProxy.GAME1_FEATURESELECTION
-        ) {
-            return;
+    protected setQuickSpinFromWeb(isQuickSpin: boolean) {
+        if (this.reelDataProxy.isQuickSpin != isQuickSpin) {
+            this.quickSpin(isQuickSpin);
         }
-        this.hideAllMenu();
-        this.reelDataProxy.isTurboMode = !this.reelDataProxy.isTurboMode;
-        this.sendNotification(SoundEvent.BUTTON_DOWN_SOUND);
+    }
+    /** 點擊Quick按鈕 */
+    public quickSpin(isQuickSpin: boolean | null = null) {
+        if (!this.view.quickSpinButton.isDisabledBtn) {
+            if (this.gameDataProxy.curSpeedMode == SpeedMode.STATUS_TURBO || isQuickSpin === false) {
+                // 切換成一般模式
+                this.gameDataProxy.curSpeedMode = SpeedMode.STATUS_NORMAL;
+                this.gameDataProxy.isShowQuickModeMsg = true;
+                this.reelDataProxy.isQuickSpin = false;
+            } else if (this.gameDataProxy.curSpeedMode == SpeedMode.STATUS_QUICK) {
+                //一段加速 切換成 二段加速
+                this.gameDataProxy.curSpeedMode = SpeedMode.STATUS_TURBO;
+                this.gameDataProxy.isShowQuickModeMsg = false;
+                this.reelDataProxy.isQuickSpin = true;
+            } else if (this.gameDataProxy.curSpeedMode == SpeedMode.STATUS_NORMAL || isQuickSpin === true) {
+                //一般模式 切換成 一段加速
+                this.gameDataProxy.curSpeedMode = SpeedMode.STATUS_QUICK;
+                this.gameDataProxy.isShowQuickModeMsg = true;
+                this.reelDataProxy.isQuickSpin = true;
+            }
+            this.hideAllMenu();
+            this.sendNotification(SoundEvent.BUTTON_DOWN_SOUND);
+        }
     }
 
     /** 開關設定選單 */

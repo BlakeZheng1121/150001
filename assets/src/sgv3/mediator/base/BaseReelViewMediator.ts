@@ -344,7 +344,7 @@ export class BaseReelViewMediator<T extends ReelView> extends BaseMediator<T> {
             this.reelView.reelsRollAfter(() => this.onCallBack(0, () => this.onSingleReelStartStop()));
             this.reelDataProxy.reelState = ReelState.CanStop;
             if (
-                this.reelDataProxy.isTurboMode &&
+                this.reelDataProxy.isQuickSpin &&
                 this.gameDataProxy.curRoundResult.displayInfo.prizePredictionType != 'TYPE_1'
             )
                 this.onReelsEmergencyStop();

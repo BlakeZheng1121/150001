@@ -1,4 +1,4 @@
-import { _decorator, Component, game, view, ResolutionPolicy, Prefab, instantiate, tween, Vec3, director } from 'cc';
+import { _decorator, Component, game, view, ResolutionPolicy, Prefab, instantiate, tween, Vec3, director, Director } from 'cc';
 import { AppFacade } from '../AppFacade';
 import { CoreWebBridgeProxy } from '../proxy/CoreWebBridgeProxy';
 import { Logger } from './Logger';
@@ -187,4 +187,24 @@ export class SceneManager extends Component {
             .by(0.02, { position: new Vec3(-3, -10, 0) })
             .start();
     }
+}
+
+// 調整遊戲 Time scale
+const getOrCreateTimeScalePolyfill = (() => {
+    let polyfill: undefined | { multiplier: number };
+
+    return () => {
+        if (!polyfill) {
+            const polyfill_ = { multiplier: 1.0 };
+            const tick = Director.prototype.tick;
+            Director.prototype.tick = function (dt: number, ...args) {
+                tick.call(this, dt * polyfill_.multiplier, ...args);
+            };
+            polyfill = polyfill_;
+        }
+        return polyfill;
+    };
+})();
+export function setEngineTimeScale(multiplier: number) {
+    getOrCreateTimeScalePolyfill().multiplier = multiplier;
 }

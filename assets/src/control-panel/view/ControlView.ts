@@ -375,12 +375,8 @@ export class ControlView extends BaseScene {
     }
 
     /** 加速狀態 */
-    public updateQuickSpinMode(_val: boolean): void {
-        if (_val) {
-            this.quickSpinButton.changeState(QuickSpinButton.STATUS_ON);
-        } else {
-            this.quickSpinButton.changeState(QuickSpinButton.STATUS_OFF);
-        }
+    public updateSpeedMode(state: string): void {
+        this.quickSpinButton.changeState(state);
     }
 
     private initJackpotWonMsgObject() {

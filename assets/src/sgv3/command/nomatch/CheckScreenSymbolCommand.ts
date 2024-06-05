@@ -32,7 +32,7 @@ export class CheckScreenSymbolCommand extends puremvc.SimpleCommand {
         const logData = new SymbolErrorLog();
         logData.errorCode = MsgCode.ERR_SYMBOL_NOTMATCH;
         logData.autoPlayMode = self.gameDataProxy.onAutoPlay;
-        logData.turboMode = reelDataProxy.isTurboMode;
+        logData.turboMode = reelDataProxy.isQuickSpin;
         logData.reelIndex = info.reelIndex;
         logData.reelRng = info.targetRng;
         logData.strip = info.strip;

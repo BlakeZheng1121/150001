@@ -12,6 +12,7 @@ import { GameStateResult } from '../result/GameStateResult';
 import { CommonGameResult } from '../result/CommonGameResult';
 import { RecoveryData } from '../data/RecoveryData';
 import { WinType } from '../enum/WinType';
+import { SpeedMode } from '../../../game/vo/enum/Game_UIEnums';
 
 export class GameData extends CoreGameData {
     /** 取得 init 設定資料 */
@@ -48,10 +49,10 @@ export class GameData extends CoreGameData {
     public curAutoTimes: number = 0;
     /** 自動模式 - 最大次數 */
     public maxAutoTimes: number = 0;
-    /** BaseGame的TurboMode狀態 */
-    public curTurboMode: boolean = false;
-    /** BaseGame的TurboMode狀態*/
-    public isShowTurboModeMsg: boolean = false;
+    /** BaseGame的QuickMode狀態 */
+    public curQuickMode: boolean = false;
+    /** BaseGame的QuickMode狀態*/
+    public isShowQuickModeMsg: boolean = false;
     /** 玩家選擇的遊戲狀態Operation */
     public curGameOperation: string = '';
     /** 滾分中 */
@@ -122,4 +123,6 @@ export class GameData extends CoreGameData {
     public onFreePlay: boolean = false;
     /** 是否有收到 Feature selection 的結果 */
     public hasSelectionResponse: boolean = false;
+    /** 當前遊戲速度 */
+    public curSpeedMode: string = SpeedMode.STATUS_NORMAL;
 }

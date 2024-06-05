@@ -247,7 +247,7 @@ export class ScoringHandleCommand extends puremvc.SimpleCommand {
     }
 
     private needQuickScoringTime(): boolean {
-        return this.reelDataProxy.isTurboMode && this.gameDataProxy.onAutoPlay;
+        return this.reelDataProxy.isQuickSpin && this.gameDataProxy.onAutoPlay;
     }
 
     private getQuickScoringTime(winType: WinType): number {
