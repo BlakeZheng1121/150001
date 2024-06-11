@@ -4,7 +4,13 @@ export const languages = {
     // Data
     loading: 'LOADING ANOTHER SCENE ASSETS...',
     quickSpinEnabled: 'Quick Spin Enabled',
-    quickSpinDisabled: 'Quick Spin Disabled'
+    quickSpinDisabled: 'Quick Spin Disabled',
+    balance: 'BALANCE',
+    win: 'WIN',
+    bet: 'TOTAL BET',
+    autospin: 'AUTO SPIN',
+    autospinnumber: 'Number of Auto Spin',
+    betoption: 'BET OPTIONS'
 };
 
 if (!win.languages) {

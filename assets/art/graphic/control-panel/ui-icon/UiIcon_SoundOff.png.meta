@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "07302e8f-65ef-4d56-9530-2628c100301e",
+  "uuid": "d3b11325-9067-4657-9a58-a638d118d1c7",
   "files": [
     ".png",
     ".json"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "07302e8f-65ef-4d56-9530-2628c100301e@6c48a",
+      "uuid": "d3b11325-9067-4657-9a58-a638d118d1c7@6c48a",
       "displayName": "UiIcon_SoundOff",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "07302e8f-65ef-4d56-9530-2628c100301e"
+        "imageUuidOrDatabaseUri": "d3b11325-9067-4657-9a58-a638d118d1c7"
       },
       "ver": "1.0.21",
       "imported": true,
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "07302e8f-65ef-4d56-9530-2628c100301e@f9941",
+      "uuid": "d3b11325-9067-4657-9a58-a638d118d1c7@f9941",
       "displayName": "UiIcon_SoundOff",
       "id": "f9941",
       "name": "spriteFrame",
@@ -41,12 +41,12 @@
         "trimType": "auto",
         "trimThreshold": 1,
         "rotated": false,
-        "offsetX": -0.5,
+        "offsetX": 0,
         "offsetY": 0,
-        "trimX": 17,
-        "trimY": 18,
-        "width": 73,
-        "height": 72,
+        "trimX": 10,
+        "trimY": 10,
+        "width": 88,
+        "height": 88,
         "rawWidth": 108,
         "rawHeight": 108,
         "borderTop": 0,
@@ -55,7 +55,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "07302e8f-65ef-4d56-9530-2628c100301e@6c48a",
+        "imageUuidOrDatabaseUri": "d3b11325-9067-4657-9a58-a638d118d1c7@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,7 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "07302e8f-65ef-4d56-9530-2628c100301e@f9941"
+    "redirect": "d3b11325-9067-4657-9a58-a638d118d1c7@f9941",
+    "fixAlphaTransparencyArtifacts": false
   }
 }

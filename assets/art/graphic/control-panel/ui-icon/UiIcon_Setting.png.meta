@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "b7593783-54cb-492b-974c-0f79d1961e1a",
+  "uuid": "4f6fc690-fefa-4739-9250-5fad8eab1934",
   "files": [
     ".png",
     ".json"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "b7593783-54cb-492b-974c-0f79d1961e1a@6c48a",
+      "uuid": "4f6fc690-fefa-4739-9250-5fad8eab1934@6c48a",
       "displayName": "UiIcon_Setting",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "b7593783-54cb-492b-974c-0f79d1961e1a"
+        "imageUuidOrDatabaseUri": "4f6fc690-fefa-4739-9250-5fad8eab1934"
       },
       "ver": "1.0.21",
       "imported": true,
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "b7593783-54cb-492b-974c-0f79d1961e1a@f9941",
+      "uuid": "4f6fc690-fefa-4739-9250-5fad8eab1934@f9941",
       "displayName": "UiIcon_Setting",
       "id": "f9941",
       "name": "spriteFrame",
@@ -42,11 +42,11 @@
         "trimThreshold": 1,
         "rotated": false,
         "offsetX": -0.5,
-        "offsetY": 0.5,
-        "trimX": 14,
-        "trimY": 14,
-        "width": 79,
-        "height": 79,
+        "offsetY": 0,
+        "trimX": 5,
+        "trimY": 6,
+        "width": 97,
+        "height": 96,
         "rawWidth": 108,
         "rawHeight": 108,
         "borderTop": 0,
@@ -55,7 +55,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "b7593783-54cb-492b-974c-0f79d1961e1a@6c48a",
+        "imageUuidOrDatabaseUri": "4f6fc690-fefa-4739-9250-5fad8eab1934@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,7 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "b7593783-54cb-492b-974c-0f79d1961e1a@f9941"
+    "redirect": "4f6fc690-fefa-4739-9250-5fad8eab1934@f9941",
+    "fixAlphaTransparencyArtifacts": false
   }
 }

@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "0cc7d693-6cf8-41d8-b4dd-ec0c0741941e",
+  "uuid": "e0a94a49-23c3-4899-a5f8-aee15cfc42e5",
   "files": [
     ".png",
     ".json"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "0cc7d693-6cf8-41d8-b4dd-ec0c0741941e@6c48a",
+      "uuid": "e0a94a49-23c3-4899-a5f8-aee15cfc42e5@6c48a",
       "displayName": "UiIcon_Info",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "0cc7d693-6cf8-41d8-b4dd-ec0c0741941e"
+        "imageUuidOrDatabaseUri": "e0a94a49-23c3-4899-a5f8-aee15cfc42e5"
       },
       "ver": "1.0.21",
       "imported": true,
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "0cc7d693-6cf8-41d8-b4dd-ec0c0741941e@f9941",
+      "uuid": "e0a94a49-23c3-4899-a5f8-aee15cfc42e5@f9941",
       "displayName": "UiIcon_Info",
       "id": "f9941",
       "name": "spriteFrame",
@@ -42,11 +42,11 @@
         "trimThreshold": 1,
         "rotated": false,
         "offsetX": 0,
-        "offsetY": 1,
-        "trimX": 18,
-        "trimY": 17,
-        "width": 72,
-        "height": 72,
+        "offsetY": 0,
+        "trimX": 10,
+        "trimY": 10,
+        "width": 88,
+        "height": 88,
         "rawWidth": 108,
         "rawHeight": 108,
         "borderTop": 0,
@@ -55,7 +55,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "0cc7d693-6cf8-41d8-b4dd-ec0c0741941e@6c48a",
+        "imageUuidOrDatabaseUri": "e0a94a49-23c3-4899-a5f8-aee15cfc42e5@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,7 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "0cc7d693-6cf8-41d8-b4dd-ec0c0741941e@f9941"
+    "redirect": "e0a94a49-23c3-4899-a5f8-aee15cfc42e5@f9941",
+    "fixAlphaTransparencyArtifacts": false
   }
 }

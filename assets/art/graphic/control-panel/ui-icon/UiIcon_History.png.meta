@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "05790a7c-903d-46dd-be5b-1d2ff07c1da2",
+  "uuid": "b80e77fc-4e6c-4aa5-a155-a8c9d1a4651f",
   "files": [
     ".png",
     ".json"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "05790a7c-903d-46dd-be5b-1d2ff07c1da2@6c48a",
+      "uuid": "b80e77fc-4e6c-4aa5-a155-a8c9d1a4651f@6c48a",
       "displayName": "UiIcon_History",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "05790a7c-903d-46dd-be5b-1d2ff07c1da2"
+        "imageUuidOrDatabaseUri": "b80e77fc-4e6c-4aa5-a155-a8c9d1a4651f"
       },
       "ver": "1.0.21",
       "imported": true,
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "05790a7c-903d-46dd-be5b-1d2ff07c1da2@f9941",
+      "uuid": "b80e77fc-4e6c-4aa5-a155-a8c9d1a4651f@f9941",
       "displayName": "UiIcon_History",
       "id": "f9941",
       "name": "spriteFrame",
@@ -41,12 +41,12 @@
         "trimType": "auto",
         "trimThreshold": 1,
         "rotated": false,
-        "offsetX": 0,
-        "offsetY": 0.5,
-        "trimX": 22,
-        "trimY": 17,
-        "width": 64,
-        "height": 73,
+        "offsetX": 5,
+        "offsetY": -0.5,
+        "trimX": 16,
+        "trimY": 11,
+        "width": 86,
+        "height": 87,
         "rawWidth": 108,
         "rawHeight": 108,
         "borderTop": 0,
@@ -55,7 +55,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "05790a7c-903d-46dd-be5b-1d2ff07c1da2@6c48a",
+        "imageUuidOrDatabaseUri": "b80e77fc-4e6c-4aa5-a155-a8c9d1a4651f@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,7 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "05790a7c-903d-46dd-be5b-1d2ff07c1da2@f9941"
+    "redirect": "b80e77fc-4e6c-4aa5-a155-a8c9d1a4651f@f9941",
+    "fixAlphaTransparencyArtifacts": false
   }
 }

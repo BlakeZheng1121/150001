@@ -39,10 +39,10 @@ const { ccclass, property } = _decorator;
 export class ControlView extends BaseScene {
     public static readonly HORIZONTAL: string = 'horizontal';
     public static readonly VERTICAL: string = 'vertical';
-    private readonly AUTO_MENU_BTN_WIDTH: number = 86;
-    private readonly AUTO_MENU_BTN_HEIGHT: number = 68;
-    private readonly BET_MENU_BTN_WIDTH: number = 154;
-    private readonly BET_MENU_BTN_HEIGHT: number = 64;
+    private readonly AUTO_MENU_BTN_WIDTH: number = 174;
+    private readonly AUTO_MENU_BTN_HEIGHT: number = 96;
+    private readonly BET_MENU_BTN_WIDTH: number = 174;
+    private readonly BET_MENU_BTN_HEIGHT: number = 96;
 
     // panel button
     public buttonCallback: IControlViewMediator;
@@ -103,6 +103,9 @@ export class ControlView extends BaseScene {
 
     @property({ type: Node })
     public autoMenu: Node;
+
+    @property({ type: Node })
+    public autoOptions: Node;
 
     @property({ type: BetMenu })
     public betMenu: BetMenu;
@@ -240,12 +243,6 @@ export class ControlView extends BaseScene {
             this.uiLayer[i].changeOrientation(ishorizontal);
         }
     }
-    /** 更新 UILayer 的子物件 */
-    private updateUILayer() {
-        for (let i = 0; i < this.uiLayer.length; i++) {
-            this.uiLayer[i].updateChildren();
-        }
-    }
 
     /** 轉場模式 */
     public transitionMode(status: boolean) {
@@ -267,19 +264,18 @@ export class ControlView extends BaseScene {
     public createAutoMenu(_options: number[], _onClickCallback: Function): void {
         let i: number = _options.length - 1;
         while (i >= 0) {
-            this.autoMenu.addChild(this.addAutoMenuButton(i, _options[i].toString(), _onClickCallback));
+            this.autoOptions.addChild(this.addAutoMenuButton(_options[i].toString(), _onClickCallback));
             i--;
         }
-        this.updateUILayer();
     }
 
-    public addAutoMenuButton(i: number, countTxt: string, callback: Function): Node {
-        const menuBtnNode = instantiate(this.menuButtonPrefab);
-        const uiTransform = menuBtnNode.getComponent(UITransform);
-        const label = menuBtnNode.getComponentInChildren(Label);
+    private addAutoMenuButton(countTxt: string, callback: Function): Node {
+        const menuButtonNode = instantiate(this.menuButtonPrefab);
+        const uiTransform = menuButtonNode.getComponent(UITransform);
+        const label = menuButtonNode.getComponentInChildren(Label);
         uiTransform.contentSize.set(this.AUTO_MENU_BTN_WIDTH, this.AUTO_MENU_BTN_HEIGHT);
         label.string = countTxt;
-        menuBtnNode.on(
+        menuButtonNode.on(
             SystemEvent.EventType.TOUCH_END,
             () => {
                 callback(countTxt);
@@ -287,7 +283,7 @@ export class ControlView extends BaseScene {
             this.buttonCallback
         );
 
-        return menuBtnNode;
+        return menuButtonNode;
     }
 
     public createBetMenu(_options: number[], _onClickCallback: Function): void {
@@ -296,43 +292,27 @@ export class ControlView extends BaseScene {
             this.betMenu.content.node.addChild(this.addBetButton(i, _options[i], _onClickCallback));
             i++;
         }
-        // 調整 bet menu 排版
-        let layout = this.betMenu.content.getComponent(Layout);
-        let height: number = this.betMenu.transform.height - this.betMenu.content.height;
-
-        layout.constraintNum = Math.ceil(_options.length * 0.5);
-        this.betMenu.content.height =
-            layout.paddingTop +
-            layout.paddingBottom +
-            (layout.constraintNum - 1) * layout.spacingY +
-            layout.constraintNum * this.BET_MENU_BTN_HEIGHT;
-
-        this.betMenu.transform.height = height + this.betMenu.content.height;
-        this.betMenu.titleTransform.width =
-            this.BET_MENU_BTN_WIDTH * 2 + layout.paddingLeft + layout.paddingRight + layout.spacingX;
-		//this.betMenu.title.string = BalanceUtil.dollarISO;
-		this.betMenu.title.string = String();
-
     }
+
     // TODO: 新增 bet 按鈕
-    public addBetButton(i: number, countTxt: number, callback: Function): Node {
-        const betBtn = instantiate(this.menuButtonPrefab);
-        const uiTransform = betBtn.getComponent(UITransform);
-        betBtn.addComponent(BetMenuButton);
+    private addBetButton(i: number, countTxt: number, callback: Function): Node {
+        const betButton = instantiate(this.menuButtonPrefab);
+        const uiTransform = betButton.getComponent(UITransform);
+        betButton.addComponent(BetMenuButton);
         uiTransform.contentSize.set(this.BET_MENU_BTN_WIDTH, this.BET_MENU_BTN_HEIGHT);
-        const menuBtn = betBtn.getComponent(BetMenuButton);
-        menuBtn.setTotalBet(countTxt);
-        menuBtn.setStateSprite(this.betMenuBtnNormal, this.betMenuBtnSelected);
-        this.betMenuButtons.push(menuBtn);
-        betBtn.on(
+        const menuButton = betButton.getComponent(BetMenuButton);
+        menuButton.setTotalBet(countTxt);
+        menuButton.setStateSprite(this.betMenuBtnNormal, this.betMenuBtnSelected);
+        this.betMenuButtons.push(menuButton);
+        betButton.on(
             SystemEvent.EventType.TOUCH_END,
             () => {
-                callback(menuBtn);
+                callback(menuButton);
             },
             this.buttonCallback
         );
 
-        return betBtn;
+        return betButton;
     }
 
     public hideAllMenu() {
