@@ -50,7 +50,6 @@ export class Game_3_View extends BaseScene {
     public init(lang: string) {
         const self = this;
 
-        self.language = lang;
         self.clickData = new TSMap<string, boolean>();
 
         self.changeLocale(lang);

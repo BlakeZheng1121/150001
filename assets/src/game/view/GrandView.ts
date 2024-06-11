@@ -1,4 +1,4 @@
-import { _decorator, Label, tween } from 'cc';
+import { _decorator, Label, SystemEvent, tween } from 'cc';
 import { TimeLineTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
 import { BaseScene } from '../../base/BaseScene';
 import { BalanceUtil } from '../../sgv3/util/BalanceUtil';
@@ -18,9 +18,11 @@ export class GrandView extends BaseScene {
     @property(Label)
     private scoreTxt: Label;
     private _score = 0;
-    private canSkip = false;
+
     private skipFunction: Function;
-    private canSkipScoringGrandTimerKey: string = 'canSkipScoringGrand';
+    // callback
+    public buttonCallback: IGrandViewMediator = null;
+
     private callBackFunction: Function;
 
     public get score(): number {
@@ -71,17 +73,7 @@ export class GrandView extends BaseScene {
         this.callBackFunction?.();
     }
 
-    private setCanUseSkip() {
-        this.canSkip = true;
-    }
-
     public scoringGrand(grand: number = 10000, callBack?: Function): void {
-        this.canSkip = false;
-        GlobalTimer.getInstance().removeTimer(this.canSkipScoringGrandTimerKey);
-        GlobalTimer.getInstance()
-            .registerTimer(this.canSkipScoringGrandTimerKey, this.bonusCanSkipRunCreditsTime, this.setCanUseSkip, this)
-            .start();
-
         const scoringTween = tween<GrandView>(this)
             .to(
                 this.grandTime,
@@ -92,7 +84,6 @@ export class GrandView extends BaseScene {
             )
             .start();
         this.skipFunction = () => {
-            this.canSkip = false;
             scoringTween.stop();
             this.score = grand;
 
@@ -114,17 +105,27 @@ export class GrandView extends BaseScene {
                 )
                 .start();
         };
+        this.registerButton();
     }
 
     public closeBoard(callBack?: Function): void {
-        this.miniResultBoard.OnBoardClose();
-        callBack?.();
+        this.unregisterButton();
+        GlobalTimer.getInstance()
+            .registerTimer(
+                'closeBoardTimer',
+                2,
+                () => {
+                    GlobalTimer.getInstance().removeTimer('closeBoardTimer');
+                    this.miniResultBoard.OnBoardClose();
+                    callBack?.();
+                },
+                this
+            )
+            .start();
     }
 
     public skipScoring() {
-        if (this.canSkip) {
-            this.skipFunction?.();
-        }
+        this.skipFunction?.();
     }
 
     show() {
@@ -134,4 +135,21 @@ export class GrandView extends BaseScene {
     hide() {
         this.anim.node.active = false;
     }
+
+    public registerButton() {
+        this.node.on(
+            SystemEvent.EventType.TOUCH_END,
+            () => {
+                this.buttonCallback.onSkip();
+            },
+            this.buttonCallback
+        );
+    }
+
+    public unregisterButton() {
+        this.node.off(SystemEvent.EventType.TOUCH_END);
+    }
+}
+export interface IGrandViewMediator {
+    onSkip();
 }

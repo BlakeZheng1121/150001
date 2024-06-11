@@ -1,4 +1,4 @@
-import { _decorator, Label, tween, Tween } from 'cc';
+import { _decorator, Label, SystemEvent, tween, Tween } from 'cc';
 import { BaseScene } from '../../base/BaseScene';
 import { BalanceUtil } from '../../sgv3/util/BalanceUtil';
 import { MiniResultBoard } from '../../ta/mini-result-board/MiniResultBoard';
@@ -37,7 +37,7 @@ export class Game_3_WinBoardView extends BaseScene {
         lang: string
     ) {
         const self = this;
-
+        self.registerButton();
         self.showOneWonBoard(credit, runTimer, hitPool[0] - 1, lang);
 
         if (runTimer > canSkipRunCreditsTime) {
@@ -72,6 +72,7 @@ export class Game_3_WinBoardView extends BaseScene {
 
     public runCreditsCompleted() {
         const self = this;
+        self.unregisterButton();
         self.callback.playRunCreditsCompletedSound();
         Tween.stopAllByTarget(self);
         self.targetNum = self.targetCredits;
@@ -126,6 +127,19 @@ export class Game_3_WinBoardView extends BaseScene {
         self.onChange();
         return true;
     }
+    public registerButton() {
+        this.node.on(
+            SystemEvent.EventType.TOUCH_END,
+            () => {
+                this.callback.onSkip();
+            },
+            this.callback
+        );
+    }
+
+    public unregisterButton() {
+        this.node.off(SystemEvent.EventType.TOUCH_END);
+    }
 }
 
 export interface IGame_3_WinBoardViewMediator {
@@ -133,4 +147,5 @@ export interface IGame_3_WinBoardViewMediator {
     playSoundEND01(): void;
     playSoundEND02(): void;
     playSoundEND03(): void;
+    onSkip(): void;
 }

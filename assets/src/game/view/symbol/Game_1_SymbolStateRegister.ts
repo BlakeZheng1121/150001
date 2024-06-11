@@ -44,21 +44,7 @@ export class Game_1_SymbolDampingState extends UIViewStateBase {
     ////
 
     onPlay() {
-        if(this.content.symbolData.id == SymbolId.C1) {
-            this.content.dampingParticle = 
-            PoolManager.instance.getNode(this.content.particlePrefab
-                , this.content.node).getComponent(ParticleContentTool);
-           
-            this.content.dampingParticle.ParticlePlay();
-            this.content.scheduleOnce(()=>{
-                if(this.content.dampingParticle) {
-                    this.content.dampingParticle.ParticleClear();
-                    this.content.dampingParticle.ParticleStop();
-                    PoolManager.instance.putNode(this.content.dampingParticle.node);
-                    this.content.dampingParticle = null;
-                }          
-            },0.8);
-        }
+        this.content.createParticlePrefab();
        
         this.onEffectFinished();
     }
@@ -99,8 +85,8 @@ export class Game_1_RollCycledState extends SymbolRollCycledState {
 
         if(this.content.labelText.enabled){
             this.content.labelText.font = (this.content.isSpecialFont) ? this.content.specialFont : this.content.baseFont;
-            this.content.labelText.string = (this.content.credit > 0) ?
-            BalanceUtil.formatBalanceWithExpressingUnits(this.content.credit): String();
+            this.content.labelText.string =
+            this.content.credit > 0 ? BalanceUtil.formatBalance(this.content.credit) : String();
         }else{
             this.content.labelText.string = String();
         }
@@ -125,19 +111,13 @@ export class Game_1_SymbolShowState extends SymbolShowState {
         this.content.labelText.enabled = this.content.symbolData.id == SymbolId.C1;
 
         if (this.content.labelText.enabled) {
-            this.content.labelText.font = this.content.isSpecialFont
-                ? this.content.specialFont
-                : this.content.baseFont;
+            this.content.forceRecycleParticlePrefab();
+            this.content.labelText.font = this.content.isSpecialFont ? this.content.specialFont : this.content.baseFont;
             this.content.labelText.string =
                 this.content.credit > 0 ? BalanceUtil.formatBalanceWithExpressingUnits(this.content.credit) : '';
         }
 
-        if(this.content.dampingParticle) {
-            this.content.dampingParticle.ParticleClear();
-            this.content.dampingParticle.ParticleStop();
-            PoolManager.instance.putNode(this.content.dampingParticle.node);
-            this.content.dampingParticle = null;
-        }
+       
 
     }
 }

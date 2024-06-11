@@ -34,16 +34,13 @@ export class WormHoleViewMediator extends BaseMediator<WormHoleView> implements 
     }
 
     public listNotificationInterests(): Array<any> {
-        return [WormHoleViewMediator.EV_CHANG_COORDINATE, SceneEvent.LOAD_BASE_COMPLETE];
+        return [SceneEvent.LOAD_BASE_COMPLETE];
     }
 
     public handleNotification(notification: puremvc.INotification): void {
         const self = this;
 
         switch (notification.getName()) {
-            case WormHoleViewMediator.EV_CHANG_COORDINATE:
-                self.setViewPosition(notification.getBody());
-                break;
             case SceneEvent.LOAD_BASE_COMPLETE:
                 self.whView.registerTouchEvent();
                 break;

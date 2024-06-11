@@ -356,7 +356,7 @@
   },
   {
     "__type__": "ReelMotionData",
-    "_pass": 2,
+    "_pass": 1,
     "_duration": 0.1,
     "_value": 35,
     "_tweenCurve": {
@@ -406,7 +406,7 @@
   },
   {
     "__type__": "ReelMotionData",
-    "_pass": 7,
+    "_pass": 6,
     "_duration": 0.1,
     "_value": 40,
     "_tweenCurve": {
@@ -704,7 +704,7 @@
     "__type__": "ReelMotionData",
     "_pass": 1,
     "_duration": 0.05,
-    "_value": 80,
+    "_value": 70,
     "_tweenCurve": {
       "__id__": 35
     }
@@ -971,7 +971,6 @@
   },
   {
     "__type__": "SymbolData",
-    "isUseLanguage": false,
     "_name": "c1",
     "_id": 1,
     "_orderLayer": 4,
@@ -979,14 +978,11 @@
       "__uuid__": "36591a9a-d8e1-4570-ac79-fad4dd6424d2@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
-    "_mainSpriteFrame_EN": null,
-    "_mainSpriteFrame_ZH": null,
     "_bgSpriteFrame": null,
     "_isImprovedFOV": true
   },
   {
     "__type__": "SymbolData",
-    "isUseLanguage": false,
     "_name": "m1",
     "_id": 2,
     "_orderLayer": 2,
@@ -994,14 +990,11 @@
       "__uuid__": "44a4f949-2109-4a81-8f38-5ca00f94928a@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
-    "_mainSpriteFrame_EN": null,
-    "_mainSpriteFrame_ZH": null,
     "_bgSpriteFrame": null,
     "_isImprovedFOV": false
   },
   {
     "__type__": "SymbolData",
-    "isUseLanguage": false,
     "_name": "m2",
     "_id": 3,
     "_orderLayer": 2,
@@ -1009,14 +1002,11 @@
       "__uuid__": "8addb9ea-275d-4ca8-a186-6bb2ae75bce2@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
-    "_mainSpriteFrame_EN": null,
-    "_mainSpriteFrame_ZH": null,
     "_bgSpriteFrame": null,
     "_isImprovedFOV": false
   },
   {
     "__type__": "SymbolData",
-    "isUseLanguage": false,
     "_name": "m3",
     "_id": 4,
     "_orderLayer": 2,
@@ -1024,14 +1014,11 @@
       "__uuid__": "cc2aba06-a714-47f1-b915-2812b825295c@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
-    "_mainSpriteFrame_EN": null,
-    "_mainSpriteFrame_ZH": null,
     "_bgSpriteFrame": null,
     "_isImprovedFOV": false
   },
   {
     "__type__": "SymbolData",
-    "isUseLanguage": false,
     "_name": "m4",
     "_id": 5,
     "_orderLayer": 2,
@@ -1039,14 +1026,11 @@
       "__uuid__": "961ee7d7-9bad-4e2c-8082-78d26a1743ef@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
-    "_mainSpriteFrame_EN": null,
-    "_mainSpriteFrame_ZH": null,
     "_bgSpriteFrame": null,
     "_isImprovedFOV": false
   },
   {
     "__type__": "SymbolData",
-    "isUseLanguage": false,
     "_name": "m5",
     "_id": 6,
     "_orderLayer": 2,
@@ -1054,14 +1038,11 @@
       "__uuid__": "de73ebfd-04d1-4043-9ac6-005dece4f4d8@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
-    "_mainSpriteFrame_EN": null,
-    "_mainSpriteFrame_ZH": null,
     "_bgSpriteFrame": null,
     "_isImprovedFOV": false
   },
   {
     "__type__": "SymbolData",
-    "isUseLanguage": false,
     "_name": "m6",
     "_id": 7,
     "_orderLayer": 2,
@@ -1069,14 +1050,11 @@
       "__uuid__": "93a2f82e-40d2-4669-b918-160f53d8ac47@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
-    "_mainSpriteFrame_EN": null,
-    "_mainSpriteFrame_ZH": null,
     "_bgSpriteFrame": null,
     "_isImprovedFOV": false
   },
   {
     "__type__": "SymbolData",
-    "isUseLanguage": false,
     "_name": "c2",
     "_id": 9,
     "_orderLayer": 4,
@@ -1084,8 +1062,6 @@
       "__uuid__": "dff50bb3-4051-4990-a6c4-d96dd89658d8@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
-    "_mainSpriteFrame_EN": null,
-    "_mainSpriteFrame_ZH": null,
     "_bgSpriteFrame": null,
     "_isImprovedFOV": true
   },

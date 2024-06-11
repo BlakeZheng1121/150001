@@ -33,7 +33,7 @@ import { QuickSpinButton } from '../view/QuickSpinButton';
 import { ChangeBetButton } from '../view/ChangeBetButton';
 import { BetMenuButton } from '../view/BetMenuButton';
 import { FreeGameOneRoundResult } from '../../sgv3/vo/result/FreeGameOneRoundResult';
-import { SceneManager } from '../../core/utils/SceneManager';
+import { SceneManager, setEngineTimeScale } from '../../core/utils/SceneManager';
 import { GameSceneData } from '../../sgv3/vo/config/GameSceneData';
 import { NetworkProxy } from '../../core/proxy/NetworkProxy';
 import { SettingMenuButton } from '../view/SettingMenuButton';
@@ -167,6 +167,10 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
                 break;
             case this.stateMachineProxy['stateEventMap'].game2Init:
             case this.stateMachineProxy['stateEventMap'].game3Init:
+                if (this.gameDataProxy.curSpeedMode != SpeedMode.STATUS_NORMAL) {
+                    this.reelDataProxy.isQuickSpin = false;
+                    setEngineTimeScale(1);
+                }
             case this.stateMachineProxy['stateEventMap'].game4Init:
                 this.gameDataProxy.isShowQuickModeMsg = true;
                 if (!this.gameDataProxy.onAutoPlay) {
@@ -190,8 +194,9 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
             case StateWinEvent.ON_GAME1_TRANSITIONS:
                 this.gameDataProxy.isShowQuickModeMsg = false;
                 this.view.quickSpinButton.disabledBtn(false);
-                if (this.gameDataProxy.curQuickMode) {
-                    this.reelDataProxy.isQuickSpin = this.gameDataProxy.curQuickMode;
+                if (this.gameDataProxy.curSpeedMode != SpeedMode.STATUS_NORMAL) {
+                    this.reelDataProxy.isQuickSpin = true;
+                    setEngineTimeScale(this.gameDataProxy.curSpeedMode === SpeedMode.STATUS_TURBO ? 3 : 1);
                 }
                 this.view.transitionMode(false);
 
@@ -280,8 +285,9 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
                 this.gameDataProxy.isShowQuickModeMsg = false;
                 this.view.quickSpinButton.disabledBtn(true);
                 this.gameDataProxy.curQuickMode = this.reelDataProxy.isQuickSpin;
-                if (this.reelDataProxy.isQuickSpin) {
+                if (this.gameDataProxy.curSpeedMode != SpeedMode.STATUS_NORMAL) {
                     this.reelDataProxy.isQuickSpin = false;
+                    setEngineTimeScale(1);
                 }
                 break;
             case ViewMediatorEvent.ENTER:

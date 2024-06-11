@@ -93,9 +93,7 @@ export class ScoringHandleCommand extends puremvc.SimpleCommand {
         targetAmount: number,
         winBoardTargetAmount: number
     ) {
-        if (this.needQuickScoringTime()) {
-            this.finalScoringTime = this.getQuickScoringTime(this.finalWinType);
-        }
+  
         this.scoringNormal(startAmount, targetAmount, winBoardTargetAmount, this.finalScoringTime);
     }
 
@@ -250,28 +248,7 @@ export class ScoringHandleCommand extends puremvc.SimpleCommand {
         return this.reelDataProxy.isQuickSpin && this.gameDataProxy.onAutoPlay;
     }
 
-    private getQuickScoringTime(winType: WinType): number {
-        let scoringTime = 0;
-        switch (true) {
-            case winType >= WinType.section_1 && winType <= WinType.section_15:
-                scoringTime = QuickScoringDuration.Scoring_normal;
-                break;
-            case winType == WinType.bigWin:
-                scoringTime = QuickScoringDuration.Scoring_BigWin;
-                break;
-            case winType == WinType.megaWin:
-                scoringTime = QuickScoringDuration.Scoring_MegaWin;
-                break;
-            case winType == WinType.superWin:
-                scoringTime = QuickScoringDuration.Scoring_SuperWin;
-                break;
-            case winType == WinType.jumboWin:
-                scoringTime = QuickScoringDuration.Scoring_JumboWin;
-                break;
-        }
-        return scoringTime;
-    }
-
+   
     // ======================== Get Set ========================
     protected _reelDataProxy: ReelDataProxy;
     protected get reelDataProxy(): ReelDataProxy {

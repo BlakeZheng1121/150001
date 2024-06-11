@@ -10,7 +10,8 @@ export const languages = {
     bet: 'เดิมพันรวม',
     autospin: 'สปินอัตโนมัติ',
     autospinnumber: 'จำนวนสปินอัตโนมัติ',
-    betoption: 'ตัวเลือกเดิมพัน'
+    betoption: 'ตัวเลือกเดิมพัน',
+    autoStart: 'เริ่มอัตโนมัติ：'
 };
 
 if (!win.languages) {

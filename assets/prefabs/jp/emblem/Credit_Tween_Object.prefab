@@ -212,9 +212,9 @@
       "__uuid__": "054c7222-c1ea-4d58-a546-c90231984136",
       "__expectedType__": "cc.BitmapFont"
     },
-    "delayTime": 0.15,
+    "delayTime": 0.05,
     "ptCount": 5,
-    "timeInterval": 0.07,
+    "timeInterval": 0.06,
     "_id": ""
   },
   {

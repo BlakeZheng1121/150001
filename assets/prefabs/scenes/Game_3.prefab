@@ -884,7 +884,7 @@
       "b": 255,
       "a": 255
     },
-    "_string": "60",
+    "_string": "10",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 55,
@@ -1046,7 +1046,7 @@
     "countdown": {
       "__id__": 50
     },
-    "autoStartTime": 30,
+    "autoStartTime": 10,
     "countdownLastTime": 0.5,
     "_id": ""
   },

@@ -58,6 +58,8 @@ export class Game_3_ViewMediator extends BaseMediator<Game_3_View> {
 
     public miniGameEnd = true;
 
+    private autoStartTimerId: number;
+
     protected lastSetupEventList: string[];
 
     protected defaultInterestList: string[] = [GameStateProxyEvent.ON_SCENE_BEFORE_CHANGE, ViewMediatorEvent.LEAVE];
@@ -414,6 +416,8 @@ export class Game_3_ViewMediator extends BaseMediator<Game_3_View> {
         const self = this;
         self.view.enableCountdown(false);
         clearTimeout(this.countdownTimerId);
+        clearTimeout(self.autoStartTimerId);
+        self.countdownTimerId = self.autoStartTimerId = null;
         this.countdownTimerId = null;
         GlobalTimer.getInstance().removeTimer(this.countdownTimerKey);
         GlobalTimer.getInstance().removeTimer(this.autoStartTimerKey);
@@ -513,6 +517,7 @@ export class Game_3_ViewMediator extends BaseMediator<Game_3_View> {
     }
 
     private registerAutoClickSymbolTimer() {
+        const self = this;
         this.view.countdown.string = this.view.autoStartTime.toString();
 
         clearInterval(this.countdownTimerId);
@@ -526,6 +531,12 @@ export class Game_3_ViewMediator extends BaseMediator<Game_3_View> {
             }
             this.playCountdownSound(curSeconds);
         }, 1000);
+
+        clearTimeout(self.autoStartTimerId);
+        self.autoStartTimerId = setTimeout(() => {
+            self.autoClickSymbol();
+            self.autoStartTimerId = null;
+        }, (self.view.autoStartTime + self.view.countdownLastTime) * 1000);
     }
 
     private autoClickSymbol() {

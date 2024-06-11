@@ -10,7 +10,8 @@ export const languages = {
     bet: 'TOTAL BET',
     autospin: 'AUTO SPIN',
     autospinnumber: 'Number of Auto Spin',
-    betoption: 'BET OPTIONS'
+    betoption: 'BET OPTIONS',
+    autoStart: 'AUTO START IN:'
 };
 
 if (!win.languages) {

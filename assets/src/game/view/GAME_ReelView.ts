@@ -220,6 +220,9 @@ export class GAME_ReelView extends ReelView {
             this.uiOrientation[i].changeOrientation(this.ishorizontalMode);
         }
     }
+    public hideWildSymbol(symbolInfo: SymbolInfo) {
+        this.setDefaultSymbolPlay(symbolInfo, SymbolPerformType.HIDE);
+    }
     ////
 
     //// Hook

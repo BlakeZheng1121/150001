@@ -10,7 +10,8 @@ export const languages = {
     bet: '总投注',
     autospin: '自动旋转',
     autospinnumber: '自动旋转次数',
-    betoption: '投注选项'
+    betoption: '投注选项',
+    autoStart: '自动开始:'
 };
 
 if (!win.languages) {

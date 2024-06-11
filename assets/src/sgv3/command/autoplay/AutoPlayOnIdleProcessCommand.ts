@@ -14,7 +14,7 @@ export class AutoPlayOnIdleProcessCommand extends puremvc.SimpleCommand {
     public static NAME = 'AutoPlayOnIdleProcessCommand';
 
     protected defaultSpinTime: number = 0;
-    protected bigWinSpinTime: number = 0;
+    protected bigWinSpinTime: number = 0.5;
     protected timerKey = AutoPlayOnIdleProcessCommand.NAME;
 
     public execute(notification: puremvc.INotification): void {

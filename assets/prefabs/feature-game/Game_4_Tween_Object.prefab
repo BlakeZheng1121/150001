@@ -2218,7 +2218,7 @@
         "__id__": 147
       }
     ],
-    "baseCreditTime": 0.45,
+    "baseCreditTime": 0.25,
     "baseCreditEasing": "fade",
     "accelerateDelayTime": 0.75,
     "acceleratePtCount": 5,

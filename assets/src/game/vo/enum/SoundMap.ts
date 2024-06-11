@@ -144,25 +144,25 @@ export enum ScoringClipsEnum {
     ScoringWin04_zh = 'ScoringWin04_zh'
 }
 export enum BaseScoringDuration {
-    Scoring01 = 0.5,
-    Scoring02 = 1,
-    Scoring03 = 2,
-    Scoring04 = 2,
-    Scoring05 = 3,
-    Scoring06 = 3,
-    Scoring07 = 3,
-    Scoring08 = 4,
-    Scoring09 = 5,
-    Scoring10 = 8,
-    Scoring11 = 8,
-    Scoring12 = 10,
-    Scoring13 = 13,
-    Scoring14 = 21,
-    Scoring15 = 25,
-    Scoring_Win01 = 12.5,
-    Scoring_Win02 = 15.3,
-    Scoring_Win03 = 19.2,
-    Scoring_Win04 = 23.6
+    Scoring01 = 1,
+    Scoring02 = 2,
+    Scoring03 = 3,
+    Scoring04 = 4,
+    Scoring05 = 5,
+    Scoring06 = 6,
+    Scoring07 = 8.5,
+    Scoring08 = 8.8,
+    Scoring09 = 9.2,
+    Scoring10 = 9.5,
+    Scoring11 = 9.9,
+    Scoring12 = 10.2,
+    Scoring13 = 10.6,
+    Scoring14 = 10.9,
+    Scoring15 = 11.3,
+    Scoring_Win01 = 13.5,
+    Scoring_Win02 = 16.3,
+    Scoring_Win03 = 20,
+    Scoring_Win04 = 24.5
 }
 
 export enum QuickScoringDuration {

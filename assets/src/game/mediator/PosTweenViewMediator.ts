@@ -149,6 +149,7 @@ export class PosTweenViewMediator extends BaseMediator<PosTweenView> {
                         );
 
                         //飛行音效播放
+                        AudioManager.Instance.stop(AudioClipsEnum.DragonUp_C1Collect);
                         AudioManager.Instance.play(AudioClipsEnum.DragonUp_C1Collect);
                         this.sendNotification(
                             DragonUpEvent.ON_BASE_CREDIT_COLLECT_START,
@@ -184,6 +185,7 @@ export class PosTweenViewMediator extends BaseMediator<PosTweenView> {
         } else {
             let curAudioBaseSequenceName = (sequenceIndex % 7) + 1; //打擊音效設定
             //打擊音效播放
+            AudioManager.Instance.stop(this.getAudioBaseSequenceName(curAudioBaseSequenceName - 1));
             AudioManager.Instance.play(this.getAudioBaseSequenceName(curAudioBaseSequenceName));
         }
     }
@@ -229,7 +231,7 @@ export class PosTweenViewMediator extends BaseMediator<PosTweenView> {
         this.curTargertSequenceIndex++;
         this.curbaseSequenceIndex = 0;
         this.curTargertCredit = 0;
-        let waitTime = hasMultiple ? 0.6 : 0.3;
+        let waitTime = hasMultiple ? 0.3 : 0.1;
 
         this.view.clearArray();
         GlobalTimer.getInstance().registerTimer('onNextTargertIndex', waitTime, this.onNextTargertIndex, this).start();
@@ -240,14 +242,20 @@ export class PosTweenViewMediator extends BaseMediator<PosTweenView> {
             this.view.clearPool(); //物件池清除
             this.baseCreditCollectSequence = [];
             this.targertCollectSequence = [];
-            this.sendNotification(DragonUpEvent.ON_ALL_CREDIT_COLLECT_END);
-            this.sendNotification(StateMachineCommand.NAME, new StateMachineObject(StateMachineProxy.GAME4_AFTERSHOW));
+            GlobalTimer.getInstance().registerTimer('onCollectEnd', 0.5, this.onAllCreditCollectEnd, this).start();
+
         } else {
             this.sendNotification(DragonUpEvent.ON_TARGERT_COLLECT_START, this.curTargertSequence);
         }
         GlobalTimer.getInstance().removeTimer('onNextTargertIndex');
     }
 
+    private onAllCreditCollectEnd() {
+        GlobalTimer.getInstance().removeTimer('onCollectEnd');
+        this.sendNotification(DragonUpEvent.ON_ALL_CREDIT_COLLECT_END);
+        this.sendNotification(StateMachineCommand.NAME, new StateMachineObject(StateMachineProxy.GAME4_AFTERSHOW));
+    }
+    
     // ======================== Get Set ========================
 
     protected _reelDataProxy: ReelDataProxy;
