@@ -5,6 +5,7 @@ import { CoreGameDataProxy } from '../proxy/CoreGameDataProxy';
 import { CoreWebBridgeProxy } from '../proxy/CoreWebBridgeProxy';
 import { Logger } from '../utils/Logger';
 import * as i18n from '../../../../extensions/i18n/assets/LanguageData';
+import * as brand from '../../../../extensions/brand/assets/BrandData';
 import { ServiceProvider } from '../vo/NetworkType';
 import { WebBridgeProxy } from '../../sgv3/proxy/WebBridgeProxy';
 
@@ -41,11 +42,11 @@ export class SetupGameConfigCommand extends puremvc.SimpleCommand {
 
             let gameDataProxy: CoreGameDataProxy = this.getGameDataProxy();
             let data = {
-                gameID: "1030",
+                gameID: '1030',
                 logTag: 'getRequest-SetupGameConfigCommand',
-                userName: String(gameDataProxy.userId),
+                userName: String(gameDataProxy.userId)
             };
-            let pack = {name:'gameLog', data: data};
+            let pack = { name: 'gameLog', data: data };
             this.webBridgeProxy.sendPlayerData(pack);
         }
     }
@@ -129,6 +130,7 @@ export class SetupGameConfigCommand extends puremvc.SimpleCommand {
 
     protected setupGameData(gameData: any) {
         let gameDataProxy: CoreGameDataProxy = this.getGameDataProxy();
+        this.setupBrandCommonUI(gameData['brandId']);
         gameDataProxy.isDemoGame = gameData['isDemo'];
         gameDataProxy.hasGoHome = gameData['isShowGoHome'];
         gameDataProxy.hasPlayerReport = gameData['isShowPlayerReport'];
@@ -146,6 +148,11 @@ export class SetupGameConfigCommand extends puremvc.SimpleCommand {
         gameDataProxy.gameAndUiVer = `v${uiVersion.version} / v${uiVersion.gameVersion}`;
         gameDataProxy.gameVer = uiVersion.gameVersion;
         this.sendNotification(SceneEvent.LOAD_UI_VERSION_COMPLETE);
+    }
+
+    protected setupBrandCommonUI(brandId: string) {
+        let _brandID: string = Number(brandId) > 0 ? brandId : '1';
+        brand.init(_brandID);
     }
 
     protected getGameDataProxy(): CoreGameDataProxy {
@@ -220,6 +227,4 @@ export class SetupGameConfigCommand extends puremvc.SimpleCommand {
 
         return this._webBridgeProxy;
     }
-
-
 }

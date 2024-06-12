@@ -251,7 +251,7 @@ export class ControlView extends BaseScene {
         this.plusBetButton.node.active = !status;
         this.autoPlayButton.node.active = !status;
         this.settingButton.node.active = !status;
-        this.spinButton.node.parent.active = !status;
+        this.spinButton.node.active = !status;
         // this.startButton.active = status;
         this.displayPanel.node.active = !status;
     }
