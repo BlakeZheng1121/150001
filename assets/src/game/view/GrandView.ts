@@ -64,13 +64,14 @@ export class GrandView extends BaseScene {
 
         this.anim.play('Show');
         this.miniResultBoard.OnBoardDelayPlay(() => this.showMiniResultBoard());
+        this.scheduleOnce(() => {
+            this.callBackFunction?.();
+        }, 4.3);
     }
 
     private showMiniResultBoard() {
         AudioManager.Instance.play(ScoringClipsEnum.Scoring_JPWin04).loop(false);
         this.miniResultBoard.playWinCoinFall();
-
-        this.callBackFunction?.();
     }
 
     public scoringGrand(grand: number = 10000, callBack?: Function): void {
@@ -92,18 +93,8 @@ export class GrandView extends BaseScene {
             AudioManager.Instance.stop(ScoringClipsEnum.Scoring_JPWinIntro);
             AudioManager.Instance.stop(ScoringClipsEnum.Scoring_JPWin04);
             AudioManager.Instance.play(ScoringClipsEnum.Scoring_JPWinEnd04);
+            callBack?.();
             this.skipFunction = null;
-            GlobalTimer.getInstance()
-                .registerTimer(
-                    'delayCloseBoardTimer',
-                    1.5,
-                    () => {
-                        GlobalTimer.getInstance().removeTimer('delayCloseBoardTimer');
-                        callBack?.();
-                    },
-                    this
-                )
-                .start();
         };
         this.registerButton();
     }

@@ -46,7 +46,7 @@ export class GAME_Game2BeforeShowCommand extends Game2BeforeShowCommand {
             );
         }
 
-        if (freeGameOneRoundResult.playerWin > 0 && freeGameOneRoundResult.displayInfo.winType) {
+        if (this.gameDataProxy.curWinData.totalAmount() > 0) {
             this.changeState(StateMachineProxy.GAME2_SHOWWIN);
         } else {
             let stayTime = sceneData.noWinStayTime;

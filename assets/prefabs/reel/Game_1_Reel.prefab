@@ -409,7 +409,7 @@
   },
   {
     "__type__": "ReelMotionData",
-    "_pass": 6,
+    "_pass": 7,
     "_duration": 0.1,
     "_value": 40,
     "_tweenCurve": {

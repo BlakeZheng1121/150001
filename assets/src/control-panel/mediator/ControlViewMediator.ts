@@ -78,6 +78,7 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
             ReelEvent.ON_QUICK_STATE_CHANGE,
             AutoPlayEvent.ON_TIMES_CHANGE,
             StateWinEvent.ON_GAME1_TRANSITIONS,
+            StateWinEvent.ON_GAME3_TRANSITIONS,
             StateWinEvent.ON_BTN_STATE_CHANGED,
             ViewMediatorEvent.JACKPOT_WON_SHOW,
             ViewMediatorEvent.JACKPOT_WON_CLOSE,
@@ -167,10 +168,6 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
                 break;
             case this.stateMachineProxy['stateEventMap'].game2Init:
             case this.stateMachineProxy['stateEventMap'].game3Init:
-                if (this.gameDataProxy.curSpeedMode != SpeedMode.STATUS_NORMAL) {
-                    this.reelDataProxy.isQuickSpin = false;
-                    setEngineTimeScale(1);
-                }
             case this.stateMachineProxy['stateEventMap'].game4Init:
                 this.gameDataProxy.isShowQuickModeMsg = true;
                 if (!this.gameDataProxy.onAutoPlay) {
@@ -201,6 +198,14 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
                 this.view.transitionMode(false);
 
                 break;
+            case StateWinEvent.ON_GAME3_TRANSITIONS:
+                this.gameDataProxy.isShowQuickModeMsg = false;
+                this.view.quickSpinButton.disabledBtn(true);
+                if (this.gameDataProxy.curSpeedMode != SpeedMode.STATUS_NORMAL) {
+                    this.reelDataProxy.isQuickSpin = false;
+                    setEngineTimeScale(1);
+                }
+                break;
             case StateWinEvent.ON_BTN_STATE_CHANGED:
                 if (!this.view) return;
                 let spinBtnState: string = this.checkSpinBtnState(notification.getBody());
@@ -211,7 +216,6 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
                     case CtrlPanelBtnState.DISABLED:
                         this.hideAllMenu();
                         this.view.settingButton.changeState(SettingButton.STATUS_DISABLED);
-                        //this.view.quickSpinButton.disabledBtn(true);
                         if (!this.gameDataProxy.onAutoPlay) {
                             this.view.autoPlayButton.disabledBtn(true);
                         }
