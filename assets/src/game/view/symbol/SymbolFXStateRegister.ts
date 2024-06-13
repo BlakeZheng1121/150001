@@ -155,8 +155,13 @@ export class SymbolFXBaseCreditUpdateState extends UIViewStateBase {
     //// Hook
     onPlay() {
         if (this.content.animation) {
-            this.content.animation.play('BeginEffect', () => this.onEffectFinished());
+            this.content.animation.play('BeginEffect', () => this.playWin());
         }
+    }
+
+    playWin() {
+        this.content.animation.play('PlayWin');
+        this.onEffectFinished();
     }
 }
 

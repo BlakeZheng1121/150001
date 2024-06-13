@@ -11,10 +11,6 @@ export class Game_2_View extends BaseScene {
     @property({ type: [Prefab], visible: true })
     private loadPrefab: Array<Prefab> | null = [];
 
-
-    @property({ type: TimeLineTool })
-    private bg_effect: TimeLineTool;
-
     // @property({ type: Label, visible: true })
     // private awardLabel: Label;
 
@@ -59,11 +55,4 @@ export class Game_2_View extends BaseScene {
     //     };
     //     return award[curGameOperation];
     // }
-
-    protected onEnable () {
-        this.bg_effect.play("free");
-    }
-    protected onDisable () {
-        this.bg_effect.stop();
-    }
 }

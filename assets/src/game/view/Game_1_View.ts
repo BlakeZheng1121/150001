@@ -14,10 +14,6 @@ export class Game_1_View extends BaseScene {
     public static readonly HORIZONTAL: string = 'horizontal';
     public static readonly VERTICAL: string = 'vertical';
 
-    @property({ type: TimeLineTool })
-    private bg_effect: TimeLineTool = null;
-
-
     private _gameUIOrientation: Array<GameUIOrientationSetting> | null = null;
 
     private get gameUIOrientation() {
@@ -44,12 +40,5 @@ export class Game_1_View extends BaseScene {
         for (let i = 0; i < this.gameUIOrientation.length; i++) {
             this.gameUIOrientation[i].changeOrientation(ishorizontal, scene);
         }
-    }
-
-    protected onEnable () {
-        this.bg_effect.play("base");
-    }
-    protected onDisable () {
-        this.bg_effect.stop();
     }
 }

@@ -152,7 +152,7 @@ export class ScoringHandleCommand extends puremvc.SimpleCommand {
                 if (this.gameDataProxy.curScene == GameScene.Game_2) {
                     AudioManager.Instance.play(ScoringClipsEnum.Scoring_Free).loop(true);
                 } else {
-                    if (winType <= WinType.section_2) {
+                    if (winType < WinType.section_2) {
                         AudioManager.Instance.play(ScoringClipsEnum.Scoring_BaseEnd);
                     } else {
                         AudioManager.Instance.play(ScoringClipsEnum.Scoring_Base).loop(true);
@@ -235,7 +235,7 @@ export class ScoringHandleCommand extends puremvc.SimpleCommand {
                     if (this.gameDataProxy.curScene == GameScene.Game_2) {
                         AudioManager.Instance.play(ScoringClipsEnum.Scoring_FreeEnd);
                     } else {
-                        if (winType > WinType.section_2) {
+                        if (winType >= WinType.section_2) {
                             AudioManager.Instance.play(ScoringClipsEnum.Scoring_BaseEnd);
                         }
                     }
