@@ -49,24 +49,20 @@ export class GrandView extends BaseScene {
         this.scheduleOnce(() => {
             AudioManager.Instance.play(AudioClipsEnum.JP_GrandHit);
         }, 0.75);
-        /*GlobalTimer.getInstance().removeTimer('GrandJPLoop');
+        this.anim.play('Show');
+        this.miniResultBoard.OnBoardDelayPlay();
         GlobalTimer.getInstance()
             .registerTimer(
-                'GrandJPLoop',
-                7.8,
+                'showUpTimer',
+                4.3,
                 () => {
-                    AudioManager.Instance.play(ScoringClipsEnum.Scoring_JPWinLoop04).loop(true);
-                    this.miniResultBoard.playWinCoinFall();
+                    GlobalTimer.getInstance().removeTimer('showUpTimer');
+                    this.showMiniResultBoard();
+                    this.callBackFunction?.();
                 },
                 this
             )
-            .start();*/
-
-        this.anim.play('Show');
-        this.miniResultBoard.OnBoardDelayPlay(() => this.showMiniResultBoard());
-        this.scheduleOnce(() => {
-            this.callBackFunction?.();
-        }, 4.3);
+            .start();
     }
 
     private showMiniResultBoard() {
@@ -87,7 +83,7 @@ export class GrandView extends BaseScene {
         this.skipFunction = () => {
             scoringTween.stop();
             this.score = grand;
-
+            GlobalTimer.getInstance().removeTimer('showUpTimer');
             this.miniResultBoard.stopWinCoinFall();
 
             AudioManager.Instance.stop(ScoringClipsEnum.Scoring_JPWinIntro);

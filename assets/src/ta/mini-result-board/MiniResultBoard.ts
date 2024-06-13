@@ -29,7 +29,7 @@ export class MiniResultBoard extends Component {
 
     @property(Color) private SpriteLightColor: Color[] = [];
 
-    @property({ type: ParticleEffect})
+    @property({ type: ParticleEffect })
     public ParticleEffects: ParticleEffect[] = [];
 
     @property({ type: Prefab })
@@ -43,7 +43,7 @@ export class MiniResultBoard extends Component {
     }
 
     public OnBoardDelayPlay(callBack?: Function) {
-        this.BoardAnimation?.play('DelayShow', () => callBack());
+        this.BoardAnimation?.play('DelayShow');
     }
 
     public OnBoardClose() {
@@ -75,14 +75,16 @@ export class MiniResultBoard extends Component {
     }
 
     public stopWinCoinFall() {
-        this.winCoinFall.ParticleStop();
-        this.scheduleOnce(() => {
-            PoolManager.instance.putNode(this.winCoinFall.node);
-        }, this.winCoinFall.PutPoolTimes);
+        if (this.winCoinFall) {
+            this.winCoinFall.ParticleStop();
+            this.scheduleOnce(() => {
+                PoolManager.instance.putNode(this.winCoinFall.node);
+            }, this.winCoinFall.PutPoolTimes);
+        }
     }
 
     setParitcleEffects(JackPotType: number = 0) {
-        this.ParticleEffects?.forEach((value)=>{
+        this.ParticleEffects?.forEach((value) => {
             value.Particle?.SetParticleColor(value.Color[JackPotType]);
         });
     }
