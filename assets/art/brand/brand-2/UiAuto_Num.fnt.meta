@@ -2,7 +2,7 @@
   "ver": "1.0.5",
   "importer": "bitmap-font",
   "imported": true,
-  "uuid": "33682026-9cb0-42e7-95d9-7cb9f25400eb",
+  "uuid": "da0b46e8-b0f8-4e95-a8ad-bf652282e2db",
   "files": [
     ".json"
   ],
@@ -21,7 +21,7 @@
             "height": 76
           },
           "xOffset": 0,
-          "yOffset": -8,
+          "yOffset": -20,
           "xAdvance": 48
         },
         "49": {
@@ -32,7 +32,7 @@
             "height": 76
           },
           "xOffset": 0,
-          "yOffset": -8,
+          "yOffset": -20,
           "xAdvance": 48
         },
         "50": {
@@ -43,7 +43,7 @@
             "height": 76
           },
           "xOffset": 0,
-          "yOffset": -8,
+          "yOffset": -20,
           "xAdvance": 48
         },
         "51": {
@@ -54,7 +54,7 @@
             "height": 76
           },
           "xOffset": 0,
-          "yOffset": -8,
+          "yOffset": -20,
           "xAdvance": 48
         },
         "52": {
@@ -65,7 +65,7 @@
             "height": 76
           },
           "xOffset": 0,
-          "yOffset": -8,
+          "yOffset": -20,
           "xAdvance": 48
         },
         "53": {
@@ -76,7 +76,7 @@
             "height": 76
           },
           "xOffset": 0,
-          "yOffset": -8,
+          "yOffset": -20,
           "xAdvance": 48
         },
         "54": {
@@ -87,7 +87,7 @@
             "height": 76
           },
           "xOffset": 0,
-          "yOffset": -8,
+          "yOffset": -20,
           "xAdvance": 48
         },
         "55": {
@@ -98,7 +98,7 @@
             "height": 76
           },
           "xOffset": 0,
-          "yOffset": -8,
+          "yOffset": -20,
           "xAdvance": 48
         },
         "56": {
@@ -109,7 +109,7 @@
             "height": 76
           },
           "xOffset": 0,
-          "yOffset": -8,
+          "yOffset": -20,
           "xAdvance": 48
         },
         "57": {
@@ -120,13 +120,13 @@
             "height": 76
           },
           "xOffset": 0,
-          "yOffset": -8,
+          "yOffset": -20,
           "xAdvance": 48
         }
       },
       "kerningDict": {}
     },
     "fontSize": 32,
-    "textureUuid": "e91823e2-740a-4423-bf63-6e4568726852"
+    "textureUuid": "b5b79d4b-400f-489d-a09a-c2ae01a5f76c"
   }
 }

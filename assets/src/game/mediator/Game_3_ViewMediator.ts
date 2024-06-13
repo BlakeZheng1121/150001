@@ -52,10 +52,13 @@ export class Game_3_ViewMediator extends BaseMediator<Game_3_View> {
     private miniResultLength = 0;
     private isAutoClick: boolean = false;
     private countdownTimerKey: string = 'countdownTimer';
+    private countdownTimerId: number;
     private autoStartTimerKey: string = 'autoStartTimer';
     private autoClickTimerKey: string = 'autoClickTimer';
 
     public miniGameEnd = true;
+
+    private autoStartTimerId: number;
 
     protected lastSetupEventList: string[];
 
@@ -412,6 +415,10 @@ export class Game_3_ViewMediator extends BaseMediator<Game_3_View> {
     private onMiniGameEnd() {
         const self = this;
         self.view.enableCountdown(false);
+        clearTimeout(this.countdownTimerId);
+        clearTimeout(self.autoStartTimerId);
+        self.countdownTimerId = self.autoStartTimerId = null;
+        this.countdownTimerId = null;
         GlobalTimer.getInstance().removeTimer(this.countdownTimerKey);
         GlobalTimer.getInstance().removeTimer(this.autoStartTimerKey);
         GlobalTimer.getInstance().removeTimer('WinJP');
@@ -510,36 +517,26 @@ export class Game_3_ViewMediator extends BaseMediator<Game_3_View> {
     }
 
     private registerAutoClickSymbolTimer() {
+        const self = this;
         this.view.countdown.string = this.view.autoStartTime.toString();
-        GlobalTimer.getInstance().removeTimer(this.countdownTimerKey);
-        GlobalTimer.getInstance()
-            .registerTimer(
-                this.countdownTimerKey,
-                1,
-                () => {
-                    let curSeconds = parseInt(this.view.countdown.string) - 1;
-                    this.view.countdown.string = String(curSeconds);
-                    if (this.view.countdown.string == '0') {
-                        this.isAutoClick = true;
-                        this.view.enableCountdown(false);
-                    }
-                    this.playCountdownSound(curSeconds);
-                },
-                this,
-                this.view.autoStartTime - 1
-            )
-            .start();
-        GlobalTimer.getInstance().removeTimer(this.autoStartTimerKey);
-        GlobalTimer.getInstance()
-            .registerTimer(
-                this.autoStartTimerKey,
-                this.view.autoStartTime + this.view.countdownLastTime,
-                () => {
-                    this.autoClickSymbol();
-                },
-                this
-            )
-            .start();
+
+        clearInterval(this.countdownTimerId);
+        this.countdownTimerId = setInterval(() => {
+            let curSeconds = parseInt(this.view.countdown.string) - 1;
+            this.view.countdown.string = String(curSeconds);
+            if (this.view.countdown.string == '0') {
+                this.isAutoClick = true;
+                this.view.enableCountdown(false);
+                this.autoClickSymbol();
+            }
+            this.playCountdownSound(curSeconds);
+        }, 1000);
+
+        clearTimeout(self.autoStartTimerId);
+        self.autoStartTimerId = setTimeout(() => {
+            self.autoClickSymbol();
+            self.autoStartTimerId = null;
+        }, (self.view.autoStartTime + self.view.countdownLastTime) * 1000);
     }
 
     private autoClickSymbol() {

@@ -129,7 +129,7 @@ export class Game_3_WinBoardViewMediator
 
     private onSpinDown() {
         const self = this;
-        if (self.bCanUseSkip === false) return;
+        // if (self.bCanUseSkip === false) return;
         if (!self.view.skipRunCredit()) return;
         GlobalTimer.getInstance().removeTimer(self.showCoinFallTimerKey);
         GlobalTimer.getInstance()
@@ -142,6 +142,9 @@ export class Game_3_WinBoardViewMediator
             .start();
     }
 
+    public onSkip() {
+        window['onSpinBtnClick']();
+    }
     private showWonCreditBoard(bonusResult: BonusGameOneRoundResult): void {
         const self = this;
         let coinFallTime = self.mySceneData.bonusCoinFallAfterCreditBoardTime;

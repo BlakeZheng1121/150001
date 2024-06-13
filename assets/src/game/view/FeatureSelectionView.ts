@@ -42,15 +42,12 @@ export class FeatureSelectionView extends BaseScene {
     @property({ type: Label, visible: true })
     public autoStart: Label | null = null;
 
-    @property({ type: Number, visible: true  })
-    public autoStartTime: number = 0;
+    @property({ type: Number, visible: true })
+    public autoStartTime: number;
 
     public autoStartCallBack: Function | null = null;
 
-    public autoStartKey: string = String('AutoStart');
-
-    public autoStartTimeKey: string = String('AutoStartTime');
-
+    private autoStartTimerId: number;
 
     public initView() {
         const self = this;
@@ -62,7 +59,7 @@ export class FeatureSelectionView extends BaseScene {
         self.hide();
         self.autoStartCallBack = () => {
             self.callBack(GameOperation[GameOperation.freeGame_01]);
-        }
+        };
     }
 
     public initTween(duration: number) {
@@ -144,7 +141,6 @@ export class FeatureSelectionView extends BaseScene {
         AudioManager.Instance.play(AudioClipsEnum.FeatureSelection_BestChoice);
 
         this.stopAutoStartTimer();
-        
     }
 
     public setButtonParticlePos(operation: string) {
@@ -177,32 +173,29 @@ export class FeatureSelectionView extends BaseScene {
         this._isShowComplete = isComplete;
     }
 
-    private registerAutoStart() {
-        let self = this;
-        GlobalTimer.getInstance()
-            .registerTimer(
-                this.autoStartTimeKey,
-                1,
-                () => {
-                    self.autoStart.string = String(parseInt(self.autoStart.string) - 1);
-                },
-                this,
-                self.autoStartTime
-            )
-            .start();
-        GlobalTimer.getInstance()
-            .registerTimer(this.autoStartKey, self.autoStartTime + 1, () => self.autoStartCallBack(), this)
-            .start();
-    }
+   
+    public registerAutoStart() {
+        const self = this;
 
+        clearInterval(self.autoStartTimerId);
+        self.autoStartTimerId = setInterval(() => {
+            self.autoStart.string = String(parseInt(self.autoStart.string) - 1);
+            if (self.autoStart.string == '0') {
+                clearInterval(self.autoStartTimerId);
+                self.autoStartTimerId = null;
+                self.autoStartCallBack()
+            }
+        }, 1000);
+   
+    }
     public resetAutoStart() {
         this.autoStart.string = this.autoStartTime.toString();
         this.stopAutoStartTimer();
     }
 
     private stopAutoStartTimer() {
-        GlobalTimer.getInstance().removeTimer(this.autoStartKey);
-        GlobalTimer.getInstance().removeTimer(this.autoStartTimeKey);
-    }
 
+        clearTimeout(this.autoStartTimerId);
+        this.autoStartTimerId = null;
+    }
 }

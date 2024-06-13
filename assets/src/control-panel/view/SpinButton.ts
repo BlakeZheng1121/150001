@@ -1,4 +1,4 @@
-import { _decorator, Component, UIOpacity, Color, Sprite, SpriteFrame } from 'cc';
+import { _decorator, Component, tween, Vec3, UIOpacity, Tween, Color, Sprite, SpriteFrame } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('SpinButton')
@@ -9,23 +9,23 @@ export class SpinButton extends Component {
     @property({ type: Sprite })
     public spinArrow: Sprite;
 
-    @property({ type: SpriteFrame })
-    public idleSpriteFrame: SpriteFrame;
-
-    @property({ type: SpriteFrame })
-    public stopSpriteFrame: SpriteFrame;
+    @property({ type: Sprite })
+    public spinStop: Sprite;
 
     public static readonly STATUS_ON: string = 'on';
     public static readonly STATUS_STOP: string = 'stop';
 
-    private uiOpacity: UIOpacity;
+    private spinUIOpacity: UIOpacity;
+    private stopUIOpacity: UIOpacity;
+
     private currentState = '';
 
     private static readonly OPACITY_LOWEST_LIMIT: number = 1; /* 避免opacity為 0 時切換圖檔有機率顯示大小錯誤 */
 
     protected onLoad() {
         this.changeState(SpinButton.STATUS_ON);
-        this.uiOpacity = this.getComponent(UIOpacity);
+        this.spinUIOpacity = this.spinArrow.getComponent(UIOpacity);
+        this.stopUIOpacity = this.spinStop.getComponent(UIOpacity);
     }
 
     public changeState(state: string) {
@@ -40,18 +40,22 @@ export class SpinButton extends Component {
     }
 
     private setSpinIdle() {
-        this.spinArrow.spriteFrame = this.idleSpriteFrame;
+        this.spinArrow.node.active = true;
+        this.spinStop.node.active = false;
     }
 
     private setSpinStop() {
-        this.spinArrow.spriteFrame = this.stopSpriteFrame;
+        this.spinArrow.node.active = false;
+        this.spinStop.node.active = true;
     }
 
     public disableBtn(disabled: boolean) {
         if (disabled) {
-            this.uiOpacity.opacity = SpinButton.OPACITY_LOWEST_LIMIT;
+            this.spinUIOpacity.opacity = SpinButton.OPACITY_LOWEST_LIMIT;
+            this.stopUIOpacity.opacity = SpinButton.OPACITY_LOWEST_LIMIT;
         } else {
-            this.uiOpacity.opacity = 255;
+            this.spinUIOpacity.opacity = 255;
+            this.stopUIOpacity.opacity = 255;
         }
     }
 
@@ -59,6 +63,7 @@ export class SpinButton extends Component {
         let color: Color = SpinStateColor.getColor(isDisable);
 
         this.spinArrow.color = color;
+        this.spinStop.color = color;
         this.spinBG.color = color;
     }
 }

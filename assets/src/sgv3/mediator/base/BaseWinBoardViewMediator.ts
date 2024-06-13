@@ -217,11 +217,7 @@ export abstract class BaseWinBoardViewMediator<T extends WinBoardView> extends B
      * 強迫分數滾停
      */
     protected forceBBWLabelComplete() {
-        if (
-            this.gameDataProxy.scrollingWinLabelCanSkip &&
-            this.gameDataProxy.scrollingWinLabel &&
-            this.gameDataProxy.runWinComplete == false
-        ) {
+        if (this.gameDataProxy.scrollingWinLabel && this.gameDataProxy.runWinComplete == false) {
             this.view?.stopWinTextTween();
             this.view?.forceBBWLabelComplete();
         }

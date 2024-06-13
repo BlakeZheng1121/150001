@@ -91,7 +91,7 @@ export class GAME_SceneSetting extends SceneSetting {
             miniGameHitRunningTime: 1,
             wonSpinBoardRunningTime: 3,
             retriggerBoardRunningTime: 2,
-            wonCreditBoardRunningTime: 0.75, //結算分數，不滾分表演
+            wonCreditBoardRunningTime: 0, //結算分數，不滾分表演
             wonCreditBoardEndTime: 3, //結算看板，顯示時間
             completeBoardRunningTime: 3,
             completeFadeOutSceneTime: 1.5,
@@ -131,7 +131,7 @@ export class GAME_SceneSetting extends SceneSetting {
             noWinStayTime: 0.5,
             bonusGamePlayBGMAfterEnterTime: 0.9,
             bonusGameWinSymbolShowTime: 4,
-            bonusGameClickSymbolShowTime: 2,
+            bonusGameClickSymbolShowTime: 1,
             bonusCoinFallAfterCreditBoardTime: 3.0,
             bonusCloseViewAfterCoinFallTime: 1.5,
             bonusCanSkipRunCreditsTime: 3,
@@ -163,11 +163,11 @@ export class GAME_SceneSetting extends SceneSetting {
             miniGameHitRunningTime: 1,
             wonSpinBoardRunningTime: 3,
             retriggerBoardRunningTime: 2,
-            wonCreditBoardRunningTime: 2.5, //結算分數，不滾分表演
+            wonCreditBoardRunningTime: 0, //結算分數，不滾分表演
             wonCreditBoardEndTime: 3, //結算看板，顯示時間
             completeBoardRunningTime: 3,
             completeFadeOutSceneTime: 1.5,
-            noWinStayTime: 0.5,
+            noWinStayTime: 0.3,
             bonusGamePlayBGMAfterEnterTime: 0,
             bonusGameWinSymbolShowTime: 0,
             bonusGameClickSymbolShowTime: 0,

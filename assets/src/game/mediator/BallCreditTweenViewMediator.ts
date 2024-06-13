@@ -101,7 +101,7 @@ export class BallCreditTweenViewMediator extends BaseMediator<BallCreditTweenVie
             audioSequenceName += 'Last';
             this.view.clearPool(); //物件池清除
             this.baseCreditCollectSequence = [];
-            GlobalTimer.getInstance().registerTimer(this.timerKey, 2.0, this.delayShowFeatureSelection, this).start();
+            GlobalTimer.getInstance().registerTimer(this.timerKey, 1, this.delayShowFeatureSelection, this).start();
         } else {
             this.onBaseCreditCollectStart();
         }

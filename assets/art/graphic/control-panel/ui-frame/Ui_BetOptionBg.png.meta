@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "6c31cc52-7f89-4e28-a970-fc0d5d5c06e7",
+  "uuid": "f61c627a-62ad-4763-90e7-fd80358e1dbd",
   "files": [
     ".png",
     ".json"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "6c31cc52-7f89-4e28-a970-fc0d5d5c06e7@6c48a",
+      "uuid": "f61c627a-62ad-4763-90e7-fd80358e1dbd@6c48a",
       "displayName": "Ui_BetOptionBg",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "6c31cc52-7f89-4e28-a970-fc0d5d5c06e7"
+        "imageUuidOrDatabaseUri": "f61c627a-62ad-4763-90e7-fd80358e1dbd"
       },
       "ver": "1.0.21",
       "imported": true,
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "6c31cc52-7f89-4e28-a970-fc0d5d5c06e7@f9941",
+      "uuid": "f61c627a-62ad-4763-90e7-fd80358e1dbd@f9941",
       "displayName": "Ui_BetOptionBg",
       "id": "f9941",
       "name": "spriteFrame",
@@ -45,17 +45,17 @@
         "offsetY": 0,
         "trimX": 0,
         "trimY": 0,
-        "width": 332,
-        "height": 734,
-        "rawWidth": 332,
-        "rawHeight": 734,
-        "borderTop": 80,
-        "borderBottom": 20,
-        "borderLeft": 20,
-        "borderRight": 20,
+        "width": 36,
+        "height": 428,
+        "rawWidth": 36,
+        "rawHeight": 428,
+        "borderTop": 15,
+        "borderBottom": 15,
+        "borderLeft": 15,
+        "borderRight": 15,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "6c31cc52-7f89-4e28-a970-fc0d5d5c06e7@6c48a",
+        "imageUuidOrDatabaseUri": "f61c627a-62ad-4763-90e7-fd80358e1dbd@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,7 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "6c31cc52-7f89-4e28-a970-fc0d5d5c06e7@f9941"
+    "redirect": "f61c627a-62ad-4763-90e7-fd80358e1dbd@f9941",
+    "fixAlphaTransparencyArtifacts": false
   }
 }

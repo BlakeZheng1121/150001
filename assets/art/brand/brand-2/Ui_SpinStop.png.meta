@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "9804a60f-2e9b-4279-8963-b66d0319209b",
+  "uuid": "89ceb935-95b8-4b01-b543-c1104bcaab67",
   "files": [
     ".png",
     ".json"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "9804a60f-2e9b-4279-8963-b66d0319209b@6c48a",
+      "uuid": "89ceb935-95b8-4b01-b543-c1104bcaab67@6c48a",
       "displayName": "Ui_SpinStop",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "9804a60f-2e9b-4279-8963-b66d0319209b",
+        "imageUuidOrDatabaseUri": "89ceb935-95b8-4b01-b543-c1104bcaab67",
         "minfilter": "linear",
         "magfilter": "linear",
         "mipfilter": "none",
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "9804a60f-2e9b-4279-8963-b66d0319209b@f9941",
+      "uuid": "89ceb935-95b8-4b01-b543-c1104bcaab67@f9941",
       "displayName": "Ui_SpinStop",
       "id": "f9941",
       "name": "spriteFrame",
@@ -55,7 +55,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "9804a60f-2e9b-4279-8963-b66d0319209b@6c48a",
+        "imageUuidOrDatabaseUri": "89ceb935-95b8-4b01-b543-c1104bcaab67@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,6 @@
   "userData": {
     "type": "sprite-frame",
     "hasAlpha": true,
-    "redirect": "9804a60f-2e9b-4279-8963-b66d0319209b@f9941"
+    "redirect": "89ceb935-95b8-4b01-b543-c1104bcaab67@f9941"
   }
 }

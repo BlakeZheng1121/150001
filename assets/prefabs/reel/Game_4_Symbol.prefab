@@ -614,7 +614,7 @@
     "normalPos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 26,
+      "y": 10,
       "z": 0
     },
     "particlePrefab": {

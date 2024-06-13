@@ -29,15 +29,15 @@ export class ReelDataProxy extends puremvc.Proxy {
         this._rollingStripMap = new Map<string, Array<Array<number>>>();
     }
 
-    protected _isTurboMode: boolean = false;
+    protected _isQuickSpin: boolean = false;
     /** 加速模式 */
-    public set isTurboMode(val: boolean) {
-        this._isTurboMode = val;
-        this.sendNotification(ReelEvent.ON_TURBO_STATE_CHANGE);
+    public set isQuickSpin(val: boolean) {
+        this._isQuickSpin = val;
+        this.sendNotification(ReelEvent.ON_QUICK_STATE_CHANGE);
     }
 
-    public get isTurboMode(): boolean {
-        return this._isTurboMode;
+    public get isQuickSpin(): boolean {
+        return this._isQuickSpin;
     }
 
     protected _mathTableIndex: number = 0;

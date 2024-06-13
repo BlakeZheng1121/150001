@@ -173,8 +173,7 @@ export class WebBridgeProxy extends CoreWebBridgeProxy {
      * @param _value - false 關閉加速.
      */
     protected setTurboValue(_val: boolean): void {
-        let reelDataProxy = this.facade.retrieveProxy(ReelDataProxy.NAME) as ReelDataProxy;
-        reelDataProxy.isTurboMode = _val;
+        this.sendNotification(ScreenEvent.SET_QUICK_SPIN_FROM_WEB, _val);
     }
 
     /**

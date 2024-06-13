@@ -15,4 +15,8 @@ export class CommonSetting {
     public isBigWinForceComplete = true;
     /** 結束計分緩衝時間 */
     public endWinDelayTime: number = 0.5;
+    /** Turbo模式TimeScale */
+    public turboTimeScale: number = 2.5;
+    /** Normal模式TimeScale */
+    public normalTimeScale = 1;
 }

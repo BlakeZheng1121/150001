@@ -14,7 +14,7 @@ export class SFConnectionCommand extends puremvc.SimpleCommand {
     protected onConnectServer(notification: puremvc.INotification): void {
         let gameLoginReturn: SGGameLoginReturn = notification.getBody() as SGGameLoginReturn;
         // refactor 之後繼承SFSLoginCommand處理
-        this.gameDataProxy.userId = gameLoginReturn.showName;
+        this.gameDataProxy.userId = this.netProxy.getConfig().userName;
         this.gameDataProxy.setBmd(gameLoginReturn.balance, true);
         this.sendNotification(ChangeBalanceCommand.NAME, gameLoginReturn);
         // slot 必須在連線後送出初始化要求封包才能繼續做

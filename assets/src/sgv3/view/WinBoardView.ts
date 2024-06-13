@@ -52,6 +52,8 @@ export abstract class WinBoardView extends BaseScene {
      */
 
     public startWinboard(winType: WinType, language: string) {
+        if (!this.node.active) this.node.active = true;
+        this.registerButton();
         this.languageType = language;
         switch (winType) {
             case WinType.bigWin:

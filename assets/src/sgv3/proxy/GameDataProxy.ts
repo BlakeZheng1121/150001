@@ -27,6 +27,8 @@ import { NetworkProxy } from '../../core/proxy/NetworkProxy';
 import { RecoveryData } from '../vo/data/RecoveryData';
 import { SpecialFeatureResult } from '../vo/result/SpecialFeatureResult';
 import { WinType } from '../vo/enum/WinType';
+import { setEngineTimeScale } from '../../core/utils/SceneManager';
+import { SpeedMode } from '../../game/vo/enum/Game_UIEnums';
 
 /** 全遊戲資料 */
 export class GameDataProxy extends CoreGameDataProxy {
@@ -372,20 +374,20 @@ export class GameDataProxy extends CoreGameDataProxy {
         this._gameData.maxAutoTimes = _val;
     }
 
-    /** 紀錄BaseGame的TurboMode狀態 */
-    public get curTurboMode(): boolean {
-        return this._gameData.curTurboMode;
+    /** 紀錄BaseGame的QuickMode狀態 */
+    public get curQuickMode(): boolean {
+        return this._gameData.curQuickMode;
     }
-    public set curTurboMode(_val: boolean) {
-        this._gameData.curTurboMode = _val;
+    public set curQuickMode(_val: boolean) {
+        this._gameData.curQuickMode = _val;
     }
 
-    /** 判斷是否要顯示TurboModeMsg */
-    public get isShowTurboModeMsg(): boolean {
-        return this._gameData.isShowTurboModeMsg;
+    /** 判斷是否要顯示QuickModeMsg */
+    public get isShowQuickModeMsg(): boolean {
+        return this._gameData.isShowQuickModeMsg;
     }
-    public set isShowTurboModeMsg(_val: boolean) {
-        this._gameData.isShowTurboModeMsg = _val;
+    public set isShowQuickModeMsg(_val: boolean) {
+        this._gameData.isShowQuickModeMsg = _val;
     }
 
     /** 玩家選擇的遊戲狀態operation - GameOperation(Enum String) */
@@ -738,6 +740,17 @@ export class GameDataProxy extends CoreGameDataProxy {
     public set hasSelectionResponse(_val: boolean) {
         this._gameData.hasSelectionResponse = _val;
     }
+    /** 遊戲速度 */
+    public get curSpeedMode(): string {
+        return this._gameData.curSpeedMode;
+    }
+    public set curSpeedMode(state: string) {
+        this._gameData.curSpeedMode = state;
+        setEngineTimeScale(
+            state == SpeedMode.STATUS_TURBO ? this.commonSetting.turboTimeScale : this.commonSetting.normalTimeScale
+        );
+    }
+
     // ============================ Method ============================
 
     /** 現金 */

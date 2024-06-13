@@ -13,7 +13,9 @@ const { ccclass } = _decorator;
 
 @ccclass('GrandViewMediator')
 export class GrandViewMediator extends BaseMediator<GrandView> {
-    protected lazyEventListener(): void {}
+    protected lazyEventListener(): void {
+        this.view.buttonCallback = this;
+    }
 
     protected hitGrandComplete: Function = null;
 
@@ -37,25 +39,31 @@ export class GrandViewMediator extends BaseMediator<GrandView> {
     }
 
     hitGrand(callBack: Function) {
-        GlobalTimer.getInstance().registerTimer('delayHitGrand', 2.5, ()=>{
-            GlobalTimer.getInstance().removeTimer('delayHitGrand');
-            this.sendNotification(JackpotPool.HIGHLIGHT_HIT_POOL, MiniGameSymbol.Grand);
-            this.view.showUp(this.gameDataProxy.language, () => this.onShowUpComplete());
-            this.hitGrandComplete = callBack;
-    
-            switch (this.gameDataProxy.curScene) {
-                case 'Game_1':
-                    AudioManager.Instance.fade(BGMClipsEnum.BGM_Base, 0, 0.7);
-                    break;
-                case 'Game_2':
-                    AudioManager.Instance.fade(BGMClipsEnum.BGM_FreeGame, 0, 0.7);
-                    break;
-                case 'Game_4':
-                    AudioManager.Instance.fade(BGMClipsEnum.BGM_DragonUp, 0, 0.7);
-                    break;
-            }
-        },this).start();
-        
+        GlobalTimer.getInstance()
+            .registerTimer(
+                'delayHitGrand',
+                2.5,
+                () => {
+                    GlobalTimer.getInstance().removeTimer('delayHitGrand');
+                    this.sendNotification(JackpotPool.HIGHLIGHT_HIT_POOL, MiniGameSymbol.Grand);
+                    this.view.showUp(this.gameDataProxy.language, () => this.onShowUpComplete());
+                    this.hitGrandComplete = callBack;
+
+                    switch (this.gameDataProxy.curScene) {
+                        case 'Game_1':
+                            AudioManager.Instance.fade(BGMClipsEnum.BGM_Base, 0, 0.7);
+                            break;
+                        case 'Game_2':
+                            AudioManager.Instance.fade(BGMClipsEnum.BGM_FreeGame, 0, 0.7);
+                            break;
+                        case 'Game_4':
+                            AudioManager.Instance.fade(BGMClipsEnum.BGM_DragonUp, 0, 0.7);
+                            break;
+                    }
+                },
+                this
+            )
+            .start();
     }
 
     onShowUpComplete() {
@@ -63,9 +71,7 @@ export class GrandViewMediator extends BaseMediator<GrandView> {
             oneRoundResult.specialHitInfo == SpecialHitInfo[SpecialHitInfo.bonusGame_02];
         // only Hit Grand in one game cycle
         this.grandCash =
-            this.gameDataProxy.spinEventData.bonusGameResult.bonusGameOneRoundResult.find(
-                getGrand
-            ).oneRoundJPTotalWin;
+            this.gameDataProxy.spinEventData.bonusGameResult.bonusGameOneRoundResult.find(getGrand).oneRoundJPTotalWin;
         this.gameDataProxy.hitJackpotPoolType = JackpotPool.GRAND;
         this.view.scoringGrand(this.grandCash / 100, () => this.onScrollEnd());
     }
@@ -92,6 +98,10 @@ export class GrandViewMediator extends BaseMediator<GrandView> {
 
     onSpinDown() {
         this.view.skipScoring();
+    }
+    
+    public onSkip() {
+        window['onSpinBtnClick']();
     }
 
     protected _gameDataProxy: GameDataProxy;

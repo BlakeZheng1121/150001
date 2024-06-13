@@ -24,6 +24,7 @@ import { AudioManager } from '../../ta/tool/AudioManager';
 import { GAME_GameDataProxy } from '../proxy/GAME_GameDataProxy';
 import { GAME_ReelView } from '../view/GAME_ReelView';
 import { AudioClipsEnum } from '../vo/enum/SoundMap';
+import { GlobalTimer } from '../../sgv3/util/GlobalTimer';
 
 const { ccclass } = _decorator;
 /** ByGame Win Reel判定實作 */
@@ -68,13 +69,13 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
                     FreeGameEvent.ON_SIDE_BALL_SHOW_AFTER,
                     FreeGameEvent.ON_EXPAND_WILD,
                     ReelEvent.ON_REELS_RESTORE,
+                    ReelEvent.HIDE_WILD_SYMBOL
                 ].concat(super.baseListNotificationInterests())
             )
         );
     }
 
     public handleNotification(notification: puremvc.INotification): void {
-        
         super.baseHandleNotification(notification);
         let name = notification.getName();
         switch (name) {
@@ -131,6 +132,9 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
                 this.setSymbolPosData();
                 this.reelView.reelsShow();
                 break;
+            case ReelEvent.HIDE_WILD_SYMBOL:
+                this.hideWildSymbol();
+                break;
         }
     }
 
@@ -149,17 +153,14 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
 
     protected onSingleReelStop(reelIndex: number): void {
         super.onSingleReelStop(reelIndex);
-        if(this.view.mySceneName != GameScene.Game_2 
-            || !this.reelDataProxy.isSlowMotionAry[3]
-            || reelIndex != 2) {
-           return; 
+        if (this.view.mySceneName != GameScene.Game_2 || !this.reelDataProxy.isSlowMotionAry[3] || reelIndex != 2) {
+            return;
         }
 
-        for(let j = 1; j <= 3; j++) {
-            let content =  this.reelView.reelsList[j]
-            .singleReelContent as SingleReelContent;
+        for (let j = 1; j <= 3; j++) {
+            let content = this.reelView.reelsList[j].singleReelContent as SingleReelContent;
             content.isBlackSymbol = true;
-            if(j != 3){
+            if (j != 3) {
                 this.reelView.reelsList[j].play(ReelType.BLACK_SHOW);
             }
         }
@@ -181,22 +182,23 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
     protected playReelStopSound(curReelStopIndex: number) {
         for (let i = 0; i < this.reelDataProxy.reelStopSoundSequence[curReelStopIndex].length; i++) {
             let stopSound: AudioClipsEnum = this.reelDataProxy.reelStopSoundSequence[curReelStopIndex][i];
+            AudioManager.Instance.stop(stopSound);
             AudioManager.Instance.play(stopSound);
         }
         this.reelDataProxy.reelStopSoundSequence[curReelStopIndex] = [];
     }
 
-    protected setRespinInfo(nexRoundResult: FreeGameOneRoundResult) {       
+    protected setRespinInfo(nexRoundResult: FreeGameOneRoundResult) {
         let respinWinData = nexRoundResult.extendInfoForFreeGameResult.reSpinResult.waysResult;
         for (let i = 0; i < this.reelView.reelsList.length; i++) {
             let content = this.reelView.reelsList[i].singleReelContent as SingleReelContent;
-            if(i>=1 && i<=3) {
-                for(let j = 0; j < respinWinData.length; j++) {
+            if (i >= 1 && i <= 3) {
+                for (let j = 0; j < respinWinData.length; j++) {
                     content.respinSymbolId.push(respinWinData[j].symbolID);
                 }
             }
-            // ByGame Featrue 
-            if(i == 0 || i == 4) {
+            // ByGame Featrue
+            if (i == 0 || i == 4) {
                 content.isTriggerFeatureReSpin = true;
             }
             content.freeCreditWeight = [0];
@@ -384,7 +386,7 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
         for (let i in self.winData.wayInfos[wayInfoIndex].symbols) {
             let symbol: SymbolInfo = self.winData.wayInfos[wayInfoIndex].symbols[i];
             if (symbol.sid >= 0) {
-                if(symbol.sid == SymbolId.WILD && !self.isPlayedWildScoring) {
+                if (symbol.sid == SymbolId.WILD && !self.isPlayedWildScoring) {
                     AudioManager.Instance.play(AudioClipsEnum.Base_WildScoring);
                     self.isPlayedWildScoring = true;
                 }
@@ -393,7 +395,7 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
                 this.reelView.setAnimSymbolHide(symbol);
             }
         }
-        self.sendNotification(ReelEvent.SHOW_REELS_LOOP_WIN,wayInfoIndex);
+        self.sendNotification(ReelEvent.SHOW_REELS_LOOP_WIN, wayInfoIndex);
     }
 
     protected skipLoopWin() {
@@ -414,7 +416,7 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
                     this.gameDataProxy.showWinOnceComplete = false;
                 }
             }
-            if (this.reelDataProxy.isTurboMode && this.gameDataProxy.onAutoPlay) {
+            if (this.reelDataProxy.isQuickSpin && this.gameDataProxy.onAutoPlay) {
                 return;
             }
             self.curIndex = self.curIndex + 1 >= self.winData.wayInfos.length ? 0 : this.curIndex + 1;
@@ -434,6 +436,30 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
             tempArray.push(array);
         }
         this.reelDataProxy.setSymbolsNode(tempArray);
+    }
+
+    protected hideWildSymbol() {
+        const self = this;
+        let winData = self.gameDataProxy.curWinData.concat();
+        for (let i in winData.wayInfos) {
+            for (let j in winData.wayInfos[i].symbols) {
+                let symbol: SymbolInfo = winData.wayInfos[i].symbols[j];
+                if (symbol.sid == SymbolId.WILD) {
+                    GlobalTimer.getInstance().removeTimer('delayHideWild');
+                    GlobalTimer.getInstance()
+                        .registerTimer(
+                            'delayHideWild',
+                            0.2,
+                            () => {
+                                this.view.hideWildSymbol(symbol);
+                            },
+                            this
+                        )
+                        .start();
+                    return;
+                }
+            }
+        }
     }
     // ======================== Get Set ========================
     protected _reelDataProxy: ReelDataProxy;

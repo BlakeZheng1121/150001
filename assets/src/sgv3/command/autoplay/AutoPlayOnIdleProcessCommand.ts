@@ -14,7 +14,7 @@ export class AutoPlayOnIdleProcessCommand extends puremvc.SimpleCommand {
     public static NAME = 'AutoPlayOnIdleProcessCommand';
 
     protected defaultSpinTime: number = 0;
-    protected bigWinSpinTime: number = 0;
+    protected bigWinSpinTime: number = 0.5;
     protected timerKey = AutoPlayOnIdleProcessCommand.NAME;
 
     public execute(notification: puremvc.INotification): void {
@@ -39,18 +39,7 @@ export class AutoPlayOnIdleProcessCommand extends puremvc.SimpleCommand {
     /** 發出Spin down通知 */
     protected notifySpinDown() {
         GlobalTimer.getInstance().removeTimer(GlobalTimer.KEY_AUTOPLAY);
-
-        let nextTime = this.isChangeDelaySpinTime() ? this.bigWinSpinTime : this.defaultSpinTime;
-        GlobalTimer.getInstance()
-            .registerTimer(
-                GlobalTimer.KEY_AUTOPLAY,
-                nextTime,
-                () => {
-                    this.sendNotification(ScreenEvent.ON_SPIN_DOWN);
-                },
-                this
-            )
-            .start();
+        this.sendNotification(ScreenEvent.ON_SPIN_DOWN);
     }
 
     /**

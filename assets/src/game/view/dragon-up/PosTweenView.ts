@@ -74,8 +74,8 @@ export class PosTweenView extends BaseScene {
     public onMultipleAccumulate(targertPos: Vec3, hasRespin: boolean, callback: Function | null = null) {
         this.callback = () => callback();
         this.curObject.node.worldPosition = hasRespin
-            ? new Vec3(targertPos.x, targertPos.y - 8, 0)
-            : new Vec3(targertPos.x, targertPos.y - 8, 0);
+            ? new Vec3(targertPos.x, targertPos.y-10, 0)
+            : new Vec3(targertPos.x, targertPos.y-10, 0);
         let convertPos = new Vec3(targertPos.x, this.multipleBoard.node.worldPosition.y);
         this.curTween = tween(this.curObject.node)
             .delay(this.curObject.accelerateDelayTime)

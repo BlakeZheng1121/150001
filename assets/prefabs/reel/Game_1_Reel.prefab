@@ -324,8 +324,8 @@
   },
   {
     "__type__": "ReelPasser",
-    "_speedBase": 90,
-    "_startSpeed": 50,
+    "_speedBase": 100,
+    "_startSpeed": 60,
     "_normalRollMotion": {
       "__id__": 16
     },
@@ -780,7 +780,7 @@
   {
     "__type__": "ReelForceData",
     "_duration": 0.2,
-    "_force": 35,
+    "_force": 30,
     "_tweenCurve": {
       "__id__": 38
     }

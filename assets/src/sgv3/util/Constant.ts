@@ -84,13 +84,14 @@ export class ReelEvent {
     public static ON_SINGLE_REEL_START_DAMPING: string = 'onSingleReelStartDamping';
     public static ON_SINGLE_REEL_STOP_ERROR: string = 'onSingleReelStopError';
 
-    public static ON_TURBO_STATE_CHANGE: string = 'onTurboStateChange';
+    public static ON_QUICK_STATE_CHANGE: string = 'onQuickStateChange';
 
     public static SHOW_ALL_REELS_WIN: string = 'showAllReelsWin';
     public static SHOW_REELS_WIN: string = 'showReelsWin';
     public static SHOW_HOLD_SPIN_WIN: string = 'showHoldSpinWin';
     public static SHOW_REELS_LOOP_WIN: string = 'showReelsLoopWin';
-
+    public static HIDE_WILD_SYMBOL: string = 'hideWildSymbol';
+    
     public static ON_REEL_PRIZE_PREDICTION: string = 'onReelPrizePrediction';
     public static ON_REEL_EFFECT_COMPLETE: string = 'onReelEffectComplete';
     public static ON_REELS_RESET: string = 'onReelsReset';
@@ -115,6 +116,7 @@ export class ScreenEvent {
     public static ON_MINUS_BET: string = 'onMinusBet';
     public static ON_PLUS_BET: string = 'onPlusBet';
     public static ON_BET_CHANGE: string = 'onBetChange';
+    public static readonly SET_QUICK_SPIN_FROM_WEB: string = 'setQuickSpinFromWeb';
 }
 
 export class UnitTestEvent {
