@@ -493,16 +493,19 @@ export class ControlViewMediator extends BaseMediator<ControlView> implements IC
                 this.gameDataProxy.curSpeedMode = SpeedMode.STATUS_NORMAL;
                 this.gameDataProxy.isShowQuickModeMsg = true;
                 this.reelDataProxy.isQuickSpin = false;
+                setEngineTimeScale(1);
             } else if (this.gameDataProxy.curSpeedMode == SpeedMode.STATUS_QUICK) {
                 //一段加速 切換成 二段加速
                 this.gameDataProxy.curSpeedMode = SpeedMode.STATUS_TURBO;
                 this.gameDataProxy.isShowQuickModeMsg = false;
                 this.reelDataProxy.isQuickSpin = true;
+                setEngineTimeScale(3);
             } else if (this.gameDataProxy.curSpeedMode == SpeedMode.STATUS_NORMAL || isQuickSpin === true) {
                 //一般模式 切換成 一段加速
                 this.gameDataProxy.curSpeedMode = SpeedMode.STATUS_QUICK;
                 this.gameDataProxy.isShowQuickModeMsg = true;
                 this.reelDataProxy.isQuickSpin = true;
+                setEngineTimeScale(1);
             }
             this.hideAllMenu();
             this.sendNotification(SoundEvent.BUTTON_DOWN_SOUND);

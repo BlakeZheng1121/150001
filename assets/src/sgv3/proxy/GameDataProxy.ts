@@ -27,8 +27,6 @@ import { NetworkProxy } from '../../core/proxy/NetworkProxy';
 import { RecoveryData } from '../vo/data/RecoveryData';
 import { SpecialFeatureResult } from '../vo/result/SpecialFeatureResult';
 import { WinType } from '../vo/enum/WinType';
-import { setEngineTimeScale } from '../../core/utils/SceneManager';
-import { SpeedMode } from '../../game/vo/enum/Game_UIEnums';
 
 /** 全遊戲資料 */
 export class GameDataProxy extends CoreGameDataProxy {
@@ -746,9 +744,6 @@ export class GameDataProxy extends CoreGameDataProxy {
     }
     public set curSpeedMode(state: string) {
         this._gameData.curSpeedMode = state;
-        setEngineTimeScale(
-            state == SpeedMode.STATUS_TURBO ? this.commonSetting.turboTimeScale : this.commonSetting.normalTimeScale
-        );
     }
 
     // ============================ Method ============================
