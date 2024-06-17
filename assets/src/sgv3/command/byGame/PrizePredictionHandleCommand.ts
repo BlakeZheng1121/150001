@@ -83,9 +83,10 @@ export class PrizePredictionHandleCommand extends puremvc.SimpleCommand {
                 (result) => result.hitNumber == 5 && result.symbolID >= SymbolId.M1 && result.symbolID <= SymbolId.M6
             );
             const randomNumber = this.getRandomNumber(result, GameScene.Game_1);
+            const reel1StackWW = result.screenSymbol[0].filter((id) => id == 0).length == 3;
 
             const prizePredictionCondition = odds >= 25 && isMSymbolFiveOfKind && randomNumber < 0.8;
-            const displayMethodCondition = odds >= 25 && isMSymbolFiveOfKind;
+            const displayMethodCondition = (odds >= 25 && isMSymbolFiveOfKind) || reel1StackWW;
 
             result.displayInfo.prizePredictionType = prizePredictionCondition ? 'TYPE_1' : 'NoPrizePredictionType';
             result.displayInfo.displayMethod = Array.from([false, false, false, false, displayMethodCondition], (x) => [
