@@ -87,10 +87,7 @@ export class PrizePredictionHandleCommand extends puremvc.SimpleCommand {
             const prizePredictionCondition = odds >= 25 && isMSymbolFiveOfKind && randomNumber < 0.8;
             const displayMethodCondition = odds >= 25 && isMSymbolFiveOfKind;
 
-            result.displayInfo.prizePredictionType =
-                prizePredictionCondition && this.gameDataProxy.curSpeedMode !== SpeedMode.STATUS_TURBO
-                    ? 'TYPE_1'
-                    : 'NoPrizePredictionType';
+            result.displayInfo.prizePredictionType = prizePredictionCondition ? 'TYPE_1' : 'NoPrizePredictionType';
             result.displayInfo.displayMethod = Array.from([false, false, false, false, displayMethodCondition], (x) => [
                 x
             ]);
@@ -118,7 +115,7 @@ export class PrizePredictionHandleCommand extends puremvc.SimpleCommand {
         let newC2Count = result.extendInfoForTopUpGameResult.goldCreditBallScreenLabel
             .reduce(convert2dTo1dArray, [])
             .filter((value) => value > 0).length;
-        if (multi >= 300 && newC2Count >= 2 && this.gameDataProxy.curSpeedMode !== SpeedMode.STATUS_TURBO) {
+        if (multi >= 300 && newC2Count >= 2) {
             result.displayInfo.prizePredictionType = 'TYPE_1';
         }
     }

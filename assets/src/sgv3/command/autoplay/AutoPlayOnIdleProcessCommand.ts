@@ -13,7 +13,7 @@ import { WinType } from '../../vo/enum/WinType';
 export class AutoPlayOnIdleProcessCommand extends puremvc.SimpleCommand {
     public static NAME = 'AutoPlayOnIdleProcessCommand';
 
-    protected defaultSpinTime: number = 0;
+    protected defaultSpinTime: number = 0.5;
     protected bigWinSpinTime: number = 0.5;
     protected timerKey = AutoPlayOnIdleProcessCommand.NAME;
 

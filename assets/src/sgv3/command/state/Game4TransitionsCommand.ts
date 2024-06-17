@@ -20,7 +20,7 @@ export class Game4TransitionsCommand extends StateCommand {
         GlobalTimer.getInstance().removeTimer(this.timerKey);
         this.sendNotification(StateWinEvent.ON_GAME4_OPENING, true); //通知Game4場景，進行開場表演
         this.sendNotification(ViewMediatorEvent.SHOW_FREE_SPIN_MSG,GameScene.Game_4); //顯示DragonUp FreeSSSpin次數的UI
-        GlobalTimer.getInstance().registerTimer(this.timerKey, 2, this.endGameCutScene, this).start();
+        GlobalTimer.getInstance().registerTimer(this.timerKey, 1, this.endGameCutScene, this).start();
     }
 
     /** 過場表演結束 */
