@@ -11,7 +11,7 @@ export class SheetListRequest extends GDRequest {
         super(SheetListRequest.NAME, l);
 
         this.url = StringUtil.format(
-            'https://www.googleapis.com/drive/v3/files?q=%22{0}%22+in+parents&key={1}',
+            'https://www.googleapis.com/drive/v3/files?supportsAllDrives=true&includeItemsFromAllDrives=true&q=%22{0}%22+in+parents&key={1}',
             folderId,
             key
         );
