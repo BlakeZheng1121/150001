@@ -120,7 +120,7 @@ export class PosTweenViewMediator extends BaseMediator<PosTweenView> {
             GlobalTimer.getInstance()
                 .registerTimer(
                     'collectEffect' + i,
-                    i * 0.225,
+                    i * 0.3,
                     () => {
                         GlobalTimer.getInstance().removeTimer('collectEffect' + this.curbaseSequenceIndex);
 
