@@ -12,7 +12,16 @@ export class GameStateSetting extends CommonGameSetting {
         this.maxBetLine = baseSetting.maxBetLine;
         this.lineTable = baseSetting.lineTable;
         this.gameHitPattern = baseSetting.gameHitPattern;
+        if (baseSetting.groupingWheelData) {
+            this.groupingWheelData = baseSetting.groupingWheelData;
+        }
     }
     /** 遊戲狀態id */
     public gameSceneId: string;
+    /**每次改 group 重新設定wheelData */
+    public setWheelData(group: number) {
+        if (this.groupingWheelData && group >= 0) {
+            this.wheelData = this.groupingWheelData[group];
+        }
+    }
 }

@@ -3,13 +3,14 @@ import { ChangeBalanceCommand } from '../../../core/command/ChangeBalanceCommand
 import { Logger } from '../../../core/utils/Logger';
 import { GameDataProxy } from '../../proxy/GameDataProxy';
 import { WebBridgeProxy } from '../../proxy/WebBridgeProxy';
-import { SpinGSResult } from '../../vo/result/SpinResult';
+import { SpinGSResult, SpinResult } from '../../vo/result/SpinResult';
 import { CheckGameFlowCommand } from '../CheckGameFlowCommand';
 import { GameStateId } from '../../vo/data/GameStateId';
 import { NetworkProxy } from '../../../core/proxy/NetworkProxy';
 import { ByGameHandleCommand } from './ByGameHandleCommand';
 import { StateMachineProxy } from '../../proxy/StateMachineProxy';
 import { MathUtil } from '../../../core/utils/MathUtil';
+import { GameSceneOption } from '../../vo/data/GameScene';
 
 /**
  * 接收到Server打過來的資料後進行處理
@@ -21,6 +22,7 @@ export class SpinResponseCommand extends puremvc.SimpleCommand {
         Logger.i('[SpinResponseCommand] Execute');
         let notifyObj: SpinGSResult = notification.getBody() as SpinGSResult;
         let gameStateResult = RefactoringGameData.RefactoringGameResult(notifyObj.spinResult);
+        this.changeWheelData(notifyObj.spinResult);
         Logger.i(JSON.stringify(notifyObj));
         this.networkProxy.setGameSeqNo(notifyObj.gameSeq);
         this.networkProxy.resetSentSpinRequest();
@@ -76,7 +78,26 @@ export class SpinResponseCommand extends puremvc.SimpleCommand {
     protected setEndGameStateId(stateId: number): void {
         GameStateId.END = stateId;
     }
+    protected changeWheelData(spinResult: SpinResult) {
+        //檢查有沒有 groupIndex
+        //修改每個場景的 wheelData
+        if (
+            spinResult.baseGameResult.extendInfoForbaseGameResult.groupingIdx === undefined ||
+            spinResult.baseGameResult.extendInfoForbaseGameResult.groupingIdx === null
+        ) {
+            return;
+        }
 
+        let groupingIdx = spinResult.baseGameResult.extendInfoForbaseGameResult.groupingIdx;
+
+        for (let sceneName in GameSceneOption) {
+            let GameStateSetting = this.gameDataProxy.getStateSettingByName(sceneName);
+
+            if (GameStateSetting) {
+                GameStateSetting.setWheelData(groupingIdx);
+            }
+        }
+    }
     // ======================== Get Set ========================
 
     protected _gameDataProxy: GameDataProxy;
