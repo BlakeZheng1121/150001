@@ -314,7 +314,7 @@ export class TimeLineTool extends Component {
             this.arrayTimelineData[index].timelineData[i].timelineSpine.timelineSpine.setCompleteListener(null);
             break;
           case TimelineType.Animation:
-              this.arrayTimelineData[index].timelineData[i].timelineAnimation.timelineAnimation.off(Animation.EventType.FINISHED);
+            this.arrayTimelineData[index].timelineData[i].timelineAnimation.timelineAnimation.off(Animation.EventType.FINISHED);
             break;
           default:
             break;
@@ -353,6 +353,7 @@ export class TimeLineTool extends Component {
             if (this.arrayTimelineData[index].timelineData[i].timelineSpine.useParticle) {
               for (let j = 0; j < this.arrayTimelineData[index].timelineData[i].timelineSpine.particleData.length; j++) {
                 this.arrayTimelineData[index].timelineData[i].timelineSpine.particleData[j].particle?.ParticleClear();
+                this.arrayTimelineData[index].timelineData[i].timelineSpine.particleData[j].particle?.unscheduleAllCallbacks();
               }
             }
             break;
@@ -369,6 +370,7 @@ export class TimeLineTool extends Component {
             if (this.arrayTimelineData[index].timelineData[i].timelineAnimation.useParticle) {
               for (let j = 0; j < this.arrayTimelineData[index].timelineData[i].timelineAnimation.particleData.length; j++) {
                 this.arrayTimelineData[index].timelineData[i].timelineAnimation.particleData[j].particle?.ParticleClear();
+                this.arrayTimelineData[index].timelineData[i].timelineAnimation.particleData[j].particle?.unscheduleAllCallbacks();
               }
             }
             break;
@@ -384,6 +386,7 @@ export class TimeLineTool extends Component {
             if (this.arrayTimelineData[index].timelineData[i].timelineTime.useParticle) {
               for (let j = 0; j < this.arrayTimelineData[index].timelineData[i].timelineTime.particleData.length; j++) {
                 this.arrayTimelineData[index].timelineData[i].timelineTime.particleData[j].particle?.ParticleClear();
+                this.arrayTimelineData[index].timelineData[i].timelineTime.particleData[j].particle?.unscheduleAllCallbacks();
               }
             }
             break;
@@ -393,6 +396,31 @@ export class TimeLineTool extends Component {
       }
     }
     this.isPlaying = false;
+  }
+
+  public setTimeScale(name: string,timeScale:number){
+    for (let i = 0; i < this.arrayTimelineData.length; i++) {
+      if (name === this.arrayTimelineData[i].timelineName) {
+        for(let j in  this.arrayTimelineData[i].timelineData){
+          //this.arrayTimelineData[i].timelineData[j].
+          switch (this.arrayTimelineData[i].timelineData[j].timelineType) {
+            case TimelineType.Spine:
+              this.arrayTimelineData[i].timelineData[j].timelineSpine.timeScale = timeScale
+              break;
+            case TimelineType.Animation:
+              this.arrayTimelineData[i].timelineData[j].timelineAnimation.timelineAnimation.clips.forEach((val)=>{
+                val.speed = timeScale;
+              })
+              break;
+            case TimelineType.Time:
+              //this.arrayTimelineData[i].timelineData[j].timelineSpine.timeScale = timeScale
+              break;
+            default:
+              break;
+          }
+        }
+      }
+    }
   }
 
   public play(name: string, cb?: Function) {
