@@ -13,4 +13,6 @@ export class ExtendInfoForFreeGameResult {
     public displayAccumulateWinAfterRespin: number;
     public extendPlayerWin: number;
     public specialFeatureIndex: number;
+    public groupingIdx: number; // 紀錄每個Round中，group使用哪一個組合
+
 }

@@ -7,4 +7,6 @@ export class ExtendInfoForBaseGameResult {
     public extendGameFeature: number;
     // rngInfo 備份，避免 Recovery 後，rngInfo 資料遺失的問題
     public backUpRngInfo: Array<Array<number>>;
+    public groupingIdx: number; // 紀錄每個Round中，group使用哪一個組合
+
 }
