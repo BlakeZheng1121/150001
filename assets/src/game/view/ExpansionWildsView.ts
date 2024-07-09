@@ -1,20 +1,17 @@
-import { _decorator, Label, tween } from 'cc';
+import { _decorator } from 'cc';
 import { BaseScene } from '../../base/BaseScene';
-import { SceneManager } from '../../core/utils/SceneManager';
 import { AudioManager } from '../../ta/tool/AudioManager';
-import { CocosAnimationMultiTool } from '../../ta/tool/cocos-animation-tool/CocosAnimationMultiTool';
 import { AudioClipsEnum } from '../vo/enum/SoundMap';
+import { TimeLineTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
 const { ccclass, property } = _decorator;
 
 @ccclass('ExpansionWildsView')
 export class ExpansionWildsView extends BaseScene {
-    @property(CocosAnimationMultiTool)
-    private animL: CocosAnimationMultiTool;
+    @property(TimeLineTool)
+    private animL: TimeLineTool;
 
-    @property(CocosAnimationMultiTool)
-    private animR: CocosAnimationMultiTool;
-
-    private isWildSoundPlaying = false;
+    @property(TimeLineTool)
+    private animR: TimeLineTool;
 
     onLoad() {
         super.onLoad();
@@ -22,23 +19,14 @@ export class ExpansionWildsView extends BaseScene {
 
     public show(): void {
         this.animL.node.active = this.animR.node.active = true;
-        this.animL.OnPlay(0);
-        this.animR.OnPlay(1);
-        AudioManager.Instance.play(AudioClipsEnum.Free_ExpandWild);
-        /*setTimeout(() => {
-            SceneManager.instance.shakeScreen();
-        }, 600);*/
-        this.isWildSoundPlaying = false;
+        this.animL.play('L_WildExpand');
+        this.animR.play('R_WildExpand');
+        AudioManager.Instance.play(AudioClipsEnum.Free_Slogan);
     }
 
-    public win(fiveOfKind: boolean, language: string, callBack?: Function): void {
-        let lang = language == 'zh' ? 3 : 2;
-        if (fiveOfKind) this.animR.OnPlay(lang);
-        this.animL.OnPlay(lang);
-        if (this.isWildSoundPlaying == false) {
-            AudioManager.Instance.play(AudioClipsEnum.Free_Wild);
-            this.isWildSoundPlaying = true;
-        }
+    public win(fiveOfKind: boolean, callBack?: Function): void {
+        if (fiveOfKind) this.animR.play('Win');
+        this.animL.play('Win');
     }
 
     public hide() {

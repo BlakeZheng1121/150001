@@ -54,8 +54,7 @@ export class ExpansionWildsViewMediator extends BaseMediator<ExpansionWildsView>
             (this.gameDataProxy.curRoundResult as FreeGameOneRoundResult)?.extendInfoForFreeGameResult.isRespinFeature
         ) {
             const winData = this.gameDataProxy.curWinData as WAY_AllWinData;
-            let language = this._gameDataProxy.language;
-            this.view.win(winData.wayInfos[index].hitNumber == 5, language);
+            this.view.win(winData.wayInfos[index].hitNumber == 5);
         }
     }
 

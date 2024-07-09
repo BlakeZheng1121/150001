@@ -1,15 +1,14 @@
 import { _decorator, Component, Color, Sprite, SpriteFrame } from 'cc';
-
-import { CocosAnimationMultiTool } from '../tool/cocos-animation-tool/CocosAnimationMultiTool';
 import { ParticleContentTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
+import { TimeLineTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
 
 const { ccclass, property } = _decorator;
 
 @ccclass('MiniIngot')
 export class MiniIngot extends Component {
-    @property(CocosAnimationMultiTool) private IngotAnimation: CocosAnimationMultiTool | null = null;
+    @property(TimeLineTool) private IngotAnimation: TimeLineTool | null = null;
 
-    @property(CocosAnimationMultiTool) private IconAnimation: CocosAnimationMultiTool | null = null;
+    @property(TimeLineTool) private IconAnimation: TimeLineTool | null = null;
 
     @property(Sprite) private IconSprite: Sprite | null = null;
 
@@ -38,12 +37,12 @@ export class MiniIngot extends Component {
     }
 
     public OnIngotShow() {
-        this.IngotAnimation?.OnPlay(4);
+        this.IngotAnimation?.play('ShowImmediately');
         this.IconSpriteLight.node.active = false;
     }
 
     public OnIngotPlayShow() {
-        this.scheduleOnce(() => this.IngotAnimation?.OnPlay(0), Math.random() * 0.2);
+        this.scheduleOnce(() => this.IngotAnimation?.play('Show'), Math.random() * 0.2);
         this.IconSpriteLight.node.active = false;
     }
 
@@ -53,11 +52,11 @@ export class MiniIngot extends Component {
         if (playAnim) {
             this.scheduleOnce(() => {
                 this.IconSpriteLight.node.active = true;
-                this.IconAnimation?.OnPlay(2);
+                this.IconAnimation?.play('Select');
             }, 0.3);
         } else {
             this.IconSpriteLight.node.active = true;
-            this.IconAnimation?.OnPlay(1);
+            this.IconAnimation?.play('ShowImmediately');
         }
 
         this.IconSpriteLight.color = this.Color[this.ThisSingleJackPotType];
@@ -71,9 +70,9 @@ export class MiniIngot extends Component {
         }
 
         if (playAnim) {
-            this.IngotAnimation?.OnPlay(1);
+            this.IngotAnimation?.play('Select');
         } else {
-            this.IngotAnimation?.OnPlay(2);
+            this.IngotAnimation?.play('Hide');
         }
     }
 
@@ -82,7 +81,7 @@ export class MiniIngot extends Component {
 
         this.Particle?.SetParticleColor(this.ParticleColor[this.ThisSingleJackPotType]);
 
-        this.IconAnimation?.OnPlay(3);
+        this.IconAnimation?.play('PrepareLight');
     }
 
     public OnIconPlayWin(cb: any | null = null) {
@@ -90,24 +89,24 @@ export class MiniIngot extends Component {
 
         this.Particle?.SetParticleColor(this.ParticleColor[this.ThisSingleJackPotType]);
 
-        this.IconAnimation?.OnPlay(4);
+        this.IconAnimation?.play('Win');
     }
 
     public OnIconPlayNoSelect() {
         this.IconSpriteLight.node.active = false;
 
-        this.IconAnimation?.OnPlay(5);
+        this.IconAnimation?.play('NoWin');
     }
 
     public OnIngotPlayNoSelect() {
-        this.IngotAnimation?.OnPlay(3);
+        this.IngotAnimation?.play('NoSelect');
     }
 
     public OnIconHide() {
         this.IconSpriteLight.node.active = false;
 
-        this.IngotAnimation?.OnPlay(2);
+        this.IngotAnimation?.play('Hide');
 
-        this.IconAnimation?.OnPlay(0);
+        this.IconAnimation?.play('Hide');
     }
 }

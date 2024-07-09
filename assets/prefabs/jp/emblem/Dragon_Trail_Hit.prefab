@@ -29,7 +29,7 @@
       }
     ],
     "_prefab": {
-      "__id__": 10
+      "__id__": 19
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -63,6 +63,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 1
     },
@@ -90,6 +91,7 @@
     "__type__": "sp.Skeleton",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 1
     },
@@ -132,7 +134,7 @@
     "fileId": "62rgnhjzdKHZ34mP4hgjHY"
   },
   {
-    "__type__": "689c2Mu1jJHJ6TjpvKfr3by",
+    "__type__": "1bae5dN+VdF06mRB63nwC33",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -142,11 +144,7 @@
     "__prefab": {
       "__id__": 7
     },
-    "DefaultActive": false,
-    "SpineAnimationIndex": [
-      "TrailHit2"
-    ],
-    "AnimationList": [
+    "arrayTimelineData": [
       {
         "__id__": 8
       }
@@ -155,42 +153,125 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "b4oqW1YDhH0aZkFO6Ar6Ic"
+    "fileId": "40Vf6cIwJHiruYiRe9BCCg"
   },
   {
-    "__type__": "AnimationList",
-    "List_Name": "回擊2",
-    "AnimationFlowIsDependOnCocosAnimation": false,
-    "DelayTime": 0,
-    "AnimationState": [
+    "__type__": "Timeline",
+    "timelineName": "Hit",
+    "timelineData": [
       {
         "__id__": 9
       }
-    ],
-    "IsAnimationOverActiveType": false,
-    "ListLoop": false
+    ]
   },
   {
-    "__type__": "AnimationState",
-    "ccAnimation": true,
-    "Spine2D": true,
-    "Spine2DAdd": false,
-    "Particle": false,
-    "Audio": false,
-    "Adjust": null,
-    "IsAnimationPlay": false,
-    "CocosAnimationState": 0,
-    "IsSpine2DPlay": true,
-    "Spine2DAnimationState": 0,
-    "IsSpineAnimationLoop": false,
-    "IsSpine2DAddPlay": false,
-    "Spine2DAddAnimationTrack": 1,
-    "Spine2DAddAnimationState": 0,
-    "IsSpineAnimationAddLoop": false,
-    "PlayParticle": [],
-    "StopParticle": [],
-    "PlayAudio_Name": [],
-    "StopAudio_Name": []
+    "__type__": "TimelineSetupData",
+    "timelineType": 0,
+    "timelineAnimation": {
+      "__id__": 10
+    },
+    "timelineSpine": {
+      "__id__": 13
+    },
+    "timelineTime": {
+      "__id__": 16
+    }
+  },
+  {
+    "__type__": "TimelineAnimationSetupData",
+    "timelineAnimation": null,
+    "timelineAnimationName": 0,
+    "delayTime": 0,
+    "useSpine": false,
+    "useAnim": false,
+    "useParticle": false,
+    "spineSetupData": {
+      "__id__": 11
+    },
+    "animSetupData": {
+      "__id__": 12
+    },
+    "particleData": []
+  },
+  {
+    "__type__": "SpineSetupData",
+    "spine": null,
+    "spineName": 0,
+    "timeScale": 1,
+    "delayTime": 0,
+    "isLoop": false,
+    "isEndClose": false
+  },
+  {
+    "__type__": "AnimationSetupData",
+    "animation": null,
+    "animationName": 0,
+    "delayTime": 0
+  },
+  {
+    "__type__": "TimelineSpineSetupData",
+    "timelineSpine": {
+      "__id__": 4
+    },
+    "timelineSpineName": 30,
+    "timeScale": 1,
+    "delayTime": 0,
+    "isEndClose": false,
+    "isLoop": false,
+    "useSpine": false,
+    "useAnim": false,
+    "useParticle": false,
+    "spineSetupData": {
+      "__id__": 14
+    },
+    "animSetupData": {
+      "__id__": 15
+    },
+    "particleData": []
+  },
+  {
+    "__type__": "SpineSetupData",
+    "spine": null,
+    "spineName": 0,
+    "timeScale": 1,
+    "delayTime": 0,
+    "isLoop": false,
+    "isEndClose": false
+  },
+  {
+    "__type__": "AnimationSetupData",
+    "animation": null,
+    "animationName": 0,
+    "delayTime": 0
+  },
+  {
+    "__type__": "TimelineTimeSetupData",
+    "toNextStateTime": 0,
+    "useSpine": false,
+    "useAnim": false,
+    "useParticle": false,
+    "spineSetupData": {
+      "__id__": 17
+    },
+    "animSetupData": {
+      "__id__": 18
+    },
+    "particleData": []
+  },
+  {
+    "__type__": "SpineSetupData",
+    "spine": null,
+    "spineName": 0,
+    "timeScale": 1,
+    "delayTime": 0,
+    "isLoop": false,
+    "isEndClose": false
+  },
+  {
+    "__type__": "AnimationSetupData",
+    "animation": null,
+    "animationName": 0,
+    "delayTime": 0
   },
   {
     "__type__": "cc.PrefabInfo",

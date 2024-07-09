@@ -73,8 +73,8 @@ export class Game_2_RollCycledState extends SymbolRollCycledState {
                 this.content.C1TrailOffsetPos.y * this.content.node.worldScale.y,
                 1
             );
-            this.content.freeC1.node.layer = Layer.PERFORM_2_PANEL;
-            this.content.freeC1.OnPlay(0);
+            this.content.freeC1.node.active = true;
+            this.content.freeC1.play('Rolling');
             AudioManager.Instance.play(AudioClipsEnum.Free_C1FireThrough);
         } else {
             this.content.freeC1.node.active = false;
@@ -106,7 +106,7 @@ export class Game_2_SymbolDampingState extends UIViewStateBase {
                 1
             );
             sub.setPartPos(this.content.node.worldPosition);
-            this.content.freeC1.OnPlay(1);
+            this.content.freeC1.play('Damp');
         }
         this.onEffectFinished();
     }

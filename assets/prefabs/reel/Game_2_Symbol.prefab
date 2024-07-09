@@ -29,20 +29,20 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 26
+        "__id__": 27
       },
       {
-        "__id__": 28
+        "__id__": 29
       },
       {
-        "__id__": 30
+        "__id__": 31
       },
       {
-        "__id__": 32
+        "__id__": 33
       }
     ],
     "_prefab": {
-      "__id__": 34
+      "__id__": 35
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -430,6 +430,9 @@
       },
       {
         "__id__": 25
+      },
+      {
+        "__id__": 26
       }
     ],
     "removedComponents": []
@@ -497,6 +500,16 @@
     }
   },
   {
+    "__type__": "CCPropertyOverrideInfo",
+    "targetInfo": {
+      "__id__": 22
+    },
+    "propertyPath": [
+      "_active"
+    ],
+    "value": false
+  },
+  {
     "__type__": "270243F10tC3YMvynan/3tq",
     "_name": "",
     "_objFlags": 0,
@@ -505,7 +518,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 27
+      "__id__": 28
     },
     "_backgroundSprite": {
       "__id__": 5
@@ -550,7 +563,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 29
+      "__id__": 30
     },
     "_id": ""
   },
@@ -567,7 +580,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 31
+      "__id__": 32
     },
     "_id": ""
   },
@@ -584,7 +597,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 33
+      "__id__": 34
     },
     "_contentSize": {
       "__type__": "cc.Size",
@@ -613,14 +626,14 @@
     "fileId": "5cdIRd7RZMEL2u2GKpU99E",
     "targetOverrides": [
       {
-        "__id__": 35
+        "__id__": 36
       }
     ]
   },
   {
     "__type__": "cc.TargetOverrideInfo",
     "source": {
-      "__id__": 26
+      "__id__": 27
     },
     "sourceInfo": null,
     "propertyPath": [
@@ -630,13 +643,13 @@
       "__id__": 18
     },
     "targetInfo": {
-      "__id__": 36
+      "__id__": 37
     }
   },
   {
     "__type__": "cc.TargetInfo",
     "localID": [
-      "51u/WFEIxGN6S6F6c1GzTo"
+      "1378Ebd1pIO5woKUPhlUOq"
     ]
   }
 ]

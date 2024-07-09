@@ -38,14 +38,14 @@
         "__id__": 156
       },
       {
-        "__id__": 178
+        "__id__": 163
       },
       {
         "__id__": 158
       }
     ],
     "_prefab": {
-      "__id__": 180
+      "__id__": 208
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -1181,7 +1181,7 @@
       "a": 255
     },
     "LoopOverTime": 0,
-    "ClearObjectTime": 4,
+    "ClearObjectTime": 0.2,
     "_id": ""
   },
   {
@@ -2232,10 +2232,9 @@
     "fileId": "8bwGTjWWlGo6KBcsiupKm3"
   },
   {
-    "__type__": "689c2Mu1jJHJ6TjpvKfr3by",
+    "__type__": "1bae5dN+VdF06mRB63nwC33",
     "_name": "",
     "_objFlags": 0,
-    "__editorExtras__": {},
     "node": {
       "__id__": 1
     },
@@ -2243,303 +2242,66 @@
     "__prefab": {
       "__id__": 159
     },
-    "DefaultActive": false,
-    "SpineAnimationIndex": [],
-    "AnimationList": [
+    "arrayTimelineData": [
       {
         "__id__": 160
       },
       {
-        "__id__": 165
-      },
-      {
-        "__id__": 169
-      },
-      {
-        "__id__": 174
+        "__id__": 185
       }
     ],
     "_id": ""
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "06YmTfmcpIbIBkAsdigwdL"
+    "fileId": "c67pa3rgVCipwMa+SwSBzK"
   },
   {
-    "__type__": "AnimationList",
-    "List_Name": "C1飛行動畫",
-    "AnimationFlowIsDependOnCocosAnimation": true,
-    "DelayTime": 0,
-    "AnimationState": [
+    "__type__": "Timeline",
+    "timelineName": "C1Collect",
+    "timelineData": [
       {
         "__id__": 161
       },
       {
-        "__id__": 162
+        "__id__": 174
       }
-    ],
-    "IsAnimationOverActiveType": false,
-    "ListLoop": false
+    ]
   },
   {
-    "__type__": "AnimationState",
-    "ccAnimation": true,
-    "Spine2D": true,
-    "Spine2DAdd": false,
-    "Particle": false,
-    "Audio": false,
-    "IsAnimationPlay": true,
-    "CocosAnimationState": 0,
-    "IsSpine2DPlay": false,
-    "Spine2DAnimationState": 0,
-    "IsSpineAnimationLoop": false,
-    "IsSpine2DAddPlay": false,
-    "Spine2DAddAnimationTrack": 1,
-    "Spine2DAddAnimationState": 0,
-    "IsSpineAnimationAddLoop": false,
-    "PlayParticle": [
-      {
-        "__id__": 80
-      }
-    ],
-    "StopParticle": [],
-    "PlayAudio_Name": [],
-    "StopAudio_Name": []
-  },
-  {
-    "__type__": "AnimationState",
-    "ccAnimation": true,
-    "Spine2D": true,
-    "Spine2DAdd": false,
-    "Particle": false,
-    "Audio": false,
-    "IsAnimationPlay": false,
-    "CocosAnimationState": 0,
-    "IsSpine2DPlay": false,
-    "Spine2DAnimationState": 0,
-    "IsSpineAnimationLoop": false,
-    "IsSpine2DAddPlay": false,
-    "Spine2DAddAnimationTrack": 1,
-    "Spine2DAddAnimationState": 0,
-    "IsSpineAnimationAddLoop": false,
-    "PlayParticle": [],
-    "StopParticle": [
-      {
-        "__id__": 163
-      },
-      {
-        "__id__": 164
-      }
-    ],
-    "PlayAudio_Name": [],
-    "StopAudio_Name": []
-  },
-  {
-    "__type__": "IsStopParticle",
-    "IsStopParticle": {
-      "__id__": 80
+    "__type__": "TimelineSetupData",
+    "timelineType": 1,
+    "timelineAnimation": {
+      "__id__": 162
     },
-    "IsParticleClear": true
-  },
-  {
-    "__type__": "IsStopParticle",
-    "IsStopParticle": {
-      "__id__": 147
+    "timelineSpine": {
+      "__id__": 168
     },
-    "IsParticleClear": true
+    "timelineTime": {
+      "__id__": 171
+    }
   },
   {
-    "__type__": "AnimationList",
-    "List_Name": "C1消除動畫",
-    "AnimationFlowIsDependOnCocosAnimation": true,
-    "DelayTime": 0,
-    "AnimationState": [
-      {
-        "__id__": 166
-      }
-    ],
-    "IsAnimationOverActiveType": false,
-    "ListLoop": false
-  },
-  {
-    "__type__": "AnimationState",
-    "ccAnimation": true,
-    "Spine2D": true,
-    "Spine2DAdd": false,
-    "Particle": false,
-    "Audio": false,
-    "IsAnimationPlay": true,
-    "CocosAnimationState": 1,
-    "IsSpine2DPlay": false,
-    "Spine2DAnimationState": 0,
-    "IsSpineAnimationLoop": false,
-    "IsSpine2DAddPlay": false,
-    "Spine2DAddAnimationTrack": 1,
-    "Spine2DAddAnimationState": 0,
-    "IsSpineAnimationAddLoop": false,
-    "PlayParticle": [],
-    "StopParticle": [
+    "__type__": "TimelineAnimationSetupData",
+    "timelineAnimation": {
+      "__id__": 163
+    },
+    "timelineAnimationName": 0,
+    "delayTime": 0,
+    "useSpine": false,
+    "useAnim": false,
+    "useParticle": true,
+    "spineSetupData": {
+      "__id__": 165
+    },
+    "animSetupData": {
+      "__id__": 166
+    },
+    "particleData": [
       {
         "__id__": 167
-      },
-      {
-        "__id__": 168
       }
-    ],
-    "PlayAudio_Name": [],
-    "StopAudio_Name": []
-  },
-  {
-    "__type__": "IsStopParticle",
-    "IsStopParticle": {
-      "__id__": 80
-    },
-    "IsParticleClear": true
-  },
-  {
-    "__type__": "IsStopParticle",
-    "IsStopParticle": {
-      "__id__": 147
-    },
-    "IsParticleClear": true
-  },
-  {
-    "__type__": "AnimationList",
-    "List_Name": "AddSpin飛行動畫",
-    "AnimationFlowIsDependOnCocosAnimation": true,
-    "DelayTime": 0,
-    "AnimationState": [
-      {
-        "__id__": 170
-      },
-      {
-        "__id__": 171
-      }
-    ],
-    "IsAnimationOverActiveType": false,
-    "ListLoop": false
-  },
-  {
-    "__type__": "AnimationState",
-    "ccAnimation": true,
-    "Spine2D": true,
-    "Spine2DAdd": false,
-    "Particle": false,
-    "Audio": false,
-    "IsAnimationPlay": true,
-    "CocosAnimationState": 2,
-    "IsSpine2DPlay": false,
-    "Spine2DAnimationState": 0,
-    "IsSpineAnimationLoop": false,
-    "IsSpine2DAddPlay": false,
-    "Spine2DAddAnimationTrack": 1,
-    "Spine2DAddAnimationState": 0,
-    "IsSpineAnimationAddLoop": false,
-    "PlayParticle": [
-      {
-        "__id__": 147
-      }
-    ],
-    "StopParticle": [],
-    "PlayAudio_Name": [],
-    "StopAudio_Name": []
-  },
-  {
-    "__type__": "AnimationState",
-    "ccAnimation": true,
-    "Spine2D": true,
-    "Spine2DAdd": false,
-    "Particle": false,
-    "Audio": false,
-    "IsAnimationPlay": false,
-    "CocosAnimationState": 0,
-    "IsSpine2DPlay": false,
-    "Spine2DAnimationState": 0,
-    "IsSpineAnimationLoop": false,
-    "IsSpine2DAddPlay": false,
-    "Spine2DAddAnimationTrack": 1,
-    "Spine2DAddAnimationState": 0,
-    "IsSpineAnimationAddLoop": false,
-    "PlayParticle": [],
-    "StopParticle": [
-      {
-        "__id__": 172
-      },
-      {
-        "__id__": 173
-      }
-    ],
-    "PlayAudio_Name": [],
-    "StopAudio_Name": []
-  },
-  {
-    "__type__": "IsStopParticle",
-    "IsStopParticle": {
-      "__id__": 80
-    },
-    "IsParticleClear": true
-  },
-  {
-    "__type__": "IsStopParticle",
-    "IsStopParticle": {
-      "__id__": 147
-    },
-    "IsParticleClear": true
-  },
-  {
-    "__type__": "AnimationList",
-    "List_Name": "AddSpin消除動畫",
-    "AnimationFlowIsDependOnCocosAnimation": true,
-    "DelayTime": 0,
-    "AnimationState": [
-      {
-        "__id__": 175
-      }
-    ],
-    "IsAnimationOverActiveType": false,
-    "ListLoop": false
-  },
-  {
-    "__type__": "AnimationState",
-    "ccAnimation": true,
-    "Spine2D": true,
-    "Spine2DAdd": false,
-    "Particle": false,
-    "Audio": false,
-    "IsAnimationPlay": true,
-    "CocosAnimationState": 3,
-    "IsSpine2DPlay": false,
-    "Spine2DAnimationState": 0,
-    "IsSpineAnimationLoop": false,
-    "IsSpine2DAddPlay": false,
-    "Spine2DAddAnimationTrack": 1,
-    "Spine2DAddAnimationState": 0,
-    "IsSpineAnimationAddLoop": false,
-    "PlayParticle": [],
-    "StopParticle": [
-      {
-        "__id__": 176
-      },
-      {
-        "__id__": 177
-      }
-    ],
-    "PlayAudio_Name": [],
-    "StopAudio_Name": []
-  },
-  {
-    "__type__": "IsStopParticle",
-    "IsStopParticle": {
-      "__id__": 147
-    },
-    "IsParticleClear": true
-  },
-  {
-    "__type__": "IsStopParticle",
-    "IsStopParticle": {
-      "__id__": 80
-    },
-    "IsParticleClear": true
+    ]
   },
   {
     "__type__": "cc.Animation",
@@ -2551,7 +2313,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 179
+      "__id__": 164
     },
     "playOnLoad": false,
     "_clips": [
@@ -2578,6 +2340,507 @@
   {
     "__type__": "cc.CompPrefabInfo",
     "fileId": "ec0ZNJcOtCC5Fd7lvTMNVc"
+  },
+  {
+    "__type__": "SpineSetupData",
+    "spine": null,
+    "spineName": 0,
+    "timeScale": 1,
+    "delayTime": 0,
+    "isLoop": false,
+    "isEndClose": false
+  },
+  {
+    "__type__": "AnimationSetupData",
+    "animation": null,
+    "animationName": 0,
+    "delayTime": 0
+  },
+  {
+    "__type__": "ParticleSetupData",
+    "particle": {
+      "__id__": 80
+    },
+    "delayTime": 0,
+    "particleState": 0,
+    "isParticleLoop": false,
+    "initParticleColor": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "cycleTime": 0,
+    "clearParticleTime": 0.2
+  },
+  {
+    "__type__": "TimelineSpineSetupData",
+    "timelineSpine": null,
+    "timelineSpineName": 0,
+    "timeScale": 1,
+    "delayTime": 0,
+    "isEndClose": false,
+    "isLoop": false,
+    "useSpine": false,
+    "useAnim": false,
+    "useParticle": false,
+    "spineSetupData": {
+      "__id__": 169
+    },
+    "animSetupData": {
+      "__id__": 170
+    },
+    "particleData": []
+  },
+  {
+    "__type__": "SpineSetupData",
+    "spine": null,
+    "spineName": 0,
+    "timeScale": 1,
+    "delayTime": 0,
+    "isLoop": false,
+    "isEndClose": false
+  },
+  {
+    "__type__": "AnimationSetupData",
+    "animation": null,
+    "animationName": 0,
+    "delayTime": 0
+  },
+  {
+    "__type__": "TimelineTimeSetupData",
+    "toNextStateTime": 0,
+    "useSpine": false,
+    "useAnim": false,
+    "useParticle": false,
+    "spineSetupData": {
+      "__id__": 172
+    },
+    "animSetupData": {
+      "__id__": 173
+    },
+    "particleData": []
+  },
+  {
+    "__type__": "SpineSetupData",
+    "spine": null,
+    "spineName": 0,
+    "timeScale": 1,
+    "delayTime": 0,
+    "isLoop": false,
+    "isEndClose": false
+  },
+  {
+    "__type__": "AnimationSetupData",
+    "animation": null,
+    "animationName": 0,
+    "delayTime": 0
+  },
+  {
+    "__type__": "TimelineSetupData",
+    "timelineType": 1,
+    "timelineAnimation": {
+      "__id__": 175
+    },
+    "timelineSpine": {
+      "__id__": 179
+    },
+    "timelineTime": {
+      "__id__": 182
+    }
+  },
+  {
+    "__type__": "TimelineAnimationSetupData",
+    "timelineAnimation": {
+      "__id__": 163
+    },
+    "timelineAnimationName": 1,
+    "delayTime": 0,
+    "useSpine": false,
+    "useAnim": false,
+    "useParticle": true,
+    "spineSetupData": {
+      "__id__": 176
+    },
+    "animSetupData": {
+      "__id__": 177
+    },
+    "particleData": [
+      {
+        "__id__": 178
+      }
+    ]
+  },
+  {
+    "__type__": "SpineSetupData",
+    "spine": null,
+    "spineName": 0,
+    "timeScale": 1,
+    "delayTime": 0,
+    "isLoop": false,
+    "isEndClose": false
+  },
+  {
+    "__type__": "AnimationSetupData",
+    "animation": null,
+    "animationName": 0,
+    "delayTime": 0
+  },
+  {
+    "__type__": "ParticleSetupData",
+    "particle": {
+      "__id__": 80
+    },
+    "delayTime": 0,
+    "particleState": 1,
+    "isParticleLoop": false,
+    "initParticleColor": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "cycleTime": 0,
+    "clearParticleTime": 0.2
+  },
+  {
+    "__type__": "TimelineSpineSetupData",
+    "timelineSpine": null,
+    "timelineSpineName": 0,
+    "timeScale": 1,
+    "delayTime": 0,
+    "isEndClose": false,
+    "isLoop": false,
+    "useSpine": false,
+    "useAnim": false,
+    "useParticle": false,
+    "spineSetupData": {
+      "__id__": 180
+    },
+    "animSetupData": {
+      "__id__": 181
+    },
+    "particleData": []
+  },
+  {
+    "__type__": "SpineSetupData",
+    "spine": null,
+    "spineName": 0,
+    "timeScale": 1,
+    "delayTime": 0,
+    "isLoop": false,
+    "isEndClose": false
+  },
+  {
+    "__type__": "AnimationSetupData",
+    "animation": null,
+    "animationName": 0,
+    "delayTime": 0
+  },
+  {
+    "__type__": "TimelineTimeSetupData",
+    "toNextStateTime": 0,
+    "useSpine": false,
+    "useAnim": false,
+    "useParticle": false,
+    "spineSetupData": {
+      "__id__": 183
+    },
+    "animSetupData": {
+      "__id__": 184
+    },
+    "particleData": []
+  },
+  {
+    "__type__": "SpineSetupData",
+    "spine": null,
+    "spineName": 0,
+    "timeScale": 1,
+    "delayTime": 0,
+    "isLoop": false,
+    "isEndClose": false
+  },
+  {
+    "__type__": "AnimationSetupData",
+    "animation": null,
+    "animationName": 0,
+    "delayTime": 0
+  },
+  {
+    "__type__": "Timeline",
+    "timelineName": "MultipleCollect",
+    "timelineData": [
+      {
+        "__id__": 186
+      },
+      {
+        "__id__": 197
+      }
+    ]
+  },
+  {
+    "__type__": "TimelineSetupData",
+    "timelineType": 1,
+    "timelineAnimation": {
+      "__id__": 187
+    },
+    "timelineSpine": {
+      "__id__": 191
+    },
+    "timelineTime": {
+      "__id__": 194
+    }
+  },
+  {
+    "__type__": "TimelineAnimationSetupData",
+    "timelineAnimation": {
+      "__id__": 163
+    },
+    "timelineAnimationName": 2,
+    "delayTime": 0,
+    "useSpine": false,
+    "useAnim": false,
+    "useParticle": true,
+    "spineSetupData": {
+      "__id__": 188
+    },
+    "animSetupData": {
+      "__id__": 189
+    },
+    "particleData": [
+      {
+        "__id__": 190
+      }
+    ]
+  },
+  {
+    "__type__": "SpineSetupData",
+    "spine": null,
+    "spineName": 0,
+    "timeScale": 1,
+    "delayTime": 0,
+    "isLoop": false,
+    "isEndClose": false
+  },
+  {
+    "__type__": "AnimationSetupData",
+    "animation": null,
+    "animationName": 0,
+    "delayTime": 0
+  },
+  {
+    "__type__": "ParticleSetupData",
+    "particle": {
+      "__id__": 147
+    },
+    "delayTime": 0,
+    "particleState": 0,
+    "isParticleLoop": false,
+    "initParticleColor": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "cycleTime": 0,
+    "clearParticleTime": 4
+  },
+  {
+    "__type__": "TimelineSpineSetupData",
+    "timelineSpine": null,
+    "timelineSpineName": 0,
+    "timeScale": 1,
+    "delayTime": 0,
+    "isEndClose": false,
+    "isLoop": false,
+    "useSpine": false,
+    "useAnim": false,
+    "useParticle": false,
+    "spineSetupData": {
+      "__id__": 192
+    },
+    "animSetupData": {
+      "__id__": 193
+    },
+    "particleData": []
+  },
+  {
+    "__type__": "SpineSetupData",
+    "spine": null,
+    "spineName": 0,
+    "timeScale": 1,
+    "delayTime": 0,
+    "isLoop": false,
+    "isEndClose": false
+  },
+  {
+    "__type__": "AnimationSetupData",
+    "animation": null,
+    "animationName": 0,
+    "delayTime": 0
+  },
+  {
+    "__type__": "TimelineTimeSetupData",
+    "toNextStateTime": 0,
+    "useSpine": false,
+    "useAnim": false,
+    "useParticle": false,
+    "spineSetupData": {
+      "__id__": 195
+    },
+    "animSetupData": {
+      "__id__": 196
+    },
+    "particleData": []
+  },
+  {
+    "__type__": "SpineSetupData",
+    "spine": null,
+    "spineName": 0,
+    "timeScale": 1,
+    "delayTime": 0,
+    "isLoop": false,
+    "isEndClose": false
+  },
+  {
+    "__type__": "AnimationSetupData",
+    "animation": null,
+    "animationName": 0,
+    "delayTime": 0
+  },
+  {
+    "__type__": "TimelineSetupData",
+    "timelineType": 1,
+    "timelineAnimation": {
+      "__id__": 198
+    },
+    "timelineSpine": {
+      "__id__": 202
+    },
+    "timelineTime": {
+      "__id__": 205
+    }
+  },
+  {
+    "__type__": "TimelineAnimationSetupData",
+    "timelineAnimation": {
+      "__id__": 163
+    },
+    "timelineAnimationName": 3,
+    "delayTime": 0,
+    "useSpine": false,
+    "useAnim": false,
+    "useParticle": true,
+    "spineSetupData": {
+      "__id__": 199
+    },
+    "animSetupData": {
+      "__id__": 200
+    },
+    "particleData": [
+      {
+        "__id__": 201
+      }
+    ]
+  },
+  {
+    "__type__": "SpineSetupData",
+    "spine": null,
+    "spineName": 0,
+    "timeScale": 1,
+    "delayTime": 0,
+    "isLoop": false,
+    "isEndClose": false
+  },
+  {
+    "__type__": "AnimationSetupData",
+    "animation": null,
+    "animationName": 0,
+    "delayTime": 0
+  },
+  {
+    "__type__": "ParticleSetupData",
+    "particle": {
+      "__id__": 147
+    },
+    "delayTime": 0,
+    "particleState": 1,
+    "isParticleLoop": false,
+    "initParticleColor": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "cycleTime": 0,
+    "clearParticleTime": 4
+  },
+  {
+    "__type__": "TimelineSpineSetupData",
+    "timelineSpine": null,
+    "timelineSpineName": 0,
+    "timeScale": 1,
+    "delayTime": 0,
+    "isEndClose": false,
+    "isLoop": false,
+    "useSpine": false,
+    "useAnim": false,
+    "useParticle": false,
+    "spineSetupData": {
+      "__id__": 203
+    },
+    "animSetupData": {
+      "__id__": 204
+    },
+    "particleData": []
+  },
+  {
+    "__type__": "SpineSetupData",
+    "spine": null,
+    "spineName": 0,
+    "timeScale": 1,
+    "delayTime": 0,
+    "isLoop": false,
+    "isEndClose": false
+  },
+  {
+    "__type__": "AnimationSetupData",
+    "animation": null,
+    "animationName": 0,
+    "delayTime": 0
+  },
+  {
+    "__type__": "TimelineTimeSetupData",
+    "toNextStateTime": 0,
+    "useSpine": false,
+    "useAnim": false,
+    "useParticle": false,
+    "spineSetupData": {
+      "__id__": 206
+    },
+    "animSetupData": {
+      "__id__": 207
+    },
+    "particleData": []
+  },
+  {
+    "__type__": "SpineSetupData",
+    "spine": null,
+    "spineName": 0,
+    "timeScale": 1,
+    "delayTime": 0,
+    "isLoop": false,
+    "isEndClose": false
+  },
+  {
+    "__type__": "AnimationSetupData",
+    "animation": null,
+    "animationName": 0,
+    "delayTime": 0
   },
   {
     "__type__": "cc.PrefabInfo",

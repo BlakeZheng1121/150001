@@ -1,7 +1,7 @@
 import { _decorator, Component, Label, Font, Sprite, TweenEasing, CCFloat, CCInteger, Vec3, Animation } from 'cc';
 import { BalanceUtil } from '../../../sgv3/util/BalanceUtil';
-import { CocosAnimationMultiTool } from '../../../ta/tool/cocos-animation-tool/CocosAnimationMultiTool';
 import { ParticleContentTool } from '../../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
+import { TimeLineTool } from '../../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
 const { ccclass, property } = _decorator;
 
 @ccclass('PosTweenObject')
@@ -16,8 +16,8 @@ export class PosTweenObject extends Component {
     public specialFont: Font | null = null;
     @property({ type: Font, visible: true })
     public multipleFont: Font | null = null;
-    @property(CocosAnimationMultiTool)
-    public Animation: CocosAnimationMultiTool | null = null;
+    @property(TimeLineTool)
+    public Animation: TimeLineTool | null = null;
     @property({ type: [ParticleContentTool], visible: true })
     public Particle: Array<ParticleContentTool> = [];
 
@@ -40,7 +40,7 @@ export class PosTweenObject extends Component {
 
     public setBaseCreditSetting(isSpecial: boolean, credit: number) {
         this.mainSprite.enabled = true;
-        this.Animation.OnPlay(0);
+        this.Animation.play('C1Collect');
         this.labelText.string = String();
         this.labelText.font = isSpecial ? this.specialFont : this.baseFont;
         this.labelText.string = BalanceUtil.formatBalanceWithExpressingUnits(credit);
@@ -50,7 +50,7 @@ export class PosTweenObject extends Component {
         this.anim.stop();
         this.labelText.node.scale = Vec3.ONE;
         this.mainSprite.enabled = false;
-        this.Animation.OnPlay(2);
+        this.Animation.play('MultipleCollect');
         this.labelText.string = String();
         this.labelText.font = this.multipleFont;
         this.labelText.string = String(multiple + '%');

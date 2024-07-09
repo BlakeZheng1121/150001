@@ -1,5 +1,5 @@
 import { _decorator, Component, Enum } from 'cc';
-import { CocosAnimationMultiTool } from '../../../ta/tool/cocos-animation-tool/CocosAnimationMultiTool';
+import { TimeLineTool } from '../../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
 import { GameOperation } from '../../vo/enum/GameOperation';
 const { ccclass, property } = _decorator;
 
@@ -8,34 +8,34 @@ export class FeatureSelectButton extends Component {
     @property({ type: Enum(GameOperation) })
     private gameOperation: GameOperation;
 
-    private _animationTool: CocosAnimationMultiTool;
+    private _timeLineTool: TimeLineTool;
 
     public get operation(): string {
         return GameOperation[this.gameOperation];
     }
 
     public hideButton(callBack?: Function) {
-        this.animationTool?.OnPlay(0, callBack);
+        this.timeLineTool?.play('Hide', callBack);
     }
 
     public showButton() {
-        this.animationTool?.OnPlay(1);
+        this.timeLineTool?.play('PlayShow');
     }
 
     public selectOperation(operation: string) {
         if (operation == GameOperation[this.gameOperation]) {
             // 選擇動畫
-            this.animationTool.OnPlay(2);
+            this.timeLineTool?.play('PlaySelect');
         } else {
             // 未選擇動畫
-            this.animationTool.OnPlay(3);
+            this.timeLineTool?.play('NoSelect');
         }
     }
 
-    private get animationTool() {
-        if (!this._animationTool) {
-            this._animationTool = this.getComponent(CocosAnimationMultiTool);
+    private get timeLineTool() {
+        if (!this._timeLineTool) {
+            this._timeLineTool = this.getComponent(TimeLineTool);
         }
-        return this._animationTool;
+        return this._timeLineTool;
     }
 }

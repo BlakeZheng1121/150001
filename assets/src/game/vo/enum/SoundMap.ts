@@ -76,12 +76,9 @@ export enum AudioClipsEnum {
     Free_C1FireThrough = 'Free_C1FireThrough',
     Free_C1GrowUp = 'Free_C1GrowUp',
     Free_C1Hit01 = 'Free_C1Hit01',
-    Free_Wild = 'Free_Wild',
     Free_WStack01 = 'Free_WStack01',
     Free_WStack02 = 'Free_WStack02',
     Free_Calculation = 'Free_Calculation',
-    Free_ExpandWild = 'Free_ExpandWild',
-    Free_Retrigger = 'Free_Retrigger',
     Free_Result = 'Free_Result',
     JP_GrandHit = 'JP_GrandHit',
     Mini_DragonBallExplosion = 'Mini_DragonBallExplosion',
@@ -105,6 +102,7 @@ export enum AudioClipsEnum {
     JP_Slogan = 'JP_Slogan',
     JPResult_en = 'JPResult_en',
     JPResult_zh = 'JPResult_zh',
+    Free_Slogan = 'Free_Slogan',
 }
 
 export enum BGMClipsEnum {

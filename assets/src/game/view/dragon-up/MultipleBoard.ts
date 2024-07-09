@@ -1,6 +1,6 @@
 
 import { _decorator, Component, Node, Label, CCFloat, tween } from 'cc';
-import { CocosAnimationMultiTool } from '../../../ta/tool/cocos-animation-tool/CocosAnimationMultiTool';
+import { TimeLineTool } from '../../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
 
 const { ccclass, property } = _decorator;
  
@@ -10,14 +10,14 @@ export class MultipleBoard extends Component {
     public labelText: Label | null = null;
     @property({ type: CCFloat, visible: true })
     public _runningTime: number = 0;
-    @property({type: CocosAnimationMultiTool})
-    public Animation: CocosAnimationMultiTool |null =null;
+    @property({type: TimeLineTool})
+    public Animation: TimeLineTool |null =null;
 
     public multiple: number = 100;// TO DO: Init set Value
 
     public rollMultiple(targertMultiple: number,callback: Function | null = null){
         //開始滾動
-        this.Animation?.OnPlay(0);
+        this.Animation?.play('ScaleMultiple');
         tween(this as MultipleBoard)
         .by(
         this._runningTime,

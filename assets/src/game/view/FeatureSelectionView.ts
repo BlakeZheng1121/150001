@@ -1,11 +1,7 @@
 import { _decorator, SystemEvent, Tween, UIOpacity, tween, Label, Animation } from 'cc';
 import { ParticleContentTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
 import { BaseScene } from '../../base/BaseScene';
-import { UILayout } from '../../core/ui/UILayout';
-import { UIOrientation } from '../../core/ui/UIOrientation';
-import { SceneManager } from '../../core/utils/SceneManager';
 import { BalanceUtil } from '../../sgv3/util/BalanceUtil';
-import { GlobalTimer } from '../../sgv3/util/GlobalTimer';
 import { FeatureSelectButton } from '../../sgv3/view/feature-selection/FeatureSelectButton';
 import { GameOperation } from '../../sgv3/vo/enum/GameOperation';
 import { AudioManager } from '../../ta/tool/AudioManager';

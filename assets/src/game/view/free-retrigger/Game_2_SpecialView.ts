@@ -1,10 +1,8 @@
-import { _decorator, SpriteFrame, Sprite, Prefab, instantiate, VerticalTextAlignment, Vec3 } from 'cc';
+import { _decorator, Prefab, instantiate } from 'cc';
 import { BaseScene } from '../../../base/BaseScene';
 import { ControlView } from '../../../control-panel/view/ControlView';
 import { GlobalTimer } from '../../../sgv3/util/GlobalTimer';
-import { FreeWild } from '../../../ta/free_ww/FreeWild';
 import { AudioManager } from '../../../ta/tool/AudioManager';
-import { CocosAnimationMultiTool } from '../../../ta/tool/cocos-animation-tool/CocosAnimationMultiTool';
 import { AudioClipsEnum } from '../../vo/enum/SoundMap';
 import { FreeGameSpecialInfo } from '../../vo/FreeGameSpecialInfo';
 import { FreeC1SubOnPerform } from './free_c1sub_on_perform/FreeC1SubOnPerform';
@@ -46,12 +44,6 @@ export class Game_2_SpecialView extends BaseScene {
 
         retriggerBoard.parent = this.node;
         self._freeRetriggerBoard = retriggerBoard.getComponent(Free_RetriggerBoard);
-
-        let animTools = this.node.getComponentsInChildren(CocosAnimationMultiTool);
-
-        for (let i in animTools) {
-            animTools[i].onLoad();
-        }
     }
 
     //** 出現角落球 */
@@ -69,9 +61,9 @@ export class Game_2_SpecialView extends BaseScene {
     //** show retriger board */
     public retriggerShow(addRound: number) {
         let self = this;
-        self.freeRetriggerBoard?.OnPlay(0);
+        self.freeRetriggerBoard?.play('Show');
 
-        AudioManager.Instance.play(AudioClipsEnum.Free_Retrigger);
+        AudioManager.Instance.play(AudioClipsEnum[`FreeRetrigger_${self.language}`]);
     }
 
     //** 角落球特色打擊 */

@@ -2,10 +2,10 @@ import { _decorator, Component, Label, Vec2, Prefab, Vec3 } from 'cc';
 import { PoolManager } from '../../../../sgv3/PoolManager';
 import { BalanceUtil } from '../../../../sgv3/util/BalanceUtil';
 import { GlobalTimer } from '../../../../sgv3/util/GlobalTimer';
-import { AnimationTimeLineTool } from '../../../../ta/tool/animation-timeline-tool/AnimationTimeLineTool';
 import { AudioManager } from '../../../../ta/tool/AudioManager';
 import { ParticleContentTool } from '../../../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
 import { AudioClipsEnum } from '../../../vo/enum/SoundMap';
+import { TimeLineTool } from '../../../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
 
 const { ccclass, property } = _decorator;
 
@@ -49,7 +49,7 @@ export class FreeC1SubOnPerform extends Component {
 
             label.string = BalanceUtil.formatBalanceWithExpressingUnits(self.hitSpecialInfo[i].Score);
 
-            self.hitSpecialInfo[i].c1Sub?.OnPlay(C1AnimList.PlayHit);
+            self.hitSpecialInfo[i].c1Sub?.play('Hit');
         }
 
         self.hitTotalCount = self.hitSpecialInfo.length;
@@ -60,9 +60,9 @@ export class FreeC1SubOnPerform extends Component {
         let self = this;
         for (let i = 0; i < self.hitSpecialInfo.length; i++) {
             if (i < self.hitSpecialInfo.length - 1) {
-                self.hitSpecialInfo[i]?.c1Sub.OnPlay(C1AnimList.Show);
+                self.hitSpecialInfo[i]?.c1Sub.play('Show');
             } else {
-                self.hitSpecialInfo[i]?.c1Sub.OnPlay(C1AnimList.Show, () => self.CallBack());
+                self.hitSpecialInfo[i]?.c1Sub.play('Show', () => self.CallBack());
             }
         }
     }
@@ -74,10 +74,10 @@ export class FreeC1SubOnPerform extends Component {
         self.CallBack = callback;
 
         for (let i = 0; i < self.hitSpecialInfo.length; i++) {
-            if (i < self.hitSpecialInfo.length - 1) {
-                self.hitSpecialInfo[i]?.c1Sub.OnPlay(C1AnimList.ShowScore);
+            if (i > 0) {
+                self.hitSpecialInfo[i]?.c1Sub.play('IncreaseShowLoop');
             } else {
-                self.hitSpecialInfo[i]?.c1Sub.OnPlay(C1AnimList.ShowScore, () => this.showSideBallFly());
+                self.hitSpecialInfo[i]?.c1Sub.play('IncreaseShow', () => this.showSideBallFly());
             }
         }
 
@@ -122,7 +122,7 @@ export class FreeC1SubOnPerform extends Component {
                     if (self.removeSideBallCount >= self.sideBallCount - 1) {
                         callback = self.specialEnd();
                     }
-                    self.hitSpecialInfo[self.removeSideBallCount]?.c1Sub.OnPlay(C1AnimList.PlayFly, callback);
+                    self.hitSpecialInfo[self.removeSideBallCount]?.c1Sub.play('Fly', callback);
                     self.onCollectCredit([
                         self.hitSpecialInfo[self.removeSideBallCount].pos,
                         self.hitSpecialInfo[self.removeSideBallCount].Score
@@ -172,7 +172,7 @@ export class FreeC1SubOnPerform extends Component {
                     _hitSpecialInfo.ID = i * 3 + j;
                     _hitSpecialInfo.Score = sideCredit[i][j];
                     _hitSpecialInfo.pos = new Vec2(i, j);
-                    _hitSpecialInfo.c1Sub = c1.getComponent(AnimationTimeLineTool);
+                    _hitSpecialInfo.c1Sub = c1.getComponent(TimeLineTool);
                     hitSpecialInfo.push(_hitSpecialInfo);
                 }
             }
@@ -185,13 +185,5 @@ export class HitSpecialInfo {
     public ID: number = 0;
     public Score: number = 0;
     public pos: Vec2 = new Vec2();
-    public c1Sub: AnimationTimeLineTool | null = null;
-}
-
-export enum C1AnimList {
-    Hide,
-    Show,
-    PlayHit,
-    ShowScore,
-    PlayFly
+    public c1Sub: TimeLineTool | null = null;
 }

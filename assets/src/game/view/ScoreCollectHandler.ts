@@ -1,9 +1,8 @@
-
 import { _decorator, Component, Label, Font, Node } from 'cc';
-import { CocosAnimationMultiTool } from '../../ta/tool/cocos-animation-tool/CocosAnimationMultiTool';
 import { ParticleContentTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
+import { TimeLineTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
 const { ccclass, property } = _decorator;
- 
+
 @ccclass('ScoreCollectHandler')
 export class ScoreCollectHandler extends Component {
     @property(Label) private countLabel: Label | null = null;
@@ -13,11 +12,12 @@ export class ScoreCollectHandler extends Component {
     @property(Node) private countGroup: Node | null = null;
 
     @property([ParticleContentTool]) private particles: ParticleContentTool[] = [];
-    
-    @property(CocosAnimationMultiTool) private scoreCollectAnimation: CocosAnimationMultiTool | null = null;
+
+    @property(TimeLineTool)
+    private scoreCollectAnimation: TimeLineTool | null = null;
 
     public ballCountUpdate(info: string) {
-        if(!this.countGroup.active){
+        if (!this.countGroup.active) {
             this.countGroup.active = true;
             this.scoreLabel.node.active = false;
         }
@@ -25,7 +25,7 @@ export class ScoreCollectHandler extends Component {
     }
 
     public ballCountHide() {
-        if(this.countGroup.active){
+        if (this.countGroup.active) {
             this.countGroup.active = false;
             this.scoreLabel.node.active = false;
         }
@@ -33,22 +33,40 @@ export class ScoreCollectHandler extends Component {
     }
 
     public onScoreCollect(score: string, PlayType: number) {
-        if(!this.scoreLabel.node.active){
+        if (!this.scoreLabel.node.active) {
             this.countGroup.active = false;
             this.scoreLabel.node.active = true;
         }
         this.scoreLabel.string = score;
-        this.scoreCollectAnimation.OnPlay(PlayType);
+        let playName: string = '';
+        switch (PlayType) {
+            case 0:
+                playName = 'BGCollect';
+                break;
+            case 1:
+                playName = 'FGCollect';
+                break;
+            case 2:
+                playName = 'DUCollect';
+                break;
+            case 3:
+                playName = 'hide';
+                break;
+            case 4:
+                playName = 'show';
+                break;
+        }
+        this.scoreCollectAnimation.play(playName);
     }
 
     //** 結算分數加總 表演*/
-    public onScoreSum(playType: number | null = 6) {
-        this.scoreCollectAnimation.OnPlay(playType);
+    public onScoreSum() {
+        this.scoreCollectAnimation.play('sum');
     }
 
     public allFXClear() {
-        for(let i in this.particles){
-            this.particles[i].ParticleClear();     
+        for (let i in this.particles) {
+            this.particles[i].ParticleClear();
         }
     }
 }
