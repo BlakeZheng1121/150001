@@ -1,11 +1,11 @@
 import { _decorator, Node, Prefab, CCFloat, NodePool, Tween, Vec3, tween, instantiate } from 'cc';
-import { BaseScene } from '../../base/BaseScene';
 import { BezierUtils } from '../../sgv3/util/BezierUtils';
 import { CreditTweenObject } from './CreditTweenObject';
+import BaseView from 'src/base/BaseView';
 const { ccclass, property } = _decorator;
 
 @ccclass('BallCreditTweenView')
-export class BallCreditTweenView extends BaseScene {
+export class BallCreditTweenView extends BaseView {
     @property({ type: Node })
     private effectTarget: Node | null = null;
     @property({ type: Prefab })

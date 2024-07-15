@@ -1,10 +1,10 @@
 import { _decorator, ProgressBar, Button, Tween, tween, Node, SystemEvent, Label } from 'cc';
-import { BaseScene } from '../../base/BaseScene';
 import { UrlLogoSetting } from '../../core/ui/UrlLogoSetting';
+import BaseView from 'src/base/BaseView';
 const { ccclass, property } = _decorator;
 
 @ccclass('LoadingView')
-export class LoadingView extends BaseScene {
+export class LoadingView extends BaseView {
     private curProgress: number;
     private progressDuration: number;
     private progressTween: Tween<ProgressBar>;

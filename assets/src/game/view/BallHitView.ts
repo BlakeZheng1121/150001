@@ -1,16 +1,16 @@
 import { _decorator } from 'cc';
-import { BaseScene } from '../../base/BaseScene';
 import { SceneManager } from '../../core/utils/SceneManager';
 import { GlobalTimer } from '../../sgv3/util/GlobalTimer';
 import { JackPotPerformControl } from '../../ta/jackpot-perform-control/JackPotPerformControl';
-import { AudioManager } from '../../ta/tool/AudioManager';
+import { AudioManager } from '../../audio/AudioManager';
 import { BallHitViewMediator } from '../mediator/BallHitViewMediator';
 import { AudioClipsEnum } from '../vo/enum/SoundMap';
 import { GameUIOrientationSetting } from '../vo/GameUIOrientationSetting';
+import BaseView from 'src/base/BaseView';
 
 const { ccclass, property } = _decorator;
 @ccclass('BallHitView')
-export class BallHitView extends BaseScene {
+export class BallHitView extends BaseView {
     public callBack: BallHitViewMediator;
     @property(JackPotPerformControl)
     private jackPotPerformControl: JackPotPerformControl;

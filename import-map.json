@@ -1,0 +1,11 @@
+{
+    "imports": {
+        "src/":"./assets/src/",
+        "util/":"./assets/src/sgv3/util/",
+        "Logger":"./assets/src/core/utils/Logger.ts",
+        "AudioManager": "./assets/src/audio/AudioManager.ts",
+        "TimeLineTool": "./extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool.ts",
+        "i18n/": "./extensions/i18n/assets/",
+        "common-ui/": "./extensions/common-ui/assets/src/"
+    }
+}

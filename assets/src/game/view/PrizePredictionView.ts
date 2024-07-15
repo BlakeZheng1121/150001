@@ -1,12 +1,12 @@
 import { _decorator, Component, Node, Prefab, CCString } from 'cc';
 import { TimeLineTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
-import { BaseScene } from '../../base/BaseScene';
-import { AudioManager } from '../../ta/tool/AudioManager';
+import { AudioManager } from '../../audio/AudioManager';
 import { AudioClipsEnum } from '../vo/enum/SoundMap';
+import BaseView from 'src/base/BaseView';
 const { ccclass, property } = _decorator;
 
 @ccclass('PrizePredictionView')
-export class PrizePredictionView extends BaseScene {
+export class PrizePredictionView extends BaseView {
     @property(TimeLineTool) private anim: TimeLineTool | null = null;
 
     private sounds: AudioClipsEnum[] = [

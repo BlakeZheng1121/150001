@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "31d41e24-9967-45f6-ba3e-89f9e9ae722d",
+  "uuid": "2691dfef-2751-4258-8ce4-69678bda3b75",
   "files": [
     ".png",
     ".json"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "31d41e24-9967-45f6-ba3e-89f9e9ae722d@6c48a",
+      "uuid": "2691dfef-2751-4258-8ce4-69678bda3b75@6c48a",
       "displayName": "UiIcon_Raise",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "31d41e24-9967-45f6-ba3e-89f9e9ae722d"
+        "imageUuidOrDatabaseUri": "2691dfef-2751-4258-8ce4-69678bda3b75"
       },
       "ver": "1.0.21",
       "imported": true,
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "31d41e24-9967-45f6-ba3e-89f9e9ae722d@f9941",
+      "uuid": "2691dfef-2751-4258-8ce4-69678bda3b75@f9941",
       "displayName": "UiIcon_Raise",
       "id": "f9941",
       "name": "spriteFrame",
@@ -55,7 +55,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "31d41e24-9967-45f6-ba3e-89f9e9ae722d@6c48a",
+        "imageUuidOrDatabaseUri": "2691dfef-2751-4258-8ce4-69678bda3b75@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,6 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "31d41e24-9967-45f6-ba3e-89f9e9ae722d@f9941"
+    "redirect": "2691dfef-2751-4258-8ce4-69678bda3b75@f9941"
   }
 }

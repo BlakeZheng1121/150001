@@ -1,16 +1,12 @@
 import { _decorator } from 'cc';
-import { TimeLineTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
-import { BaseScene } from '../../base/BaseScene';
 import { SceneManager } from '../../core/utils/SceneManager';
 import { GameUIOrientationSetting } from '../vo/GameUIOrientationSetting';
-// import { GAME_ShowView } from './GAME_ShowView';
-// import { GAME_EffectView } from './GAME_EffectView';
-// import { GAME_FortuneBallView } from './GAME_FortuneBallView';
+import BaseView from 'src/base/BaseView';
 
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_1_View')
-export class Game_1_View extends BaseScene {
+export class Game_1_View extends BaseView {
     public static readonly HORIZONTAL: string = 'horizontal';
     public static readonly VERTICAL: string = 'vertical';
 

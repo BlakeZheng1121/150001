@@ -16,7 +16,7 @@ import { GlobalTimer } from '../../sgv3/util/GlobalTimer';
 import { GameSceneData } from '../../sgv3/vo/config/GameSceneData';
 import { GameScene } from '../../sgv3/vo/data/GameScene';
 import { BonusGameOneRoundResult } from '../../sgv3/vo/result/BonusGameOneRoundResult';
-import { AudioManager } from '../../ta/tool/AudioManager';
+import { AudioManager } from '../../audio/AudioManager';
 
 import { GAME_GameDataProxy } from '../proxy/GAME_GameDataProxy';
 import { Game_3_WinBoardView, IGame_3_WinBoardViewMediator } from '../view/Game_3_WinBoardView';

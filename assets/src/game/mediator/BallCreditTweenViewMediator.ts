@@ -5,7 +5,7 @@ import { ReelDataProxy } from '../../sgv3/proxy/ReelDataProxy';
 import { GameStateProxyEvent, ViewMediatorEvent } from '../../sgv3/util/Constant';
 import { GlobalTimer } from '../../sgv3/util/GlobalTimer';
 import { GameScene } from '../../sgv3/vo/data/GameScene';
-import { AudioManager } from '../../ta/tool/AudioManager';
+import { AudioManager } from '../../audio/AudioManager';
 import { GAME_GameDataProxy } from '../proxy/GAME_GameDataProxy';
 import { BallCreditTweenView } from '../view/BallCreditTweenView';
 import { AudioClipsEnum } from '../vo/enum/SoundMap';

@@ -6,7 +6,7 @@ import { GlobalTimer } from '../../sgv3/util/GlobalTimer';
 import { MiniGameSymbol } from '../../sgv3/vo/enum/MiniGameSymbolType';
 import { SpecialHitInfo } from '../../sgv3/vo/enum/SpecialHitInfo';
 import { BonusGameOneRoundResult } from '../../sgv3/vo/result/BonusGameOneRoundResult';
-import { AudioManager } from '../../ta/tool/AudioManager';
+import { AudioManager } from '../../audio/AudioManager';
 import { GrandView } from '../view/GrandView';
 import { AudioClipsEnum, BGMClipsEnum, ScoringClipsEnum } from '../vo/enum/SoundMap';
 const { ccclass } = _decorator;

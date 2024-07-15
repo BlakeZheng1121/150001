@@ -6,7 +6,7 @@ import { StateMachineObject } from '../../../core/proxy/CoreStateMachineProxy';
 import { ReelEffect_SymbolFeatureCommand } from '../../../game/command/reelEffect/ReelEffect_SymbolFeatureCommand';
 import { GAME_GameDataProxy } from '../../../game/proxy/GAME_GameDataProxy';
 import { AudioClipsEnum } from '../../../game/vo/enum/SoundMap';
-import { AudioManager } from '../../../ta/tool/AudioManager';
+import { AudioManager } from '../../../audio/AudioManager';
 import { CheckScreenSymbolCommand } from '../../command/nomatch/CheckScreenSymbolCommand';
 import { ReelEffectCommand } from '../../command/reeleffect/ReelEffectCommand';
 import { ReelDataProxy } from '../../proxy/ReelDataProxy';

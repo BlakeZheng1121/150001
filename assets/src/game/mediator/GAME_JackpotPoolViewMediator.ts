@@ -122,8 +122,6 @@ export class GAME_JackpotPoolViewMediator extends BaseMediator<GAME_JackpotPoolV
         this.initBonusPool();
 
         this.onBetLevelChange();
-
-        this.view.curTimingStart();
     }
 
     protected initBonusPool() {

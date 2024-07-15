@@ -738,6 +738,15 @@ export class GameDataProxy extends CoreGameDataProxy {
     public set hasSelectionResponse(_val: boolean) {
         this._gameData.hasSelectionResponse = _val;
     }
+
+    /** 是否正在載入或開啟 Help view */
+    public get isHelpOpen(): boolean {
+        return this._gameData.isLoadingHelp;
+    }
+    public set isHelpOpen(_val: boolean) {
+        this._gameData.isLoadingHelp = _val;
+    }
+    
     /** 遊戲速度 */
     public get curSpeedMode(): string {
         return this._gameData.curSpeedMode;

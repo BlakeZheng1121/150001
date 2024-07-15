@@ -49,7 +49,7 @@ var gameData = {
     isDemo: false,
     isShowGoHome: true,
     isShowPlayerReport: true,
-    brandId: '2'
+    brandId: '1'
 };
 
 var callBackLog = {};

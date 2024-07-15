@@ -1,6 +1,6 @@
 import { NetworkProxy } from '../../../core/proxy/NetworkProxy';
 import { BGMClipsEnum } from '../../../game/vo/enum/SoundMap';
-import { AudioManager } from '../../../ta/tool/AudioManager';
+import { AudioManager } from '../../../audio/AudioManager';
 import { ReelEffect_SymbolFeatureCommand } from '../../../game/command/reelEffect/ReelEffect_SymbolFeatureCommand';
 import { StateMachineProxy } from '../../proxy/StateMachineProxy';
 import { SoundEvent, BaseSoundParms, WinEvent, ReelEvent } from '../../util/Constant';

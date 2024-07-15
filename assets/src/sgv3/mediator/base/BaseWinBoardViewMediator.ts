@@ -8,7 +8,7 @@ import { WinBoardState } from '../../vo/enum/WinBoardState';
 import { SceneManager } from '../../../core/utils/SceneManager';
 import BaseMediator from '../../../base/BaseMediator';
 import { GlobalTimer } from '../../util/GlobalTimer';
-import { AudioManager } from '../../../ta/tool/AudioManager';
+import { AudioManager } from '../../../audio/AudioManager';
 import { BGMClipsEnum } from '../../../game/vo/enum/SoundMap';
 import { Logger } from '../../../core/utils/Logger';
 import { WinType } from '../../vo/enum/WinType';

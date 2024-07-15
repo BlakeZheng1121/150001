@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "d01a2784-ba76-4bcd-a9e5-b0548d1ae2bb",
+  "uuid": "66143aac-7489-4f04-b6ce-42950515a841",
   "files": [
     ".png",
     ".json"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "d01a2784-ba76-4bcd-a9e5-b0548d1ae2bb@6c48a",
+      "uuid": "66143aac-7489-4f04-b6ce-42950515a841@6c48a",
       "displayName": "UiIcon_Decline",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "d01a2784-ba76-4bcd-a9e5-b0548d1ae2bb"
+        "imageUuidOrDatabaseUri": "66143aac-7489-4f04-b6ce-42950515a841"
       },
       "ver": "1.0.21",
       "imported": true,
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "d01a2784-ba76-4bcd-a9e5-b0548d1ae2bb@f9941",
+      "uuid": "66143aac-7489-4f04-b6ce-42950515a841@f9941",
       "displayName": "UiIcon_Decline",
       "id": "f9941",
       "name": "spriteFrame",
@@ -55,7 +55,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "d01a2784-ba76-4bcd-a9e5-b0548d1ae2bb@6c48a",
+        "imageUuidOrDatabaseUri": "66143aac-7489-4f04-b6ce-42950515a841@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,6 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "d01a2784-ba76-4bcd-a9e5-b0548d1ae2bb@f9941"
+    "redirect": "66143aac-7489-4f04-b6ce-42950515a841@f9941"
   }
 }

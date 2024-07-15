@@ -1,15 +1,15 @@
 import { _decorator, Node, UIOpacity, Tween, tween, Label } from 'cc';
-import { BaseScene } from '../../base/BaseScene';
 import { TSMap } from '../../core/utils/TSMap';
 import { GAME_GameScene } from '../vo/data/GAME_GameScene';
 import { MiniGameSelectPerform } from '../../ta/mini-ingot/MiniGameSelectPerform';
 import { AudioClipsEnum } from '../vo/enum/SoundMap';
-import { AudioManager } from '../../ta/tool/AudioManager';
+import { AudioManager } from '../../audio/AudioManager';
 import { MiniIngot } from '../../ta/mini-ingot/MiniIngot';
+import BaseView from 'src/base/BaseView';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_3_View')
-export class Game_3_View extends BaseScene {
+export class Game_3_View extends BaseView {
     public static readonly HORIZONTAL: string = 'horizontal';
     public static readonly VERTICAL: string = 'vertical';
     /** 是否為贏分面板時間 */

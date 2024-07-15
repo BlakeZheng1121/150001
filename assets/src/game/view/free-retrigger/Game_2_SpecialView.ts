@@ -1,16 +1,15 @@
 import { _decorator, Prefab, instantiate } from 'cc';
-import { BaseScene } from '../../../base/BaseScene';
-import { ControlView } from '../../../control-panel/view/ControlView';
 import { GlobalTimer } from '../../../sgv3/util/GlobalTimer';
-import { AudioManager } from '../../../ta/tool/AudioManager';
+import { AudioManager } from '../../../audio/AudioManager';
 import { AudioClipsEnum } from '../../vo/enum/SoundMap';
 import { FreeGameSpecialInfo } from '../../vo/FreeGameSpecialInfo';
 import { FreeC1SubOnPerform } from './free_c1sub_on_perform/FreeC1SubOnPerform';
 import { Free_RetriggerBoard } from './Free_RetriggerBoard';
+import BaseView from 'src/base/BaseView';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_2_SpecialView')
-export class Game_2_SpecialView extends BaseScene {
+export class Game_2_SpecialView extends BaseView {
     @property(FreeC1SubOnPerform)
     private freeC1SubOnPerform: FreeC1SubOnPerform | null = null;
 
@@ -123,20 +122,5 @@ export class Game_2_SpecialView extends BaseScene {
         this.onSpecialEndCallBack = null;
         this.onCollectCredit = null;
         this.freeGameSpecialInfo = new FreeGameSpecialInfo();
-    }
-
-    public stopFreeWild() {
-        // this.freeWild.OnFreeWildHide();
-    }
-
-    public changeOrientation(orientation: string) {
-        let self = this;
-        let isHorizontal: boolean = false;
-
-        if (orientation == ControlView.HORIZONTAL) isHorizontal = true;
-
-        // for (let i = 0; i < self.node.children.length; i++) {
-        //     self.node.children[i].getComponent(UIOrientation).changeOrientation(isHorizontal);
-        // }
     }
 }

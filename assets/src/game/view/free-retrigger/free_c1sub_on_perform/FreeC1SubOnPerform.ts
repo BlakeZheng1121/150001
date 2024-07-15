@@ -2,7 +2,7 @@ import { _decorator, Component, Label, Vec2, Prefab, Vec3 } from 'cc';
 import { PoolManager } from '../../../../sgv3/PoolManager';
 import { BalanceUtil } from '../../../../sgv3/util/BalanceUtil';
 import { GlobalTimer } from '../../../../sgv3/util/GlobalTimer';
-import { AudioManager } from '../../../../ta/tool/AudioManager';
+import { AudioManager } from '../../../../audio/AudioManager';
 import { ParticleContentTool } from '../../../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
 import { AudioClipsEnum } from '../../../vo/enum/SoundMap';
 import { TimeLineTool } from '../../../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';

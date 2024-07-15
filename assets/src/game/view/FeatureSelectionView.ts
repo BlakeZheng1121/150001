@@ -1,15 +1,15 @@
 import { _decorator, SystemEvent, Tween, UIOpacity, tween, Label, Animation } from 'cc';
 import { ParticleContentTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
-import { BaseScene } from '../../base/BaseScene';
 import { BalanceUtil } from '../../sgv3/util/BalanceUtil';
 import { FeatureSelectButton } from '../../sgv3/view/feature-selection/FeatureSelectButton';
 import { GameOperation } from '../../sgv3/vo/enum/GameOperation';
-import { AudioManager } from '../../ta/tool/AudioManager';
+import { AudioManager } from '../../audio/AudioManager';
 import { AudioClipsEnum, BGMClipsEnum } from '../vo/enum/SoundMap';
+import BaseView from 'src/base/BaseView';
 const { ccclass, property } = _decorator;
 
 @ccclass('FeatureSelectionView')
-export class FeatureSelectionView extends BaseScene {
+export class FeatureSelectionView extends BaseView {
     public static readonly HORIZONTAL: string = 'horizontal';
     public static readonly VERTICAL: string = 'vertical';
     private showTween: Tween<UIOpacity>;

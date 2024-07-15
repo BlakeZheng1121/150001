@@ -9,8 +9,8 @@
   "subMetas": {},
   "userData": {
     "_fntConfig": {
-      "commonHeight": 84,
-      "fontSize": 84,
+      "commonHeight": 32,
+      "fontSize": 32,
       "atlasName": "UiAuto_Num_0.png",
       "fontDefDictionary": {
         "48": {
@@ -21,7 +21,7 @@
             "height": 72
           },
           "xOffset": 0,
-          "yOffset": 4,
+          "yOffset": -20,
           "xAdvance": 52
         },
         "49": {
@@ -32,7 +32,7 @@
             "height": 72
           },
           "xOffset": 0,
-          "yOffset": 4,
+          "yOffset": -20,
           "xAdvance": 36
         },
         "50": {
@@ -43,7 +43,7 @@
             "height": 72
           },
           "xOffset": 0,
-          "yOffset": 4,
+          "yOffset": -20,
           "xAdvance": 52
         },
         "51": {
@@ -54,7 +54,7 @@
             "height": 72
           },
           "xOffset": 0,
-          "yOffset": 4,
+          "yOffset": -20,
           "xAdvance": 52
         },
         "52": {
@@ -65,7 +65,7 @@
             "height": 72
           },
           "xOffset": 0,
-          "yOffset": 4,
+          "yOffset": -20,
           "xAdvance": 52
         },
         "53": {
@@ -76,7 +76,7 @@
             "height": 72
           },
           "xOffset": 0,
-          "yOffset": 4,
+          "yOffset": -20,
           "xAdvance": 52
         },
         "54": {
@@ -87,7 +87,7 @@
             "height": 72
           },
           "xOffset": 0,
-          "yOffset": 4,
+          "yOffset": -20,
           "xAdvance": 52
         },
         "55": {
@@ -98,7 +98,7 @@
             "height": 72
           },
           "xOffset": 0,
-          "yOffset": 4,
+          "yOffset": -20,
           "xAdvance": 46
         },
         "56": {
@@ -109,7 +109,7 @@
             "height": 72
           },
           "xOffset": 0,
-          "yOffset": 4,
+          "yOffset": -20,
           "xAdvance": 52
         },
         "57": {
@@ -120,13 +120,13 @@
             "height": 72
           },
           "xOffset": 0,
-          "yOffset": 4,
+          "yOffset": -20,
           "xAdvance": 52
         }
       },
       "kerningDict": {}
     },
-    "fontSize": 84,
+    "fontSize": 32,
     "textureUuid": "954f2914-4860-40ac-aa56-9a91cd185e9d"
   }
 }

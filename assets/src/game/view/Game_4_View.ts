@@ -1,12 +1,12 @@
 import { _decorator } from 'cc';
-import { BaseScene } from '../../base/BaseScene';
 import { SceneManager } from '../../core/utils/SceneManager';
 import { GameUIOrientationSetting } from '../vo/GameUIOrientationSetting';
 import { PosTweenView } from './dragon-up/PosTweenView';
+import BaseView from 'src/base/BaseView';
 const { ccclass } = _decorator;
 
 @ccclass('Game_4_View')
-export class Game_4_View extends BaseScene {
+export class Game_4_View extends BaseView {
     public static readonly HORIZONTAL: string = 'horizontal';
     public static readonly VERTICAL: string = 'vertical';
 

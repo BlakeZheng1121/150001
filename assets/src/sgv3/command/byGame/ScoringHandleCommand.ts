@@ -1,6 +1,6 @@
 import { _decorator } from 'cc';
 import { AudioClipsEnum, QuickScoringDuration, ScoringClipsEnum } from '../../../game/vo/enum/SoundMap';
-import { AudioManager } from '../../../ta/tool/AudioManager';
+import { AudioManager } from '../../../audio/AudioManager';
 import { GameDataProxy } from '../../proxy/GameDataProxy';
 import { ReelDataProxy } from '../../proxy/ReelDataProxy';
 import { WinEvent } from '../../util/Constant';

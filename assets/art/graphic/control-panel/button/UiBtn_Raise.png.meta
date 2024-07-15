@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "e0ba9ff4-6d6d-464b-8ffa-1a8b33b0fa18",
+  "uuid": "8bfa48ac-a7ca-4e84-b3d4-aea93f9cb47d",
   "files": [
     ".png",
     ".json"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "e0ba9ff4-6d6d-464b-8ffa-1a8b33b0fa18@6c48a",
+      "uuid": "8bfa48ac-a7ca-4e84-b3d4-aea93f9cb47d@6c48a",
       "displayName": "UiBtn_Raise",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "e0ba9ff4-6d6d-464b-8ffa-1a8b33b0fa18"
+        "imageUuidOrDatabaseUri": "8bfa48ac-a7ca-4e84-b3d4-aea93f9cb47d"
       },
       "ver": "1.0.21",
       "imported": true,
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "e0ba9ff4-6d6d-464b-8ffa-1a8b33b0fa18@f9941",
+      "uuid": "8bfa48ac-a7ca-4e84-b3d4-aea93f9cb47d@f9941",
       "displayName": "UiBtn_Raise",
       "id": "f9941",
       "name": "spriteFrame",
@@ -41,21 +41,21 @@
         "trimType": "auto",
         "trimThreshold": 1,
         "rotated": false,
-        "offsetX": -0.5,
-        "offsetY": -0.5,
-        "trimX": 6,
-        "trimY": 7,
-        "width": 105,
-        "height": 105,
-        "rawWidth": 118,
-        "rawHeight": 118,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 13,
+        "trimY": 13,
+        "width": 111,
+        "height": 111,
+        "rawWidth": 137,
+        "rawHeight": 137,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "e0ba9ff4-6d6d-464b-8ffa-1a8b33b0fa18@6c48a",
+        "imageUuidOrDatabaseUri": "8bfa48ac-a7ca-4e84-b3d4-aea93f9cb47d@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,6 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "e0ba9ff4-6d6d-464b-8ffa-1a8b33b0fa18@f9941"
+    "redirect": "8bfa48ac-a7ca-4e84-b3d4-aea93f9cb47d@f9941"
   }
 }

@@ -8,7 +8,7 @@ import {
 } from '../../../sgv3/view/reel/symbol/SymbolStateRegisterBase';
 import { Layer } from '../../../sgv3/vo/enum/Layer';
 import { SymbolPartType, SymbolPerformType } from '../../../sgv3/vo/enum/Reel';
-import { AudioManager } from '../../../ta/tool/AudioManager';
+import { AudioManager } from '../../../audio/AudioManager';
 import { AudioClipsEnum } from '../../vo/enum/SoundMap';
 import { Game_2_SymbolContent } from './Game_2_SymbolContent';
 const { ccclass } = _decorator;

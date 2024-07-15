@@ -1,15 +1,15 @@
 import { instantiate, NodePool, Prefab, Vec3, _decorator, Node, tween, CCFloat, Tween } from 'cc';
-import { BaseScene } from '../../../base/BaseScene';
 import { PoolManager } from '../../../sgv3/PoolManager';
 import { BezierUtils } from '../../../sgv3/util/BezierUtils';
 import { ParticleContentTool } from '../../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
 import { MultipleBoard } from './MultipleBoard';
 
 import { PosTweenObject } from './PosTweenObject';
+import BaseView from 'src/base/BaseView';
 const { ccclass, property } = _decorator;
 
 @ccclass('PosTweenView')
-export class PosTweenView extends BaseScene {
+export class PosTweenView extends BaseView {
     @property({ type: MultipleBoard, visible: true })
     private _multipleBoard: MultipleBoard | null = null;
     @property({ type: Prefab, visible: true })

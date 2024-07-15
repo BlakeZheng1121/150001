@@ -12,11 +12,11 @@ import {
     Camera,
     UIOpacity
 } from 'cc';
-import { BaseScene } from '../../base/BaseScene';
+import BaseView from 'src/base/BaseView';
 const { ccclass } = _decorator;
 
 @ccclass('WormHoleView')
-export class WormHoleView extends BaseScene {
+export class WormHoleView extends BaseView {
     private listener: IWormHoleView;
 
     private clickedCount: number;

@@ -1,14 +1,13 @@
 import { _decorator, Component, Node, game } from 'cc';
 import { TimeLineTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
-import { BaseScene } from '../../base/BaseScene';
-import { AudioManager } from '../../ta/tool/AudioManager';
-import { CocosAnimationMultiTool } from '../../ta/tool/cocos-animation-tool/CocosAnimationMultiTool';
+import { AudioManager } from '../../audio/AudioManager';
 import { AudioClipsEnum } from '../vo/enum/SoundMap';
+import BaseView from 'src/base/BaseView';
 
 const { ccclass, property } = _decorator;
 
 @ccclass('GAME_TransitionView')
-export class GAME_TransitionView extends BaseScene {
+export class GAME_TransitionView extends BaseView {
     public static readonly HORIZONTAL: string = 'horizontal';
     public static readonly VERTICAL: string = 'vertical';
 

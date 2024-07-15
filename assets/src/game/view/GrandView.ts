@@ -1,16 +1,16 @@
 import { _decorator, Label, SystemEvent, tween } from 'cc';
 import { TimeLineTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
-import { BaseScene } from '../../base/BaseScene';
 import { BalanceUtil } from '../../sgv3/util/BalanceUtil';
 import { GlobalTimer } from '../../sgv3/util/GlobalTimer';
 import { MiniGameSymbol } from '../../sgv3/vo/enum/MiniGameSymbolType';
 import { MiniResultBoard } from '../../ta/mini-result-board/MiniResultBoard';
-import { AudioManager } from '../../ta/tool/AudioManager';
+import { AudioManager } from '../../audio/AudioManager';
 import { AudioClipsEnum, ScoringClipsEnum } from '../vo/enum/SoundMap';
+import BaseView from 'src/base/BaseView';
 const { ccclass, property } = _decorator;
 
 @ccclass('GrandView')
-export class GrandView extends BaseScene {
+export class GrandView extends BaseView {
     @property(TimeLineTool)
     private anim: TimeLineTool;
     @property(MiniResultBoard)

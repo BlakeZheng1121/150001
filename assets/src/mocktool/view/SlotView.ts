@@ -1,7 +1,6 @@
 import { Logger } from '../../core/utils/Logger';
 import { TSMap } from '../../core/utils/TSMap';
 import { RowData } from '../vo/RNGSheet';
-import { BaseScene } from '../../base/BaseScene';
 import {
     _decorator,
     Node,
@@ -17,6 +16,7 @@ import {
 } from 'cc';
 import { ReelTestPasser, ReelTestPasserListener } from '../../sgv3/view/reel/ReelTestPasser';
 import { ReelPasser } from '../../sgv3/vo/match/ReelMatchInfo';
+import BaseView from 'src/base/BaseView';
 const { ccclass, property } = _decorator;
 
 /**
@@ -27,7 +27,7 @@ const { ccclass, property } = _decorator;
  * @author Vince vinceyang
  */
 @ccclass('SlotView')
-export class SlotView extends BaseScene implements ReelTestPasserListener {
+export class SlotView extends BaseView implements ReelTestPasserListener {
     public static readonly DEF_Y: number = 50;
 
     public static readonly BTN_DEF_X: number = 400;

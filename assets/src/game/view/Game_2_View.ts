@@ -1,13 +1,11 @@
 import { director, instantiate, Label, Prefab, _decorator } from 'cc';
-import { TimeLineTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
-import { BaseScene } from '../../base/BaseScene';
-import { UIOrientation } from '../../core/ui/UIOrientation';
 import { SceneManager } from '../../core/utils/SceneManager';
 import { GameUIOrientationSetting } from '../vo/GameUIOrientationSetting';
+import BaseView from 'src/base/BaseView';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_2_View')
-export class Game_2_View extends BaseScene {
+export class Game_2_View extends BaseView {
     @property({ type: [Prefab], visible: true })
     private loadPrefab: Array<Prefab> | null = [];
 

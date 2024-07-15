@@ -1,11 +1,11 @@
 import { _decorator, Label, SystemEvent, tween, Tween } from 'cc';
-import { BaseScene } from '../../base/BaseScene';
 import { BalanceUtil } from '../../sgv3/util/BalanceUtil';
 import { MiniResultBoard } from '../../ta/mini-result-board/MiniResultBoard';
+import BaseView from 'src/base/BaseView';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_3_WinBoardView')
-export class Game_3_WinBoardView extends BaseScene {
+export class Game_3_WinBoardView extends BaseView {
     public callback: IGame_3_WinBoardViewMediator;
 
     @property(MiniResultBoard)

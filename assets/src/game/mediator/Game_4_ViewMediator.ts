@@ -11,7 +11,7 @@ import { StateMachineObject } from '../../core/proxy/CoreStateMachineProxy';
 import { StateMachineProxy } from '../../sgv3/proxy/StateMachineProxy';
 import { GameScene } from '../../sgv3/vo/data/GameScene';
 import { BGMClipsEnum } from '../vo/enum/SoundMap';
-import { AudioManager } from '../../ta/tool/AudioManager';
+import { AudioManager } from '../../audio/AudioManager';
 import { TopUpGameOneRoundResult } from '../../sgv3/vo/result/TopUpGameOneRoundResult';
 
 const { ccclass } = _decorator;

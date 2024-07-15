@@ -19,6 +19,10 @@ export class UrlLogoSetting extends Component {
     public set url(value: String) {
         this._url = value;
     }
+
+    public get logo(): Sprite {
+        return this._logo;
+    }
     //endregion
 
     //region API

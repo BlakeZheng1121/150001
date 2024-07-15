@@ -20,7 +20,7 @@ import { SymbolInfo } from '../../sgv3/vo/info/SymbolInfo';
 import { FreeGameOneRoundResult } from '../../sgv3/vo/result/FreeGameOneRoundResult';
 import { TopUpGameOneRoundResult } from '../../sgv3/vo/result/TopUpGameOneRoundResult';
 import { WAY_AllWinData } from '../../sgv3way/vo/datas/WAY_AllWinData';
-import { AudioManager } from '../../ta/tool/AudioManager';
+import { AudioManager } from '../../audio/AudioManager';
 import { GAME_GameDataProxy } from '../proxy/GAME_GameDataProxy';
 import { GAME_ReelView } from '../view/GAME_ReelView';
 import { AudioClipsEnum } from '../vo/enum/SoundMap';

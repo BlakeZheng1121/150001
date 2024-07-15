@@ -9,7 +9,7 @@ import { WebBridgeProxy } from '../../sgv3/proxy/WebBridgeProxy';
 import { GameStateProxyEvent, JackpotPool, StateWinEvent, ViewMediatorEvent } from '../../sgv3/util/Constant';
 import { GlobalTimer } from '../../sgv3/util/GlobalTimer';
 import { GameScene } from '../../sgv3/vo/data/GameScene';
-import { AudioManager } from '../../ta/tool/AudioManager';
+import { AudioManager } from '../../audio/AudioManager';
 import { GAME_GameDataProxy } from '../proxy/GAME_GameDataProxy';
 import { Game_2_View } from '../view/Game_2_View';
 import { BGMClipsEnum } from '../vo/enum/SoundMap';

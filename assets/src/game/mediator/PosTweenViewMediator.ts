@@ -8,7 +8,7 @@ import { StateMachineProxy } from '../../sgv3/proxy/StateMachineProxy';
 import { DragonUpEvent, ViewMediatorEvent } from '../../sgv3/util/Constant';
 import { GlobalTimer } from '../../sgv3/util/GlobalTimer';
 import { GameScene } from '../../sgv3/vo/data/GameScene';
-import { AudioManager } from '../../ta/tool/AudioManager';
+import { AudioManager } from '../../audio/AudioManager';
 import { GAME_GameDataProxy } from '../proxy/GAME_GameDataProxy';
 import { PosTweenView } from '../view/dragon-up/PosTweenView';
 import { AudioClipsEnum } from '../vo/enum/SoundMap';

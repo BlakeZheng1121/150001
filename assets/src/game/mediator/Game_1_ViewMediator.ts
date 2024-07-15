@@ -9,7 +9,7 @@ import { _decorator } from 'cc';
 import { GameScene } from '../../sgv3/vo/data/GameScene';
 import { GlobalTimer } from '../../sgv3/util/GlobalTimer';
 import { BGMClipsEnum } from '../vo/enum/SoundMap';
-import { AudioManager } from '../../ta/tool/AudioManager';
+import { AudioManager } from '../../audio/AudioManager';
 
 const { ccclass } = _decorator;
 

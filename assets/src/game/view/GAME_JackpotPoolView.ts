@@ -1,5 +1,4 @@
 import { _decorator, Label, Tween, tween, Node } from 'cc';
-import { BaseScene } from '../../base/BaseScene';
 import { Logger } from '../../core/utils/Logger';
 import { SceneManager } from '../../core/utils/SceneManager';
 import { BalanceUtil } from '../../sgv3/util/BalanceUtil';
@@ -7,11 +6,12 @@ import { JackpotPool } from '../../sgv3/util/Constant';
 import { GameScene } from '../../sgv3/vo/data/GameScene';
 import { Raise_JackpotFX } from '../../ta/raise-jackpot/Raise_JackpotFX';
 import { GameUIOrientationSetting } from '../vo/GameUIOrientationSetting';
+import BaseView from 'src/base/BaseView';
 
 const { ccclass, property } = _decorator;
 
 @ccclass('GAME_JackpotPoolView')
-export class GAME_JackpotPoolView extends BaseScene {
+export class GAME_JackpotPoolView extends BaseView {
     public static readonly HORIZONTAL: string = 'horizontal';
     public static readonly VERTICAL: string = 'vertical';
     private language: string;
@@ -36,10 +36,6 @@ export class GAME_JackpotPoolView extends BaseScene {
     @property({ type: Label })
     public miniAmount: Label;
 
-    // 時間
-    @property({ type: Label })
-    public curTime: Label;
-
     // 加押特效
     @property({ type: Raise_JackpotFX })
     public raiseJackpotFX: Raise_JackpotFX;
@@ -56,8 +52,6 @@ export class GAME_JackpotPoolView extends BaseScene {
     public totalMiniAmount: number = 0;
 
     private betRangeMapIndex: number = 1;
-
-    private curTimeOut: any;
 
     private textTweens: Map<number, Tween<GAME_JackpotPoolView>> = new Map<number, Tween<GAME_JackpotPoolView>>();
 
@@ -343,33 +337,5 @@ export class GAME_JackpotPoolView extends BaseScene {
                     break;
             }
         }
-    }
-
-    public curTimingStart() {
-        let self = this;
-        self.curTimeOut = setInterval(setCurTime, 1000);
-
-        function setCurTime() {
-            let nowTime = new Date();
-            let hours = nowTime.getHours();
-            let minutes = nowTime.getMinutes();
-            let timeString: string = self.convertTimeString(hours) + ':' + self.convertTimeString(minutes);
-            self.curTime.string = timeString;
-        }
-    }
-
-    public curTimingStop() {
-        let self = this;
-        clearInterval(self.curTimeOut);
-    }
-
-    private convertTimeString(time: number) {
-        let newTime: string = '0';
-        if (time < 10) {
-            newTime += time.toString();
-        } else {
-            newTime = time.toString();
-        }
-        return newTime;
     }
 }

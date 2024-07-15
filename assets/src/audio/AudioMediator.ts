@@ -1,6 +1,6 @@
 import { _decorator } from 'cc';
-import { AudioClipsEnum } from '../../game/vo/enum/SoundMap';
-import { SoundEvent, WinEvent } from '../../sgv3/util/Constant';
+import { AudioClipsEnum } from '../game/vo/enum/SoundMap';
+import { SoundEvent, WinEvent } from '../sgv3/util/Constant';
 import { AudioManager } from './AudioManager';
 const { ccclass } = _decorator;
 

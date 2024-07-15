@@ -123,6 +123,8 @@ export class GameData extends CoreGameData {
     public onFreePlay: boolean = false;
     /** 是否有收到 Feature selection 的結果 */
     public hasSelectionResponse: boolean = false;
+    /** 是否正在載入或開啟 Help view */
+    public isLoadingHelp: boolean = false;
     /** 當前遊戲速度 */
     public curSpeedMode: string = SpeedMode.STATUS_NORMAL;
 }

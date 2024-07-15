@@ -1,9 +1,30 @@
-import { js } from 'cc';
-import BaseUI from './BaseUI';
-import { IBaseUI } from '../data/Inters';
+import { _decorator, js } from 'cc';
+import { LayerManager } from  '../core/utils/LayerManager';
 import AppNode from '../core/AppNode';
-export default abstract class BaseView extends BaseUI implements IBaseUI {
+import BaseUI from './BaseUI';
+const { ccclass, property } = _decorator;
+
+@ccclass('BaseView')
+export default abstract class BaseView extends BaseUI {
+    @property({})
+    private renderOrder: number = -1;
     private viewMsg: any = {};
+
+    /**
+     * 該組件第一次啟用時，可指定對應的 Mediator 類別和自定義註冊的名稱。
+     * 當 mediatorClassName 和 mediatorName 沒有定義時，會自行組裝對應的類別名稱，並且以該類別名稱作為註冊 Mediator 的名稱。
+     * @param mediatorClassName Mediator 對應的類別名稱
+     * @param mediatorName Mediator 的註冊名稱
+     */
+    protected onLoad(mediatorClassName?: string, mediatorName?: string) {
+        const className = js.getClassName(this);
+        const MediatorClassName = mediatorClassName ? mediatorClassName : `${className}Mediator`;
+        this.initMediator(MediatorClassName, mediatorName);
+        if (this.renderOrder >= 0) {
+            LayerManager.setLayer(this, this.renderOrder);
+        }
+    }
+
     public initData(data?: any, mediatorName?: string, ...params: any): void {
         super.initData(data, params);
         mediatorName && this.initMediator(mediatorName);

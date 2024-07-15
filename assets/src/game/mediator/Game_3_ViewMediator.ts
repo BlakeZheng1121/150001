@@ -21,7 +21,7 @@ import { GameScene } from '../../sgv3/vo/data/GameScene';
 import { MiniGameSymbol } from '../../sgv3/vo/enum/MiniGameSymbolType';
 import { SpecialHitInfo } from '../../sgv3/vo/enum/SpecialHitInfo';
 import { BonusGameOneRoundResult } from '../../sgv3/vo/result/BonusGameOneRoundResult';
-import { AudioManager } from '../../ta/tool/AudioManager';
+import { AudioManager } from '../../audio/AudioManager';
 import { GAME_GameDataProxy } from '../proxy/GAME_GameDataProxy';
 import { Game_3_View } from '../view/Game_3_View';
 import { AudioClipsEnum, BGMClipsEnum } from '../vo/enum/SoundMap';

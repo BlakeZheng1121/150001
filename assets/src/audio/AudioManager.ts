@@ -1,5 +1,5 @@
 import { _decorator, Component, AudioClip, Prefab, resources } from 'cc';
-import { PoolManager } from '../../sgv3/PoolManager';
+import { PoolManager } from '../sgv3/PoolManager';
 import { AudioContainer } from './AudioContainer';
 import { AudioSourcePool } from './AudioSourcePool';
 const { ccclass, property } = _decorator;

@@ -1,12 +1,12 @@
 import { _decorator, Vec3 } from 'cc';
 import { TimeLineTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
-import { BaseScene } from '../../base/BaseScene';
-import { AudioManager } from '../../ta/tool/AudioManager';
+import { AudioManager } from '../../audio/AudioManager';
 import { AudioClipsEnum } from '../vo/enum/SoundMap';
+import BaseView from 'src/base/BaseView';
 const { ccclass, property } = _decorator;
 
 @ccclass('ReelFXView')
-export class ReelFXView extends BaseScene {
+export class ReelFXView extends BaseView {
     @property(TimeLineTool)
     private anim: TimeLineTool;
 

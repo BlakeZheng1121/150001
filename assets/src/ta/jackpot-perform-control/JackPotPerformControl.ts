@@ -5,8 +5,7 @@ import { ScoreCollectHandler } from '../../game/view/ScoreCollectHandler';
 import { AudioClipsEnum } from '../../game/vo/enum/SoundMap';
 import { PoolManager } from '../../sgv3/PoolManager';
 import { SpineTailPerform } from '../spine-trail-perform/SpineTailPerform';
-import { AnimationTimeLineTool } from '../tool/animation-timeline-tool/AnimationTimeLineTool';
-import { AudioManager } from '../tool/AudioManager';
+import { AudioManager } from '../../audio/AudioManager';
 
 const { ccclass, property } = _decorator;
 

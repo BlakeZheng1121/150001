@@ -1,12 +1,12 @@
 import { _decorator } from 'cc';
-import { BaseScene } from '../../base/BaseScene';
-import { AudioManager } from '../../ta/tool/AudioManager';
+import { AudioManager } from '../../audio/AudioManager';
 import { AudioClipsEnum } from '../vo/enum/SoundMap';
 import { TimeLineTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
+import BaseView from 'src/base/BaseView';
 const { ccclass, property } = _decorator;
 
 @ccclass('ExpansionWildsView')
-export class ExpansionWildsView extends BaseScene {
+export class ExpansionWildsView extends BaseView {
     @property(TimeLineTool)
     private animL: TimeLineTool;
 

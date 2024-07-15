@@ -28,7 +28,7 @@ import { CheckShowWinComplete } from '../CheckShowWinComplete';
 import { WinBoardRunCompleteCommand } from '../winboard/WinBoardRunCompleteCommand';
 import { ChangeWinBoardStateCommand } from '../winboard/ChangeWinBoardStateCommand';
 import { Game1AfterShowCommand } from '../state/Game1AfterShowCommand';
-import { AudioMediator } from '../../../ta/tool/AudioMediator';
+import { AudioMediator } from '../../../audio/AudioMediator';
 import { SettlePlayResponseCommand } from '../../../core/command/SettlePlayResponseCommand';
 import { SaveDataResponseCommand } from '../../../core/command/SaveDataResponseCommand';
 import { CheckRecoveryFlowCommand } from '../recovery/CheckRecoveryFlowCommand';
@@ -37,6 +37,9 @@ import { SaveRecoveryDataCommand } from '../recovery/SaveRecoveryDataCommand';
 import { ByGameHandleCommand } from '../spin/ByGameHandleCommand';
 import { MultipleCalculateCommand } from '../byGame/MultipleCalculateCommand';
 import { ScoringHandleCommand } from '../byGame/ScoringHandleCommand';
+import { OpenHelpCommand } from '../help/OpenHelpCommand';
+import { CloseHelpCommand } from '../help/CloseHelpCommand';
+import { CheckNormalButtonStateCommand } from 'src/game/command/CheckNormalButtonStateCommand';
 
 export abstract class RegisterPuremvcCommand extends puremvc.SimpleCommand {
     public execute(notification: puremvc.INotification): void {
@@ -132,6 +135,10 @@ export abstract class RegisterPuremvcCommand extends puremvc.SimpleCommand {
         this.facade.registerCommand(MultipleCalculateCommand.NAME, MultipleCalculateCommand);
         // 滾分處理
         this.facade.registerCommand(ScoringHandleCommand.NAME, ScoringHandleCommand);
+        // Help
+        this.facade.registerCommand(OpenHelpCommand.NAME, OpenHelpCommand);
+        this.facade.registerCommand(CloseHelpCommand.NAME, CloseHelpCommand);
+        this.facade.registerCommand(CheckNormalButtonStateCommand.NAME, CheckNormalButtonStateCommand);
     }
 
     /**

@@ -1,5 +1,4 @@
 import { Prefab, _decorator, Node, CCString, Sprite, SpriteFrame } from 'cc';
-import { BaseScene } from '../../../base/BaseScene';
 import { LayoutDisplayModeSetting, UILayout } from '../../../core/ui/UILayout';
 import { UISlotMask } from '../../../core/ui/UISlotMask';
 import { PoolManager } from '../../PoolManager';
@@ -9,6 +8,7 @@ import { ReelPasser } from '../../vo/match/ReelMatchInfo';
 import { SingleReelView } from './single-reel/SingleReelView';
 import { SymbolPartGroups } from './symbol/SymbolPartGroups';
 import { SymbolDataPlist } from './SymbolDataPlist';
+import BaseView from 'src/base/BaseView';
 
 const { ccclass, property } = _decorator;
 
@@ -26,7 +26,7 @@ export class ReelsScenesSetting {
 
 /** 基本Reel View實作 */
 @ccclass('ReelView')
-export abstract class ReelView extends BaseScene {
+export abstract class ReelView extends BaseView {
     //// Internal Member
     @property({ type: [ReelsScenesSetting], visible: true })
     private scenesSetting: Array<ReelsScenesSetting> = [];

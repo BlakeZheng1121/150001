@@ -1,13 +1,13 @@
 import { _decorator, Tween, tween, Label, SystemEvent, Node } from 'cc';
-import { BaseScene } from '../../base/BaseScene';
 import { TimeLineTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
 import { BalanceUtil } from '../util/BalanceUtil';
 import { LevelWinType, WinType } from '../vo/enum/WinType';
+import BaseView from 'src/base/BaseView';
 
 const { ccclass, property } = _decorator;
 
 @ccclass('WinBoardView')
-export abstract class WinBoardView extends BaseScene {
+export abstract class WinBoardView extends BaseView {
     public static readonly HORIZONTAL: string = 'horizontal';
     public static readonly VERTICAL: string = 'vertical';
 

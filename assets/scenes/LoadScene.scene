@@ -2026,6 +2026,7 @@
     },
     "_enabled": true,
     "__prefab": null,
+    "renderOrder": -1,
     "progressBar": {
       "__id__": 48
     },

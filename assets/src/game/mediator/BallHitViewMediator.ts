@@ -14,7 +14,7 @@ import {
     ViewMediatorEvent
 } from '../../sgv3/util/Constant';
 import { GameScene } from '../../sgv3/vo/data/GameScene';
-import { AudioManager } from '../../ta/tool/AudioManager';
+import { AudioManager } from '../../audio/AudioManager';
 
 import { GAME_4_CreditCollectResultCommand } from '../command/dragon-up/GAME_4_CreditCollectResultCommand';
 import { MathUtil } from '../../core/utils/MathUtil';

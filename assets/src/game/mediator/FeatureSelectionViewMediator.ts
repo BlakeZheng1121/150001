@@ -8,7 +8,7 @@ import { GameDataProxy } from '../../sgv3/proxy/GameDataProxy';
 import { StateWinEvent, ViewMediatorEvent } from '../../sgv3/util/Constant';
 import { GameSceneData } from '../../sgv3/vo/config/GameSceneData';
 import { GameScene } from '../../sgv3/vo/data/GameScene';
-import { AudioManager } from '../../ta/tool/AudioManager';
+import { AudioManager } from '../../audio/AudioManager';
 import { FeatureSelectionView } from '../view/FeatureSelectionView';
 import { BGMClipsEnum } from '../vo/enum/SoundMap';
 const { ccclass } = _decorator;

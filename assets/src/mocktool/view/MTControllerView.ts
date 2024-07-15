@@ -1,10 +1,10 @@
 import { _decorator, Prefab, instantiate, Button, EditBox, SystemEvent, Label, Node, EventTouch, find } from 'cc';
-import { BaseScene } from '../../base/BaseScene';
 import { MTCaseManager } from '../proxy/MTCaseManager';
+import BaseView from 'src/base/BaseView';
 const { ccclass, property } = _decorator;
 
 @ccclass('MTControllerView')
-export class MTControllerView extends BaseScene {
+export class MTControllerView extends BaseView {
     private readonly BORDER_WIDTH = 20;
     private readonly BTN_WIDTH = 220;
     private readonly BTN_HEIGHT = 60;

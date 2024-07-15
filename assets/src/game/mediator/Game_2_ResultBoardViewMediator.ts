@@ -3,7 +3,7 @@ import BaseMediator from '../../base/BaseMediator';
 import { SceneManager } from '../../core/utils/SceneManager';
 import { StateWinEvent } from '../../sgv3/util/Constant';
 import { GameScene } from '../../sgv3/vo/data/GameScene';
-import { AudioManager } from '../../ta/tool/AudioManager';
+import { AudioManager } from '../../audio/AudioManager';
 import { GAME_GameDataProxy } from '../proxy/GAME_GameDataProxy';
 import { Game_2_ResultBoardView } from '../view/Game_2_ResultBoardView';
 import { BGMClipsEnum } from '../vo/enum/SoundMap';

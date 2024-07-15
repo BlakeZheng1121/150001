@@ -1,7 +1,6 @@
 import { _decorator } from 'cc';
 import BaseMediator from '../../../base/BaseMediator';
-import { BaseScene } from '../../../base/BaseScene';
-import BaseView from '../../../base/BaseView';
+import BaseView from 'src/base/BaseView';
 import { GameDataProxy } from '../../proxy/GameDataProxy';
 import { ViewMediatorEvent } from '../../util/Constant';
 import { GameSceneData } from '../../vo/config/GameSceneData';
@@ -10,7 +9,7 @@ import { GameScene } from '../../vo/data/GameScene';
 const { ccclass } = _decorator;
 
 @ccclass('BaseGameViewMediator')
-export abstract class BaseGameViewMediator<T extends BaseScene | BaseView> extends BaseMediator<T> {
+export abstract class BaseGameViewMediator<T extends BaseView> extends BaseMediator<T> {
     // SceneData
     protected mySceneName: string = '';
     protected myGameScene: GameScene = null;
