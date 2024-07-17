@@ -1,7 +1,10 @@
+import { UIEvent } from 'common-ui/proxy/UIEvent';
 import { StateMachineProxy } from '../../proxy/StateMachineProxy';
 import { StateWinEvent, ViewMediatorEvent, WinEvent } from '../../util/Constant';
 import { GlobalTimer } from '../../util/GlobalTimer';
 import { StateCommand } from './StateCommand';
+import { ButtonName } from 'common-ui/proxy/UIEnums';
+import { SpinButton } from 'common-ui/view/SpinButton';
 
 export class Game3InitCommand extends StateCommand {
     public static readonly NAME = StateMachineProxy.GAME3_EV_INIT;
@@ -16,6 +19,7 @@ export class Game3InitCommand extends StateCommand {
         const SceneData = self.gameDataProxy.getSceneDataByName(self.gameDataProxy.curScene);
         self.sendNotification(WinEvent.FORCE_WIN_DISPOSE);
         self.sendNotification(ViewMediatorEvent.CLOSE_FREE_SPIN_MSG);
+        this.sendNotification(UIEvent.CHANGE_BUTTON_STATE, { name: ButtonName.SPIN, state: SpinButton.STATUS_IDLE });
         let delayTime = 0;
         //判斷是否需要重置牌面
         if (self.gameDataProxy.reStateResult) {

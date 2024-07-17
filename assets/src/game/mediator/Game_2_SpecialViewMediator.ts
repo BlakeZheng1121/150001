@@ -1,6 +1,5 @@
 import { _decorator } from 'cc';
 import BaseMediator from '../../base/BaseMediator';
-import { ControlView } from '../../control-panel/view/ControlView';
 import { SceneManager } from '../../core/utils/SceneManager';
 import {
     FreeGameEvent,
@@ -25,25 +24,22 @@ export class Game_2_SpecialViewMediator extends BaseMediator<Game_2_SpecialView>
         this.view.init(this.gameDataProxy.language);
     }
 
-    protected lazyEventListener(): void {}
+    protected lazyEventListener(): void {
+        this.view.node.active = false;
+    }
 
     public listNotificationInterests(): Array<any> {
         return [
             ViewMediatorEvent.SHOW_RETRIGGER_BOARD,
-            ReelEvent.ON_REELS_PERFORM_END,
-            ReelEvent.ON_REELS_START_ROLL,
-            SceneManager.EV_ORIENTATION_VERTICAL,
-            SceneManager.EV_ORIENTATION_HORIZONTAL,
-            GameStateProxyEvent.ON_SCENE_BEFORE_CHANGE,
             FreeGameEvent.ON_SIDE_BALL_SHOW,
-            FreeGameEvent.ON_SIDE_BALL_SCORE_SHOW
+            FreeGameEvent.ON_SIDE_BALL_SCORE_SHOW,
+            GameStateProxyEvent.ON_SCENE_BEFORE_CHANGE
         ];
     }
 
     public handleNotification(notification: puremvc.INotification): void {
         let name = notification.getName();
         let self = this;
-        if (self.gameDataProxy.curScene != GameScene.Game_2) return;
         switch (name) {
             case ViewMediatorEvent.SHOW_RETRIGGER_BOARD:
                 self.showRetriggerBoard(notification.getBody()[0]);
@@ -55,10 +51,7 @@ export class Game_2_SpecialViewMediator extends BaseMediator<Game_2_SpecialView>
                 self.onHitSpecial(notification.getBody());
                 break;
             case GameStateProxyEvent.ON_SCENE_BEFORE_CHANGE:
-            case ReelEvent.ON_REELS_START_ROLL:
-            case StateWinEvent.SHOW_LAST_CREDIT_BOARD:
-            case StateWinEvent.ON_GAME2_OPENING:
-                self.view.stopFreeWild();
+                this.sceneChange();
                 break;
         }
     }
@@ -76,6 +69,10 @@ export class Game_2_SpecialViewMediator extends BaseMediator<Game_2_SpecialView>
 
     protected showRetriggerBoard(addRound: number) {
         this.view.retriggerShow(addRound);
+    }
+
+    public sceneChange() {
+        this.view.node.active = this.gameDataProxy.curScene == GameScene.Game_2;
     }
 
     private _gameDataProxy: GAME_GameDataProxy;

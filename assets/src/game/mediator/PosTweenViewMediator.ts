@@ -32,7 +32,9 @@ export class PosTweenViewMediator extends BaseMediator<PosTweenView> {
         super(name, component);
     }
 
-    protected lazyEventListener(): void {}
+    protected lazyEventListener(): void {
+        this.view.node.active = false;
+    }
 
     public listNotificationInterests(): Array<any> {
         return [

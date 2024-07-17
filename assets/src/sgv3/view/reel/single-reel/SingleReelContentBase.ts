@@ -4,6 +4,7 @@ import { ReelMask } from '../reel-mask/ReelMask';
 import { UISymbol } from '../symbol/UISymbol';
 import { SymbolDataPlist } from '../SymbolDataPlist';
 import { SingleReelView } from './SingleReelView';
+import { OverlaySymbolContainer } from '../symbol/OverlaySymbolContainer';
 
 const { ccclass, property } = _decorator;
 
@@ -174,6 +175,8 @@ export class SingleReelContentBase extends Component {
     public dampMotionData: ReelForceData | null = null;
 
     public tempTween: Tween<SingleReelContentBase> | null = null;
+
+    public overlaySymbolContainer: OverlaySymbolContainer | null = null;
     ////
 
     ////Event

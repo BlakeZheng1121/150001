@@ -8,6 +8,7 @@ import { WheelUsePattern } from '../vo/enum/WheelUsePattern';
 import { GameStateSetting } from '../vo/setting/GameStateSetting';
 import { GameDataProxy } from './GameDataProxy';
 import { ReelState } from '../vo/data/ReelState';
+import { UIProxy } from 'common-ui/proxy/UIProxy';
 
 export class ReelDataProxy extends puremvc.Proxy {
     public static NAME: string = 'ReelDataProxy';
@@ -29,15 +30,9 @@ export class ReelDataProxy extends puremvc.Proxy {
         this._rollingStripMap = new Map<string, Array<Array<number>>>();
     }
 
-    protected _isQuickSpin: boolean = false;
     /** 加速模式 */
-    public set isQuickSpin(val: boolean) {
-        this._isQuickSpin = val;
-        this.sendNotification(ReelEvent.ON_QUICK_STATE_CHANGE);
-    }
-
     public get isQuickSpin(): boolean {
-        return this._isQuickSpin;
+        return this.UIProxy.isQuickSpin;
     }
 
     protected _mathTableIndex: number = 0;
@@ -125,6 +120,15 @@ export class ReelDataProxy extends puremvc.Proxy {
         }
         return this._gameDataProxy;
     }
+
+    private _UIProxy: UIProxy;
+    public get UIProxy(): UIProxy {
+        if (!this._UIProxy) {
+            this._UIProxy = this.facade.retrieveProxy(UIProxy.NAME) as UIProxy;
+        }
+        return this._UIProxy;
+    }
+
 
     protected positionCompare(s1: Node, s2: Node) {
         if (s1.worldPosition.y < s2.worldPosition.y) {

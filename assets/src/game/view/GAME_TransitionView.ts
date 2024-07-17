@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, game } from 'cc';
+import { _decorator } from 'cc';
 import { TimeLineTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
 import { AudioManager } from '../../audio/AudioManager';
 import { AudioClipsEnum } from '../vo/enum/SoundMap';
@@ -20,7 +20,6 @@ export class GAME_TransitionView extends BaseView {
 
     protected onLoad() {
         super.onLoad('TransitionViewMediator');
-        game.addPersistRootNode(this.node);
     }
 
     /** 更改orientation mode */

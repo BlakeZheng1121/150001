@@ -9,7 +9,7 @@ export class Game_3_WinBoardView extends BaseView {
     public callback: IGame_3_WinBoardViewMediator;
 
     @property(MiniResultBoard)
-    private miniResultBoard: MiniResultBoard;
+    public miniResultBoard: MiniResultBoard;
 
     // 結算畫面的總分數字
     @property({ type: Label })
@@ -127,6 +127,7 @@ export class Game_3_WinBoardView extends BaseView {
         self.onChange();
         return true;
     }
+
     public registerButton() {
         this.node.on(
             SystemEvent.EventType.TOUCH_END,

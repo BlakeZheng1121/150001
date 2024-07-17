@@ -1,16 +1,22 @@
-
 import { _decorator } from 'cc';
 import { UIViewStateBase } from '../../../core/uiview/UIViewStateRegister';
 import { SingleReelContent } from '../../../sgv3/view/reel/single-reel/SingleReelContent';
-import { SingleReelDampState, SingleReelEmergencyStopState, SingleReelRollAfterState, SingleReelRollStartState, SingleReelSlowStopState, SingleReelStateRegisterBase, SingleReelStopState } from '../../../sgv3/view/reel/single-reel/SingleReelStateRegisterBase';
+import {
+    SingleReelDampState,
+    SingleReelEmergencyStopState,
+    SingleReelRollAfterState,
+    SingleReelRollStartState,
+    SingleReelSlowStopState,
+    SingleReelStateRegisterBase,
+    SingleReelStopState
+} from '../../../sgv3/view/reel/single-reel/SingleReelStateRegisterBase';
 import { Layer } from '../../../sgv3/vo/enum/Layer';
 import { ReelType, SymbolPerformType } from '../../../sgv3/vo/enum/Reel';
 import { Game_2_SymbolContent } from '../symbol/Game_2_SymbolContent';
 const { ccclass } = _decorator;
- 
+
 @ccclass('Game_2_ReelStateRegister')
 export class Game_2_ReelStateRegister extends SingleReelStateRegisterBase {
-
     private _content: SingleReelContent | null = null;
 
     private get content() {
@@ -20,7 +26,7 @@ export class Game_2_ReelStateRegister extends SingleReelStateRegisterBase {
         return this._content;
     }
 
-    onRegister(){
+    onRegister() {
         super.onRegister();
         this.registerState(new Game_2_DampState(this.content));
         this.registerState(new Game_2_EmergencyStopState(this.content));
@@ -30,7 +36,6 @@ export class Game_2_ReelStateRegister extends SingleReelStateRegisterBase {
         this.registerState(new Game_2_StopState(this.content));
         this.registerState(new Game_2_BlackShowState(this.content));
     }
-
 }
 
 // ByGame 針對respin 壓暗
@@ -52,12 +57,14 @@ export class Game_2_BlackShowState extends UIViewStateBase {
 
     ////Internal Method
     protected onPlay() {
-        for (let i = 0; i < this.content!.symbols!.length; i++) {
-            if (this.content.isBlackSymbol && (!this.content
-                .isRespinBlackId(this.content.symbols[i].symbolContent.symbolData.id))) {
-                    this.content.symbols[i].setLayer(Layer.PERFORM_2_PANEL);
-            }else{
-                this.content.symbols[i].setLayer(Layer.PERFORM_1_PANEL);
+        for (let i = this.content.fovStartIndex; i <= this.content.fovEndIndex; i++) {
+            if (
+                this.content.isBlackSymbol &&
+                !this.content.isRespinBlackId(this.content.symbols[i].symbolContent.symbolData.id)
+            ) {
+                this.content.symbols[i].setOverlay(this.content.overlaySymbolContainer);
+            } else {
+                this.content.symbols[i].restoreParent();
             }
         }
 
@@ -78,22 +85,24 @@ export class Game_2_DampState extends SingleReelDampState {
         this.content = content;
     }
 
-    onPlay() {      
-        if(this.content.isTriggerFeatureReSpin) {
+    onPlay() {
+        if (this.content.isTriggerFeatureReSpin) {
             this.onEffectFinished();
             return;
-        }else {
-            super.onPlay();                    
-        }      
+        } else {
+            super.onPlay();
+        }
 
-       for (let i = 0; i < this.content!.symbols!.length; i++) {
+        for (let i = 0; i < this.content!.symbols!.length; i++) {
             let symbolContent = this.content!.symbols[i].symbolContent as Game_2_SymbolContent;
-            if (symbolContent.freeC1.node.active 
-                && symbolContent.fovIndex >= 0
-                || symbolContent.fovIndex >= 0) {
+            if (
+                (symbolContent.freeC1.node.active || !this.content.isRespinBlackId(symbolContent.symbolData.id)) &&
+                symbolContent.fovIndex >= 0
+            ) {
                 this.content!.symbols[i].play(SymbolPerformType.DAMPING);
-            }else {
-                this.content!.symbols[i].setLayer(Layer.PERFORM_1_PANEL);
+                this.content!.symbols[i].setOverlay(this.content.overlaySymbolContainer);
+            } else {
+                this.content.symbols[i].restoreParent();
                 symbolContent.freeC1.node.active = false;
             }
         }
@@ -120,15 +129,15 @@ export class Game_2_EmergencyStopState extends SingleReelEmergencyStopState {
     ////
 
     ////Internal Method
-    protected onRollCycled(){
+    protected onRollCycled() {
         let symbolContent = this.content.first.symbolContent as Game_2_SymbolContent;
         let credit = this.content.getFreeCredit(symbolContent.fovIndex);
         symbolContent.freeCredit = credit;
         super.onRollCycled();
-        if(!this.content.isRespinBlackId(symbolContent.symbolData.id)) {
-            this.content.first.setLayer(Layer.PERFORM_2_PANEL);
-        }else{
-            this.content.first.setLayer(Layer.PERFORM_1_PANEL);
+        if (!this.content.isRespinBlackId(symbolContent.symbolData.id)) {
+            this.content.first.setOverlay(this.content.overlaySymbolContainer);
+        } else {
+            this.content.first.restoreParent();
         }
     }
     ////
@@ -147,7 +156,7 @@ export class Game_2_RollAfterState extends SingleReelRollAfterState {
     ////
 
     ////Internal Method
-    protected onRollCycled(){
+    protected onRollCycled() {
         let symbolContent = this.content.first.symbolContent as Game_2_SymbolContent;
         let credit = this.content.getFreeCredit(symbolContent.fovIndex);
         symbolContent.freeCredit = credit;
@@ -169,7 +178,7 @@ export class Game_2_RollStartState extends SingleReelRollStartState {
     ////
 
     ////Internal Method
-    protected onRollCycled(){
+    protected onRollCycled() {
         let symbolContent = this.content.first.symbolContent as Game_2_SymbolContent;
         let credit = this.content.getFreeCredit(symbolContent.fovIndex);
         symbolContent.freeCredit = credit;
@@ -197,15 +206,15 @@ export class Game_2_SlowStopState extends SingleReelSlowStopState {
     ////
 
     //// API
-    protected onRollCycled(){
+    protected onRollCycled() {
         let symbolContent = this.content.first.symbolContent as Game_2_SymbolContent;
         let credit = this.content.getFreeCredit(symbolContent.fovIndex);
         symbolContent.freeCredit = credit;
         super.onRollCycled();
-        if(!this.content.isRespinBlackId(symbolContent.symbolData.id)) {
-            this.content.first.setLayer(Layer.PERFORM_2_PANEL);
-        }else{
-            this.content.first.setLayer(Layer.PERFORM_1_PANEL);
+        if (!this.content.isRespinBlackId(symbolContent.symbolData.id)) {
+            this.content.first.setOverlay(this.content.overlaySymbolContainer);
+        } else {
+            this.content.first.restoreParent();
         }
     }
     ////
@@ -224,7 +233,7 @@ export class Game_2_StopState extends SingleReelStopState {
     ////
 
     ////Internal Method
-    protected onRollCycled(){
+    protected onRollCycled() {
         let symbolContent = this.content.first.symbolContent as Game_2_SymbolContent;
         let credit = this.content.getFreeCredit(symbolContent.fovIndex);
         symbolContent.freeCredit = credit;

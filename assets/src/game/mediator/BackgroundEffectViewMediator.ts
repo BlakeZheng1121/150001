@@ -9,7 +9,9 @@ const { ccclass, property } = _decorator;
 
 @ccclass('BackgroundEffectViewMediator')
 export class BackgroundEffectViewMediator extends BaseMediator<BackgroundEffectView> {
-    protected lazyEventListener(): void {}
+    protected lazyEventListener(): void {
+        this.view.playBaseGameSceneAnim();
+    }
 
     public listNotificationInterests(): Array<any> {
         return [GameStateProxyEvent.ON_SCENE_CHANGED];

@@ -27,6 +27,7 @@ import { NetworkProxy } from '../../core/proxy/NetworkProxy';
 import { RecoveryData } from '../vo/data/RecoveryData';
 import { SpecialFeatureResult } from '../vo/result/SpecialFeatureResult';
 import { WinType } from '../vo/enum/WinType';
+import { UIEvent } from 'common-ui/proxy/UIEvent';
 
 /** 全遊戲資料 */
 export class GameDataProxy extends CoreGameDataProxy {
@@ -606,8 +607,7 @@ export class GameDataProxy extends CoreGameDataProxy {
         let denom = MathUtil.mul(this.curDenom, 0.001);
         this.credit = MathUtil.div(this.cash, denom);
 
-        const webBridgeProxy = this.facade.retrieveProxy(WebBridgeProxy.NAME) as WebBridgeProxy;
-        webBridgeProxy.updateHtmlCredit();
+        this.sendNotification(UIEvent.UPDATE_PLAYER_BALANCE, this.cash);
         this.saveUserSetting();
     }
     public get curDenom(): number {
@@ -1031,7 +1031,6 @@ export class GameDataProxy extends CoreGameDataProxy {
         self.totalBetList.sort(function (a, b) {
             return a - b;
         });
-        self.totalBetList.reverse();
     }
 
     protected setTotalBetExtraBet(): void {
@@ -1062,7 +1061,6 @@ export class GameDataProxy extends CoreGameDataProxy {
         this.totalBetList.sort(function (a, b) {
             return a - b;
         });
-        this.totalBetList.reverse();
 
         // 移除重複值
         this.totalBetList = this.totalBetList.filter(function (el, i, arr) {

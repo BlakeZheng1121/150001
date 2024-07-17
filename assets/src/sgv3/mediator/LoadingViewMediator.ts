@@ -5,7 +5,7 @@ import { SFLoginCommand } from '../../core/command/SFLoginCommand';
 import { NetworkProxy } from '../../core/proxy/NetworkProxy';
 import { Logger } from '../../core/utils/Logger';
 import { SceneManager } from '../../core/utils/SceneManager';
-import { AudioManager } from '../../ta/tool/AudioManager';
+import { AudioManager } from '../../audio/AudioManager';
 import { CoreDefaultSettingCommand } from '../command/CoreDefaultSettingCommand';
 import { CheckRecoveryFlowCommand } from '../command/recovery/CheckRecoveryFlowCommand';
 import { GameDataProxy } from '../proxy/GameDataProxy';
@@ -40,7 +40,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
 
     /** preload 要預載的資源 */
     protected baseList(): string[] {
-        return [GameScene.Game_1, 'common', 'control', 'winBoard'];
+        return [GameScene.Game_1, 'common', 'common-ui', 'bbw', 'winBoard'];
     }
 
     /** 進入basegame後 要載的資源 */
@@ -148,14 +148,18 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
                     )
                     .start();
             } else {
-                this.gameDataProxy.isCompletedBatchLoading = true;
-                if (this.pendEventInfo) {
-                    this.sendNotification(this.pendEventInfo.triggerEvent, this.pendEventInfo.eventParam);
-                }
-                this.pendEventInfo = null;
-                this.view.loadingComplete();
+                this.loadBatchComplete();
             }
         }
+    }
+
+    private loadBatchComplete() {
+        this.gameDataProxy.isCompletedBatchLoading = true;
+        if (this.pendEventInfo) {
+            this.sendNotification(this.pendEventInfo.triggerEvent, this.pendEventInfo.eventParam);
+        }
+        this.pendEventInfo = null;
+        this.view.loadingComplete();
     }
 
     /** 因為一開始的loading畫面，如果沒有delay會看到loading bar未載完就進入遊戲的狀況 */
@@ -179,12 +183,12 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
     protected afterInitData() {
         if (this.gameDataProxy.isMaintaining) {
             this.gameDataProxy.isMaintaining = false;
-            this.webBridgeProxy.resetWebErrors();
             this.sendNotification(CoreDefaultSettingCommand.NAME);
         } else {
             this.headGroup = this.baseLoadList;
             this.downloadBundle('common')
                 .then(() => this.downloadBundle('scenes'))
+                .then(() => this.downloadBundle('common-ui'))
                 .then(() => this.downloadBundle('control-panel'))
                 .then(() => this.loadAssetsBundle(this.baseLoadList))
                 .catch((error) => {
@@ -236,37 +240,58 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
     /** 使用 Asset bundle 實例各場景的 prefab */
     private async loadAssetsBundle(groupList: string[]) {
         while (groupList.length > 0) {
-            let assetName = groupList.shift();
+            let assetName = groupList[0];
             if (assetName == 'common') {
                 await this.loadPrefab('common', 'Common-Panel')
                     .then((prefab) => this.instantiatePrefab(prefab))
-                    // .then((obj) => this.wait(obj))
                     .then((commonNode: Node) => {
                         commonNode.children.forEach((node) => {
                             node.active = false;
                         });
                     })
-                    .then((obj) => this.wait(obj, 100));
-            } else if (assetName == 'control') {
-                await this.loadPrefab('control-panel', 'Control-Panel')
+                    .then((obj) => {
+                        groupList.shift();
+                        this.wait(obj, 100);
+                    })
+                    .catch((error) => {});
+            } else if (assetName == 'common-ui') {
+                await this.loadPrefab('control-panel', 'Game_ControlPanel')
                     .then((prefab) => this.instantiatePrefab(prefab))
-                    .then((obj) => this.wait(obj, 100));
+                    .then((obj) => {
+                        groupList.shift();
+                        this.wait(obj, 100);
+                    })
+                    .catch((error) => {});
+            } else if (assetName == 'bbw') {
+                await this.loadPrefab('common-ui', 'BBWView')
+                    .then((prefab) => this.instantiatePrefab(prefab))
+                    .then((obj) => {
+                        groupList.shift();
+                        this.wait(obj, 100);
+                    })
+                    .catch((error) => {});
             } else if (assetName == 'winBoard') {
                 await this.loadPrefab('common', 'Game_WinBoardView')
                     .then((prefab) => this.instantiatePrefab(prefab))
                     .then((winBoardNode: Node) => {
                         winBoardNode.active = false;
                     })
-                    .then((obj) => this.wait(obj, 100));
+                    .then((obj) => {
+                        groupList.shift();
+                        this.wait(obj, 100);
+                    })
+                    .catch((error) => {});
             } else {
                 await this.loadPrefab('scenes', assetName)
                     .then((prefab) => this.instantiatePrefab(prefab))
-                    // .then((obj) => this.wait(obj))
                     .then((node: Node) => {
                         node.active = false;
-                        node.setSiblingIndex(1);
                     })
-                    .then((obj) => this.wait(obj, 100));
+                    .then((obj) => {
+                        groupList.shift();
+                        this.wait(obj, 100);
+                    })
+                    .catch((error) => {});
             }
         }
 
@@ -289,7 +314,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
     instantiatePrefab(prefab) {
         return new Promise((resolve, reject) => {
             const node: Node = instantiate(prefab);
-            director.getScene().getChildByName('View').addChild(node);
+            director.getScene().addChild(node);
             // 完成載入數量
             this.finishedAssetsNum++;
             this.onLoadSceneProgress(this.finishedAssetsNum, this.totalAssetsNum);

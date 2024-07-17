@@ -8,7 +8,6 @@ import { StateCommand } from './StateCommand';
 export class Game4TransitionsCommand extends StateCommand {
     public static readonly NAME = StateMachineProxy.GAME4_EV_TRANSITIONS;
 
-   
     protected timerKey = 'game4Transition';
     public execute(notification: puremvc.INotification): void {
         this.sendNotification(StateWinEvent.ON_GAME4_TRANSITIONS, false);
@@ -19,7 +18,6 @@ export class Game4TransitionsCommand extends StateCommand {
     private showOpening() {
         GlobalTimer.getInstance().removeTimer(this.timerKey);
         this.sendNotification(StateWinEvent.ON_GAME4_OPENING, true); //通知Game4場景，進行開場表演
-        this.sendNotification(ViewMediatorEvent.SHOW_FREE_SPIN_MSG,GameScene.Game_4); //顯示DragonUp FreeSSSpin次數的UI
         GlobalTimer.getInstance().registerTimer(this.timerKey, 1, this.endGameCutScene, this).start();
     }
 

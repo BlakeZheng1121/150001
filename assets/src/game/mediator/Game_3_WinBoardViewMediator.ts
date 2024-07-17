@@ -112,7 +112,8 @@ export class Game_3_WinBoardViewMediator
 
     /** 離開場景處理 */
     protected leaveMediator() {
-        if (this.gameDataProxy.preScene !== GameScene.Init && this.gameDataProxy.preScene !== this.mySceneName) {
+        if (this.gameDataProxy.preScene !== this.mySceneName) {
+            this.view.miniResultBoard.node.active = false;
             return;
         }
 
@@ -145,11 +146,11 @@ export class Game_3_WinBoardViewMediator
     public onSkip() {
         window['onSpinBtnClick']();
     }
+
     private showWonCreditBoard(bonusResult: BonusGameOneRoundResult): void {
         const self = this;
         let coinFallTime = self.mySceneData.bonusCoinFallAfterCreditBoardTime;
         self.totalWin = bonusResult.oneRoundJPTotalWin + bonusResult.oneRoundTotalWinWithoutJP;
-        self.view.node.active = true;
 
         let runTimer = self.getWinBoardRunTimer(bonusResult.hitPool);
 
@@ -264,7 +265,7 @@ export class Game_3_WinBoardViewMediator
 
     playRunCreditsCompletedSound(): void {
         AudioManager.Instance.stop(ScoringClipsEnum.Scoring_JPWinIntro);
-        AudioManager.Instance.stop(this.curScoringEnum).fade(0, 0.3);;
+        AudioManager.Instance.stop(this.curScoringEnum).fade(0, 0.3);
         AudioManager.Instance.play(this.curScoringEndEnum).volume(0).fade(1, 0.3);
     }
 

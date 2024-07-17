@@ -4,6 +4,7 @@ import { MathUtil } from '../../core/utils/MathUtil';
 import { GameDataProxy } from '../proxy/GameDataProxy';
 import { WebBridgeProxy } from '../proxy/WebBridgeProxy';
 import { CtrlPanelBtnState } from '../util/Constant';
+import { UIEvent } from 'common-ui/proxy/UIEvent';
 
 /**
  * 初始設定 line、bet、denom 等等
@@ -28,7 +29,7 @@ export abstract class CoreDefaultSettingCommand extends puremvc.SimpleCommand {
         // 設定web顯示的線數，該值會隨line or way調整
         this.setWebLine();
         // 設定 Control Panel的Bet Menu
-        this.sendNotification(CtrlPanelBtnState.CREATE_BET_MENU);
+        this.sendNotification(UIEvent.CREATE_BET_MENU);
         // 設定 Bet Menu旁 切換 Bet會有 Bonus Upgrade的資訊
         this.sendNotification(CtrlPanelBtnState.CREATE_BONUS_UPGRADE_BET_RANGE_INFO);
     }

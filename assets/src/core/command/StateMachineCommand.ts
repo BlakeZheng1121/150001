@@ -1,12 +1,11 @@
 import { NetworkProxy } from '../proxy/NetworkProxy';
 import { StateMachineObject, CoreStateMachineProxy } from '../proxy/CoreStateMachineProxy';
-import { CoreSFDisconnectionCommand } from './CoreSFDisconnectionCommand';
 import { CoreSGMaintenanceCommand } from './CoreSGMaintenanceCommand';
-import { StateWinEvent } from '../../sgv3/util/Constant';
 import { CoreWebBridgeProxy } from '../proxy/CoreWebBridgeProxy';
 import { AccountStatusMultipleLoginCommand } from './AccountStatusMultipleLoginCommand';
 import { CoreGameDataProxy } from '../proxy/CoreGameDataProxy';
 import { SFReconnectCommand } from './SFReconnectCommand';
+import { CheckNormalButtonStateCommand } from 'src/game/command/CheckNormalButtonStateCommand';
 
 export class StateMachineCommand extends puremvc.SimpleCommand {
     public static readonly NAME: string = 'StateMachineCommand';
@@ -34,7 +33,7 @@ export class StateMachineCommand extends puremvc.SimpleCommand {
         } else {
             self.sendNotification(StateMachineCommand.EV_FAILED_STATE);
         }
-        this.sendNotification(StateWinEvent.ON_BTN_STATE_CHANGED);
+        this.sendNotification(CheckNormalButtonStateCommand.NAME);
     }
 
     private changeState(obj: StateMachineObject): void {

@@ -8,40 +8,8 @@
   },
   "layer": [
     {
-      "name": "CONTROL_PANEL",
-      "value": 1
-    },
-    {
-      "name": "PERFORM_1_PANEL",
-      "value": 2
-    },
-    {
-      "name": "PERFORM_2_PANEL",
-      "value": 4
-    },
-    {
-      "name": "PERFORM_3_PANEL",
-      "value": 8
-    },
-    {
-      "name": "TRANSITION_PANEL",
-      "value": 16
-    },
-    {
-      "name": "BBW_PANEL",
-      "value": 32
-    },
-    {
       "name": "REEL_MASK_PANEL",
       "value": 524288
-    },
-    {
-      "name": "BOARD_PANEL",
-      "value": 64
-    },
-    {
-      "name": "LEVELWIN_PANEL",
-      "value": 128
     }
   ],
   "script": {

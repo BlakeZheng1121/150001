@@ -18,7 +18,17 @@ export class GAME_Game2HitSpecialCommand extends Game2HitSpecialCommand {
         let freeGameSpecialInfo: FreeGameSpecialInfo = (notification.getBody() as StateMachineObject).body;
 
         if (freeGameSpecialInfo.isHitGrand) {
-            this.sendNotification(WinEvent.ON_HIT_GRAND, this.endGame2HitGrand.bind(this));
+            const getGrand = (oneRoundResult: BonusGameOneRoundResult) =>
+                oneRoundResult.specialHitInfo == SpecialHitInfo[SpecialHitInfo.bonusGame_02];
+            // only Hit Grand in one game cycle
+            let grandCash =
+                this.gameDataProxy.spinEventData.bonusGameResult.bonusGameOneRoundResult.find(
+                    getGrand
+                ).oneRoundJPTotalWin;
+            this.sendNotification(WinEvent.ON_HIT_GRAND, {
+                grandCash: grandCash,
+                callback: this.endGame2HitGrand.bind(this)
+            });
         } else if (freeGameSpecialInfo.retrigger.isRetrigger) {
             this.showRetrigger();
             // 通知ui要做hitSpecial表演

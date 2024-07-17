@@ -51,6 +51,7 @@ CCProgram sprite-fs %{
   // 遊戲畫面大小
   uniform view {
     vec2 viewSize;
+    vec2 viewOffset;
   };
   // 遮罩範圍的參考圖
   #if USE_BASE_MAP
@@ -69,8 +70,8 @@ CCProgram sprite-fs %{
   vec4 frag () {
     vec2 worldXY = v_wpos.xy;
     // 將世界座標對應到視窗上的 uv，直橫式轉換 viewSize 需重新設定
-    worldXY.x = worldXY.x / viewSize.x;
-    worldXY.y = worldXY.y / viewSize.y;
+    worldXY.x = (worldXY.x + viewOffset.x) / viewSize.x;
+    worldXY.y = (worldXY.y + viewOffset.y) / viewSize.y ;
     vec4 o = vec4(1, 1, 1, 1);
     
     #if USE_BASE_MAP

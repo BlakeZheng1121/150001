@@ -3,21 +3,15 @@ import { SceneManager } from '../../core/utils/SceneManager';
 import { GameUIOrientationSetting } from '../vo/GameUIOrientationSetting';
 import { PosTweenView } from './dragon-up/PosTweenView';
 import BaseView from 'src/base/BaseView';
-const { ccclass } = _decorator;
+const { ccclass, property } = _decorator;
 
 @ccclass('Game_4_View')
 export class Game_4_View extends BaseView {
     public static readonly HORIZONTAL: string = 'horizontal';
     public static readonly VERTICAL: string = 'vertical';
 
-    private _posTweenView: PosTweenView | null = null;
-
-    public get posTweenView() {
-        if (this._posTweenView == null) {
-            this._posTweenView = this.getComponentInChildren(PosTweenView);
-        }
-        return this._posTweenView;
-    }
+    @property({ type: PosTweenView })
+    private posTweenView: PosTweenView | null = null;
 
     private _gameUIOrientation: Array<GameUIOrientationSetting> | null = null;
 
@@ -34,6 +28,10 @@ export class Game_4_View extends BaseView {
 
     public init(accMultiple: number) {
         this.posTweenView.init(accMultiple);
+    }
+
+    public togglePosTweenView(enabled: boolean) {
+        this.posTweenView.node.active = enabled;
     }
 
     public changeOrientation(orientation: string, scene: string) {

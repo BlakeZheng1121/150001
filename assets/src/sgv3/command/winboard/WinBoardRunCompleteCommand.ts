@@ -8,6 +8,10 @@ import { GlobalTimer } from '../../util/GlobalTimer';
 import { GameScene } from '../../vo/data/GameScene';
 import { MaintainGame1ShowwinCommand } from '../connect/MaintainGame1ShowwinCommand';
 import { TakeWinCommand } from '../balance/TakeWinCommand';
+import { UIEvent } from 'common-ui/proxy/UIEvent';
+import { ButtonName } from 'common-ui/proxy/UIEnums';
+import { SpinButton } from 'common-ui/view/SpinButton';
+import { CheckNormalButtonStateCommand } from 'src/game/command/CheckNormalButtonStateCommand';
 
 /** 最後滾分後處理 */
 export class WinBoardRunCompleteCommand extends puremvc.SimpleCommand {
@@ -35,7 +39,7 @@ export class WinBoardRunCompleteCommand extends puremvc.SimpleCommand {
                 self.other();
                 break;
         }
-        this.sendNotification(StateWinEvent.ON_BTN_STATE_CHANGED, true);
+        this.sendNotification(CheckNormalButtonStateCommand.NAME);
     }
 
     /** Game1處理最後滾分事件 */
@@ -46,15 +50,10 @@ export class WinBoardRunCompleteCommand extends puremvc.SimpleCommand {
             // 檢查 下一Round 是否為特殊中獎(free_game, bonus_game)
             // 檢查 是否從MiniGame回來，是的話直接往下走
             self.game1DelayAfterShow(self.miniGameDelayTime);
-        } else if (self.gameDataProxy.onAutoPlay) {
+        } else {
             self.game1DelayAfterShow(self.gameDataProxy.commonSetting.endWinDelayTime);
             self.sendNotification(TakeWinCommand.NAME); //贏分加入表底
-        } else {
-            self.sendNotification(TakeWinCommand.NAME); //贏分加入表底
-
-            if (self.stateMachineProxy.checkMaintenanceGame1Showwin()) {
-                self.sendNotification(MaintainGame1ShowwinCommand.NAME);
-            }
+            self.sendNotification(UIEvent.CHANGE_BUTTON_STATE, { name: ButtonName.SPIN, state: SpinButton.STATUS_IDLE });
         }
     }
 

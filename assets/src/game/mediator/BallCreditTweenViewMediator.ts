@@ -16,6 +16,7 @@ export class BallCreditTweenViewMediator extends BaseMediator<BallCreditTweenVie
     private baseCreditCollectSequence: Array<Vec2> | null = null;
     private curbaseSequenceIndex: number = 0;
     private timerKey = 'delayShowFeatureSelection';
+    private featureSelectionCallback: Function = null;
 
     public constructor(name?: string, component?: any) {
         super(name, component);
@@ -66,8 +67,9 @@ export class BallCreditTweenViewMediator extends BaseMediator<BallCreditTweenVie
     }
 
     /** 起始設定 處理參數Reset */
-    private onBaseCreditCollectInit(baseArray: Array<Vec2>) {
-        this.baseCreditCollectSequence = baseArray;
+    private onBaseCreditCollectInit(data: { baseArray: Array<Vec2>; callback: Function }) {
+        this.baseCreditCollectSequence = data.baseArray;
+        this.featureSelectionCallback = data.callback;
         this.curbaseSequenceIndex = 0;
         this.onBaseCreditCollectStart();
     }
@@ -94,7 +96,6 @@ export class BallCreditTweenViewMediator extends BaseMediator<BallCreditTweenVie
         this.sendNotification(ViewMediatorEvent.COLLECT_CREDIT_BALL, array);
         this.curbaseSequenceIndex++;
         let audioSequenceName: string = AudioClipsEnum.Base_FeatureInitialCollectHit01;
-      
 
         if (this.curbaseSequenceIndex >= this.baseCreditCollectSequence.length) {
             audioSequenceName = audioSequenceName.slice(0, audioSequenceName.length - 2);
@@ -110,11 +111,8 @@ export class BallCreditTweenViewMediator extends BaseMediator<BallCreditTweenVie
 
     private delayShowFeatureSelection() {
         GlobalTimer.getInstance().removeTimer(this.timerKey);
-        let result = this.gameDataProxy.spinEventData.baseGameResult;
-        this.sendNotification(ViewMediatorEvent.SHOW_FEATURE_SELECTION, [
-            result.extendInfoForbaseGameResult.ballCount,
-            this.gameDataProxy.convertCredit2Cash(result.extendInfoForbaseGameResult.ballTotalCredit) // 換算成錢
-        ]);
+        this.featureSelectionCallback();
+        this.featureSelectionCallback = null;
     }
     // ======================== Get Set ========================
 

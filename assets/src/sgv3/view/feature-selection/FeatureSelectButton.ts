@@ -15,10 +15,14 @@ export class FeatureSelectButton extends Component {
     }
 
     public hideButton(callBack?: Function) {
-        this.timeLineTool?.play('Hide', callBack);
+        this.timeLineTool?.play('Hide', () => {
+            callBack?.();
+            this.node.active = false;
+        });
     }
 
     public showButton() {
+        this.node.active = true;
         this.timeLineTool?.play('PlayShow');
     }
 

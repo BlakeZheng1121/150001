@@ -1,3 +1,4 @@
+import { UIEvent } from 'common-ui/proxy/UIEvent';
 import { SpinRequestCommand } from '../../sgv3/command/spin/SpinRequestCommand';
 import { GameDataProxy } from '../../sgv3/proxy/GameDataProxy';
 import { ReelDataProxy } from '../../sgv3/proxy/ReelDataProxy';
@@ -23,7 +24,7 @@ export class SettlePlayResponseCommand extends puremvc.SimpleCommand {
                 this.gameDataProxy.canUpdateJackpotPool = true;
                 this.gameDataProxy.setBmd(settlePlayResponse.balance);
                 if (this.isCanUpdateBalance()) {
-                    this.webBridgeProxy.updateHtmlCredit();
+                    this.sendNotification(UIEvent.UPDATE_PLAYER_BALANCE, this.gameDataProxy.cash);
                 }
             }
         }

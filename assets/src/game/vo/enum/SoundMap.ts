@@ -99,6 +99,8 @@ export enum AudioClipsEnum {
     PrizePrediction03 = 'PrizePrediction03',
     SpinStop = 'SpinStop',
 
+    FreeRetrigger_en = 'FreeRetrigger_en',
+    FreeRetrigger_zh = 'FreeRetrigger_zh',
     JP_Slogan = 'JP_Slogan',
     JPResult_en = 'JPResult_en',
     JPResult_zh = 'JPResult_zh',
@@ -161,12 +163,4 @@ export enum BaseScoringDuration {
     Scoring_Win02 = 16.3,
     Scoring_Win03 = 20,
     Scoring_Win04 = 24.5
-}
-
-export enum QuickScoringDuration {
-    Scoring_normal = 0,
-    Scoring_BigWin = 1,
-    Scoring_MegaWin = 1,
-    Scoring_SuperWin = 1,
-    Scoring_JumboWin = 1
 }

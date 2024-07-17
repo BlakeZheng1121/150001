@@ -1,3 +1,4 @@
+import { UIEvent } from 'common-ui/proxy/UIEvent';
 import { NetworkProxy } from '../../../core/proxy/NetworkProxy';
 import { StateMachineProxy } from '../../proxy/StateMachineProxy';
 import { SoundEvent, BaseSoundParms, WinEvent, ViewMediatorEvent } from '../../util/Constant';
@@ -7,6 +8,8 @@ import { CheckGameFlowCommand } from '../CheckGameFlowCommand';
 import { ClearRecoveryDataCommand } from '../recovery/ClearRecoveryDataCommand';
 import { SpinRequestCommand } from '../spin/SpinRequestCommand';
 import { StateCommand } from './StateCommand';
+import { ButtonName } from 'common-ui/proxy/UIEnums';
+import { SpinButton } from 'common-ui/view/SpinButton';
 
 export class Game1SpinCommand extends StateCommand {
     public static readonly NAME = StateMachineProxy.GAME1_EV_SPIN;
@@ -20,6 +23,7 @@ export class Game1SpinCommand extends StateCommand {
         // 重連線中不允許spin
         if (this.gameDataProxy.isMaintaining) return;
 
+        this.sendNotification(UIEvent.CHANGE_BUTTON_STATE, { name: ButtonName.SPIN, state: SpinButton.STATUS_STOP });
         this.sendNotification(WinEvent.FORCE_WIN_DISPOSE); // 清除之前的贏分表演
         //是否 Recovery表演流程
         if (
@@ -38,10 +42,7 @@ export class Game1SpinCommand extends StateCommand {
         this.sendNotification(SoundEvent.SOUNDCMD, [SoundEvent.PLAY_SCENEBG, BaseSoundParms.GAME1]);
 
         this.gameDataProxy.isSpinning = true;
-        // 滾輪滾動，將 Web Spin 按鈕改變圖示
-        // this.webBridgeProxy.setElementStyle('spinBtn', 'stop', 'add');
-
-        this.webBridgeProxy.updateHtmlPlayerWin(0); //清除Win欄位
+        this.sendNotification(UIEvent.UPDATE_PLAYER_WIN, 0); //清除Win欄位
         this.sendNotification(ViewMediatorEvent.JACKPOT_WON_CLOSE); //清除jackpot贏分顯示
 
         if (this.gameDataProxy.onAutoPlay) {

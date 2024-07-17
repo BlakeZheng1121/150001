@@ -116,7 +116,6 @@ export class ScreenEvent {
     public static ON_MINUS_BET: string = 'onMinusBet';
     public static ON_PLUS_BET: string = 'onPlusBet';
     public static ON_BET_CHANGE: string = 'onBetChange';
-    public static readonly SET_QUICK_SPIN_FROM_WEB: string = 'setQuickSpinFromWeb';
 }
 
 export class UnitTestEvent {

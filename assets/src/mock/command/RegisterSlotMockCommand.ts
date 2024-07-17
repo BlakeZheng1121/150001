@@ -13,9 +13,9 @@ export class RegisterSlotMockCommand extends puremvc.SimpleCommand {
 
         super.execute(notification);
         const self = this;
-        if (DEBUG) {
-            self.facade.registerCommand(MockKeyboardInputCommand.NAME, MockKeyboardInputCommand);
-        }
+        // if (DEBUG) {
+        //     self.facade.registerCommand(MockKeyboardInputCommand.NAME, MockKeyboardInputCommand);
+        // }
         //self.facade.registerProxy(new MockWebBridgeProxy());
         self.registerMediator(rootView);
     }

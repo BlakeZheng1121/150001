@@ -1,24 +1,11 @@
-import { _decorator, Component, Camera, RenderTexture, gfx, view, Sprite, Vec2, Material, CCFloat, Vec3 } from 'cc';
+import { _decorator, Component, Camera, RenderTexture, gfx, view, Vec2, Material } from 'cc';
 import { DEF_MAX_HEIGHT, DEF_STAGE_HEIGHT, DEF_STAGE_WIDTH } from '../utils/SceneManager';
 const { ccclass, property } = _decorator;
-
-@ccclass('SlotMaskDisplayModeSetting')
-export class SlotMaskDisplayModeSetting {
-    @property({ type: CCFloat, visible: true })
-    public orthoHeight = 0;
-    @property({ visible: true })
-    public position = new Vec3();
-}
 
 @ccclass('UISlotMask')
 export class UISlotMask extends Component {
     // 用來擷取遮罩範圍的參考圖
-    @property({ type: Camera })
-    public baseCam: Camera;
-    @property({ type: SlotMaskDisplayModeSetting, visible: true })
-    private _horizontalDisplaySetting: SlotMaskDisplayModeSetting = new SlotMaskDisplayModeSetting();
-    @property({ type: SlotMaskDisplayModeSetting, visible: true })
-    private _verticalDisplaySetting: SlotMaskDisplayModeSetting = new SlotMaskDisplayModeSetting();
+    private baseCam: Camera;
 
     // 遮罩範圍的參考圖，以相同的 sprite color 作為可渲染的範圍
     private baseMap: RenderTexture;
@@ -36,6 +23,7 @@ export class UISlotMask extends Component {
 
     protected onLoad() {
         const self = this;
+        self.baseCam = this.getComponent(Camera);
         // 直接監聽視窗縮放事件，避免來不及調整 Mask 尺寸導致出現破綻
         window.addEventListener('resize', () => {
             let isHorizontal = false; // window.matchMedia('(orientation: landscape)').matches;
@@ -63,9 +51,7 @@ export class UISlotMask extends Component {
         this.enabledCamera(true);
         if (this.isHorizontalMode != isHorizontal || isInit == true) {
             this.isHorizontalMode = isHorizontal;
-            this.node.position = this.isHorizontalMode
-                ? this._horizontalDisplaySetting.position
-                : this._verticalDisplaySetting.position;
+            
             let frameLongSide = DEF_STAGE_WIDTH > DEF_STAGE_HEIGHT ? DEF_STAGE_WIDTH : DEF_STAGE_HEIGHT;
             let frameShortSide = DEF_STAGE_WIDTH > DEF_STAGE_HEIGHT ? DEF_STAGE_HEIGHT : DEF_STAGE_WIDTH;
             if (isHorizontal) {
@@ -100,18 +86,23 @@ export class UISlotMask extends Component {
         ) {
             this.viewSize.x = view.getDesignResolutionSize().width;
             this.viewSize.y = view.getDesignResolutionSize().height;
-            // 直式需動態調整攝影機參數
-            this.baseCam.orthoHeight =
-                this.viewSize.x > this.viewSize.y
-                    ? this._horizontalDisplaySetting.orthoHeight
-                    : Math.round((this.viewSize.y * 0.5) / this.node.parent.scale.y);
-            // 指定遊戲畫面的大小，直橫式轉換需重新設定
-            this.sharedMaterial.setProperty('viewSize', this.viewSize);
+
+            if (this.isHorizontalMode) {
+                this.baseCam.orthoHeight = Math.round((DEF_STAGE_HEIGHT * 0.5));
+                this.sharedMaterial.setProperty('viewSize', new Vec2(DEF_STAGE_WIDTH, DEF_STAGE_HEIGHT));
+                this.sharedMaterial.setProperty('viewOffset', new Vec2(0, 0));
+            } else {
+                // 直式需動態調整攝影機參數
+                this.baseCam.orthoHeight = Math.round((DEF_MAX_HEIGHT * 0.5) / this.node.parent.scale.y);
+                // 指定遊戲畫面的大小，直橫式轉換需重新設定
+                this.sharedMaterial.setProperty('viewSize', new Vec2(DEF_STAGE_WIDTH, DEF_MAX_HEIGHT));
+                this.sharedMaterial.setProperty('viewOffset', new Vec2(0, (DEF_MAX_HEIGHT - this.viewSize.y) * 0.5));
+            }
         }
-        this.scheduleOnce(()=>this.enabledCamera(false), 0);
+        this.scheduleOnce(() => this.enabledCamera(false), 0);
     }
 
-    private enabledCamera (enabled: boolean) {
+    private enabledCamera(enabled: boolean) {
         this.baseCam.enabled = enabled;
-    } 
+    }
 }

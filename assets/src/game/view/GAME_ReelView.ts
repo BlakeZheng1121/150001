@@ -1,4 +1,4 @@
-import { Label, Vec3, _decorator, Node } from 'cc';
+import { Label, Vec3, _decorator, Node, Color } from 'cc';
 import { UIOrientation } from '../../core/ui/UIOrientation';
 import { SymbolPosData } from '../../sgv3/proxy/ReelDataProxy';
 import { BalanceUtil } from '../../sgv3/util/BalanceUtil';
@@ -144,8 +144,6 @@ export class GAME_ReelView extends ReelView {
         self._winScoreText.node.setWorldPosition(self.getScoreTextPosition(symbolInfo));
         //贏分資訊
         self._winScoreText.string = BalanceUtil.formatBalance(symbolWin);
-        //設定層級
-        self._winScoreText.node.layer = Layer.PERFORM_3_PANEL;
         self._winScoreText.node.active = true;
     }
 
@@ -249,7 +247,7 @@ export class GAME_ReelView extends ReelView {
 
         if (anim) anim.node.active = false;
         symbol.play(SymbolPerformType.SHOW);
-        symbol.setLayer(Layer.PERFORM_1_PANEL);
+        this.restoreSymbolParent(symbol, symbolInfo.x);
     }
 
     protected setAnimSymbolPlay(symbolInfo: SymbolInfo, featureInfo: SymbolPosData) {
@@ -265,7 +263,15 @@ export class GAME_ReelView extends ReelView {
 
     protected setDefaultSymbolPlay(symbolInfo: SymbolInfo, type: SymbolPerformType) {
         let symbol = this.getSymbol(symbolInfo);
-        symbol.setLayer(Layer.PERFORM_2_PANEL);
+        switch (type) {
+            case SymbolPerformType.HIDE:
+                this.restoreSymbolParent(symbol, symbolInfo.x);
+                break;
+            case SymbolPerformType.SHOW_ALL_WIN:
+            case SymbolPerformType.SHOW_LOOP_WIN:
+                this.setOverlaySymbol(symbol, symbolInfo.x);
+                break;
+        }
         symbol.play(type);
     }
 
@@ -300,6 +306,18 @@ export class GAME_ReelView extends ReelView {
     protected getSymbolPosition(reelIndex: number, fovIndex: number): Vec3 {
         let reelContent = this.reelsList[reelIndex].singleReelContent;
         return reelContent.symbols[reelContent.getSymbolIndex(fovIndex)].node.worldPosition;
+    }
+
+    protected setOverlaySymbol(symbol: UISymbol, reelIndex: number) {
+        symbol.setOverlay(this.overlaySymbolContainer);
+        symbol.setColor(Color.WHITE);
+        this.reelsList[reelIndex].singleReelContent.singleReelView!.symbolsCompare();
+    }
+
+    protected restoreSymbolParent(symbol: UISymbol, reelIndex: number) {
+        symbol.restoreParent();
+        symbol.setColor(this.reelsList[reelIndex].singleReelContent.shaderColor);
+        this.reelsList[reelIndex].singleReelContent.singleReelView!.symbolsCompare();
     }
     ////
 }

@@ -16,6 +16,7 @@ import { BonusGameOneRoundResult } from '../../sgv3/vo/result/BonusGameOneRoundR
 import { FreeGameOneRoundResult } from '../../sgv3/vo/result/FreeGameOneRoundResult';
 import { WAY_AllWinData } from '../../sgv3way/vo/datas/WAY_AllWinData';
 import { ExpansionWildsView } from '../view/ExpansionWildsView';
+import { GameScene } from 'src/sgv3/vo/data/GameScene';
 const { ccclass } = _decorator;
 
 @ccclass('ExpansionWildsViewMediator')
@@ -31,7 +32,7 @@ export class ExpansionWildsViewMediator extends BaseMediator<ExpansionWildsView>
     }
 
     public handleNotification(notification: puremvc.INotification): void {
-        if (!this.view.node.activeInHierarchy) return;
+        if (this.gameDataProxy.curScene != GameScene.Game_2) return;
         let name = notification.getName();
         switch (name) {
             case FreeGameEvent.ON_EXPAND_WILD:

@@ -14,6 +14,7 @@ import { Logger } from '../../../core/utils/Logger';
 import { WinType } from '../../vo/enum/WinType';
 import { WinBoardRunCompleteCommand } from '../../command/winboard/WinBoardRunCompleteCommand';
 import { GameScene } from '../../vo/data/GameScene';
+import { UIEvent } from 'common-ui/proxy/UIEvent';
 
 export abstract class BaseWinBoardViewMediator<T extends WinBoardView> extends BaseMediator<T> {
     public static NAME: string = 'WinBoardViewMediator';
@@ -169,7 +170,7 @@ export abstract class BaseWinBoardViewMediator<T extends WinBoardView> extends B
     }
 
     protected updateBBWLabel(amount: number) {
-        this.webBridgeProxy.updateHtmlPlayerWin(amount);
+        this.sendNotification(UIEvent.UPDATE_PLAYER_WIN, amount);
     }
 
     protected runWinLabelsComplete(data: { targetAmount: number; winBoardTargetAmount: number; winType: WinType }) {
@@ -191,7 +192,7 @@ export abstract class BaseWinBoardViewMediator<T extends WinBoardView> extends B
     }
 
     /**winboard滾分結束-恢復BGM音量 停delay秒後才收掉animation*/
-    public winboardLabelComplete(winType: WinType, targetAmount: number, delay: number = 2.7) {
+    public winboardLabelComplete(winType: WinType, targetAmount: number, delay: number = 2) {
         this.view?.updateWinboardText(targetAmount);
         this.fadeBGM(1, 0.3);
         this.view?.stopWinboard();

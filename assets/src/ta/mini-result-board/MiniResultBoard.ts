@@ -39,15 +39,20 @@ export class MiniResultBoard extends Component {
     //播放板子(彩金狀態0~4為mini到grand,語系:0為中文1為英文)
     public OnBoardPlay(JackPotType: number = 0, LanguageType: number = 0) {
         this.SetEffectType(JackPotType, LanguageType);
+        this.node.active = true;
         this.BoardAnimation?.play('Show');
     }
 
     public OnBoardDelayPlay(callBack?: Function) {
+        this.node.active = true;
         this.BoardAnimation?.play('DelayShow');
     }
 
     public OnBoardClose() {
-        this.BoardAnimation?.play('Hide');
+        this.BoardAnimation?.play('Hide', () => {
+            this.recycleParticle();
+            this.node.active = false;
+        });
     }
 
     //設定JackPotType對應的美術資源(彩金狀態0~4為mini到grand,語系:0為中文1為英文)
@@ -75,12 +80,12 @@ export class MiniResultBoard extends Component {
     }
 
     public stopWinCoinFall() {
-        if (this.winCoinFall) {
-            this.winCoinFall.ParticleStop();
-            this.scheduleOnce(() => {
-                PoolManager.instance.putNode(this.winCoinFall.node);
-            }, this.winCoinFall.PutPoolTimes);
-        }
+        this.winCoinFall.ParticleStop();
+    }
+
+    public recycleParticle() {
+        PoolManager.instance.putNode(this.winCoinFall.node);
+        this.winCoinFall = null;
     }
 
     setParitcleEffects(JackPotType: number = 0) {

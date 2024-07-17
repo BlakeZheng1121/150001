@@ -1,6 +1,11 @@
 import { Vec2 } from 'cc';
 import { Game1FeatureSelectionCommand } from '../../../sgv3/command/state/Game1FeatureSelectionCommand';
 import { ViewMediatorEvent } from '../../../sgv3/util/Constant';
+import { UIEvent } from 'common-ui/proxy/UIEvent';
+import { ButtonName, ButtonState } from 'common-ui/proxy/UIEnums';
+import { SpeedMode } from 'src/game/vo/enum/Game_UIEnums';
+import { setEngineTimeScale } from 'src/core/utils/SceneManager';
+import { UIProxy } from 'common-ui/proxy/UIProxy';
 
 export class GAME_Game1FeatureSelectionCommand extends Game1FeatureSelectionCommand {
     public execute(notification: puremvc.INotification): void {
@@ -20,6 +25,39 @@ export class GAME_Game1FeatureSelectionCommand extends Game1FeatureSelectionComm
             }
         }
         // Base game 龍珠分數收集
-        this.sendNotification(ViewMediatorEvent.ON_CREDIT_BALL_COLLECT_START, baseArray);
+        this.sendNotification(ViewMediatorEvent.ON_CREDIT_BALL_COLLECT_START, {
+            baseArray: baseArray,
+            callback: this.showFeatureSelection.bind(this)
+        });
+    }
+
+    public showFeatureSelection() {
+        this.disableQuickSpin();
+        let result = this.gameDataProxy.spinEventData.baseGameResult;
+        this.sendNotification(ViewMediatorEvent.SHOW_FEATURE_SELECTION, [
+            result.extendInfoForbaseGameResult.ballCount,
+            this.gameDataProxy.convertCredit2Cash(result.extendInfoForbaseGameResult.ballTotalCredit) // 換算成錢
+        ]);
+    }
+
+    private disableQuickSpin() {
+        this.sendNotification(UIEvent.CHANGE_BUTTON_STATE, {
+            name: ButtonName.QUICK_SPIN,
+            state: ButtonState.DISABLED
+        });
+        this.UIProxy.isQuickSpin = false;
+        //還原正常速度
+        if (this.gameDataProxy.curSpeedMode === SpeedMode.STATUS_TURBO) {
+            setEngineTimeScale(1);
+        }
+    }
+
+    // ======================== Get Set ========================
+    private _UIProxy: UIProxy;
+    public get UIProxy(): UIProxy {
+        if (!this._UIProxy) {
+            this._UIProxy = this.facade.retrieveProxy(UIProxy.NAME) as UIProxy;
+        }
+        return this._UIProxy;
     }
 }

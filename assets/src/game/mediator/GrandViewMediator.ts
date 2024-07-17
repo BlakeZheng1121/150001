@@ -7,16 +7,16 @@ import { MiniGameSymbol } from '../../sgv3/vo/enum/MiniGameSymbolType';
 import { SpecialHitInfo } from '../../sgv3/vo/enum/SpecialHitInfo';
 import { BonusGameOneRoundResult } from '../../sgv3/vo/result/BonusGameOneRoundResult';
 import { AudioManager } from '../../audio/AudioManager';
-import { GrandView } from '../view/GrandView';
+import { GrandView, IGrandViewMediator } from '../view/GrandView';
 import { AudioClipsEnum, BGMClipsEnum, ScoringClipsEnum } from '../vo/enum/SoundMap';
 const { ccclass } = _decorator;
 
 @ccclass('GrandViewMediator')
-export class GrandViewMediator extends BaseMediator<GrandView> {
+export class GrandViewMediator extends BaseMediator<GrandView> implements IGrandViewMediator {
     protected lazyEventListener(): void {
         this.view.buttonCallback = this;
+        this.view.miniResultBoard.node.active = false;
     }
-
     protected hitGrandComplete: Function = null;
 
     private grandCash: number = 0;
@@ -38,7 +38,7 @@ export class GrandViewMediator extends BaseMediator<GrandView> {
         }
     }
 
-    hitGrand(callBack: Function) {
+    hitGrand(data: { grandCash: number; callback: Function }) {
         GlobalTimer.getInstance()
             .registerTimer(
                 'delayHitGrand',
@@ -46,8 +46,8 @@ export class GrandViewMediator extends BaseMediator<GrandView> {
                 () => {
                     GlobalTimer.getInstance().removeTimer('delayHitGrand');
                     this.sendNotification(JackpotPool.HIGHLIGHT_HIT_POOL, MiniGameSymbol.Grand);
-                    this.view.showUp(this.gameDataProxy.language, () => this.onShowUpComplete());
-                    this.hitGrandComplete = callBack;
+                    this.view.showUp(this.gameDataProxy.language, () => this.onShowUpComplete(data.grandCash));
+                    this.hitGrandComplete = data.callback;
 
                     switch (this.gameDataProxy.curScene) {
                         case 'Game_1':
@@ -66,12 +66,8 @@ export class GrandViewMediator extends BaseMediator<GrandView> {
             .start();
     }
 
-    onShowUpComplete() {
-        const getGrand = (oneRoundResult: BonusGameOneRoundResult) =>
-            oneRoundResult.specialHitInfo == SpecialHitInfo[SpecialHitInfo.bonusGame_02];
-        // only Hit Grand in one game cycle
-        this.grandCash =
-            this.gameDataProxy.spinEventData.bonusGameResult.bonusGameOneRoundResult.find(getGrand).oneRoundJPTotalWin;
+    onShowUpComplete(grandCash: number) {
+        this.grandCash = grandCash;
         this.gameDataProxy.hitJackpotPoolType = JackpotPool.GRAND;
         this.view.scoringGrand(this.grandCash / 100, () => this.onScrollEnd());
     }
@@ -99,7 +95,7 @@ export class GrandViewMediator extends BaseMediator<GrandView> {
     onSpinDown() {
         this.view.skipScoring();
     }
-    
+
     public onSkip() {
         window['onSpinBtnClick']();
     }

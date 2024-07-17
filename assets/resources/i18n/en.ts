@@ -11,7 +11,10 @@ export const languages = {
     autospin: 'AUTO SPIN',
     autospinnumber: 'Number of Auto Spin',
     betoption: 'BET OPTIONS',
-    autoStart: 'AUTO START IN:'
+    autoStart: 'AUTO START IN:',
+    jpBonusUpgrade: 'JP BONUS UPGRADE',
+    jackpotUpgradeBet: 'Increased your bet to upgrade',
+    jackpotUpgradeBetRange: 'Bet {0} To {1}'
 };
 
 if (!win.languages) {

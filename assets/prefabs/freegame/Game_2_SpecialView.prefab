@@ -48,7 +48,7 @@
       "y": 1,
       "z": 1
     },
-    "_layer": 8,
+    "_layer": 33554432,
     "_euler": {
       "__type__": "cc.Vec3",
       "x": 0,
@@ -93,7 +93,7 @@
       "y": 1,
       "z": 1
     },
-    "_layer": 8,
+    "_layer": 33554432,
     "_euler": {
       "__type__": "cc.Vec3",
       "x": 0,
@@ -146,6 +146,7 @@
     "__prefab": {
       "__id__": 7
     },
+    "renderOrder": 13,
     "freeC1SubOnPerform": {
       "__id__": 3
     },

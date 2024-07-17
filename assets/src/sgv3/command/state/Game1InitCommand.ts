@@ -8,6 +8,7 @@ import { GameScene } from '../../vo/data/GameScene';
 import { GameStateId } from '../../vo/data/GameStateId';
 import { GameOperation } from '../../vo/enum/GameOperation';
 import { StateCommand } from './StateCommand';
+import { UIEvent } from 'common-ui/proxy/UIEvent';
 
 export class Game1InitCommand extends StateCommand {
     public static readonly NAME = StateMachineProxy.GAME1_EV_INIT;
@@ -34,7 +35,7 @@ export class Game1InitCommand extends StateCommand {
                     this.sendNotification(SoundEvent.SOUNDCMD, [SoundEvent.RESET_SCENEBG, BaseSoundParms.GAME1]);
                     let totalWin = this.gameDataProxy._tempWonCredit;
                     this.gameDataProxy.resetTempWonCredit();
-                    this.webBridgeProxy.updateHtmlCredit();
+                    this.sendNotification(UIEvent.UPDATE_PLAYER_BALANCE, this.gameDataProxy.cash);
                     this.networkProxy.sendSettlePlay(totalWin);
                     this.changeState(StateMachineProxy.GAME1_IDLE);
                 }
@@ -71,7 +72,7 @@ export class Game1InitCommand extends StateCommand {
                     this.changeState(StateMachineProxy.GAME1_END);
                     return;
                 } else {
-                    this.webBridgeProxy.updateHtmlPlayerWin(0); //清除Win欄位
+                    this.sendNotification(UIEvent.UPDATE_PLAYER_WIN, 0); //清除Win欄位
                     this.changeState(StateMachineProxy.GAME1_IDLE);
                 }
                 this.sendNotification(ReelEvent.ON_REELS_INIT);

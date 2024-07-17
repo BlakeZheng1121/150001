@@ -49,7 +49,7 @@ export class SingleReelDampState extends UIViewStateBase {
     protected onPlay() {
         for (let i = this.singleReelContent.fovStartIndex; i <= this.singleReelContent.fovEndIndex; i++) {
             if (this.singleReelContent.symbols[i].symbolContent.symbolData.isImprovedFOV) {
-                this.singleReelContent.symbols[i].setLayer(Layer.PERFORM_2_PANEL);
+                this.singleReelContent.symbols[i].setOverlay(this.singleReelContent.overlaySymbolContainer);
                 this.singleReelContent.symbols[i].setColor(Color.WHITE);
             }
         }
@@ -288,7 +288,7 @@ export class SingleReelRollStartState extends UIViewStateBase {
     protected onPlay() {
         for (let i = this.singleReelContent.fovStartIndex; i <= this.singleReelContent.fovEndIndex; i++) {
             let symbol = this.singleReelContent.symbols[i];
-            this.singleReelContent.symbols[i].setLayer(Layer.PERFORM_1_PANEL);
+            symbol.restoreParent();
             symbol.setColor(this.singleReelContent.shaderColor);
         }
 
@@ -357,7 +357,7 @@ export class SingleReelShowState extends UIViewStateBase {
 
         for (let i = this.singleReelContent.fovStartIndex; i <= this.singleReelContent.fovEndIndex; i++) {
             if (this.singleReelContent.symbols[i].symbolContent.symbolData.isImprovedFOV) {
-                this.singleReelContent.symbols[i].setLayer(Layer.PERFORM_2_PANEL);
+                this.singleReelContent.symbols[i].setOverlay(this.singleReelContent.overlaySymbolContainer);
                 this.singleReelContent.symbols[i].setColor(Color.WHITE);
             }
         }

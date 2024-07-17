@@ -18,7 +18,9 @@ export class Game_2_ResultBoardViewMediator extends BaseMediator<Game_2_ResultBo
         super(name, component);
     }
 
-    protected lazyEventListener(): void {}
+    protected lazyEventListener(): void {
+        this.view.resultBoard.node.active = false;
+    }
 
     public listNotificationInterests(): Array<any> {
         return [

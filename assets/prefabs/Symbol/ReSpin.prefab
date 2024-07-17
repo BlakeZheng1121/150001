@@ -54,7 +54,7 @@
       "y": 1,
       "z": 1
     },
-    "_layer": 4,
+    "_layer": 33554432,
     "_euler": {
       "__type__": "cc.Vec3",
       "x": 0,
@@ -105,7 +105,7 @@
       "y": 1,
       "z": 1
     },
-    "_layer": 4,
+    "_layer": 33554432,
     "_euler": {
       "__type__": "cc.Vec3",
       "x": 0,
@@ -176,7 +176,7 @@
       "__uuid__": "30e59385-156d-4043-9c3c-0827d5074e1e",
       "__expectedType__": "sp.SkeletonData"
     },
-    "defaultSkin": "",
+    "defaultSkin": "default",
     "defaultAnimation": "",
     "_sockets": [],
     "_debugMesh": false,

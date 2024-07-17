@@ -1,9 +1,11 @@
+import { UIEvent } from 'common-ui/proxy/UIEvent';
 import { Logger } from '../../../core/utils/Logger';
 import { GameDataProxy } from '../../proxy/GameDataProxy';
 import { StateMachineProxy } from '../../proxy/StateMachineProxy';
 import { WebBridgeProxy } from '../../proxy/WebBridgeProxy';
-import { AutoPlayEvent, ScreenEvent, StateWinEvent } from '../../util/Constant';
+import { ScreenEvent } from '../../util/Constant';
 import { GlobalTimer } from '../../util/GlobalTimer';
+import { CheckNormalButtonStateCommand } from 'src/game/command/CheckNormalButtonStateCommand';
 
 /**
  * 選擇自動模式次數
@@ -23,9 +25,8 @@ export class AutoPlayClickOptionCommand extends puremvc.SimpleCommand {
             // 停止自動模式
             this.gameDataProxy.onAutoPlay = false;
             this.gameDataProxy.curAutoTimes = this.gameDataProxy.maxAutoTimes = 0;
-            this.sendNotification(AutoPlayEvent.ON_TIMES_CHANGE);
-            this.sendNotification(StateWinEvent.ON_BTN_STATE_CHANGED);
-            this.webBridgeProxy.updateWebAutoTimesSpan('pause');
+            this.sendNotification(UIEvent.UPDATE_AUTO_PLAY_COUNT, 0);
+            this.sendNotification(CheckNormalButtonStateCommand.NAME);
         } else if (_curTimes < _maxTimes) {
             this.gameDataProxy.onAutoPlay = true;
             this.gameDataProxy.curAutoTimes = _curTimes;

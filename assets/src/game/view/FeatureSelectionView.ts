@@ -53,6 +53,9 @@ export class FeatureSelectionView extends BaseView {
         // self.hideFeatureSelection();
         self.registerButton();
         self.hide();
+        self.featureButtons.forEach((featureBtn) => {
+            featureBtn.node.active = false;
+        });
         self.autoStartCallBack = () => {
             self.callBack(GameOperation[GameOperation.freeGame_01]);
         };
@@ -94,6 +97,7 @@ export class FeatureSelectionView extends BaseView {
         this.node.active = true;
         this.occupiedButtons.forEach((featureBtn) => featureBtn.showButton());
         this.showTween.start();
+        AudioManager.Instance.play(AudioClipsEnum.FeatureSelection_TransitionDragonUp);
     }
 
     private getFilter(onlyFreeGame: boolean) {
@@ -169,7 +173,6 @@ export class FeatureSelectionView extends BaseView {
         this._isShowComplete = isComplete;
     }
 
-   
     public registerAutoStart() {
         const self = this;
 
@@ -179,10 +182,9 @@ export class FeatureSelectionView extends BaseView {
             if (self.autoStart.string == '0') {
                 clearInterval(self.autoStartTimerId);
                 self.autoStartTimerId = null;
-                self.autoStartCallBack()
+                self.autoStartCallBack();
             }
         }, 1000);
-   
     }
     public resetAutoStart() {
         this.autoStart.string = this.autoStartTime.toString();
@@ -190,7 +192,6 @@ export class FeatureSelectionView extends BaseView {
     }
 
     private stopAutoStartTimer() {
-
         clearTimeout(this.autoStartTimerId);
         this.autoStartTimerId = null;
     }

@@ -7,7 +7,15 @@ import { BonusGameOneRoundResult } from '../../../sgv3/vo/result/BonusGameOneRou
 export class GAME_Game1HitSpecialCommand extends Game1HitSpecialCommand {
     protected timerKey_HitGrand = 'game1HitGrand';
     public execute(notification: puremvc.INotification): void {
-        this.sendNotification(WinEvent.ON_HIT_GRAND, this.endGame1HitGrand.bind(this));
+        const getGrand = (oneRoundResult: BonusGameOneRoundResult) =>
+            oneRoundResult.specialHitInfo == SpecialHitInfo[SpecialHitInfo.bonusGame_02];
+        // only Hit Grand in one game cycle
+        let grandCash =
+            this.gameDataProxy.spinEventData.bonusGameResult.bonusGameOneRoundResult.find(getGrand).oneRoundJPTotalWin;
+        this.sendNotification(WinEvent.ON_HIT_GRAND, {
+            grandCash: grandCash,
+            callback: this.endGame1HitGrand.bind(this)
+        });
     }
 
     protected endGame1HitGrand() {

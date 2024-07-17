@@ -14,7 +14,7 @@ export class GrandView extends BaseView {
     @property(TimeLineTool)
     private anim: TimeLineTool;
     @property(MiniResultBoard)
-    private miniResultBoard: MiniResultBoard;
+    public miniResultBoard: MiniResultBoard;
     @property(Label)
     private scoreTxt: Label;
     private _score = 0;

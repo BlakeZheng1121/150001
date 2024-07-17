@@ -46,7 +46,7 @@ export class Game_4_ReelDampState extends SingleReelDampState {
         if(this.content.fovFeature[0].lockType == LockType.NONE 
             || this.content.fovFeature[0].lockType == LockType.NEW_LOCK){
             if(this.content.symbols[1].symbolContent.symbolData.isImprovedFOV){
-                this.content.symbols[1].setLayer(Layer.PERFORM_2_PANEL);
+                this.content.symbols[1].setOverlay(this.content.overlaySymbolContainer);
                 this.content.symbols[1].setColor(Color.WHITE);
                 this.content.symbols[1].play(SymbolPerformType.DAMPING);
             }

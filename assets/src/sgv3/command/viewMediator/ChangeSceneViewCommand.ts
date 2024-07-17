@@ -1,3 +1,4 @@
+import { UIEvent } from 'common-ui/proxy/UIEvent';
 import { StateMachineCommand } from '../../../core/command/StateMachineCommand';
 import { StateMachineObject } from '../../../core/proxy/CoreStateMachineProxy';
 import { GameDataProxy } from '../../proxy/GameDataProxy';
@@ -6,6 +7,10 @@ import { WebBridgeProxy } from '../../proxy/WebBridgeProxy';
 import { GameStateProxyEvent, ViewMediatorEvent, WebGameState, StateWinEvent, WinEvent } from '../../util/Constant';
 import { GlobalTimer } from '../../util/GlobalTimer';
 import { GameScene } from '../../vo/data/GameScene';
+import { ButtonName, ButtonState } from 'common-ui/proxy/UIEnums';
+import { SpeedMode } from 'src/game/vo/enum/Game_UIEnums';
+import { setEngineTimeScale } from 'src/core/utils/SceneManager';
+import { UIProxy } from 'common-ui/proxy/UIProxy';
 
 export class ChangeSceneViewCommand extends puremvc.SimpleCommand {
     public static readonly NAME = GameStateProxyEvent.ON_SCENE_CHANGED;
@@ -14,13 +19,14 @@ export class ChangeSceneViewCommand extends puremvc.SimpleCommand {
         let scene = notification.getBody() as string;
         switch (scene) {
             case GameScene.Game_1:
+                this.enableQuickSpin();
                 if (this.gameDataProxy.preScene != GameScene.Init) {
                     this.sendNotification(StateWinEvent.ON_GAME1_TRANSITIONS);
                 }
                 if (this.gameDataProxy.reStateResult) {
                     //Recovery進入場景
-                    this.webBridgeProxy.updateHtmlCredit();
-                    this.webBridgeProxy.updateHtmlPlayerWin(this.gameDataProxy.playerTotalWin);
+                    this.sendNotification(UIEvent.UPDATE_PLAYER_BALANCE, this.gameDataProxy.cash);
+                    this.sendNotification(UIEvent.UPDATE_PLAYER_WIN, this.gameDataProxy.playerTotalWin);
                 }
                 if (this.gameDataProxy.preScene === GameScene.Game_3) {
                     GlobalTimer.getInstance()
@@ -34,10 +40,11 @@ export class ChangeSceneViewCommand extends puremvc.SimpleCommand {
                 }
                 break;
             case GameScene.Game_2:
+                this.disableQuickSpin();
                 if (this.gameDataProxy.reStateResult) {
                     //Recovery進入場景
-                    this.webBridgeProxy.updateHtmlCredit();
-                    this.webBridgeProxy.updateHtmlPlayerWin(this.gameDataProxy.playerTotalWin);
+                    this.sendNotification(UIEvent.UPDATE_PLAYER_BALANCE, this.gameDataProxy.cash);
+                    this.sendNotification(UIEvent.UPDATE_PLAYER_WIN, this.gameDataProxy.playerTotalWin);
                     this.sendNotification(
                         StateMachineCommand.NAME,
                         new StateMachineObject(StateMachineProxy.GAME2_INIT)
@@ -65,9 +72,10 @@ export class ChangeSceneViewCommand extends puremvc.SimpleCommand {
                 }
                 break;
             case GameScene.Game_3:
+                this.disableQuickSpin();
                 if (this.gameDataProxy.reStateResult) {
-                    this.webBridgeProxy.updateHtmlCredit();
-                    this.webBridgeProxy.updateHtmlPlayerWin(this.gameDataProxy.playerTotalWin);
+                    this.sendNotification(UIEvent.UPDATE_PLAYER_BALANCE, this.gameDataProxy.cash);
+                    this.sendNotification(UIEvent.UPDATE_PLAYER_WIN, this.gameDataProxy.playerTotalWin);
                     this.Game3TransitionsBG(); //直接進去遊戲場景
                 } else {
                     this.sendNotification(StateWinEvent.ON_GAME3_TRANSITIONS, true); //通知入場的轉場動畫
@@ -77,10 +85,11 @@ export class ChangeSceneViewCommand extends puremvc.SimpleCommand {
                 }
                 return;
             case GameScene.Game_4:
+                this.disableQuickSpin();
                 if (this.gameDataProxy.reStateResult) {
                     //Recovery進入場景
-                    this.webBridgeProxy.updateHtmlCredit();
-                    this.webBridgeProxy.updateHtmlPlayerWin(this.gameDataProxy.playerTotalWin);
+                    this.sendNotification(UIEvent.UPDATE_PLAYER_BALANCE, this.gameDataProxy.cash);
+                    this.sendNotification(UIEvent.UPDATE_PLAYER_WIN, this.gameDataProxy.playerTotalWin);
                     this.sendNotification(
                         StateMachineCommand.NAME,
                         new StateMachineObject(StateMachineProxy.GAME4_INIT)
@@ -97,6 +106,27 @@ export class ChangeSceneViewCommand extends puremvc.SimpleCommand {
         this.sendNotification(ViewMediatorEvent.LEAVE);
         this.sendNotification(ViewMediatorEvent.ENTER);
         this.webBridgeProxy.sendGameState(WebBridgeProxy.curScene, WebGameState.INIT);
+    }
+
+    private enableQuickSpin() {
+        this.sendNotification(UIEvent.CHANGE_BUTTON_STATE, { name: ButtonName.QUICK_SPIN, state: ButtonState.ENABLED });
+        this.sendNotification(UIEvent.CHECK_QUICK_SPIN_STATUS);
+        //判斷是否需要還原三倍速
+        if (this.gameDataProxy.curSpeedMode === SpeedMode.STATUS_TURBO) {
+            setEngineTimeScale(3);
+        }
+    }
+
+    private disableQuickSpin() {
+        this.sendNotification(UIEvent.CHANGE_BUTTON_STATE, {
+            name: ButtonName.QUICK_SPIN,
+            state: ButtonState.DISABLED
+        });
+        this.UIProxy.isQuickSpin = false;
+        //還原正常速度
+        if (this.gameDataProxy.curSpeedMode === SpeedMode.STATUS_TURBO) {
+            setEngineTimeScale(1);
+        }
     }
 
     protected Game1TransitionsBG(): void {
@@ -149,5 +179,13 @@ export class ChangeSceneViewCommand extends puremvc.SimpleCommand {
             this._webBridgeProxy = this.facade.retrieveProxy(WebBridgeProxy.NAME) as WebBridgeProxy;
         }
         return this._webBridgeProxy;
+    }
+
+    private _UIProxy: UIProxy;
+    public get UIProxy(): UIProxy {
+        if (!this._UIProxy) {
+            this._UIProxy = this.facade.retrieveProxy(UIProxy.NAME) as UIProxy;
+        }
+        return this._UIProxy;
     }
 }

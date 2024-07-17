@@ -24,7 +24,17 @@ export class Game4HitSpecialCommand extends StateCommand {
 
         if (isHitGrand) {
             // 滿盤 Hit Grand
-            this.sendNotification(WinEvent.ON_HIT_GRAND, this.endGame4HitGrand.bind(this));
+            const getGrand = (oneRoundResult: BonusGameOneRoundResult) =>
+                oneRoundResult.specialHitInfo == SpecialHitInfo[SpecialHitInfo.bonusGame_02];
+            // only Hit Grand in one game cycle
+            let grandCash =
+                this.gameDataProxy.spinEventData.bonusGameResult.bonusGameOneRoundResult.find(
+                    getGrand
+                ).oneRoundJPTotalWin;
+            this.sendNotification(WinEvent.ON_HIT_GRAND, {
+                grandCash: grandCash,
+                callback: this.endGame4HitGrand.bind(this)
+            });
         } else {
             // ReSpin
             this.doReSpin();

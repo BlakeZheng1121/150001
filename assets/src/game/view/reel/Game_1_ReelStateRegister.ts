@@ -11,7 +11,6 @@ import {
     SingleReelStopState
 } from '../../../sgv3/view/reel/single-reel/SingleReelStateRegisterBase';
 import { SymbolContent } from '../../../sgv3/view/reel/symbol/SymbolContent';
-import { Layer } from '../../../sgv3/vo/enum/Layer';
 import { ReelType, SymbolId, SymbolPerformType } from '../../../sgv3/vo/enum/Reel';
 import { Game_1_SymbolContent } from '../symbol/Game_1_SymbolContent';
 const { ccclass } = _decorator;
@@ -53,13 +52,12 @@ export class Game_1_DampState extends SingleReelDampState {
     onPlay() {
         super.onPlay();
         for (let i = 0; i < this.content!.symbols!.length; i++) {
-            if (i >= this.content.fovStartIndex 
-                && i<= this.content.fovEndIndex
-                && this.content.symbols[i].symbolContent.symbolData.id == SymbolId.C1
-                || this.content.symbols[i].symbolContent.fovIndex >= 0) {
-                    this.content.symbols[i].play(SymbolPerformType.DAMPING);
-            } else {
-                this.content.symbols[i].setLayer(Layer.PERFORM_1_PANEL);
+            if (
+                i >= this.content.fovStartIndex &&
+                i <= this.content.fovEndIndex &&
+                this.content.symbols[i].symbolContent.symbolData.id == SymbolId.C1
+            ) {
+                this.content.symbols[i].play(SymbolPerformType.DAMPING);
             }
         }
     }
@@ -155,7 +153,7 @@ export class Game_1_RollStartState extends SingleReelRollStartState {
 
     onPlay() {
         let firstContent = this.content.first.symbolContent as Game_1_SymbolContent;
-        if(firstContent.symbolData.id == SymbolId.C1 && firstContent.credit == 0){
+        if (firstContent.symbolData.id == SymbolId.C1 && firstContent.credit == 0) {
             firstContent.credit = this.content.getCredit(-1);
         }
         this.content.first.play(SymbolPerformType.SHOW);

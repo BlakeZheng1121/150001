@@ -1,8 +1,11 @@
 import { StateMachineProxy } from '../../proxy/StateMachineProxy';
-import { AutoPlayEvent, ScreenEvent } from '../../util/Constant';
+import { ScreenEvent } from '../../util/Constant';
 import { IdelRemindCommand } from '../connect/IdelRemindCommand';
 import { AutoPlayOnIdleProcessCommand } from '../autoplay/AutoPlayOnIdleProcessCommand';
 import { StateCommand } from './StateCommand';
+import { UIEvent } from 'common-ui/proxy/UIEvent';
+import { ButtonName } from 'common-ui/proxy/UIEnums';
+import { SpinButton } from 'common-ui/view/SpinButton';
 
 export class Game1IdleCommand extends StateCommand {
     public static readonly NAME = StateMachineProxy.GAME1_EV_IDLE;
@@ -27,7 +30,7 @@ export class Game1IdleCommand extends StateCommand {
             if (self.gameDataProxy.onAutoPlay) {
                 self.gameDataProxy.onAutoPlay = false;
                 self.gameDataProxy.curAutoTimes = this.gameDataProxy.maxAutoTimes = 0;
-                self.sendNotification(AutoPlayEvent.ON_TIMES_CHANGE);
+                self.sendNotification(UIEvent.UPDATE_AUTO_PLAY_COUNT, 0);
                 self.webBridgeProxy.updateWebAutoTimesSpan('pause');
             }
         } else if (this.gameDataProxy.onAutoPlay) {
@@ -37,5 +40,6 @@ export class Game1IdleCommand extends StateCommand {
             // 直接 Spin
             self.facade.sendNotification(ScreenEvent.ON_SPIN_DOWN);
         }
+        self.sendNotification(UIEvent.CHANGE_BUTTON_STATE, { name: ButtonName.SPIN, state: SpinButton.STATUS_IDLE });
     }
 }

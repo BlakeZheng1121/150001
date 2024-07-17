@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Enum, Renderable2D, Vec3 } from 'cc';
+import { _decorator, Component, Enum, Node, Renderable2D, Vec3 } from 'cc';
 import { SymbolPartType } from '../../../vo/enum/Reel';
 const { ccclass, property } = _decorator;
  
@@ -9,6 +9,7 @@ export class SymbolPart extends Component {
     public partType: SymbolPartType  = SymbolPartType.MAIN;
     @property({visible: true})
     public offsetPos: Vec3 = new Vec3();
+    public defaultParent: Node | null = null;
 
     private _renderable2D: Renderable2D | null = null;
 

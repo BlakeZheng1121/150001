@@ -1,7 +1,7 @@
+import { GameDataProxy } from 'src/sgv3/proxy/GameDataProxy';
 import { StateMachineProxy } from '../../sgv3/proxy/StateMachineProxy';
 import { WebBridgeProxy } from '../../sgv3/proxy/WebBridgeProxy';
-import { CoreGameDataProxy } from '../proxy/CoreGameDataProxy';
-import { ChangeBalanceEvent } from '../vo/ChangeBalanceEvent';
+import { UIEvent } from 'common-ui/proxy/UIEvent';
 
 export class ChangeBalanceCommand extends puremvc.SimpleCommand {
     public static readonly NAME: string = 'gs.changeBalance';
@@ -22,7 +22,7 @@ export class ChangeBalanceCommand extends puremvc.SimpleCommand {
         if (ts > this.gameDataProxy.tsBmd && this.checkUpdateBalance()) {
             this.gameDataProxy.tsBmd = ts;
             this.gameDataProxy.setBmd(balance, true);
-            this.webBridgeProxy.updateHtmlCredit();
+            this.sendNotification(UIEvent.UPDATE_PLAYER_BALANCE, this.gameDataProxy.cash);
         }
     }
 
@@ -30,10 +30,10 @@ export class ChangeBalanceCommand extends puremvc.SimpleCommand {
         return this.gameDataProxy.gameState == StateMachineProxy.GAME1_IDLE;
     }
 
-    protected _gameDataProxy: CoreGameDataProxy;
-    protected get gameDataProxy(): CoreGameDataProxy {
+    protected _gameDataProxy: GameDataProxy;
+    protected get gameDataProxy(): GameDataProxy {
         if (!this._gameDataProxy) {
-            this._gameDataProxy = this.facade.retrieveProxy(CoreGameDataProxy.NAME) as CoreGameDataProxy;
+            this._gameDataProxy = this.facade.retrieveProxy(GameDataProxy.NAME) as GameDataProxy;
         }
         return this._gameDataProxy;
     }

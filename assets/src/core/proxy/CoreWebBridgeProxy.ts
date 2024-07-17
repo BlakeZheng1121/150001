@@ -3,6 +3,7 @@ import { DEBUG } from 'cc/env';
 import { CoreSGMaintenanceCommand } from '../command/CoreSGMaintenanceCommand';
 import { Logger } from '../utils/Logger';
 import { TSMap } from '../utils/TSMap';
+import { CloseHelpCommand } from 'src/sgv3/command/help/CloseHelpCommand';
 
 /**
  * 與前端傳遞訊息的接口
@@ -89,6 +90,7 @@ export class CoreWebBridgeProxy extends puremvc.Proxy {
      * 關閉 Help
      */
     public closeHelp(): void {
+        this.sendNotification(CloseHelpCommand.NAME);
         this.getWebFunRequest(this, 'gameClientMsg', { event: 'toggleHelpPage', value: false });
     }
 

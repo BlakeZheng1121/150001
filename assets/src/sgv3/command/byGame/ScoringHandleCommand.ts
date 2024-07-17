@@ -1,5 +1,5 @@
 import { _decorator } from 'cc';
-import { AudioClipsEnum, QuickScoringDuration, ScoringClipsEnum } from '../../../game/vo/enum/SoundMap';
+import { ScoringClipsEnum } from '../../../game/vo/enum/SoundMap';
 import { AudioManager } from '../../../audio/AudioManager';
 import { GameDataProxy } from '../../proxy/GameDataProxy';
 import { ReelDataProxy } from '../../proxy/ReelDataProxy';

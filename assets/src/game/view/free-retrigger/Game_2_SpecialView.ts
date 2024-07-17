@@ -81,39 +81,6 @@ export class Game_2_SpecialView extends BaseView {
     }
 
     private showHitSideBallEnd() {
-        let self = this;
-        if (self.freeGameSpecialInfo.freeWild.isShowFreeWild) {
-            self.showFreeWild();
-        } else {
-            this.onSpecialEndCallBack();
-            this.clearCallback();
-        }
-    }
-
-    //** show wild 倍數 特色 */
-    private showFreeWild() {
-        let self = this;
-        // if (!self.freeWild.node.active) self.freeWild.node.active = true;
-        // self.freeWild.node.setWorldPosition(self.freeGameSpecialInfo.freeWild.wildPos);
-        // self.freeWild.OnFreeWildPerform('x' + self.freeGameSpecialInfo.freeWild.multiplier.toString());
-        self.playVocal(self.freeGameSpecialInfo.freeWild.multiplier);
-        GlobalTimer.getInstance()
-            .registerTimer(
-                self.freeGameSpecialInfo.freeWild.timeKey_name,
-                self.freeGameSpecialInfo.freeWild.timeOut,
-                self.showWildSpecialEnd,
-                self
-            )
-            .start();
-    }
-
-    private playVocal(multiplier: number) {
-        let self = this;
-        AudioManager.Instance.play(AudioClipsEnum[`FreeWild${multiplier}_${self.language}`]);
-    }
-
-    private showWildSpecialEnd() {
-        GlobalTimer.getInstance().removeTimer(this.freeGameSpecialInfo.freeWild.timeKey_name);
         this.onSpecialEndCallBack();
         this.clearCallback();
     }

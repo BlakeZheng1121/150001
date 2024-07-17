@@ -5,6 +5,7 @@ import { Layer } from '../../../vo/enum/Layer';
 import { SymbolPartType } from '../../../vo/enum/Reel';
 import { SymbolContentBase } from './SymbolContentBase';
 import { SymbolPart } from './SymbolPart';
+import { OverlaySymbolContainer } from './OverlaySymbolContainer';
 const { ccclass } = _decorator;
 
 @ccclass('UISymbol')
@@ -26,7 +27,7 @@ export class UISymbol extends UIViewBase {
     }
 
     public set symbolPos(value: Vec3){
-       this.setSymbolPos(value);
+        this.setSymbolPos(value);
     }
 
     public getSymbolPosWithType(type: SymbolPartType) {
@@ -81,6 +82,25 @@ export class UISymbol extends UIViewBase {
         this.symbolContent.parts.forEach((part) => {
             part.node.layer = layer;
         })
+    }
+
+    public setOverlay(container: OverlaySymbolContainer) {
+        this.symbolContent.parts.forEach((part) => {
+            if (part.defaultParent == null) {
+                part.defaultParent = part.node.parent;
+                let partParent = container.getPartParent(part.partType);
+                part.node.setParent(partParent, true);
+            }
+        });
+    }
+
+    public restoreParent() {
+        this.symbolContent.parts.forEach((part) => {
+            if (part.defaultParent) {
+                part.node.setParent(part.defaultParent, true);
+                part.defaultParent = null;
+            }
+        });
     }
     ////
 

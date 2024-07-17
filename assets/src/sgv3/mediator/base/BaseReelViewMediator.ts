@@ -174,7 +174,6 @@ export class BaseReelViewMediator<T extends ReelView> extends BaseMediator<T> {
         switch (self.reelDataProxy.reelState) {
             case ReelState.Idle:
                 if (self.gameDataProxy.checkReelCanSpin()) {
-                    self.onSpin();
                     switch (self.gameDataProxy.curScene) {
                         case GameScene.Game_1:
                             self.sendNotification(
@@ -200,6 +199,7 @@ export class BaseReelViewMediator<T extends ReelView> extends BaseMediator<T> {
                     if (!self.gameDataProxy.onAutoPlay && self.gameDataProxy.curScene == GameScene.Game_1) {
                         AudioManager.Instance.play(AudioClipsEnum.Button_Spin);
                     }
+                    self.onSpin();
                 }
                 break;
             case ReelState.CanStop:

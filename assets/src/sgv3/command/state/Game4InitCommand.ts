@@ -1,3 +1,4 @@
+import { UIEvent } from 'common-ui/proxy/UIEvent';
 import { Logger } from '../../../core/utils/Logger';
 import { ReelDataProxy } from '../../proxy/ReelDataProxy';
 import { StateMachineProxy } from '../../proxy/StateMachineProxy';
@@ -7,6 +8,8 @@ import { SymbolInfo } from '../../vo/info/SymbolInfo';
 import { BaseGameResult } from '../../vo/result/BaseGameResult';
 import { TopUpGameOneRoundResult } from '../../vo/result/TopUpGameOneRoundResult';
 import { StateCommand } from './StateCommand';
+import { ButtonName } from 'common-ui/proxy/UIEnums';
+import { SpinButton } from 'common-ui/view/SpinButton';
 
 export class Game4InitCommand extends StateCommand {
     public static readonly NAME = StateMachineProxy.GAME4_EV_INIT;
@@ -18,6 +21,7 @@ export class Game4InitCommand extends StateCommand {
         let topUpGameOneRoundResult = this.gameDataProxy.curRoundResult as TopUpGameOneRoundResult;
         
         this.sendNotification(ReelEvent.ON_REELS_INIT); //Reel ByGame資料 Init
+        this.sendNotification(UIEvent.CHANGE_BUTTON_STATE, { name: ButtonName.SPIN, state: SpinButton.STATUS_IDLE });
 
         if (this.gameDataProxy.reStateResult) {
             this.sendNotification(ReelEvent.ON_REELS_RESTORE,this.gameDataProxy.curRoundResult); // Restore Reel ByGame資料
@@ -38,6 +42,7 @@ export class Game4InitCommand extends StateCommand {
                 this.sendNotification(WinEvent.FORCE_UPDATE_WIN_LABEL, cashAmount);
             }
             this.showHoldSpinWin();
+            this.sendNotification(ViewMediatorEvent.SHOW_FREE_SPIN_MSG); //顯示Free Spin次數的UI
             this.sendNotification(ViewMediatorEvent.SHOW_WON_SPIN_DATA, topUpGameOneRoundResult.roundInfo.totalRound);
         } else {
             Logger.w('非正常流程進入 ' + this.gameDataProxy.curScene);

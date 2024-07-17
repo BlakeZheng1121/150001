@@ -42,7 +42,9 @@ export class BallHitViewMediator extends BaseMediator<BallHitView> {
     private bCanUseSkip: boolean = false;
     protected tempFunc: Function;
 
-    protected lazyEventListener(): void {}
+    protected lazyEventListener(): void {
+        this.view.baseGameIdle();
+    }
 
     public listNotificationInterests(): Array<any> {
         return [

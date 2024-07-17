@@ -91,6 +91,7 @@ export class Game_4_ViewMediator extends BaseGameViewMediator<Game_4_View> {
             })
         );
         this.view.init(curMultiple);
+        this.view.togglePosTweenView(true);
         this.view.node.active = true;
         this.facade.sendNotification(JackpotPool.CHANGE_SCENE);
 
@@ -105,9 +106,8 @@ export class Game_4_ViewMediator extends BaseGameViewMediator<Game_4_View> {
     /** 離開場景處理 */
     protected leaveMediator() {
         if (this.gameDataProxy.preScene !== GameScene.Init && this.gameDataProxy.preScene !== this.mySceneName) return;
-        this.game_4_View.node.active = false;
-        // this.game_1_View.y = 3000;
-        // this.game_1_View.visible = false;
+        this.view.togglePosTweenView(false);
+        this.view.node.active = false;
         AudioManager.Instance.stop(BGMClipsEnum.BGM_DragonUp).fade(0, 1);
     }
 

@@ -64,7 +64,7 @@ export class MiniGameSelectPerform extends Component {
 
     //MiniGame元寶隱藏
     public OnIconHide() {
-        for (let i = 0; i < this.ingotNumber; i++) {
+        for (let i = 0; i < this._MiniIngotPerform.length; i++) {
             this.MiniIngotPerform[i].OnIconHide();
             PoolManager.instance.putNode(this.MiniIngotPerform[i].node);
         }

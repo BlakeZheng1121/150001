@@ -29,7 +29,6 @@ export class Game_2_View extends BaseView {
         for (let i = 0; i < this.loadPrefab.length; i++) {
             let loadPrefab = instantiate(this.loadPrefab[i]);
             director.getScene().addChild(loadPrefab);
-            loadPrefab.parent = this.node;
         }
     }
 

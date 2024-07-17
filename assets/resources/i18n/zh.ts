@@ -11,7 +11,10 @@ export const languages = {
     autospin: '自动旋转',
     autospinnumber: '自动旋转次数',
     betoption: '投注选项',
-    autoStart: '自动开始:'
+    autoStart: '自动开始:',
+    jpBonusUpgrade: '彩金奖金升级',
+    jackpotUpgradeBet: '提高投注可以升级',
+    jackpotUpgradeBetRange: '投注 {0} 到 {1}'
 };
 
 if (!win.languages) {

@@ -1,3 +1,4 @@
+import { UIEvent } from 'common-ui/proxy/UIEvent';
 import { ChangeBalanceCommand } from '../../../core/command/ChangeBalanceCommand';
 import { GameDataProxy } from '../../proxy/GameDataProxy';
 import { StateMachineProxy } from '../../proxy/StateMachineProxy';
@@ -8,7 +9,7 @@ export class BalanceChangedCommand extends puremvc.SimpleCommand {
 
     public execute(notification: puremvc.INotification) {
         if (this.checkUpdateHtmlCredit()) {
-            this.webBridgeProxy.updateHtmlCredit();
+            this.sendNotification(UIEvent.UPDATE_PLAYER_BALANCE, this.gameDataProxy.cash);
         }
     }
 

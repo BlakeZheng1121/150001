@@ -3,15 +3,13 @@ import { StateMachineCommand } from '../../core/command/StateMachineCommand';
 import { StateMachineObject } from '../../core/proxy/CoreStateMachineProxy';
 import { CoreWebBridgeProxy } from '../../core/proxy/CoreWebBridgeProxy';
 import { MathUtil } from '../../core/utils/MathUtil';
-import { StringTools } from '../../core/utils/StringTools';
 import { AutoPlayClickOptionCommand } from '../command/autoplay/AutoPlayClickOptionCommand';
-import { BalanceUtil } from '../util/BalanceUtil';
 import { ScreenEvent, SoundEvent, BaseSoundParms, WinEvent } from '../util/Constant';
 import { GameScene } from '../vo/data/GameScene';
 import { GameDataProxy } from './GameDataProxy';
-import { ReelDataProxy } from './ReelDataProxy';
 import { StateMachineProxy } from './StateMachineProxy';
 import { ServiceProvider } from '../../core/vo/NetworkType';
+import { UIEvent } from 'common-ui/proxy/UIEvent';
 
 /**
  * [GAME to HTML]
@@ -173,7 +171,7 @@ export class WebBridgeProxy extends CoreWebBridgeProxy {
      * @param _value - false 關閉加速.
      */
     protected setTurboValue(_val: boolean): void {
-        this.sendNotification(ScreenEvent.SET_QUICK_SPIN_FROM_WEB, _val);
+        this.sendNotification(UIEvent.SET_QUICK_SPIN_FROM_WEB, _val);
     }
 
     /**
@@ -281,29 +279,10 @@ export class WebBridgeProxy extends CoreWebBridgeProxy {
         return this.getWebObj('userInfo');
     }
 
-    /** 更新 Html Credit 欄位的值. */
-    public updateHtmlCredit(): void {
-        const _credit = StringTools.toCredit(this.gameDataProxy.credit);
-        const _cash = BalanceUtil.formatBalanceWithDollarSign(this.gameDataProxy.cash);
-
-        if (!!window['updateHtmlCredit']) this.getWebFun('updateHtmlCredit', _credit, _cash);
-    }
-
-    /** 更新 Html PlayerWin 欄位的值. */
-    public updateHtmlPlayerWin(_data: number): void {
-        let cash = BalanceUtil.formatBalanceWithDollarSign(_data);
-        this.getWebFun('updateHtmlPlayerWin', StringTools.toCredit(_data), cash);
-    }
-
     /** 更新 Html AutoTimes 欄位的值. */
     public updateWebAutoTimesSpan(_data: any): void {
         this.getWebFun('updateWebAutoTimesSpan', String(_data));
         this.getWebFun('updateMobileAutoTimesSpan', String(_data));
-    }
-
-    /** 更新 Html SpinNumber 欄位的值. */
-    public updateSpinNumber(_data: number): void {
-        if (!!window['updateSpinNumber']) this.getWebFun('updateSpinNumber', _data);
     }
 
     /**

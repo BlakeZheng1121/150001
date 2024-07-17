@@ -150,7 +150,7 @@ export class Game_4_SymbolDampingState extends UIViewStateBase {
 
         let particle: ParticleContentTool = 
         PoolManager.instance.getNode(this.content.particlePrefab
-            , this.content.node).getComponent(ParticleContentTool);
+            , main.node).getComponent(ParticleContentTool);
        
         particle.ParticlePlay();
         this.content.scheduleOnce(()=>{

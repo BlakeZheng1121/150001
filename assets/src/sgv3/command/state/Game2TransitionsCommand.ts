@@ -18,7 +18,6 @@ export class Game2TransitionCommand extends StateCommand {
     private showOpening() {
         GlobalTimer.getInstance().removeTimer(this.timerKey);
         this.sendNotification(StateWinEvent.ON_GAME2_OPENING, true); //通知Game2場景，進行開場表演
-        this.sendNotification(ViewMediatorEvent.SHOW_FREE_SPIN_MSG,GameScene.Game_2); //顯示Free Spin次數的UI
         GlobalTimer.getInstance().registerTimer(this.timerKey, 1, this.endGameCutScene, this).start();
     }
 

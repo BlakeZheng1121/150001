@@ -87,7 +87,6 @@ export class Game_3_ViewMediator extends BaseMediator<Game_3_View> {
         self.mySceneData = self.gameDataProxy.getSceneDataByName(self.mySceneName);
         self.myGameScene = self.mySceneName;
 
-        game.addPersistRootNode(this.view.node);
         this.view.node.active = false;
     }
 

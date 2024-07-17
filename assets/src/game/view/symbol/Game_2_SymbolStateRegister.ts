@@ -6,7 +6,6 @@ import {
     SymbolShowState,
     SymbolStateRegisterBase
 } from '../../../sgv3/view/reel/symbol/SymbolStateRegisterBase';
-import { Layer } from '../../../sgv3/vo/enum/Layer';
 import { SymbolPartType, SymbolPerformType } from '../../../sgv3/vo/enum/Reel';
 import { AudioManager } from '../../../audio/AudioManager';
 import { AudioClipsEnum } from '../../vo/enum/SoundMap';

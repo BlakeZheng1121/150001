@@ -50,7 +50,7 @@
       "y": 1,
       "z": 1
     },
-    "_layer": 2,
+    "_layer": 33554432,
     "_euler": {
       "__type__": "cc.Vec3",
       "x": 0,
@@ -71,6 +71,7 @@
     "__prefab": {
       "__id__": 3
     },
+    "renderOrder": 9,
     "_multipleBoard": null,
     "prefab": {
       "__uuid__": "e365689f-766e-4c73-9e60-a0fa831237d6",
@@ -101,8 +102,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
-      "height": 100
+      "width": 900,
+      "height": 1600
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",

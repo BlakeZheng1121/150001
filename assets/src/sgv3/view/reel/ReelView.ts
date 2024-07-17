@@ -7,8 +7,9 @@ import { ReelType } from '../../vo/enum/Reel';
 import { ReelPasser } from '../../vo/match/ReelMatchInfo';
 import { SingleReelView } from './single-reel/SingleReelView';
 import { SymbolPartGroups } from './symbol/SymbolPartGroups';
-import { SymbolDataPlist } from './SymbolDataPlist';
 import BaseView from 'src/base/BaseView';
+import { OverlaySymbolContainer } from './symbol/OverlaySymbolContainer';
+import { SceneManager } from 'src/core/utils/SceneManager';
 
 const { ccclass, property } = _decorator;
 
@@ -38,6 +39,8 @@ export abstract class ReelView extends BaseView {
     private _uiLayout: UILayout | null = null;
     @property({ type: Sprite, visible: true })
     private _backgroundSprite: Sprite | null = null;
+    @property({ type: OverlaySymbolContainer })
+    protected overlaySymbolContainer: OverlaySymbolContainer | null = null;
 
     private updateReelsIndex: Array<Array<number>> = [];
 
@@ -56,7 +59,7 @@ export abstract class ReelView extends BaseView {
 
     public get uiSlotMask() {
         if (this._uiSlotMask == null) {
-            this._uiSlotMask = this.getComponentInChildren(UISlotMask);
+            this._uiSlotMask = SceneManager.instance.node.getComponentInChildren(UISlotMask);
         }
         return this._uiSlotMask;
     }
@@ -106,6 +109,23 @@ export abstract class ReelView extends BaseView {
         this.reelsList[index].singleReelContent!.stripIndexer.targetRng = targetRng;
     }
 
+    public setOverlay(index: number[], isAllImprove = false) {
+        for (let i = 0; i < index.length; i++) {
+            this.reelsList[index[i]].singleReelContent.symbols.forEach((symbol, symbolIndex) => {
+                if (
+                    (symbol.symbolContent.symbolData.isImprovedFOV &&
+                        symbolIndex >= this.reelsList[index[i]].singleReelContent.fovStartIndex &&
+                        symbolIndex <= this.reelsList[index[i]].singleReelContent.fovEndIndex) ||
+                    isAllImprove
+                ) {
+                    symbol.setOverlay(this.reelsList[index[i]].singleReelContent.overlaySymbolContainer);
+                } else {
+                    symbol.restoreParent();
+                }
+            });
+        }
+    }
+
     public reelsShow() {
         for (let i = 0; i < this.reelsList.length; i++) {
             if (this.reelsList[i].singleReelContent.isRolling) {
@@ -125,6 +145,7 @@ export abstract class ReelView extends BaseView {
             this.reelsList.push(temp.getComponent(SingleReelView)!);
             this.reelsList[i].singleReelContent.id = i;
             this.reelsList[i].singleReelContent.ishorizontalMode = this.ishorizontalMode;
+            this.reelsList[i].singleReelContent.overlaySymbolContainer = this.overlaySymbolContainer;
             this.reelsList[i].play(ReelType.INIT);
         }
         this._uiLayout.updateLayout();

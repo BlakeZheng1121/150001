@@ -27,7 +27,6 @@ export class WAY_DefaultSettingCommand extends CoreDefaultSettingCommand {
         this.gameDataProxy.totalBetList.sort(function (a, b) {
             return a - b;
         });
-        this.gameDataProxy.totalBetList.reverse();
     }
 
     protected setBetAndLine(_defaultIdx: number): number {
@@ -81,7 +80,6 @@ export class WAY_DefaultSettingCommand extends CoreDefaultSettingCommand {
         this.gameDataProxy.jackpotAllBetList.sort(function (a, b) {
             return a - b;
         });
-        this.gameDataProxy.jackpotAllBetList.reverse();
     }
 
     // ======================== Get Set ========================

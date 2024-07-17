@@ -11,6 +11,7 @@ import { ByGameHandleCommand } from './ByGameHandleCommand';
 import { StateMachineProxy } from '../../proxy/StateMachineProxy';
 import { MathUtil } from '../../../core/utils/MathUtil';
 import { GameSceneOption } from '../../vo/data/GameScene';
+import { UIEvent } from 'common-ui/proxy/UIEvent';
 
 /**
  * 接收到Server打過來的資料後進行處理
@@ -47,7 +48,7 @@ export class SpinResponseCommand extends puremvc.SimpleCommand {
         self.gameDataProxy.sceneSetting.setSceneResultMap_ByResult(aryStrSceneName);
 
         // 更新 Html SpinNumber 欄位的值.
-        self.webBridgeProxy.updateSpinNumber(self.gameDataProxy.spinSequenceNumber);
+        self.sendNotification(UIEvent.UPDATE_SPIN_SEQ_NUM, self.gameDataProxy.spinSequenceNumber);
 
         if (self.gameDataProxy.spinEventData.bonusGameResult) {
             this.gameDataProxy.tempWonCredit = MathUtil.add(
@@ -63,7 +64,7 @@ export class SpinResponseCommand extends puremvc.SimpleCommand {
 
         self.gameDataProxy.setBmd(notifyObj.balance, true);
         // 刷新 Credit
-        self.webBridgeProxy.updateHtmlCredit();
+        this.sendNotification(UIEvent.UPDATE_PLAYER_BALANCE, this.gameDataProxy.cash);
 
         // 判斷是否為 Feature selection 結果
         if (this.gameDataProxy.gameState == StateMachineProxy.GAME1_FEATURESELECTION) {

@@ -16,9 +16,7 @@ export class Game_2_ResultBoardView extends BaseView {
     private resultLabel: Label;
 
     public showWinBoard(score: number, curScene: string) {
-        if (this.node.active == false) {
-            this.node.active = true;
-        }
+        this.resultBoard.node.active = true;
         let self = this;
         self.resultLabel.string = BalanceUtil.formatBalance(score);
         self.resultBoard.play('Perform', self.winBoardEnd.bind(self));
