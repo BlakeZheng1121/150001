@@ -104,8 +104,6 @@ export class TimelineComboBox_Tandem extends Component {
         TimelineData.setChangeTimelineDataIndexFuc(this.timelineDataChangeTimlineDataIndexFuc);
         TimelineData.setUpdateComboBoxDataFuc(this.timelineDataUpdateComboBoxDataFuc);
         let firstTimelineIndex = 0;
-        Timeline.isDropDown = false;
-        TimelineData.isDropDown = false;
         for (let j = 0; j < this.ary_TimelineTool.length; j++) {
           Timeline.itemArray.push(this.ary_TimelineTool[j].node.name);
         }

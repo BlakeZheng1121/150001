@@ -48,6 +48,8 @@ export class SpineSetupData {
   @property({ type: Enum(SpinesEnum) })
   public spineName: SpinesEnum = SpinesEnum["<None>"];
   @property({ type: Number })
+  public trackIndex: number = 0;
+  @property({ type: Number })
   public timeScale: number = 1;
   @property({ type: Number })
   public delayTime: number = 0;
@@ -55,6 +57,7 @@ export class SpineSetupData {
   public isLoop: boolean = false;
   @property({ type: Boolean })
   public isEndClose: boolean = false;
+  public trackEntry: any;
 }
 
 @ccclass("ParticleSetupData")
@@ -176,6 +179,8 @@ export class TimelineSpineSetupData {
   @property({ type: Enum(TimelineSpinesEnum) })
   public timelineSpineName: TimelineSpinesEnum = TimelineSpinesEnum["<None>"];
   @property({ type: Number })
+  public trackIndex: number = 0;
+  @property({ type: Number })
   public timeScale: number = 1;
   @property({ type: Number })
   public delayTime: number = 0;
@@ -210,6 +215,7 @@ export class TimelineSpineSetupData {
     type: [ParticleSetupData],
   })
   public particleData: ParticleSetupData[] = [];
+  public trackEntry: any;
 }
 
 @ccclass("TimelineSetupData")

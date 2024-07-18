@@ -25,27 +25,32 @@ export class TimeLineTool extends Component {
       this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.timelineSpine.node.active = true;
       this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.timelineSpine.timeScale =
         this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.timeScale;
-      this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.timelineSpine.clearTracks();
 
-      this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.timelineSpine.setCompleteListener(() => {
-        this.scheduleOnce(() => {
-          this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.timelineSpine.setCompleteListener(null);
-          if (this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.isLoop === true) {
-            return;
-          }
-          this.checkTimelineEnd(timelineIndex);
-          if (this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.isEndClose === true) {
-            this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.timelineSpine.clearTracks();
-            this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.timelineSpine.node.active = false;
-          }
-        });
-      });
-
-      this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.timelineSpine.setAnimation(
-        0,
+      let trackEntry = this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.timelineSpine.setAnimation(
+        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.trackIndex,
         timlineSpineName,
         this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.isLoop
       );
+      this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.trackEntry = trackEntry;
+
+      this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.timelineSpine.setTrackCompleteListener(
+        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.trackEntry, 
+        () => {
+          this.scheduleOnce(() => {
+            this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.timelineSpine.setTrackCompleteListener(
+              this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.trackEntry, () => {});
+            if (this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.isLoop === true) {
+              return;
+            }
+            this.checkTimelineEnd(timelineIndex);
+            if (this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.isEndClose === true) {
+              this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.timelineSpine.clearTrack(
+                this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.trackIndex
+              );
+              this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.timelineSpine.node.active = false;
+            }
+          });
+        });
     }, this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.delayTime);
   }
 
@@ -58,24 +63,29 @@ export class TimeLineTool extends Component {
 
       this.scheduleOnce(() => {
         this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.spine.node.active = true;
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.spine.clearTracks();
-
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.spine.setCompleteListener(() => {
-          this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.spine.setCompleteListener(null);
-          if (this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.isEndClose) {
-            this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.spine.clearTracks();
-  
-            this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.spine.node.active = false;
-          }
-        });
 
         this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.spine.timeScale =
           this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.timeScale;
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.spine.setAnimation(
-          0,
+        let trackEntry = this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.spine.setAnimation(
+          this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.trackIndex,
           spineName,
           this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.isLoop
         );
+        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.trackEntry = trackEntry;
+        
+        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.spine.setTrackCompleteListener(
+          trackEntry, 
+          () => {
+            this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.spine.setTrackCompleteListener(
+              this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.trackEntry, () => {});
+            if (this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.isEndClose) {
+              this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.spine.clearTrack(
+                this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.trackIndex
+              );
+    
+              this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.spine.node.active = false;
+            }
+          });
       }, this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.delayTime);
     }
   }
@@ -141,23 +151,28 @@ export class TimeLineTool extends Component {
 
       this.scheduleOnce(() => {
         this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.spine.node.active = true;
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.spine.clearTracks();
-
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.spine.setCompleteListener(() => {
-          this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.spine.setCompleteListener(null);
-          if (this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.isEndClose) {
-            this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.spine.clearTrack;
-            this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.spine.node.active = false;
-          }
-        });
 
         this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.spine.timeScale =
           this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.timeScale;
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.spine.setAnimation(
-          0,
+        let trackEntry = this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.spine.setAnimation(
+          this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.trackIndex,
           spineName,
           this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.isLoop
         );
+        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.trackEntry = trackEntry;
+
+        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.spine.setTrackCompleteListener(
+          trackEntry,
+          () => {
+            this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.spine.setTrackCompleteListener(
+              this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.trackEntry, () => {});
+            if (this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.isEndClose) {
+              this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.spine.clearTrack(
+                this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.trackIndex
+              );
+              this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.spine.node.active = false;
+            }
+          });
       }, this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.delayTime);
     }
   }
@@ -203,23 +218,28 @@ export class TimeLineTool extends Component {
 
       this.scheduleOnce(() => {
         this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.spine.node.active = true;
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.spine.clearTracks();
-
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.spine.setCompleteListener(() => {
-          this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.spine.setCompleteListener(null);
-          if (this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.isEndClose === true) {
-            this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.spine.clearTracks();
-            this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.spine.node.active = false;
-          }
-        });
 
         this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.spine.timeScale =
           this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.timeScale;
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.spine.setAnimation(
-          0,
+        let trackEntry = this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.spine.setAnimation(
+          this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.trackIndex,
           spineName,
           this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.isLoop
         );
+        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.trackEntry = trackEntry;
+
+        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.spine.setTrackCompleteListener(
+          trackEntry, 
+          () => {
+            this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.spine.setTrackCompleteListener(
+              this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.trackEntry, () => {});
+            if (this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.isEndClose === true) {
+              this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.spine.clearTrack(
+                this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.trackIndex
+              );
+              this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.spine.node.active = false;
+            }
+          });
       }, this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.delayTime);
     }
   }
@@ -311,7 +331,10 @@ export class TimeLineTool extends Component {
       for (let i = 0; i < this.arrayTimelineData[index].timelineData.length; i++) {
         switch (this.arrayTimelineData[index].timelineData[i].timelineType) {
           case TimelineType.Spine:
-            this.arrayTimelineData[index].timelineData[i].timelineSpine.timelineSpine.setCompleteListener(null);
+            if (this.arrayTimelineData[index].timelineData[i].timelineSpine.trackEntry != null) {
+              this.arrayTimelineData[index].timelineData[i].timelineSpine.timelineSpine.setTrackCompleteListener(
+                this.arrayTimelineData[index].timelineData[i].timelineSpine.trackEntry, () => {});
+            }
             break;
           case TimelineType.Animation:
             this.arrayTimelineData[index].timelineData[i].timelineAnimation.timelineAnimation.off(Animation.EventType.FINISHED);
@@ -341,7 +364,10 @@ export class TimeLineTool extends Component {
       for (let i = 0; i < this.arrayTimelineData[index].timelineData.length; i++) {
         switch (this.arrayTimelineData[index].timelineData[i].timelineType) {
           case TimelineType.Spine:
-            this.arrayTimelineData[index].timelineData[i].timelineSpine.timelineSpine.setCompleteListener(null);
+            if (this.arrayTimelineData[index].timelineData[i].timelineSpine.trackEntry != null) {
+              this.arrayTimelineData[index].timelineData[i].timelineSpine.timelineSpine.setTrackCompleteListener(
+                this.arrayTimelineData[index].timelineData[i].timelineSpine.trackEntry, () => {});
+            }
             this.arrayTimelineData[index].timelineData[i].timelineSpine.timelineSpine?.clearTracks();
             if (this.arrayTimelineData[index].timelineData[i].timelineSpine.useSpine) {
               this.arrayTimelineData[index].timelineData[i].timelineSpine.spineSetupData.spine?.clearTracks();

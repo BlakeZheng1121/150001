@@ -17,7 +17,6 @@ export class ComboBox extends Component {
   @property({ type: Prefab })
   itemPrefab: Prefab; // 下拉框选项
   timelineDataList: Item[] = [];
-  public isDropDown: boolean = false;
   public itemArray: string[] = [];
   timelineManager: TimelineToolScene;
   timelineMode: TimelineMode = TimelineMode.Normal;
@@ -145,7 +144,7 @@ export class ComboBox extends Component {
 
   showHideDropDownBox() {
     // 下拉框显示与隐藏
-    if (!this.isDropDown) {
+    if (!this.dropDown.active) {
       if (this.timelineMode === TimelineMode.Tandem) {
         this.dropDown.setParent(this.node.parent.parent.parent.parent);
         this.dropDown.setPosition(new Vec3(this.node.position.x, this.node.position.y, this.node.position.z));
@@ -163,8 +162,5 @@ export class ComboBox extends Component {
   comboboxClicked() {
     // 下拉框显示与隐藏
     this.showHideDropDownBox();
-    // 改变isDropDown值
-    if (!this.isDropDown) this.isDropDown = true;
-    else this.isDropDown = false;
   }
 }

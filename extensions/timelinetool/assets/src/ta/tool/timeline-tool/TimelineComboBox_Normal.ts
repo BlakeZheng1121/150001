@@ -54,9 +54,6 @@ export class TimelineComboBox_Normal extends Component {
   }
 
   setTimeline() {
-    // 是否已经下拉
-    this.timeline.isDropDown = false;
-
     // 下拉框选项内容
     for (let i = 0; i < this.ary_TimelineTool.length; i++) {
       this.timeline.itemArray.push(this.ary_TimelineTool[i].node.name);
@@ -64,8 +61,6 @@ export class TimelineComboBox_Normal extends Component {
   }
 
   setTimelineData() {
-    // 是否已经下拉
-    this.timelineData.isDropDown = false;
     // 下拉框选项内容
     for (let i = 0; i < this.ary_TimelineTool[this.timelineIndex].arrayTimelineData.length; i++) {
       this.timelineData.itemArray.push(this.ary_TimelineTool[this.timelineIndex].arrayTimelineData[i].timelineName);
