@@ -26,7 +26,7 @@ export class LocalizedLabel extends BaseLocalized {
     }
     set _key(str: string) {
         this.key = str;
-        this.updateRenderer();
+        this.localize();
     }
 
     onLoad() {
@@ -34,10 +34,10 @@ export class LocalizedLabel extends BaseLocalized {
             // i18n.init('en');
             return;
         }
-        this.updateRenderer();
+        this.localize();
     }
 
-    updateRenderer() {
+    localize() {
         this.label && (this.label.string = i18n.t(this.key));
     }
 }

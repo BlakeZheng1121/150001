@@ -14,7 +14,7 @@ if (!win.languages) {
     win.languages = {};
 }
 
-win.languages.{{name}} = languages;
+win.languages['{{name}}'] = languages;
 `;
 // 兼容 3.3.0 之前的版本
 Editor.Panel.define =
@@ -156,7 +156,7 @@ module.exports = Editor.Panel.define({
                 async generateLanguageFile(event) {
                     // @ts-ignore
                     const language = event.target.value;
-                    if (!/[a-zA-Z]/.test(language)) {
+                    if (!/\w{2,3}(-\w{2})?/.test(language)) {
                         console.warn(`语言名称只允许使用 a-z A-Z, ${language} 不合法`);
                         return;
                     }

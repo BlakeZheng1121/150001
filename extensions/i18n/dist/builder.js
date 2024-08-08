@@ -1,23 +1,22 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.configs = exports.unload = exports.load = void 0;
-function load() {
-}
+function load() { }
 exports.load = load;
-function unload() {
-}
+function unload() { }
 exports.unload = unload;
 exports.configs = {
     '*': {
         hooks: './hooks',
         options: {
-            webTestOption: {
-                label: 'webTestOption',
-                default: false,
+            defaultLang: {
+                label: 'i18n:i18n.buildPanel.title',
+                description: 'i18n:i18n.buildPanel.title',
+                default: 'en',
                 render: {
-                    ui: 'ui-checkbox'
+                    ui: 'ui-input'
                 }
             }
         }
-    },
+    }
 };

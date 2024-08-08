@@ -2,6 +2,56 @@
 
 ## Deprecated Features
 
+## 1.1.19
+### Changed
+- 支援ISO 639-1 多國語系帶區碼
+
+## 1.1.18
+### Add
+- build game環節自動在各語系根目錄下補auto-atlas
+
+## 1.1.17
+### Changed
+- build game補檔案忽略auto-atlas檔(.pac)
+### Add
+- 將spine圖檔設定不打包，避免spine載入資源失敗
+
+
+## 1.1.16
+### Fixed
+- 修正build game 清除sprite資源時，如果LocalizedSprite目標是Prefab導致錯誤卡死
+
+## 1.1.15
+### Fixed
+- 修正移除LocalizedSkeleton卡無限循環
+- 修正i18n.t變數改成字串避免無法正常運作
+- 修正build game補資源的時機，提前至before build
+
+## 1.1.14
+### Fixed
+- 處理1.1.13 build game 補資源時，spine各語系檔案數量不一致會照成浪費的疑慮
+
+## 1.1.13
+### Fixed
+- 修正hook失效
+### Changed
+- 預設語系設定為 en
+### Added
+- 新增build code 時把各語系缺漏的圖用預設語系資源補齊
+
+## 1.1.12
+### Added
+- LocalizedSprite支援JPG
+### Changed
+- 移除沒在使用的build config參數及沒在使用的hooks function
+- LocalizedPosition menu選單移至i18n內
+- 調整路徑處理方式，不在綁定在language下(但各語系仍需要在同個資料夾下且都打包bundle，且不支援複數bundle)
+
+
+## 1.1.11
+- 更改 updateRenderer 為泛用的 localize
+- 增加 i18n.t 用 Template string 可以把參數帶入
+
 ## 1.1.10
 ### Added
 - 加入LocalizedPosition擴增功能，在上面可做node座標的即時編輯，並且加入存檔功能

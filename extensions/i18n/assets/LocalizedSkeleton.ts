@@ -11,7 +11,7 @@ export class LocalizedSkeleton extends sp.Skeleton {
         readonly: true,
         visible: true
     })
-    private url: string | null = '';
+    private url: string = '';
 
     private changingSkeleton = false;
 
@@ -22,7 +22,7 @@ export class LocalizedSkeleton extends sp.Skeleton {
                 // i18n.init('en');
                 return;
             }
-            this.updateRenderer();
+            this.localize();
         }
     }
 
@@ -39,16 +39,20 @@ export class LocalizedSkeleton extends sp.Skeleton {
         this.cachePath();
     }
 
-    async updateRenderer() {
+    async localize() {
         // @ts-ignore
         if (CC_EDITOR) {
             this.changingSkeleton = true;
-            i18n._language;
             let url = eval('`' + this.url + '`');
             let uuid = await Editor.Message.request('asset-db', 'query-uuid', url);
+            if(!uuid) {
+                const defaultPath = this.url.replace('${i18n._language}', i18n._default);
+                uuid = await Editor.Message.request('asset-db', 'query-uuid', defaultPath);
+                console.warn(`${this.node.name} use default language ${i18n._default} instead of ${i18n._language}`);
+            }
             await Editor.Message.request('scene', 'set-property', {
                 uuid: this.node.uuid,
-                path: `__comps__.${this.getComponents(Component).findIndex(val=>val==this)}.skeletonData`,
+                path: `__comps__.${this.getComponents(Component).findIndex((val) => val == this)}.skeletonData`,
                 dump: {
                     type: 'sp.SkeletonData',
                     value: {
@@ -56,7 +60,7 @@ export class LocalizedSkeleton extends sp.Skeleton {
                     }
                 }
             });
-	    this.changingSkeleton = false;
+            this.changingSkeleton = false;
         } else {
             this.downloadBundle()
                 .then((bundle) => this.loadSkeleton(bundle))
@@ -103,12 +107,22 @@ export class LocalizedSkeleton extends sp.Skeleton {
     }
 
     private processPath() {
-        //db://assets/resources/language/en/xxxxxx
-        // console.log(this.spriteUrl);
-        // const regex = 'language/[a-z]+/\\w+';
-        // this.spriteUrl = this.spriteUrl.slice(this.spriteUrl.search(regex));
-        const splitArray = this.url.split('/');
-        this.url = this.url.replace(splitArray[splitArray.indexOf('language') + 1], '${i18n._language}'); //.split('@')[0];
+        // 調整路徑處理方式，不在綁定在language下，但各語系仍需要在同個資料夾下且都打包bundle，且不支援複數bundle
+        let done = false;
+        JSON.stringify(window.languages, (key, value) => {
+            if (done) {
+                return undefined;
+            } else {
+                if (key != '' && window.languages[key]) {
+                    const reg = new RegExp(`\/${key}\/`);
+                    if (this.url.match(reg)) {
+                        this.url = this.url.replace(reg, '/${i18n._language}/');
+                        done = true;
+                    }
+                }
+                return value;
+            }
+        });
     }
 
     clearRef() {

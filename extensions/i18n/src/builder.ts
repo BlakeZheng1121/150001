@@ -1,25 +1,21 @@
-import { IBuildPlugin } from "../@types/packages/builder/@types";
+import { IBuildPlugin } from '../@types/packages/builder/@types';
 
+export function load() {}
 
-export function load() {
-    
-}
-
-export function unload() {
-    
-}
+export function unload() {}
 
 export const configs: Record<string, IBuildPlugin> = {
     '*': {
         hooks: './hooks',
         options: {
-            webTestOption: {
-                label: 'webTestOption',
-                default: false,
+            defaultLang: {
+                label: 'i18n:i18n.buildPanel.title',
+                description: 'i18n:i18n.buildPanel.title',
+                default: 'en',
                 render: {
-                    ui: 'ui-checkbox'
+                    ui: 'ui-input'
                 }
             }
         }
-    },
+    }
 };

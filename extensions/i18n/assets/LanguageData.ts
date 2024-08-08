@@ -1,10 +1,9 @@
 import { director } from 'cc';
 import { BaseLocalized } from './BaseLocalized';
 import { LocalizedSkeleton } from './LocalizedSkeleton';
-import { LocalizedSprite } from './LocalizedSprite';
 
-const _default = 'en';
-export let _language = '';
+export const _default = 'en';
+export let _language = _default;
 
 export let ready: boolean = false;
 
@@ -18,9 +17,14 @@ export function init(lang: string) {
     updateSceneRenderers();
 }
 
-export function getSupportedLanguage(lang: string) {
+export function getSupportedLanguage(language: string) {
     if (win.languages) {
+        if (win.languages[language]) {
+            return language;
+        }
+        let lang = language.replace(/-[^-]+$/, '');
         if (win.languages[lang]) {
+            console.warn(`${language} is not supported and will automatically switch to ${lang}.`);
             return lang;
         } else {
             return _default;
@@ -33,7 +37,7 @@ export function getSupportedLanguage(lang: string) {
  * 翻译数据
  * @param key
  */
-export function t(key: string) {
+export function t(key: string, param?: any) {
     const win: any = window;
 
     if (!win.languages) {
@@ -48,41 +52,42 @@ export function t(key: string) {
             return '';
         }
     }
-    return data || '';
+    return stringInterpolation(data, param) || '';
+}
+
+export function stringInterpolation(text: string, param?: any) {
+    if (param) {
+        let embed = '';
+        let keys = Object.keys(param);
+        for (let i = 0; i < keys.length; i++) {
+            const key = keys[i];
+            const value = param[key];
+            embed = embed.concat(`const ${key} = '${value}';`);
+        }
+        text = Function(`${embed}return (\`${text}\`)`)();
+    }
+    return text;
 }
 
 export function updateSceneRenderers() {
-    // very costly iterations
-    const rootNodes = director.getScene()?.children;
-    // walk all nodes with localize skeleton and update
-    const allLocalizedSkeletons: any[] = [];
-    for (let i = 0; i < rootNodes.length; ++i) {
-        let skeletons = rootNodes[i].getComponentsInChildren('LocalizedSkeleton');
-        Array.prototype.push.apply(allLocalizedSkeletons, skeletons);
-    }
-    for (let i = 0; i < allLocalizedSkeletons.length; ++i) {
-        let skeletons = allLocalizedSkeletons[i];
-        if (!skeletons.node.active) continue;
-        skeletons.updateRenderer();
-    }
+    const allLocalizedObjects: any[] = [];
 
-    const allObjects = director.getScene().getComponentsInChildren(BaseLocalized);
-    for (let i = 0; i < allObjects.length; ++i) {
-        allObjects[i].updateRenderer();
+    Array.prototype.push.apply(allLocalizedObjects, director.getScene().getComponentsInChildren(LocalizedSkeleton));
+    Array.prototype.push.apply(allLocalizedObjects, director.getScene().getComponentsInChildren(BaseLocalized));
+
+    for (let i = 0; i < allLocalizedObjects.length; i++) {
+        allLocalizedObjects[i].localize?.();
     }
 }
 
 export function clearRef() {
-    const allLocalizedSprites = director.getScene().getComponentsInChildren(LocalizedSprite);
-    for (let i = 0; i < allLocalizedSprites.length; ++i) {
-        let sprite = allLocalizedSprites[i];
-        sprite.clearRef();
-    }
+    const allLocalizedObjects: any[] = [];
 
-    const allLocalizedSkeleton = director.getScene().getComponentsInChildren(LocalizedSkeleton);
-    for (let i = 0; i < allLocalizedSkeleton.length; ++i) {
-        let skeleton = allLocalizedSkeleton[i];
-        skeleton.clearRef();
+    Array.prototype.push.apply(allLocalizedObjects, director.getScene().getComponentsInChildren(LocalizedSkeleton));
+    Array.prototype.push.apply(allLocalizedObjects, director.getScene().getComponentsInChildren(BaseLocalized));
+
+    for (let i = 0; i < allLocalizedObjects.length; i++) {
+        allLocalizedObjects[i].clearRef?.();
     }
 }
 
