@@ -1,4 +1,4 @@
 [submodule "extensions/common-ui"]
 	path = extensions/common-ui
-	url = ../../h5_game_lab/h5_gamedevelop_package/commonui.git
+	url=../../h5_game_lab/h5_game_package/common_ui.git
 	branch = publish
