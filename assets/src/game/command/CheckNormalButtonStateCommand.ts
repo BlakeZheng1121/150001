@@ -11,16 +11,12 @@ export class CheckNormalButtonStateCommand extends puremvc.SimpleCommand {
     public static readonly NAME = 'CheckNormalButtonStateCommand';
 
     public execute(notification: puremvc.INotification): void {
-        if (
-            this.gameDataProxy.onAutoPlay == false &&
-            (this.gameDataProxy.gameState == StateMachineProxy.GAME1_IDLE ||
-                (this.gameDataProxy.gameState == StateMachineProxy.GAME1_SHOWWIN &&
-                    this.gameDataProxy.runWinComplete &&
-                    this.gameDataProxy.isHitSpecial() == false))
-        ) {
+        if (this.gameDataProxy.onAutoPlay == false && this.gameDataProxy.gameState == StateMachineProxy.GAME1_IDLE) {
             this.sendNotification(UIEvent.ENABLE_NORMAL_BUTTON);
         } else {
-            /* if (this.gameDataProxy.curScene !== GameScene.Game_2)  */this.sendNotification(UIEvent.DISABLE_NORMAL_BUTTON);
+            /* if (this.gameDataProxy.curScene !== GameScene.Game_2)  */ this.sendNotification(
+                UIEvent.DISABLE_NORMAL_BUTTON
+            );
         }
         /* if (
             this.gameDataProxy.curScene !== GameScene.Game_2 &&

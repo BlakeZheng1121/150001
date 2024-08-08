@@ -301,8 +301,9 @@
   },
   {
     "__type__": "TimelineAnimationSetupData",
-    "timelineAnimation": null,
-    "timelineAnimationName": 0,
+    "animation": null,
+    "_animationName": 0,
+    "animationNameString": "",
     "delayTime": 0,
     "useSpine": false,
     "useAnim": false,
@@ -318,28 +319,37 @@
   {
     "__type__": "SpineSetupData",
     "spine": null,
-    "spineName": 0,
+    "_spineName": 0,
+    "spineNameString": "",
+    "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
     "isLoop": false,
+    "isResetSlots": false,
+    "isResetBones": false,
     "isEndClose": false
   },
   {
     "__type__": "AnimationSetupData",
     "animation": null,
-    "animationName": 0,
+    "_animationName": 0,
+    "animationNameString": "",
     "delayTime": 0
   },
   {
     "__type__": "TimelineSpineSetupData",
-    "timelineSpine": {
+    "spine": {
       "__id__": 6
     },
-    "timelineSpineName": 2,
+    "_spineName": 2,
+    "spineNameString": "FreePlayWin_Show",
+    "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
-    "isEndClose": false,
     "isLoop": false,
+    "isResetSlots": false,
+    "isResetBones": false,
+    "isEndClose": false,
     "useSpine": false,
     "useAnim": true,
     "useParticle": true,
@@ -361,10 +371,14 @@
   {
     "__type__": "SpineSetupData",
     "spine": null,
-    "spineName": 0,
+    "_spineName": 0,
+    "spineNameString": "",
+    "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
     "isLoop": false,
+    "isResetSlots": false,
+    "isResetBones": false,
     "isEndClose": false
   },
   {
@@ -372,7 +386,8 @@
     "animation": {
       "__id__": 18
     },
-    "animationName": 1,
+    "_animationName": 1,
+    "animationNameString": "L",
     "delayTime": 0
   },
   {
@@ -2136,16 +2151,21 @@
   {
     "__type__": "SpineSetupData",
     "spine": null,
-    "spineName": 0,
+    "_spineName": 0,
+    "spineNameString": "",
+    "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
     "isLoop": false,
+    "isResetSlots": false,
+    "isResetBones": false,
     "isEndClose": false
   },
   {
     "__type__": "AnimationSetupData",
     "animation": null,
-    "animationName": 0,
+    "_animationName": 0,
+    "animationNameString": "",
     "delayTime": 0
   },
   {
@@ -2172,8 +2192,9 @@
   },
   {
     "__type__": "TimelineAnimationSetupData",
-    "timelineAnimation": null,
-    "timelineAnimationName": 0,
+    "animation": null,
+    "_animationName": 0,
+    "animationNameString": "",
     "delayTime": 0,
     "useSpine": false,
     "useAnim": false,
@@ -2189,28 +2210,37 @@
   {
     "__type__": "SpineSetupData",
     "spine": null,
-    "spineName": 0,
+    "_spineName": 0,
+    "spineNameString": "",
+    "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
     "isLoop": false,
+    "isResetSlots": false,
+    "isResetBones": false,
     "isEndClose": false
   },
   {
     "__type__": "AnimationSetupData",
     "animation": null,
-    "animationName": 0,
+    "_animationName": 0,
+    "animationNameString": "",
     "delayTime": 0
   },
   {
     "__type__": "TimelineSpineSetupData",
-    "timelineSpine": {
+    "spine": {
       "__id__": 6
     },
-    "timelineSpineName": 2,
+    "_spineName": 2,
+    "spineNameString": "FreePlayWin_Show",
+    "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
-    "isEndClose": false,
     "isLoop": false,
+    "isResetSlots": false,
+    "isResetBones": false,
+    "isEndClose": false,
     "useSpine": false,
     "useAnim": true,
     "useParticle": true,
@@ -2232,10 +2262,14 @@
   {
     "__type__": "SpineSetupData",
     "spine": null,
-    "spineName": 0,
+    "_spineName": 0,
+    "spineNameString": "",
+    "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
     "isLoop": false,
+    "isResetSlots": false,
+    "isResetBones": false,
     "isEndClose": false
   },
   {
@@ -2243,7 +2277,8 @@
     "animation": {
       "__id__": 18
     },
-    "animationName": 0,
+    "_animationName": 0,
+    "animationNameString": "R",
     "delayTime": 0
   },
   {
@@ -3162,16 +3197,21 @@
   {
     "__type__": "SpineSetupData",
     "spine": null,
-    "spineName": 0,
+    "_spineName": 0,
+    "spineNameString": "",
+    "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
     "isLoop": false,
+    "isResetSlots": false,
+    "isResetBones": false,
     "isEndClose": false
   },
   {
     "__type__": "AnimationSetupData",
     "animation": null,
-    "animationName": 0,
+    "_animationName": 0,
+    "animationNameString": "",
     "delayTime": 0
   },
   {
@@ -3198,8 +3238,9 @@
   },
   {
     "__type__": "TimelineAnimationSetupData",
-    "timelineAnimation": null,
-    "timelineAnimationName": 0,
+    "animation": null,
+    "_animationName": 0,
+    "animationNameString": "",
     "delayTime": 0,
     "useSpine": false,
     "useAnim": false,
@@ -3215,28 +3256,37 @@
   {
     "__type__": "SpineSetupData",
     "spine": null,
-    "spineName": 0,
+    "_spineName": 0,
+    "spineNameString": "",
+    "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
     "isLoop": false,
+    "isResetSlots": false,
+    "isResetBones": false,
     "isEndClose": false
   },
   {
     "__type__": "AnimationSetupData",
     "animation": null,
-    "animationName": 0,
+    "_animationName": 0,
+    "animationNameString": "",
     "delayTime": 0
   },
   {
     "__type__": "TimelineSpineSetupData",
-    "timelineSpine": {
+    "spine": {
       "__id__": 6
     },
-    "timelineSpineName": 1,
+    "_spineName": 1,
+    "spineNameString": "FreePlayWin_Loop",
+    "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
-    "isEndClose": false,
     "isLoop": false,
+    "isResetSlots": false,
+    "isResetBones": false,
+    "isEndClose": false,
     "useSpine": false,
     "useAnim": true,
     "useParticle": false,
@@ -3251,10 +3301,14 @@
   {
     "__type__": "SpineSetupData",
     "spine": null,
-    "spineName": 0,
+    "_spineName": 0,
+    "spineNameString": "",
+    "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
     "isLoop": false,
+    "isResetSlots": false,
+    "isResetBones": false,
     "isEndClose": false
   },
   {
@@ -3262,7 +3316,8 @@
     "animation": {
       "__id__": 18
     },
-    "animationName": 1,
+    "_animationName": 1,
+    "animationNameString": "L",
     "delayTime": 0
   },
   {
@@ -3282,16 +3337,21 @@
   {
     "__type__": "SpineSetupData",
     "spine": null,
-    "spineName": 0,
+    "_spineName": 0,
+    "spineNameString": "",
+    "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
     "isLoop": false,
+    "isResetSlots": false,
+    "isResetBones": false,
     "isEndClose": false
   },
   {
     "__type__": "AnimationSetupData",
     "animation": null,
-    "animationName": 0,
+    "_animationName": 0,
+    "animationNameString": "",
     "delayTime": 0
   },
   {

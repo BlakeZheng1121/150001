@@ -1,5 +1,4 @@
-import { _decorator, Component, game, view, ResolutionPolicy, Prefab, instantiate, tween, Vec3, director, Director } from 'cc';
-import { AppFacade } from '../AppFacade';
+import { _decorator, Component, game, view, ResolutionPolicy, Prefab, instantiate, Director } from 'cc';
 import { CoreWebBridgeProxy } from '../proxy/CoreWebBridgeProxy';
 import { Logger } from './Logger';
 
@@ -33,6 +32,7 @@ export class SceneManager extends Component {
     private screenAngle: number;
     private isOrientationSuccess: boolean;
     private policy: ResolutionPolicy;
+    private facadeModule: any;
 
     private static _orientation: Orientation = Orientation.VERTICAL;
     public static get Orientation() {
@@ -56,8 +56,21 @@ export class SceneManager extends Component {
             this.destroy();
             return;
         }
+        this.importFacadeModule().then(() => {
+            // 解析度自適應設定
+            this.initializeResolutionPolicy();
 
-        // 解析度自適應設定
+            /** Release 不能包含 mock */
+            instantiate(this.prefabMockTool).setParent(this.node);
+        });
+    }
+
+    private async importFacadeModule() {
+        const self = this;
+        self.facadeModule = await import('../AppFacade');
+    }
+
+    private initializeResolutionPolicy() {
         this.policy = new ResolutionPolicy(
             ResolutionPolicy.ContainerStrategy.PROPORTION_TO_FRAME,
             ResolutionPolicy.ContentStrategy.SHOW_ALL
@@ -72,14 +85,7 @@ export class SceneManager extends Component {
         DEF_STAGE_WIDTH = view.getDesignResolutionSize().width;
         DEF_STAGE_HEIGHT = view.getDesignResolutionSize().height;
         this.onChangeScreen();
-
-        /** Release 不能包含 mock */
-        // TODO: 因應測試需求先註解，待mock打包機制完成
-        // if (DEBUG) {
-        instantiate(this.prefabMockTool).setParent(this.node);
-        // }
     }
-
     /**
      * 判斷是否該轉向
      *
@@ -141,7 +147,9 @@ export class SceneManager extends Component {
             jpHistoryPosY = ContainerJPButtonVertical.HISTORY;
         }
 
-        const webBridgeProxy = AppFacade.instance.retrieveProxy(CoreWebBridgeProxy.NAME) as CoreWebBridgeProxy;
+        const webBridgeProxy = this.facadeModule.AppFacade.getInstance().retrieveProxy(
+            CoreWebBridgeProxy.NAME
+        ) as CoreWebBridgeProxy;
         webBridgeProxy.getWebFunRequest(this, 'gameClientMsg', {
             event: 'customButtonPosition',
             value: {

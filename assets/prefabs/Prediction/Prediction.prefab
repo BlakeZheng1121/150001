@@ -157,8 +157,9 @@
   },
   {
     "__type__": "TimelineAnimationSetupData",
-    "timelineAnimation": null,
-    "timelineAnimationName": 0,
+    "animation": null,
+    "_animationName": 0,
+    "animationNameString": "",
     "delayTime": 0,
     "useSpine": false,
     "useAnim": false,
@@ -174,28 +175,37 @@
   {
     "__type__": "SpineSetupData",
     "spine": null,
-    "spineName": 0,
+    "_spineName": 0,
+    "spineNameString": "",
+    "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
     "isLoop": false,
+    "isResetSlots": false,
+    "isResetBones": false,
     "isEndClose": false
   },
   {
     "__type__": "AnimationSetupData",
     "animation": null,
-    "animationName": 0,
+    "_animationName": 0,
+    "animationNameString": "",
     "delayTime": 0
   },
   {
     "__type__": "TimelineSpineSetupData",
-    "timelineSpine": {
+    "spine": {
       "__id__": 14
     },
-    "timelineSpineName": 1,
+    "_spineName": 1,
+    "spineNameString": "Prediction",
+    "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
-    "isEndClose": false,
     "isLoop": false,
+    "isResetSlots": false,
+    "isResetBones": false,
+    "isEndClose": false,
     "useSpine": false,
     "useAnim": false,
     "useParticle": false,
@@ -259,16 +269,21 @@
   {
     "__type__": "SpineSetupData",
     "spine": null,
-    "spineName": 1,
+    "_spineName": 0,
+    "spineNameString": "",
+    "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
     "isLoop": false,
+    "isResetSlots": false,
+    "isResetBones": false,
     "isEndClose": false
   },
   {
     "__type__": "AnimationSetupData",
     "animation": null,
-    "animationName": 0,
+    "_animationName": 0,
+    "animationNameString": "",
     "delayTime": 0
   },
   {
@@ -310,16 +325,21 @@
     "spine": {
       "__id__": 14
     },
-    "spineName": 1,
+    "_spineName": 0,
+    "spineNameString": "",
+    "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
     "isLoop": false,
+    "isResetSlots": false,
+    "isResetBones": false,
     "isEndClose": false
   },
   {
     "__type__": "AnimationSetupData",
     "animation": null,
-    "animationName": 0,
+    "_animationName": 0,
+    "animationNameString": "",
     "delayTime": 0
   },
   {

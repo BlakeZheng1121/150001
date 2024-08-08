@@ -186,11 +186,6 @@ export class SlotViewMediator extends BaseMediator<SlotView> implements SlotView
         whMediator.reset();
     }
 
-    // protected setSound(): void {
-    //     const soundProxy = this.facade.retrieveProxy(SoundProxy.NAME) as SoundProxy;
-    //     if (soundProxy) soundProxy.enableSound(!soundProxy.hasSound());
-    // }
-
     public onClickClose(): void {
         const self = this;
 

@@ -5,7 +5,7 @@ const { ccclass, property } = _decorator;
 
 @ccclass('Game_ControlView')
 export class Game_ControlView extends ControlView {
-    @property({ type: Game_QuickSpinButton })
+    @property({ type: Game_QuickSpinButton, override: true })
     public quickSpinButton: Game_QuickSpinButton;
 
     public buttonCallback: Game_IControlViewMediator;

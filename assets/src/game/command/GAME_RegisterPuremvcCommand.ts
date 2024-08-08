@@ -20,7 +20,6 @@ export class GAME_RegisterPuremvcCommand extends WAY_RegisterPuremvcCommand {
      */
     protected registerProxy(): void {
         this.facade.registerProxy(new GAME_GameDataProxy());
-        // this.facade.registerProxy(new WinCreditSoundProxy());
         this.facade.registerProxy(new StateMachineProxy());
 
         super.registerProxy();

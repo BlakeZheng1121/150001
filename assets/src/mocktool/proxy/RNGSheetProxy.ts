@@ -15,8 +15,8 @@ export class RNGSheetProxy extends puremvc.Proxy implements IGDRequest {
 
     private machineType: string;
     private fildId: string;
-    private key: string = 'AIzaSyDyKJMNfR8BEwNqOJ5vwF6YF7-wOjmOLLg';
-    private gdId: string = '18H7CYe8LR_aC-6gxtukYZKAOh8hzEBPf';
+    private key: string = 'AIzaSyDxi7lK0cfhOzppMkhFCNfrOCXN5eC3DLo';
+    private gdId: string = '1g9HdtCsrIEvrThDq_n5Fa2m0jdwRDbKU';
 
     public constructor() {
         super(RNGSheetProxy.NAME);

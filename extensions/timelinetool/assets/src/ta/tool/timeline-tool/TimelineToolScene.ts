@@ -233,7 +233,7 @@ export class TimelineToolScene extends Component {
   }
 
   update() {
-    if (this.isPlaying !== this.timelineTool[this.timelineIndex].isPlaying) {
+    if (this.timelineTool.length > 0 && this.isPlaying !== this.timelineTool[this.timelineIndex].isPlaying) {
       if (this.timelineTool[this.timelineIndex].isPlaying === true) {
         this.isPlayingLabel.string = "Playing";
       } else {

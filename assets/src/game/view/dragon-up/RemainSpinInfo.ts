@@ -1,5 +1,5 @@
-import { _decorator, Component, Label } from 'cc';
 import { TimeLineTool } from 'TimeLineTool';
+import { _decorator, Component, Label } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('RemainSpinInfo')

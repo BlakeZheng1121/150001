@@ -1,9 +1,5 @@
-import { _decorator, Sprite, UIOpacity, Color, SpriteFrame } from 'cc';
-import { UIButton } from 'common-ui/view/UIButton';
+import { _decorator, Color, SpriteFrame, Node } from 'cc';
 import { SpeedMode } from '../vo/enum/Game_UIEnums';
-import { ButtonState } from 'common-ui/proxy/UIEnums';
-
-import { TimeLineTool } from 'TimeLineTool';
 import { QuickSpinButton } from 'common-ui/view/QuickSpinButton';
 const { ccclass, property } = _decorator;
 
@@ -14,16 +10,10 @@ export class Game_QuickSpinButton extends QuickSpinButton {
     @property({ type: Color })
     public turboOnColor: Color;
 
-    @property({ type: TimeLineTool })
-    public newIcon: TimeLineTool = null;
-
-    protected onLoad() {
-        super.onLoad();
-        this.newIcon.play('sweep');
-    }
+    @property({ type: Node })
+    public newIcon: Node = null;
 
     public setState(state: string) {
-
         this.state = state;
         switch (state) {
             case SpeedMode.STATUS_QUICK:
@@ -43,7 +33,8 @@ export class Game_QuickSpinButton extends QuickSpinButton {
                 break;
         }
     }
+
     public closeNewIcon() {
-        this.newIcon.node.active = false;
+        this.newIcon.active = false;
     }
 }

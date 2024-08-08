@@ -1,644 +1,477 @@
-import { _decorator, Component, CCClass, __private, Animation } from "cc";
-import { EDITOR } from "cc/env";
-import { ParticleState, Timeline, TimelineType } from "./ToolData";
+import { _decorator, Component, CCClass, Animation, sp } from 'cc';
+import { EDITOR } from 'cc/env';
+import {
+    AnimationSetupData,
+    ParticleSetupData,
+    ParticleState,
+    SpineSetupData,
+    Timeline,
+    TimelineType
+} from './ToolData';
 
 const { ccclass, property, executeInEditMode } = _decorator;
 
-@ccclass("TimeLineTool")
+@ccclass('TimeLineTool')
 @executeInEditMode(true)
 export class TimeLineTool extends Component {
-  @property({ type: [Timeline] })
-  public arrayTimelineData: Timeline[] = [];
-  _isPlaying: boolean = false;
+    @property({ type: [Timeline] })
+    public arrayTimelineData: Timeline[] = [];
+    private _isPlaying: boolean = false;
+    public set isPlaying(value: boolean) {
+        this._isPlaying = value;
+    }
+    public get isPlaying() {
+        return this._isPlaying;
+    }
 
-  update() {
-    this.updateEditorEnum();
-  }
+    protected update() {
+        if (EDITOR) {
+            this.updateEditorEnum();
+        }
+    }
 
-  SetTimelineSpineData(timelineIndex: number, timelineDataIndex: number) {
-    let timlineSpineName = Object.getOwnPropertyDescriptor(
-      this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.timelineSpine.skeletonData.getAnimsEnum(),
-      this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.timelineSpineName
-    ).value;
+    /** Spine 主線 */
+    private SetTimelineSpineData(spineSetupData: SpineSetupData, timelineName: string, callBack: Function) {
+        this.handleSpineAnimation(spineSetupData, timelineName, callBack);
+    }
 
-    this.scheduleOnce(() => {
-      this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.timelineSpine.node.active = true;
-      this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.timelineSpine.timeScale =
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.timeScale;
+    /** Animation 主線 */
+    private SetTimelineAnimationData(animSetupData: AnimationSetupData, timelineName: string, callback: Function) {
+        this.handleAnimation(animSetupData, timelineName, callback);
+    }
 
-      let trackEntry = this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.timelineSpine.setAnimation(
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.trackIndex,
-        timlineSpineName,
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.isLoop
-      );
-      this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.trackEntry = trackEntry;
+    // 主線附加 Spine
+    private SetAppendSpine(timelineData: any, timelineName: string) {
+        if (timelineData.useSpine) {
+            this.handleSpineAnimation(timelineData.spineSetupData, timelineName);
+        }
+    }
 
-      this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.timelineSpine.setTrackCompleteListener(
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.trackEntry, 
-        () => {
-          this.scheduleOnce(() => {
-            this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.timelineSpine.setTrackCompleteListener(
-              this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.trackEntry, () => {});
-            if (this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.isLoop === true) {
-              return;
+    // 主線附加 Animation
+    private SetAppendAnimation(timelineData: any, timelineName: string) {
+        if (timelineData.useAnim) {
+            this.handleAnimation(timelineData.animSetupData, timelineName);
+        }
+    }
+
+    // 主線附加 Particle
+    private SetAppendParticle(timelineData: any) {
+        if (timelineData.useParticle) {
+            this.handleParticle(timelineData.particleData);
+        }
+    }
+
+    private handleSpineAnimation(spineSetupData: SpineSetupData, timelineName: string, callBack?: Function) {
+        const self = this;
+        const spine = spineSetupData.spine;
+        const spineAnimName = spineSetupData.spineNameString;
+        if (spineAnimName == null || spineAnimName === '') {
+            throw new Error(`The spine name of "${timelineName}" in ${this.node.name} is empty`);
+        }
+
+        function playSpine() {
+            spine.node.active = true;
+            spine.timeScale = spineSetupData.timeScale;
+            self.resetSpineSlotsIfNeeded(spine, spineSetupData.isResetSlots);
+            self.resetSpineBonesIfNeeded(spine, spineSetupData.isResetBones);
+            let trackEntry = spine.setAnimation(spineSetupData.trackIndex, spineAnimName, spineSetupData.isLoop);
+            spineSetupData.trackEntry = trackEntry;
+
+            if (spineSetupData.isLoop === false) {
+                spine.setTrackCompleteListener(trackEntry, () => {
+                    spine.setTrackCompleteListener(trackEntry, () => {});
+                    spine.clearTrack(spineSetupData.trackIndex);
+                    callBack?.();
+                    if (spineSetupData.isEndClose === true) {
+                        spine.node.active = false;
+                    }
+                });
             }
-            this.checkTimelineEnd(timelineIndex);
-            if (this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.isEndClose === true) {
-              this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.timelineSpine.clearTrack(
-                this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.trackIndex
-              );
-              this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.timelineSpine.node.active = false;
-            }
-          });
-        });
-    }, this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.delayTime);
-  }
+        }
+        // 延遲時間為0時，直接執行，避免scheduleOnce過一幀才執行
+        if (spineSetupData.delayTime === 0) {
+            playSpine();
+        } else {
+            this.scheduleOnce(playSpine, spineSetupData.delayTime);
+        }
+    }
 
-  SetTimelineSpineDataAppendSpine(timelineIndex: number, timelineDataIndex: number) {
-    if (this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.useSpine) {
-      let spineName = Object.getOwnPropertyDescriptor(
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.spine.skeletonData.getAnimsEnum(),
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.spineName
-      ).value;
+    private handleAnimation(animSetupData: AnimationSetupData, timelineName: string, callback?: Function) {
+        const animation = animSetupData.animation;
+        const animationName = animSetupData.animationNameString;
+        if (animationName == null || animationName === '') {
+            throw new Error(`The animation name of "${timelineName}" in ${this.node.name} is empty`);
+        }
 
-      this.scheduleOnce(() => {
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.spine.node.active = true;
-
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.spine.timeScale =
-          this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.timeScale;
-        let trackEntry = this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.spine.setAnimation(
-          this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.trackIndex,
-          spineName,
-          this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.isLoop
+        animation.on(
+            Animation.EventType.FINISHED,
+            () => {
+                animation.off(Animation.EventType.FINISHED);
+                callback?.();
+            },
+            this
         );
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.trackEntry = trackEntry;
-        
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.spine.setTrackCompleteListener(
-          trackEntry, 
-          () => {
-            this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.spine.setTrackCompleteListener(
-              this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.trackEntry, () => {});
-            if (this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.isEndClose) {
-              this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.spine.clearTrack(
-                this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.trackIndex
-              );
-    
-              this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.spine.node.active = false;
-            }
-          });
-      }, this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.spineSetupData.delayTime);
-    }
-  }
 
-  SetTimelineSpineDataAppendAnimation(timelineIndex: number, timelineDataIndex: number) {
-    if (this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.useAnim) {
-      let animationName =
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.animSetupData.animation.clips[
-          this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.animSetupData.animationName
-        ].name;
-
-      this.scheduleOnce(() => {
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.animSetupData.animation.play(animationName);
-      }, this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.animSetupData.delayTime);
-    }
-  }
-
-  SetTimelineSpineDataAppendParticle(timelineIndex: number, timelineDataIndex: number) {
-    if (this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.useParticle) {
-      for (let j = 0; j < this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.particleData.length; j++) {
-        switch (this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.particleData[j].particleState) {
-          case ParticleState.Play:
-            this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.particleData[j].particle.ParticleClear();
-            this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.particleData[j].particle.ParticlePlay(
-              true,
-              this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.particleData[j].delayTime
-            );
-            break;
-          case ParticleState.Stop:
-            this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine.particleData[j].particle.ParticleStop();
-            break;
+        function playAnim() {
+            animation.play(animationName);
         }
-      }
-    }
-  }
-
-  SetTimelineAnimationData(timelineIndex: number, timelineDataIndex: number) {
-    let timelineAnimationName =
-      this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.timelineAnimation.clips[
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.timelineAnimationName
-      ].name;
-
-    //TimelineAnimation 的End 事件
-    this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.timelineAnimation.on(
-      Animation.EventType.FINISHED,
-      () => {
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.timelineAnimation.off(Animation.EventType.FINISHED);
-        this.checkTimelineEnd(timelineIndex);
-      },
-      this
-    );
-    this.scheduleOnce(() => {
-      this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.timelineAnimation.play(timelineAnimationName);
-    }, this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.delayTime);
-  }
-
-  SetTimelineAnimationDataAppendSpine(timelineIndex: number, timelineDataIndex: number) {
-    if (this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.useSpine) {
-      let spineName = Object.getOwnPropertyDescriptor(
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.spine.skeletonData.getAnimsEnum(),
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.spineName
-      ).value;
-
-      this.scheduleOnce(() => {
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.spine.node.active = true;
-
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.spine.timeScale =
-          this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.timeScale;
-        let trackEntry = this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.spine.setAnimation(
-          this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.trackIndex,
-          spineName,
-          this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.isLoop
-        );
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.trackEntry = trackEntry;
-
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.spine.setTrackCompleteListener(
-          trackEntry,
-          () => {
-            this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.spine.setTrackCompleteListener(
-              this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.trackEntry, () => {});
-            if (this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.isEndClose) {
-              this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.spine.clearTrack(
-                this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.trackIndex
-              );
-              this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.spineSetupData.spine.node.active = false;
-            }
-          });
-      }, this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.delayTime);
-    }
-  }
-
-  SetTimelineAnimationDataAppendAnimation(timelineIndex: number, timelineDataIndex: number) {
-    if (this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.useAnim) {
-      let animationName =
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.animSetupData.animation.clips[
-          this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.animSetupData.animationName
-        ].name;
-
-      this.scheduleOnce(() => {
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.animSetupData.animation.play(animationName);
-      }, this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.animSetupData.delayTime);
-    }
-  }
-
-  SetTimelineAnimationDataAppendParticle(timelineIndex: number, timelineDataIndex: number) {
-    if (this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.useParticle) {
-      for (let j = 0; j < this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.particleData.length; j++) {
-        switch (this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.particleData[j].particleState) {
-          case ParticleState.Play:
-            this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.particleData[j].particle.ParticleClear();
-            this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.particleData[j].particle.ParticlePlay(
-              true,
-              this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.particleData[j].delayTime
-            );
-            break;
-          case ParticleState.Stop:
-            this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation.particleData[j].particle.ParticleStop();
-            break;
+        // 延遲時間為0時，直接執行，避免scheduleOnce過一幀才執行
+        if (animSetupData.delayTime === 0) {
+            playAnim();
+        } else {
+            this.scheduleOnce(playAnim, animSetupData.delayTime);
         }
-      }
     }
-  }
 
-  SetTimelineTimeDataAppendSpine(timelineIndex: number, timelineDataIndex: number) {
-    if (this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.useSpine) {
-      let spineName = Object.getOwnPropertyDescriptor(
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.spine.skeletonData.getAnimsEnum(),
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.spineName
-      ).value;
-
-      this.scheduleOnce(() => {
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.spine.node.active = true;
-
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.spine.timeScale =
-          this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.timeScale;
-        let trackEntry = this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.spine.setAnimation(
-          this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.trackIndex,
-          spineName,
-          this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.isLoop
-        );
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.trackEntry = trackEntry;
-
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.spine.setTrackCompleteListener(
-          trackEntry, 
-          () => {
-            this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.spine.setTrackCompleteListener(
-              this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.trackEntry, () => {});
-            if (this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.isEndClose === true) {
-              this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.spine.clearTrack(
-                this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.trackIndex
-              );
-              this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.spine.node.active = false;
+    private handleParticle(particleData: ParticleSetupData[]) {
+        for (let j = 0; j < particleData.length; j++) {
+            switch (particleData[j].particleState) {
+                case ParticleState.Play:
+                    particleData[j].particle.ParticleClear();
+                    particleData[j].particle.ParticlePlay(true, particleData[j].delayTime);
+                    break;
+                case ParticleState.Stop:
+                    particleData[j].particle.ParticleStop();
+                    break;
             }
-          });
-      }, this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.spineSetupData.delayTime);
-    }
-  }
-
-  SetTimelineTimeDataAppendAnimation(timelineIndex: number, timelineDataIndex: number) {
-    if (this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.useAnim) {
-      let animationName =
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.animSetupData.animation.clips[
-          this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.animSetupData.animationName
-        ].name;
-
-      this.scheduleOnce(() => {
-        this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.animSetupData.animation.play(animationName);
-      }, this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.animSetupData.delayTime);
-    }
-  }
-
-  SetTimelineTimeDataAppendParticle(timelineIndex: number, timelineDataIndex: number) {
-    if (this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.useParticle) {
-      for (let j = 0; j < this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.particleData.length; j++) {
-        switch (this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.particleData[j].particleState) {
-          case ParticleState.Play:
-            this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.particleData[j].particle.ParticleClear();
-            this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.particleData[j].particle.ParticlePlay(
-              true,
-              this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.particleData[j].delayTime
-            );
-            break;
-          case ParticleState.Stop:
-            this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.particleData[j].particle.ParticleStop();
-            break;
         }
-      }
     }
-    this.scheduleOnce(() => {
-      this.checkTimelineEnd(timelineIndex);
-    }, this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime.toNextStateTime);
-  }
 
-  checkTimelineIndex(timelineIndex: number, timelineDataIndex: number) {
-    if (this.isPlaying === false) return;
-    switch (this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineType) {
-      case TimelineType.Spine:
-        this.SetTimelineSpineData(timelineIndex, timelineDataIndex);
-        this.SetTimelineSpineDataAppendSpine(timelineIndex, timelineDataIndex);
-        this.SetTimelineSpineDataAppendAnimation(timelineIndex, timelineDataIndex);
-        this.SetTimelineSpineDataAppendParticle(timelineIndex, timelineDataIndex);
-        break;
-      case TimelineType.Animation:
-        this.SetTimelineAnimationData(timelineIndex, timelineDataIndex);
-        this.SetTimelineAnimationDataAppendSpine(timelineIndex, timelineDataIndex);
-        this.SetTimelineAnimationDataAppendAnimation(timelineIndex, timelineDataIndex);
-        this.SetTimelineAnimationDataAppendParticle(timelineIndex, timelineDataIndex);
-        break;
-      case TimelineType.Time:
-        // 分支Spine播放設定
-        this.SetTimelineTimeDataAppendSpine(timelineIndex, timelineDataIndex);
-        // 分支Animation播放設定
-        this.SetTimelineTimeDataAppendAnimation(timelineIndex, timelineDataIndex);
-        // 分支Particle播放設定
-        this.SetTimelineTimeDataAppendParticle(timelineIndex, timelineDataIndex);
-        break;
-      default:
-        break;
-    }
-  }
-
-  checkTimelineEnd(timelineIndex: number) {
-    this.arrayTimelineData[timelineIndex].timelineDataIndex++;
-    if (this.arrayTimelineData[timelineIndex].timelineDataIndex < this.arrayTimelineData[timelineIndex].timelineData.length) {
-      this.checkTimelineIndex(timelineIndex, this.arrayTimelineData[timelineIndex].timelineDataIndex);
-    } else {
-      this.timelineEnd(timelineIndex);
-    }
-  }
-
-  timelineEnd(timelineIndex: number) {
-    let callBack = this.arrayTimelineData[timelineIndex].TimelineEndCallBack;
-    this.changeStateInit();
-    this.isPlaying = false;
-    callBack?.();
-  }
-
-  private changeStateInit() {
-    this.unscheduleAllCallbacks();
-    for (let index = 0; index < this.arrayTimelineData.length; index++) {
-      this.arrayTimelineData[index].timelineDataIndex = 0;
-      this.arrayTimelineData[index].TimelineEndCallBack = null;
-      for (let i = 0; i < this.arrayTimelineData[index].timelineData.length; i++) {
-        switch (this.arrayTimelineData[index].timelineData[i].timelineType) {
-          case TimelineType.Spine:
-            if (this.arrayTimelineData[index].timelineData[i].timelineSpine.trackEntry != null) {
-              this.arrayTimelineData[index].timelineData[i].timelineSpine.timelineSpine.setTrackCompleteListener(
-                this.arrayTimelineData[index].timelineData[i].timelineSpine.trackEntry, () => {});
-            }
-            break;
-          case TimelineType.Animation:
-            this.arrayTimelineData[index].timelineData[i].timelineAnimation.timelineAnimation.off(Animation.EventType.FINISHED);
-            break;
-          default:
-            break;
+    private resetSpineSlotsIfNeeded(spine: sp.Skeleton, isResetSlots: boolean) {
+        if (isResetSlots) {
+            spine.setSlotsToSetupPose();
         }
-      }
     }
-  }
 
-  public changeState(name: string, cb: Function = () => {}) {
-    this.changeStateInit();
-    for (let i = 0; i < this.arrayTimelineData.length; i++) {
-      if (name === this.arrayTimelineData[i].timelineName) {
-        this.arrayTimelineData[i].TimelineEndCallBack = cb;
-        this.checkTimelineIndex(i, this.arrayTimelineData[i].timelineDataIndex);
-      }
-    }
-  }
-  //--------------------------API---------------------------
-  public init() {
-    this.unscheduleAllCallbacks();
-    for (let index = 0; index < this.arrayTimelineData.length; index++) {
-      this.arrayTimelineData[index].timelineDataIndex = 0;
-      this.arrayTimelineData[index].TimelineEndCallBack = null;
-      for (let i = 0; i < this.arrayTimelineData[index].timelineData.length; i++) {
-        switch (this.arrayTimelineData[index].timelineData[i].timelineType) {
-          case TimelineType.Spine:
-            if (this.arrayTimelineData[index].timelineData[i].timelineSpine.trackEntry != null) {
-              this.arrayTimelineData[index].timelineData[i].timelineSpine.timelineSpine.setTrackCompleteListener(
-                this.arrayTimelineData[index].timelineData[i].timelineSpine.trackEntry, () => {});
-            }
-            this.arrayTimelineData[index].timelineData[i].timelineSpine.timelineSpine?.clearTracks();
-            if (this.arrayTimelineData[index].timelineData[i].timelineSpine.useSpine) {
-              this.arrayTimelineData[index].timelineData[i].timelineSpine.spineSetupData.spine?.clearTracks();
-              this.arrayTimelineData[index].timelineData[i].timelineSpine.spineSetupData.spine.node.active = false;
-            }
-            if (this.arrayTimelineData[index].timelineData[i].timelineSpine.useAnim) {
-              this.arrayTimelineData[index].timelineData[i].timelineSpine.animSetupData.animation?.stop();
-            }
-            if (this.arrayTimelineData[index].timelineData[i].timelineSpine.useParticle) {
-              for (let j = 0; j < this.arrayTimelineData[index].timelineData[i].timelineSpine.particleData.length; j++) {
-                this.arrayTimelineData[index].timelineData[i].timelineSpine.particleData[j].particle?.ParticleClear();
-                this.arrayTimelineData[index].timelineData[i].timelineSpine.particleData[j].particle?.unscheduleAllCallbacks();
-              }
-            }
-            break;
-          case TimelineType.Animation:
-            this.arrayTimelineData[index].timelineData[i].timelineAnimation.timelineAnimation.off(Animation.EventType.FINISHED);
-            this.arrayTimelineData[index].timelineData[i].timelineAnimation.timelineAnimation?.stop();
-            if (this.arrayTimelineData[index].timelineData[i].timelineAnimation.useSpine) {
-              this.arrayTimelineData[index].timelineData[i].timelineAnimation.spineSetupData.spine?.clearTracks();
-              this.arrayTimelineData[index].timelineData[i].timelineAnimation.spineSetupData.spine.node.active = false;
-            }
-            if (this.arrayTimelineData[index].timelineData[i].timelineAnimation.useAnim) {
-              this.arrayTimelineData[index].timelineData[i].timelineAnimation.animSetupData.animation?.stop();
-            }
-            if (this.arrayTimelineData[index].timelineData[i].timelineAnimation.useParticle) {
-              for (let j = 0; j < this.arrayTimelineData[index].timelineData[i].timelineAnimation.particleData.length; j++) {
-                this.arrayTimelineData[index].timelineData[i].timelineAnimation.particleData[j].particle?.ParticleClear();
-                this.arrayTimelineData[index].timelineData[i].timelineAnimation.particleData[j].particle?.unscheduleAllCallbacks();
-              }
-            }
-            break;
-          case TimelineType.Time:
-            //清除重寫
-            if (this.arrayTimelineData[index].timelineData[i].timelineTime.useSpine) {
-              this.arrayTimelineData[index].timelineData[i].timelineTime.spineSetupData.spine?.clearTracks();
-              this.arrayTimelineData[index].timelineData[i].timelineTime.spineSetupData.spine.node.active = false;
-            }
-            if (this.arrayTimelineData[index].timelineData[i].timelineTime.useAnim) {
-              this.arrayTimelineData[index].timelineData[i].timelineTime.animSetupData.animation?.stop();
-            }
-            if (this.arrayTimelineData[index].timelineData[i].timelineTime.useParticle) {
-              for (let j = 0; j < this.arrayTimelineData[index].timelineData[i].timelineTime.particleData.length; j++) {
-                this.arrayTimelineData[index].timelineData[i].timelineTime.particleData[j].particle?.ParticleClear();
-                this.arrayTimelineData[index].timelineData[i].timelineTime.particleData[j].particle?.unscheduleAllCallbacks();
-              }
-            }
-            break;
-          default:
-            break;
+    private resetSpineBonesIfNeeded(spine: sp.Skeleton, isResetBones: boolean) {
+        if (isResetBones) {
+            spine.setBonesToSetupPose();
         }
-      }
     }
-    this.isPlaying = false;
-  }
 
-  public setTimeScale(name: string,timeScale:number){
-    for (let i = 0; i < this.arrayTimelineData.length; i++) {
-      if (name === this.arrayTimelineData[i].timelineName) {
-        for(let j in  this.arrayTimelineData[i].timelineData){
-          //this.arrayTimelineData[i].timelineData[j].
-          switch (this.arrayTimelineData[i].timelineData[j].timelineType) {
+    private checkTimelineIndex(timelineIndex: number, timelineDataIndex: number) {
+        if (this.isPlaying === false) return;
+        const timelineName = this.arrayTimelineData[timelineIndex].timelineName;
+        let timelineData;
+        switch (this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineType) {
             case TimelineType.Spine:
-              this.arrayTimelineData[i].timelineData[j].timelineSpine.timeScale = timeScale
-              break;
+                timelineData = this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineSpine;
+                this.SetTimelineSpineData(timelineData, timelineName, this.checkTimelineEnd.bind(this, timelineIndex));
+                break;
             case TimelineType.Animation:
-              this.arrayTimelineData[i].timelineData[j].timelineAnimation.timelineAnimation.clips.forEach((val)=>{
-                val.speed = timeScale;
-              })
-              break;
+                timelineData = this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineAnimation;
+                this.SetTimelineAnimationData(
+                    timelineData,
+                    timelineName,
+                    this.checkTimelineEnd.bind(this, timelineIndex)
+                );
+                break;
             case TimelineType.Time:
-              //this.arrayTimelineData[i].timelineData[j].timelineSpine.timeScale = timeScale
-              break;
+                timelineData = this.arrayTimelineData[timelineIndex].timelineData[timelineDataIndex].timelineTime;
+                this.scheduleOnce(() => {
+                    this.checkTimelineEnd(timelineIndex);
+                }, timelineData.toNextStateTime);
+                break;
             default:
-              break;
-          }
+                break;
         }
-      }
+        this.SetAppendSpine(timelineData, timelineName);
+        this.SetAppendAnimation(timelineData, timelineName);
+        this.SetAppendParticle(timelineData);
     }
-  }
 
-  public play(name: string, cb?: Function) {
-    if (this.isPlaying === true) this.changeState(name, cb);
-    else {
-      this.isPlaying = true;
-      for (let i = 0; i < this.arrayTimelineData.length; i++) {
-        if (name === this.arrayTimelineData[i].timelineName) {
-          this.arrayTimelineData[i].TimelineEndCallBack = cb;
-          this.checkTimelineIndex(i, this.arrayTimelineData[i].timelineDataIndex);
+    private checkTimelineEnd(timelineIndex: number) {
+        this.arrayTimelineData[timelineIndex].timelineDataIndex++;
+        if (
+            this.arrayTimelineData[timelineIndex].timelineDataIndex <
+            this.arrayTimelineData[timelineIndex].timelineData.length
+        ) {
+            this.checkTimelineIndex(timelineIndex, this.arrayTimelineData[timelineIndex].timelineDataIndex);
+        } else {
+            this.timelineEnd(timelineIndex);
         }
-      }
     }
-  }
 
-  public stop() {
-    this.init();
-  }
+    private timelineEnd(timelineIndex: number) {
+        let callBack = this.arrayTimelineData[timelineIndex].TimelineEndCallBack;
+        this.changeStateInit();
+        this.isPlaying = false;
+        callBack?.();
+    }
 
-  public set isPlaying(value: boolean) {
-    this._isPlaying = value;
-  }
-
-  public get isPlaying() {
-    return this._isPlaying;
-  }
-
-  //-----------------Editor上面即時更換Enum的內容---------------------------
-  updateEditorEnum() {
-    if (EDITOR) {
-      for (let index = 0; index < this.arrayTimelineData.length; index++) {
-        for (let i = 0; i < this.arrayTimelineData[index].timelineData.length; i++) {
-          // 主線的Spine設定檔
-          if (this.arrayTimelineData[index].timelineData[i].timelineSpine.timelineSpine !== null) {
-            this._refreshSecEnum_TimelineSpineName(
-              this.arrayTimelineData[index].timelineData[i].timelineSpine.timelineSpine.skeletonData.getAnimsEnum(),
-              this.arrayTimelineData[index].timelineData[i].timelineSpine
-            );
-          } else {
-            this._refreshSecEnum_TimelineSpineName({ "<None>": 0 }, this.arrayTimelineData[index].timelineData[i].timelineSpine);
-          }
-          // Spine分支的Spine & Animation設定檔
-          if (this.arrayTimelineData[index].timelineData[i].timelineSpine.spineSetupData.spine !== null) {
-            this._refreshSecEnum_SpineName(
-              this.arrayTimelineData[index].timelineData[i].timelineSpine.spineSetupData.spine.skeletonData.getAnimsEnum(),
-              this.arrayTimelineData[index].timelineData[i].timelineSpine.spineSetupData
-            );
-          } else {
-            this._refreshSecEnum_SpineName({ "<None>": 0 }, this.arrayTimelineData[index].timelineData[i].timelineSpine.spineSetupData);
-          }
-
-          if (this.arrayTimelineData[index].timelineData[i].timelineSpine.animSetupData.animation !== null) {
-            var AnimEnum: object = {};
-            for (let j = 0; j < this.arrayTimelineData[index].timelineData[i].timelineSpine.animSetupData.animation.clips.length; j++) {
-              var name: string = this.arrayTimelineData[index].timelineData[i].timelineSpine.animSetupData.animation.clips[j].name;
-              AnimEnum = Object.assign(AnimEnum, { [name]: j });
+    private changeStateInit() {
+        for (let index = 0; index < this.arrayTimelineData.length; index++) {
+            this.arrayTimelineData[index].timelineDataIndex = 0;
+            this.arrayTimelineData[index].TimelineEndCallBack = null;
+            for (let i = 0; i < this.arrayTimelineData[index].timelineData.length; i++) {
+                switch (this.arrayTimelineData[index].timelineData[i].timelineType) {
+                    case TimelineType.Spine:
+                        const spineSetupData = this.arrayTimelineData[index].timelineData[i].timelineSpine;
+                        if (spineSetupData.trackEntry != null) {
+                            spineSetupData.spine.setTrackCompleteListener(spineSetupData.trackEntry, () => {});
+                        }
+                        break;
+                    case TimelineType.Animation:
+                        this.arrayTimelineData[index].timelineData[i].timelineAnimation.animation.off(
+                            Animation.EventType.FINISHED
+                        );
+                        break;
+                    default:
+                        break;
+                }
             }
-            this._refreshSecEnum_AnimationName(AnimEnum, this.arrayTimelineData[index].timelineData[i].timelineSpine.animSetupData);
-          } else {
-            this._refreshSecEnum_AnimationName({ "<None>": 0 }, this.arrayTimelineData[index].timelineData[i].timelineSpine.animSetupData);
-          }
-          //Spine分支的particle設定
-          for (let j = 0; j < this.arrayTimelineData[index].timelineData[i].timelineSpine.particleData.length; j++) {
-            if (this.arrayTimelineData[index].timelineData[i].timelineSpine.particleData[j].particle !== null) {
-              this.arrayTimelineData[index].timelineData[i].timelineSpine.particleData[j].isParticleLoop =
-                this.arrayTimelineData[index].timelineData[i].timelineSpine.particleData[j].particle.IsLoop;
-              this.arrayTimelineData[index].timelineData[i].timelineSpine.particleData[j].initParticleColor =
-                this.arrayTimelineData[index].timelineData[i].timelineSpine.particleData[j].particle.InitColor;
-              this.arrayTimelineData[index].timelineData[i].timelineSpine.particleData[j].cycleTime =
-                this.arrayTimelineData[index].timelineData[i].timelineSpine.particleData[j].particle.LoopOverTime;
-              this.arrayTimelineData[index].timelineData[i].timelineSpine.particleData[j].clearParticleTime =
-                this.arrayTimelineData[index].timelineData[i].timelineSpine.particleData[j].particle.ClearObjectTime;
-            }
-          }
-
-          // 主線的Animation設定檔
-          if (this.arrayTimelineData[index].timelineData[i].timelineAnimation.timelineAnimation !== null) {
-            var AnimEnum: object = {};
-            for (let j = 0; j < this.arrayTimelineData[index].timelineData[i].timelineAnimation.timelineAnimation.clips.length; j++) {
-              var name: string = this.arrayTimelineData[index].timelineData[i].timelineAnimation.timelineAnimation.clips[j].name;
-              AnimEnum = Object.assign(AnimEnum, { [name]: j });
-            }
-            this._refreshSecEnum_TimelineAnimationName(AnimEnum, this.arrayTimelineData[index].timelineData[i].timelineAnimation);
-          } else {
-            this._refreshSecEnum_TimelineAnimationName({ "<None>": 0 }, this.arrayTimelineData[index].timelineData[i].timelineAnimation);
-          }
-          // Animation分支的Spine & Animation設定檔
-          if (this.arrayTimelineData[index].timelineData[i].timelineAnimation.spineSetupData.spine !== null) {
-            this._refreshSecEnum_SpineName(
-              this.arrayTimelineData[index].timelineData[i].timelineAnimation.spineSetupData.spine.skeletonData.getAnimsEnum(),
-              this.arrayTimelineData[index].timelineData[i].timelineAnimation.spineSetupData
-            );
-          } else {
-            this._refreshSecEnum_SpineName({ "<None>": 0 }, this.arrayTimelineData[index].timelineData[i].timelineAnimation.spineSetupData);
-          }
-
-          if (this.arrayTimelineData[index].timelineData[i].timelineAnimation.animSetupData.animation !== null) {
-            var AnimEnum: object = {};
-            for (let j = 0; j < this.arrayTimelineData[index].timelineData[i].timelineAnimation.animSetupData.animation.clips.length; j++) {
-              var name: string = this.arrayTimelineData[index].timelineData[i].timelineAnimation.animSetupData.animation.clips[j].name;
-              AnimEnum = Object.assign(AnimEnum, { [name]: j });
-            }
-            this._refreshSecEnum_AnimationName(AnimEnum, this.arrayTimelineData[index].timelineData[i].timelineAnimation.animSetupData);
-          } else {
-            this._refreshSecEnum_AnimationName({ "<None>": 0 }, this.arrayTimelineData[index].timelineData[i].timelineAnimation.animSetupData);
-          }
-          //Animation分支的particle設定
-          for (let j = 0; j < this.arrayTimelineData[index].timelineData[i].timelineAnimation.particleData.length; j++) {
-            if (this.arrayTimelineData[index].timelineData[i].timelineAnimation.particleData[j].particle !== null) {
-              this.arrayTimelineData[index].timelineData[i].timelineAnimation.particleData[j].isParticleLoop =
-                this.arrayTimelineData[index].timelineData[i].timelineAnimation.particleData[j].particle.IsLoop;
-              this.arrayTimelineData[index].timelineData[i].timelineAnimation.particleData[j].initParticleColor =
-                this.arrayTimelineData[index].timelineData[i].timelineAnimation.particleData[j].particle.InitColor;
-              this.arrayTimelineData[index].timelineData[i].timelineAnimation.particleData[j].cycleTime =
-                this.arrayTimelineData[index].timelineData[i].timelineAnimation.particleData[j].particle.LoopOverTime;
-              this.arrayTimelineData[index].timelineData[i].timelineAnimation.particleData[j].clearParticleTime =
-                this.arrayTimelineData[index].timelineData[i].timelineAnimation.particleData[j].particle.ClearObjectTime;
-            }
-          }
-          //主線的TimelineTime的Spine & Animation設定
-          if (this.arrayTimelineData[index].timelineData[i].timelineTime.spineSetupData.spine !== null) {
-            this._refreshSecEnum_SpineName(
-              this.arrayTimelineData[index].timelineData[i].timelineTime.spineSetupData.spine.skeletonData.getAnimsEnum(),
-              this.arrayTimelineData[index].timelineData[i].timelineTime.spineSetupData
-            );
-          } else {
-            this._refreshSecEnum_SpineName({ "<None>": 0 }, this.arrayTimelineData[index].timelineData[i].timelineTime.spineSetupData);
-          }
-
-          if (this.arrayTimelineData[index].timelineData[i].timelineTime.animSetupData.animation !== null) {
-            var AnimEnum: object = {};
-            for (let j = 0; j < this.arrayTimelineData[index].timelineData[i].timelineTime.animSetupData.animation.clips.length; j++) {
-              var name: string = this.arrayTimelineData[index].timelineData[i].timelineTime.animSetupData.animation.clips[j].name;
-              AnimEnum = Object.assign(AnimEnum, { [name]: j });
-            }
-            this._refreshSecEnum_AnimationName(AnimEnum, this.arrayTimelineData[index].timelineData[i].timelineTime.animSetupData);
-          } else {
-            this._refreshSecEnum_AnimationName({ "<None>": 0 }, this.arrayTimelineData[index].timelineData[i].timelineTime.animSetupData);
-          }
-          //主線的TimelineTime的particle設定
-          for (let j = 0; j < this.arrayTimelineData[index].timelineData[i].timelineTime.particleData.length; j++) {
-            if (this.arrayTimelineData[index].timelineData[i].timelineTime.particleData[j].particle !== null) {
-              this.arrayTimelineData[index].timelineData[i].timelineTime.particleData[j].isParticleLoop =
-                this.arrayTimelineData[index].timelineData[i].timelineTime.particleData[j].particle.IsLoop;
-              this.arrayTimelineData[index].timelineData[i].timelineTime.particleData[j].initParticleColor =
-                this.arrayTimelineData[index].timelineData[i].timelineTime.particleData[j].particle.InitColor;
-              this.arrayTimelineData[index].timelineData[i].timelineTime.particleData[j].cycleTime =
-                this.arrayTimelineData[index].timelineData[i].timelineTime.particleData[j].particle.LoopOverTime;
-              this.arrayTimelineData[index].timelineData[i].timelineTime.particleData[j].clearParticleTime =
-                this.arrayTimelineData[index].timelineData[i].timelineTime.particleData[j].particle.ClearObjectTime;
-            }
-          }
         }
-      }
     }
-  }
 
-  //-----------------更換Enum內容的Function---------------------------
-  _refreshSecEnum_TimelineSpineName(value: {}, myself: any) {
-    if (EDITOR) {
-      const arr = [];
-      for (let key in value) {
-        arr.push({ name: key, value: value[key] });
-      }
-      CCClass.Attr.setClassAttr(myself, "timelineSpineName", "enumList", arr);
+    public changeState(name: string, cb: Function = () => {}) {
+        this.unscheduleAllCallbacks();
+        this.changeStateInit();
     }
-  }
-  _refreshSecEnum_SpineName(value: {}, myself: any) {
-    if (EDITOR) {
-      const arr = [];
-      for (let key in value) {
-        arr.push({ name: key, value: value[key] });
-      }
-      CCClass.Attr.setClassAttr(myself, "spineName", "enumList", arr);
+    //--------------------------API---------------------------
+    public init() {
+        this.unscheduleAllCallbacks();
+        for (let index = 0; index < this.arrayTimelineData.length; index++) {
+            this.arrayTimelineData[index].timelineDataIndex = 0;
+            this.arrayTimelineData[index].TimelineEndCallBack = null;
+            for (let i = 0; i < this.arrayTimelineData[index].timelineData.length; i++) {
+                switch (this.arrayTimelineData[index].timelineData[i].timelineType) {
+                    case TimelineType.Spine:
+                        const timelineSpine = this.arrayTimelineData[index].timelineData[i].timelineSpine;
+                        if (timelineSpine.trackEntry != null) {
+                            timelineSpine.spine.setTrackCompleteListener(timelineSpine.trackEntry, () => {});
+                        }
+                        timelineSpine.spine?.clearTracks();
+                        this.clearAppendOfTimeline(timelineSpine);
+                        break;
+                    case TimelineType.Animation:
+                        const timelineAnimation = this.arrayTimelineData[index].timelineData[i].timelineAnimation;
+                        timelineAnimation.animation.off(Animation.EventType.FINISHED);
+                        timelineAnimation.animation?.stop();
+                        this.clearAppendOfTimeline(timelineAnimation);
+                        break;
+                    case TimelineType.Time:
+                        const timelineTime = this.arrayTimelineData[index].timelineData[i].timelineTime;
+                        this.clearAppendOfTimeline(timelineTime);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        this.isPlaying = false;
     }
-  }
-  _refreshSecEnum_TimelineAnimationName(value: {}, myself: any) {
-    if (EDITOR) {
-      const arr = [];
-      for (let key in value) {
-        arr.push({ name: key, value: value[key] });
-      }
-      CCClass.Attr.setClassAttr(myself, "timelineAnimationName", "enumList", arr);
+
+    private clearAppendOfTimeline(timelineData: any) {
+        if (timelineData.useSpine) {
+            timelineData.spineSetupData.spine?.clearTracks();
+            timelineData.spineSetupData.spine.node.active = false;
+        }
+        if (timelineData.useAnim) {
+            timelineData.animSetupData.animation?.stop();
+        }
+        if (timelineData.useParticle) {
+            for (let j = 0; j < timelineData.particleData.length; j++) {
+                timelineData.particleData[j].particle?.ParticleClear();
+                timelineData.particleData[j].particle?.unscheduleAllCallbacks();
+            }
+        }
     }
-  }
-  _refreshSecEnum_AnimationName(value: {}, myself: any) {
-    if (EDITOR) {
-      const arr = [];
-      for (let key in value) {
-        arr.push({ name: key, value: value[key] });
-      }
-      CCClass.Attr.setClassAttr(myself, "animationName", "enumList", arr);
+
+    public setTimeScale(name: string, timeScale: number) {
+        for (let i = 0; i < this.arrayTimelineData.length; i++) {
+            if (name === this.arrayTimelineData[i].timelineName) {
+                for (let j in this.arrayTimelineData[i].timelineData) {
+                    switch (this.arrayTimelineData[i].timelineData[j].timelineType) {
+                        case TimelineType.Spine:
+                            this.arrayTimelineData[i].timelineData[j].timelineSpine.timeScale = timeScale;
+                            break;
+                        case TimelineType.Animation:
+                            this.arrayTimelineData[i].timelineData[j].timelineAnimation.animation.clips.forEach(
+                                (val) => {
+                                    val.speed = timeScale;
+                                }
+                            );
+                            break;
+                        case TimelineType.Time:
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
     }
-  }
+
+    public play(name: string, cb?: Function) {
+        this.changeState(name, cb);
+        this.isPlaying = true;
+        for (let i = 0; i < this.arrayTimelineData.length; i++) {
+            if (name === this.arrayTimelineData[i].timelineName) {
+                this.arrayTimelineData[i].TimelineEndCallBack = cb;
+                this.checkTimelineIndex(i, this.arrayTimelineData[i].timelineDataIndex);
+            }
+        }
+    }
+
+    public stop() {
+        this.init();
+    }
+
+    //-----------------Editor上面即時更換Enum的內容---------------------------
+    updateEditorEnum() {
+        for (let index = 0; index < this.arrayTimelineData.length; index++) {
+            for (let i = 0; i < this.arrayTimelineData[index].timelineData.length; i++) {
+                // 主線的Spine設定檔
+                const timelineSpine = this.arrayTimelineData[index].timelineData[i].timelineSpine;
+                if (timelineSpine.spine !== null) {
+                    this.refreshEnumForSpineName(timelineSpine.spine.skeletonData.getAnimsEnum(), timelineSpine);
+                } else {
+                    this.refreshEnumForSpineName({ '<None>': 0 }, timelineSpine);
+                }
+                this.checkSpineName(timelineSpine);
+                // Spine分支的Spine & Animation & Particle設定檔
+                this.updateAppendOfTimeline(timelineSpine);
+
+                // 主線的Animation設定檔
+                const timelineAnimation = this.arrayTimelineData[index].timelineData[i].timelineAnimation;
+                if (timelineAnimation.animation !== null) {
+                    var AnimEnum: object = {};
+                    for (let j = 0; j < timelineAnimation.animation.clips.length; j++) {
+                        var name: string = timelineAnimation.animation.clips[j]?.name ?? '';
+                        AnimEnum = Object.assign(AnimEnum, { [name]: j });
+                    }
+                    this.refreshEnumForAnimationName(AnimEnum, timelineAnimation);
+                } else {
+                    this.refreshEnumForAnimationName({ '<None>': 0 }, timelineAnimation);
+                }
+                this.checkAnimationName(timelineAnimation);
+                // Animation分支的Spine & Animation & Particle設定檔
+                this.updateAppendOfTimeline(timelineAnimation);
+
+                // 主線的TimelineTime的Spine & Animation & Particle設定
+                const timelineTime = this.arrayTimelineData[index].timelineData[i].timelineTime;
+                this.updateAppendOfTimeline(timelineTime);
+            }
+        }
+    }
+
+    private updateAppendOfTimeline(timelineData: any) {
+        const spineSetupData = timelineData.spineSetupData;
+        if (spineSetupData.spine !== null) {
+            this.refreshEnumForSpineName(spineSetupData.spine.skeletonData.getAnimsEnum(), spineSetupData);
+        } else {
+            this.refreshEnumForSpineName({ '<None>': 0 }, spineSetupData);
+        }
+        this.checkSpineName(spineSetupData);
+
+        const animSetupData = timelineData.animSetupData;
+        if (animSetupData.animation !== null) {
+            var AnimEnum: object = {};
+            for (let j = 0; j < animSetupData.animation.clips.length; j++) {
+                var name: string = animSetupData.animation.clips[j]?.name ?? '';
+                AnimEnum = Object.assign(AnimEnum, { [name]: j });
+            }
+            this.refreshEnumForAnimationName(AnimEnum, animSetupData);
+        } else {
+            this.refreshEnumForAnimationName({ '<None>': 0 }, animSetupData);
+        }
+        this.checkAnimationName(animSetupData);
+
+        const particleData = timelineData.particleData;
+        for (let j = 0; j < particleData.length; j++) {
+            if (particleData[j].particle !== null) {
+                particleData[j].isParticleLoop = particleData[j].particle.IsLoop;
+                particleData[j].initParticleColor = particleData[j].particle.InitColor;
+                particleData[j].cycleTime = particleData[j].particle.LoopOverTime;
+                particleData[j].clearParticleTime = particleData[j].particle.ClearObjectTime;
+            }
+        }
+    }
+
+    // 檢查SpineName是否有對應到Enum的值
+    private checkSpineName(timelineSpine: SpineSetupData) {
+        if (timelineSpine.spine !== null) {
+            const enumValue = this.getSpineAnimName(timelineSpine.spine, timelineSpine.spineName);
+            if (timelineSpine.spineNameString !== enumValue) {
+                const enumKeys = Object.keys(timelineSpine.spine.skeletonData.getAnimsEnum());
+                let isMatch = false;
+                for (let i = 0; i < enumKeys.length; i++) {
+                    if (enumKeys[i] == timelineSpine.spineNameString) {
+                        timelineSpine.spineName = i;
+                        isMatch = true;
+                        break;
+                    }
+                }
+                if (!isMatch) {
+                    timelineSpine.spineName = 0;
+                }
+            }
+        } else {
+            timelineSpine.spineName = 0;
+            timelineSpine.spineNameString = '';
+        }
+    }
+
+    private getSpineAnimName(spine: sp.Skeleton, animIndex: number): string {
+        let animName = '';
+        try {
+            animName = Object.getOwnPropertyDescriptor(spine.skeletonData.getAnimsEnum(), animIndex).value;
+        } catch (error) {
+            console.warn('getSpineAnimName error:', error);
+        }
+        return animName;
+    }
+
+    // 檢查AnimationName是否有對應到Enum的值
+    private checkAnimationName(timelineAnimation: AnimationSetupData) {
+        if (timelineAnimation.animation !== null) {
+            const animationName = this.getAnimationName(timelineAnimation.animation, timelineAnimation.animationName);
+            if (timelineAnimation.animationNameString !== animationName) {
+                const clips = timelineAnimation.animation.clips;
+                let isMatch = false;
+                for (let i = 0; i < clips.length; i++) {
+                    if (clips[i]?.name == timelineAnimation.animationNameString) {
+                        timelineAnimation.animationName = i;
+                        isMatch = true;
+                        break;
+                    }
+                }
+                if (!isMatch) {
+                    timelineAnimation.animationName = null;
+                }
+            }
+        } else {
+            timelineAnimation.animationName = 0;
+            timelineAnimation.animationNameString = '';
+        }
+    }
+
+    private getAnimationName(animation: Animation, animIndex: number): string {
+        let animName = '';
+        try {
+            animName = animation.clips[animIndex]?.name ?? '';
+        } catch (error) {
+            console.warn('getAnimationName error:', error);
+        }
+        return animName;
+    }
+
+    //-----------------更換Enum內容的Function---------------------------
+    private refreshEnumForSpineName(value: {}, myself: any) {
+        this.refreshEnum(value, myself, 'spineName');
+    }
+
+    private refreshEnumForAnimationName(value: {}, myself: any) {
+        this.refreshEnum(value, myself, 'animationName');
+    }
+
+    private refreshEnum(value: {}, myself: any, attributeName: string) {
+        const arr = [];
+        for (const key in value) {
+            if (value.hasOwnProperty(key)) {
+                arr.push({ name: key, value: value[key] });
+            }
+        }
+        CCClass.Attr.setClassAttr(myself, attributeName, 'enumList', arr);
+    }
 }

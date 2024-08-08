@@ -21,5 +21,5 @@ export class AudioMediator extends puremvc.Mediator {
                 AudioManager.Instance.play(AudioClipsEnum.Button_UI);
                 break;
         }
-    }   
+    }
 }
