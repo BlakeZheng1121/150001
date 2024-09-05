@@ -2,3 +2,7 @@
 	path = extensions/common-ui
 	url=../../h5_game_lab/h5_game_package/common_ui.git
 	branch = publish
+[submodule "extensions/timeline-tool"]
+	path = extensions/timeline-tool
+	url=../../h5_game_lab/h5_game_package/timeline_tool.git
+	branch = publish
