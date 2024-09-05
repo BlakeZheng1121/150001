@@ -1,1 +1,13 @@
-{"ver":"1.1.32","importer":"prefab","imported":true,"uuid":"686db002-2e7f-4974-a95e-56ae48f66a47","files":[".json"],"subMetas":{},"userData":{"syncNodeName":"Raise_JackpotFX"}}
+{
+  "ver": "1.1.38",
+  "importer": "prefab",
+  "imported": true,
+  "uuid": "686db002-2e7f-4974-a95e-56ae48f66a47",
+  "files": [
+    ".json"
+  ],
+  "subMetas": {},
+  "userData": {
+    "syncNodeName": "Raise_JackpotFX"
+  }
+}

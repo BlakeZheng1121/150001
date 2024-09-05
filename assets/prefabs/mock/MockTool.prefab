@@ -8,7 +8,8 @@
       "__id__": 1
     },
     "optimizationPolicy": 0,
-    "asyncLoadAssets": false
+    "asyncLoadAssets": false,
+    "persistent": false
   },
   {
     "__type__": "cc.Node",
@@ -1107,6 +1108,17 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "4dLM/tDWpJoIPxRHkhABVJ"
+    "fileId": "4dLM/tDWpJoIPxRHkhABVJ",
+    "nestedPrefabInstanceRoots": [
+      {
+        "__id__": 6
+      },
+      {
+        "__id__": 47
+      },
+      {
+        "__id__": 56
+      }
+    ]
   }
 ]

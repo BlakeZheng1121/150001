@@ -11,7 +11,7 @@ export class SetupDevSFSConfigCommand extends SetupSFSConfigCommand {
 
         let rndUid: number = Math.floor(Math.random() * 2999) + 1000;
 
-        config.userName = config.uid = 'rd03php01@JB';
+        config.userName = config.uid = 'qaphp24@JB';
 
         config.t = 'dev.net';
         config.host = 'stdev.jigaming.com.tw';

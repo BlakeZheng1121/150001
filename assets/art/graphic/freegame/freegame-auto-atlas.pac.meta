@@ -1,5 +1,5 @@
 {
-  "ver": "1.0.5",
+  "ver": "1.0.6",
   "importer": "auto-atlas",
   "imported": true,
   "uuid": "a6f7b173-6886-47c2-babd-f5adb113ec74",
@@ -31,6 +31,9 @@
       "magfilter": "linear",
       "mipfilter": "none",
       "anisotropy": 0
-    }
+    },
+    "removeTextureInBundle": false,
+    "removeImageInBundle": false,
+    "removeSpriteAtlasInBundle": false
   }
 }

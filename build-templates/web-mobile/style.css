@@ -12,6 +12,7 @@ div {
     -ms-user-select: none;
     user-select: none;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    touch-action: none;
 }
 /* body, canvas, div {
   display: block;
@@ -35,8 +36,9 @@ input::-webkit-inner-spin-button {
 }
 
 body {
-    width: 100vw;
-    height: 100vh;
+    position: absolute;
+    width: 100%;
+    height: 100%;
     margin: 0;
     -ms-scroll-chaining: none;
     overscroll-behavior: contain;
@@ -102,8 +104,8 @@ iframe {
 #gameHelp,
 #gameRule {
     position: absolute;
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
 }
 
 a:link,
@@ -124,49 +126,9 @@ p.footer {
     font-size: x-small;
 }
 
-.progress-bar {
-    background-color: #1a1a1a;
-    position: absolute;
-    left: 25%;
-    top: 80%;
-    height: 14px;
-    padding: 5px;
-    width: 50%;
-    /*margin: 0 -175px;         */
-    border-radius: 5px;
-    box-shadow: 0 1px 5px #000 inset, 0 1px 0 #444;
-}
-
-.progress-bar span {
-    display: block;
+#GameDiv,
+#Cocos3dGameContainer,
+#GameCanvas {
+    width: 100%;
     height: 100%;
-    border-radius: 3px;
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
-    transition: width 0.4s ease-in-out;
-    background-color: #34c2e3;
-}
-
-.stripes span {
-    background-size: 30px 30px;
-    background-image: linear-gradient(
-        135deg,
-        rgba(255, 255, 255, 0.15) 25%,
-        transparent 25%,
-        transparent 50%,
-        rgba(255, 255, 255, 0.15) 50%,
-        rgba(255, 255, 255, 0.15) 75%,
-        transparent 75%,
-        transparent
-    );
-
-    animation: animate-stripes 1s linear infinite;
-}
-
-@keyframes animate-stripes {
-    0% {
-        background-position: 0 0;
-    }
-    100% {
-        background-position: 60px 0;
-    }
 }

@@ -1,11 +1,11 @@
 {
-  "ver": "1.0.21",
+  "ver": "1.0.23",
   "importer": "image",
   "imported": true,
   "uuid": "a076d29c-5d54-417e-9deb-46eafc226a61",
   "files": [
-    ".png",
-    ".json"
+    ".json",
+    ".png"
   ],
   "subMetas": {
     "6c48a": {
@@ -69,6 +69,7 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "a076d29c-5d54-417e-9deb-46eafc226a61@f9941"
+    "redirect": "a076d29c-5d54-417e-9deb-46eafc226a61@f9941",
+    "fixAlphaTransparencyArtifacts": false
   }
 }

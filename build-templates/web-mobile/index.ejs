@@ -8,7 +8,7 @@
         <!--http://www.html5rocks.com/en/mobile/mobifying/-->
         <meta
             name="viewport"
-            content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1,minimal-ui=true"
+            content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1,viewport-fit=cover"
         />
 
         <!--https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html-->
@@ -28,10 +28,6 @@
         <meta name="x5-fullscreen" content="true" />
         <meta name="360-fullscreen" content="true" />
 
-        <!-- force screen orientation on some browser -->
-        <meta name="screen-orientation" content="<%= orientation %>" />
-        <meta name="x5-orientation" content="<%= orientation %>" />
-
         <!--fix fireball/issues/3568 -->
         <!--<meta name="browsermode" content="application">-->
         <meta name="x5-page-mode" content="app" />
@@ -41,14 +37,17 @@
 
         <link rel="stylesheet" type="text/css" href="<%= cssUrl %>" />
     </head>
-
     <body>
-        <div id="game-shell">
+        <div id="GameDiv">
             <div id="background-img"></div>
-            <canvas id="GameCanvas" oncontextmenu="event.preventDefault()" tabindex="0"></canvas>
+            <div id="Cocos3dGameContainer" style="position: absolute">
+                <canvas id="GameCanvas" oncontextmenu="event.preventDefault()" tabindex="0"></canvas>
+            </div>
+            <iframe src="" id="gameHelp" style="display: none"></iframe>
         </div>
+         
         <%- include(cocosTemplate, {}) %>
-        <iframe src="" id="gameHelp" style="display: none"></iframe>
+       
         <script>
             var gameVersion = '1.0.0';
             var curGameVersion = (val) => (gameVersion = val);

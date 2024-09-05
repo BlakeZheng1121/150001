@@ -1,4 +1,4 @@
-
+# 通知部分先拿掉，之後再一起處理
 default:
   image: alpine:latest
 
@@ -12,12 +12,12 @@ workflow:
 
 include:
   - project: h5_cicd/gitlab-yml
-    ref: main
+    ref: master
     file: 
       - game_client/build-game-cocos-command.yaml
-      - game_client/post-result-message-command.yaml     
+      # - game_client/post-result-message-command.yaml     
   - project: h5_cicd/gitlab-yml
-    ref: main
+    ref: master
     file:
       - game_client/deploy-game-command.yaml
     rules:
@@ -28,12 +28,12 @@ stages:
   - build
   - publish
   - deploy
-  - notify
+  # - notify
 
 variables:
-  COCOS_VERSION: '3.3.2'
+  COCOS_VERSION: '3.5.2'
   GAME_TYPE: '1'
-  GAME_ID: '1030'
+  GAME_ID: '1104'
   CHECK_GAME_SIZE: '10' #打包容量判斷，MB為基礎單位
-  CHECK_MEMORY: '2g'
+  CHECK_MEMORY: '8g'
   NEED_COPY_HELP: 'true' #判斷是否需要啟動複製Help頁面工作;預設為false

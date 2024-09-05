@@ -1,11 +1,11 @@
 {
-  "ver": "1.0.21",
+  "ver": "1.0.23",
   "importer": "image",
   "imported": true,
   "uuid": "b94adb2c-4986-4636-a630-5cc875d28251",
   "files": [
-    ".png",
-    ".json"
+    ".json",
+    ".png"
   ],
   "subMetas": {
     "6c48a": {
@@ -73,6 +73,7 @@
     "compressSettings": {
       "useCompressTexture": true,
       "presetId": "c2DD1UYRdP47cNPKyrDZCN"
-    }
+    },
+    "fixAlphaTransparencyArtifacts": false
   }
 }

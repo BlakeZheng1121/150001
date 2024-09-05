@@ -1,5 +1,5 @@
 {
-  "__version__": "1.0.5",
+  "__version__": "1.0.6",
   "macroConfig": {
     "ENABLE_TRANSPARENT_CANVAS": false,
     "ENABLE_TILEDMAP_CULLING": false,
@@ -19,11 +19,17 @@
       "gfx-webgl2": {
         "_value": false
       },
+      "animation": {
+        "_value": true
+      },
+      "skeletal-animation": {
+        "_value": false
+      },
       "3d": {
         "_value": false
       },
       "2d": {
-        "_value": true
+        "_value": false
       },
       "ui": {
         "_value": true
@@ -67,7 +73,7 @@
         "_value": false
       },
       "particle-2d": {
-        "_value": true
+        "_value": false
       },
       "audio": {
         "_value": true
@@ -92,22 +98,25 @@
       },
       "dragon-bones": {
         "_value": false
+      },
+      "marionette": {
+        "_value": false
       }
     },
     "includeModules": [
+      "animation",
+      "audio",
       "base",
       "gfx-webgl",
-      "audio",
-      "tween",
       "particle",
-      "2d",
-      "ui",
-      "particle-2d",
-      "spine"
+      "spine",
+      "tween",
+      "ui"
     ],
     "noDeprecatedFeatures": {
       "value": false,
       "version": ""
-    }
+    },
+    "flags": {}
   }
 }
