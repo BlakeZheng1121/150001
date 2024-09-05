@@ -1,5 +1,4 @@
 import { _decorator } from 'cc';
-import { ParticleContentTool } from '../../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
 import { UIViewStateBase } from '../../../core/uiview/UIViewStateRegister';
 import { PoolManager } from '../../../sgv3/PoolManager';
 import { BalanceUtil } from '../../../sgv3/util/BalanceUtil';

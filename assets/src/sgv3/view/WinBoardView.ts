@@ -1,5 +1,5 @@
 import { _decorator, Tween, tween, Label, SystemEvent, Node } from 'cc';
-import { TimeLineTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
+import { TimelineTool } from 'TimelineTool';
 import { BalanceUtil } from '../util/BalanceUtil';
 import { LevelWinType, WinType } from '../vo/enum/WinType';
 import BaseView from 'src/base/BaseView';
@@ -15,8 +15,8 @@ export abstract class WinBoardView extends BaseView {
     public winBoardScore: Label;
     @property({ type: Node })
     public mask: Node;
-    @property({ type: TimeLineTool, visible: true })
-    winBoardAnimationComponent: TimeLineTool;
+    @property({ type: TimelineTool, visible: true })
+    winBoardAnimationComponent: TimelineTool;
 
     public buttonCallback: IWinBoardViewMediator = null;
 

@@ -1,6 +1,6 @@
 
 import { _decorator, Component, Node, Label, CCFloat, tween } from 'cc';
-import { TimeLineTool } from '../../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
+import { TimelineTool } from 'TimelineTool';
 
 const { ccclass, property } = _decorator;
  
@@ -10,8 +10,8 @@ export class MultipleBoard extends Component {
     public labelText: Label | null = null;
     @property({ type: CCFloat, visible: true })
     public _runningTime: number = 0;
-    @property({type: TimeLineTool})
-    public Animation: TimeLineTool |null =null;
+    @property({type: TimelineTool})
+    public Animation: TimelineTool |null =null;
 
     public multiple: number = 100;// TO DO: Init set Value
 

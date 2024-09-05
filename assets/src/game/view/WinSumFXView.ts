@@ -1,7 +1,7 @@
 
 import { _decorator } from 'cc';
 import BaseView from 'src/base/BaseView';
-import { ParticleContentTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
+import { ParticleContentTool } from 'ParticleContentTool';
 const { ccclass, property } = _decorator;
 
 @ccclass('WinSumFXView')

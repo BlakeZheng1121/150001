@@ -3,9 +3,9 @@ import { PoolManager } from '../../../../sgv3/PoolManager';
 import { BalanceUtil } from '../../../../sgv3/util/BalanceUtil';
 import { GlobalTimer } from '../../../../sgv3/util/GlobalTimer';
 import { AudioManager } from '../../../../audio/AudioManager';
-import { ParticleContentTool } from '../../../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
+import { ParticleContentTool } from 'ParticleContentTool';
 import { AudioClipsEnum } from '../../../vo/enum/SoundMap';
-import { TimeLineTool } from '../../../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
+import { TimelineTool } from 'TimelineTool';
 
 const { ccclass, property } = _decorator;
 
@@ -172,7 +172,7 @@ export class FreeC1SubOnPerform extends Component {
                     _hitSpecialInfo.ID = i * 3 + j;
                     _hitSpecialInfo.Score = sideCredit[i][j];
                     _hitSpecialInfo.pos = new Vec2(i, j);
-                    _hitSpecialInfo.c1Sub = c1.getComponent(TimeLineTool);
+                    _hitSpecialInfo.c1Sub = c1.getComponent(TimelineTool);
                     hitSpecialInfo.push(_hitSpecialInfo);
                 }
             }
@@ -185,5 +185,5 @@ export class HitSpecialInfo {
     public ID: number = 0;
     public Score: number = 0;
     public pos: Vec2 = new Vec2();
-    public c1Sub: TimeLineTool | null = null;
+    public c1Sub: TimelineTool | null = null;
 }

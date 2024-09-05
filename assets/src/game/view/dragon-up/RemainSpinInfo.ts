@@ -1,4 +1,4 @@
-import { TimeLineTool } from 'TimeLineTool';
+import { TimelineTool } from 'TimelineTool';
 import { _decorator, Component, Label } from 'cc';
 const { ccclass, property } = _decorator;
 
@@ -7,8 +7,8 @@ export class RemainSpinInfo extends Component {
     @property({ type: Label })
     private curRemainSpinTimes: Label;
     // 加場次特效
-    @property({ type: TimeLineTool })
-    private remainSpinFX: TimeLineTool;
+    @property({ type: TimelineTool })
+    private remainSpinFX: TimelineTool;
 
     private curSpinTime: number = 0;
 

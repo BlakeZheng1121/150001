@@ -1,12 +1,12 @@
 import { _decorator } from 'cc';
-import { TimeLineTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
+import { TimelineTool } from 'TimelineTool';
 import BaseView from 'src/base/BaseView';
 const { ccclass, property } = _decorator;
  
 @ccclass('BackgroundEffectView')
 export class BackgroundEffectView extends BaseView {
-    @property(TimeLineTool)
-    private anim: TimeLineTool;
+    @property(TimelineTool)
+    private anim: TimelineTool;
 
     public showBgEffect() {
         this.node.active = true;

@@ -1,5 +1,5 @@
 import { _decorator, Label } from 'cc';
-import { TimeLineTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
+import { TimelineTool } from 'TimelineTool';
 import { BalanceUtil } from '../../sgv3/util/BalanceUtil';
 import { GameScene } from '../../sgv3/vo/data/GameScene';
 import { AudioManager } from '../../audio/AudioManager';
@@ -9,8 +9,8 @@ const { ccclass, property } = _decorator;
 
 @ccclass('Game_2_ResultBoardView')
 export class Game_2_ResultBoardView extends BaseView {
-    @property(TimeLineTool)
-    public resultBoard: TimeLineTool | null = null;
+    @property(TimelineTool)
+    public resultBoard: TimelineTool | null = null;
 
     @property(Label)
     private resultLabel: Label;

@@ -1,6 +1,6 @@
 import { _decorator, Component, Prefab, Node } from 'cc';
 import { PoolManager } from '../../sgv3/PoolManager';
-import { TimeLineTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
+import { TimelineTool } from 'TimelineTool';
 
 const { ccclass, property } = _decorator;
 
@@ -13,9 +13,9 @@ export class SpineTailPerform extends Component {
     @property({ type: Prefab, visible: true })
     public trailHitPrefab: Prefab | null = null;
 
-    public spineDragonTrailHit: TimeLineTool[] = [];
+    public spineDragonTrailHit: TimelineTool[] = [];
 
-    public spineDragonTrail: TimeLineTool[] = [];
+    public spineDragonTrail: TimelineTool[] = [];
     public trailName: string[] = [];
 
     private listIndex: number = 0;
@@ -30,7 +30,7 @@ export class SpineTailPerform extends Component {
     private miniEntryPos: Array<number> = [8, 4, 0, 9, 5, 1, 10, 6, 2, 11, 7, 3]; // miniGame items pos (3 X 4)
 
     public UpdateAnimationObjectID(index: number) {
-        let trail: TimeLineTool = PoolManager.instance.getNode(this.trailPrefab, this.node).getComponent(TimeLineTool);
+        let trail: TimelineTool = PoolManager.instance.getNode(this.trailPrefab, this.node).getComponent(TimelineTool);
 
         this.listIndex = index;
         let trailName = String(this.TRAIL_STRING) + this.dragonBallPos[this.listIndex];
@@ -39,9 +39,9 @@ export class SpineTailPerform extends Component {
         this.trailName.push(trailName);
 
         if (this.spineDragonTrailHit.length < 2) {
-            let trailHit: TimeLineTool = PoolManager.instance
+            let trailHit: TimelineTool = PoolManager.instance
                 .getNode(this.trailHitPrefab, this.effectTarget)
-                .getComponent(TimeLineTool);
+                .getComponent(TimelineTool);
 
             this.spineDragonTrailHit.push(trailHit);
         }
@@ -70,7 +70,7 @@ export class SpineTailPerform extends Component {
     }
 
     public SpineMiniEffect(index: number) {
-        let trail: TimeLineTool = PoolManager.instance.getNode(this.trailPrefab, this.node).getComponent(TimeLineTool);
+        let trail: TimelineTool = PoolManager.instance.getNode(this.trailPrefab, this.node).getComponent(TimelineTool);
 
         let trailName = String(this.MINI_ENTRY_STRING) + this.miniEntryPos[index];
 

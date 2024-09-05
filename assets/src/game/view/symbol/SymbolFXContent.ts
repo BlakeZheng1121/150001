@@ -1,5 +1,5 @@
 import { _decorator, Label, Font, Component, Enum, Sprite, SpriteFrame, Vec3 } from 'cc';
-import { TimeLineTool } from '../../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
+import { TimelineTool } from 'TimelineTool';
 import { LockType, SymbolId } from '../../../sgv3/vo/enum/Reel';
 const { ccclass, property } = _decorator;
 
@@ -7,8 +7,8 @@ const { ccclass, property } = _decorator;
 export class SymbolFXContent extends Component {
     @property({ type: Enum(SymbolId), visible: true })
     public symbolType: SymbolId = SymbolId.C1;
-    @property({ type: TimeLineTool })
-    public animation: TimeLineTool | null = null;
+    @property({ type: TimelineTool })
+    public animation: TimelineTool | null = null;
 
     @property({
         type: Label,

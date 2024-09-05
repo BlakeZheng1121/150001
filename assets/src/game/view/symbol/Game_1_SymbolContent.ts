@@ -1,6 +1,6 @@
 
 import { Font, Label, Prefab, _decorator } from 'cc';
-import { ParticleContentTool } from '../../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
+import { ParticleContentTool } from 'ParticleContentTool';
 import { SymbolContentBase } from '../../../sgv3/view/reel/symbol/SymbolContentBase';
 import { PoolManager } from '../../../sgv3/PoolManager';
 import { SymbolPartType } from 'src/sgv3/vo/enum/Reel';

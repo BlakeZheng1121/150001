@@ -1,6 +1,5 @@
 import { _decorator, Component, Prefab, Node } from 'cc';
-import { ParticleContentTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
-import { TimeLineTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
+import { TimelineTool } from 'TimelineTool';
 import { ScoreCollectHandler } from '../../game/view/ScoreCollectHandler';
 import { AudioClipsEnum } from '../../game/vo/enum/SoundMap';
 import { PoolManager } from '../../sgv3/PoolManager';
@@ -13,9 +12,7 @@ const { ccclass, property } = _decorator;
 export class JackPotPerformControl extends Component {
     @property(SpineTailPerform) private DragonSpineTrailPerform: SpineTailPerform | null = null;
 
-    @property(TimeLineTool) private JackpotAvatar: TimeLineTool | null = null;
-
-    @property(ParticleContentTool) private transitionParticle: ParticleContentTool | null = null;
+    @property(TimelineTool) private JackpotAvatar: TimelineTool | null = null;
 
     @property private PerDargonHitValue: number = 0;
 
@@ -101,10 +98,6 @@ export class JackPotPerformControl extends Component {
         this.scheduleOnce(() => {
             AudioManager.Instance.play(AudioClipsEnum.Mini_DragonBallExplosion);
         }, 1.0);
-
-        this.scheduleOnce(() => {
-            this.transitionParticle?.ParticleClear();
-        }, 5.3);
 
         this.scheduleOnce(() => {
             () => cb();

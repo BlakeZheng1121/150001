@@ -1,7 +1,7 @@
 import { _decorator, Component, Label, Font, Sprite, TweenEasing, CCFloat, CCInteger, Vec3, Animation } from 'cc';
 import { BalanceUtil } from '../../../sgv3/util/BalanceUtil';
-import { ParticleContentTool } from '../../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
-import { TimeLineTool } from '../../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
+import { ParticleContentTool } from 'ParticleContentTool';
+import { TimelineTool } from 'TimelineTool';
 const { ccclass, property } = _decorator;
 
 @ccclass('PosTweenObject')
@@ -16,8 +16,8 @@ export class PosTweenObject extends Component {
     public specialFont: Font | null = null;
     @property({ type: Font, visible: true })
     public multipleFont: Font | null = null;
-    @property(TimeLineTool)
-    public Animation: TimeLineTool | null = null;
+    @property(TimelineTool)
+    public Animation: TimelineTool | null = null;
     @property({ type: [ParticleContentTool], visible: true })
     public Particle: Array<ParticleContentTool> = [];
 

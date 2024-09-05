@@ -1,14 +1,14 @@
 import { _decorator, Component, Color, Sprite, SpriteFrame } from 'cc';
-import { ParticleContentTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
-import { TimeLineTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
+import { ParticleContentTool } from 'ParticleContentTool';
+import { TimelineTool } from 'TimelineTool';
 
 const { ccclass, property } = _decorator;
 
 @ccclass('MiniIngot')
 export class MiniIngot extends Component {
-    @property(TimeLineTool) private IngotAnimation: TimeLineTool | null = null;
+    @property(TimelineTool) private IngotAnimation: TimelineTool | null = null;
 
-    @property(TimeLineTool) private IconAnimation: TimeLineTool | null = null;
+    @property(TimelineTool) private IconAnimation: TimelineTool | null = null;
 
     @property(Sprite) private IconSprite: Sprite | null = null;
 

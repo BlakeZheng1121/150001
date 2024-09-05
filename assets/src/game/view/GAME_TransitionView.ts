@@ -1,5 +1,5 @@
 import { _decorator } from 'cc';
-import { TimeLineTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
+import { TimelineTool } from 'TimelineTool';
 import { AudioManager } from '../../audio/AudioManager';
 import { AudioClipsEnum } from '../vo/enum/SoundMap';
 import BaseView from 'src/base/BaseView';
@@ -13,8 +13,8 @@ export class GAME_TransitionView extends BaseView {
 
     public currentState = '';
 
-    @property(TimeLineTool)
-    private Transition: TimeLineTool | null = null;
+    @property(TimelineTool)
+    private Transition: TimelineTool | null = null;
 
     protected isTransitionBG: boolean = false; //判斷是否進行轉場.
 

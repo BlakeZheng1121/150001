@@ -1,7 +1,7 @@
 import { _decorator, Component, Color, Sprite, SpriteFrame, Prefab, Vec3 } from 'cc';
 import { PoolManager } from '../../sgv3/PoolManager';
-import { ParticleContentTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
-import { TimeLineTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
+import { ParticleContentTool } from 'ParticleContentTool';
+import { TimelineTool } from 'TimelineTool';
 
 const { ccclass, property } = _decorator;
 
@@ -15,7 +15,7 @@ export class ParticleEffect {
 
 @ccclass('MiniResultBoard')
 export class MiniResultBoard extends Component {
-    @property(TimeLineTool) private BoardAnimation: TimeLineTool | null = null;
+    @property(TimelineTool) private BoardAnimation: TimelineTool | null = null;
 
     @property(Sprite) private BoardSprite: Sprite[] = [];
 

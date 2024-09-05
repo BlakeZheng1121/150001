@@ -1,6 +1,6 @@
 import { _decorator, Node, Tween, Label, tween, Font, Prefab, Vec3 } from 'cc';
 import { SymbolContentBase } from '../../../sgv3/view/reel/symbol/SymbolContentBase';
-import { TimeLineTool } from '../../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
+import { TimelineTool } from 'TimelineTool';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_2_SymbolContent')
@@ -9,8 +9,8 @@ export class Game_2_SymbolContent extends SymbolContentBase {
     public baseFont: Font | null = null;
     @property({ type: Font, visible: true })
     public specialFont: Font | null = null;
-    @property({ type: TimeLineTool, visible: true })
-    public freeC1: TimeLineTool | null = null;
+    @property({ type: TimelineTool, visible: true })
+    public freeC1: TimelineTool | null = null;
     @property({})
     public C1TrailOffsetPos: Vec3 = new Vec3();
     @property({})

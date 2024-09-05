@@ -1,5 +1,5 @@
 import { _decorator, Label, SystemEvent, tween } from 'cc';
-import { TimeLineTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
+import { TimelineTool } from 'TimelineTool';
 import { BalanceUtil } from '../../sgv3/util/BalanceUtil';
 import { GlobalTimer } from '../../sgv3/util/GlobalTimer';
 import { MiniGameSymbol } from '../../sgv3/vo/enum/MiniGameSymbolType';
@@ -11,8 +11,8 @@ const { ccclass, property } = _decorator;
 
 @ccclass('GrandView')
 export class GrandView extends BaseView {
-    @property(TimeLineTool)
-    private anim: TimeLineTool;
+    @property(TimelineTool)
+    private anim: TimelineTool;
     @property(MiniResultBoard)
     public miniResultBoard: MiniResultBoard;
     @property(Label)

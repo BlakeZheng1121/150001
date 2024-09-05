@@ -1,5 +1,5 @@
 import { _decorator, SystemEvent, Tween, UIOpacity, tween, Label, Animation } from 'cc';
-import { ParticleContentTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
+import { ParticleContentTool } from 'ParticleContentTool';
 import { BalanceUtil } from '../../sgv3/util/BalanceUtil';
 import { FeatureSelectButton } from '../../sgv3/view/feature-selection/FeatureSelectButton';
 import { GameOperation } from '../../sgv3/vo/enum/GameOperation';

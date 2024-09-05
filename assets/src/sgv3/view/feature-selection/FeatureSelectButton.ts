@@ -1,5 +1,5 @@
 import { _decorator, Component, Enum } from 'cc';
-import { TimeLineTool } from '../../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
+import { TimelineTool } from 'TimelineTool';
 import { GameOperation } from '../../vo/enum/GameOperation';
 const { ccclass, property } = _decorator;
 
@@ -8,7 +8,7 @@ export class FeatureSelectButton extends Component {
     @property({ type: Enum(GameOperation) })
     private gameOperation: GameOperation;
 
-    private _timeLineTool: TimeLineTool;
+    private _timeLineTool: TimelineTool;
 
     public get operation(): string {
         return GameOperation[this.gameOperation];
@@ -38,7 +38,7 @@ export class FeatureSelectButton extends Component {
 
     private get timeLineTool() {
         if (!this._timeLineTool) {
-            this._timeLineTool = this.getComponent(TimeLineTool);
+            this._timeLineTool = this.getComponent(TimelineTool);
         }
         return this._timeLineTool;
     }

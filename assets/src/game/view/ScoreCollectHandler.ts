@@ -1,6 +1,6 @@
 import { _decorator, Component, Label, Font, Node } from 'cc';
-import { ParticleContentTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/particle-tool/ParticleContentTool';
-import { TimeLineTool } from '../../../../extensions/timelinetool/assets/src/ta/tool/timeline-tool/TimeLineTool';
+import { ParticleContentTool } from 'ParticleContentTool';
+import { TimelineTool } from 'TimelineTool';
 const { ccclass, property } = _decorator;
 
 @ccclass('ScoreCollectHandler')
@@ -13,8 +13,8 @@ export class ScoreCollectHandler extends Component {
 
     @property([ParticleContentTool]) private particles: ParticleContentTool[] = [];
 
-    @property(TimeLineTool)
-    private scoreCollectAnimation: TimeLineTool | null = null;
+    @property(TimelineTool)
+    private scoreCollectAnimation: TimelineTool | null = null;
 
     public ballCountUpdate(info: string) {
         if (!this.countGroup.active) {
