@@ -12,19 +12,19 @@ export class Game4RollCompleteCommand extends StateCommand {
         this.notifyWebControl();
         let topUpGameOneRoundResult: TopUpGameOneRoundResult = this.gameDataProxy
             .curRoundResult as TopUpGameOneRoundResult;
-        
+
         let curResult = this.reelDataProxy.symbolFeature;
         let count = 0;
-        for(let x=0;x< curResult.length;x++){
-            for(let y=0;y< curResult[x].length;y++){
-                if(curResult[x][y].lockType == LockType.NEW_LOCK){
+        for (let x = 0; x < curResult.length; x++) {
+            for (let y = 0; y < curResult[x].length; y++) {
+                if (curResult[x][y].lockType == LockType.NEW_LOCK) {
                     count++;
                 }
             }
         }
 
-        if(count > 0) {
-            this.sendNotification(DragonUpEvent.ON_C2_COUNT_UPDATE,count);
+        if (count > 0) {
+            this.sendNotification(DragonUpEvent.ON_C2_COUNT_UPDATE, count);
         }
 
         // 進入Roll代表可以重置preScene為當前的Scene
@@ -45,7 +45,7 @@ export class Game4RollCompleteCommand extends StateCommand {
         }
     }
 
-    // ======================== Get Set ======================== 
+    // ======================== Get Set ========================
     protected _reelDataProxy: ReelDataProxy;
     protected get reelDataProxy(): ReelDataProxy {
         if (!this._reelDataProxy) {

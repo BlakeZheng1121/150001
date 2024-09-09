@@ -5,7 +5,7 @@ import { SceneManager } from '../../core/utils/SceneManager';
 import { ClearRecoveryDataCommand } from '../../sgv3/command/recovery/ClearRecoveryDataCommand';
 import { SpinRequestCommand } from '../../sgv3/command/spin/SpinRequestCommand';
 import { GameDataProxy } from '../../sgv3/proxy/GameDataProxy';
-import { StateWinEvent, ViewMediatorEvent } from '../../sgv3/util/Constant';
+import { ViewMediatorEvent } from '../../sgv3/util/Constant';
 import { GameSceneData } from '../../sgv3/vo/config/GameSceneData';
 import { GameScene } from '../../sgv3/vo/data/GameScene';
 import { AudioManager } from '../../audio/AudioManager';
@@ -65,14 +65,11 @@ export class FeatureSelectionViewMediator extends BaseMediator<FeatureSelectionV
         if (this.view.isShowComplete) {
             this.gameDataProxy.curGameOperation = operation;
             this.view.onFeatureSelect(operation);
-            AudioManager.Instance.stop(BGMClipsEnum.BGM_FeatureSelection)
-                .fade(0, 1)
-                .callback(() => {
-                    this.sendNotification(SpinRequestCommand.NAME);
-                    if (this.gameDataProxy.reStateResult != undefined) {
-                        this.sendNotification(ClearRecoveryDataCommand.NAME);
-                    }
-                });
+            this.sendNotification(SpinRequestCommand.NAME);
+            if (this.gameDataProxy.reStateResult != undefined) {
+                this.sendNotification(ClearRecoveryDataCommand.NAME);
+            }
+            AudioManager.Instance.stop(BGMClipsEnum.BGM_FeatureSelection).fade(0, 1);
         }
     }
 

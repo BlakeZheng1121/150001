@@ -16,6 +16,7 @@ export class Game3InitCommand extends StateCommand {
     public execute(notification: puremvc.INotification): void {
         const self = this;
         self.notifyWebControl();
+        self.gameDataProxy.isReadyEnterMiniGame = false;
         const SceneData = self.gameDataProxy.getSceneDataByName(self.gameDataProxy.curScene);
         self.sendNotification(WinEvent.FORCE_WIN_DISPOSE);
         self.sendNotification(ViewMediatorEvent.CLOSE_FREE_SPIN_MSG);

@@ -65,7 +65,8 @@ export class GAME_SceneSetting extends SceneSetting {
             bonusCoinFallAfterCreditBoardTime: 0,
             bonusCloseViewAfterCoinFallTime: 0,
             bonusCanSkipRunCreditsTime: 0,
-            featureSelectionShowTime: 1
+            featureSelectionShowTime: 1,
+            reelPrefab: null
         };
 
         return result;
@@ -102,7 +103,8 @@ export class GAME_SceneSetting extends SceneSetting {
             bonusCoinFallAfterCreditBoardTime: 0,
             bonusCloseViewAfterCoinFallTime: 0,
             bonusCanSkipRunCreditsTime: 0,
-            featureSelectionShowTime: 0
+            featureSelectionShowTime: 0,
+            reelPrefab: null
         };
         return result;
     }
@@ -132,10 +134,11 @@ export class GAME_SceneSetting extends SceneSetting {
             bonusGamePlayBGMAfterEnterTime: 0.9,
             bonusGameWinSymbolShowTime: 4,
             bonusGameClickSymbolShowTime: 1,
-            bonusCoinFallAfterCreditBoardTime: 3.0,
+            bonusCoinFallAfterCreditBoardTime: 1,
             bonusCloseViewAfterCoinFallTime: 1.5,
             bonusCanSkipRunCreditsTime: 3,
-            featureSelectionShowTime: 0
+            featureSelectionShowTime: 0,
+            reelPrefab: null
         };
         return result;
     }
@@ -174,7 +177,8 @@ export class GAME_SceneSetting extends SceneSetting {
             bonusCoinFallAfterCreditBoardTime: 0,
             bonusCloseViewAfterCoinFallTime: 0,
             bonusCanSkipRunCreditsTime: 0,
-            featureSelectionShowTime: 0
+            featureSelectionShowTime: 0,
+            reelPrefab: null
         };
         return result;
     }

@@ -56,10 +56,10 @@ export class SceneManager extends Component {
             this.destroy();
             return;
         }
+        // 解析度自適應設定
+        this.initializeResolutionPolicy();
         this.importFacadeModule().then(() => {
-            // 解析度自適應設定
-            this.initializeResolutionPolicy();
-
+            this.onChangeScreen();
             /** Release 不能包含 mock */
             instantiate(this.prefabMockTool).setParent(this.node);
         });
@@ -84,7 +84,6 @@ export class SceneManager extends Component {
 
         DEF_STAGE_WIDTH = view.getDesignResolutionSize().width;
         DEF_STAGE_HEIGHT = view.getDesignResolutionSize().height;
-        this.onChangeScreen();
     }
     /**
      * 判斷是否該轉向
@@ -92,10 +91,18 @@ export class SceneManager extends Component {
      * @param evt 畫面轉動時的事件
      */
     private onChangeScreen(evt: UIEvent = undefined): void {
+        let isMobile = navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i) != null;
+        let isLandscape = window.innerWidth > window.innerHeight;
         const self = this;
         if (self.node) {
-            const screenHeight = window.innerHeight;
-            const screenWidth = window.innerWidth;
+            let screenHeight = window.innerHeight;
+            let screenWidth = window.innerWidth;
+            if (isLandscape) {
+                if (isMobile) {
+                    screenWidth = window.innerHeight;
+                    screenHeight = window.innerWidth;
+                }
+            }
             if (screenHeight != self.screenHeight || screenWidth != self.screenWidth || !self.isOrientationSuccess) {
                 self.screenHeight = screenHeight;
                 self.screenWidth = screenWidth;
@@ -134,6 +141,12 @@ export class SceneManager extends Component {
         }
 
         view.setDesignResolutionSize(frameShortSide, frameHeight, this.policy);
+        /**
+         * 調整 Design Resolution Size 後，需要重新觸發 orientationchange
+         * 使 Cocos3dGameContainer 尺寸重新計算
+         * 避免自適應的畫面尺寸錯誤
+         */
+        window.dispatchEvent(new Event('orientationchange'));
     }
 
     private callContainerResize(screenAngle: number) {
@@ -164,39 +177,7 @@ export class SceneManager extends Component {
             }
         });
     }
-
-    public shakeScreen() {
-        this.shake('View/Common-Panel/Base_Reel_View');
-        this.shake('View/Game_2/Expansion_Wilds_View');
-    }
-
-    public shake(url) {
-        let target = director.getScene().getChildByPath(url);
-
-        tween(target)
-            .by(0.02, { position: new Vec3(5, 7, 0) })
-            .by(0.02, { position: new Vec3(-11, 0, 0) })
-            .by(0.02, { position: new Vec3(-7, -4, 0) })
-            .by(0.02, { position: new Vec3(16, -9, 0) })
-            .by(0.02, { position: new Vec3(-8, 11, 0) })
-            .by(0.02, { position: new Vec3(7, -13, 0) })
-            .by(0.02, { position: new Vec3(-10, -2, 0) })
-            .by(0.02, { position: new Vec3(11, 20, 0) })
-            .by(0.02, { position: new Vec3(-3, -10, 0) })
-            .delay(0.2)
-            .by(0.02, { position: new Vec3(5, 7, 0) })
-            .by(0.02, { position: new Vec3(-11, 0, 0) })
-            .by(0.02, { position: new Vec3(-7, -4, 0) })
-            .by(0.02, { position: new Vec3(16, -9, 0) })
-            .by(0.02, { position: new Vec3(-8, 11, 0) })
-            .by(0.02, { position: new Vec3(7, -13, 0) })
-            .by(0.02, { position: new Vec3(-10, -2, 0) })
-            .by(0.02, { position: new Vec3(11, 20, 0) })
-            .by(0.02, { position: new Vec3(-3, -10, 0) })
-            .start();
-    }
 }
-
 // 調整遊戲 Time scale
 const getOrCreateTimeScalePolyfill = (() => {
     let polyfill: undefined | { multiplier: number };
@@ -213,6 +194,7 @@ const getOrCreateTimeScalePolyfill = (() => {
         return polyfill;
     };
 })();
+
 export function setEngineTimeScale(multiplier: number) {
     getOrCreateTimeScalePolyfill().multiplier = multiplier;
 }

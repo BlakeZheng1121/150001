@@ -55,7 +55,7 @@ export class ScoringHandleCommand extends puremvc.SimpleCommand {
                     (this.gameDataProxy.curRoundResult as FreeGameOneRoundResult).waysGameResult.playerWin
                 );
             }
-        } else if (this.gameDataProxy.afterGame2) {
+        } else if (this.gameDataProxy.afterFeatureGame) {
             targetAmount = this.gameDataProxy.totalWinAmount;
             winType = this.gameDataProxy.totalWinType;
             scoringTime = this.gameDataProxy.totalScoringTime;
@@ -82,18 +82,14 @@ export class ScoringHandleCommand extends puremvc.SimpleCommand {
                 () => {
                     this.playScoring(this.finalWinType);
                     this.playScoringVocal(this.finalWinType);
-                    this.setScoringData(startAmount, targetAmount, winBoardTargetAmount);},
+                    this.setScoringData(startAmount, targetAmount, winBoardTargetAmount);
+                },
                 this
             )
             .start();
     }
 
-    protected setScoringData(
-        startAmount: number,
-        targetAmount: number,
-        winBoardTargetAmount: number
-    ) {
-  
+    protected setScoringData(startAmount: number, targetAmount: number, winBoardTargetAmount: number) {
         this.scoringNormal(startAmount, targetAmount, winBoardTargetAmount, this.finalScoringTime);
     }
 
@@ -150,8 +146,12 @@ export class ScoringHandleCommand extends puremvc.SimpleCommand {
         } else {
             if (winType != WinType.none) {
                 if (this.gameDataProxy.curScene == GameScene.Game_2) {
+                    AudioManager.Instance.stop(ScoringClipsEnum.Scoring_FreeEnd);
+                    AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Free);
                     AudioManager.Instance.play(ScoringClipsEnum.Scoring_Free).loop(true);
                 } else {
+                    AudioManager.Instance.stop(ScoringClipsEnum.Scoring_BaseEnd);
+                    AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Base);
                     if (winType < WinType.section_2) {
                         AudioManager.Instance.play(ScoringClipsEnum.Scoring_BaseEnd);
                     } else {
@@ -191,7 +191,7 @@ export class ScoringHandleCommand extends puremvc.SimpleCommand {
         GlobalTimer.getInstance().removeTimer(this.timerKey);
         GlobalTimer.getInstance().removeTimer(this.timerKey_Sound);
         if (this.gameDataProxy.winBoardState == WinBoardState.SHOW) {
-            if (isForceComplete || this.needQuickScoringTime()) {
+            if (isForceComplete) {
                 switch (winType) {
                     case WinType.bigWin:
                         AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win01).fade(0, 0.5);
@@ -206,8 +206,7 @@ export class ScoringHandleCommand extends puremvc.SimpleCommand {
                         AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win04).fade(0, 0.5);
                         break;
                 }
-            }
-            else {
+            } else {
                 switch (winType) {
                     case WinType.bigWin:
                         AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Win01).fade(0, 1.0);
@@ -244,11 +243,6 @@ export class ScoringHandleCommand extends puremvc.SimpleCommand {
         }
     }
 
-    private needQuickScoringTime(): boolean {
-        return this.reelDataProxy.isQuickSpin && this.gameDataProxy.onAutoPlay;
-    }
-
-   
     // ======================== Get Set ========================
     protected _reelDataProxy: ReelDataProxy;
     protected get reelDataProxy(): ReelDataProxy {

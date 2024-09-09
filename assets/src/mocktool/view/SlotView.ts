@@ -1,19 +1,7 @@
 import { Logger } from '../../core/utils/Logger';
 import { TSMap } from '../../core/utils/TSMap';
 import { RowData } from '../vo/RNGSheet';
-import {
-    _decorator,
-    Node,
-    EventTouch,
-    EditBox,
-    Label,
-    Button,
-    Sprite,
-    Prefab,
-    instantiate,
-    SystemEvent,
-    EventHandler
-} from 'cc';
+import { _decorator, Node, EventTouch, EditBox, Label, Button, Sprite, Prefab, instantiate, SystemEvent } from 'cc';
 import { ReelTestPasser, ReelTestPasserListener } from '../../sgv3/view/reel/ReelTestPasser';
 import { ReelPasser } from '../../sgv3/vo/match/ReelMatchInfo';
 import BaseView from 'src/base/BaseView';
@@ -41,8 +29,6 @@ export class SlotView extends BaseView implements ReelTestPasserListener {
     private reelTestPasser: ReelTestPasser;
 
     private REFRESH_BTN_NAME = 'RefreshSheet';
-    private SOUND_OFF_BTN_NAME = 'SoundOff';
-    private SOUND_ON_BTN_NAME = 'SoundOn';
 
     @property({ type: Node })
     public allBtnGP: Node;
@@ -76,7 +62,6 @@ export class SlotView extends BaseView implements ReelTestPasserListener {
         const self = this;
 
         self.createButton(['Close', self.listener.onClickClose, self.listener], true);
-        self.createButton([self.SOUND_OFF_BTN_NAME, self.listener.onClickSetSound, self.listener], true);
         self.createButton(['SetRNG', self.listener.onClickSetRNG, self.listener], true);
         self.createButton(['SetMathRNG', self.listener.onClickSetMathRNG, self.listener], true);
         self.createButton([self.REFRESH_BTN_NAME, self.listener.onClickRefreshSheet, self.listener], true);
@@ -237,13 +222,6 @@ export class SlotView extends BaseView implements ReelTestPasserListener {
         }
     }
 
-    public resetSoundBtnName(_btn: Button): void {
-        const self = this;
-        if (!_btn) return;
-        let label = _btn.getComponentInChildren(Label);
-        label.string = label.string == self.SOUND_OFF_BTN_NAME ? self.SOUND_ON_BTN_NAME : self.SOUND_OFF_BTN_NAME;
-    }
-
     public getInputText(): string {
         return this.inputTxt.string;
     }
@@ -255,7 +233,6 @@ export interface SlotViewListener {
     onClickEventCase(eventType: string): void;
     onClickSetRNG(): void;
     onClickSetMathRNG(): void;
-    onClickSetSound(e: EventTouch): void;
     onClickRefreshSheet(e: EventTouch): void;
     onClickExtraCase(e: EventTouch): void;
     onApplyReelPasser(sceneName: string, reelPasser: ReelPasser): void;

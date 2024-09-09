@@ -140,7 +140,7 @@ export class BonusUpgradeViewMediator extends BaseMediator<BonusUpgradeView> {
     public get controlView(): ControlView {
         if (!this._controlView) {
             this._controlView = this.facade
-                .retrieveMediator('Game_ControlViewMediator')
+                .retrieveMediator('ControlViewMediator')
                 .getViewComponent() as ControlView;
         }
         return this._controlView;

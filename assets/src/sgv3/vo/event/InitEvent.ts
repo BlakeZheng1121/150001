@@ -1,3 +1,4 @@
+import { SeatInfo } from '../result/ExtendInfoForBaseGameResult';
 import { SpinResult } from '../result/SpinResult';
 import { ExecuteSetting } from '../setting/ExecuteSetting';
 import { GameStateSetting } from '../setting/GameStateSetting';
@@ -82,4 +83,11 @@ export class InitEvent {
     /** 沒有完成 SettlePlay前，會有的資料  */
     public spinResult: SpinResult;
     public gameSeqNo: number;
+
+    /** 意象物累積初始資料 */
+    public initialData: InitialData;
+}
+
+export class InitialData {
+    public seatInfo: SeatInfo;
 }

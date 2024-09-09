@@ -1,6 +1,5 @@
 import { _decorator } from 'cc';
 import { UIViewStateBase } from '../../../core/uiview/UIViewStateRegister';
-import { PoolManager } from '../../../sgv3/PoolManager';
 import { BalanceUtil } from '../../../sgv3/util/BalanceUtil';
 import {
     SymbolHideState,
@@ -47,7 +46,7 @@ export class Game_1_SymbolDampingState extends UIViewStateBase {
     ////
 
     onPlay() {
-        if (this.content.symbolData.id == SymbolId.C1) this.content.createParticlePrefab();
+        this.content.createParticlePrefab();
         this.onEffectFinished();
     }
     ////

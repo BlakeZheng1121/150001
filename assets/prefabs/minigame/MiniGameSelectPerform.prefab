@@ -35,7 +35,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -82,
+      "y": -75,
       "z": 0
     },
     "_lrot": {
@@ -74,7 +74,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 900,
-      "height": 550
+      "height": 580
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -106,12 +106,12 @@
       "height": 150
     },
     "_startAxis": 0,
-    "_paddingLeft": 0,
+    "_paddingLeft": 10,
     "_paddingRight": 0,
     "_paddingTop": 0,
     "_paddingBottom": 0,
-    "_spacingX": 5,
-    "_spacingY": 50,
+    "_spacingX": 2,
+    "_spacingY": 65,
     "_verticalDirection": 1,
     "_horizontalDirection": 0,
     "_constraint": 2,
@@ -145,12 +145,12 @@
   {
     "__type__": "LayoutDisplayModeSetting",
     "type": 0,
-    "paddingLeft": 0,
+    "paddingLeft": 10,
     "paddingRight": 0,
     "paddingTop": 0,
     "paddingBottom": 0,
-    "spacingX": 5,
-    "spacingY": 50,
+    "spacingX": 2,
+    "spacingY": 65,
     "constraint": 0,
     "constraintNum": 0
   },

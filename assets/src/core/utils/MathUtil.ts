@@ -97,7 +97,7 @@ export class MathUtil {
             const decimalLength = d2 - d1;
             const v1 = Number(String(result).replace('.', ''));
             const v2 = Number(String(value).replace('.', ''));
-            result = (v1 / v2) * Math.pow(10, decimalLength);
+            result = this.mul(v1 / v2, Math.pow(10, decimalLength));
         }
         return Number(result);
     }

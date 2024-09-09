@@ -1,4 +1,4 @@
-import { director, instantiate, Label, Prefab, _decorator } from 'cc';
+import { director, instantiate, Prefab, _decorator } from 'cc';
 import { SceneManager } from '../../core/utils/SceneManager';
 import { GameUIOrientationSetting } from '../vo/GameUIOrientationSetting';
 import BaseView from 'src/base/BaseView';
@@ -6,14 +6,13 @@ const { ccclass, property } = _decorator;
 
 @ccclass('Game_2_View')
 export class Game_2_View extends BaseView {
-    @property({ type: [Prefab], visible: true })
-    private loadPrefab: Array<Prefab> | null = [];
-
-    // @property({ type: Label, visible: true })
-    // private awardLabel: Label;
-
     public static readonly HORIZONTAL: string = 'horizontal';
     public static readonly VERTICAL: string = 'vertical';
+
+    @property({ type: Prefab})
+    public reelPrefab: Prefab | null = null;
+    @property({ type: [Prefab], visible: true })
+    private loadPrefab: Array<Prefab> | null = [];
 
     private _gameUIOrientation: Array<GameUIOrientationSetting> | null = null;
 
@@ -29,12 +28,8 @@ export class Game_2_View extends BaseView {
         for (let i = 0; i < this.loadPrefab.length; i++) {
             let loadPrefab = instantiate(this.loadPrefab[i]);
             director.getScene().addChild(loadPrefab);
+            loadPrefab.parent = this.node;
         }
-    }
-
-    /** 更新 award 場次 */
-    public setAwardMessage(curGameOperation: string) {
-        // this.awardLabel.string = this.getAwardMessage(curGameOperation);
     }
 
     public changeOrientation(orientation: string, scene: string) {
@@ -43,13 +38,4 @@ export class Game_2_View extends BaseView {
             this.gameUIOrientation[i].changeOrientation(ishorizontal, scene);
         }
     }
-
-    // public getAwardMessage(curGameOperation: string) {
-    //     let award = {
-    //         freeGame_01: '3',
-    //         freeGame_02: '2',
-    //         freeGame_03: '1'
-    //     };
-    //     return award[curGameOperation];
-    // }
 }

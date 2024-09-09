@@ -12,6 +12,11 @@ export const languages = {
     autospinnumber: 'Number of Auto Spin',
     betoption: 'BET OPTIONS',
     autoStart: 'AUTO START IN:',
+    quit: 'Quit',
+    history: 'History',
+    rules: 'Rules',
+    sound: 'Sound',
+    close: 'Close',
     jpBonusUpgrade: 'JP BONUS UPGRADE',
     jackpotUpgradeBet: 'Increased your bet to upgrade',
     jackpotUpgradeBetRange: 'Bet {0} To {1}'

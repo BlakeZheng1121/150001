@@ -29,6 +29,18 @@ export class BalanceUtil {
     }
 
     /**
+     * 將cash無條件捨去後再轉換顯示給玩家的cash樣式，不固定小數點位數
+     *
+     * @param cash 錢
+     * @returns 格式化後的金錢樣式
+     */
+    public static formatFlexibleDecimalBalance(cash: number): string {
+        const value = MathUtil.floor(cash, MathUtil.decimalPlace);
+
+        return StringUtil.formatFlexibleDecimalCash(value);
+    }
+
+    /**
      * 將cash無條件捨去後再轉換顯示給玩家的cash樣式，增加K及M的單位，並一律捨去單位的小數點
      *
      * @param cash 錢

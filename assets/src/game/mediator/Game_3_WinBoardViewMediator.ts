@@ -1,7 +1,6 @@
 import { _decorator } from 'cc';
 import BaseMediator from '../../base/BaseMediator';
 import { Logger } from '../../core/utils/Logger';
-import { SceneManager } from '../../core/utils/SceneManager';
 import { CheckGameFlowCommand } from '../../sgv3/command/CheckGameFlowCommand';
 import { ChangeGameSceneCommand } from '../../sgv3/command/scene/ChangeGameSceneCommand';
 import { WebBridgeProxy } from '../../sgv3/proxy/WebBridgeProxy';
@@ -41,10 +40,6 @@ export class Game_3_WinBoardViewMediator
     private bCanUseSkip: boolean = false;
 
     protected lastSetupEventList: string[];
-
-    protected curScoringEnum: string = '';
-
-    protected curScoringEndEnum: string = '';
 
     private totalWin: number;
 
@@ -188,10 +183,10 @@ export class Game_3_WinBoardViewMediator
     private getWinBoardRunTimer(hitInfo: number[]): number {
         let timer = 0;
 
-        let miniTime = 15;
-        let minorTime = 15;
-        let majorTime = 27;
-        let grandTime = 27;
+        let miniTime = 6.02;
+        let minorTime = 26.993;
+        let majorTime = 30.02;
+        let grandTime = 50.993;
 
         let biggestSymbol = JackpotPool.MINI;
         for (let i = 0; i < hitInfo.length; i++) {
@@ -204,26 +199,18 @@ export class Game_3_WinBoardViewMediator
             case JackpotPool.GRAND:
                 timer = grandTime;
                 this.mySceneData.bonusCanSkipRunCreditsTime = 5;
-                this.curScoringEnum = ScoringClipsEnum.Scoring_JPWin04;
-                this.curScoringEndEnum = ScoringClipsEnum.Scoring_JPWinEnd04;
                 break;
             case JackpotPool.MAJOR:
                 timer = majorTime;
                 this.mySceneData.bonusCanSkipRunCreditsTime = 5;
-                this.curScoringEnum = ScoringClipsEnum.Scoring_JPWin03;
-                this.curScoringEndEnum = ScoringClipsEnum.Scoring_JPWinEnd03;
                 break;
             case JackpotPool.MINOR:
                 timer = minorTime;
                 this.mySceneData.bonusCanSkipRunCreditsTime = 3;
-                this.curScoringEnum = ScoringClipsEnum.Scoring_JPWin02;
-                this.curScoringEndEnum = ScoringClipsEnum.Scoring_JPWinEnd02;
                 break;
             case JackpotPool.MINI:
                 timer = miniTime;
                 this.mySceneData.bonusCanSkipRunCreditsTime = 3;
-                this.curScoringEnum = ScoringClipsEnum.Scoring_JPWin01;
-                this.curScoringEndEnum = ScoringClipsEnum.Scoring_JPWinEnd01;
                 break;
         }
         return timer;
@@ -265,8 +252,8 @@ export class Game_3_WinBoardViewMediator
 
     playRunCreditsCompletedSound(): void {
         AudioManager.Instance.stop(ScoringClipsEnum.Scoring_JPWinIntro);
-        AudioManager.Instance.stop(this.curScoringEnum).fade(0, 0.3);
-        AudioManager.Instance.play(this.curScoringEndEnum).volume(0).fade(1, 0.3);
+        AudioManager.Instance.stop(ScoringClipsEnum.Scoring_JPWinLoop);
+        AudioManager.Instance.play(ScoringClipsEnum.Scoring_JPWinEnd);
     }
 
     playSoundEND01(): void {
@@ -282,7 +269,10 @@ export class Game_3_WinBoardViewMediator
 
     playSoundScoringJPWin(): void {
         AudioManager.Instance.stop(BGMClipsEnum.BGM_Mini).fade(0, 1);
-        let audio = AudioManager.Instance.play(this.curScoringEnum).volume(1).loop(false);
+        let audio = AudioManager.Instance.play(ScoringClipsEnum.Scoring_JPWinLoop).volume(0).loop(true);
+        AudioManager.Instance.play(ScoringClipsEnum.Scoring_JPWinIntro).callback(() => {
+            audio.volume(1).replay();
+        });
     }
 
     /** 更新 Mediator 監聽的事件 */

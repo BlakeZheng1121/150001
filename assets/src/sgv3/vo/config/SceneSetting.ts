@@ -1,13 +1,12 @@
 import { TSMap } from '../../../core/utils/TSMap';
 import { SceneData } from '../data/SceneData';
-import { GameSceneData, WinSetting } from './GameSceneData';
+import { GameSceneData } from './GameSceneData';
 
 /**
  * 提供給遊戲做場景相關基本資料做設定
  * @author luke
  */
 export class SceneSetting extends SceneData {
-    public winSetting: WinSetting = null;
     constructor() {
         super();
         this.setSceneMap();

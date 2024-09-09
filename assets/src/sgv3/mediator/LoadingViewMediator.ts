@@ -1,11 +1,9 @@
 import { assetManager, Component, director, instantiate, Prefab, Node, _decorator } from 'cc';
+import { AudioManager } from '../../audio/AudioManager';
 import BaseMediator from '../../base/BaseMediator';
-import { ChangeBalanceCommand } from '../../core/command/ChangeBalanceCommand';
-import { SFLoginCommand } from '../../core/command/SFLoginCommand';
 import { NetworkProxy } from '../../core/proxy/NetworkProxy';
 import { Logger } from '../../core/utils/Logger';
 import { SceneManager } from '../../core/utils/SceneManager';
-import { AudioManager } from '../../audio/AudioManager';
 import { CoreDefaultSettingCommand } from '../command/CoreDefaultSettingCommand';
 import { CheckRecoveryFlowCommand } from '../command/recovery/CheckRecoveryFlowCommand';
 import { GameDataProxy } from '../proxy/GameDataProxy';
@@ -18,7 +16,6 @@ import { GameProxyEvent } from '../vo/event/GameProxyEvent';
 import { LoadEvent } from '../vo/event/LoadEvent';
 import { PendingEvent } from '../vo/event/PendingEvent';
 import { KibanaLog, LogType } from '../vo/log/KibanaLog';
-import { SGGameLoginReturn } from '../vo/result/SGGameLoginReturn';
 const { ccclass } = _decorator;
 
 @ccclass('LoadingViewMediator')
@@ -40,12 +37,12 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
 
     /** preload 要預載的資源 */
     protected baseList(): string[] {
-        return [GameScene.Game_1, 'common', 'common-ui', 'bbw', 'winBoard'];
+        return [GameScene.Game_1, 'preload', 'common-ui', 'bbw'];
     }
 
     /** 進入basegame後 要載的資源 */
     protected extendList(): string[] {
-        return [GameScene.Game_2, GameScene.Game_3, GameScene.Game_4];
+        return ['extend', GameScene.Game_2, GameScene.Game_3, GameScene.Game_4];
     }
 
     public constructor(name?: string, component?: any) {
@@ -186,10 +183,10 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
             this.sendNotification(CoreDefaultSettingCommand.NAME);
         } else {
             this.headGroup = this.baseLoadList;
-            this.downloadBundle('common')
+            this.downloadBundle('preload')
                 .then(() => this.downloadBundle('scenes'))
                 .then(() => this.downloadBundle('common-ui'))
-                .then(() => this.downloadBundle('control-panel'))
+                .then(() => this.downloadBundle('extend'))
                 .then(() => this.loadAssetsBundle(this.baseLoadList))
                 .catch((error) => {
                     // 一段時間後retry
@@ -241,13 +238,16 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
     private async loadAssetsBundle(groupList: string[]) {
         while (groupList.length > 0) {
             let assetName = groupList[0];
-            if (assetName == 'common') {
-                await this.loadPrefab('common', 'Common-Panel')
+            if (assetName == 'preload') {
+                await this.loadPrefab('preload', 'Preload')
                     .then((prefab) => this.instantiatePrefab(prefab))
-                    .then((commonNode: Node) => {
-                        commonNode.children.forEach((node) => {
-                            node.active = false;
-                        });
+                    .then((preloadNode: Node) => {
+                        if (preloadNode.children.length > 0) {
+                            preloadNode.children.forEach((node) => {
+                                node.setParent(SceneManager.instance.node);
+                            });
+                        }
+                        preloadNode.destroy();
                     })
                     .then((obj) => {
                         groupList.shift();
@@ -255,7 +255,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
                     })
                     .catch((error) => {});
             } else if (assetName == 'common-ui') {
-                await this.loadPrefab('control-panel', 'Game_ControlPanel')
+                await this.loadPrefab('common-ui', 'ControlPanel')
                     .then((prefab) => this.instantiatePrefab(prefab))
                     .then((obj) => {
                         groupList.shift();
@@ -270,17 +270,21 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
                         this.wait(obj, 100);
                     })
                     .catch((error) => {});
-            } else if (assetName == 'winBoard') {
-                await this.loadPrefab('common', 'Game_WinBoardView')
+            } else if (assetName == 'extend') {
+                await this.loadPrefab('extend', 'Extend')
                     .then((prefab) => this.instantiatePrefab(prefab))
-                    .then((winBoardNode: Node) => {
-                        winBoardNode.active = false;
+                    .then((extendNode: Node) => {
+                        if (extendNode.children.length > 0) {
+                            extendNode.children.forEach((node) => {
+                                node.setParent(SceneManager.instance.node);
+                            });
+                        }
+                        extendNode.destroy();
                     })
                     .then((obj) => {
                         groupList.shift();
                         this.wait(obj, 100);
-                    })
-                    .catch((error) => {});
+                    });
             } else {
                 await this.loadPrefab('scenes', assetName)
                     .then((prefab) => this.instantiatePrefab(prefab))

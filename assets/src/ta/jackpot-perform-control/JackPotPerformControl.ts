@@ -1,20 +1,21 @@
 import { _decorator, Component, Prefab, Node } from 'cc';
 import { TimelineTool } from 'TimelineTool';
 import { ScoreCollectHandler } from '../../game/view/ScoreCollectHandler';
-import { AudioClipsEnum } from '../../game/vo/enum/SoundMap';
+import { AudioClipsEnum, BGMClipsEnum } from '../../game/vo/enum/SoundMap';
 import { PoolManager } from '../../sgv3/PoolManager';
 import { SpineTailPerform } from '../spine-trail-perform/SpineTailPerform';
 import { AudioManager } from '../../audio/AudioManager';
+import { GlobalTimer } from 'src/sgv3/util/GlobalTimer';
 
 const { ccclass, property } = _decorator;
 
 @ccclass('JackPotPerformControl')
 export class JackPotPerformControl extends Component {
-    @property(SpineTailPerform) private DragonSpineTrailPerform: SpineTailPerform | null = null;
+    @property({ type: SpineTailPerform })
+    private DragonSpineTrailPerform: SpineTailPerform | null = null;
 
-    @property(TimelineTool) private JackpotAvatar: TimelineTool | null = null;
-
-    @property private PerDargonHitValue: number = 0;
+    @property({ type: TimelineTool })
+    private JackpotAvatar: TimelineTool | null = null;
 
     @property({ type: Prefab, visible: true })
     public scorePrefab: Prefab | null = null;
@@ -22,66 +23,39 @@ export class JackPotPerformControl extends Component {
     @property({ type: Node, visible: true })
     public effectTarget: Node | null = null;
 
-    private DragonBallHitValue: number = 0;
-
-    private DragonBallHitLV: number = 0;
-
-    private DragonBallCurrentLV: number = 0;
-
-    private _isJackPot: boolean = false;
-
     private TopCountNum: ScoreCollectHandler | null = null;
-
+    private ballHitList: Array<number> = [];
     //BaseGame打擊
     public BaseTrailPerform(spineDragonTrailAnimatID: number) {
-        if (this._isJackPot == false) {
-            this.DragonSpineTrailPerform?.UpdateAnimationObjectID(spineDragonTrailAnimatID);
-            this.DragonSpineTrailPerform?.SpineTrailEffect();
-            this.unschedule(this.OnDragonBallHit);
-            this.scheduleOnce(this.OnDragonBallHit, 0.3);
-        }
-    }
-
-    //清除BaseGame打擊行為所觸發的神燈動畫
-    public ClearBaseTrailSchedule() {
-        this.unschedule(this.OnDragonBallHit);
+        this.DragonSpineTrailPerform?.UpdateAnimationObjectID(spineDragonTrailAnimatID);
+        this.DragonSpineTrailPerform?.SpineTrailEffect();
+        let ballHitId = this.ballHitList.length == 0 ? 0 : this.ballHitList[this.ballHitList.length - 1] + 1;
+        this.ballHitList.push(ballHitId);
+        GlobalTimer.getInstance()
+            .registerTimer(
+                'ballHit' + ballHitId,
+                0.9,
+                () => {
+                    GlobalTimer.getInstance().removeTimer('ballHit' + ballHitId);
+                    this.OnDragonBallHit();
+                    this.ballHitList.shift();
+                },
+                this
+            )
+            .start();
     }
 
     public FreeTrailPerform(spineDragonTrailAnimatID: number) {
-        if (this._isJackPot == false) {
-            this.DragonSpineTrailPerform?.UpdateAnimationObjectID(spineDragonTrailAnimatID);
-            this.DragonSpineTrailPerform?.SpineFreeTrailEffect();
-        }
+        this.DragonSpineTrailPerform?.UpdateAnimationObjectID(spineDragonTrailAnimatID);
+        this.DragonSpineTrailPerform?.SpineFreeTrailEffect();
     }
 
     private OnDragonBallHit() {
-        if (this.DragonBallHitValue > 100) {
-            this.DragonBallHitValue = 0;
-        } else if (this._isJackPot == false) {
-            this.DragonBallHitValue += this.PerDargonHitValue;
-
-            this.DragonBallHitLV = this.DragonBallHitValue / 25;
-
-            var DragonBallInt = Math.floor(this.DragonBallHitLV);
-
-            this.JackpotAvatar?.play('Base_Hit_FX', () => this.OnDragonBallHitComplete());
-
-            if (DragonBallInt != Math.floor(this.DragonBallCurrentLV)) {
-                var lv = DragonBallInt - 1;
-                if (lv < 0) {
-                    lv = 0;
-                }
-            }
-            this.DragonBallCurrentLV = this.DragonBallHitLV;
-        }
-    }
-
-    private OnDragonBallHitComplete() {
-        this.baseIdle();
+        this.JackpotAvatar?.play('Base_Hit_FX', undefined, false);
     }
 
     public OnFreeGameBallHit() {
-        this.JackpotAvatar?.play('Free_Hit_FX', () => this.freeIdle());
+        this.JackpotAvatar?.play('Free_Hit_FX');
     }
 
     public OnHoldAndWinBallHit() {
@@ -91,13 +65,13 @@ export class JackPotPerformControl extends Component {
     //JackPotHit
     public JackPotHit(cb: any | null = null) {
         this.JackpotAvatar?.play('Mini_Transition');
-
         this.scheduleOnce(() => {
-            AudioManager.Instance.play(AudioClipsEnum.Mini_DragonBreath);
-        }, 0.5);
+            this.JackpotAvatar.clearSpineTrack('Base_Hit_FX');
+        }, 0.3);
         this.scheduleOnce(() => {
+            AudioManager.Instance.play(BGMClipsEnum.BGM_Mini).loop(true);
             AudioManager.Instance.play(AudioClipsEnum.Mini_DragonBallExplosion);
-        }, 1.0);
+        }, 5.7);
 
         this.scheduleOnce(() => {
             () => cb();
@@ -149,7 +123,7 @@ export class JackPotPerformControl extends Component {
     }
 
     public freeIdle() {
-        this.JackpotAvatar?.play('Idle_NoBoard');
+        this.JackpotAvatar?.play('Idle_Free');
     }
 
     public fallImmediately() {

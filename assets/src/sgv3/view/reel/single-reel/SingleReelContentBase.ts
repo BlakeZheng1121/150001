@@ -1,5 +1,12 @@
 import { _decorator, Component, Vec3, Prefab, Tween, UITransform, Material, math, Color, CurveRange } from 'cc';
-import { ReelForceData, ReelMotionData, ReelPasser, SingleReel as SingleReeler, StripIndexer, SymbolData } from '../../../vo/match/ReelMatchInfo';
+import {
+    ReelForceData,
+    ReelMotionData,
+    ReelPasser,
+    SingleReel as SingleReeler,
+    StripIndexer,
+    SymbolData
+} from '../../../vo/match/ReelMatchInfo';
 import { ReelMask } from '../reel-mask/ReelMask';
 import { UISymbol } from '../symbol/UISymbol';
 import { SymbolDataPlist } from '../SymbolDataPlist';
@@ -207,10 +214,10 @@ export class SingleReelContentBase extends Component {
         return this._singleReeler.symbolCount - this.stripIndexer.benchMark + fovIndex;
     }
     /**由 Pass 顆數 推算取得對應 滾動FOVIndex 若不在FOV內,則回傳-1 */
-    public getFOVIndex(targertPass: number): number{
-        return (targertPass- this.passCounter > this.stripIndexer.fovLength
-        || targertPass- this.passCounter <= 0)
-        ? -1: targertPass- this.passCounter - 1;
+    public getFOVIndex(targertPass: number): number {
+        return targertPass - this.passCounter > this.stripIndexer.fovLength || targertPass - this.passCounter <= 0
+            ? -1
+            : targertPass - this.passCounter - 1;
     }
     ////
 

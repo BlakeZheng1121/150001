@@ -98,21 +98,16 @@ export class GAME_JackpotPoolViewMediator extends BaseMediator<GAME_JackpotPoolV
         const jpPoolData = this.gameDataProxy.initEventData.executeSetting.jackpotSetting.jackpotPoolData[first];
         const betIndex = this.gameDataProxy.totalBetIdx;
         const betRangeMapIndex = this.gameDataProxy.getJackpotPoolRangeIndexWithBet();
-        let newPoolInitValue = [];
         for (let i = 0; i < jpPoolData.jackpotExtendSetting.poolInitValue[betRangeMapIndex].length; i++) {
             let jpType = jpPoolData.jackpotExtendSetting.poolInitValueType[i];
             let jpValue = jpPoolData.jackpotExtendSetting.poolInitValue[betRangeMapIndex][i];
             switch (jpType) {
-                case JackpotPoolValueType.Credit:
-                    newPoolInitValue.push(this.gameDataProxy.convertCredit2Cash(jpValue));
-                    break;
                 case JackpotPoolValueType.Multiplier:
                     let mulValue = this.gameDataProxy.totalBetList[this.gameDataProxy.totalBetIdx] * jpValue;
-                    newPoolInitValue.push(mulValue);
+                    this.view.updateBonusPoolByBetRange(i, mulValue);
                     break;
             }
         }
-        this.view.updateBonusPoolByBetRange(newPoolInitValue);
         if (this.gameDataProxy.curScene != GameScene.Init) {
             this.view.updateFortuneMultiplier(betIndex); //依照 BetRange或 階層上升
         }

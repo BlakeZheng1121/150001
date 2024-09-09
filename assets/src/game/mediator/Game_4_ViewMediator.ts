@@ -46,8 +46,9 @@ export class Game_4_ViewMediator extends BaseGameViewMediator<Game_4_View> {
         // 取得該場景的資料
         let parseName: string[] = Game_4_ViewMediator.NAME.split('_');
         this.mySceneName = parseName[0] + '_' + parseName[1];
-        //this.mySceneData = this.gameDataProxy.getSceneDataByName(this.mySceneName);
+        this.mySceneData = this.gameDataProxy.getSceneDataByName(this.mySceneName);
         this.myGameScene = this.mySceneName;
+        this.mySceneData.reelPrefab = this.view.reelPrefab;
     }
 
     protected lazyEventListener(): void {}
@@ -100,7 +101,7 @@ export class Game_4_ViewMediator extends BaseGameViewMediator<Game_4_View> {
             StateMachineCommand.NAME,
             new StateMachineObject(StateMachineProxy.GAME4_TRANSITIONS)
         );
-        AudioManager.Instance.play(BGMClipsEnum.BGM_DragonUp).loop(true).volume(0).fade(1, 1);
+        AudioManager.Instance.play(BGMClipsEnum.BGM_DragonUp).loop(true).volume(0).fade(1, 0.8);
     }
 
     /** 離開場景處理 */

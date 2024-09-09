@@ -8,7 +8,6 @@ import { WebBridgeProxy } from '../../proxy/WebBridgeProxy';
 import { AutoPlayClickOptionCommand } from '../autoplay/AutoPlayClickOptionCommand';
 import { AutoPlayOnIdleProcessCommand } from '../autoplay/AutoPlayOnIdleProcessCommand';
 import { AutoPlayOnSpinProcessCommand } from '../autoplay/AutoPlayOnSpinProcessCommand';
-import { AutoplayShowAllLineCompleteCommand } from '../autoplay/AutoplayShowAllLineCompleteCommand';
 import { BalanceChangedCommand } from '../balance/BalanceChangedCommand';
 import { TakeWinCommand } from '../balance/TakeWinCommand';
 import { CheckGameFlowCommand } from '../CheckGameFlowCommand';
@@ -23,7 +22,6 @@ import { SpinResponseCommand } from '../spin/SpinResponseCommand';
 import { CheckStateFailCommand } from '../statemachine/CheckStateFailCommand';
 import { ChangeSceneViewCommand } from '../viewMediator/ChangeSceneViewCommand';
 import { PrizePredictionCompleteCommand } from '../reeleffect/PrizePredictionCompleteCommand';
-import { ResetGame1CanSpinCommand } from '../ResetGame1CanSpinCommand';
 import { CheckShowWinComplete } from '../CheckShowWinComplete';
 import { WinBoardRunCompleteCommand } from '../winboard/WinBoardRunCompleteCommand';
 import { ChangeWinBoardStateCommand } from '../winboard/ChangeWinBoardStateCommand';
@@ -68,7 +66,7 @@ export abstract class RegisterPuremvcCommand extends puremvc.SimpleCommand {
      */
     protected registerCommand(): void {
         this.facade.registerCommand(AccountStatusCommand.NAME, AccountStatusCommand);
-		this.facade.registerCommand(AccountStatusMultipleLoginCommand.NAME, AccountStatusMultipleLoginCommand);
+        this.facade.registerCommand(AccountStatusMultipleLoginCommand.NAME, AccountStatusMultipleLoginCommand);
         this.facade.registerCommand(InitEventCommand.NAME, InitEventCommand);
         this.facade.registerCommand(SpinResponseCommand.NAME, SpinResponseCommand);
         this.facade.registerCommand(ByGameHandleCommand.NAME, ByGameHandleCommand);
@@ -78,7 +76,6 @@ export abstract class RegisterPuremvcCommand extends puremvc.SimpleCommand {
         this.facade.registerCommand(AutoPlayOnIdleProcessCommand.NAME, AutoPlayOnIdleProcessCommand);
         this.facade.registerCommand(AutoPlayOnSpinProcessCommand.NAME, AutoPlayOnSpinProcessCommand);
         this.facade.registerCommand(AutoPlayClickOptionCommand.NAME, AutoPlayClickOptionCommand);
-        this.facade.registerCommand(AutoplayShowAllLineCompleteCommand.NAME, AutoplayShowAllLineCompleteCommand);
 
         // spin Request
         this.facade.registerCommand(NormalPlayCommand.NAME, NormalPlayCommand);
@@ -97,15 +94,8 @@ export abstract class RegisterPuremvcCommand extends puremvc.SimpleCommand {
         // 場景轉換器
         this.facade.registerCommand(ChangeSceneViewCommand.NAME, ChangeSceneViewCommand);
 
-        // // 註冊web按鈕點擊後處理事件
-        // this.facade.registerCommand(ClickWebListCommand.NAME, ClickWebListCommand);
-        // // 咪牌資料確認
-        // this.facade.registerCommand(ClickWebListCommand.NAME, ClickWebListCommand);
         // 場景資料確認
         this.facade.registerCommand(CheckGameFlowCommand.NAME, CheckGameFlowCommand);
-
-        // //重置show狀態讓Game1可以spin
-        this.facade.registerCommand(ResetGame1CanSpinCommand.NAME, ResetGame1CanSpinCommand);
 
         this.facade.registerCommand(Game1AfterShowCommand.NAME, Game1AfterShowCommand);
 

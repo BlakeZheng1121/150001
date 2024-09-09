@@ -18,12 +18,11 @@ export class GrandView extends BaseView {
     @property(Label)
     private scoreTxt: Label;
     private _score = 0;
-
+    private canSkip = false;
     private skipFunction: Function;
-    // callback
-    public buttonCallback: IGrandViewMediator = null;
-
+    private canSkipScoringGrandTimerKey: string = 'canSkipScoringGrand';
     private callBackFunction: Function;
+    public buttonCallback: IGrandViewMediator = null;
 
     public get score(): number {
         return this._score;
@@ -33,8 +32,7 @@ export class GrandView extends BaseView {
         this._score = value;
         this.scoreTxt.string = BalanceUtil.formatBalanceWithDollarSign(value);
     }
-    private grandTime = 7; // 60s, Game_3_WinBoardViewMediator.getWinBoardRunTimer
-    private bonusCanSkipRunCreditsTime = 5; //Game_3_WinBoardViewMediator.getWinBoardRunTimer
+    private grandTime = 50.993;
 
     onLoad() {
         super.onLoad('GrandViewMediator', `${this.node.parent.name}_GrandViewMediator`);
@@ -42,15 +40,15 @@ export class GrandView extends BaseView {
 
     public showUp(_lang: string, callBack?: Function): void {
         let lang = _lang == 'en' ? 0 : 1;
-        this.miniResultBoard.SetEffectType(MiniGameSymbol.Grand, lang);
         this.callBackFunction = callBack;
 
         this.score = 0;
-        this.scheduleOnce(() => {
-            AudioManager.Instance.play(AudioClipsEnum.JP_GrandHit);
-        }, 0.75);
+        AudioManager.Instance.play(AudioClipsEnum.JP_GrandHit);
+        this.scheduleOnce(() => {}, 0.75);
+
         this.anim.play('Show');
         this.miniResultBoard.OnBoardDelayPlay();
+        this.miniResultBoard.SetEffectType(MiniGameSymbol.Grand, lang);
         GlobalTimer.getInstance()
             .registerTimer(
                 'showUpTimer',
@@ -66,7 +64,10 @@ export class GrandView extends BaseView {
     }
 
     private showMiniResultBoard() {
-        AudioManager.Instance.play(ScoringClipsEnum.Scoring_JPWin04).loop(false);
+        let audio = AudioManager.Instance.play(ScoringClipsEnum.Scoring_JPWinLoop).volume(0).loop(true);
+        AudioManager.Instance.play(ScoringClipsEnum.Scoring_JPWinIntro).callback(() => {
+            audio.volume(1).replay();
+        });
         this.miniResultBoard.playWinCoinFall();
     }
 
@@ -85,10 +86,9 @@ export class GrandView extends BaseView {
             this.score = grand;
             GlobalTimer.getInstance().removeTimer('showUpTimer');
             this.miniResultBoard.stopWinCoinFall();
-
             AudioManager.Instance.stop(ScoringClipsEnum.Scoring_JPWinIntro);
-            AudioManager.Instance.stop(ScoringClipsEnum.Scoring_JPWin04);
-            AudioManager.Instance.play(ScoringClipsEnum.Scoring_JPWinEnd04);
+            AudioManager.Instance.stop(ScoringClipsEnum.Scoring_JPWinLoop);
+            AudioManager.Instance.play(ScoringClipsEnum.Scoring_JPWinEnd);
             callBack?.();
             this.skipFunction = null;
         };

@@ -80,7 +80,7 @@ export class Game2EndCommand extends StateCommand {
         } else {
             this.showCreditBoard();
         }
-        this.gameDataProxy.afterGame2 = true;
+        this.gameDataProxy.afterFeatureGame = true;
     }
 
     /** 有贏分顯示CreditBoard */

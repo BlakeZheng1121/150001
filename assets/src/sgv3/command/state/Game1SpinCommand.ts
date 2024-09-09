@@ -31,7 +31,7 @@ export class Game1SpinCommand extends StateCommand {
             this.gameDataProxy.reStateResult.gameStateId == GameStateId.END
         ) {
             this.gameDataProxy.resetGameParams(); // 這邊為做贏分表演相關參數重置
-            if (this.networkProxy.getCanSpinState()) {
+            if(this.networkProxy.getCanSpinState()) {
                 this.sendNotification(SpinRequestCommand.NAME);
             }
         } else {
@@ -51,7 +51,7 @@ export class Game1SpinCommand extends StateCommand {
 
         //新增加速log
         let data = {
-            gameID: '1030',
+            gameID: '1104',
             userName: this.gameDataProxy.userName,
             logTag: 'slotSpeedMode',
             logType: 'behavior',

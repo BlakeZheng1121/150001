@@ -80,7 +80,7 @@ export abstract class CoreDefaultSettingCommand extends puremvc.SimpleCommand {
             return false;
         }
         // 取得押注預設值
-        let _defaultIdx: number = this.gameDataProxy.totalBetList.length - 1;
+        let _defaultIdx: number = 0;
 
         if (this.gameDataProxy.userSetting) {
             // 使用玩家上次使用的押注設定
@@ -90,7 +90,7 @@ export abstract class CoreDefaultSettingCommand extends puremvc.SimpleCommand {
 
         // 確認是否有該 押注設定
         if (!this.gameDataProxy.totalBetList[_defaultIdx]) {
-            _defaultIdx = this.gameDataProxy.totalBetList.length - 1;
+            _defaultIdx = 0;
         }
 
         this.gameDataProxy.totalBetIdx = _defaultIdx;

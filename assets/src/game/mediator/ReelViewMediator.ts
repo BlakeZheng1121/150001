@@ -387,7 +387,6 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
             let symbol: SymbolInfo = self.winData.wayInfos[wayInfoIndex].symbols[i];
             if (symbol.sid >= 0) {
                 if (symbol.sid == SymbolId.WILD && !self.isPlayedWildScoring) {
-                    AudioManager.Instance.play(AudioClipsEnum.Base_WildScoring);
                     self.isPlayedWildScoring = true;
                 }
                 this.reelView.showLoopWinSymbol(symbol, self.reelDataProxy.symbolFeature[symbol.x][symbol.y]);
@@ -416,9 +415,9 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
                     this.gameDataProxy.showWinOnceComplete = false;
                 }
             }
-            if (this.reelDataProxy.isQuickSpin && this.gameDataProxy.onAutoPlay) {
-                return;
-            }
+            // if (this.reelDataProxy.isTurboMode && this.gameDataProxy.onAutoPlay) {
+            //     return;
+            // }
             self.curIndex = self.curIndex + 1 >= self.winData.wayInfos.length ? 0 : this.curIndex + 1;
             self.playLoopWin(self.curIndex);
         }

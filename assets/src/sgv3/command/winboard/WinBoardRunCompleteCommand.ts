@@ -17,7 +17,7 @@ import { CheckNormalButtonStateCommand } from 'src/game/command/CheckNormalButto
 export class WinBoardRunCompleteCommand extends puremvc.SimpleCommand {
     public static readonly NAME: string = 'WinBoardRunCompleteCommand';
     protected timerName = 'WinBoardRunComplete';
-    protected miniGameDelayTime: number = 1.0;
+    protected miniGameDelayTime: number = 0.8;
 
     public execute(notification: puremvc.INotification) {
         const self = this;
@@ -45,15 +45,19 @@ export class WinBoardRunCompleteCommand extends puremvc.SimpleCommand {
     /** Game1處理最後滾分事件 */
     public game1() {
         const self = this;
-        self.gameDataProxy.afterGame2 = false;
+        self.gameDataProxy.afterFeatureGame = false;
         if (self.gameDataProxy.isHitSpecial() || self.gameDataProxy.preScene == 'Game_3') {
             // 檢查 下一Round 是否為特殊中獎(free_game, bonus_game)
             // 檢查 是否從MiniGame回來，是的話直接往下走
-            self.game1DelayAfterShow(self.miniGameDelayTime);
+            // 若中MiniGame，需升階表演結束才進下個流程
+            const isHitMiniGame = self.gameDataProxy.isHitMiniGame();
+            const isReadyEnterMiniGame = self.gameDataProxy.isReadyEnterMiniGame;
+            
+            if (!isHitMiniGame || (isHitMiniGame && isReadyEnterMiniGame)) {
+                self.game1DelayAfterShow(self.miniGameDelayTime);
+            }
         } else {
             self.game1DelayAfterShow(self.gameDataProxy.commonSetting.endWinDelayTime);
-            self.sendNotification(TakeWinCommand.NAME); //贏分加入表底
-            self.sendNotification(UIEvent.CHANGE_BUTTON_STATE, { name: ButtonName.SPIN, state: SpinButton.STATUS_IDLE });
         }
     }
 

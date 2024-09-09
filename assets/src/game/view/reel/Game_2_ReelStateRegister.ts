@@ -10,7 +10,6 @@ import {
     SingleReelStateRegisterBase,
     SingleReelStopState
 } from '../../../sgv3/view/reel/single-reel/SingleReelStateRegisterBase';
-import { Layer } from '../../../sgv3/vo/enum/Layer';
 import { ReelType, SymbolPerformType } from '../../../sgv3/vo/enum/Reel';
 import { Game_2_SymbolContent } from '../symbol/Game_2_SymbolContent';
 const { ccclass } = _decorator;

@@ -51,7 +51,7 @@ export class GAME_JackpotPoolView extends BaseView {
     public totalMinorAmount: number = 0;
     public totalMiniAmount: number = 0;
 
-    private betRangeMapIndex: number = 1;
+    private betRangeMapIndex: number = 0;
 
     private textTweens: Map<number, Tween<GAME_JackpotPoolView>> = new Map<number, Tween<GAME_JackpotPoolView>>();
 
@@ -110,28 +110,26 @@ export class GAME_JackpotPoolView extends BaseView {
         this.updateAllPoolAmount();
     }
 
-    public updateBonusPoolByBetRange(poolValue: number[]) {
+    public updateBonusPoolByBetRange(poolId:number, poolValue: number) {
         // 給 pool 更新倍率，Grand 與 Major 連結 Jackpot，不做更新
-        for (let i = 0; i < poolValue.length; i++) {
-            let tempValue = poolValue[i];
-            switch (i + 1) {
+            switch (poolId + 1) {
                 case JackpotPool.GRAND:
-                    //this.tempGrandAmount = tempValue;
+                    this.tempGrandAmount = poolValue;
+                    this.updateGrandAmount();
                     break;
                 case JackpotPool.MAJOR:
-                    this.tempMajorAmount = tempValue;
+                    this.tempMajorAmount = poolValue;
+                    this.updateMajorAmount();
                     break;
                 case JackpotPool.MINOR:
-                    this.tempMinorAmount = tempValue;
+                    this.tempMinorAmount = poolValue;
+                    this.updateMinorAmount();
                     break;
                 case JackpotPool.MINI:
-                    this.tempMiniAmount = tempValue;
+                    this.tempMiniAmount = poolValue;
+                    this.updateMiniAmount();
                     break;
             }
-        }
-        this.updateMajorAmount();
-        this.updateMinorAmount();
-        this.updateMiniAmount();
     }
 
     public runAmount(_endAmount: number, _poolId: number, _runningTime: number, isForce: boolean): void {

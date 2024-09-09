@@ -13,6 +13,9 @@ export class Game1ShowWinCommand extends StateCommand {
         // 從 Game3 回到 Game1 不需要再滾分，只需要輪播贏分 Symbol
         if (this.gameDataProxy.preScene === GameScene.Game_3) {
             // 沒有滾分，因此延遲切換下個狀態
+            if (this.gameDataProxy.stateWinData.totalAmount() > 0) {
+                this.sendNotification(ReelEvent.SHOW_REELS_WIN, this.gameDataProxy.curWinData);
+            }
             GlobalTimer.getInstance()
                 .registerTimer(
                     'showWinToAfterShow',
@@ -24,15 +27,15 @@ export class Game1ShowWinCommand extends StateCommand {
                     this
                 )
                 .start();
+        } else {
+            this.showView();
         }
-
-        this.showView();
     }
 
     protected showView() {
         // 輪播贏分 Symbol
         if (this.gameDataProxy.stateWinData.totalAmount() > 0) {
-            if (this.gameDataProxy.afterGame2) {
+            if (this.gameDataProxy.afterFeatureGame) {
                 this.sendNotification(ReelEvent.SHOW_REELS_WIN, this.gameDataProxy.curWinData);
                 this.sendNotification(ScoringHandleCommand.NAME);
             } else {

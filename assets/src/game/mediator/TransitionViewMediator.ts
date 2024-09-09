@@ -67,6 +67,16 @@ export class TransitionViewMediator extends BaseMediator<GAME_TransitionView> {
 
     /** 開啟 轉場動畫*/
     protected onTransitionBGEffect() {
-        this.transitionView.showTransition();
+        GlobalTimer.getInstance()
+            .registerTimer(
+                'onTransitionBGEffect',
+                1.3,
+                () => {
+                    GlobalTimer.getInstance().removeTimer('onTransitionBGEffect');
+                    this.transitionView.showTransition();
+                },
+                this
+            )
+            .start();
     }
 }

@@ -8,13 +8,14 @@
       "__id__": 1
     },
     "optimizationPolicy": 0,
-    "asyncLoadAssets": false,
-    "persistent": false
+    "persistent": false,
+    "asyncLoadAssets": false
   },
   {
     "__type__": "cc.Node",
     "_name": "Game_1",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "_parent": null,
     "_children": [
       {
@@ -129,7 +130,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 525,
+      "y": 530,
       "z": 0
     },
     "_lrot": {
@@ -260,6 +261,10 @@
       "__id__": 11
     },
     "renderOrder": 0,
+    "reelPrefab": {
+      "__uuid__": "ff08993d-cfc3-4856-ad6b-20b1df2644a6",
+      "__expectedType__": "cc.Prefab"
+    },
     "_id": ""
   },
   {
@@ -279,8 +284,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 900,
-      "height": 1600
+      "width": 100,
+      "height": 100
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",

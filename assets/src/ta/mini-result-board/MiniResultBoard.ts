@@ -49,10 +49,11 @@ export class MiniResultBoard extends Component {
     }
 
     public OnBoardClose() {
-        this.BoardAnimation?.play('Hide', () => {
+        this.BoardAnimation?.play('Hide');
+        this.scheduleOnce(() => {
             this.recycleParticle();
             this.node.active = false;
-        });
+        }, 3);
     }
 
     //設定JackPotType對應的美術資源(彩金狀態0~4為mini到grand,語系:0為中文1為英文)

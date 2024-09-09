@@ -100,7 +100,9 @@ export class ReelDataProxy extends puremvc.Proxy {
             symbols.sort(this.positionCompare);
         });
         //return this.symbolsNode[reelIndex][fovIndex + 1].worldPosition;
-        return this.symbolsNode[reelIndex][fovIndex + 1].getComponent(UISymbol).getSymbolPosWithType(SymbolPartType.LABEL);
+        return this.symbolsNode[reelIndex][fovIndex + 1]
+            .getComponent(UISymbol)
+            .getSymbolPosWithType(SymbolPartType.LABEL);
     }
 
     public setSymbolsNode(symbols: Array<Array<Node>>) {

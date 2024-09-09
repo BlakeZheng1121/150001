@@ -46,6 +46,9 @@ export abstract class WinBoardView extends BaseView {
         super.onLoad();
     }
 
+    protected start(): void {
+        this.node.active = false;
+    }    
     /**
      * 執行大獎面板且滾分
      * @param _type 面板類型
@@ -95,9 +98,14 @@ export abstract class WinBoardView extends BaseView {
         );
     }
 
+    public unregisterButton() {
+        this.node.off(SystemEvent.EventType.TOUCH_END);
+    }
+
     public stopWinboard() {
+        this.unregisterButton();
         this.winBoardAnimationComponent.play(this.winType + '-win-' + this.stopString, () => {
-            this.mask.active = false;
+            this.node.active = false;
         });
         this.winType = LevelWinType.NONE;
     }
@@ -139,7 +147,7 @@ export abstract class WinBoardView extends BaseView {
                         updateCallback?.();
                     },
                     onComplete: () => {
-                        completeCallback?.(false);
+                        completeCallback?.();
                     }
                 }
             )

@@ -28,12 +28,7 @@ export class SFDisconnectionCommand extends CoreSFDisconnectionCommand {
     }
 
     /** 停止一般聲音 */
-    protected stopNormalSound() {
-        // const self = this;
-        // if (self.soundProxy) {
-        //     self.soundProxy.stopAll(SoundCategory.SE);
-        // }
-    }
+    protected stopNormalSound() {}
 
     // ======================== Get Set ========================
     protected _stateMachineProxy: StateMachineProxy;

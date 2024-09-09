@@ -1,4 +1,4 @@
-import { SoundData } from '../../../core/proxy/SoundData';
+import { Prefab } from "cc";
 
 export class GameSceneData {
     /** Scene 對應數學遊戲類別id */
@@ -55,6 +55,8 @@ export class GameSceneData {
 
     /** Feature Selection 淡入時間 */
     featureSelectionShowTime: number;
+    /** reel prefab */
+    reelPrefab: Prefab;
 }
 
 export class ShakeInfo {
@@ -62,9 +64,3 @@ export class ShakeInfo {
     range: number;
     frequency: number;
 }
-
-// export class WinSetting {
-//     runTimeList: number[];
-//     winRunLeveSE: SoundData[];
-//     winTypeList: number[];
-//}

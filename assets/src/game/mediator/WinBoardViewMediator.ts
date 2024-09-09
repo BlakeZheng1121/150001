@@ -18,14 +18,6 @@ export class WinBoardViewMediator extends BaseWinBoardViewMediator<WinBoardView>
     /** 提供給外部可以設定自己客製化的winboardView */
     protected setWinboardView() {}
 
-    public runScrollWinStart(ratio: number): void {
-        // this.winCreditSoundProxy.playSound(ratio);
-    }
-
-    public runScrollWinEnd(): void {
-        // this.winCreditSoundProxy.complete();
-    }
-
     /** spin down點下後判斷 */
     protected onSpinDown() {
         super.onSpinDown();

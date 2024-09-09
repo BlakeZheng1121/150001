@@ -43,7 +43,7 @@ export class Game4HitSpecialCommand extends StateCommand {
 
     protected doReSpin() {
         let isMaxReSpinInfo = (this.gameDataProxy.curRoundResult as TopUpGameOneRoundResult)
-        .extendInfoForTopUpGameResult.maxTriggerCountFlag;
+            .extendInfoForTopUpGameResult.maxTriggerCountFlag;
         let posSymbolResult = this.reelDataProxy.symbolFeature;
         let lastXY: Vec2 = this.getLastReSpinXY;
         let num = 0;
@@ -53,15 +53,12 @@ export class Game4HitSpecialCommand extends StateCommand {
                 if (reSpinNum > 0) {
                     let index = y * this.reelDataProxy.symbolFeature.length + x;
                     let targertXY = new Vec2(x, y);
-                    let isMaxReSpin = (lastXY.x == targertXY.x 
-                        && lastXY.y == targertXY.y
-                        && isMaxReSpinInfo)
+                    let isMaxReSpin = lastXY.x == targertXY.x && lastXY.y == targertXY.y && isMaxReSpinInfo;
                     GlobalTimer.getInstance()
                         .registerTimer(
                             String(this.timerKey_Retrigger + index),
                             this.retriggertime * num,
-                            () => this.onRespinNext(targertXY
-                            ,isMaxReSpin),
+                            () => this.onRespinNext(targertXY, isMaxReSpin),
                             this
                         )
                         .start();
@@ -70,12 +67,11 @@ export class Game4HitSpecialCommand extends StateCommand {
             }
         }
         GlobalTimer.getInstance()
-            .registerTimer(String(this.timerKey_Retrigger_End)
-            , this.retriggertime * num + 1, this.onReSpinEnd, this)
+            .registerTimer(String(this.timerKey_Retrigger_End), this.retriggertime * num + 1, this.onReSpinEnd, this)
             .start();
     }
 
-    protected onRespinNext(xy: Vec2,isMaxReSpin: boolean) {
+    protected onRespinNext(xy: Vec2, isMaxReSpin: boolean) {
         let index = xy.y * this.reelDataProxy.symbolFeature.length + xy.x;
         let infoArray: Array<any> = [];
         infoArray.push(xy);
@@ -95,7 +91,7 @@ export class Game4HitSpecialCommand extends StateCommand {
             result.specialHitInfo != SpecialHitInfo[SpecialHitInfo.bonusGame_02];
         this.gameDataProxy.spinEventData.bonusGameResult.bonusGameOneRoundResult =
             this.gameDataProxy.spinEventData.bonusGameResult.bonusGameOneRoundResult.filter(removeResult);
-        
+
         this.doReSpin();
     }
     // ======================== Get Set ========================
@@ -108,16 +104,16 @@ export class Game4HitSpecialCommand extends StateCommand {
         return this._reelDataProxy;
     }
 
-    protected get getLastReSpinXY(){
+    protected get getLastReSpinXY() {
         let posSymbolResult = this.reelDataProxy.symbolFeature;
-        for (let x = posSymbolResult.length-1; x >=0; x--) {
-            for (let y = posSymbolResult[x].length-1; y >=0; y--) {
+        for (let x = posSymbolResult.length - 1; x >= 0; x--) {
+            for (let y = posSymbolResult[x].length - 1; y >= 0; y--) {
                 let reSpinNum = posSymbolResult[x][y].ReSpinNum;
                 if (reSpinNum > 0) {
-                    return new Vec2(x,y);
+                    return new Vec2(x, y);
                 }
             }
         }
-        return new Vec2(-1,-1);
+        return new Vec2(-1, -1);
     }
 }

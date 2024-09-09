@@ -1,5 +1,5 @@
 import { _decorator, AudioSource, AudioClip } from 'cc';
-const { ccclass, property } = _decorator;
+const { ccclass } = _decorator;
 
 @ccclass('AudioSourcePool')
 export class AudioSourcePool {
@@ -13,8 +13,13 @@ export class AudioSourcePool {
     }
 
     getAudioSource(clip: AudioClip): AudioSource {
-        let index = this.reservedPool.findIndex((audioSource) => audioSource && audioSource.clip == clip);
-        let audioSource = index != -1 ? this.reservedPool.splice(index, 1)[0] : this.getNewAudioSource(clip);
+        let audioSource =
+            this.reservedPool.find((audioSource) => audioSource && audioSource.clip == clip) ??
+            this.getNewAudioSource(clip);
+        let index = this.reservedPool.indexOf(audioSource);
+        if (index != -1) {
+            this.reservedPool.splice(index, 1);
+        }
         return audioSource;
     }
 

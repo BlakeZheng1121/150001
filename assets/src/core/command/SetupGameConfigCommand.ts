@@ -42,7 +42,7 @@ export class SetupGameConfigCommand extends puremvc.SimpleCommand {
 
             let gameDataProxy: CoreGameDataProxy = this.getGameDataProxy();
             let data = {
-                gameID: '1030',
+                gameID: '1104',
                 logTag: 'getRequest-SetupGameConfigCommand',
                 userName: String(gameDataProxy.userId)
             };

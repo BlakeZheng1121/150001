@@ -43,7 +43,7 @@ export class BallHitViewMediator extends BaseMediator<BallHitView> {
     protected tempFunc: Function;
 
     protected lazyEventListener(): void {
-        this.view.baseGameIdle();
+        this.initView();
     }
 
     public listNotificationInterests(): Array<any> {
@@ -58,6 +58,8 @@ export class BallHitViewMediator extends BaseMediator<BallHitView> {
             ViewMediatorEvent.PREPARE_COLLECT_BALL,
             ViewMediatorEvent.COLLECT_CREDIT_BALL,
             ViewMediatorEvent.COLLECT_CREDIT_BALL_SKIP_CALLBACK,
+            ViewMediatorEvent.INIT_EMBLEM_LEVEL,
+            ViewMediatorEvent.UPDATE_EMBLEM_LEVEL,
             DragonUpEvent.ON_ALL_CREDIT_COLLECT_START,
             DragonUpEvent.ON_C2_COUNT_UPDATE,
             SceneManager.EV_ORIENTATION_VERTICAL,
@@ -102,6 +104,12 @@ export class BallHitViewMediator extends BaseMediator<BallHitView> {
             case ViewMediatorEvent.COLLECT_CREDIT_BALL_SKIP_CALLBACK:
                 this.collectCreditBallOnSkip(notification.getBody());
                 break;
+            case ViewMediatorEvent.INIT_EMBLEM_LEVEL:
+                this.initEmblemLevel(notification.getBody());
+                break;
+            case ViewMediatorEvent.UPDATE_EMBLEM_LEVEL:
+                this.updateEmblemLevel(notification.getBody());
+                break;
             case DragonUpEvent.ON_C2_COUNT_UPDATE:
                 this.updateBallCount(notification.getBody());
                 break;
@@ -121,16 +129,29 @@ export class BallHitViewMediator extends BaseMediator<BallHitView> {
         }
     }
 
+    private initView() {
+        this.view.baseGameIdle();
+        let initLevel: number[] = [];
+        initLevel = this.gameDataProxy.getInitEmblemLevel()
+        this.initEmblemLevel(initLevel);
+    }
+
+    private initEmblemLevel(level: number[]) {
+        this.view.initEmblemLevel(level);
+    }
+
+    private updateEmblemLevel(level: number[]) {
+        if (level != null) {
+            this.view.updateEmblemLevel(level);
+        }
+    }
+
     private ballHitShow() {
         if (this.gameDataProxy.curScene != GameScene.Game_1) return;
         let ballHitInfo = this.gameDataProxy.spinEventData.baseGameResult.extendInfoForbaseGameResult;
         if (ballHitInfo['ballCount'] > 0) {
             this.view.ballHitShow(ballHitInfo);
         }
-    }
-
-    private ballHitClearShow() {
-        this.view.ballHitClearShowOnBase();
     }
 
     private loadingTransition() {
@@ -191,7 +212,7 @@ export class BallHitViewMediator extends BaseMediator<BallHitView> {
     private prepareCollectBall() {
         // this.view.ballFreeGameIdle();
         AudioManager.Instance.stop(BGMClipsEnum.BGM_Base).fade(0, 1);
-        AudioManager.Instance.play(BGMClipsEnum.BGM_FeatureSelection).loop(true).volume(0).fade(1, 1);
+        AudioManager.Instance.play(BGMClipsEnum.BGM_FeatureSelection).loop(true).volume(0).fade(1, 1.5);
     }
 
     // 龍珠分數收集

@@ -39,13 +39,9 @@ export class Game1InitCommand extends StateCommand {
                     this.networkProxy.sendSettlePlay(totalWin);
                     this.changeState(StateMachineProxy.GAME1_IDLE);
                 }
-                //AudioManager.Instance.stop(BGMClipsEnum.BGM_Mini).fade(0, 1);
-
                 break;
             case GameScene.Game_2:
-            //AudioManager.Instance.stop(BGMClipsEnum.BGM_FreeGame).fade(0, 1);
             case GameScene.Game_4:
-                //AudioManager.Instance.stop(BGMClipsEnum.BGM_DragonUp).fade(0, 1);
                 this.sendNotification(ReelEvent.ON_REELS_INIT); //Reel Init
                 this.sendNotification(ReelEffect_SymbolFeatureCommand.name);
                 if (this.gameDataProxy.stateWinData.totalAmount() > 0) {

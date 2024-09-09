@@ -91,11 +91,14 @@ export class SpinResponseCommand extends puremvc.SimpleCommand {
 
         let groupingIdx = spinResult.baseGameResult.extendInfoForbaseGameResult.groupingIdx;
 
-        for (let sceneName in GameSceneOption) {
-            let GameStateSetting = this.gameDataProxy.getStateSettingByName(sceneName);
+        if (groupingIdx >= 0) {
+            let gameSceneList = Object.entries(GameSceneOption);
+            for (let i = 2; i < gameSceneList.length; i++) {
+                let GameStateSetting = this.gameDataProxy.getStateSettingByName(GameSceneOption[i]);
 
-            if (GameStateSetting) {
-                GameStateSetting.setWheelData(groupingIdx);
+                if (GameStateSetting) {
+                    GameStateSetting.setWheelData(groupingIdx);
+                }
             }
         }
     }

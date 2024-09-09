@@ -1,12 +1,10 @@
-
 import { Font, Label, Prefab, _decorator } from 'cc';
-import { ParticleContentTool } from 'ParticleContentTool';
-import { SymbolContentBase } from '../../../sgv3/view/reel/symbol/SymbolContentBase';
 import { PoolManager } from '../../../sgv3/PoolManager';
+import { SymbolContentBase } from '../../../sgv3/view/reel/symbol/SymbolContentBase';
+import { ParticleContentTool } from 'ParticleContentTool';
 import { SymbolPartType } from 'src/sgv3/vo/enum/Reel';
 const { ccclass, property } = _decorator;
 
- 
 @ccclass('Game_1_SymbolContent')
 export class Game_1_SymbolContent extends SymbolContentBase {
     @property({ type: Label, visible: true })
@@ -21,7 +19,6 @@ export class Game_1_SymbolContent extends SymbolContentBase {
     public credit: number = 0;
 
     public isSpecialFont: boolean = false;
-
 
     private particleContent: ParticleContentTool;
     private recycleParticleCallback: Function;

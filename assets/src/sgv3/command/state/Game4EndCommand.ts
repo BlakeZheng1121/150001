@@ -24,7 +24,7 @@ export class Game4EndCommand extends StateCommand {
 
     protected onBonusGameEnd(){
         this.sendNotification(ViewMediatorEvent.CLOSE_FREE_SPIN_MSG);
-        this.gameDataProxy.afterGame2 = true;
+        this.gameDataProxy.afterFeatureGame = true;
     }
 
     protected onBonusGameIdle(){

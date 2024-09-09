@@ -1,4 +1,4 @@
-import { _decorator } from 'cc';
+import { _decorator, Prefab } from 'cc';
 import { SceneManager } from '../../core/utils/SceneManager';
 import { GameUIOrientationSetting } from '../vo/GameUIOrientationSetting';
 import { PosTweenView } from './dragon-up/PosTweenView';
@@ -9,6 +9,9 @@ const { ccclass, property } = _decorator;
 export class Game_4_View extends BaseView {
     public static readonly HORIZONTAL: string = 'horizontal';
     public static readonly VERTICAL: string = 'vertical';
+
+    @property({ type: Prefab})
+    public reelPrefab: Prefab | null = null;
 
     @property({ type: PosTweenView })
     private posTweenView: PosTweenView | null = null;

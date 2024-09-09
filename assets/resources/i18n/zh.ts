@@ -12,6 +12,11 @@ export const languages = {
     autospinnumber: '自动旋转次数',
     betoption: '投注选项',
     autoStart: '自动开始:',
+    quit: '退出',
+    history: '历史',
+    rules: '规则',
+    sound: '声音',
+    close: '关闭',
     jpBonusUpgrade: '彩金奖金升级',
     jackpotUpgradeBet: '提高投注可以升级',
     jackpotUpgradeBetRange: '投注 {0} 到 {1}'

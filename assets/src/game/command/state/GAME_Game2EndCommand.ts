@@ -7,7 +7,7 @@ import { GAME_GameDataProxy } from '../../proxy/GAME_GameDataProxy';
 const { ccclass } = _decorator;
 @ccclass('GAME_Game2EndCommand')
 export class GAME_Game2EndCommand extends Game2EndCommand {
-    readonly beforeEndShowRrunningTime: number = 1.5;
+    readonly beforeEndShowRrunningTime: number = 1.2;
     readonly endShowTimeKey: string = 'endShowTimeKey';
     /** game2結束面板處理 */
     protected playGame2EndBoard() {
@@ -16,7 +16,7 @@ export class GAME_Game2EndCommand extends Game2EndCommand {
 
         this.showTotalWinSum();
 
-        this.gameDataProxy.afterGame2 = true;
+        this.gameDataProxy.afterFeatureGame = true;
     }
 
     /** 有贏分顯示CreditBoard */

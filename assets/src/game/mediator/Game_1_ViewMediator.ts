@@ -40,6 +40,8 @@ export class Game_1_ViewMediator extends BaseGameViewMediator<Game_1_View> {
         let parseName: string[] = Game_1_ViewMediator.NAME.split('_');
         this.mySceneName = parseName[0] + '_' + parseName[1];
         this.myGameScene = this.mySceneName;
+        this.mySceneData = this.gameDataProxy.getSceneDataByName(this.mySceneName);
+        this.mySceneData.reelPrefab = this.view.reelPrefab;
     }
 
     protected lazyEventListener(): void {}

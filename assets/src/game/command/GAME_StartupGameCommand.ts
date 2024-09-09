@@ -17,7 +17,7 @@ export class GAME_StartupGameCommand extends StartupGameCommand {
         super.execute(notification);
 
         let data = {
-            gameID: "1030",
+            gameID: "1104",
             logTag: 'StartupGame',
         };
         let pack = {name:'gameLog', data: data};

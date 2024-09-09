@@ -7,6 +7,7 @@ import { BallHitViewMediator } from '../mediator/BallHitViewMediator';
 import { AudioClipsEnum } from '../vo/enum/SoundMap';
 import { GameUIOrientationSetting } from '../vo/GameUIOrientationSetting';
 import BaseView from 'src/base/BaseView';
+import { EmblemControl } from './EmblemControl';
 
 const { ccclass, property } = _decorator;
 @ccclass('BallHitView')
@@ -14,6 +15,8 @@ export class BallHitView extends BaseView {
     public callBack: BallHitViewMediator;
     @property(JackPotPerformControl)
     private jackPotPerformControl: JackPotPerformControl;
+    @property({ type: EmblemControl })
+    public emblemControl: EmblemControl | null = null;
 
     public baseGameIdle() {
         this.jackPotPerformControl.baseIdle();
@@ -43,7 +46,7 @@ export class BallHitView extends BaseView {
         GlobalTimer.getInstance()
             .registerTimer(
                 'ballHitShow',
-                0.7,
+                0.9,
                 () => {
                     GlobalTimer.getInstance().removeTimer('ballHitShow');
                     if (ballCount < 6) {
@@ -56,11 +59,6 @@ export class BallHitView extends BaseView {
                 this
             )
             .start();
-    }
-
-    //** 清除前一把C1打擊所觸發的魔燈動畫 */
-    public ballHitClearShowOnBase() {
-        this.jackPotPerformControl.ClearBaseTrailSchedule();
     }
 
     //** 結算分數加總 表演*/
@@ -159,7 +157,6 @@ export class BallHitView extends BaseView {
     // Base game 轉 Mini game
     public miniGameTransition() {
         AudioManager.Instance.play(AudioClipsEnum.JP_Slogan);
-        AudioManager.Instance.play(AudioClipsEnum.Mini_DrangonBallFall);
         this.jackPotPerformControl.JackPotHit();
         GlobalTimer.getInstance().removeTimer('ballTransition');
         GlobalTimer.getInstance()
@@ -177,6 +174,14 @@ export class BallHitView extends BaseView {
 
     public miniGameRecovery() {
         this.jackPotPerformControl.fallImmediately();
+    }
+
+    public initEmblemLevel(level: number[]) {
+        this.emblemControl?.initialLevel(0, level[0]);
+    }
+
+    public updateEmblemLevel(level: number[]) {
+        this.emblemControl?.updateLevel(0, level[0]);
     }
 
     // 數字左邊補零

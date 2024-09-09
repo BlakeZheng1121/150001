@@ -239,13 +239,6 @@ export class SlotViewMediator extends BaseMediator<SlotView> implements SlotView
         self.close();
     }
 
-    public onClickSetSound(e: EventTouch): void {
-        const self = this;
-        // self.setSound();
-        self.slotView.resetSoundBtnName(<Button>e.target);
-        self.close();
-    }
-
     public onClickRefreshSheet(e: EventTouch): void {
         const self = this;
 

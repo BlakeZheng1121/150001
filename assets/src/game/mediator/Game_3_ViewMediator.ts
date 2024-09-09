@@ -24,7 +24,7 @@ import { BonusGameOneRoundResult } from '../../sgv3/vo/result/BonusGameOneRoundR
 import { AudioManager } from '../../audio/AudioManager';
 import { GAME_GameDataProxy } from '../proxy/GAME_GameDataProxy';
 import { Game_3_View } from '../view/Game_3_View';
-import { AudioClipsEnum, BGMClipsEnum } from '../vo/enum/SoundMap';
+import { AudioClipsEnum } from '../vo/enum/SoundMap';
 const { ccclass } = _decorator;
 
 @ccclass('Game_3_ViewMediator')
@@ -51,14 +51,11 @@ export class Game_3_ViewMediator extends BaseMediator<Game_3_View> {
     private miniCnt = 0;
     private miniResultLength = 0;
     private isAutoClick: boolean = false;
-    private countdownTimerKey: string = 'countdownTimer';
-    private countdownTimerId: number;
-    private autoStartTimerKey: string = 'autoStartTimer';
     private autoClickTimerKey: string = 'autoClickTimer';
+    private countdownTimerId: number;
+    private autoStartTimerId: number;
 
     public miniGameEnd = true;
-
-    private autoStartTimerId: number;
 
     protected lastSetupEventList: string[];
 
@@ -158,8 +155,6 @@ export class Game_3_ViewMediator extends BaseMediator<Game_3_View> {
 
         self.resetSymbolClickState();
         self.setMiniGameResultData();
-
-        AudioManager.Instance.play(BGMClipsEnum.BGM_Mini).loop(true).volume(0).fade(1, 1);
 
         self.view.enterView();
         self.view.enableCountdown(true);
@@ -414,12 +409,9 @@ export class Game_3_ViewMediator extends BaseMediator<Game_3_View> {
     private onMiniGameEnd() {
         const self = this;
         self.view.enableCountdown(false);
-        clearTimeout(this.countdownTimerId);
+        clearInterval(self.countdownTimerId);
         clearTimeout(self.autoStartTimerId);
         self.countdownTimerId = self.autoStartTimerId = null;
-        this.countdownTimerId = null;
-        GlobalTimer.getInstance().removeTimer(this.countdownTimerKey);
-        GlobalTimer.getInstance().removeTimer(this.autoStartTimerKey);
         GlobalTimer.getInstance().removeTimer('WinJP');
         GlobalTimer.getInstance()
             .registerTimer(
@@ -515,20 +507,20 @@ export class Game_3_ViewMediator extends BaseMediator<Game_3_View> {
         }
     }
 
+    // 倒數計時不使用 scheduleTimer，避免 turbo mode 計時被加速
     private registerAutoClickSymbolTimer() {
         const self = this;
-        this.view.countdown.string = this.view.autoStartTime.toString();
-
-        clearInterval(this.countdownTimerId);
-        this.countdownTimerId = setInterval(() => {
-            let curSeconds = parseInt(this.view.countdown.string) - 1;
-            this.view.countdown.string = String(curSeconds);
-            if (this.view.countdown.string == '0') {
-                this.isAutoClick = true;
-                this.view.enableCountdown(false);
-                this.autoClickSymbol();
+        self.view.countdown.string = self.view.autoStartTime.toString();
+        clearInterval(self.countdownTimerId);
+        self.countdownTimerId = setInterval(() => {
+            let curSeconds = parseInt(self.view.countdown.string) - 1;
+            self.view.countdown.string = String(curSeconds);
+            if (self.view.countdown.string == '0') {
+                self.isAutoClick = true;
+                self.view.enableCountdown(false);
+                clearInterval(self.countdownTimerId);
+                self.countdownTimerId = null;
             }
-            this.playCountdownSound(curSeconds);
         }, 1000);
 
         clearTimeout(self.autoStartTimerId);
@@ -560,13 +552,5 @@ export class Game_3_ViewMediator extends BaseMediator<Game_3_View> {
                 macro.REPEAT_FOREVER
             )
             .start();
-    }
-
-    private playCountdownSound(curSeconds: number) {
-        if (curSeconds == 0) {
-            AudioManager.Instance.play(AudioClipsEnum.MiniCountdown02);
-        } else if (curSeconds <= 5 && curSeconds > 0) {
-            AudioManager.Instance.play(AudioClipsEnum.MiniCountdown01);
-        }
     }
 }

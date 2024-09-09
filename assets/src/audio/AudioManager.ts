@@ -2,6 +2,7 @@ import { _decorator, Component, AudioClip, Prefab, resources } from 'cc';
 import { PoolManager } from '../sgv3/PoolManager';
 import { AudioContainer } from './AudioContainer';
 import { AudioSourcePool } from './AudioSourcePool';
+import * as i18n from '../../../extensions/i18n/assets/LanguageData';
 const { ccclass, property } = _decorator;
 
 @ccclass('AudioManager')
@@ -32,11 +33,8 @@ export class AudioManager extends Component {
     //
     private audioSourcePool: AudioSourcePool;
 
-    private audioPrefix: string = 'Audio/';
-
-    private preloadList: string[] = ['Preload'];
-
-    private loadList: string[] = ['SFX', 'BGM', 'Scoring', 'Vocal'];
+    private preloadPromiseList = [];
+    private loadPromiseList = [];
     private retryInterval: number = 500;
 
     onLoad() {
@@ -46,12 +44,59 @@ export class AudioManager extends Component {
 
     private init() {
         this.audioSourcePool = new AudioSourcePool();
+        this.assignPromise();
         this.preloadAudio();
     }
 
-    preloadAudio() {
+    private assignPromise() {
+        const unusedLanguages = this.getUnusedLanguages();
+        resources.config.paths.forEach((val, key) => {
+            if (this.checkUnused(unusedLanguages, key) == false) {
+                if (/[aA]udio\/[pP]re[lL]oad\/\w+/.test(key)) {
+                    this.preloadPromiseList.push(key);
+                } else if (/[aA]udio\/\w+/.test(key)) {
+                    this.loadPromiseList.push(key);
+                }
+            }
+        });
+    }
+
+    private getUnusedLanguages() {
+        let unused: string[] = [];
+        JSON.stringify(window.languages, (key, value) => {
+            if (typeof value !== 'string' && /\w+/.test(key) && key !== i18n._language) {
+                unused.push(key);
+            }
+            return value;
+        });
+        return unused;
+    }
+
+    private checkUnused(filter: string[], url: string) {
+        for (let i = 0; i < filter.length; i++) {
+            if (url.endsWith('_' + filter[i])) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private loadAudioClip(dir: string) {
+        return new Promise((resolve, reject) => {
+            resources.load<AudioClip>(dir, (error, audio) => {
+                if (error) {
+                    return reject(error);
+                }
+                this.audioClipsMap.set(audio.name, audio);
+                resolve(`Success load ${audio.name}`);
+            });
+        });
+    }
+
+    private preloadAudio() {
+        Promise.all(this.preloadPromiseList).catch((msg) => console.warn(msg));
         let promiseList = [];
-        this.preloadList.forEach((value) => promiseList.push(this.downloadClip(this.getAudioPath(value))));
+        this.preloadPromiseList.forEach((dir) => promiseList.push(this.loadAudioClip(dir)));
         Promise.all(promiseList).catch((err) => {
             setTimeout(() => {
                 this.preloadAudio();
@@ -59,13 +104,9 @@ export class AudioManager extends Component {
         });
     }
 
-    //聲音名稱與clip Mapping
     loadAudio() {
         let promiseList = [];
-        while (this.loadList.length > 0) {
-            let value = this.loadList.pop();
-            promiseList.push(this.downloadClip(this.getAudioPath(value)));
-        }
+        this.loadPromiseList.forEach((dir) => promiseList.push(this.loadAudioClip(dir)));
         Promise.all(promiseList)
             .then((msg) => this.resumeClip())
             .catch((err) => {
@@ -75,44 +116,17 @@ export class AudioManager extends Component {
             });
     }
 
-    private getAudioPath(name) {
-        return this.audioPrefix + name;
-    }
-
-    private downloadClip(dir: string) {
-        return new Promise((resolve, reject) => {
-            resources.loadDir<AudioClip>(dir, (error, audios) => {
-                if (error) {
-                    return reject(error);
-                }
-                audios.forEach((clip) => {
-                    this.audioClipsMap.set(clip.name, clip);
-                    this.audioSourcePool.returnAudioSource(this.audioSourcePool.getAudioSource(clip));
-                });
-                resolve(dir);
-            });
-        });
-    }
-
     private resumeClip() {
         this.activePool
             .filter((audio) => audio.audioSource.clip == null)
             .forEach((audio) => {
-                if (audio.audioSource.loop == true) {
-                    audio.audioSource.clip = this.audioClipsMap.get(audio.clipName);
-                    audio.audioSource.play();
-                } else {
-                    this.returnToPool(audio);
-                }
+                audio.audioSource.clip = this.audioClipsMap.get(audio.clipName);
+                audio.audioSource.play();
             }, this);
     }
 
     play(clipName: string) {
         let audioContainer = this.createAudioContainerFromPool({ clipName: clipName });
-
-        if (audioContainer.audioSource.clip == null) {
-            audioContainer.stop();
-        }
 
         const options = {
             fade(vol: number, duration: number) {

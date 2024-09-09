@@ -189,6 +189,8 @@ export class ViewMediatorEvent {
     public static readonly COLLECT_CREDIT_BALL_SKIP_CALLBACK: string = 'collectCreditBallSkipCallback';
 
     public static readonly RECOVERY_LOAD_VIEW: string = 'recoveryLoadView';
+    public static readonly INIT_EMBLEM_LEVEL: string = 'initEmblemLevel';
+    public static readonly UPDATE_EMBLEM_LEVEL: string = 'updateEmblemLevel';
 
     public static readonly;
 }
@@ -211,7 +213,6 @@ export class JackpotPool {
     public static HIDE_HIGHLIGHT: string = 'hideHighlight';
     public static HIT_JACKPOT_TO_POOL_VALUE_INIT: string = 'hitJackpotToPoolValueInit';
     public static HIT_JACKPOT_TO_POOL_VALUE_UPDATE: string = 'hitJackpotToPoolValueUpdate';
-
     public static GRAND: number = 1;
     public static MAJOR: number = 2;
     public static MINOR: number = 3;
@@ -222,6 +223,7 @@ export class CtrlPanelBtnState {
     public static DISABLED: number = 0;
     public static CAN_CLICK: number = 1;
     public static CREATE_BET_MENU: string = 'createBetMenu';
+    public static UPDATE_BET_MENU: string = 'updateBetMenu';
     public static CREATE_BONUS_UPGRADE_BET_RANGE_INFO: string = 'createBonusUpgradeBetRangeInfo';
 }
 

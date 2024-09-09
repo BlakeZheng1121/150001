@@ -21,7 +21,7 @@
             "height": 56
           },
           "xOffset": 0,
-          "yOffset": 0,
+          "yOffset": -12,
           "xAdvance": 52
         },
         "48": {
@@ -32,7 +32,7 @@
             "height": 56
           },
           "xOffset": 0,
-          "yOffset": 0,
+          "yOffset": -12,
           "xAdvance": 34
         },
         "49": {
@@ -43,7 +43,7 @@
             "height": 56
           },
           "xOffset": 0,
-          "yOffset": 0,
+          "yOffset": -12,
           "xAdvance": 26
         },
         "50": {
@@ -54,7 +54,7 @@
             "height": 56
           },
           "xOffset": 0,
-          "yOffset": 0,
+          "yOffset": -12,
           "xAdvance": 33
         },
         "51": {
@@ -65,7 +65,7 @@
             "height": 56
           },
           "xOffset": 0,
-          "yOffset": 0,
+          "yOffset": -12,
           "xAdvance": 33
         },
         "52": {
@@ -76,7 +76,7 @@
             "height": 56
           },
           "xOffset": 0,
-          "yOffset": 0,
+          "yOffset": -12,
           "xAdvance": 36
         },
         "53": {
@@ -87,7 +87,7 @@
             "height": 56
           },
           "xOffset": 0,
-          "yOffset": 0,
+          "yOffset": -12,
           "xAdvance": 34
         },
         "54": {
@@ -98,7 +98,7 @@
             "height": 56
           },
           "xOffset": 0,
-          "yOffset": 0,
+          "yOffset": -12,
           "xAdvance": 32
         },
         "55": {
@@ -109,7 +109,7 @@
             "height": 56
           },
           "xOffset": 0,
-          "yOffset": 0,
+          "yOffset": -12,
           "xAdvance": 32
         },
         "56": {
@@ -120,7 +120,7 @@
             "height": 56
           },
           "xOffset": 0,
-          "yOffset": 0,
+          "yOffset": -12,
           "xAdvance": 34
         },
         "57": {
@@ -131,7 +131,7 @@
             "height": 56
           },
           "xOffset": 0,
-          "yOffset": 0,
+          "yOffset": -12,
           "xAdvance": 34
         }
       },

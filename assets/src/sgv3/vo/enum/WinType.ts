@@ -27,5 +27,5 @@ export enum LevelWinType {
     BIG_WIN = 'big',
     MEGA_WIN = 'mega',
     SUPER_WIN = 'super',
-    JUMBO_WIN = 'jumbo',
+    JUMBO_WIN = 'jumbo'
 }

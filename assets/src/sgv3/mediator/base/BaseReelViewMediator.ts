@@ -61,10 +61,12 @@ export class BaseReelViewMediator<T extends ReelView> extends BaseMediator<T> {
     /**TO DO: 資料初始化Reel狀態 */
     protected initReelStatus(): void {
         const self = this;
+        let sceneData = self.gameDataProxy.getSceneDataByName(self.reelView.mySceneName);
         let reelTable: WheelData[] = null;
         reelTable = self.stateSetting.wheelData[self.gameDataProxy.sceneSetting.defaultMathTableIndex];
         // 初始化reelView UI基本設定
         self.reelView.onSceneChange();
+        self.reelView.setReelPrefab(sceneData.reelPrefab);
         self.reelView.reelsInit(reelTable.length, this.spinStopSequence, this._gameDataProxy.language);
         let rollingStrip = new Array<Array<number>>();
         for (let i = 0; i < reelTable.length; i++) {

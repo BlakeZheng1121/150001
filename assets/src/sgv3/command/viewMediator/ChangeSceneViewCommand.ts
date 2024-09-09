@@ -7,9 +7,9 @@ import { WebBridgeProxy } from '../../proxy/WebBridgeProxy';
 import { GameStateProxyEvent, ViewMediatorEvent, WebGameState, StateWinEvent, WinEvent } from '../../util/Constant';
 import { GlobalTimer } from '../../util/GlobalTimer';
 import { GameScene } from '../../vo/data/GameScene';
-import { ButtonName, ButtonState } from 'common-ui/proxy/UIEnums';
-import { SpeedMode } from 'src/game/vo/enum/Game_UIEnums';
 import { setEngineTimeScale } from 'src/core/utils/SceneManager';
+import { SpeedMode } from 'src/game/vo/enum/Game_UIEnums';
+import { ButtonName, ButtonState } from 'common-ui/proxy/UIEnums';
 import { UIProxy } from 'common-ui/proxy/UIProxy';
 
 export class ChangeSceneViewCommand extends puremvc.SimpleCommand {
@@ -32,6 +32,8 @@ export class ChangeSceneViewCommand extends puremvc.SimpleCommand {
                     GlobalTimer.getInstance()
                         .registerTimer('Game1_TransitionBG', 1, this.Game1TransitionsBG, this)
                         .start();
+                    let emblemLevel = (this.gameDataProxy.curEmblemLevel = [0]);
+                    this.sendNotification(ViewMediatorEvent.INIT_EMBLEM_LEVEL, emblemLevel);
                 } else {
                     this.sendNotification(
                         StateMachineCommand.NAME,
@@ -66,7 +68,7 @@ export class ChangeSceneViewCommand extends puremvc.SimpleCommand {
                     this.sendNotification(StateWinEvent.ON_GAME2_TRANSITIONS, true); //通知轉場動畫
                     this.sendNotification(WinEvent.FORCE_WIN_DISPOSE);
                     GlobalTimer.getInstance()
-                        .registerTimer('Game2_TransitionBG', 1.7, this.Game2TransitionsBG, this)
+                        .registerTimer('Game2_TransitionBG', 3.0, this.Game2TransitionsBG, this)
                         .start();
                     return;
                 }
@@ -98,7 +100,7 @@ export class ChangeSceneViewCommand extends puremvc.SimpleCommand {
                 } else {
                     this.sendNotification(StateWinEvent.ON_GAME4_TRANSITIONS, true); //通知入場的轉場動畫
                     GlobalTimer.getInstance()
-                        .registerTimer('Game4_TransitionBG', 1.7, this.Game4TransitionsBG, this)
+                        .registerTimer('Game4_TransitionBG', 3.0, this.Game4TransitionsBG, this)
                         .start();
                     return;
                 }

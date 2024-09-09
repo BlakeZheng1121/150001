@@ -219,13 +219,13 @@
     },
     "enableCulling": false,
     "_prewarm": false,
-    "_capacity": 1,
+    "_capacity": 4,
     "_simulationSpace": 1,
     "_id": ""
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "62EowIM4tFEKXWntHQFeNc"
+    "fileId": "d1W3BOS5hIzq/GJ5QOidrP"
   },
   {
     "__type__": "cc.GradientRange",
@@ -259,7 +259,7 @@
   {
     "__type__": "cc.CurveRange",
     "mode": 0,
-    "constant": 0,
+    "constant": 20,
     "multiplier": 1
   },
   {
@@ -301,7 +301,7 @@
   {
     "__type__": "cc.CurveRange",
     "mode": 0,
-    "constant": 10,
+    "constant": 100,
     "multiplier": 1
   },
   {
@@ -353,7 +353,7 @@
   {
     "__type__": "cc.AlphaKey",
     "alpha": 0,
-    "time": 0.984375
+    "time": 0.9
   },
   {
     "__type__": "cc.ShapeModule",
@@ -365,7 +365,7 @@
     "randomDirectionAmount": 0,
     "sphericalDirectionAmount": 0,
     "randomPositionAmount": 0,
-    "radius": 0,
+    "radius": 0.2,
     "radiusThickness": 1,
     "arcMode": 0,
     "arcSpread": 0,
@@ -434,15 +434,15 @@
   {
     "__type__": "cc.RealCurve",
     "_times": [
-      0.005128205128205128,
-      0.9974358974358974
+      0,
+      1
     ],
     "_values": [
       {
         "__type__": "cc.RealKeyframeValue",
         "interpolationMode": 2,
         "tangentWeightMode": 3,
-        "value": 0.5814814814814815,
+        "value": 0.4962962962962963,
         "rightTangent": 0.994227994227994,
         "rightTangentWeight": 0.27841187032158227,
         "leftTangent": 0.994227994227994,
@@ -453,7 +453,7 @@
         "__type__": "cc.RealKeyframeValue",
         "interpolationMode": 2,
         "tangentWeightMode": 0,
-        "value": 1,
+        "value": 0.8518518518518519,
         "rightTangent": -0.029629629629629672,
         "rightTangentWeight": 0.5002194305882143,
         "leftTangent": -0.029629629629629672,
@@ -796,7 +796,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "0d3AkkqzJIPKoTsR6m0XKv"
+    "fileId": "c12M8fi49JKaOm5Hj5WTFQ"
   },
   {
     "__type__": "cc.UIMeshRenderer",
@@ -813,7 +813,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "b3mK/q68tDErcDMkppgcSP"
+    "fileId": "aaQR+UZmNCzZd+O27Yf7+O"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -823,7 +823,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "beYCEnchpCB7/4meKyBZiO"
+    "fileId": "e7LG5lXtJCfYyXvY6GWOMW"
   },
   {
     "__type__": "cc.Node",
@@ -982,13 +982,13 @@
     },
     "enableCulling": false,
     "_prewarm": false,
-    "_capacity": 4,
+    "_capacity": 1,
     "_simulationSpace": 1,
     "_id": ""
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "fcA9+5xotKY6a4sR97f9xg"
+    "fileId": "16C8CBe35EI7kXATzR3WcE"
   },
   {
     "__type__": "cc.GradientRange",
@@ -1022,7 +1022,7 @@
   {
     "__type__": "cc.CurveRange",
     "mode": 0,
-    "constant": 20,
+    "constant": 0,
     "multiplier": 1
   },
   {
@@ -1064,7 +1064,7 @@
   {
     "__type__": "cc.CurveRange",
     "mode": 0,
-    "constant": 100,
+    "constant": 10,
     "multiplier": 1
   },
   {
@@ -1116,7 +1116,7 @@
   {
     "__type__": "cc.AlphaKey",
     "alpha": 0,
-    "time": 0.9
+    "time": 0.984375
   },
   {
     "__type__": "cc.ShapeModule",
@@ -1128,7 +1128,7 @@
     "randomDirectionAmount": 0,
     "sphericalDirectionAmount": 0,
     "randomPositionAmount": 0,
-    "radius": 0.2,
+    "radius": 0,
     "radiusThickness": 1,
     "arcMode": 0,
     "arcSpread": 0,
@@ -1197,15 +1197,15 @@
   {
     "__type__": "cc.RealCurve",
     "_times": [
-      0,
-      1
+      0.005128205128205128,
+      0.9974358974358974
     ],
     "_values": [
       {
         "__type__": "cc.RealKeyframeValue",
         "interpolationMode": 2,
         "tangentWeightMode": 3,
-        "value": 0.4962962962962963,
+        "value": 0.5814814814814815,
         "rightTangent": 0.994227994227994,
         "rightTangentWeight": 0.27841187032158227,
         "leftTangent": 0.994227994227994,
@@ -1216,7 +1216,7 @@
         "__type__": "cc.RealKeyframeValue",
         "interpolationMode": 2,
         "tangentWeightMode": 0,
-        "value": 0.8518518518518519,
+        "value": 1,
         "rightTangent": -0.029629629629629672,
         "rightTangentWeight": 0.5002194305882143,
         "leftTangent": -0.029629629629629672,
@@ -1559,7 +1559,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "9faDvV3npBl4NVi8gGK29z"
+    "fileId": "e5R2FOn4tJdpv20UyKYf1r"
   },
   {
     "__type__": "cc.UIMeshRenderer",
@@ -1576,7 +1576,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "6cLjq536RNXaI+BIVIcqHA"
+    "fileId": "743XubEJFI7JSX/xXNa7fo"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -1586,7 +1586,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "36iDpUmoFOe4Xg7TJIenVO"
+    "fileId": "28JVDSL9tJ54Cb47h71aKc"
   },
   {
     "__type__": "200e7cueHpF9oO/55msUhzu",

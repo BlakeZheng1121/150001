@@ -127,8 +127,7 @@ export class PosTweenViewMediator extends BaseMediator<PosTweenView> {
                         GlobalTimer.getInstance().removeTimer('collectEffect' + this.curbaseSequenceIndex);
 
                         let basePos = this.reelDataProxy.getFovPos(
-                            this.curBaseSequence.y * this.reelDataProxy.symbolFeature.length +
-                                this.curBaseSequence.x,
+                            this.curBaseSequence.y * this.reelDataProxy.symbolFeature.length + this.curBaseSequence.x,
                             0
                         );
                         let targertPos = this.reelDataProxy.getFovPos(
@@ -140,10 +139,8 @@ export class PosTweenViewMediator extends BaseMediator<PosTweenView> {
                         //設定資料
                         this.view.cloneArrayPrefab();
                         this.view.arrayObject[this.curbaseSequenceIndex].setBaseCreditSetting(
-                            this.reelDataProxy.symbolFeature[this.curBaseSequence.x][this.curBaseSequence.y]
-                                .isSpecial,
-                            this.reelDataProxy.symbolFeature[this.curBaseSequence.x][this.curBaseSequence.y]
-                                .creditCent
+                            this.reelDataProxy.symbolFeature[this.curBaseSequence.x][this.curBaseSequence.y].isSpecial,
+                            this.reelDataProxy.symbolFeature[this.curBaseSequence.x][this.curBaseSequence.y].creditCent
                         );
                         //BaseCredit收集表演
                         this.view.onBaseCreditCollect(this.curbaseSequenceIndex, basePos, targertPos, (idx: number) =>
@@ -151,12 +148,10 @@ export class PosTweenViewMediator extends BaseMediator<PosTweenView> {
                         );
 
                         //飛行音效播放
-                        AudioManager.Instance.stop(AudioClipsEnum.DragonUp_C1Collect);
                         AudioManager.Instance.play(AudioClipsEnum.DragonUp_C1Collect);
                         this.sendNotification(
                             DragonUpEvent.ON_BASE_CREDIT_COLLECT_START,
-                            this.curBaseSequence.y * this.reelDataProxy.symbolFeature.length +
-                                this.curBaseSequence.x
+                            this.curBaseSequence.y * this.reelDataProxy.symbolFeature.length + this.curBaseSequence.x
                         );
 
                         this.curbaseSequenceIndex++;
@@ -164,7 +159,6 @@ export class PosTweenViewMediator extends BaseMediator<PosTweenView> {
                     this
                 )
                 .start();
-
         }
     }
 
@@ -175,7 +169,9 @@ export class PosTweenViewMediator extends BaseMediator<PosTweenView> {
             this.curTargertSequence.y * this.reelDataProxy.symbolFeature.length + this.curTargertSequence.x;
         this.curTargertCredit = MathUtil.add(
             this.curTargertCredit,
-            this.reelDataProxy.symbolFeature[this.getCurBaseSequenceByIndex(sequenceIndex).x][this.getCurBaseSequenceByIndex(sequenceIndex).y].creditCent
+            this.reelDataProxy.symbolFeature[this.getCurBaseSequenceByIndex(sequenceIndex).x][
+                this.getCurBaseSequenceByIndex(sequenceIndex).y
+            ].creditCent
         );
         tempArray.push(targertIndex); //index 0: 表示金球TargertIndex
         tempArray.push(this.curTargertCredit); //Index 1: 表示金球當前累積金額
@@ -208,8 +204,9 @@ export class PosTweenViewMediator extends BaseMediator<PosTweenView> {
             this.view.clonePrefab();
             this.view.curObject.setMultipleSetting(this.view.multipleBoard.multiple);
             this.view.onGetMultipleResult(targertPos, () => this.onCheckTargertIndex(true));
-
-            AudioManager.Instance.play(AudioClipsEnum.DragonUp_PercentCollect02);
+            this.view.scheduleOnce(() => {
+                AudioManager.Instance.play(AudioClipsEnum.DragonUp_PercentCollect02);
+            }, 0.6);
         } else {
             this.onCheckTargertIndex(false);
         }
@@ -245,7 +242,6 @@ export class PosTweenViewMediator extends BaseMediator<PosTweenView> {
             this.baseCreditCollectSequence = [];
             this.targertCollectSequence = [];
             GlobalTimer.getInstance().registerTimer('onCollectEnd', 0.5, this.onAllCreditCollectEnd, this).start();
-
         } else {
             this.sendNotification(DragonUpEvent.ON_TARGERT_COLLECT_START, this.curTargertSequence);
         }
@@ -257,7 +253,7 @@ export class PosTweenViewMediator extends BaseMediator<PosTweenView> {
         this.sendNotification(DragonUpEvent.ON_ALL_CREDIT_COLLECT_END);
         this.sendNotification(StateMachineCommand.NAME, new StateMachineObject(StateMachineProxy.GAME4_AFTERSHOW));
     }
-    
+
     // ======================== Get Set ========================
 
     protected _reelDataProxy: ReelDataProxy;

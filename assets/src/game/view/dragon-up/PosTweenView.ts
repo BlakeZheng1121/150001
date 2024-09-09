@@ -126,7 +126,7 @@ export class PosTweenView extends BaseView {
         this.callback = () => callback();
         this.curObject.node.worldPosition = new Vec3(
             this.multipleBoard.node.worldPosition.x,
-            this.multipleBoard.node.worldPosition.y + 6,
+            this.multipleBoard.node.worldPosition.y,
             this.multipleBoard.node.worldPosition.z
         );
         let convertPos = new Vec3(this.multipleBoard.node.worldPosition.x, targertPos.y);
@@ -156,10 +156,6 @@ export class PosTweenView extends BaseView {
 
     public onObjectFinished() {
         if (this.curObject != null) {
-            for (let i in this.curObject.Particle) {
-                this.curObject.Particle[i].ParticleClear();
-                this.curObject.Particle[i].ParticleStop();
-            }
             this.curObject.labelText.string = String();
             this.recycled(this.curObject.node);
             this.curObject = null;

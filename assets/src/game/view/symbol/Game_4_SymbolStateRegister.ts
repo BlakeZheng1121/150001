@@ -1,12 +1,12 @@
 
 import { tween, Vec3, _decorator } from 'cc';
-import { ParticleContentTool } from 'ParticleContentTool';
 import { UIViewStateBase } from '../../../core/uiview/UIViewStateRegister';
 import { PoolManager } from '../../../sgv3/PoolManager';
 import { BalanceUtil } from '../../../sgv3/util/BalanceUtil';
 import { SymbolPart } from '../../../sgv3/view/reel/symbol/SymbolPart';
 import { SymbolHideState, SymbolRollCycledState, SymbolShowState, SymbolStateRegisterBase } from '../../../sgv3/view/reel/symbol/SymbolStateRegisterBase';
 import { SymbolId, SymbolPartType, SymbolPerformType } from '../../../sgv3/vo/enum/Reel';
+import { ParticleContentTool } from 'ParticleContentTool';
 import { Game_4_SymbolContent } from './Game_4_SymbolContent';
 const { ccclass } = _decorator;
  
@@ -100,7 +100,7 @@ export class Game_4_SymbolShowState extends SymbolShowState {
     onPlay() {
         super.onPlay();      
         this.content.labelText.enabled = (this.content.credit > 0);
-	this.content.labelText.string = String();
+        this.content.labelText.string = String();
 
         switch(this.content.symbolData.id){
           case SymbolId.C1:

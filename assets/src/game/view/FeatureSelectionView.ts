@@ -1,4 +1,4 @@
-import { _decorator, SystemEvent, Tween, UIOpacity, tween, Label, Animation } from 'cc';
+import { _decorator, SystemEvent, Tween, UIOpacity, tween, Label, Animation, Node } from 'cc';
 import { ParticleContentTool } from 'ParticleContentTool';
 import { BalanceUtil } from '../../sgv3/util/BalanceUtil';
 import { FeatureSelectButton } from '../../sgv3/view/feature-selection/FeatureSelectButton';
@@ -23,8 +23,8 @@ export class FeatureSelectionView extends BaseView {
 
     private occupiedButtons: Array<FeatureSelectButton> = [];
 
-    @property({ type: [ParticleContentTool] })
-    public buttonFX: Array<ParticleContentTool> = [];
+    @property({ type: [Node] })
+    public buttonFXNode: Array<Node> = [];
 
     @property({ type: Animation })
     public AnimBlackBG: Animation | null = null;
@@ -50,7 +50,6 @@ export class FeatureSelectionView extends BaseView {
 
         self.isShowComplete = false;
         self.uiOpacity = self.getComponent(UIOpacity);
-        // self.hideFeatureSelection();
         self.registerButton();
         self.hide();
         self.featureButtons.forEach((featureBtn) => {
@@ -125,10 +124,11 @@ export class FeatureSelectionView extends BaseView {
     }
 
     hide() {
-        this.stopButtonParticle();
         this.uiOpacity.opacity = 0;
-        this.node.active = false;
         this.resetAutoStart();
+        this.scheduleOnce(() => {
+            this.node.active = false;
+        }, 2);
     }
 
     public onFeatureSelect(operation: string) {
@@ -137,7 +137,6 @@ export class FeatureSelectionView extends BaseView {
         self.occupiedButtons.forEach((freeBtn) => freeBtn.selectOperation(operation));
         self.AnimBlackBG.play('BlackBG_PlayShow');
         self.setButtonParticlePos(operation);
-        self.showButtonParticle();
         AudioManager.Instance.play(AudioClipsEnum.FeatureSelection_BestChoice);
 
         this.stopAutoStartTimer();
@@ -147,21 +146,8 @@ export class FeatureSelectionView extends BaseView {
         const self = this;
 
         const featureBtn = self.featureButtons.find((element) => element.operation == operation);
-        featureBtn?.node.insertChild(this.buttonFX[0].node, 0);
-        featureBtn?.node.insertChild(this.buttonFX[1].node, 0);
-    }
-
-    public showButtonParticle() {
-        for (let i in this.buttonFX) {
-            this.buttonFX[i].node.active = true;
-            this.buttonFX[i].ParticlePlay();
-        }
-    }
-
-    public stopButtonParticle() {
-        for (let i in this.buttonFX) {
-            this.buttonFX[i].ParticleClear();
-            this.buttonFX[i].node.active = false;
+        for (let i in this.buttonFXNode) {
+            this.buttonFXNode[i].setWorldPosition(featureBtn?.node.worldPosition);
         }
     }
 

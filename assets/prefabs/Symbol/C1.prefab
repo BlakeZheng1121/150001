@@ -8,13 +8,14 @@
       "__id__": 1
     },
     "optimizationPolicy": 0,
-    "asyncLoadAssets": false,
-    "persistent": false
+    "persistent": false,
+    "asyncLoadAssets": false
   },
   {
     "__type__": "cc.Node",
     "_name": "C1",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "_parent": null,
     "_children": [
       {
@@ -171,7 +172,6 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
-    "__editorExtras__": {},
     "node": {
       "__id__": 3
     },
@@ -199,7 +199,6 @@
     "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
-    "__editorExtras__": {},
     "node": {
       "__id__": 3
     },
@@ -219,7 +218,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "36591a9a-d8e1-4570-ac79-fad4dd6424d2@f9941",
+      "__uuid__": "cb31aa0f-ba0f-4a1e-bec8-0028a881a73a@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,
@@ -234,10 +233,7 @@
     "_fillRange": 0,
     "_isTrimmedMode": false,
     "_useGrayscale": false,
-    "_atlas": {
-      "__uuid__": "5f3bbbd6-c76a-4800-b6b6-99ee0d97ff18",
-      "__expectedType__": "cc.SpriteAtlas"
-    },
+    "_atlas": null,
     "_id": ""
   },
   {
@@ -354,17 +350,15 @@
     "_string": "",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 32,
+    "_actualFontSize": 54,
     "_fontSize": 54,
     "_fontFamily": "Arial",
     "_lineHeight": 60,
     "_overflow": 2,
     "_enableWrapText": false,
-    "_font": {
-      "__uuid__": "824c974a-fe82-485a-a840-b047032cd361",
-      "__expectedType__": "cc.BitmapFont"
-    },
-    "_isSystemFontUsed": false,
+    "_font": null,
+    "_isSystemFontUsed": true,
+    "_spacingX": 0,
     "_isItalic": false,
     "_isBold": false,
     "_isUnderline": false,

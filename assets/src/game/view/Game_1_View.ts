@@ -1,4 +1,4 @@
-import { _decorator } from 'cc';
+import { _decorator, Prefab } from 'cc';
 import { SceneManager } from '../../core/utils/SceneManager';
 import { GameUIOrientationSetting } from '../vo/GameUIOrientationSetting';
 import BaseView from 'src/base/BaseView';
@@ -10,6 +10,9 @@ export class Game_1_View extends BaseView {
     public static readonly HORIZONTAL: string = 'horizontal';
     public static readonly VERTICAL: string = 'vertical';
 
+    @property({ type: Prefab})
+    public reelPrefab: Prefab | null = null;
+
     private _gameUIOrientation: Array<GameUIOrientationSetting> | null = null;
 
     private get gameUIOrientation() {
@@ -19,16 +22,8 @@ export class Game_1_View extends BaseView {
         return this._gameUIOrientation;
     }
 
-    // public showView: GAME_ShowView;
-    // public effectView: GAME_EffectView;
-    // public fortuneballView: GAME_FortuneBallView;
-
     protected onLoad() {
         super.onLoad();
-        // TODO: 讓場景資料可用initData設定
-        // this.fortuneballView.mySceneName =
-        //     this.effectView.mySceneName =
-        //     this.showView.mySceneName =
     }
 
     public changeOrientation(orientation: string, scene: string) {

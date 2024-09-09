@@ -8,13 +8,14 @@
       "__id__": 1
     },
     "optimizationPolicy": 0,
-    "asyncLoadAssets": false,
-    "persistent": false
+    "persistent": false,
+    "asyncLoadAssets": false
   },
   {
     "__type__": "cc.Node",
     "_name": "Mini_WinCoinFall",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "_parent": null,
     "_children": [
       {
@@ -24,22 +25,22 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 66
+        "__id__": 65
       },
       {
-        "__id__": 68
+        "__id__": 67
       },
       {
-        "__id__": 72
+        "__id__": 71
       }
     ],
     "_prefab": {
-      "__id__": 74
+      "__id__": 73
     },
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 0,
+      "y": 540,
       "z": 0
     },
     "_lrot": {
@@ -86,7 +87,7 @@
       }
     ],
     "_prefab": {
-      "__id__": 65
+      "__id__": 64
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -127,13 +128,13 @@
     "__prefab": {
       "__id__": 4
     },
+    "_visFlags": 0,
     "_materials": [
       {
         "__uuid__": "ed02b351-ec03-4b37-92da-53ed6f74b218",
         "__expectedType__": "cc.Material"
       }
     ],
-    "_visFlags": 0,
     "startColor": {
       "__id__": 5
     },
@@ -173,7 +174,7 @@
     "startLifetime": {
       "__id__": 14
     },
-    "duration": 2.5,
+    "duration": 3.3,
     "loop": true,
     "simulationSpeed": 1.4,
     "playOnAwake": false,
@@ -187,6 +188,13 @@
       "__id__": 17
     },
     "bursts": [],
+    "_renderCulling": false,
+    "_cullingMode": 0,
+    "_aabbHalfX": 0,
+    "_aabbHalfY": 0,
+    "_aabbHalfZ": 0,
+    "_dataCulling": false,
+    "enableCulling": false,
     "_colorOverLifetimeModule": {
       "__id__": 18
     },
@@ -217,7 +225,6 @@
     "renderer": {
       "__id__": 60
     },
-    "enableCulling": false,
     "_prewarm": false,
     "_capacity": 200,
     "_simulationSpace": 1,
@@ -290,7 +297,7 @@
   {
     "__type__": "cc.CurveRange",
     "mode": 0,
-    "constant": 2.7,
+    "constant": 3.3,
     "multiplier": 1
   },
   {
@@ -838,10 +845,11 @@
       "__uuid__": "856904f2-ac1a-409d-80af-282250c70ca4@6c48a",
       "__expectedType__": "cc.Texture2D"
     },
-    "_useGPU": false
+    "_useGPU": false,
+    "_alignSpace": 2
   },
   {
-    "__type__": "cc.UITransform",
+    "__type__": "cc.UIMeshRenderer",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -851,6 +859,21 @@
     "__prefab": {
       "__id__": 62
     },
+    "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "f5at6IYRtGMqonFu24udm3"
+  },
+  {
+    "__type__": "cc.UITransform",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 2
+    },
+    "_enabled": true,
+    "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 100,
@@ -862,27 +885,6 @@
       "y": 0.5
     },
     "_id": ""
-  },
-  {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "26J6uY6qlMzbwIumIMjoHD"
-  },
-  {
-    "__type__": "cc.UIMeshRenderer",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 2
-    },
-    "_enabled": true,
-    "__prefab": {
-      "__id__": 64
-    },
-    "_id": ""
-  },
-  {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "f5at6IYRtGMqonFu24udm3"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -903,7 +905,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 67
+      "__id__": 66
     },
     "IsLoop": true,
     "InitColor": {
@@ -914,7 +916,7 @@
       "a": 255
     },
     "LoopOverTime": 0,
-    "ClearObjectTime": 2,
+    "ClearObjectTime": 4,
     "_id": ""
   },
   {
@@ -930,13 +932,13 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 69
+      "__id__": 68
     },
     "_horizontalSetting": {
-      "__id__": 70
+      "__id__": 69
     },
     "_verticalSetting": {
-      "__id__": 71
+      "__id__": 70
     },
     "_id": ""
   },
@@ -999,7 +1001,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 73
+      "__id__": 72
     },
     "_contentSize": {
       "__type__": "cc.Size",

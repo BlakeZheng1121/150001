@@ -96,17 +96,22 @@ export class BallCreditTweenViewMediator extends BaseMediator<BallCreditTweenVie
         this.sendNotification(ViewMediatorEvent.COLLECT_CREDIT_BALL, array);
         this.curbaseSequenceIndex++;
         let audioSequenceName: string = AudioClipsEnum.Base_FeatureInitialCollectHit01;
+        audioSequenceName = audioSequenceName.slice(0, audioSequenceName.length - 2);
 
         if (this.curbaseSequenceIndex >= this.baseCreditCollectSequence.length) {
-            audioSequenceName = audioSequenceName.slice(0, audioSequenceName.length - 2);
             audioSequenceName += 'Last';
             this.view.clearPool(); //物件池清除
             this.baseCreditCollectSequence = [];
             GlobalTimer.getInstance().registerTimer(this.timerKey, 1, this.delayShowFeatureSelection, this).start();
         } else {
+            audioSequenceName += this.prefixInteger(this.curbaseSequenceIndex, 2);
             this.onBaseCreditCollectStart();
         }
         AudioManager.Instance.play(audioSequenceName);
+    }
+    // 數字左邊補零
+    private prefixInteger(num: number, length: number): any {
+        return (Array(length).join('0') + num).slice(-length);
     }
 
     private delayShowFeatureSelection() {

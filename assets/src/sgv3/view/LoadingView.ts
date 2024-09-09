@@ -1,13 +1,12 @@
-import { _decorator, ProgressBar, Button, Tween, tween, Node, SystemEvent, Label } from 'cc';
+import { _decorator, ProgressBar, Node, Tween, tween, SystemEvent, Label, Sprite, Camera } from 'cc';
 import { UrlLogoSetting } from '../../core/ui/UrlLogoSetting';
 import BaseView from 'src/base/BaseView';
 const { ccclass, property } = _decorator;
 
 @ccclass('LoadingView')
 export class LoadingView extends BaseView {
-    private curProgress: number;
-    private progressDuration: number;
-    private progressTween: Tween<ProgressBar>;
+    public static readonly HORIZONTAL: string = 'horizontal';
+    public static readonly VERTICAL: string = 'vertical';
 
     @property({ type: ProgressBar })
     public progressBar: ProgressBar;
@@ -24,10 +23,36 @@ export class LoadingView extends BaseView {
     @property({ type: Node })
     public pending: Node;
 
+    @property({ type: Sprite })
+    public introBG: Sprite;
+
+    @property({ type: Camera })
+    public mainCamera: Camera;
+
+    public curProgress: number = 0;
+    private targetProgress: number = 0;
+    private progressDuration: number;
+    private progressTween: Tween<LoadingView>;
+    private isIntroBGLoadComplete = false;
+
     protected onLoad() {
         super.onLoad();
         this.clickToPlayBtn.active = false;
         this.pending.active = false;
+        this.mainCamera.enabled = false;
+    }
+
+    protected update() {
+        if (this.introBG.spriteFrame && this.isIntroBGLoadComplete == false) {
+            // TODO 通知 Container 關閉品牌載入頁面，並顯示遊戲畫面
+            this.initProgressBar();
+            this.isIntroBGLoadComplete = true;
+        }
+    }
+
+    /**更改orientation mode */
+    public changeOrientation(mode: string, scene: string) {
+        let ishorizontal = mode == LoadingView.HORIZONTAL;
     }
 
     public loadBaseResComplete(callBack: Function) {
@@ -38,6 +63,7 @@ export class LoadingView extends BaseView {
 
     // 隱藏所有內容
     public hideContent(): void {
+        this.mainCamera.enabled = true;
         this.intro.destroy();
         this.intro = null;
         this.selfDestruct();
@@ -45,20 +71,28 @@ export class LoadingView extends BaseView {
 
     // 設定進度
     public setProgress(position: number): void {
-        this.curProgress = position;
-        if (this.curProgress < 1) {
+        this.targetProgress = position;
+        if (this.targetProgress < 1) {
             this.progressDuration = 0.5;
         } else {
             this.progressDuration = 0.2;
         }
-
-        this.progressTween?.stop();
-        this.progressTween = tween(this.progressBar).to(this.progressDuration, { progress: this.curProgress }).start();
+        if (this.introBG.spriteFrame) {
+            this.progressTween?.stop();
+            this.progressTween = tween(<LoadingView>this)
+                .to(
+                    this.progressDuration,
+                    { curProgress: this.targetProgress },
+                    {
+                        onUpdate: (target: LoadingView) => this.onUpdateProgress(target)
+                    }
+                )
+                .start();
+        }
     }
 
-    // 重置載入進度
-    public resetProgress() {
-        this.progressBar.progress = 0;
+    private onUpdateProgress(target: LoadingView) {
+        this.progressBar.progress = target.curProgress;
     }
 
     // pending loading顯示
@@ -74,9 +108,13 @@ export class LoadingView extends BaseView {
         this.selfDestruct();
     }
 
-    private selfDestruct () {
-        if(!this.pending && !this.intro) {
+    private selfDestruct() {
+        if (!this.pending && !this.intro) {
             this.node.destroy();
         }
+    }
+
+    private initProgressBar() {
+        this.setProgress(this.targetProgress);
     }
 }

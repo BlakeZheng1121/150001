@@ -25,7 +25,7 @@ var initTicket = {
     gamePass: 'd9e9f6d',
     currency: 'THB',
     isStreamingGame: false,
-    jackpotGroup: 'scphphse'
+    jackpotGroup: 'qaphphse'
 };
 
 var userInfo = {

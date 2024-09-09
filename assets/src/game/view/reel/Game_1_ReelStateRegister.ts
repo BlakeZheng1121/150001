@@ -51,12 +51,8 @@ export class Game_1_DampState extends SingleReelDampState {
 
     onPlay() {
         super.onPlay();
-        for (let i = 0; i < this.content!.symbols!.length; i++) {
-            if (
-                i >= this.content.fovStartIndex &&
-                i <= this.content.fovEndIndex &&
-                this.content.symbols[i].symbolContent.symbolData.id == SymbolId.C1
-            ) {
+        for (let i = this.content.fovStartIndex; i <= this.content.fovEndIndex; i++) {
+            if (this.content.symbols[i].symbolContent.symbolData.id == SymbolId.C1) {
                 this.content.symbols[i].play(SymbolPerformType.DAMPING);
             }
         }
@@ -153,7 +149,7 @@ export class Game_1_RollStartState extends SingleReelRollStartState {
 
     onPlay() {
         let firstContent = this.content.first.symbolContent as Game_1_SymbolContent;
-        if (firstContent.symbolData.id == SymbolId.C1 && firstContent.credit == 0) {
+        if(firstContent.symbolData.id == SymbolId.C1 && firstContent.credit == 0){
             firstContent.credit = this.content.getCredit(-1);
         }
         this.content.first.play(SymbolPerformType.SHOW);

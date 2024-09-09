@@ -9,6 +9,7 @@ import { Component } from 'cc';
 import { MockToContainerIconPosCommand } from '../command/MockToContainerIconPosCommand';
 import { MockReconnectCommand } from '../command/MockReconnectCommand';
 import { MockHitGrandCommand } from '../command/MockHitGrandCommand';
+import { MockEmblemLevelCommand } from '../command/MockEmblemLevelCommand';
 
 export class MockViewMediator extends puremvc.Mediator {
     private parentView: Component = null;
@@ -55,22 +56,20 @@ export class MockViewMediator extends puremvc.Mediator {
             PrizePrediction: MockPrizePredictionCommand.NAME,
             Disconnection: MockDisconnectionCommand.NAME,
             Maintenance: MockMaintenanceCommand.NAME,
-            Reconncet: MockReconnectCommand.NAME,
-            ScatterNoWin: MockSpinScatterNowinCommand.NAME,
-            FakeSymbolReel: MockReelSymbolCommand.NAME,
+            Reconnect: MockReconnectCommand.NAME,
             ToContainerIconPos: MockToContainerIconPosCommand.NAME,
-            HitGrand: MockHitGrandCommand.NAME
+            HitGrand: MockHitGrandCommand.NAME,
+            EmblemLevel: MockEmblemLevelCommand.NAME
         };
         const self = this;
         self.facade.registerCommand(MockWinboardCommand.NAME, MockWinboardCommand);
         self.facade.registerCommand(MockPrizePredictionCommand.NAME, MockPrizePredictionCommand);
         self.facade.registerCommand(MockDisconnectionCommand.NAME, MockDisconnectionCommand);
-        self.facade.registerCommand(MockReconnectCommand.NAME,MockReconnectCommand);
         self.facade.registerCommand(MockMaintenanceCommand.NAME, MockMaintenanceCommand);
-        self.facade.registerCommand(MockSpinScatterNowinCommand.NAME, MockSpinScatterNowinCommand);
-        self.facade.registerCommand(MockReelSymbolCommand.NAME, MockReelSymbolCommand);
+        self.facade.registerCommand(MockReconnectCommand.NAME,MockReconnectCommand);
         self.facade.registerCommand(MockToContainerIconPosCommand.NAME, MockToContainerIconPosCommand);
         self.facade.registerCommand(MockHitGrandCommand.NAME, MockHitGrandCommand);
+        self.facade.registerCommand(MockEmblemLevelCommand.NAME, MockEmblemLevelCommand);
         self.sendNotification('onAddExtraCase', caseList);
     }
 

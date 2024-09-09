@@ -14,9 +14,6 @@ export class AudioMediator extends puremvc.Mediator {
     public handleNotification(notification: puremvc.INotification): void {
         let name = notification.getName();
         switch (name) {
-            case WinEvent.MULTIPLE_SET: //取得結果倍率後
-                //this.scoringLengthDistinguish();
-                break;
             case SoundEvent.BUTTON_DOWN_SOUND:
                 AudioManager.Instance.play(AudioClipsEnum.Button_UI);
                 break;

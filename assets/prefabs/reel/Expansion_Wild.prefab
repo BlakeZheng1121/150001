@@ -8,13 +8,14 @@
       "__id__": 1
     },
     "optimizationPolicy": 0,
-    "asyncLoadAssets": false,
-    "persistent": false
+    "persistent": false,
+    "asyncLoadAssets": false
   },
   {
     "__type__": "cc.Node",
     "_name": "Expansion_Wild",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "_parent": null,
     "_children": [
       {
@@ -228,7 +229,6 @@
       "a": 255
     },
     "loop": false,
-    "_premultipliedAlpha": true,
     "_timeScale": 0.9,
     "_useTint": false,
     "_preCacheMode": 0,
@@ -240,6 +240,7 @@
       "__uuid__": "80e41e5c-2f22-4e29-9731-002c32869c56",
       "__expectedType__": "sp.SkeletonData"
     },
+    "_premultipliedAlpha": true,
     "defaultSkin": "default",
     "defaultAnimation": "<None>",
     "_sockets": [],
@@ -348,8 +349,8 @@
     "timeScale": 1,
     "delayTime": 0,
     "isLoop": false,
-    "isResetSlots": false,
-    "isResetBones": false,
+    "isResetSlots": true,
+    "isResetBones": true,
     "isEndClose": false,
     "useSpine": false,
     "useAnim": true,
@@ -529,6 +530,7 @@
     "__prefab": {
       "__id__": 24
     },
+    "_visFlags": 0,
     "_materials": [
       {
         "__uuid__": "3294a0ec-d8a7-4eba-a632-20675cb06645",
@@ -536,7 +538,6 @@
       },
       null
     ],
-    "_visFlags": 0,
     "startColor": {
       "__id__": 25
     },
@@ -590,6 +591,13 @@
       "__id__": 37
     },
     "bursts": [],
+    "_renderCulling": false,
+    "_cullingMode": 0,
+    "_aabbHalfX": 0,
+    "_aabbHalfY": 0,
+    "_aabbHalfZ": 0,
+    "_dataCulling": false,
+    "enableCulling": false,
     "_colorOverLifetimeModule": {
       "__id__": 38
     },
@@ -620,7 +628,6 @@
     "renderer": {
       "__id__": 80
     },
-    "enableCulling": false,
     "_prewarm": false,
     "_capacity": 30,
     "_simulationSpace": 1,
@@ -1194,7 +1201,8 @@
       "__uuid__": "c94664df-0c82-4012-ad92-059bca037126@6c48a",
       "__expectedType__": "cc.Texture2D"
     },
-    "_useGPU": false
+    "_useGPU": false,
+    "_alignSpace": 2
   },
   {
     "__type__": "cc.UITransform",
@@ -1362,6 +1370,7 @@
     "__prefab": {
       "__id__": 91
     },
+    "_visFlags": 0,
     "_materials": [
       {
         "__uuid__": "0dced420-c725-478a-b668-03b2c04a2c75",
@@ -1369,7 +1378,6 @@
       },
       null
     ],
-    "_visFlags": 0,
     "startColor": {
       "__id__": 92
     },
@@ -1423,6 +1431,13 @@
       "__id__": 104
     },
     "bursts": [],
+    "_renderCulling": false,
+    "_cullingMode": 0,
+    "_aabbHalfX": 0,
+    "_aabbHalfY": 0,
+    "_aabbHalfZ": 0,
+    "_dataCulling": false,
+    "enableCulling": false,
     "_colorOverLifetimeModule": {
       "__id__": 105
     },
@@ -1453,7 +1468,6 @@
     "renderer": {
       "__id__": 151
     },
-    "enableCulling": false,
     "_prewarm": false,
     "_capacity": 2,
     "_simulationSpace": 1,
@@ -1708,7 +1722,8 @@
     "__type__": "cc.RealCurve",
     "_times": [
       0,
-      1
+      0.9,
+      0.9641025641025641
     ],
     "_values": [
       {
@@ -1724,9 +1739,20 @@
       },
       {
         "__type__": "cc.RealKeyframeValue",
-        "interpolationMode": 2,
+        "interpolationMode": 1,
         "tangentWeightMode": 0,
         "value": 1,
+        "rightTangent": 0,
+        "rightTangentWeight": 0,
+        "leftTangent": 0,
+        "leftTangentWeight": 0,
+        "easingMethod": 0
+      },
+      {
+        "__type__": "cc.RealKeyframeValue",
+        "interpolationMode": 2,
+        "tangentWeightMode": 0,
+        "value": 0.044444444444444446,
         "rightTangent": 0,
         "rightTangentWeight": 0,
         "leftTangent": 0,
@@ -1741,7 +1767,8 @@
     "__type__": "cc.RealCurve",
     "_times": [
       0,
-      1
+      0.9,
+      0.9743589743589743
     ],
     "_values": [
       {
@@ -1757,13 +1784,24 @@
       },
       {
         "__type__": "cc.RealKeyframeValue",
-        "interpolationMode": 0,
+        "interpolationMode": 1,
         "tangentWeightMode": 0,
         "value": 0.9555555555555556,
-        "rightTangent": 0.0888888888888889,
+        "rightTangent": 0,
         "rightTangentWeight": 1,
-        "leftTangent": 0.0888888888888889,
+        "leftTangent": 0,
         "leftTangentWeight": 1,
+        "easingMethod": 0
+      },
+      {
+        "__type__": "cc.RealKeyframeValue",
+        "interpolationMode": 2,
+        "tangentWeightMode": 0,
+        "value": 0.025925925925925925,
+        "rightTangent": 0,
+        "rightTangentWeight": 0,
+        "leftTangent": 0,
+        "leftTangentWeight": 0,
         "easingMethod": 0
       }
     ],
@@ -2075,7 +2113,8 @@
       "__uuid__": "a80994b7-3ceb-4c8d-a33b-797cc02875ea@6c48a",
       "__expectedType__": "cc.Texture2D"
     },
-    "_useGPU": false
+    "_useGPU": false,
+    "_alignSpace": 2
   },
   {
     "__type__": "cc.UITransform",
@@ -2239,8 +2278,8 @@
     "timeScale": 1,
     "delayTime": 0,
     "isLoop": false,
-    "isResetSlots": false,
-    "isResetBones": false,
+    "isResetSlots": true,
+    "isResetBones": true,
     "isEndClose": false,
     "useSpine": false,
     "useAnim": true,
@@ -2408,6 +2447,7 @@
     "__prefab": {
       "__id__": 174
     },
+    "_visFlags": 0,
     "_materials": [
       {
         "__uuid__": "0dced420-c725-478a-b668-03b2c04a2c75",
@@ -2415,7 +2455,6 @@
       },
       null
     ],
-    "_visFlags": 0,
     "startColor": {
       "__id__": 175
     },
@@ -2469,6 +2508,13 @@
       "__id__": 187
     },
     "bursts": [],
+    "_renderCulling": false,
+    "_cullingMode": 0,
+    "_aabbHalfX": 0,
+    "_aabbHalfY": 0,
+    "_aabbHalfZ": 0,
+    "_dataCulling": false,
+    "enableCulling": false,
     "_colorOverLifetimeModule": {
       "__id__": 188
     },
@@ -2499,7 +2545,6 @@
     "renderer": {
       "__id__": 234
     },
-    "enableCulling": false,
     "_prewarm": false,
     "_capacity": 2,
     "_simulationSpace": 1,
@@ -2754,7 +2799,8 @@
     "__type__": "cc.RealCurve",
     "_times": [
       0,
-      1
+      0.9,
+      0.95
     ],
     "_values": [
       {
@@ -2770,9 +2816,20 @@
       },
       {
         "__type__": "cc.RealKeyframeValue",
-        "interpolationMode": 2,
+        "interpolationMode": 1,
         "tangentWeightMode": 0,
         "value": 1,
+        "rightTangent": 0,
+        "rightTangentWeight": 0,
+        "leftTangent": 0,
+        "leftTangentWeight": 0,
+        "easingMethod": 0
+      },
+      {
+        "__type__": "cc.RealKeyframeValue",
+        "interpolationMode": 2,
+        "tangentWeightMode": 0,
+        "value": 0,
         "rightTangent": 0,
         "rightTangentWeight": 0,
         "leftTangent": 0,
@@ -2787,7 +2844,8 @@
     "__type__": "cc.RealCurve",
     "_times": [
       0,
-      1
+      0.9,
+      0.95
     ],
     "_values": [
       {
@@ -2803,13 +2861,24 @@
       },
       {
         "__type__": "cc.RealKeyframeValue",
-        "interpolationMode": 0,
+        "interpolationMode": 1,
         "tangentWeightMode": 0,
         "value": 0.9555555555555556,
-        "rightTangent": 0.0888888888888889,
+        "rightTangent": 0,
         "rightTangentWeight": 1,
-        "leftTangent": 0.0888888888888889,
+        "leftTangent": 0,
         "leftTangentWeight": 1,
+        "easingMethod": 0
+      },
+      {
+        "__type__": "cc.RealKeyframeValue",
+        "interpolationMode": 2,
+        "tangentWeightMode": 0,
+        "value": 0,
+        "rightTangent": 0,
+        "rightTangentWeight": 0,
+        "leftTangent": 0,
+        "leftTangentWeight": 0,
         "easingMethod": 0
       }
     ],
@@ -3121,7 +3190,8 @@
       "__uuid__": "a80994b7-3ceb-4c8d-a33b-797cc02875ea@6c48a",
       "__expectedType__": "cc.Texture2D"
     },
-    "_useGPU": false
+    "_useGPU": false,
+    "_alignSpace": 2
   },
   {
     "__type__": "cc.UITransform",
@@ -3285,8 +3355,8 @@
     "timeScale": 1,
     "delayTime": 0,
     "isLoop": false,
-    "isResetSlots": false,
-    "isResetBones": false,
+    "isResetSlots": true,
+    "isResetBones": true,
     "isEndClose": false,
     "useSpine": false,
     "useAnim": true,
@@ -3504,6 +3574,7 @@
     "__prefab": {
       "__id__": 263
     },
+    "_visFlags": 0,
     "_materials": [
       {
         "__uuid__": "3294a0ec-d8a7-4eba-a632-20675cb06645",
@@ -3511,7 +3582,6 @@
       },
       null
     ],
-    "_visFlags": 0,
     "startColor": {
       "__id__": 264
     },
@@ -3565,6 +3635,13 @@
       "__id__": 276
     },
     "bursts": [],
+    "_renderCulling": false,
+    "_cullingMode": 0,
+    "_aabbHalfX": 0,
+    "_aabbHalfY": 0,
+    "_aabbHalfZ": 0,
+    "_dataCulling": false,
+    "enableCulling": false,
     "_colorOverLifetimeModule": {
       "__id__": 277
     },
@@ -3595,7 +3672,6 @@
     "renderer": {
       "__id__": 319
     },
-    "enableCulling": false,
     "_prewarm": false,
     "_capacity": 100,
     "_simulationSpace": 1,
@@ -4144,7 +4220,8 @@
       "__uuid__": "c94664df-0c82-4012-ad92-059bca037126@6c48a",
       "__expectedType__": "cc.Texture2D"
     },
-    "_useGPU": false
+    "_useGPU": false,
+    "_alignSpace": 2
   },
   {
     "__type__": "cc.UITransform",

@@ -1,5 +1,4 @@
-import { CCFloat, CCInteger, CurveRange, math, SpriteFrame, TweenEasing, _decorator } from 'cc';
-import { GameDataProxy } from '../../proxy/GameDataProxy';
+import { CCFloat, CCInteger, CurveRange, math, SpriteFrame, _decorator } from 'cc';
 import { Layer } from '../enum/Layer';
 import { MotionType } from '../enum/Reel';
 const { ccclass, property } = _decorator;

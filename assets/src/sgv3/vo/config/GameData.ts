@@ -49,10 +49,10 @@ export class GameData extends CoreGameData {
     public curAutoTimes: number = 0;
     /** 自動模式 - 最大次數 */
     public maxAutoTimes: number = 0;
-    /** BaseGame的QuickMode狀態 */
-    public curQuickMode: boolean = false;
-    /** BaseGame的QuickMode狀態*/
-    public isShowQuickModeMsg: boolean = false;
+    /** BaseGame的TurboMode狀態 */
+    public curTurboMode: boolean = false;
+    /** BaseGame的TurboMode狀態*/
+    public isShowTurboModeMsg: boolean = false;
     /** 玩家選擇的遊戲狀態Operation */
     public curGameOperation: string = '';
     /** 滾分中 */
@@ -86,7 +86,7 @@ export class GameData extends CoreGameData {
     /** 上一組場景 */
     public preScene: string = GameScene.Init;
     /** 是否為game2結束 */
-    public afterGame2: boolean = false;
+    public afterFeatureGame: boolean = false;
     /** 當前贏分資料 */
     public curWindData: AllWinData;
     /**FG=>BG當前贏分 */
@@ -127,4 +127,6 @@ export class GameData extends CoreGameData {
     public isLoadingHelp: boolean = false;
     /** 當前遊戲速度 */
     public curSpeedMode: string = SpeedMode.STATUS_NORMAL;
+    /** 是否準備進入 Mini game */
+    public isReadyEnterMiniGame: boolean = false;
 }

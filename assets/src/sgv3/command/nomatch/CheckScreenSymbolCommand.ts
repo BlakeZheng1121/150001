@@ -17,7 +17,7 @@ export class CheckScreenSymbolCommand extends puremvc.SimpleCommand {
         if (self.checkSymbolReelsError(stopInfo)) {
             // 這邊檢查錯誤如果錯誤就直接狂滾
             self.handlerError(stopInfo);
-            self.sendNotification(ReelEvent.ON_SINGLE_REEL_STOP_ERROR,stopInfo.reelIndex);          
+            self.sendNotification(ReelEvent.ON_SINGLE_REEL_STOP_ERROR, stopInfo.reelIndex);
         }
     }
 
@@ -55,13 +55,14 @@ export class CheckScreenSymbolCommand extends puremvc.SimpleCommand {
     public checkSymbolReelsError(info: StripIndexer): boolean {
         const self = this;
         let result = false;
-        if (!self.gameDataProxy.curRoundResult)
-            return false;
-        if (info.targetRng < 0 
-            || info.targetRng >= info.strip.length
-            || self.gameDataProxy.getCurrentReelSymbolIDIndexByID(info.strip[info.targetRng]) < 0) {
-                return true;
-            }
+        if (!self.gameDataProxy.curRoundResult) return false;
+        if (
+            info.targetRng < 0 ||
+            info.targetRng >= info.strip.length ||
+            self.gameDataProxy.getCurrentReelSymbolIDIndexByID(info.strip[info.targetRng]) < 0
+        ) {
+            return true;
+        }
 
         return result;
     }
@@ -140,9 +141,9 @@ export class CheckScreenSymbolCommand extends puremvc.SimpleCommand {
         }
         return 0;
     }
-     // ======================== Get Set ========================
-     protected _gameDataProxy: GameDataProxy;
-     protected get gameDataProxy(): GameDataProxy {
+    // ======================== Get Set ========================
+    protected _gameDataProxy: GameDataProxy;
+    protected get gameDataProxy(): GameDataProxy {
         if (!this._gameDataProxy) {
             this._gameDataProxy = this.facade.retrieveProxy(GameDataProxy.NAME) as GameDataProxy;
         }

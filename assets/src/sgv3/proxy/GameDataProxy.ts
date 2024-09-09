@@ -15,7 +15,6 @@ import { JackpotEvent } from '../vo/event/JackpotEvent';
 import { SymbolMatchInfo } from '../vo/match/SymbolMatchInfo';
 import { SpinResult } from '../vo/result/SpinResult';
 import { UserSetting } from '../vo/setting/UserSetting';
-import { WebBridgeProxy } from './WebBridgeProxy';
 import { InitEvent } from '../vo/event/InitEvent';
 import { GameStateSetting } from '../vo/setting/GameStateSetting';
 import { GameStateResult } from '../vo/result/GameStateResult';
@@ -31,6 +30,7 @@ import { UIEvent } from 'common-ui/proxy/UIEvent';
 
 /** 全遊戲資料 */
 export class GameDataProxy extends CoreGameDataProxy {
+    public curEmblemLevel: number[] = [];
     protected _gameData: GameData;
     protected _userSetting: UserSetting;
 
@@ -114,83 +114,9 @@ export class GameDataProxy extends CoreGameDataProxy {
         return this.userId;
     }
 
-    // public setWinSetting(): boolean {
-    //     let success = true;
-    //     let runTime = 0;
-    //     this.sceneSetting.winSetting = new WinSetting();
-    //     this.sceneSetting.winSetting.winTypeList = [
-    //         BigWinType.normal_1,
-    //         BigWinType.normal_2,
-    //         BigWinType.normal_3,
-    //         BigWinType.normal_4,
-    //         BigWinType.normal_5,
-    //         BigWinType.normal_6,
-    //         BigWinType.normal_7,
-    //         BigWinType.normal_8,
-    //         BigWinType.normal_9,
-    //         BigWinType.normal_10,
-    //         BigWinType.normal_11,
-    //         BigWinType.normal_12,
-    //         BigWinType.normal_13,
-    //         BigWinType.normal_14,
-    //         BigWinType.normal_15,
-    //         BigWinType.bigWin,
-    //         BigWinType.megaWin,
-    //         BigWinType.superWin,
-    //         BigWinType.jumboWin
-    //     ];
-
-    //     this.sceneSetting.winSetting.winRunLeveSE = [
-    //         SoundDataMap.SCORING_01,
-    //         SoundDataMap.SCORING_02,
-    //         SoundDataMap.SCORING_03,
-    //         SoundDataMap.SCORING_04,
-    //         SoundDataMap.SCORING_05,
-    //         SoundDataMap.SCORING_06,
-    //         SoundDataMap.SCORING_07,
-    //         SoundDataMap.SCORING_08,
-    //         SoundDataMap.SCORING_09,
-    //         SoundDataMap.SCORING_10,
-    //         SoundDataMap.SCORING_11,
-    //         SoundDataMap.SCORING_12,
-    //         SoundDataMap.SCORING_13,
-    //         SoundDataMap.SCORING_14,
-    //         SoundDataMap.SCORING_15,
-    //         SoundDataMap.SCORING_WIN_01,
-    //         SoundDataMap.SCORING_WIN_02
-    //     ];
-
-    //     switch (this.language) {
-    //         case 'en':
-    //             this.sceneSetting.winSetting.winRunLeveSE.push(SoundDataMap.SCORING_WIN_01_EN);
-    //             this.sceneSetting.winSetting.winRunLeveSE.push(SoundDataMap.SCORING_WIN_02_EN);
-    //             this.sceneSetting.winSetting.winRunLeveSE.push(SoundDataMap.SCORING_WIN_03_EN);
-    //             this.sceneSetting.winSetting.winRunLeveSE.push(SoundDataMap.SCORING_WIN_04_EN);
-    //             break;
-    //         case 'cn':
-    //         case 'tw':
-    //             this.sceneSetting.winSetting.winRunLeveSE.push(SoundDataMap.SCORING_WIN_03_CN);
-    //             this.sceneSetting.winSetting.winRunLeveSE.push(SoundDataMap.SCORING_WIN_04_CN);
-    //             break;
-    //         case 'th':
-    //             this.sceneSetting.winSetting.winRunLeveSE.push(SoundDataMap.SCORING_WIN_03_TH);
-    //             this.sceneSetting.winSetting.winRunLeveSE.push(SoundDataMap.SCORING_WIN_04_TH);
-    //             break;
-    //     }
-
-    //     this.sceneSetting.winSetting.runTimeList = [];
-    //     for (let i = 0; i < this.sceneSetting.winSetting.winRunLeveSE.length; i++) {
-    //         // TODO: 抓贏分音效長度
-    //         runTime = 0.5; /* this.soundProxy.getSoundDuration(this.sceneSetting.winSetting.winRunLeveSE[i]); */
-    //         if (typeof runTime == 'number') {
-    //             this.sceneSetting.winSetting.runTimeList.push(runTime);
-    //         } else {
-    //             success = false;
-    //             return success;
-    //         }
-    //     }
-    //     return success;
-    // }
+    public get localStorageSoundKey(): string {
+        return this.userName + '_soundOn';
+    }
 
     // ============================ Member ============================
     /** 取得 init 設定資料 */
@@ -373,20 +299,20 @@ export class GameDataProxy extends CoreGameDataProxy {
         this._gameData.maxAutoTimes = _val;
     }
 
-    /** 紀錄BaseGame的QuickMode狀態 */
-    public get curQuickMode(): boolean {
-        return this._gameData.curQuickMode;
+    /** 紀錄BaseGame的TurboMode狀態 */
+    public get curTurboMode(): boolean {
+        return this._gameData.curTurboMode;
     }
-    public set curQuickMode(_val: boolean) {
-        this._gameData.curQuickMode = _val;
+    public set curTurboMode(_val: boolean) {
+        this._gameData.curTurboMode = _val;
     }
 
-    /** 判斷是否要顯示QuickModeMsg */
-    public get isShowQuickModeMsg(): boolean {
-        return this._gameData.isShowQuickModeMsg;
+    /** 判斷是否要顯示TurboModeMsg */
+    public get isShowTurboModeMsg(): boolean {
+        return this._gameData.isShowTurboModeMsg;
     }
-    public set isShowQuickModeMsg(_val: boolean) {
-        this._gameData.isShowQuickModeMsg = _val;
+    public set isShowTurboModeMsg(_val: boolean) {
+        this._gameData.isShowTurboModeMsg = _val;
     }
 
     /** 玩家選擇的遊戲狀態operation - GameOperation(Enum String) */
@@ -517,11 +443,11 @@ export class GameDataProxy extends CoreGameDataProxy {
     }
 
     /** 是否為 Free game結束 */
-    public get afterGame2(): boolean {
-        return this._gameData.afterGame2;
+    public get afterFeatureGame(): boolean {
+        return this._gameData.afterFeatureGame;
     }
-    public set afterGame2(_val: boolean) {
-        this._gameData.afterGame2 = _val;
+    public set afterFeatureGame(_val: boolean) {
+        this._gameData.afterFeatureGame = _val;
     }
 
     /** 全贏線資料 */
@@ -660,6 +586,7 @@ export class GameDataProxy extends CoreGameDataProxy {
     /**聲音開關狀態 */
     public set soundEnableState(value: boolean) {
         this._gameData.soundEnableState = value;
+        if (window.localStorage) localStorage.setItem(this.localStorageSoundKey, JSON.stringify(value));
     }
 
     public get soundEnableState(): boolean {
@@ -746,7 +673,7 @@ export class GameDataProxy extends CoreGameDataProxy {
     public set isHelpOpen(_val: boolean) {
         this._gameData.isLoadingHelp = _val;
     }
-    
+
     /** 遊戲速度 */
     public get curSpeedMode(): string {
         return this._gameData.curSpeedMode;
@@ -755,6 +682,13 @@ export class GameDataProxy extends CoreGameDataProxy {
         this._gameData.curSpeedMode = state;
     }
 
+    /** 是否準備進入 Mini game */
+    public get isReadyEnterMiniGame(): boolean {
+        return this._gameData.isReadyEnterMiniGame;
+    }
+    public set isReadyEnterMiniGame(_val: boolean) {
+        this._gameData.isReadyEnterMiniGame = _val;
+    }
     // ============================ Method ============================
 
     /** 現金 */
@@ -832,7 +766,11 @@ export class GameDataProxy extends CoreGameDataProxy {
     /** 載入玩家該遊戲使用的 denom、bet */
     public loadUserSetting(): void {
         try {
-            if (window.localStorage) this.userSetting = JSON.parse(localStorage.getItem(this.localStorageKey));
+            if (window.localStorage) {
+                this.userSetting = JSON.parse(localStorage.getItem(this.localStorageKey));
+                let soundState = JSON.parse(localStorage.getItem(this.localStorageSoundKey));
+                this.soundEnableState = soundState == null ? true : soundState;
+            }
         } catch (e) {
             let userData: UserSetting = new UserSetting();
             userData.denom = `${this.initEventData.denoms[0]}`;
@@ -893,36 +831,6 @@ export class GameDataProxy extends CoreGameDataProxy {
         }
     }
 
-    // /** 確認autoplay下是否中大獎 */
-    // public isAutoPlayBigWin(): boolean {
-    //     return this.onAutoPlay && this.curScene === GameScene.Game_1 && this.isGradeWin();
-    // }
-
-    // /** 大獎面板後 秀線判斷 */
-    // public afterGradeWinBoardShow(): boolean {
-    //     return this.curScene === GameScene.Game_1 && this.isGradeWin();
-    // }
-
-    // /** 確認是否為GradeWin的狀態 */
-    // public isGradeWin(): boolean {
-    //     return (
-    //         !!this.spinEventData &&
-    //         !!this.spinEventData.baseGameResult &&
-    //         !!this.spinEventData.baseGameResult.displayInfo &&
-    //         BigWinType[this.spinEventData.baseGameResult.displayInfo.bigWinType] >= BigWinType.bigWin
-    //     );
-    // }
-
-    // /** 確認是否為NormalWin的狀態 */
-    // public isNormalWin(): boolean {
-    //     return (
-    //         !!this.spinEventData &&
-    //         !!this.spinEventData.baseGameResult &&
-    //         !!this.spinEventData.baseGameResult.displayInfo &&
-    //         BigWinType[this.spinEventData.baseGameResult.displayInfo.bigWinType] <= BigWinType.normal_15
-    //     );
-    // }
-
     /** 重置遊戲參數 */
     public resetGameParams() {
         const self = this;
@@ -960,6 +868,16 @@ export class GameDataProxy extends CoreGameDataProxy {
             }
         }
         return false;
+    }
+
+    /** 是否有中 Mini game */
+    public isHitMiniGame(): boolean {
+        const self = this;
+        let isHitMiniGame = false;
+        const hasBonus01 = (result: SpecialFeatureResult) =>
+            result.specialHitInfo === SpecialHitInfo[SpecialHitInfo.bonusGame_01];
+        isHitMiniGame = self?.curRoundResult?.specialFeatureResult.some(hasBonus01);
+        return isHitMiniGame ? isHitMiniGame : false;
     }
 
     /** 是否這場資料有中 Grand */
@@ -1101,6 +1019,31 @@ export class GameDataProxy extends CoreGameDataProxy {
         const betRangeMapIndex = jpPoolData.jackpotExtendSetting.betRangeMap[curBetIndex];
 
         return betRangeMapIndex;
+    }
+
+    public getInitEmblemLevel(): number[] {
+        let level: number[] = [];
+        if (this.initEventData.initialData) {
+            level[0] = this.getLevelMapping(this.initEventData.initialData.seatInfo.statusAccumulation[0]);
+        } else {
+            level[0] = 0;
+        }
+        return level;
+    }
+
+    public getLevelMapping(accumulation: number): number {
+        let level: number = 0;
+        let normalize: number = MathUtil.div(accumulation, 1000);
+        if (normalize >= 1 || this.isHitMiniGame()) {
+            level = 3;
+        } else if (normalize >= 0.66) {
+            level = 2;
+        } else if (normalize >= 0.33) {
+            level = 1;
+        } else {
+            level = 0;
+        }
+        return level;
     }
 
     /** 是否為 Free Play 模式 */

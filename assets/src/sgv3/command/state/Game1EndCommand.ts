@@ -29,9 +29,6 @@ export class Game1EndCommand extends StateCommand {
             //針對MiniGame結束回BaseGame的表演流程
             this.sendNotification(TakeWinCommand.NAME);
             this.changeState(StateMachineProxy.GAME1_IDLE);
-
-            let totalWin = this.gameDataProxy._tempWonCredit;
-            this.networkProxy.sendSettlePlay(totalWin);
         }
     }
 

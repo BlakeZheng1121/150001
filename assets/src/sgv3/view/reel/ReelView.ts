@@ -206,6 +206,10 @@ export abstract class ReelView extends BaseView {
             this.reelsList[i].singleReelContent.ReelPasser = reelPasser;
         }
     }
+
+    public setReelPrefab(prefab: Prefab) {
+        this.scenesSetting[this.curSceneIndex].reelPrefab = prefab;
+    }
     ////
 
     //// Hook

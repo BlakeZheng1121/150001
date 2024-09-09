@@ -1,3 +1,4 @@
+import { PrizePredictionViewMediator } from 'src/game/mediator/PrizePredictionViewMediator';
 import { GameDataProxy } from '../../proxy/GameDataProxy';
 import { ReelDataProxy } from '../../proxy/ReelDataProxy';
 import { ReelEvent } from '../../util/Constant';
@@ -5,8 +6,8 @@ import { ReelEvent } from '../../util/Constant';
 export class ReelEffectPrizePredictionCommand extends puremvc.SimpleCommand {
     public execute(notification: puremvc.INotification) {
         //送出大獎預告表演通知
-        
-        if (this.gameDataProxy.curRoundResult.displayInfo.prizePredictionType == 'TYPE_1') {
+        let hasMediator = this.facade.hasMediator(PrizePredictionViewMediator.name);
+        if (this.gameDataProxy.curRoundResult.displayInfo.prizePredictionType == 'TYPE_1' && hasMediator) {
             this.sendNotification(ReelEvent.ON_REEL_PRIZE_PREDICTION);
         } else {
             this.sendNotification(ReelEvent.ON_REEL_EFFECT_COMPLETE);
