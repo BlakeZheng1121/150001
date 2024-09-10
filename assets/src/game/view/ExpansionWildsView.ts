@@ -24,8 +24,8 @@ export class ExpansionWildsView extends BaseView {
         AudioManager.Instance.play(AudioClipsEnum.Free_Slogan);
     }
 
-    public win(fiveOfKind: boolean, callBack?: Function): void {
-        if (fiveOfKind) this.animR.play('Win');
+    public win(isFiveOfKind: boolean, callBack?: Function): void {
+        if (isFiveOfKind) this.animR.play('Win');
         this.animL.play('Win');
     }
 

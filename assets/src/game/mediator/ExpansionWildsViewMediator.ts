@@ -1,31 +1,20 @@
 import { _decorator } from 'cc';
 import BaseMediator from '../../base/BaseMediator';
 import { GameDataProxy } from '../../sgv3/proxy/GameDataProxy';
-import {
-    FreeGameEvent,
-    JackpotPool,
-    ReelEvent,
-    ScreenEvent,
-    SpinResultProxyEvent,
-    ViewMediatorEvent,
-    WinEvent
-} from '../../sgv3/util/Constant';
-import { MiniGameSymbol } from '../../sgv3/vo/enum/MiniGameSymbolType';
-import { SpecialHitInfo } from '../../sgv3/vo/enum/SpecialHitInfo';
-import { BonusGameOneRoundResult } from '../../sgv3/vo/result/BonusGameOneRoundResult';
+import { FreeGameEvent, ReelEvent, WinEvent } from '../../sgv3/util/Constant';
 import { FreeGameOneRoundResult } from '../../sgv3/vo/result/FreeGameOneRoundResult';
 import { WAY_AllWinData } from '../../sgv3way/vo/datas/WAY_AllWinData';
 import { ExpansionWildsView } from '../view/ExpansionWildsView';
 import { GameScene } from 'src/sgv3/vo/data/GameScene';
+import { AudioManager } from 'src/audio/AudioManager';
+import { AudioClipsEnum } from '../vo/enum/SoundMap';
 const { ccclass } = _decorator;
 
 @ccclass('ExpansionWildsViewMediator')
 export class ExpansionWildsViewMediator extends BaseMediator<ExpansionWildsView> {
     protected lazyEventListener(): void {}
 
-    protected hitGrandComplete: Function = null;
-
-    private grandCash: number = 0;
+    private isFirstPlayWildSound: boolean = true;
 
     public listNotificationInterests(): Array<any> {
         return [FreeGameEvent.ON_EXPAND_WILD, ReelEvent.SHOW_REELS_LOOP_WIN, WinEvent.FORCE_WIN_DISPOSE];
@@ -43,6 +32,8 @@ export class ExpansionWildsViewMediator extends BaseMediator<ExpansionWildsView>
                 break;
             case WinEvent.FORCE_WIN_DISPOSE:
                 this.view.hide();
+                this.isFirstPlayWildSound = true;
+                break;
         }
     }
 
@@ -55,7 +46,12 @@ export class ExpansionWildsViewMediator extends BaseMediator<ExpansionWildsView>
             (this.gameDataProxy.curRoundResult as FreeGameOneRoundResult)?.extendInfoForFreeGameResult.isRespinFeature
         ) {
             const winData = this.gameDataProxy.curWinData as WAY_AllWinData;
-            this.view.win(winData.wayInfos[index].hitNumber == 5);
+            let isFiveOfKind = winData.wayInfos[index].hitNumber == 5;
+            this.view.win(isFiveOfKind);
+            if (isFiveOfKind && this.isFirstPlayWildSound) {
+                this.isFirstPlayWildSound = false;
+                AudioManager.Instance.play(AudioClipsEnum.Free_Wild);
+            }
         }
     }
 

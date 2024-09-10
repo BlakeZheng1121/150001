@@ -72,6 +72,7 @@ export enum AudioClipsEnum {
     Free_C1FireThrough = 'Free_C1FireThrough',
     Free_C1GrowUp = 'Free_C1GrowUp',
     Free_C1Hit01 = 'Free_C1Hit01',
+    Free_Wild = 'Free_Wild',
     Free_WStack01 = 'Free_WStack01',
     Free_WStack02 = 'Free_WStack02',
     Free_Calculation = 'Free_Calculation',
