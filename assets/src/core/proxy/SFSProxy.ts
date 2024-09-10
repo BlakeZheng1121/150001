@@ -127,7 +127,7 @@ export class SFSProxy extends GameProxy {
             config.sessionID4 = otherData['sessionID'][4];
             config.gameUid = otherData['gameUid'];
             config.gamePass = otherData['gamePass'];
-            config.gameLoginName = 'gameLogin';
+            config.gameLoginName = otherData['gameLoginName'] ?? 'gameLogin';
             config.jackpotGroup = otherData['jackpotGroup'];
             var strGsInfo: String = otherData['gsInfo'];
             let gsInfo: Array<string> = strGsInfo.split('_');
@@ -136,6 +136,7 @@ export class SFSProxy extends GameProxy {
             // FIXME: 可能用不到的code，要試驗，用不著就刪除
             config.password = 'a';
             config.clientType = 'Web';
+            config.t = otherData['t'];
         }
         this.config = config;
 

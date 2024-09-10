@@ -7,7 +7,6 @@ export class SetupDevGameConfigCommand extends SetupGameConfigCommand {
 
         let gameDataProxy = this.getGameDataProxy();
         gameDataProxy.resPath = '';
-
         if (window['servInfo'].enableDebugLog) {
             Logger.enable = window['servInfo'].enableDebugLog;
         }

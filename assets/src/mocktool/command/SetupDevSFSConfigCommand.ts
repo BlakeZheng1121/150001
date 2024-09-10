@@ -10,16 +10,7 @@ export class SetupDevSFSConfigCommand extends SetupSFSConfigCommand {
         let config: ISFSProxyConfig = this.getConfig();
 
         let rndUid: number = Math.floor(Math.random() * 2999) + 1000;
-
-        config.userName = config.uid = 'qaphp24@JB';
-
-        config.t = 'dev.net';
-        config.host = 'stdev.jigaming.com.tw';
-        config.port = 443;
-        config.zone = 'JH5_ZONE_GAME';
-        config.gameLoginName = 'testGameLogin';
-        config.useSSL = true;
-
+        
         this.saveLoginInfo(config);
 
         // 更新userInfo

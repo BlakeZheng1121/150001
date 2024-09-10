@@ -9,9 +9,7 @@ const { ccclass, property } = _decorator;
 export class ReelFXView extends BaseView {
     @property(TimelineTool)
     private anim: TimelineTool;
-
-    // @property()
-    //private sound: string = 'BigWinPrediction';
+    
     onLoad() {
         super.onLoad();
     }
