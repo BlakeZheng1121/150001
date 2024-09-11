@@ -1033,19 +1033,18 @@ export class GameDataProxy extends CoreGameDataProxy {
 
     public getLevelMapping(accumulation: number): number {
         let level: number = 0;
-        let normalize: number = MathUtil.div(accumulation, 1000);
-        if (normalize >= 1 || this.isHitMiniGame()) {
+        if (accumulation >= 10000 || this.isHitMiniGame()) {
             level = 3;
-        } else if (normalize >= 0.66) {
+        } else if (accumulation >= 6666) {
             level = 2;
-        } else if (normalize >= 0.33) {
+        } else if (accumulation >= 3333) {
             level = 1;
         } else {
             level = 0;
         }
         return level;
     }
-
+    
     /** 是否為 Free Play 模式 */
     public get onFreePlay(): boolean {
         return this._gameData.onFreePlay;
