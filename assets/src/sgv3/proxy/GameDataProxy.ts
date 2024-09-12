@@ -1028,6 +1028,7 @@ export class GameDataProxy extends CoreGameDataProxy {
         } else {
             level[0] = 0;
         }
+        this.curEmblemLevel = level;
         return level;
     }
 
