@@ -86,6 +86,8 @@ export abstract class CoreDefaultSettingCommand extends puremvc.SimpleCommand {
             // 使用玩家上次使用的押注設定
             this.gameDataProxy.curDenom = MathUtil.mul(+this.gameDataProxy.userSetting.denom, 0.001);
             _defaultIdx = this.setBetAndLine(_defaultIdx); // 該值會隨line or way調整
+        } else {
+            this.gameDataProxy.curExtraBet = this.gameDataProxy.sceneSetting.betCombinationsType.NO_EXTRA_BET;
         }
 
         // 確認是否有該 押注設定

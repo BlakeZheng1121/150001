@@ -89,7 +89,7 @@ export class ReelDataProxy extends puremvc.Proxy {
 
         // 更新輪帶表
         for (reelIdx = 0; reelIdx < this.reelCounts; reelIdx++) {
-            this.rollingStrip[reelIdx] = this.reelTable[reelIdx].wheelData;
+            this.rollingStrip[reelIdx] = this.reelTable[reelIdx].wheelData.concat();
         }
 
         this.sendNotification(ReelDataProxyEvent.ON_STRIP_CHANGE);

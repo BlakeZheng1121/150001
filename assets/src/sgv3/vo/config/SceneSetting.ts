@@ -29,4 +29,12 @@ export class SceneSetting extends SceneData {
     public get gameSceneResultMap(): TSMap<string, GameSceneData> {
         return this.sceneResultMap;
     }
+
+    public get betCombinationsType(): BetCombinationsType {
+        return new BetCombinationsType();
+    }
+}
+
+export class BetCombinationsType {
+    public NO_EXTRA_BET: string = 'NoExtraBet';
 }

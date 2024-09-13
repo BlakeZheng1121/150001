@@ -10,18 +10,21 @@ export class WAY_DefaultSettingCommand extends CoreDefaultSettingCommand {
     protected setTotalBetList() {
         // 整理 singleBetCombinations 的投注組合依大到小排列
         let _tempKey: string = '';
+        let _timeKeySplit: Array<string> = [];
         let _denom: number = NaN;
-
+        let _bet: number = NaN;
         // 加入初始化重設totalBetList
         this.gameDataProxy.totalBetList = [];
         for (_tempKey in this.gameDataProxy.initEventData.singleBetCombinations) {
-            _denom = +_tempKey.split('_')[0];
-            this.gameDataProxy.totalBetList.push(
-                MathUtil.mul(
-                    +this.gameDataProxy.initEventData.singleBetCombinations[_tempKey],
-                    MathUtil.div(_denom, 1000)
-                )
+            _timeKeySplit = _tempKey.split('_');
+            _denom = +_timeKeySplit[0];
+            _bet = MathUtil.mul(
+                +this.gameDataProxy.initEventData.singleBetCombinations[_tempKey],
+                MathUtil.div(_denom, 1000)
             );
+            if (_timeKeySplit.indexOf(this.gameDataProxy.sceneSetting.betCombinationsType.NO_EXTRA_BET) > -1) {
+                this.gameDataProxy.totalBetList.push(_bet);
+            }
         }
 
         this.gameDataProxy.totalBetList.sort(function (a, b) {

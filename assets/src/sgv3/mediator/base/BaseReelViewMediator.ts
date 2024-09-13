@@ -70,7 +70,7 @@ export class BaseReelViewMediator<T extends ReelView> extends BaseMediator<T> {
         self.reelView.reelsInit(reelTable.length, this.spinStopSequence, this._gameDataProxy.language);
         let rollingStrip = new Array<Array<number>>();
         for (let i = 0; i < reelTable.length; i++) {
-            rollingStrip.push(reelTable[i].wheelData);
+            rollingStrip.push(reelTable[i].wheelData.concat());
             self.reelView.setStrip(i, reelTable[i].wheelData);
             self.reelView.setTargetRng(i, 0);
         }

@@ -25,6 +25,7 @@ import { GAME_GameDataProxy } from '../proxy/GAME_GameDataProxy';
 import { GAME_ReelView } from '../view/GAME_ReelView';
 import { AudioClipsEnum } from '../vo/enum/SoundMap';
 import { GlobalTimer } from '../../sgv3/util/GlobalTimer';
+import { MathUtil } from 'src/core/utils/MathUtil';
 
 const { ccclass } = _decorator;
 /** ByGame Win Reel判定實作 */
@@ -249,7 +250,7 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
                     let baseExtendSetting =
                         this.gameDataProxy.initEventData.executeSetting.baseGameSetting.baseGameExtendSetting;
                     content.creditArray = this.getCreditArray(baseExtendSetting.creditBall);
-                    content.creditWeight = this.getWeight(baseExtendSetting.creditBallWeight);
+                    content.creditWeight = this.getWeight(baseExtendSetting.creditBallWeight[0]);
                 }
                 break;
             case GameScene.Game_2:
@@ -508,5 +509,35 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
             );
         }
         return range;
+    }
+
+    protected updateStrip(): void {
+        this.setMysterySymbol();
+        super.updateStrip();
+    }
+
+    private setMysterySymbol() {
+        if (this.gameDataProxy.curScene == GameScene.Game_1) {
+            let mysterySymbolId: number =
+                this.gameDataProxy.initEventData.executeSetting.baseGameSetting.baseGameExtendSetting.mysterySymbolId;
+            // 有 Mystery symbol 才需要變換 symbol
+            if (mysterySymbolId != undefined) {
+                let mysterySymbolList =
+                    this.gameDataProxy.initEventData.executeSetting.baseGameSetting.baseGameExtendSetting
+                        .mysterySymbolList;
+                let replaceSymbolId =
+                    this.gameDataProxy.spinEventData?.baseGameResult.extendInfoForbaseGameResult?.mysterySymbol;
+                replaceSymbolId = replaceSymbolId
+                    ? replaceSymbolId
+                    : mysterySymbolList[MathUtil.randomBetween(0, mysterySymbolList.length - 1)];
+                for (let i = 0; i < this.reelDataProxy.rollingStrip.length; i++) {
+                    for (let j = 0; j < this.reelDataProxy.rollingStrip[i].length; j++) {
+                        if (this.reelDataProxy.rollingStrip[i][j] == mysterySymbolId) {
+                            this.reelDataProxy.rollingStrip[i][j] = replaceSymbolId;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
