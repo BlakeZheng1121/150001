@@ -1023,9 +1023,9 @@ export class GameDataProxy extends CoreGameDataProxy {
 
     public getInitEmblemLevel(): number[] {
         let level: number[] = [];
-        if (this.initEventData.initialData) {
+        try {
             level[0] = this.getLevelMapping(this.initEventData.initialData.seatInfo.statusAccumulation[0]);
-        } else {
+        } catch (error) {
             level[0] = 0;
         }
         this.curEmblemLevel = level;

@@ -49,11 +49,11 @@ export class GAME_Game1RollCompleteCommand extends Game1RollCompleteCommand {
         let curRoundResult = this.gameDataProxy.curRoundResult as BaseGameResult;
         let curLevel = (level[0] = this.gameDataProxy.curEmblemLevel[0] ? this.gameDataProxy.curEmblemLevel[0] : 0);
         if (this.hasSymbolC1(curRoundResult)) {
-            if (curRoundResult.extendInfoForbaseGameResult.seatInfo) {
+            try {
                 curLevel = this.gameDataProxy.getLevelMapping(
                     curRoundResult.extendInfoForbaseGameResult.seatInfo.statusAccumulation[0]
                 );
-            } else {
+            } catch (error) {
                 // TEST: 後端沒帶資料時，隨機取得一個等級
                 curLevel = Math.random() < 0.5 ? Math.min(curLevel + 1, 3) : curLevel;
             }
