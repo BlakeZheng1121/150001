@@ -9,6 +9,7 @@ import { GameStateId } from '../../vo/data/GameStateId';
 import { GameOperation } from '../../vo/enum/GameOperation';
 import { StateCommand } from './StateCommand';
 import { UIEvent } from 'common-ui/proxy/UIEvent';
+import { LastSymbolFeatureCommand } from 'src/game/command/LastSymbolFeatureCommand';
 
 export class Game1InitCommand extends StateCommand {
     public static readonly NAME = StateMachineProxy.GAME1_EV_INIT;
@@ -43,7 +44,7 @@ export class Game1InitCommand extends StateCommand {
             case GameScene.Game_2:
             case GameScene.Game_4:
                 this.sendNotification(ReelEvent.ON_REELS_INIT); //Reel Init
-                this.sendNotification(ReelEffect_SymbolFeatureCommand.name);
+                this.sendNotification(ReelEffect_SymbolFeatureCommand.NAME);
                 if (this.gameDataProxy.stateWinData.totalAmount() > 0) {
                     // 讓他可以重頭開始
                     this.sendNotification(SoundEvent.SOUNDCMD, [SoundEvent.RESET_SCENEBG, BaseSoundParms.GAME1]);
@@ -72,6 +73,8 @@ export class Game1InitCommand extends StateCommand {
                     this.changeState(StateMachineProxy.GAME1_IDLE);
                 }
                 this.sendNotification(ReelEvent.ON_REELS_INIT);
+                // 恢復最後一把的盤面
+                this.sendNotification(LastSymbolFeatureCommand.NAME);
                 break;
         }
         AudioManager.Instance.play(BGMClipsEnum.BGM_Base).loop(true).volume(0).fade(1, 1);

@@ -102,7 +102,8 @@ export class BaseReelViewMediator<T extends ReelView> extends BaseMediator<T> {
             ReelEvent.ON_REELS_INIT,
             ReelEvent.ON_REELS_RESTORE,
             ReelEvent.ON_SINGLE_REEL_STOP_ERROR,
-            ReelEvent.ON_REELS_RESET
+            ReelEvent.ON_REELS_RESET,
+            ReelEvent.SHOW_LAST_SYMBOL_OF_REELS
         ];
     }
 
@@ -330,6 +331,7 @@ export class BaseReelViewMediator<T extends ReelView> extends BaseMediator<T> {
     protected onGetRNG(): void {
         const self = this;
         self.reelDataProxy.mathTableIndex = self.gameDataProxy.curRoundResult.usedTableIndex;
+        self.sendNotification(ReelDataProxyEvent.ON_STRIP_CHANGE);
         for (let infoIndex = 0; infoIndex < self.gameDataProxy.curRoundResult.displayInfo.rngInfo.length; infoIndex++) {
             let rngInfo: Array<number> = self.gameDataProxy.curRoundResult.displayInfo.rngInfo[infoIndex];
             for (let i = 0; i < rngInfo.length; i++) {
@@ -368,6 +370,7 @@ export class BaseReelViewMediator<T extends ReelView> extends BaseMediator<T> {
             return;
         }
         self.reelDataProxy.mathTableIndex = roundResult.usedTableIndex;
+        self.sendNotification(ReelDataProxyEvent.ON_STRIP_CHANGE);
         for (let infoIndex = 0; infoIndex < roundResult.displayInfo.rngInfo.length; infoIndex++) {
             let rngInfo: Array<number> = roundResult.displayInfo.rngInfo[infoIndex];
             for (let i = 0; i < rngInfo.length; i++) {
@@ -376,13 +379,13 @@ export class BaseReelViewMediator<T extends ReelView> extends BaseMediator<T> {
         }
         this.reelDataProxy.reelState = ReelState.Idle;
         //讓外部去處理後續Reel模組所需資料
-        self.sendNotification(ReelEffect_SymbolFeatureCommand.name);
+        self.sendNotification(ReelEffect_SymbolFeatureCommand.NAME);
     }
 
     protected onSymbolsResultCheck(reelInfo: StripIndexer) {
         const self = this;
         //讓外部去確認後續 Reel 資料是否顯示錯誤
-        self.sendNotification(CheckScreenSymbolCommand.name, reelInfo);
+        self.sendNotification(CheckScreenSymbolCommand.NAME, reelInfo);
     }
 
     protected onTriggerSymbolsError(reelIndex: number) {

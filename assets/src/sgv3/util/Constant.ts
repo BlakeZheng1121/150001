@@ -91,7 +91,8 @@ export class ReelEvent {
     public static SHOW_HOLD_SPIN_WIN: string = 'showHoldSpinWin';
     public static SHOW_REELS_LOOP_WIN: string = 'showReelsLoopWin';
     public static HIDE_WILD_SYMBOL: string = 'hideWildSymbol';
-    
+    public static SHOW_LAST_SYMBOL_OF_REELS: string = 'showLastSymbolOfReels';
+
     public static ON_REEL_PRIZE_PREDICTION: string = 'onReelPrizePrediction';
     public static ON_REEL_EFFECT_COMPLETE: string = 'onReelEffectComplete';
     public static ON_REELS_RESET: string = 'onReelsReset';
