@@ -89,5 +89,11 @@ export class InitEvent {
 }
 
 export class InitialData {
+    public seatStatusCache: seatStatusCache;
+}
+
+export class seatStatusCache {
     public seatInfo: SeatInfo;
+    public mysterySymbol: number;
+    public ballScreenLabel: Array<Array<number>>;
 }

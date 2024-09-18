@@ -6,6 +6,8 @@ import { FreeGameOneRoundResult } from '../../../sgv3/vo/result/FreeGameOneRound
 import { TopUpGameOneRoundResult } from '../../../sgv3/vo/result/TopUpGameOneRoundResult';
 
 export class ReelEffect_SymbolFeatureCommand extends puremvc.SimpleCommand {
+    public static readonly NAME = 'ReelEffect_SymbolFeatureCommand';
+
     public execute(notification: puremvc.INotification) {
         let myGameScene: GameScene = this.gameDataProxy.curStateResult
             ? this.gameDataProxy.curStateResult.gameSceneName

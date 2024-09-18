@@ -26,6 +26,7 @@ import { GAME_ReelView } from '../view/GAME_ReelView';
 import { AudioClipsEnum } from '../vo/enum/SoundMap';
 import { GlobalTimer } from '../../sgv3/util/GlobalTimer';
 import { MathUtil } from 'src/core/utils/MathUtil';
+import { SeatInfo } from 'src/sgv3/vo/result/ExtendInfoForBaseGameResult';
 
 const { ccclass } = _decorator;
 /** ByGame Win Reel判定實作 */
@@ -70,7 +71,8 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
                     FreeGameEvent.ON_SIDE_BALL_SHOW_AFTER,
                     FreeGameEvent.ON_EXPAND_WILD,
                     ReelEvent.ON_REELS_RESTORE,
-                    ReelEvent.HIDE_WILD_SYMBOL
+                    ReelEvent.HIDE_WILD_SYMBOL,
+                    ReelEvent.SHOW_LAST_SYMBOL_OF_REELS
                 ].concat(super.baseListNotificationInterests())
             )
         );
@@ -129,6 +131,8 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
                     this.view.freeGameHideSideBall();
                 }
                 break;
+            case ReelEvent.SHOW_LAST_SYMBOL_OF_REELS:
+                this.showLastSymbolOfReels(notification.getBody());
             case ReelEvent.ON_REELS_RESTORE:
                 this.setSymbolPosData();
                 this.reelView.reelsShow();
@@ -288,7 +292,7 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
 
     /** 取得SymbolFOV資料 */
     protected setSymbolPosData() {
-        if (this.reelView.reelsList.length == 0) {
+        if (this.reelView.reelsList.length == 0 || this.reelDataProxy.symbolFeature == null) {
             return;
         }
         switch (this.gameDataProxy.curScene) {
@@ -512,32 +516,45 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
     }
 
     protected updateStrip(): void {
-        this.setMysterySymbol();
+        if (this.gameDataProxy.curScene == GameScene.Game_1) {
+            let replaceSymbolId =
+                this.gameDataProxy.spinEventData?.baseGameResult.extendInfoForbaseGameResult?.mysterySymbol;
+            this.setMysterySymbol(replaceSymbolId);
+        }
         super.updateStrip();
     }
 
-    private setMysterySymbol() {
-        if (this.gameDataProxy.curScene == GameScene.Game_1) {
-            let mysterySymbolId: number =
-                this.gameDataProxy.initEventData.executeSetting.baseGameSetting.baseGameExtendSetting.mysterySymbolId;
-            // 有 Mystery symbol 才需要變換 symbol
-            if (mysterySymbolId != undefined) {
-                let mysterySymbolList =
-                    this.gameDataProxy.initEventData.executeSetting.baseGameSetting.baseGameExtendSetting
-                        .mysterySymbolList;
-                let replaceSymbolId =
-                    this.gameDataProxy.spinEventData?.baseGameResult.extendInfoForbaseGameResult?.mysterySymbol;
-                replaceSymbolId = replaceSymbolId
-                    ? replaceSymbolId
-                    : mysterySymbolList[MathUtil.randomBetween(0, mysterySymbolList.length - 1)];
-                for (let i = 0; i < this.reelDataProxy.rollingStrip.length; i++) {
-                    for (let j = 0; j < this.reelDataProxy.rollingStrip[i].length; j++) {
-                        if (this.reelDataProxy.rollingStrip[i][j] == mysterySymbolId) {
-                            this.reelDataProxy.rollingStrip[i][j] = replaceSymbolId;
-                        }
+    private setMysterySymbol(replaceSymbolId: number) {
+        let mysterySymbolId: number =
+            this.gameDataProxy.initEventData.executeSetting.baseGameSetting.baseGameExtendSetting.mysterySymbolId;
+        // 有 Mystery symbol 才需要變換 symbol
+        if (mysterySymbolId != undefined) {
+            let mysterySymbolList =
+                this.gameDataProxy.initEventData.executeSetting.baseGameSetting.baseGameExtendSetting.mysterySymbolList;
+            replaceSymbolId = replaceSymbolId
+                ? replaceSymbolId
+                : mysterySymbolList[MathUtil.randomBetween(0, mysterySymbolList.length - 1)];
+            for (let i = 0; i < this.reelDataProxy.rollingStrip.length; i++) {
+                for (let j = 0; j < this.reelDataProxy.rollingStrip[i].length; j++) {
+                    if (this.reelDataProxy.rollingStrip[i][j] == mysterySymbolId) {
+                        this.reelDataProxy.rollingStrip[i][j] = replaceSymbolId;
                     }
                 }
             }
         }
+    }
+    // 顯示最後盤面
+    public showLastSymbolOfReels(data: { seatInfo: SeatInfo; mysterySymbol?: number }) {
+        const self = this;
+        self.reelDataProxy.mathTableIndex = data.seatInfo.usedTableIndex;
+        self.setMysterySymbol(data.mysterySymbol);
+        super.updateStrip();
+        for (let infoIndex = 0; infoIndex < data.seatInfo.screenRngInfo.length; infoIndex++) {
+            let rngInfo: Array<number> = data.seatInfo.screenRngInfo[infoIndex];
+            for (let i = 0; i < rngInfo.length; i++) {
+                self.reelView.setTargetRng(infoIndex * rngInfo.length + i, rngInfo[i]);
+            }
+        }
+        self.reelView.reelsShow();
     }
 }

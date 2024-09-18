@@ -1024,7 +1024,7 @@ export class GameDataProxy extends CoreGameDataProxy {
     public getInitEmblemLevel(): number[] {
         let level: number[] = [];
         try {
-            level[0] = this.getLevelMapping(this.initEventData.initialData.seatInfo.statusAccumulation[0]);
+            level[0] = this.getLevelMapping(this.initEventData.initialData.seatStatusCache.seatInfo.statusAccumulation[0]);
         } catch (error) {
             level[0] = 0;
         }
@@ -1045,7 +1045,7 @@ export class GameDataProxy extends CoreGameDataProxy {
         }
         return level;
     }
-    
+
     /** 是否為 Free Play 模式 */
     public get onFreePlay(): boolean {
         return this._gameData.onFreePlay;

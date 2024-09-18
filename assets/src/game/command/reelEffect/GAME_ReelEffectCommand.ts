@@ -6,7 +6,7 @@ import { ReelEffect_SymbolFeatureCommand } from './ReelEffect_SymbolFeatureComma
 export class GAME_ReelEffectCommand extends ReelEffectCommand {
     public initializeMacroCommand() {
         super.initializeMacroCommand();
-        this.sendNotification(ReelEffect_SymbolFeatureCommand.name);
+        this.sendNotification(ReelEffect_SymbolFeatureCommand.NAME);
         this.addSubCommand(ReelEffect_SpinStopSoundCommand);
         this.addSubCommand(ReelEffect_DampingSoundCommand);
     }

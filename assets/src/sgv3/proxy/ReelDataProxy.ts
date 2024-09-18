@@ -91,8 +91,6 @@ export class ReelDataProxy extends puremvc.Proxy {
         for (reelIdx = 0; reelIdx < this.reelCounts; reelIdx++) {
             this.rollingStrip[reelIdx] = this.reelTable[reelIdx].wheelData.concat();
         }
-
-        this.sendNotification(ReelDataProxyEvent.ON_STRIP_CHANGE);
     }
 
     public getFovPos(reelIndex: number, fovIndex: number): Vec3 {
