@@ -108,9 +108,8 @@ export class GAME_JackpotPoolViewMediator extends BaseMediator<GAME_JackpotPoolV
                     break;
             }
         }
-        if (this.gameDataProxy.curScene != GameScene.Init) {
-            this.view.updateFortuneMultiplier(betIndex); //依照 BetRange或 階層上升
-        }
+        const isPlayFX = this.gameDataProxy.curScene != GameScene.Init;
+        this.view.updateFortuneMultiplier(betIndex, isPlayFX); //依照 BetRange或 階層上升
     }
 
     protected initView(): void {
@@ -159,7 +158,7 @@ export class GAME_JackpotPoolViewMediator extends BaseMediator<GAME_JackpotPoolV
     protected hitJackpotToUpdatePoolValue(hitInfos: PoolHitInfo[]) {
         let jpObject: JackpotTypeObj = new JackpotTypeObj();
         jpObject.typeItems = [];
-        for (let i = 0; i < JackpotPool.GRAND; i++) {
+        for (let i = 0; i < JackpotPool.MAJOR; i++) {
             let jackpotPoolObj: JackpotPoolObj = new JackpotPoolObj();
             jackpotPoolObj.poolId = hitInfos[i].hitPool;
             jackpotPoolObj.poolValue = hitInfos[i].hitAmount / 100;

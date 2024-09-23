@@ -6,6 +6,7 @@ import { FreeGameOneRoundResult } from '../../vo/result/FreeGameOneRoundResult';
 import { StateCommand } from './StateCommand';
 import { ButtonName } from 'common-ui/proxy/UIEnums';
 import { SpinButton } from 'common-ui/view/SpinButton';
+import { SpecialHitInfo } from 'src/sgv3/vo/enum/SpecialHitInfo';
 
 export class Game2InitCommand extends StateCommand {
     public static readonly NAME = StateMachineProxy.GAME2_EV_INIT;
@@ -33,7 +34,7 @@ export class Game2InitCommand extends StateCommand {
 
             // 剛進入FreeGame場景時，重置盤面(※中間回來的不用重置盤面)
             if (freeGameOneRoundResult.roundInfo.roundNumber == 1) {
-                this.checkJackpotPool();
+                this.checkJackpotPool(SpecialHitInfo[SpecialHitInfo.bonusGame_02]);
                 this.sendNotification(WinEvent.FORCE_WIN_DISPOSE);
                 this.sendNotification(WinEvent.FORCE_UPDATE_WIN_LABEL, cashAmount);
             }

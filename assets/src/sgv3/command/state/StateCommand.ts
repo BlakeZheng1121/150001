@@ -1,3 +1,4 @@
+import { BonusGameOneRoundResult } from 'src/sgv3/vo/result/BonusGameOneRoundResult';
 import { StateMachineCommand } from '../../../core/command/StateMachineCommand';
 import { StateMachineObject } from '../../../core/proxy/CoreStateMachineProxy';
 import { GameDataProxy } from '../../proxy/GameDataProxy';
@@ -18,21 +19,22 @@ export class StateCommand extends puremvc.SimpleCommand {
         this.sendNotification(StateMachineCommand.NAME, new StateMachineObject(state, body));
     }
 
-    protected checkJackpotPool() {
+    protected checkJackpotPool(hitInfo: string) {
         // 當連中 2次 Grand 時，下一次場景需要更新到最新的 JackpotPool 數值
         this.gameDataProxy.hitJackpotPoolType = 0;
         if (this.gameDataProxy.spinEventData.bonusGameResult) {
             let bonusGameOneRoundResultLength =
                 this.gameDataProxy.spinEventData.bonusGameResult.bonusGameOneRoundResult.length;
-            let result =
-                this.gameDataProxy.spinEventData.bonusGameResult.bonusGameOneRoundResult[
-                    bonusGameOneRoundResultLength - 1
-                ].jpHitInfo;
-            this.gameDataProxy.hitJackpotPoolType = this.gameDataProxy.spinEventData.bonusGameResult.bonusGameOneRoundResult[
-                bonusGameOneRoundResultLength - 1
-            ].hitPool[0];
+            const findHitInfo = (oneRoundResult: BonusGameOneRoundResult) => oneRoundResult.specialHitInfo == hitInfo;
+            let result = this.gameDataProxy.spinEventData.bonusGameResult.bonusGameOneRoundResult.find(findHitInfo);
+            if (result) {
+                this.gameDataProxy.hitJackpotPoolType =
+                    this.gameDataProxy.spinEventData.bonusGameResult.bonusGameOneRoundResult[
+                        bonusGameOneRoundResultLength - 1
+                    ].hitPool[0];
 
-            this.sendNotification(JackpotPool.HIT_JACKPOT_TO_POOL_VALUE_UPDATE, result);
+                this.sendNotification(JackpotPool.HIT_JACKPOT_TO_POOL_VALUE_UPDATE, result.jpHitInfo);
+            }
         }
     }
 

@@ -5,6 +5,7 @@ import { GlobalTimer } from '../../util/GlobalTimer';
 import { StateCommand } from './StateCommand';
 import { ButtonName } from 'common-ui/proxy/UIEnums';
 import { SpinButton } from 'common-ui/view/SpinButton';
+import { SpecialHitInfo } from 'src/sgv3/vo/enum/SpecialHitInfo';
 
 export class Game3InitCommand extends StateCommand {
     public static readonly NAME = StateMachineProxy.GAME3_EV_INIT;
@@ -31,7 +32,7 @@ export class Game3InitCommand extends StateCommand {
         }
         GlobalTimer.getInstance().registerTimer(self.timerKey, delayTime, self.endGame3Init, self).start();
 
-        this.checkJackpotPool();
+        this.checkJackpotPool(SpecialHitInfo[SpecialHitInfo.bonusGame_01]);
     }
 
     protected endGame3Init() {

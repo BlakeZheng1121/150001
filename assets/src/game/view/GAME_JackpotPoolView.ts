@@ -52,8 +52,9 @@ export class GAME_JackpotPoolView extends BaseView {
     public totalMiniAmount: number = 0;
 
     private betRangeMapIndex: number = 0;
+    private timeoutId: number;
 
-    private textTweens: Map<number, Tween<GAME_JackpotPoolView>> = new Map<number, Tween<GAME_JackpotPoolView>>();
+    private timeoutMap: Map<number, number> = new Map<number, number>();
 
     public init(lang: string) {
         this.language = lang;
@@ -80,6 +81,7 @@ export class GAME_JackpotPoolView extends BaseView {
     public changeLocale(locale: string) {}
 
     public initBonusPool(poolResetValue: number[]) {
+        this.clearAllTimeouts();
         // 給 pool 初始倍率
         for (let i = 0; i < poolResetValue.length; i++) {
             //let tempValue = poolResetValue[i] / 100;
@@ -88,48 +90,48 @@ export class GAME_JackpotPoolView extends BaseView {
                 case JackpotPool.GRAND:
                     this.tempGrandAmount = tempValue;
                     this.totalGrandAmount = tempValue;
-                    this.textTweens.set(JackpotPool.GRAND, null);
+                    this.timeoutMap.set(JackpotPool.GRAND, null);
                     break;
                 case JackpotPool.MAJOR:
                     this.tempMajorAmount = tempValue;
                     this.totalMajorAmount = tempValue;
-                    this.textTweens.set(JackpotPool.MAJOR, null);
+                    this.timeoutMap.set(JackpotPool.MAJOR, null);
                     break;
                 case JackpotPool.MINOR:
                     this.tempMinorAmount = tempValue;
                     this.totalMinorAmount = tempValue;
-                    this.textTweens.set(JackpotPool.MINOR, null);
+                    this.timeoutMap.set(JackpotPool.MINOR, null);
                     break;
                 case JackpotPool.MINI:
                     this.tempMiniAmount = tempValue;
                     this.totalMiniAmount = tempValue;
-                    this.textTweens.set(JackpotPool.MINI, null);
+                    this.timeoutMap.set(JackpotPool.MINI, null);
                     break;
             }
         }
         this.updateAllPoolAmount();
     }
 
-    public updateBonusPoolByBetRange(poolId:number, poolValue: number) {
+    public updateBonusPoolByBetRange(poolId: number, poolValue: number) {
         // 給 pool 更新倍率，Grand 與 Major 連結 Jackpot，不做更新
-            switch (poolId + 1) {
-                case JackpotPool.GRAND:
-                    this.tempGrandAmount = poolValue;
-                    this.updateGrandAmount();
-                    break;
-                case JackpotPool.MAJOR:
-                    this.tempMajorAmount = poolValue;
-                    this.updateMajorAmount();
-                    break;
-                case JackpotPool.MINOR:
-                    this.tempMinorAmount = poolValue;
-                    this.updateMinorAmount();
-                    break;
-                case JackpotPool.MINI:
-                    this.tempMiniAmount = poolValue;
-                    this.updateMiniAmount();
-                    break;
-            }
+        switch (poolId + 1) {
+            case JackpotPool.GRAND:
+                this.tempGrandAmount = poolValue;
+                this.updateGrandAmount();
+                break;
+            case JackpotPool.MAJOR:
+                this.tempMajorAmount = poolValue;
+                this.updateMajorAmount();
+                break;
+            case JackpotPool.MINOR:
+                this.tempMinorAmount = poolValue;
+                this.updateMinorAmount();
+                break;
+            case JackpotPool.MINI:
+                this.tempMiniAmount = poolValue;
+                this.updateMiniAmount();
+                break;
+        }
     }
 
     public runAmount(_endAmount: number, _poolId: number, _runningTime: number, isForce: boolean): void {
@@ -152,22 +154,20 @@ export class GAME_JackpotPoolView extends BaseView {
                 this.totalGrandAmount = _endAmount;
                 if (this.totalGrandAmount < this.tempGrandAmount || isForce) {
                     this.runGrandAmountComplete();
-                } else {
-                    let textTween = this.textTweens.get(JackpotPool.GRAND);
-                    textTween = tween(<GAME_JackpotPoolView>this)
-                        .to(
-                            _runningTime,
-                            { tempGrandAmount: _endAmount },
-                            {
-                                onUpdate: (target) => {
-                                    (target as GAME_JackpotPoolView).updateGrandAmount();
-                                },
-                                onComplete: (target) => {
-                                    (target as GAME_JackpotPoolView).runGrandAmountComplete();
-                                }
-                            }
-                        )
-                        .start();
+                } else if (this.totalGrandAmount > this.tempGrandAmount) {
+                    this.runAmountToTarget(
+                        JackpotPool.GRAND,
+                        this.tempGrandAmount,
+                        this.totalGrandAmount,
+                        _runningTime,
+                        (currentAmount) => {
+                            this.tempGrandAmount = currentAmount;
+                            this.updateGrandAmount();
+                        },
+                        () => {
+                            this.runGrandAmountComplete();
+                        }
+                    );
                 }
                 break;
             case JackpotPool.MAJOR:
@@ -176,22 +176,20 @@ export class GAME_JackpotPoolView extends BaseView {
                 this.totalMajorAmount = _endAmount;
                 if (this.totalMajorAmount < this.tempMajorAmount || isForce) {
                     this.runMajorAmountComplete();
-                } else {
-                    let textTween = this.textTweens.get(JackpotPool.MAJOR);
-                    textTween = tween(<GAME_JackpotPoolView>this)
-                        .to(
-                            _runningTime,
-                            { tempMajorAmount: _endAmount },
-                            {
-                                onUpdate: (target) => {
-                                    (target as GAME_JackpotPoolView).updateMajorAmount();
-                                },
-                                onComplete: (target) => {
-                                    (target as GAME_JackpotPoolView).runMajorAmountComplete();
-                                }
-                            }
-                        )
-                        .start();
+                } else if (this.totalMajorAmount > this.tempMajorAmount) {
+                    this.runAmountToTarget(
+                        JackpotPool.MAJOR,
+                        this.tempMajorAmount,
+                        this.totalMajorAmount,
+                        _runningTime,
+                        (currentAmount) => {
+                            this.tempMajorAmount = currentAmount;
+                            this.updateMajorAmount();
+                        },
+                        () => {
+                            this.runMajorAmountComplete();
+                        }
+                    );
                 }
                 break;
             case JackpotPool.MINOR:
@@ -200,22 +198,20 @@ export class GAME_JackpotPoolView extends BaseView {
                 this.totalMinorAmount = _endAmount;
                 if (this.totalMinorAmount < this.tempMinorAmount || isForce) {
                     this.runMinorAmountComplete();
-                } else {
-                    let textTween = this.textTweens.get(JackpotPool.MINOR);
-                    textTween = tween(<GAME_JackpotPoolView>this)
-                        .to(
-                            _runningTime,
-                            { tempMinorAmount: _endAmount },
-                            {
-                                onUpdate: (target) => {
-                                    (target as GAME_JackpotPoolView).updateMinorAmount();
-                                },
-                                onComplete: (target) => {
-                                    (target as GAME_JackpotPoolView).runMinorAmountComplete();
-                                }
-                            }
-                        )
-                        .start();
+                } else if (this.totalMinorAmount > this.tempMinorAmount) {
+                    this.runAmountToTarget(
+                        JackpotPool.MINOR,
+                        this.tempMinorAmount,
+                        this.totalMinorAmount,
+                        _runningTime,
+                        (currentAmount) => {
+                            this.tempMinorAmount = currentAmount;
+                            this.updateMinorAmount();
+                        },
+                        () => {
+                            this.runMinorAmountComplete();
+                        }
+                    );
                 }
                 break;
             case JackpotPool.MINI:
@@ -224,29 +220,27 @@ export class GAME_JackpotPoolView extends BaseView {
                 this.totalMiniAmount = _endAmount;
                 if (this.totalMiniAmount < this.tempMiniAmount || isForce) {
                     this.runMiniAmountComplete();
-                } else {
-                    let textTween = this.textTweens.get(JackpotPool.MINI);
-                    textTween = tween(<GAME_JackpotPoolView>this)
-                        .to(
-                            _runningTime,
-                            { tempMiniAmount: _endAmount },
-                            {
-                                onUpdate: (target) => {
-                                    (target as GAME_JackpotPoolView).updateMiniAmount();
-                                },
-                                onComplete: (target) => {
-                                    (target as GAME_JackpotPoolView).runMiniAmountComplete();
-                                }
-                            }
-                        )
-                        .start();
+                } else if (this.totalMiniAmount > this.tempMiniAmount) {
+                    this.runAmountToTarget(
+                        JackpotPool.MINI,
+                        this.tempMiniAmount,
+                        this.totalMiniAmount,
+                        _runningTime,
+                        (currentAmount) => {
+                            this.tempMiniAmount = currentAmount;
+                            this.updateMiniAmount();
+                        },
+                        () => {
+                            this.runMiniAmountComplete();
+                        }
+                    );
                 }
                 break;
         }
     }
 
-    public updateFortuneMultiplier(mapIndex: number) {
-        if (mapIndex > this.betRangeMapIndex) {
+    public updateFortuneMultiplier(mapIndex: number, isPlayFX: boolean) {
+        if (isPlayFX && mapIndex > this.betRangeMapIndex) {
             this.raiseJackpotFX.onPlay();
         }
         this.betRangeMapIndex = mapIndex;
@@ -335,5 +329,46 @@ export class GAME_JackpotPoolView extends BaseView {
                     break;
             }
         }
+    }
+    // 改用 Timeout 來實作滾動彩金池，避免 Turbo mode 引擎加速時，數值滾動太快
+    private runAmountToTarget(
+        poolId: number,
+        start: number,
+        target: number,
+        duration: number,
+        onUpdate: (currentAmount: number) => void,
+        onComplete: () => void
+    ) {
+        const self = this;
+        const startTime = performance.now();
+        const change = target - start;
+        const interval = 33; // ms, 約30FPS
+
+        const updateAmount = () => {
+            const currentTime = performance.now();
+            const elapsedTime = (currentTime - startTime) / 1000;
+            const progress = Math.min(elapsedTime / duration, 1); // 確保進度不超過1
+
+            const currentAmount = start + change * progress;
+            onUpdate(currentAmount);
+
+            if (progress < 1) {
+                let timeoutId = self.timeoutMap.get(poolId);
+                clearTimeout(timeoutId);
+                timeoutId = setTimeout(updateAmount, interval);
+                self.timeoutMap.set(poolId, timeoutId);
+            } else {
+                onComplete();
+            }
+        };
+
+        updateAmount();
+    }
+
+    public clearAllTimeouts() {
+        this.timeoutMap.forEach((timeoutId, poolId) => {
+            clearTimeout(timeoutId);
+        });
+        this.timeoutMap.clear();
     }
 }
