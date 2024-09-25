@@ -6,7 +6,7 @@ import { ReelEvent } from '../../util/Constant';
 export class ReelEffectPrizePredictionCommand extends puremvc.SimpleCommand {
     public execute(notification: puremvc.INotification) {
         //送出大獎預告表演通知
-        let hasMediator = this.facade.hasMediator(PrizePredictionViewMediator.name);
+        let hasMediator = this.facade.hasMediator(PrizePredictionViewMediator.NAME);
         if (this.gameDataProxy.curRoundResult.displayInfo.prizePredictionType == 'TYPE_1' && hasMediator) {
             this.sendNotification(ReelEvent.ON_REEL_PRIZE_PREDICTION);
         } else {

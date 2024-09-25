@@ -8,6 +8,11 @@ const { ccclass } = _decorator;
 
 @ccclass('PrizePredictionViewMediator')
 export class PrizePredictionViewMediator extends BaseMediator<PrizePredictionView> {
+    public constructor(name?: string, component?: any) {
+        super(name, component);
+        PrizePredictionViewMediator.NAME = this.mediatorName;
+    }
+
     protected lazyEventListener(): void {}
 
     public listNotificationInterests(): Array<any> {

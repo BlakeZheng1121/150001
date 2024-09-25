@@ -41,15 +41,18 @@ export class ReelEffect_DampingSoundCommand extends puremvc.SimpleCommand {
         let c1Count = 0;
         for (let i = 0; i < this.spinStopSequenceLength; i++) {
             let curSequence = this.reelDataProxy.reelStopSoundSequence[i];
+            let screenRow = this.reelDataProxy.symbolFeature[i].length;
             for (let j = 0; j < this.reelDataProxy.symbolFeature[i].length; j++) {
                 if (this.reelDataProxy.symbolFeature[i][j].creditCent > 0) {
                     c1Count++;
-                    if (curSequence.length == 1) {
-                        // 預設 原本的SpinStop 音效
-                        let soundType = this.getHitC1SoundType(this.reelDataProxy.symbolFeature[i][j].isSpecial);
-                        curSequence.push(soundType);
-                        this.hitNum++;
-                    }
+                }
+            }
+            if (this.reelDataProxy.symbolFeature[i].some((feature) => feature.creditCent > 0)) {
+                if (c1Count + (this.spinStopSequenceLength - 1 - i) * screenRow >= 6) {
+                    let isSpecial = this.reelDataProxy.symbolFeature[i].some((feature) => feature.isSpecial);
+                    let soundType = this.getHitC1SoundType(isSpecial);
+                    curSequence.push(soundType);
+                    this.hitNum++;
                 }
             }
             curSequence = this.getHitCorrectness(curSequence, i, c1Count);
@@ -81,7 +84,13 @@ export class ReelEffect_DampingSoundCommand extends puremvc.SimpleCommand {
                 curSequence.push(AudioClipsEnum.Free_C1Hit01);
             }
         }
-        this.handleBigWinHit();
+        const totalBet = this.gameDataProxy.curTotalBet;
+        const result = this.gameDataProxy.curRoundResult as FreeGameOneRoundResult;
+        const playerWin = result.waysGameResult.playerWin;
+        const odds = this.gameDataProxy.convertCredit2Cash(playerWin) / totalBet;
+        if (odds >= 25) {
+            this.handleBigWinHit();
+        }
         this.handleRespin();
     }
 

@@ -8,13 +8,14 @@
       "__id__": 1
     },
     "optimizationPolicy": 0,
-    "asyncLoadAssets": false,
-    "persistent": false
+    "persistent": false,
+    "asyncLoadAssets": false
   },
   {
     "__type__": "cc.Node",
     "_name": "COM_FourLevelsBigWin",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "_parent": null,
     "_children": [
       {
@@ -371,6 +372,7 @@
     "__prefab": {
       "__id__": 13
     },
+    "_visFlags": 0,
     "_materials": [
       {
         "__uuid__": "9ac96d01-6d75-4cff-8109-10280ca93569",
@@ -378,7 +380,6 @@
       },
       null
     ],
-    "_visFlags": 0,
     "startColor": {
       "__id__": 14
     },
@@ -432,6 +433,13 @@
       "__id__": 26
     },
     "bursts": [],
+    "_renderCulling": false,
+    "_cullingMode": 0,
+    "_aabbHalfX": 0,
+    "_aabbHalfY": 0,
+    "_aabbHalfZ": 0,
+    "_dataCulling": false,
+    "enableCulling": false,
     "_colorOverLifetimeModule": {
       "__id__": 27
     },
@@ -462,7 +470,6 @@
     "renderer": {
       "__id__": 73
     },
-    "enableCulling": false,
     "_prewarm": false,
     "_capacity": 400,
     "_simulationSpace": 1,
@@ -1109,7 +1116,8 @@
       "__uuid__": "1b113a06-0df7-40a3-87df-a1eb65e9af76@6c48a",
       "__expectedType__": "cc.Texture2D"
     },
-    "_useGPU": false
+    "_useGPU": false,
+    "_alignSpace": 2
   },
   {
     "__type__": "cc.UITransform",
@@ -1229,6 +1237,7 @@
     "__prefab": {
       "__id__": 81
     },
+    "_visFlags": 0,
     "_materials": [
       {
         "__uuid__": "d84ec5ca-8037-41a7-ad7f-34a5a80002cf",
@@ -1236,7 +1245,6 @@
       },
       null
     ],
-    "_visFlags": 0,
     "startColor": {
       "__id__": 82
     },
@@ -1290,6 +1298,13 @@
       "__id__": 94
     },
     "bursts": [],
+    "_renderCulling": false,
+    "_cullingMode": 0,
+    "_aabbHalfX": 0,
+    "_aabbHalfY": 0,
+    "_aabbHalfZ": 0,
+    "_dataCulling": false,
+    "enableCulling": false,
     "_colorOverLifetimeModule": {
       "__id__": 95
     },
@@ -1320,7 +1335,6 @@
     "renderer": {
       "__id__": 139
     },
-    "enableCulling": false,
     "_prewarm": true,
     "_capacity": 7,
     "_simulationSpace": 1,
@@ -1900,7 +1914,8 @@
       "__uuid__": "b1688042-2b8c-4caf-b81c-c698200a3ebe@6c48a",
       "__expectedType__": "cc.Texture2D"
     },
-    "_useGPU": false
+    "_useGPU": false,
+    "_alignSpace": 2
   },
   {
     "__type__": "cc.UITransform",
@@ -2019,6 +2034,7 @@
     "__prefab": {
       "__id__": 147
     },
+    "_visFlags": 0,
     "_materials": [
       {
         "__uuid__": "9ad78888-2531-4999-adcf-e1763ad9f1fa",
@@ -2026,7 +2042,6 @@
       },
       null
     ],
-    "_visFlags": 0,
     "startColor": {
       "__id__": 148
     },
@@ -2080,6 +2095,13 @@
       "__id__": 160
     },
     "bursts": [],
+    "_renderCulling": false,
+    "_cullingMode": 0,
+    "_aabbHalfX": 0,
+    "_aabbHalfY": 0,
+    "_aabbHalfZ": 0,
+    "_dataCulling": false,
+    "enableCulling": false,
     "_colorOverLifetimeModule": {
       "__id__": 161
     },
@@ -2110,7 +2132,6 @@
     "renderer": {
       "__id__": 206
     },
-    "enableCulling": false,
     "_prewarm": false,
     "_capacity": 40,
     "_simulationSpace": 1,
@@ -2720,7 +2741,8 @@
       "__uuid__": "7ee1e462-329b-46d4-9de2-172c9853180f@6c48a",
       "__expectedType__": "cc.Texture2D"
     },
-    "_useGPU": false
+    "_useGPU": false,
+    "_alignSpace": 2
   },
   {
     "__type__": "cc.UITransform",
@@ -2841,6 +2863,7 @@
     "__prefab": {
       "__id__": 214
     },
+    "_visFlags": 0,
     "_materials": [
       {
         "__uuid__": "ed02b351-ec03-4b37-92da-53ed6f74b218",
@@ -2848,7 +2871,6 @@
       },
       null
     ],
-    "_visFlags": 0,
     "startColor": {
       "__id__": 215
     },
@@ -2902,6 +2924,13 @@
       "__id__": 227
     },
     "bursts": [],
+    "_renderCulling": false,
+    "_cullingMode": 0,
+    "_aabbHalfX": 0,
+    "_aabbHalfY": 0,
+    "_aabbHalfZ": 0,
+    "_dataCulling": false,
+    "enableCulling": false,
     "_colorOverLifetimeModule": {
       "__id__": 228
     },
@@ -2932,7 +2961,6 @@
     "renderer": {
       "__id__": 264
     },
-    "enableCulling": false,
     "_prewarm": false,
     "_capacity": 100,
     "_simulationSpace": 1,
@@ -3286,10 +3314,10 @@
   {
     "__type__": "cc.TextureAnimationModule",
     "_enable": true,
-    "_numTilesX": 4,
-    "numTilesX": 4,
-    "_numTilesY": 3,
-    "numTilesY": 3,
+    "_numTilesX": 6,
+    "numTilesX": 6,
+    "_numTilesY": 6,
+    "numTilesY": 6,
     "_mode": 0,
     "animation": 0,
     "frameOverTime": {
@@ -3423,7 +3451,8 @@
       "__uuid__": "856904f2-ac1a-409d-80af-282250c70ca4@6c48a",
       "__expectedType__": "cc.Texture2D"
     },
-    "_useGPU": false
+    "_useGPU": false,
+    "_alignSpace": 2
   },
   {
     "__type__": "cc.UITransform",
@@ -3544,6 +3573,7 @@
     "__prefab": {
       "__id__": 272
     },
+    "_visFlags": 0,
     "_materials": [
       {
         "__uuid__": "ed02b351-ec03-4b37-92da-53ed6f74b218",
@@ -3551,7 +3581,6 @@
       },
       null
     ],
-    "_visFlags": 0,
     "startColor": {
       "__id__": 273
     },
@@ -3605,6 +3634,13 @@
       "__id__": 285
     },
     "bursts": [],
+    "_renderCulling": false,
+    "_cullingMode": 0,
+    "_aabbHalfX": 0,
+    "_aabbHalfY": 0,
+    "_aabbHalfZ": 0,
+    "_dataCulling": false,
+    "enableCulling": false,
     "_colorOverLifetimeModule": {
       "__id__": 286
     },
@@ -3635,7 +3671,6 @@
     "renderer": {
       "__id__": 322
     },
-    "enableCulling": false,
     "_prewarm": false,
     "_capacity": 300,
     "_simulationSpace": 1,
@@ -4126,7 +4161,8 @@
       "__uuid__": "856904f2-ac1a-409d-80af-282250c70ca4@6c48a",
       "__expectedType__": "cc.Texture2D"
     },
-    "_useGPU": false
+    "_useGPU": false,
+    "_alignSpace": 2
   },
   {
     "__type__": "cc.UITransform",
@@ -4247,6 +4283,7 @@
     "__prefab": {
       "__id__": 330
     },
+    "_visFlags": 0,
     "_materials": [
       {
         "__uuid__": "85c9abdf-02cf-4d82-b0ac-7da4b312529f",
@@ -4254,7 +4291,6 @@
       },
       null
     ],
-    "_visFlags": 0,
     "startColor": {
       "__id__": 331
     },
@@ -4308,6 +4344,13 @@
       "__id__": 343
     },
     "bursts": [],
+    "_renderCulling": false,
+    "_cullingMode": 0,
+    "_aabbHalfX": 0,
+    "_aabbHalfY": 0,
+    "_aabbHalfZ": 0,
+    "_dataCulling": false,
+    "enableCulling": false,
     "_colorOverLifetimeModule": {
       "__id__": 344
     },
@@ -4338,7 +4381,6 @@
     "renderer": {
       "__id__": 380
     },
-    "enableCulling": false,
     "_prewarm": false,
     "_capacity": 100,
     "_simulationSpace": 1,
@@ -4829,7 +4871,8 @@
       "__uuid__": "ec6bf44b-1071-4e29-a273-d24b7d2d1501@6c48a",
       "__expectedType__": "cc.Texture2D"
     },
-    "_useGPU": false
+    "_useGPU": false,
+    "_alignSpace": 2
   },
   {
     "__type__": "cc.UITransform",
@@ -5080,6 +5123,7 @@
     "__prefab": {
       "__id__": 394
     },
+    "_visFlags": 0,
     "_materials": [
       {
         "__uuid__": "9ac96d01-6d75-4cff-8109-10280ca93569",
@@ -5087,7 +5131,6 @@
       },
       null
     ],
-    "_visFlags": 0,
     "startColor": {
       "__id__": 395
     },
@@ -5141,6 +5184,13 @@
       "__id__": 407
     },
     "bursts": [],
+    "_renderCulling": false,
+    "_cullingMode": 0,
+    "_aabbHalfX": 0,
+    "_aabbHalfY": 0,
+    "_aabbHalfZ": 0,
+    "_dataCulling": false,
+    "enableCulling": false,
     "_colorOverLifetimeModule": {
       "__id__": 408
     },
@@ -5171,7 +5221,6 @@
     "renderer": {
       "__id__": 454
     },
-    "enableCulling": false,
     "_prewarm": false,
     "_capacity": 350,
     "_simulationSpace": 1,
@@ -5818,7 +5867,8 @@
       "__uuid__": "1b113a06-0df7-40a3-87df-a1eb65e9af76@6c48a",
       "__expectedType__": "cc.Texture2D"
     },
-    "_useGPU": false
+    "_useGPU": false,
+    "_alignSpace": 2
   },
   {
     "__type__": "cc.UITransform",
@@ -5938,6 +5988,7 @@
     "__prefab": {
       "__id__": 462
     },
+    "_visFlags": 0,
     "_materials": [
       {
         "__uuid__": "d84ec5ca-8037-41a7-ad7f-34a5a80002cf",
@@ -5945,7 +5996,6 @@
       },
       null
     ],
-    "_visFlags": 0,
     "startColor": {
       "__id__": 463
     },
@@ -5999,6 +6049,13 @@
       "__id__": 475
     },
     "bursts": [],
+    "_renderCulling": false,
+    "_cullingMode": 0,
+    "_aabbHalfX": 0,
+    "_aabbHalfY": 0,
+    "_aabbHalfZ": 0,
+    "_dataCulling": false,
+    "enableCulling": false,
     "_colorOverLifetimeModule": {
       "__id__": 476
     },
@@ -6029,7 +6086,6 @@
     "renderer": {
       "__id__": 520
     },
-    "enableCulling": false,
     "_prewarm": true,
     "_capacity": 7,
     "_simulationSpace": 1,
@@ -6609,7 +6665,8 @@
       "__uuid__": "b1688042-2b8c-4caf-b81c-c698200a3ebe@6c48a",
       "__expectedType__": "cc.Texture2D"
     },
-    "_useGPU": false
+    "_useGPU": false,
+    "_alignSpace": 2
   },
   {
     "__type__": "cc.UITransform",
@@ -6728,6 +6785,7 @@
     "__prefab": {
       "__id__": 528
     },
+    "_visFlags": 0,
     "_materials": [
       {
         "__uuid__": "9ad78888-2531-4999-adcf-e1763ad9f1fa",
@@ -6735,7 +6793,6 @@
       },
       null
     ],
-    "_visFlags": 0,
     "startColor": {
       "__id__": 529
     },
@@ -6789,6 +6846,13 @@
       "__id__": 541
     },
     "bursts": [],
+    "_renderCulling": false,
+    "_cullingMode": 0,
+    "_aabbHalfX": 0,
+    "_aabbHalfY": 0,
+    "_aabbHalfZ": 0,
+    "_dataCulling": false,
+    "enableCulling": false,
     "_colorOverLifetimeModule": {
       "__id__": 542
     },
@@ -6819,7 +6883,6 @@
     "renderer": {
       "__id__": 587
     },
-    "enableCulling": false,
     "_prewarm": false,
     "_capacity": 40,
     "_simulationSpace": 1,
@@ -7429,7 +7492,8 @@
       "__uuid__": "7ee1e462-329b-46d4-9de2-172c9853180f@6c48a",
       "__expectedType__": "cc.Texture2D"
     },
-    "_useGPU": false
+    "_useGPU": false,
+    "_alignSpace": 2
   },
   {
     "__type__": "cc.UITransform",
@@ -7550,6 +7614,7 @@
     "__prefab": {
       "__id__": 595
     },
+    "_visFlags": 0,
     "_materials": [
       {
         "__uuid__": "ed02b351-ec03-4b37-92da-53ed6f74b218",
@@ -7557,7 +7622,6 @@
       },
       null
     ],
-    "_visFlags": 0,
     "startColor": {
       "__id__": 596
     },
@@ -7611,6 +7675,13 @@
       "__id__": 608
     },
     "bursts": [],
+    "_renderCulling": false,
+    "_cullingMode": 0,
+    "_aabbHalfX": 0,
+    "_aabbHalfY": 0,
+    "_aabbHalfZ": 0,
+    "_dataCulling": false,
+    "enableCulling": false,
     "_colorOverLifetimeModule": {
       "__id__": 609
     },
@@ -7641,7 +7712,6 @@
     "renderer": {
       "__id__": 645
     },
-    "enableCulling": false,
     "_prewarm": false,
     "_capacity": 300,
     "_simulationSpace": 1,
@@ -8132,7 +8202,8 @@
       "__uuid__": "856904f2-ac1a-409d-80af-282250c70ca4@6c48a",
       "__expectedType__": "cc.Texture2D"
     },
-    "_useGPU": false
+    "_useGPU": false,
+    "_alignSpace": 2
   },
   {
     "__type__": "cc.UITransform",
@@ -8254,6 +8325,7 @@
     "__prefab": {
       "__id__": 653
     },
+    "_visFlags": 0,
     "_materials": [
       {
         "__uuid__": "85c9abdf-02cf-4d82-b0ac-7da4b312529f",
@@ -8261,7 +8333,6 @@
       },
       null
     ],
-    "_visFlags": 0,
     "startColor": {
       "__id__": 654
     },
@@ -8315,6 +8386,13 @@
       "__id__": 666
     },
     "bursts": [],
+    "_renderCulling": false,
+    "_cullingMode": 0,
+    "_aabbHalfX": 0,
+    "_aabbHalfY": 0,
+    "_aabbHalfZ": 0,
+    "_dataCulling": false,
+    "enableCulling": false,
     "_colorOverLifetimeModule": {
       "__id__": 667
     },
@@ -8345,7 +8423,6 @@
     "renderer": {
       "__id__": 703
     },
-    "enableCulling": false,
     "_prewarm": false,
     "_capacity": 15,
     "_simulationSpace": 1,
@@ -8836,7 +8913,8 @@
       "__uuid__": "ec6bf44b-1071-4e29-a273-d24b7d2d1501@6c48a",
       "__expectedType__": "cc.Texture2D"
     },
-    "_useGPU": false
+    "_useGPU": false,
+    "_alignSpace": 2
   },
   {
     "__type__": "cc.UITransform",
@@ -9081,6 +9159,7 @@
     "__prefab": {
       "__id__": 717
     },
+    "_visFlags": 0,
     "_materials": [
       {
         "__uuid__": "9ac96d01-6d75-4cff-8109-10280ca93569",
@@ -9088,7 +9167,6 @@
       },
       null
     ],
-    "_visFlags": 0,
     "startColor": {
       "__id__": 718
     },
@@ -9142,6 +9220,13 @@
       "__id__": 730
     },
     "bursts": [],
+    "_renderCulling": false,
+    "_cullingMode": 0,
+    "_aabbHalfX": 0,
+    "_aabbHalfY": 0,
+    "_aabbHalfZ": 0,
+    "_dataCulling": false,
+    "enableCulling": false,
     "_colorOverLifetimeModule": {
       "__id__": 731
     },
@@ -9172,7 +9257,6 @@
     "renderer": {
       "__id__": 777
     },
-    "enableCulling": false,
     "_prewarm": false,
     "_capacity": 350,
     "_simulationSpace": 1,
@@ -9819,7 +9903,8 @@
       "__uuid__": "1b113a06-0df7-40a3-87df-a1eb65e9af76@6c48a",
       "__expectedType__": "cc.Texture2D"
     },
-    "_useGPU": false
+    "_useGPU": false,
+    "_alignSpace": 2
   },
   {
     "__type__": "cc.UITransform",
@@ -9939,6 +10024,7 @@
     "__prefab": {
       "__id__": 785
     },
+    "_visFlags": 0,
     "_materials": [
       {
         "__uuid__": "d84ec5ca-8037-41a7-ad7f-34a5a80002cf",
@@ -9946,7 +10032,6 @@
       },
       null
     ],
-    "_visFlags": 0,
     "startColor": {
       "__id__": 786
     },
@@ -10000,6 +10085,13 @@
       "__id__": 798
     },
     "bursts": [],
+    "_renderCulling": false,
+    "_cullingMode": 0,
+    "_aabbHalfX": 0,
+    "_aabbHalfY": 0,
+    "_aabbHalfZ": 0,
+    "_dataCulling": false,
+    "enableCulling": false,
     "_colorOverLifetimeModule": {
       "__id__": 799
     },
@@ -10030,7 +10122,6 @@
     "renderer": {
       "__id__": 843
     },
-    "enableCulling": false,
     "_prewarm": true,
     "_capacity": 10,
     "_simulationSpace": 1,
@@ -10610,7 +10701,8 @@
       "__uuid__": "b1688042-2b8c-4caf-b81c-c698200a3ebe@6c48a",
       "__expectedType__": "cc.Texture2D"
     },
-    "_useGPU": false
+    "_useGPU": false,
+    "_alignSpace": 2
   },
   {
     "__type__": "cc.UITransform",
@@ -10729,6 +10821,7 @@
     "__prefab": {
       "__id__": 851
     },
+    "_visFlags": 0,
     "_materials": [
       {
         "__uuid__": "ed02b351-ec03-4b37-92da-53ed6f74b218",
@@ -10736,7 +10829,6 @@
       },
       null
     ],
-    "_visFlags": 0,
     "startColor": {
       "__id__": 852
     },
@@ -10790,6 +10882,13 @@
       "__id__": 864
     },
     "bursts": [],
+    "_renderCulling": false,
+    "_cullingMode": 0,
+    "_aabbHalfX": 0,
+    "_aabbHalfY": 0,
+    "_aabbHalfZ": 0,
+    "_dataCulling": false,
+    "enableCulling": false,
     "_colorOverLifetimeModule": {
       "__id__": 865
     },
@@ -10820,7 +10919,6 @@
     "renderer": {
       "__id__": 901
     },
-    "enableCulling": false,
     "_prewarm": false,
     "_capacity": 300,
     "_simulationSpace": 1,
@@ -11311,7 +11409,8 @@
       "__uuid__": "856904f2-ac1a-409d-80af-282250c70ca4@6c48a",
       "__expectedType__": "cc.Texture2D"
     },
-    "_useGPU": false
+    "_useGPU": false,
+    "_alignSpace": 2
   },
   {
     "__type__": "cc.UITransform",
@@ -11556,6 +11655,7 @@
     "__prefab": {
       "__id__": 915
     },
+    "_visFlags": 0,
     "_materials": [
       {
         "__uuid__": "9ac96d01-6d75-4cff-8109-10280ca93569",
@@ -11563,7 +11663,6 @@
       },
       null
     ],
-    "_visFlags": 0,
     "startColor": {
       "__id__": 916
     },
@@ -11617,6 +11716,13 @@
       "__id__": 928
     },
     "bursts": [],
+    "_renderCulling": false,
+    "_cullingMode": 0,
+    "_aabbHalfX": 0,
+    "_aabbHalfY": 0,
+    "_aabbHalfZ": 0,
+    "_dataCulling": false,
+    "enableCulling": false,
     "_colorOverLifetimeModule": {
       "__id__": 929
     },
@@ -11647,7 +11753,6 @@
     "renderer": {
       "__id__": 975
     },
-    "enableCulling": false,
     "_prewarm": false,
     "_capacity": 300,
     "_simulationSpace": 1,
@@ -12294,7 +12399,8 @@
       "__uuid__": "1b113a06-0df7-40a3-87df-a1eb65e9af76@6c48a",
       "__expectedType__": "cc.Texture2D"
     },
-    "_useGPU": false
+    "_useGPU": false,
+    "_alignSpace": 2
   },
   {
     "__type__": "cc.UITransform",
@@ -12414,6 +12520,7 @@
     "__prefab": {
       "__id__": 983
     },
+    "_visFlags": 0,
     "_materials": [
       {
         "__uuid__": "d84ec5ca-8037-41a7-ad7f-34a5a80002cf",
@@ -12421,7 +12528,6 @@
       },
       null
     ],
-    "_visFlags": 0,
     "startColor": {
       "__id__": 984
     },
@@ -12475,6 +12581,13 @@
       "__id__": 996
     },
     "bursts": [],
+    "_renderCulling": false,
+    "_cullingMode": 0,
+    "_aabbHalfX": 0,
+    "_aabbHalfY": 0,
+    "_aabbHalfZ": 0,
+    "_dataCulling": false,
+    "enableCulling": false,
     "_colorOverLifetimeModule": {
       "__id__": 997
     },
@@ -12505,7 +12618,6 @@
     "renderer": {
       "__id__": 1041
     },
-    "enableCulling": false,
     "_prewarm": true,
     "_capacity": 8,
     "_simulationSpace": 1,
@@ -13085,7 +13197,8 @@
       "__uuid__": "b1688042-2b8c-4caf-b81c-c698200a3ebe@6c48a",
       "__expectedType__": "cc.Texture2D"
     },
-    "_useGPU": false
+    "_useGPU": false,
+    "_alignSpace": 2
   },
   {
     "__type__": "cc.UITransform",
@@ -13204,6 +13317,7 @@
     "__prefab": {
       "__id__": 1049
     },
+    "_visFlags": 0,
     "_materials": [
       {
         "__uuid__": "ed02b351-ec03-4b37-92da-53ed6f74b218",
@@ -13211,7 +13325,6 @@
       },
       null
     ],
-    "_visFlags": 0,
     "startColor": {
       "__id__": 1050
     },
@@ -13265,6 +13378,13 @@
       "__id__": 1062
     },
     "bursts": [],
+    "_renderCulling": false,
+    "_cullingMode": 0,
+    "_aabbHalfX": 0,
+    "_aabbHalfY": 0,
+    "_aabbHalfZ": 0,
+    "_dataCulling": false,
+    "enableCulling": false,
     "_colorOverLifetimeModule": {
       "__id__": 1063
     },
@@ -13295,7 +13415,6 @@
     "renderer": {
       "__id__": 1099
     },
-    "enableCulling": false,
     "_prewarm": false,
     "_capacity": 100,
     "_simulationSpace": 1,
@@ -13786,7 +13905,8 @@
       "__uuid__": "856904f2-ac1a-409d-80af-282250c70ca4@6c48a",
       "__expectedType__": "cc.Texture2D"
     },
-    "_useGPU": false
+    "_useGPU": false,
+    "_alignSpace": 2
   },
   {
     "__type__": "cc.UITransform",
@@ -14075,6 +14195,7 @@
       "__expectedType__": "cc.BitmapFont"
     },
     "_isSystemFontUsed": false,
+    "_spacingX": 0,
     "_isItalic": false,
     "_isBold": false,
     "_isUnderline": false,
@@ -14183,7 +14304,6 @@
       "a": 255
     },
     "loop": true,
-    "_premultipliedAlpha": true,
     "_timeScale": 1,
     "_useTint": false,
     "_preCacheMode": 0,
@@ -14195,6 +14315,7 @@
       "__uuid__": "1144438b-af49-4368-bd3e-8885feb09a2e",
       "__expectedType__": "sp.SkeletonData"
     },
+    "_premultipliedAlpha": true,
     "defaultSkin": "default",
     "defaultAnimation": "",
     "_sockets": [],
@@ -14334,6 +14455,7 @@
     "__prefab": {
       "__id__": 1127
     },
+    "_visFlags": 0,
     "_materials": [
       {
         "__uuid__": "016413c2-daf0-4188-b925-4db2abe749d3",
@@ -14341,7 +14463,6 @@
       },
       null
     ],
-    "_visFlags": 0,
     "startColor": {
       "__id__": 1128
     },
@@ -14395,6 +14516,13 @@
       "__id__": 1140
     },
     "bursts": [],
+    "_renderCulling": false,
+    "_cullingMode": 0,
+    "_aabbHalfX": 0,
+    "_aabbHalfY": 0,
+    "_aabbHalfZ": 0,
+    "_dataCulling": false,
+    "enableCulling": false,
     "_colorOverLifetimeModule": {
       "__id__": 1141
     },
@@ -14425,7 +14553,6 @@
     "renderer": {
       "__id__": 1185
     },
-    "enableCulling": false,
     "_prewarm": false,
     "_capacity": 100,
     "_simulationSpace": 1,
@@ -14993,7 +15120,8 @@
       "__uuid__": "a06bfffe-f12e-4903-b947-db421bbb3f32@6c48a",
       "__expectedType__": "cc.Texture2D"
     },
-    "_useGPU": false
+    "_useGPU": false,
+    "_alignSpace": 2
   },
   {
     "__type__": "cc.UITransform",
@@ -15114,6 +15242,7 @@
     "__prefab": {
       "__id__": 1193
     },
+    "_visFlags": 0,
     "_materials": [
       {
         "__uuid__": "15d458cc-1b15-4c3f-b1cf-4e0d3073eb52",
@@ -15121,7 +15250,6 @@
       },
       null
     ],
-    "_visFlags": 0,
     "startColor": {
       "__id__": 1194
     },
@@ -15175,6 +15303,13 @@
       "__id__": 1206
     },
     "bursts": [],
+    "_renderCulling": false,
+    "_cullingMode": 0,
+    "_aabbHalfX": 0,
+    "_aabbHalfY": 0,
+    "_aabbHalfZ": 0,
+    "_dataCulling": false,
+    "enableCulling": false,
     "_colorOverLifetimeModule": {
       "__id__": 1207
     },
@@ -15205,7 +15340,6 @@
     "renderer": {
       "__id__": 1251
     },
-    "enableCulling": false,
     "_prewarm": true,
     "_capacity": 1,
     "_simulationSpace": 1,
@@ -15773,7 +15907,8 @@
       "__uuid__": "b40924fd-60eb-453a-9e37-e7906a746bf0@6c48a",
       "__expectedType__": "cc.Texture2D"
     },
-    "_useGPU": false
+    "_useGPU": false,
+    "_alignSpace": 2
   },
   {
     "__type__": "cc.UITransform",
