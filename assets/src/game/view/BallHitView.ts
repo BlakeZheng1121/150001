@@ -1,4 +1,4 @@
-import { _decorator } from 'cc';
+import { _decorator, Enum, Node, Vec3 } from 'cc';
 import { SceneManager } from '../../core/utils/SceneManager';
 import { GlobalTimer } from '../../sgv3/util/GlobalTimer';
 import { JackPotPerformControl } from '../../ta/jackpot-perform-control/JackPotPerformControl';
@@ -8,8 +8,59 @@ import { AudioClipsEnum } from '../vo/enum/SoundMap';
 import { GameUIOrientationSetting } from '../vo/GameUIOrientationSetting';
 import BaseView from 'src/base/BaseView';
 import { EmblemControl } from './EmblemControl';
+import { GameSceneOption } from 'src/sgv3/vo/data/GameScene';
 
 const { ccclass, property } = _decorator;
+
+export enum EmblemLevel {
+    Level_1 = 0,
+    Level_2 = 1,
+    Level_3 = 2,
+    Level_4 = 3
+}
+
+@ccclass('TransformSetting')
+export class TransformSetting {
+    @property({})
+    public isChangeScale: boolean = false;
+    @property({})
+    public isChangePosition: boolean = false;
+    @property({
+        visible() {
+            return this.isChangePosition;
+        }
+    })
+    public position: Vec3 = new Vec3();
+    @property({
+        visible() {
+            return this.isChangeScale;
+        }
+    })
+    public scale: Vec3 = new Vec3();
+}
+
+@ccclass('TransformSettingByLevel')
+export class TransformSettingByLevel {
+    @property({ type: Enum(EmblemLevel) })
+    public level: EmblemLevel = EmblemLevel.Level_1;
+
+    @property({ type: TransformSetting, visible: true })
+    public setting: TransformSetting = new TransformSetting();
+}
+
+@ccclass('SceneTransformSetting')
+export class SceneTransformSetting {
+    @property({ type: Enum(GameSceneOption), visible: true })
+    public _scene: GameSceneOption = GameSceneOption.Game_1;
+
+    public get scene(): string {
+        return GameSceneOption[this._scene];
+    }
+
+    @property({ type: TransformSettingByLevel, visible: true })
+    public transformSetting: Array<TransformSettingByLevel> = [];
+}
+
 @ccclass('BallHitView')
 export class BallHitView extends BaseView {
     public callBack: BallHitViewMediator;
@@ -17,6 +68,10 @@ export class BallHitView extends BaseView {
     private jackPotPerformControl: JackPotPerformControl;
     @property({ type: EmblemControl })
     public emblemControl: EmblemControl | null = null;
+    @property({ type: Node })
+    public emblemNode: Node | null = null;
+    @property({ type: [SceneTransformSetting], visible: true })
+    public emblemTransformSetting: Array<SceneTransformSetting> = [];
 
     public baseGameIdle() {
         this.jackPotPerformControl.baseIdle();
@@ -149,11 +204,6 @@ export class BallHitView extends BaseView {
         this.jackPotPerformControl.hideBallCountInfo();
     }
 
-    // Base game 轉 Free game
-    public freeGameTransition() {
-        this.freeGameIdle();
-    }
-
     // Base game 轉 Mini game
     public miniGameTransition() {
         AudioManager.Instance.play(AudioClipsEnum.JP_Slogan);
@@ -204,6 +254,23 @@ export class BallHitView extends BaseView {
         let isHorizontal = orientation == SceneManager.EV_ORIENTATION_HORIZONTAL;
         for (let i = 0; i < this.uiOrientation.length; i++) {
             this.uiOrientation[i].changeOrientation(isHorizontal, scene);
+        }
+    }
+
+    public changeScene(curScene: string) {
+        let curLevel = this.emblemControl.getLevel();
+        let emblemSetting = this.emblemTransformSetting.find((setting) => setting.scene == curScene);
+        if (emblemSetting) {
+            let settingByLevel = emblemSetting.transformSetting.find((setting) => setting.level == curLevel);
+            if (settingByLevel) {
+                let setting = settingByLevel.setting;
+                if (setting.isChangePosition) {
+                    this.emblemNode.setPosition(setting.position);
+                }
+                if (setting.isChangeScale) {
+                    this.emblemNode.setScale(setting.scale);
+                }
+            }
         }
     }
 }

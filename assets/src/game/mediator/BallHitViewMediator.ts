@@ -118,6 +118,7 @@ export class BallHitViewMediator extends BaseMediator<BallHitView> {
                 break;
             case GameStateProxyEvent.ON_SCENE_BEFORE_CHANGE:
                 this.view.changeOrientation(this.gameDataProxy.orientationEvent, this.gameDataProxy.curScene);
+                this.view.changeScene(this.gameDataProxy.curScene);
                 this.loadingTransition();
                 break;
             case FreeGameEvent.ON_BEFORE_END_SCORE_SHOW:
@@ -178,14 +179,12 @@ export class BallHitViewMediator extends BaseMediator<BallHitView> {
     }
 
     private freeGameTransition() {
-        this.view.freeGameTransition();
         this.numInBall = this.gameDataProxy.ballTotalCredit;
         let ballCash = BalanceUtil.formatBalance(this.numInBall);
         this.view.setBallCredit(ballCash, 4);
     }
 
     private topUpGameTransition() {
-        this.view.freeGameTransition();
         this.hideBallCredit();
         this.numInBall = this.gameDataProxy.ballTotalCount;
         this.ballTotalCount = this.numInBall;
@@ -210,7 +209,7 @@ export class BallHitViewMediator extends BaseMediator<BallHitView> {
     }
     // 準備收集龍珠分數的表演，直式需放大龍珠
     private prepareCollectBall() {
-        // this.view.ballFreeGameIdle();
+        this.view.freeGameIdle();
         AudioManager.Instance.stop(BGMClipsEnum.BGM_Base).fade(0, 1);
         AudioManager.Instance.play(BGMClipsEnum.BGM_FeatureSelection).loop(true).volume(0).fade(1, 1.5);
     }

@@ -56,4 +56,8 @@ export class EmblemControl extends Component {
     public setLevelUpAudio(audio: string) {
         this.levelUpAudio = audio;
     }
+
+    public getLevel() {
+        return this.curLevel[0]
+    }
 }
