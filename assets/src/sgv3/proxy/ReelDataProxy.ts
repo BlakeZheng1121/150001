@@ -93,14 +93,12 @@ export class ReelDataProxy extends puremvc.Proxy {
         }
     }
 
-    public getFovPos(reelIndex: number, fovIndex: number): Vec3 {
+    // 取得滾輪框內的Symbol位置，可指定Symbol特定部位的位置
+    public getFovPos(reelIndex: number, fovIndex: number, partType?: SymbolPartType): Vec3 {
         this.symbolsNode.forEach((symbols) => {
             symbols.sort(this.positionCompare);
         });
-        //return this.symbolsNode[reelIndex][fovIndex + 1].worldPosition;
-        return this.symbolsNode[reelIndex][fovIndex + 1]
-            .getComponent(UISymbol)
-            .getSymbolPosWithType(SymbolPartType.LABEL);
+        return this.symbolsNode[reelIndex][fovIndex + 1].getComponent(UISymbol).getSymbolPosWithType(partType);
     }
 
     public setSymbolsNode(symbols: Array<Array<Node>>) {
@@ -128,7 +126,6 @@ export class ReelDataProxy extends puremvc.Proxy {
         }
         return this._UIProxy;
     }
-
 
     protected positionCompare(s1: Node, s2: Node) {
         if (s1.worldPosition.y < s2.worldPosition.y) {

@@ -106,20 +106,30 @@ export class PosTweenView extends BaseView {
     ) {
         this.arrayIndex.push(sequenceIndex);
         this.callback = (idx) => callback(idx);
-        this.arrayObject[sequenceIndex].node.worldPosition = basePos;
-        tween(this.arrayObject[sequenceIndex].node)
-            .to(
-                this.arrayObject[sequenceIndex].baseCreditTime,
-                { worldPosition: targertPos },
-                { easing: this.arrayObject[sequenceIndex].baseCreditEasing }
-            )
+        let curObject = this.arrayObject[sequenceIndex];
+        curObject.node.worldPosition = basePos;
+        tween(curObject.node)
+            .to(curObject.baseCreditTime, { worldPosition: targertPos }, { easing: curObject.baseCreditEasing })
             .union()
             .call(() => {
                 if (this.callback != null) {
                     this.callback(this.arrayIndex[sequenceIndex]);
                 }
             })
+            .delay(0.5)
+            .call(() => {
+                this.onBaseCreditObjectFinished(curObject);
+            })
             .start();
+    }
+
+    private onBaseCreditObjectFinished(creditObject: PosTweenObject) {
+        for (let i in creditObject.Particle) {
+            creditObject.Particle[i].ParticleClear();
+            creditObject.Particle[i].ParticleStop();
+        }
+        creditObject.labelText.string = String();
+        this.recycled(creditObject.node);
     }
 
     public onGetMultipleResult(targertPos: Vec3, callback: Function | null = null) {
@@ -170,15 +180,6 @@ export class PosTweenView extends BaseView {
             this.arrayIndex = [];
         }
         if (this.arrayObject.length > 0) {
-            this.arrayObject.forEach((value) => {
-                for (let i in value.Particle) {
-                    value.Particle[i].ParticleClear();
-                    value.Particle[i].ParticleStop();
-                }
-                value.labelText.string = String();
-                this.recycled(value.node);
-                value = null;
-            });
             this.arrayObject = [];
         }
     }

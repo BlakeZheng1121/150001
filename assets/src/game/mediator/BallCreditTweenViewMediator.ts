@@ -9,6 +9,7 @@ import { AudioManager } from '../../audio/AudioManager';
 import { GAME_GameDataProxy } from '../proxy/GAME_GameDataProxy';
 import { BallCreditTweenView } from '../view/BallCreditTweenView';
 import { AudioClipsEnum } from '../vo/enum/SoundMap';
+import { SymbolPartType } from 'src/sgv3/vo/enum/Reel';
 const { ccclass } = _decorator;
 
 @ccclass('BallCreditTweenViewMediator')
@@ -76,7 +77,11 @@ export class BallCreditTweenViewMediator extends BaseMediator<BallCreditTweenVie
 
     /** 每顆 C1球要開始收集至龍珠上時 */
     private onBaseCreditCollectStart() {
-        let basePos = this.reelDataProxy.getFovPos(this.curBaseSequence.x, this.curBaseSequence.y);
+        let basePos = this.reelDataProxy.getFovPos(
+            this.curBaseSequence.x,
+            this.curBaseSequence.y,
+            SymbolPartType.LABEL
+        );
         //設定資料
         this.view.clonePrefab();
         this.view.curObject.setBaseCreditSetting(

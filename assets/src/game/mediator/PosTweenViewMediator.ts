@@ -12,6 +12,7 @@ import { AudioManager } from '../../audio/AudioManager';
 import { GAME_GameDataProxy } from '../proxy/GAME_GameDataProxy';
 import { PosTweenView } from '../view/dragon-up/PosTweenView';
 import { AudioClipsEnum } from '../vo/enum/SoundMap';
+import { SymbolPartType } from 'src/sgv3/vo/enum/Reel';
 const { ccclass } = _decorator;
 
 @ccclass('PosTweenViewMediator')
@@ -81,7 +82,8 @@ export class PosTweenViewMediator extends BaseMediator<PosTweenView> {
         if (this.reelDataProxy.symbolFeature[this.curTargertSequence.x][this.curTargertSequence.y].multiple > 0) {
             let targertPos = this.reelDataProxy.getFovPos(
                 this.curTargertSequence.y * this.reelDataProxy.symbolFeature.length + this.curTargertSequence.x,
-                0
+                0,
+                SymbolPartType.LABEL
             );
             let hasRespin =
                 this.reelDataProxy.symbolFeature[this.curTargertSequence.x][this.curTargertSequence.y].ReSpinNum > 0;
@@ -194,7 +196,8 @@ export class PosTweenViewMediator extends BaseMediator<PosTweenView> {
             this.curTargertSequence.y * this.reelDataProxy.symbolFeature.length + this.curTargertSequence.x;
         let targertPos = this.reelDataProxy.getFovPos(
             this.curTargertSequence.y * this.reelDataProxy.symbolFeature.length + this.curTargertSequence.x,
-            0
+            0,
+            SymbolPartType.LABEL
         );
 
         this.sendNotification(DragonUpEvent.ON_GET_MULTIPLE_RESULT_START, targertIndex);
@@ -238,7 +241,6 @@ export class PosTweenViewMediator extends BaseMediator<PosTweenView> {
 
     private onNextTargertIndex() {
         if (this.curTargertSequenceIndex >= this.targertCollectSequence.length) {
-            this.view.clearPool(); //物件池清除
             this.baseCreditCollectSequence = [];
             this.targertCollectSequence = [];
             GlobalTimer.getInstance().registerTimer('onCollectEnd', 0.5, this.onAllCreditCollectEnd, this).start();
