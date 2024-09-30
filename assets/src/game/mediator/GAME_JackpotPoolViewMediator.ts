@@ -156,13 +156,17 @@ export class GAME_JackpotPoolViewMediator extends BaseMediator<GAME_JackpotPoolV
     }
 
     protected hitJackpotToUpdatePoolValue(hitInfos: PoolHitInfo[]) {
+        const jpPoolData = this.gameDataProxy.initEventData.executeSetting.jackpotSetting.jackpotPoolData[0];
         let jpObject: JackpotTypeObj = new JackpotTypeObj();
         jpObject.typeItems = [];
-        for (let i = 0; i < JackpotPool.MAJOR; i++) {
-            let jackpotPoolObj: JackpotPoolObj = new JackpotPoolObj();
-            jackpotPoolObj.poolId = hitInfos[i].hitPool;
-            jackpotPoolObj.poolValue = hitInfos[i].hitAmount / 100;
-            jpObject.typeItems.push(jackpotPoolObj);
+        for (let i = 0; i < jpPoolData.jackpotExtendSetting.poolInitValueType.length; i++) {
+            let jpType = jpPoolData.jackpotExtendSetting.poolInitValueType[i];
+            if (jpType == JackpotPoolValueType.Credit) {
+                let jackpotPoolObj: JackpotPoolObj = new JackpotPoolObj();
+                jackpotPoolObj.poolId = hitInfos[i].hitPool;
+                jackpotPoolObj.poolValue = hitInfos[i].hitAmount / 100;
+                jpObject.typeItems.push(jackpotPoolObj);
+            }
         }
         this.updatePoolValue(jpObject, true);
     }
