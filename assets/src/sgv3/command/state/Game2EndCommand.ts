@@ -1,5 +1,5 @@
 import { StateMachineProxy } from '../../proxy/StateMachineProxy';
-import { WinEvent, SoundEvent, BaseSoundParms, StateWinEvent, ViewMediatorEvent, ReelEvent, FreeGameEvent } from '../../util/Constant';
+import { WinEvent, StateWinEvent, ViewMediatorEvent, ReelEvent, FreeGameEvent } from '../../util/Constant';
 import { GlobalTimer } from '../../util/GlobalTimer';
 import { GameScene } from '../../vo/data/GameScene';
 import { GameStateId } from '../../vo/data/GameStateId';
@@ -49,12 +49,19 @@ export class Game2EndCommand extends StateCommand {
             } else {
                 const nextRoundResult = this.gameDataProxy.curStateResult.roundResult[0] as FreeGameOneRoundResult;
                 if (nextRoundResult && nextRoundResult.extendInfoForFreeGameResult.isRespinFeature) {
-                    this.sendNotification(FreeGameEvent.ON_EXPAND_WILD,nextRoundResult);
+                    this.sendNotification(FreeGameEvent.ON_EXPAND_WILD, nextRoundResult);
 
-                    GlobalTimer.getInstance().registerTimer(FreeGameEvent.ON_EXPAND_WILD,1.5,() => {
-                        GlobalTimer.getInstance().removeTimer(FreeGameEvent.ON_EXPAND_WILD);
-                        this.changeState(StateMachineProxy.GAME2_IDLE)
-                    },this).start();
+                    GlobalTimer.getInstance()
+                        .registerTimer(
+                            FreeGameEvent.ON_EXPAND_WILD,
+                            1.5,
+                            () => {
+                                GlobalTimer.getInstance().removeTimer(FreeGameEvent.ON_EXPAND_WILD);
+                                this.changeState(StateMachineProxy.GAME2_IDLE);
+                            },
+                            this
+                        )
+                        .start();
                 } else {
                     this.sendNotification(ReelEvent.ON_REELS_INIT); //Reel Init
                     this.changeState(StateMachineProxy.GAME2_IDLE);
@@ -68,9 +75,6 @@ export class Game2EndCommand extends StateCommand {
 
     /** game2結束面板處理 */
     protected playGame2EndBoard() {
-        this.sendNotification(SoundEvent.SOUNDCMD, [SoundEvent.STOP_ALLSOUND, BaseSoundParms.BGM]);
-        this.sendNotification(SoundEvent.SOUNDCMD, [SoundEvent.PLAY_NORMALSOUND, BaseSoundParms.GAME2END]);
-
         let freeGameOneRoundResults = this.gameDataProxy.spinEventData.freeGameResult.freeGameOneRoundResult;
         if (
             freeGameOneRoundResults[freeGameOneRoundResults.length - 1].displayLogicInfo

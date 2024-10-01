@@ -1,5 +1,5 @@
 import { StateMachineProxy } from '../../proxy/StateMachineProxy';
-import { WinEvent, SoundEvent, BaseSoundParms, StateWinEvent } from '../../util/Constant';
+import { WinEvent, StateWinEvent } from '../../util/Constant';
 import { StateCommand } from './StateCommand';
 
 export class Game3EndCommand extends StateCommand {
@@ -21,8 +21,6 @@ export class Game3EndCommand extends StateCommand {
     /** Game3結束面板處理 */
     protected playGame3EndBoard() {
         const self = this;
-        self.sendNotification(SoundEvent.SOUNDCMD, [SoundEvent.STOP_ALLSOUND, BaseSoundParms.BGM]);
-        self.sendNotification(SoundEvent.SOUNDCMD, [SoundEvent.PLAY_NORMALSOUND, BaseSoundParms.Game3END]);
         self.showCreditBoard();
     }
 

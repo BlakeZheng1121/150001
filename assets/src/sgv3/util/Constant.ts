@@ -124,20 +124,6 @@ export class UnitTestEvent {
 }
 
 export class SoundEvent {
-    /**  重置背景音樂 */
-    public static readonly SOUNDCMD = 'soundCmd';
-    /**  重置背景音樂 */
-    public static readonly RESET_SCENEBG = 'resetSceneBG';
-    /**  播放背景音樂 */
-    public static readonly PLAY_SCENEBG = 'playSceneBG';
-    /**  播放一般音效 */
-    public static readonly PLAY_NORMALSOUND = 'playNormalSound';
-    /**  播放一般音效 */
-    public static readonly STOP_NORMALSOUND = 'stopNormalSound';
-    /**  暫停背景音樂 */
-    public static readonly PAUSE_ALLSOUND = 'pauseAllSound';
-    /**  關閉背景音樂 */
-    public static readonly STOP_ALLSOUND = 'stopAllSound';
     public static readonly BUTTON_DOWN_SOUND = 'Button_UI';
     public static readonly SPIN_DOWN_SOUND = 'Button_Spin';
 }

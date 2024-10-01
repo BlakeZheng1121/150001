@@ -1,7 +1,7 @@
 import { UIEvent } from 'common-ui/proxy/UIEvent';
 import { NetworkProxy } from '../../../core/proxy/NetworkProxy';
 import { StateMachineProxy } from '../../proxy/StateMachineProxy';
-import { SoundEvent, BaseSoundParms, WinEvent, ViewMediatorEvent } from '../../util/Constant';
+import { WinEvent, ViewMediatorEvent } from '../../util/Constant';
 import { GameStateId } from '../../vo/data/GameStateId';
 import { AutoPlayOnSpinProcessCommand } from '../autoplay/AutoPlayOnSpinProcessCommand';
 import { CheckGameFlowCommand } from '../CheckGameFlowCommand';
@@ -31,15 +31,13 @@ export class Game1SpinCommand extends StateCommand {
             this.gameDataProxy.reStateResult.gameStateId == GameStateId.END
         ) {
             this.gameDataProxy.resetGameParams(); // 這邊為做贏分表演相關參數重置
-            if(this.networkProxy.getCanSpinState()) {
+            if (this.networkProxy.getCanSpinState()) {
                 this.sendNotification(SpinRequestCommand.NAME);
             }
         } else {
             this.sendNotification(CheckGameFlowCommand.NAME); //有數學資料，表示取得 Recovery資料
             this.sendNotification(ClearRecoveryDataCommand.NAME); //完成 Recovery動作，清除資料
         }
-
-        this.sendNotification(SoundEvent.SOUNDCMD, [SoundEvent.PLAY_SCENEBG, BaseSoundParms.GAME1]);
 
         this.gameDataProxy.isSpinning = true;
         this.sendNotification(UIEvent.UPDATE_PLAYER_WIN, 0); //清除Win欄位

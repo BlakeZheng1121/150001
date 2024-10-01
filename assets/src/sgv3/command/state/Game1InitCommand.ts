@@ -3,7 +3,7 @@ import { BGMClipsEnum } from '../../../game/vo/enum/SoundMap';
 import { AudioManager } from '../../../audio/AudioManager';
 import { ReelEffect_SymbolFeatureCommand } from '../../../game/command/reelEffect/ReelEffect_SymbolFeatureCommand';
 import { StateMachineProxy } from '../../proxy/StateMachineProxy';
-import { SoundEvent, BaseSoundParms, WinEvent, ReelEvent } from '../../util/Constant';
+import { WinEvent, ReelEvent } from '../../util/Constant';
 import { GameScene } from '../../vo/data/GameScene';
 import { GameStateId } from '../../vo/data/GameStateId';
 import { GameOperation } from '../../vo/enum/GameOperation';
@@ -28,12 +28,10 @@ export class Game1InitCommand extends StateCommand {
                 if (this.gameDataProxy.stateWinData.totalAmount() > 0 || this.gameDataProxy.hasFeatureSelection()) {
                     // 讓他可以重頭開始
                     this.gameDataProxy.rollingMoneyEnd = true;
-                    this.sendNotification(SoundEvent.SOUNDCMD, [SoundEvent.RESET_SCENEBG, BaseSoundParms.GAME1]);
                     this.gameDataProxy.curWinData = this.gameDataProxy.stateWinData.concat();
                     this.changeState(StateMachineProxy.GAME1_SHOWWIN);
                 } else {
                     // 從game3出來 game1沒分數就不用showWin了 所以直接清除TempWon讓錶底加上miniGame的值
-                    this.sendNotification(SoundEvent.SOUNDCMD, [SoundEvent.RESET_SCENEBG, BaseSoundParms.GAME1]);
                     let totalWin = this.gameDataProxy._tempWonCredit;
                     this.gameDataProxy.resetTempWonCredit();
                     this.sendNotification(UIEvent.UPDATE_PLAYER_BALANCE, this.gameDataProxy.cash);
@@ -47,7 +45,6 @@ export class Game1InitCommand extends StateCommand {
                 this.sendNotification(ReelEffect_SymbolFeatureCommand.NAME);
                 if (this.gameDataProxy.stateWinData.totalAmount() > 0) {
                     // 讓他可以重頭開始
-                    this.sendNotification(SoundEvent.SOUNDCMD, [SoundEvent.RESET_SCENEBG, BaseSoundParms.GAME1]);
                     this.gameDataProxy.curWinData = this.gameDataProxy.stateWinData.concat();
                     this.sendNotification(ReelEvent.ON_REELS_RESTORE, this.gameDataProxy.spinEventData.baseGameResult);
                     this.changeState(StateMachineProxy.GAME1_SHOWWIN);

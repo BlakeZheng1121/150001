@@ -126,8 +126,13 @@ export class AudioManager extends Component {
     }
 
     play(clipName: string) {
+        if (clipName == '') {
+            return;
+        }
         let audioContainer = this.createAudioContainerFromPool({ clipName: clipName });
-
+        if (audioContainer == null) {
+            return;
+        }
         const options = {
             fade(vol: number, duration: number) {
                 audioContainer.fade({ vol: vol, duration: duration });
@@ -183,6 +188,9 @@ export class AudioManager extends Component {
         mute = this.mute
     }: audioContainerPara): AudioContainer {
         let clip = this.audioClipsMap.get(clipName);
+        if (clip == null) {
+            return null;
+        }
         let audioSourceContainerNode = PoolManager.instance.getNode(this.audioContainerPrefab, this.node);
         let audioSourceContainer = audioSourceContainerNode.getComponent(AudioContainer);
 

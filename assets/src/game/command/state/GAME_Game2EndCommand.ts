@@ -1,6 +1,6 @@
 import { _decorator } from 'cc';
 import { Game2EndCommand } from '../../../sgv3/command/state/Game2EndCommand';
-import { BaseSoundParms, FreeGameEvent, SoundEvent, StateWinEvent } from '../../../sgv3/util/Constant';
+import { FreeGameEvent, StateWinEvent } from '../../../sgv3/util/Constant';
 import { GlobalTimer } from '../../../sgv3/util/GlobalTimer';
 import { GameScene } from '../../../sgv3/vo/data/GameScene';
 import { GAME_GameDataProxy } from '../../proxy/GAME_GameDataProxy';
@@ -11,9 +11,6 @@ export class GAME_Game2EndCommand extends Game2EndCommand {
     readonly endShowTimeKey: string = 'endShowTimeKey';
     /** game2結束面板處理 */
     protected playGame2EndBoard() {
-        this.sendNotification(SoundEvent.SOUNDCMD, [SoundEvent.STOP_ALLSOUND, BaseSoundParms.BGM]);
-        this.sendNotification(SoundEvent.SOUNDCMD, [SoundEvent.PLAY_NORMALSOUND, BaseSoundParms.GAME2END]);
-
         this.showTotalWinSum();
 
         this.gameDataProxy.afterFeatureGame = true;

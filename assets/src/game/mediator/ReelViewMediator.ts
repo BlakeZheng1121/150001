@@ -39,6 +39,7 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
 
     protected curIndex: number = 0;
     protected isPlayedWildScoring: boolean = false;
+    protected preSpinStopSoundSequence: Array<string> = [];
 
     public constructor(name?: string, component?: any) {
         super(name, component);
@@ -187,8 +188,11 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
     protected playReelStopSound(curReelStopIndex: number) {
         for (let i = 0; i < this.reelDataProxy.reelStopSoundSequence[curReelStopIndex].length; i++) {
             let stopSound: AudioClipsEnum = this.reelDataProxy.reelStopSoundSequence[curReelStopIndex][i];
-            AudioManager.Instance.stop(stopSound);
+            if (this.preSpinStopSoundSequence[curReelStopIndex]) {
+                AudioManager.Instance.stop(this.preSpinStopSoundSequence[curReelStopIndex]);
+            }
             AudioManager.Instance.play(stopSound);
+            this.preSpinStopSoundSequence[curReelStopIndex] = stopSound;
         }
         this.reelDataProxy.reelStopSoundSequence[curReelStopIndex] = [];
     }

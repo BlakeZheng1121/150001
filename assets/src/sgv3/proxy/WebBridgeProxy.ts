@@ -4,7 +4,7 @@ import { StateMachineObject } from '../../core/proxy/CoreStateMachineProxy';
 import { CoreWebBridgeProxy } from '../../core/proxy/CoreWebBridgeProxy';
 import { MathUtil } from '../../core/utils/MathUtil';
 import { AutoPlayClickOptionCommand } from '../command/autoplay/AutoPlayClickOptionCommand';
-import { ScreenEvent, SoundEvent, BaseSoundParms, WinEvent } from '../util/Constant';
+import { ScreenEvent, WinEvent } from '../util/Constant';
 import { GameScene } from '../vo/data/GameScene';
 import { GameDataProxy } from './GameDataProxy';
 import { StateMachineProxy } from './StateMachineProxy';
@@ -90,7 +90,6 @@ export class WebBridgeProxy extends CoreWebBridgeProxy {
                     return false;
                 } else {
                     // 關閉分級面板
-                    this.sendNotification(SoundEvent.SOUNDCMD, [SoundEvent.PLAY_NORMALSOUND, BaseSoundParms.WEBBTN]);
                     this.sendNotification(WinEvent.HIDE_BOARD_REQUEST);
                     return true;
                 }
@@ -102,7 +101,6 @@ export class WebBridgeProxy extends CoreWebBridgeProxy {
                     return false;
                 } else {
                     // 切狀態至 end
-                    this.sendNotification(SoundEvent.SOUNDCMD, [SoundEvent.PLAY_NORMALSOUND, BaseSoundParms.WEBBTN]);
                     this.sendNotification(WinEvent.HIDE_BOARD_REQUEST);
                     this.sendNotification(
                         StateMachineCommand.NAME,
