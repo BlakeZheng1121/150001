@@ -424,9 +424,6 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
                     this.gameDataProxy.showWinOnceComplete = false;
                 }
             }
-            // if (this.reelDataProxy.isTurboMode && this.gameDataProxy.onAutoPlay) {
-            //     return;
-            // }
             self.curIndex = self.curIndex + 1 >= self.winData.wayInfos.length ? 0 : this.curIndex + 1;
             self.playLoopWin(self.curIndex);
         }

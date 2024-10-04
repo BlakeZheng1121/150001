@@ -22,7 +22,6 @@ export class CommonGameSetting {
     public tableCount: number; //紀錄表單總數
     public tableHitProbability: Array<number>; // 紀錄各表單的選擇機率
     public wheelData: Array<Array<WheelData>>; // 紀錄輪帶 WheelData[i][j]表示第i個Table的第j輪帶。
-    public extraWheelData: Array<Array<WheelData>>; // 紀錄輪帶 WheelData[i][j]表示第i個Table的第j輪帶。
     public groupingWheelData: Array<Array<Array<WheelData>>>; // wheelData 外面多增加一層 group
     public fakeWheelData: Array<Array<WheelData>>; //紀錄假輪帶 fakeWheelData[i][j]，表示第i個Table的第j輪帶
     public baseGameExtendSetting: BaseGameExtendSetting;
