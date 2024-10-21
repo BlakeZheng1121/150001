@@ -15,13 +15,6 @@ export class GAME_StartupGameCommand extends StartupGameCommand {
 
     public execute(notification: puremvc.INotification): void {
         super.execute(notification);
-
-        let data = {
-            gameID: "1104",
-            logTag: 'StartupGame',
-        };
-        let pack = {name:'gameLog', data: data};
-        this.webBridgeProxy.sendPlayerData(pack);
     }
 
     private _webBridgeProxy: WebBridgeProxy;

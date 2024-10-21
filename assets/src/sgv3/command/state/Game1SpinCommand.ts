@@ -49,7 +49,7 @@ export class Game1SpinCommand extends StateCommand {
 
         //新增加速log
         let data = {
-            gameID: '1104',
+            gameID: this.gameDataProxy.machineType,
             userName: this.gameDataProxy.userName,
             logTag: 'slotSpeedMode',
             logType: 'behavior',

@@ -39,15 +39,6 @@ export class SetupGameConfigCommand extends puremvc.SimpleCommand {
             self.getUIVersionRequest();
             self.getLogoUrlRequest();
             self.getSpinLogoUrlRequest();
-
-            let gameDataProxy: CoreGameDataProxy = this.getGameDataProxy();
-            let data = {
-                gameID: '1104',
-                logTag: 'getRequest-SetupGameConfigCommand',
-                userName: String(gameDataProxy.userId)
-            };
-            let pack = { name: 'gameLog', data: data };
-            this.webBridgeProxy.sendPlayerData(pack);
         }
     }
 

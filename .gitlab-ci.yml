@@ -33,8 +33,8 @@ stages:
 variables:
   COCOS_VERSION: '3.5.2'
   GAME_TYPE: '1'
-  GAME_ID: '1104'
-  EXPORT_ID: '1104'
+  GAME_ID: '100004'
+  EXPORT_ID: '100004'
   CHECK_GAME_SIZE: '10' #打包容量判斷，MB為基礎單位
   CHECK_MEMORY: '8g'
   NEED_COPY_HELP: 'true' #判斷是否需要啟動複製Help頁面工作;預設為false

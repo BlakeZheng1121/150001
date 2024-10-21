@@ -1,5 +1,5 @@
 var gameType = 1;
-var machineType = 1104;
+var machineType = 100004;
 
 var unit = 'qa';
 var userID = 25;
