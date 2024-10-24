@@ -178,8 +178,6 @@ export class ViewMediatorEvent {
     public static readonly RECOVERY_LOAD_VIEW: string = 'recoveryLoadView';
     public static readonly INIT_EMBLEM_LEVEL: string = 'initEmblemLevel';
     public static readonly UPDATE_EMBLEM_LEVEL: string = 'updateEmblemLevel';
-
-    public static readonly;
 }
 
 export class WebGameState {

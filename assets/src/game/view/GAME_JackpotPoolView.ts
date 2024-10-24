@@ -1,12 +1,13 @@
-import { _decorator, Label, Tween, tween, Node } from 'cc';
+import { _decorator, Label, Node, tween, Vec3 } from 'cc';
 import { Logger } from '../../core/utils/Logger';
 import { SceneManager } from '../../core/utils/SceneManager';
 import { BalanceUtil } from '../../sgv3/util/BalanceUtil';
 import { JackpotPool } from '../../sgv3/util/Constant';
 import { GameScene } from '../../sgv3/vo/data/GameScene';
-import { Raise_JackpotFX } from '../../ta/raise-jackpot/Raise_JackpotFX';
 import { GameUIOrientationSetting } from '../vo/GameUIOrientationSetting';
 import BaseView from 'src/base/BaseView';
+import { TimelineTool } from 'TimelineTool';
+import { LayerManager } from 'src/core/utils/LayerManager';
 
 const { ccclass, property } = _decorator;
 
@@ -14,9 +15,10 @@ const { ccclass, property } = _decorator;
 export class GAME_JackpotPoolView extends BaseView {
     public static readonly HORIZONTAL: string = 'horizontal';
     public static readonly VERTICAL: string = 'vertical';
-    private language: string;
     private orientationState: string;
 
+    @property({ type: Number })
+    public anotherRenderOrder: number;
     @property({ type: Node })
     public jackpotPoolGrand: Node;
     @property({ type: Node })
@@ -37,8 +39,8 @@ export class GAME_JackpotPoolView extends BaseView {
     public miniAmount: Label;
 
     // 加押特效
-    @property({ type: Raise_JackpotFX })
-    public raiseJackpotFX: Raise_JackpotFX;
+    @property({ type: TimelineTool })
+    public raiseJackpotFX: TimelineTool;
 
     // 滾分 - 動畫用暫時分數
     public tempGrandAmount: number = 0;
@@ -51,14 +53,8 @@ export class GAME_JackpotPoolView extends BaseView {
     public totalMinorAmount: number = 0;
     public totalMiniAmount: number = 0;
 
-    private betRangeMapIndex: number = 0;
-    private timeoutId: number;
-
     private timeoutMap: Map<number, number> = new Map<number, number>();
-
-    public init(lang: string) {
-        this.language = lang;
-    }
+    private scaleUp: Vec3 = new Vec3(1.2, 1.2);
 
     // 直橫式轉換
     private _gameUIOrientation: Array<GameUIOrientationSetting> | null = null;
@@ -239,11 +235,35 @@ export class GAME_JackpotPoolView extends BaseView {
         }
     }
 
-    public updateFortuneMultiplier(mapIndex: number, isPlayFX: boolean) {
-        if (isPlayFX && mapIndex > this.betRangeMapIndex) {
-            this.raiseJackpotFX.onPlay();
+    public updateFortuneMultiplier(poolFxList: Array<number>) {
+        for (let i = 0; i < poolFxList.length; i++) {
+            this.playJackpotFX(poolFxList[i]);
         }
-        this.betRangeMapIndex = mapIndex;
+    }
+
+    private playJackpotFX(poolId: number) {
+        let animName: string = '';
+        switch (poolId + 1) {
+            case JackpotPool.MAJOR:
+                animName = 'Major';
+                this.playScaleTween(this.majorAmount.node);
+                break;
+            case JackpotPool.MINOR:
+                animName = 'Minor';
+                this.playScaleTween(this.minorAmount.node);
+                break;
+            case JackpotPool.MINI:
+                animName = 'Mini';
+                this.playScaleTween(this.miniAmount.node);
+                break;
+        }
+        if (animName != '') {
+            this.raiseJackpotFX.play(animName);
+        }
+    }
+
+    private playScaleTween(target: Node) {
+        tween(target).to(0.1, { scale: this.scaleUp }).to(0.1, { scale: Vec3.ONE }).start();
     }
 
     public updateAllPoolAmount() {
@@ -370,5 +390,13 @@ export class GAME_JackpotPoolView extends BaseView {
             clearTimeout(timeoutId);
         });
         this.timeoutMap.clear();
+    }
+
+    public setLowerLayer() {
+        LayerManager.setLayer(this, this.anotherRenderOrder);
+    }
+
+    public restoreLayer() {
+        LayerManager.setLayer(this, this.getRenderOrder());
     }
 }

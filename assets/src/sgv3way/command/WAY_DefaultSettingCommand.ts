@@ -8,83 +8,40 @@ import { WAY_GameDataProxy } from '../proxy/WAY_GameDataProxy';
 export class WAY_DefaultSettingCommand extends CoreDefaultSettingCommand {
     /** 設定totalbetList*/
     protected setTotalBetList() {
-        // 整理 singleBetCombinations 的投注組合依大到小排列
-        let _tempKey: string = '';
-        let _timeKeySplit: Array<string> = [];
-        let _denom: number = NaN;
-        let _bet: number = NaN;
-        // 加入初始化重設totalBetList
+        // 基礎押注
+        const baseBet = this.gameDataProxy.initEventData.executeSetting.baseGameSetting.betSpec.baseBet;
+        // 幣別 denom
+        const denom = this.gameDataProxy.initEventData.denoms[0];
         this.gameDataProxy.totalBetList = [];
-        for (_tempKey in this.gameDataProxy.initEventData.singleBetCombinations) {
-            _timeKeySplit = _tempKey.split('_');
-            _denom = +_timeKeySplit[0];
-            _bet = MathUtil.mul(
-                +this.gameDataProxy.initEventData.singleBetCombinations[_tempKey],
-                MathUtil.div(_denom, 1000)
+        for (let i = 0; i < this.gameDataProxy.initEventData.betMultiplier.length; i++) {
+            let totalBet = MathUtil.mul(
+                baseBet,
+                this.gameDataProxy.initEventData.betMultiplier[i],
+                MathUtil.div(denom, 1000)
             );
-            if (_timeKeySplit.indexOf(this.gameDataProxy.sceneSetting.betCombinationsType.NO_EXTRA_BET) > -1) {
-                this.gameDataProxy.totalBetList.push(_bet);
-            }
+            this.gameDataProxy.totalBetList.push(totalBet);
         }
-
-        this.gameDataProxy.totalBetList.sort(function (a, b) {
-            return a - b;
-        });
     }
 
     protected setBetAndLine(_defaultIdx: number): number {
-        this.gameDataProxy.curBet = +this.gameDataProxy.userSetting.bet;
+        this.gameDataProxy.curTotalBet = +this.gameDataProxy.userSetting.totalBet;
         this.gameDataProxy.curLine = +this.gameDataProxy.userSetting.line;
+        this.gameDataProxy.curExtraBet = this.gameDataProxy.userSetting.extraBet;
+        this.gameDataProxy.curBet = +this.gameDataProxy.userSetting.betMultiplier;
+        this.gameDataProxy.curDenomMultiplier = +this.gameDataProxy.userSetting.denomMultiplier;
 
-        this.gameDataProxy.curExtraBet = this.gameDataProxy.userSetting.extrabet;
-        let _useKey: string = '';
-        let _userBet: number = NaN;
-        // 取得對應 key 值
-        _useKey =
-            this.gameDataProxy.betCombinationKeys[0] +
-            '_' +
-            this.gameDataProxy.betCombinationKeys[1] +
-            '_' +
-            this.gameDataProxy.betCombinationKeys[2] +
-            '_' +
-            this.gameDataProxy.betCombinationKeys[3];
-
-        if (this.gameDataProxy.initEventData.singleBetCombinations[_useKey]) {
-            _userBet = this.getUserBet(
-                this.gameDataProxy.initEventData.singleBetCombinations[_useKey],
-                +this.gameDataProxy.curDenom
-            );
-            _defaultIdx = this.gameDataProxy.totalBetList.indexOf(_userBet);
+        let predicate: (bet: any, index: any) => boolean;
+        if (this.gameDataProxy.hasDenomMultiplier()) {
+            predicate = (bet, index) =>
+                bet == this.gameDataProxy.curTotalBet &&
+                this.gameDataProxy.initEventData.denomMultiplier[index] == this.gameDataProxy.curDenomMultiplier;
+        } else {
+            predicate = (bet, index) => bet == this.gameDataProxy.curTotalBet;
         }
+        _defaultIdx = this.gameDataProxy.totalBetList.findIndex(predicate);
 
         return _defaultIdx;
     }
-
-    /** 初始化 Html 線或輪數設定 */
-    protected setWebLine() {
-        this.webBridgeProxy.initLine(
-            '' + this.gameDataProxy.initEventData.executeSetting.baseGameSetting.betSpec.waysBetColumnList[0]
-        );
-    }
-
-    protected setJackpotAllBetList() {
-        let _tempKey: string = '';
-        let _tempBet = NaN;
-        let _param: string[] = [];
-
-        // 加入初始化重設totalBetList
-        this.gameDataProxy.jackpotAllBetList = [];
-        for (_tempKey in this.gameDataProxy.initEventData.singleBetCombinations) {
-            _param = _tempKey.split('_');
-            _tempBet = MathUtil.mul(+this.gameDataProxy.initEventData.singleBetCombinations[_tempKey], +_param[0], 0.001);
-            this.gameDataProxy.jackpotAllBetList.push(+_param[1])
-        }
-
-        this.gameDataProxy.jackpotAllBetList.sort(function (a, b) {
-            return a - b;
-        });
-    }
-
     // ======================== Get Set ========================
     protected _gameDataProxy: WAY_GameDataProxy;
     protected get gameDataProxy(): WAY_GameDataProxy {

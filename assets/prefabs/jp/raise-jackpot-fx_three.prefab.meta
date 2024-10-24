@@ -2,12 +2,12 @@
   "ver": "1.1.38",
   "importer": "prefab",
   "imported": true,
-  "uuid": "686db002-2e7f-4974-a95e-56ae48f66a47",
+  "uuid": "dc1b4355-46fc-4762-80c8-bb0379699ea4",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "Raise_JackpotFX"
+    "syncNodeName": "raise-jackpot-fx_three"
   }
 }

@@ -86,6 +86,19 @@ export class InitEvent {
 
     /** 意象物累積初始資料 */
     public initialData: InitialData;
+
+    /** 
+     * @summary 押注組合的基礎押注倍數 
+     * @description TotalBet(Credit) = baseBet * betMultiplier
+     */
+    public betMultiplier: Array<number>;
+
+    /**
+     * @summary 押注組合對應的 denom 倍數設定
+     * @description 有此資料時，遊戲的押注選單會顯示 denom 倍數選項，
+     * 且 Jackpot bonus 會依照玩家選擇 denom 倍數來計算
+     */
+    public denomMultiplier: Array<number>;
 }
 
 export class InitialData {

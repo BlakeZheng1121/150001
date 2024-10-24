@@ -10,13 +10,22 @@ export class WAY_SpinRequestCommand extends SpinRequestCommand {
         this.gameDataProxy.playerTotalWin = -1;
 
         let extraBetType = this.gameDataProxy.curExtraBet;
-        let playBet = this.gameDataProxy.curBetByCombination;
+        let playBet = this.gameDataProxy.convertCash2Credit(this.gameDataProxy.curTotalBet);
         let denom = this.gameDataProxy.curDenom;
         let operationRequest = this.gameDataProxy.curGameOperation;
         let wayColumn = this.gameDataProxy.curLine;
         let wayBet = this.gameDataProxy.curBet;
+        let denomMultiplier = this.gameDataProxy.curDenomMultiplier;
 
-        this.netProxy.sendSpinRequest(playBet, extraBetType, denom, operationRequest, wayBet, wayColumn);
+        this.netProxy.sendSpinRequest(
+            playBet,
+            extraBetType,
+            denom,
+            operationRequest,
+            wayBet,
+            wayColumn,
+            denomMultiplier
+        );
     }
 
     protected _gameDataProxy: WAY_GameDataProxy;

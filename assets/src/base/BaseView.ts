@@ -43,4 +43,8 @@ export default abstract class BaseView extends BaseUI {
             mediator && mediator.setViewComponent(null);
         }
     }
+
+    public getRenderOrder(): number {
+        return this.renderOrder;
+    }
 }

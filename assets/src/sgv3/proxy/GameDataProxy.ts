@@ -31,6 +31,7 @@ import { UIEvent } from 'common-ui/proxy/UIEvent';
 /** 全遊戲資料 */
 export class GameDataProxy extends CoreGameDataProxy {
     public curEmblemLevel: number[] = [];
+    public emblemLevelRange: number[] = [];
     protected _gameData: GameData;
     protected _userSetting: UserSetting;
 
@@ -349,22 +350,6 @@ export class GameDataProxy extends CoreGameDataProxy {
         this._gameData.scrollingEndPlayed = _val;
     }
 
-    /** 分批載入進度 */
-    public get batchSceneComplete(): number {
-        return this._gameData.batchSceneComplete;
-    }
-    public set batchSceneComplete(_val: number) {
-        this._gameData.batchSceneComplete = _val;
-    }
-
-    /** 投注組合單位 */
-    public get betCombinationKeys(): string[] {
-        return this._gameData.betCombinationKeys;
-    }
-    public set betCombinationKeys(_val: string[]) {
-        this._gameData.betCombinationKeys = _val;
-    }
-
     /** 投注組合列表 */
     public get totalBetList(): number[] {
         return this._gameData.totalBetList;
@@ -417,14 +402,6 @@ export class GameDataProxy extends CoreGameDataProxy {
     public set winBoardState(_val: WinBoardState) {
         this._gameData.winBoardState = _val;
     }
-    /**檢查winBoard是否表演中 */
-    // public set winBoardShowing(val: boolean) {
-    //     this._gameData.winBoardShowing = val;
-    // }
-
-    // public get winBoardShowing(): boolean {
-    //     return this._gameData.winBoardShowing;
-    // }
 
     /** 目前場景資料 */
     public get curScene(): string {
@@ -508,18 +485,26 @@ export class GameDataProxy extends CoreGameDataProxy {
     /** 投注 */
     public set curBet(val) {
         this._gameData.curBet = val;
-        this.betCombinationKeys[1] = '' + val;
         this.saveUserSetting();
     }
     public get curBet(): number {
         return this._gameData.curBet;
     }
 
+    protected _curDenomMultiplier: number = NaN;
+    /** Denom multiplier */
+    public set curDenomMultiplier(val) {
+        this._curDenomMultiplier = val;
+        this.saveUserSetting();
+    }
+    public get curDenomMultiplier(): number {
+        return this._curDenomMultiplier;
+    }
+
     protected _curLine: number = NaN;
     /** 線數 */
     public set curLine(val) {
         this._curLine = val;
-        this.betCombinationKeys[2] = '' + val;
     }
     public get curLine(): number {
         return this._curLine;
@@ -529,7 +514,6 @@ export class GameDataProxy extends CoreGameDataProxy {
     /** 面額 */
     public set curDenom(val) {
         this._curDenom = val;
-        this.betCombinationKeys[0] = '' + MathUtil.mul(val, 1000);
         let denom = MathUtil.mul(this.curDenom, 0.001);
         this.credit = MathUtil.div(this.cash, denom);
 
@@ -543,7 +527,6 @@ export class GameDataProxy extends CoreGameDataProxy {
     /** 額外投注 */
     public set curExtraBet(val) {
         this._gameData.curExtraBet = val;
-        this.betCombinationKeys[3] = '' + val;
         this.saveUserSetting();
     }
     public get curExtraBet(): string {
@@ -553,6 +536,7 @@ export class GameDataProxy extends CoreGameDataProxy {
     /** 投注組合取得的值 */
     public set curTotalBet(val) {
         this._gameData.curTotalBet = val;
+        this.saveUserSetting();
     }
     public get curTotalBet(): number {
         return this._gameData.curTotalBet;
@@ -591,24 +575,6 @@ export class GameDataProxy extends CoreGameDataProxy {
 
     public get soundEnableState(): boolean {
         return this._gameData.soundEnableState;
-    }
-
-    // 取得傳入 GS 所需的 Bet 值
-    public get curBetByCombination(): number {
-        return this.initEventData.singleBetCombinations[this.curBetCombinationKey];
-    }
-
-    /** 取得投注組合 Key 值 */
-    public get curBetCombinationKey(): string {
-        return (
-            this.betCombinationKeys[0] +
-            '_' +
-            this.betCombinationKeys[1] +
-            '_' +
-            this.betCombinationKeys[2] +
-            '_' +
-            this.betCombinationKeys[3]
-        );
     }
 
     /** 判斷是否可以spin */
@@ -763,6 +729,10 @@ export class GameDataProxy extends CoreGameDataProxy {
         return MathUtil.mul(_data, this.curDenom, 0.001);
     }
 
+    public convertCash2Credit(_data: number): number {
+        return MathUtil.div(_data, this.curDenom, 0.001);
+    }
+
     /** 載入玩家該遊戲使用的 denom、bet */
     public loadUserSetting(): void {
         try {
@@ -781,53 +751,57 @@ export class GameDataProxy extends CoreGameDataProxy {
     /** 儲存玩家使用習慣 */
     protected saveUserSetting(): void {
         let saveData: UserSetting = new UserSetting();
-        saveData.denom = this.betCombinationKeys[0];
-        saveData.bet = this.betCombinationKeys[1];
-        saveData.line = this.betCombinationKeys[2];
-        saveData.extrabet = this.betCombinationKeys[3];
+        saveData.denom = this.curDenom.toString();
+        saveData.totalBet = this.curTotalBet.toString();
+        saveData.line = this.curLine.toString();
+        saveData.extraBet = this.curExtraBet;
+        saveData.betMultiplier = this.curBet.toString();
+        saveData.denomMultiplier = this.curDenomMultiplier.toString();
         try {
             if (window.localStorage) localStorage.setItem(this.localStorageKey, JSON.stringify(saveData));
         } catch (e) {}
     }
 
     /**
-     * [HTML to GAME]
-     * - 網頁端選擇 TotalBet，遊戲設定所選的值.
+     * 選擇 TotalBet，遊戲設定所選的值.
      * @param _value User 所選值
+     * @param _denomMultiplier 面額倍率
      */
-    public resetBetInfo(_value: number, _init: boolean = false): any {
-        let _key: string = '';
-        let _param: string[] = [];
-        let _tempBet: number = NaN;
+    public resetBetInfo(_value: number, _denomMultiplier: number = undefined): any {
         let _exist: boolean = false;
-        let _returnObj: any = new Object();
-        for (_key in this.initEventData.singleBetCombinations) {
-            let _isExtraBetMatch = true;
-            if (this.curExtraBet) {
-                _isExtraBetMatch = _key.indexOf(this.curExtraBet) !== -1;
+        this.curDenom = MathUtil.mul(this.initEventData.denoms[0], 0.001);
+        // maxBetLine > 0 代表是 Line Game，否則是 Way Game
+        // Line Game curLine 固定為 maxBetLine，Way Game curLine 固定為 screenColumn
+        const maxBetLine = this.initEventData.executeSetting.baseGameSetting.maxBetLine;
+        const screenColumn = this.initEventData.executeSetting.baseGameSetting.screenColumn;
+        this.curLine = maxBetLine > 0 ? maxBetLine : screenColumn;
+        // 暫時固定 No Extra Bet
+        this.curExtraBet = this.initEventData.executeSetting.baseGameSetting.betSpec.extraBetTypeList[0];
+        let predicate: (bet: any, index: any) => boolean;
+        if (this.hasDenomMultiplier()) {
+            predicate = (bet, index) => bet == _value && this.initEventData.denomMultiplier[index] == _denomMultiplier;
+        } else {
+            predicate = (bet, index) => bet == _value;
+        }
+        const betIndex = this.totalBetList.findIndex(predicate);
+        if (betIndex >= 0) {
+            this.curBet = this.initEventData.betMultiplier[betIndex];
+            if (this.hasDenomMultiplier()) {
+                this.curDenomMultiplier = this.initEventData.denomMultiplier[betIndex];
+            } else {
+                this.curDenomMultiplier = NaN;
             }
-            _param = _key.split('_');
-            _tempBet = MathUtil.mul(+this.initEventData.singleBetCombinations[_key], +_param[0], 0.001);
-            if (_tempBet == _value && _isExtraBetMatch) {
-                _exist = true;
-                _returnObj.totalBet = _tempBet;
-                this.curDenom = _returnObj.denom = MathUtil.mul(+_param[0], 0.001);
-                this.curBet = _returnObj.bet = +_param[1];
-                this.curLine = +_param[2];
-                this.curExtraBet = _param.length < 5 ? _param[3] : _param[3] + '_' + _param[4];
-                break;
-            }
+            _exist = true;
+        } else {
+            _exist = false;
         }
 
         if (_exist) {
             // 設定 TotalBet
             this.curTotalBet = _value;
             this.networkProxy.updateTotalBet(this.curTotalBet);
-
-            return _returnObj;
         } else {
             Logger.w('投注組合不存在目前設定的投注數字 : ' + _value);
-            return undefined;
         }
     }
 
@@ -900,118 +874,6 @@ export class GameDataProxy extends CoreGameDataProxy {
         return hasFeatureSelection ? hasFeatureSelection : false;
     }
 
-    /** 設定押注列表 */
-    public setTotalBetList(): void {
-        const self = this;
-        const extraBetTypeList = self.initEventData.executeSetting.baseGameSetting.betSpec.extraBetTypeList;
-        // 投注組合是否包含 extraBet
-        if (extraBetTypeList.length > 1) {
-            if (!self.curExtraBet) {
-                if (self.userSetting && self.userSetting.extrabet) {
-                    self.curExtraBet = self.userSetting.extrabet;
-                } else {
-                    self.curExtraBet = extraBetTypeList[self.defaultExtraBetIndex].toString();
-                }
-            }
-            const tempCurExtraBet = self.curExtraBet;
-            const maxExtraBetType = extraBetTypeList[extraBetTypeList.length - 1].toString();
-            self.initBetCombinations();
-            // 取得最大額外押分 Bet 列表長度
-            self.curExtraBet = maxExtraBetType;
-            self.setTotalBetExtraBet();
-            self.maxTotalBetLength = self.totalBetList.length;
-            // 設定當前的 totalBetList
-            self.curExtraBet = tempCurExtraBet;
-            self.setTotalBetExtraBet();
-        } else {
-            self.setTotalBetNoExtraBet();
-        }
-    }
-
-    protected setTotalBetNoExtraBet(): void {
-        const self = this;
-        // 整理 singleBetCombinations 的投注組合依大到小排列
-        let _tempKey: string = '';
-        let _denom: number = NaN;
-        let _maxBet = MathUtil.div(+self.initEventData.maxBet, 1000);
-        let _totalBet: number = NaN;
-        // 加入初始化重設totalBetList
-        self.totalBetList = [];
-        for (_tempKey in self.initEventData.singleBetCombinations) {
-            _denom = +_tempKey.split('_')[0];
-            _totalBet = MathUtil.mul(+self.initEventData.singleBetCombinations[_tempKey], MathUtil.div(_denom, 1000));
-
-            // 押分超過最大押分 不加入TotalBetList
-            // if (_totalBet > _maxBet) continue;
-
-            self.totalBetList.push(_totalBet);
-        }
-        self.totalBetList.sort(function (a, b) {
-            return a - b;
-        });
-    }
-
-    protected setTotalBetExtraBet(): void {
-        // 整理 singleBetCombinations 的投注組合依大到小排列
-        let _tempKey: string = '';
-        let _denom: number = NaN;
-        let _maxBet = MathUtil.div(+this.initEventData.maxBet, 1000);
-        let _totalBet: number = NaN;
-        // 加入初始化重設totalBetList
-        this.totalBetList = [];
-        // 改寫 singleBetCombinations 用betCombinations的投注組合依大到小排列
-        for (_tempKey in this.initEventData.singleBetCombinations) {
-            if (_tempKey.indexOf(this.curExtraBet) !== -1) {
-                _denom = +_tempKey.split('_')[0];
-                _totalBet = MathUtil.mul(
-                    +this.initEventData.singleBetCombinations[_tempKey],
-                    MathUtil.div(_denom, 1000)
-                );
-
-                // 押分超過最大押分 不加入TotalBetList
-                // if (_totalBet > _maxBet) continue;
-
-                this.totalBetList.push(
-                    MathUtil.mul(+this.initEventData.singleBetCombinations[_tempKey], MathUtil.div(_denom, 1000))
-                );
-            }
-        }
-        this.totalBetList.sort(function (a, b) {
-            return a - b;
-        });
-
-        // 移除重複值
-        this.totalBetList = this.totalBetList.filter(function (el, i, arr) {
-            return arr.indexOf(el) === i;
-        });
-
-        // 整理長度 (讓所有 ExtraBet 的長度一致)
-        if (this.totalBetList.length > this.maxTotalBetLength) {
-            const diff = this.totalBetList.length - this.maxTotalBetLength;
-            this.totalBetList = this.totalBetList.slice(diff, this.totalBetList.length);
-        }
-    }
-
-    protected initBetCombinations() {
-        let _tmpVal: string,
-            _tmpParam: string[],
-            _newKey: string,
-            _newCombinations: { [key: string]: number } = {};
-        for (let key in this.initEventData.betCombinations) {
-            _tmpVal = key.toString();
-            _tmpParam = _tmpVal.split('_');
-
-            let i: number = 0;
-            while (i < this.initEventData.denoms.length) {
-                _newKey = this.initEventData.denoms[i] + '_' + _tmpVal;
-                _newCombinations[_newKey] = this.initEventData.betCombinations[key];
-                i++;
-            }
-        }
-
-        this.initEventData.singleBetCombinations = _newCombinations;
-    }
-
     public getJackpotPoolRangeIndexWithBet(): number {
         const jpPoolData = this.initEventData.executeSetting.jackpotSetting.jackpotPoolData[0];
         const wayBetList = this.initEventData.executeSetting.baseGameSetting.betSpec.waysBetList;
@@ -1022,9 +884,12 @@ export class GameDataProxy extends CoreGameDataProxy {
     }
 
     public getInitEmblemLevel(): number[] {
+        this.initEmblemLevelRange();
         let level: number[] = [];
         try {
-            level[0] = this.getLevelMapping(this.initEventData.initialData.seatStatusCache.seatInfo.statusAccumulation[0]);
+            level[0] = this.getLevelMapping(
+                this.initEventData.initialData.seatStatusCache.seatInfo.statusAccumulation[0]
+            );
         } catch (error) {
             level[0] = 0;
         }
@@ -1032,18 +897,28 @@ export class GameDataProxy extends CoreGameDataProxy {
         return level;
     }
 
+    private initEmblemLevelRange() {
+        this.emblemLevelRange = [0, 3333, 6666, 10000];
+    }
+
     public getLevelMapping(accumulation: number): number {
         let level: number = 0;
-        if (accumulation >= 10000 || this.isHitMiniGame()) {
-            level = 3;
-        } else if (accumulation >= 6666) {
-            level = 2;
-        } else if (accumulation >= 3333) {
-            level = 1;
-        } else {
-            level = 0;
+        for (let i = this.emblemLevelRange.length - 1; i >= 0; i--) {
+            if (accumulation >= this.emblemLevelRange[i] || this.isHitMiniGame()) {
+                level = i;
+                break;
+            }
         }
         return level;
+    }
+
+    public hasDenomMultiplier(): boolean {
+        const denomMultiplierList = this.initEventData.denomMultiplier;
+        if (denomMultiplierList && denomMultiplierList.length > 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /** 是否為 Free Play 模式 */

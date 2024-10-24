@@ -29,7 +29,6 @@ export class WebBridgeProxy extends CoreWebBridgeProxy {
         window['onSpinBtnClick'] = () => this.spinRequest();
         window['setTurboValue'] = (_val) => this.setTurboValue(_val);
         window['onWebAutoPlayClick'] = (_val, _val2) => this.onWebAutoPlayClick(_val, _val2);
-        window['setTotalBetValue'] = (_val) => this.setTotalBetValue(_val);
         window['setGameFeature'] = (_val) => this.setFeature(_val);
         window['checkMenuEnable'] = () => this.checkMenuEnable();
         window['enableCreditLimit'] = (val) => this.enableCreditLimit(val);
@@ -185,15 +184,6 @@ export class WebBridgeProxy extends CoreWebBridgeProxy {
 
     /**
      * [HTML to GAME]
-     * - 網頁端選擇 TotalBet，遊戲設定所選的值.
-     * @param _value User 所選值
-     */
-    public setTotalBetValue(_value: number): any {
-        return this.gameDataProxy.resetBetInfo(_value);
-    }
-
-    /**
-     * [HTML to GAME]
      * - 收到web打過來的ticket
      * @param _value - ticket
      */
@@ -205,22 +195,6 @@ export class WebBridgeProxy extends CoreWebBridgeProxy {
     // ===========================
     // 以下是 GAME to HTML Method
     // ===========================
-
-    /**
-     * 將數學提供的 InitData(totalBetList) 帶入，設定 HTML Bet 選項.
-     * @param _totalBetList 投注選單
-     * @param _idx 預設投注
-     */
-    public initTotalBetSelection(_totalBetList: number[], _idx: number, _paramObj: any): void {
-        this.getWebFun('initTotalBetSelection', _totalBetList, _idx, _paramObj);
-    }
-
-    /**
-     * 將數學提供的 InitData(lines) 帶入，設定 HTML lines 選項.
-     */
-    public initLine(_value: string): void {
-        this.getWebFun('initLine', _value);
-    }
 
     /**
      * 通知 Html 遊戲狀態改變

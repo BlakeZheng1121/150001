@@ -22,12 +22,8 @@ export abstract class CoreDefaultSettingCommand extends puremvc.SimpleCommand {
         this.setInitHitPattern();
         // 設定Totalbet init列表，該值會隨line or way調整
         this.setTotalBetList();
-        // 設定 Jackpot資料 所有的 Bet值
-        this.setJackpotAllBetList();
         // 檢查是否有已經存在的組合
         this.resetStorageTotalBet();
-        // 設定web顯示的線數，該值會隨line or way調整
-        this.setWebLine();
         // 設定 Control Panel的Bet Menu
         this.sendNotification(UIEvent.CREATE_BET_MENU);
         // 設定 Bet Menu旁 切換 Bet會有 Bonus Upgrade的資訊
@@ -98,11 +94,13 @@ export abstract class CoreDefaultSettingCommand extends puremvc.SimpleCommand {
         this.gameDataProxy.totalBetIdx = _defaultIdx;
 
         // 初始化遊戲押注設定
-        let _paramObj: any = this.gameDataProxy.resetBetInfo(this.gameDataProxy.totalBetList[_defaultIdx], true);
+        const curBet = this.gameDataProxy.totalBetList[_defaultIdx];
 
-        // 初始化 Html 押注設定
-        if (!!this.webBridgeProxy) {
-            this.webBridgeProxy.initTotalBetSelection(this.gameDataProxy.totalBetList, _defaultIdx, _paramObj);
+        if (this.gameDataProxy.hasDenomMultiplier()) {
+            const curDenomMultiplier = this.gameDataProxy.initEventData?.denomMultiplier[_defaultIdx];
+            this.gameDataProxy.resetBetInfo(curBet, curDenomMultiplier);
+        } else {
+            this.gameDataProxy.resetBetInfo(curBet);
         }
 
         return true;
@@ -128,20 +126,11 @@ export abstract class CoreDefaultSettingCommand extends puremvc.SimpleCommand {
      * 設定totalbetList
      */
     protected setTotalBetList() {}
-
-    /**
-     * 設定 Jackpot所有 BetList
-     */
-    protected setJackpotAllBetList() {}
-
+    
     /**
      * 設定gamedataproxy betline and bet
      */
     protected abstract setBetAndLine(_val: number): number;
-
-    /** 設定web顯示的線數 */
-    protected setWebLine() {}
-
     // ======================== Get Set ========================
     protected _webBridgeProxy: WebBridgeProxy;
     protected get webBridgeProxy(): WebBridgeProxy {
