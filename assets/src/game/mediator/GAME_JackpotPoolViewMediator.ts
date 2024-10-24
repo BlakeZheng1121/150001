@@ -4,18 +4,21 @@ import { Logger } from '../../core/utils/Logger';
 import { SceneManager } from '../../core/utils/SceneManager';
 import { GameDataProxy } from '../../sgv3/proxy/GameDataProxy';
 import { JackpotPoolProxy } from '../../sgv3/proxy/JackpotPoolProxy';
-import { GameStateProxyEvent, JackpotPool, SceneEvent, ScreenEvent } from '../../sgv3/util/Constant';
+import { GameStateProxyEvent, JackpotPool, SceneEvent, ScreenEvent, ViewMediatorEvent } from '../../sgv3/util/Constant';
 import { GameScene } from '../../sgv3/vo/data/GameScene';
 import { JackpotPoolObj } from '../../sgv3/vo/jackpot/JackpotPoolObj';
 import { JackpotTypeObj } from '../../sgv3/vo/jackpot/JackpotTypeObj';
 import { PoolHitInfo } from '../../sgv3/vo/result/PoolHitInfo';
 import { GAME_JackpotPoolView } from '../view/GAME_JackpotPoolView';
 import { JackpotPoolValueType } from '../../sgv3/vo/enum/JackpotPoolValueType';
+import { UIEvent } from 'common-ui/proxy/UIEvent';
+import { MathUtil } from 'src/core/utils/MathUtil';
 const { ccclass } = _decorator;
 
 @ccclass('GAME_JackpotPoolViewMediator')
 export class GAME_JackpotPoolViewMediator extends BaseMediator<GAME_JackpotPoolView> {
     public static readonly NAME: string = 'GAME_JackpotPoolViewMediator';
+    private curBonusMultiplier: number = 0;
 
     constructor(name?: string, component?: any) {
         super(name, component);
@@ -34,7 +37,9 @@ export class GAME_JackpotPoolViewMediator extends BaseMediator<GAME_JackpotPoolV
             JackpotPool.POOL_VALUE_UPDATE,
             JackpotPool.HIT_JACKPOT_TO_POOL_VALUE_INIT,
             JackpotPool.HIT_JACKPOT_TO_POOL_VALUE_UPDATE,
-            GameStateProxyEvent.ON_SCENE_BEFORE_CHANGE
+            GameStateProxyEvent.ON_SCENE_BEFORE_CHANGE,
+            UIEvent.ON_CLICK_DENOM_BUTTON,
+            ViewMediatorEvent.SHOW_FEATURE_SELECTION
         ];
         return eventList;
     }
@@ -70,13 +75,18 @@ export class GAME_JackpotPoolViewMediator extends BaseMediator<GAME_JackpotPoolV
                 break;
             case JackpotPool.HIT_JACKPOT_TO_POOL_VALUE_INIT:
                 this.hitJackpotToInitPoolValue();
-                this.onBetLevelChange();
                 break;
             case JackpotPool.HIT_JACKPOT_TO_POOL_VALUE_UPDATE:
                 this.hitJackpotToUpdatePoolValue(notification.getBody());
                 break;
             case GameStateProxyEvent.ON_SCENE_BEFORE_CHANGE:
                 this.view.changeOrientation(this.gameDataProxy.orientationEvent, this.gameDataProxy.curScene);
+                break;
+            case UIEvent.ON_CLICK_DENOM_BUTTON:
+                this.onClickDenom(notification.getBody());
+                break;
+            case ViewMediatorEvent.SHOW_FEATURE_SELECTION:
+                this.view.setLowerLayer();
                 break;
         }
     }
@@ -98,25 +108,54 @@ export class GAME_JackpotPoolViewMediator extends BaseMediator<GAME_JackpotPoolV
         const jpPoolData = this.gameDataProxy.initEventData.executeSetting.jackpotSetting.jackpotPoolData[first];
         const betIndex = this.gameDataProxy.totalBetIdx;
         const betRangeMapIndex = this.gameDataProxy.getJackpotPoolRangeIndexWithBet();
+        let poolFxList = [];
+        let isBetMultiplier = false;
         for (let i = 0; i < jpPoolData.jackpotExtendSetting.poolInitValue[betRangeMapIndex].length; i++) {
             let jpType = jpPoolData.jackpotExtendSetting.poolInitValueType[i];
             let jpValue = jpPoolData.jackpotExtendSetting.poolInitValue[betRangeMapIndex][i];
             switch (jpType) {
                 case JackpotPoolValueType.Multiplier:
-                    let mulValue = this.gameDataProxy.totalBetList[this.gameDataProxy.totalBetIdx] * jpValue;
+                    let mulValue = MathUtil.mul(
+                        this.gameDataProxy.totalBetList[this.gameDataProxy.totalBetIdx],
+                        jpValue
+                    );
                     this.view.updateBonusPoolByBetRange(i, mulValue);
+                    isBetMultiplier = true;
+                    poolFxList.push(i);
                     break;
             }
         }
-        const isPlayFX = this.gameDataProxy.curScene != GameScene.Init;
-        this.view.updateFortuneMultiplier(betIndex, isPlayFX); //依照 BetRange或 階層上升
+        // Bonus 依照押注倍數更新才表演動畫
+        if (isBetMultiplier && betIndex > this.curBonusMultiplier && this.gameDataProxy.curScene != GameScene.Init) {
+            this.view.updateFortuneMultiplier(poolFxList); //依照 BetRange或 階層上升
+        }
+        this.curBonusMultiplier = betIndex;
+    }
+
+    private onClickDenom(denomMultiplier: number) {
+        const first = 0;
+        const jpPoolData = this.gameDataProxy.initEventData.executeSetting.jackpotSetting.jackpotPoolData[first];
+        const betRangeMapIndex = this.gameDataProxy.getJackpotPoolRangeIndexWithBet();
+        let poolFxList = [];
+        for (let i = 0; i < jpPoolData.jackpotExtendSetting.poolInitValue[betRangeMapIndex].length; i++) {
+            let jpType = jpPoolData.jackpotExtendSetting.poolInitValueType[i];
+            let jpValue = jpPoolData.jackpotExtendSetting.poolInitValue[betRangeMapIndex][i];
+            switch (jpType) {
+                case JackpotPoolValueType.DenomMultiplier:
+                    let bonusCredit = MathUtil.mul(denomMultiplier, jpValue);
+                    this.view.updateBonusPoolByBetRange(i, this.gameDataProxy.convertCredit2Cash(bonusCredit));
+                    poolFxList.push(i);
+                    break;
+            }
+        }
+        if (this.curBonusMultiplier != denomMultiplier && this.gameDataProxy.curScene != GameScene.Init) {
+            this.curBonusMultiplier = denomMultiplier;
+            this.view.updateFortuneMultiplier(poolFxList);
+        }
     }
 
     protected initView(): void {
-        this.view.init(this.gameDataProxy.language);
-
         this.initBonusPool();
-
         this.onBetLevelChange();
     }
 
@@ -134,8 +173,18 @@ export class GAME_JackpotPoolViewMediator extends BaseMediator<GAME_JackpotPoolV
                     newPoolInitValue.push(this.jackpotPoolProxy.jackpotTypeObj.typeItems[i].poolValue);
                     break;
                 case JackpotPoolValueType.Multiplier:
-                    let mulValue = this.gameDataProxy.totalBetList[this.gameDataProxy.totalBetIdx] * jpValue;
+                    let mulValue = MathUtil.mul(
+                        this.gameDataProxy.totalBetList[this.gameDataProxy.totalBetIdx],
+                        jpValue
+                    );
                     newPoolInitValue.push(mulValue);
+                    break;
+                case JackpotPoolValueType.DenomMultiplier:
+                    let bonusCredit = MathUtil.mul(
+                        this.gameDataProxy.initEventData.denomMultiplier[this.gameDataProxy.totalBetIdx],
+                        jpValue
+                    );
+                    newPoolInitValue.push(this.gameDataProxy.convertCredit2Cash(bonusCredit));
                     break;
             }
         }
@@ -147,10 +196,29 @@ export class GAME_JackpotPoolViewMediator extends BaseMediator<GAME_JackpotPoolV
     protected hitJackpotToInitPoolValue() {
         const hitJackpotPoolType = this.gameDataProxy.hitJackpotPoolType;
         const jpPoolData = this.gameDataProxy.initEventData.executeSetting.jackpotSetting.jackpotPoolData[0];
-        const poolIndex = this.gameDataProxy.getJackpotPoolRangeIndexWithBet();
-        const initJackpotValue = this.gameDataProxy.convertCredit2Cash(
-            jpPoolData.jackpotExtendSetting.poolInitValue[poolIndex][hitJackpotPoolType - 1]
-        );
+        const betRangeMapIndex = this.gameDataProxy.getJackpotPoolRangeIndexWithBet();
+        let initJackpotValue: number = 0;
+
+        let jpType = jpPoolData.jackpotExtendSetting.poolInitValueType[hitJackpotPoolType - 1];
+        let jpValue = jpPoolData.jackpotExtendSetting.poolInitValue[betRangeMapIndex][hitJackpotPoolType - 1];
+        switch (jpType) {
+            case JackpotPoolValueType.Credit:
+                initJackpotValue = this.gameDataProxy.convertCredit2Cash(jpValue);
+                break;
+            case JackpotPoolValueType.Multiplier:
+                initJackpotValue = MathUtil.mul(
+                    this.gameDataProxy.totalBetList[this.gameDataProxy.totalBetIdx],
+                    jpValue
+                );
+                break;
+            case JackpotPoolValueType.DenomMultiplier:
+                let bonusCredit = MathUtil.mul(
+                    this.gameDataProxy.initEventData.denomMultiplier[this.gameDataProxy.totalBetIdx],
+                    jpValue
+                );
+                initJackpotValue = this.gameDataProxy.convertCredit2Cash(bonusCredit);
+                break;
+        }
 
         this.runPoolLabel(initJackpotValue, hitJackpotPoolType, true);
     }
@@ -190,6 +258,7 @@ export class GAME_JackpotPoolViewMediator extends BaseMediator<GAME_JackpotPoolV
 
     private setJpPoolPos() {
         this.view.enterGamePos(this.gameDataProxy.curScene);
+        this.view.restoreLayer();
     }
 
     // ======================== Get Set ========================

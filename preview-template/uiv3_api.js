@@ -1,8 +1,8 @@
 var gameType = 1;
-var machineType = 100004;
+var machineType = 110004;
 
 var unit = 'qa';
-var userID = 25;
+var userID = 24;
 var dollarSign = 'php';
 var domain = 'JB';
 var uid = `${unit}${dollarSign}${userID.toString().padStart(2, '0')}@${domain}`;

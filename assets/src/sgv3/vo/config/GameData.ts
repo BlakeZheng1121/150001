@@ -61,10 +61,6 @@ export class GameData extends CoreGameData {
     public scrollingWinLabelCanSkip: boolean = false;
     /** ScrollingEnd是否播放了 */
     public scrollingEndPlayed: boolean = false;
-    /** 分批載入進度 */
-    public batchSceneComplete: number = 0;
-    /** 投注組合單位 */
-    public betCombinationKeys: string[] = [];
     /** 投注組合列表 */
     public totalBetList: number[] = [];
     /** Jackpot投注所有列表 */
@@ -115,8 +111,6 @@ export class GameData extends CoreGameData {
     public maxTotalBetLength: number = Number.MAX_VALUE;
     /** 是否為報表模式 */
     public isReportMode: boolean = false;
-    /**winBoard是否表演中 */
-    public winBoardShowing: boolean = false;
     /** Recovery狀態資料 */
     public recoveryState: RecoveryData;
     /** 是否為 Free Play */

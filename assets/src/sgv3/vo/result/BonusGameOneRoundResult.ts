@@ -4,7 +4,7 @@ export class BonusGameOneRoundResult {
     public specialHitInfo: string; //中哪種BonusGame
     public hitPool: number[];
     public poolamount: number[];
-    public oneRoundTotalWinWithoutJP: number;
+    public oneRoundTotalWinWithoutJP: number;   // 單位是 cent dollar，10000 代表 100.00 dollar
     public oneRoundJPTotalWin: number;
     public jpHitInfo: PoolHitInfo[];
     public nonJPHitInfo: PoolHitInfo[];

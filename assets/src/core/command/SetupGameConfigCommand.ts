@@ -218,4 +218,6 @@ export class SetupGameConfigCommand extends puremvc.SimpleCommand {
 
         return this._webBridgeProxy;
     }
+
+
 }
