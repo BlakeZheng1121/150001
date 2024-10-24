@@ -1,4 +1,5 @@
 import { _decorator } from 'cc';
+import { MathUtil } from 'src/core/utils/MathUtil';
 import { GameDataProxy } from 'src/sgv3/proxy/GameDataProxy';
 import { ReelDataProxy, SymbolPosData } from 'src/sgv3/proxy/ReelDataProxy';
 import { ReelEvent } from 'src/sgv3/util/Constant';
@@ -32,11 +33,13 @@ export class LastSymbolFeatureCommand extends puremvc.SimpleCommand {
             }
         }
         let seatInfo = this.gameDataProxy.initEventData.initialData.seatStatusCache.seatInfo;
-        let mysterySymbol = this.gameDataProxy.initEventData.initialData.seatStatusCache.mysterySymbol;
-        this.sendNotification(ReelEvent.SHOW_LAST_SYMBOL_OF_REELS, {
-            seatInfo: seatInfo,
-            mysterySymbol: mysterySymbol
-        });
+        if (seatInfo.screenRngInfo) {
+            let mysterySymbol = this.gameDataProxy.initEventData.initialData.seatStatusCache.mysterySymbol;
+            this.sendNotification(ReelEvent.SHOW_LAST_SYMBOL_OF_REELS, {
+                seatInfo: seatInfo,
+                mysterySymbol: mysterySymbol
+            });
+        }
     }
 
     // ======================== Get Set ========================
@@ -65,14 +68,14 @@ export class LastSymbolFeatureCommand extends puremvc.SimpleCommand {
     }
     // 依 Cash 比對
     protected isSpecialBall(value: number): boolean {
+        const creditBall =
+            this.gameDataProxy.initEventData.executeSetting.baseGameSetting.baseGameExtendSetting.creditBall;
         let cash = this.gameDataProxy.convertCredit2Cash(
-            (this.gameDataProxy.initEventData.executeSetting.baseGameSetting.baseGameExtendSetting.creditBall[
-                this.gameDataProxy.initEventData.executeSetting.baseGameSetting.baseGameExtendSetting.creditBall
-                    .length - 1
-            ] *
-                this.gameDataProxy.curTotalBet) /
+            MathUtil.div(
+                MathUtil.mul(creditBall[creditBall.length - 1], this.gameDataProxy.curTotalBet),
                 this.gameDataProxy.curDenom
+            )
         );
-        return cash * 10 == value;
+        return MathUtil.mul(cash, 10) == value;
     }
 }

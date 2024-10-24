@@ -1,3 +1,4 @@
+import { MathUtil } from 'src/core/utils/MathUtil';
 import { GameDataProxy } from '../../../sgv3/proxy/GameDataProxy';
 import { ReelDataProxy, SymbolPosData } from '../../../sgv3/proxy/ReelDataProxy';
 import { GameScene } from '../../../sgv3/vo/data/GameScene';
@@ -110,12 +111,14 @@ export class ReelEffect_SymbolFeatureCommand extends puremvc.SimpleCommand {
     }
     // 依 Cash 比對
     protected isSpecialBall(value: number): boolean {
+        const creditBall =
+            this.gameDataProxy.initEventData.executeSetting.baseGameSetting.baseGameExtendSetting.creditBall;
         let cash = this.gameDataProxy.convertCredit2Cash(
-            this.gameDataProxy.initEventData.executeSetting.baseGameSetting.baseGameExtendSetting.creditBall[
-                this.gameDataProxy.initEventData.executeSetting.baseGameSetting.baseGameExtendSetting.creditBall
-                    .length - 1
-            ] * this.gameDataProxy.curTotalBet / this.gameDataProxy.curDenom
+            MathUtil.div(
+                MathUtil.mul(creditBall[creditBall.length - 1], this.gameDataProxy.curTotalBet),
+                this.gameDataProxy.curDenom
+            )
         );
-        return cash * 10 == value;
+        return MathUtil.mul(cash, 10) == value;
     }
 }

@@ -509,7 +509,10 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
         for (let i = 0; i < array.length; i++) {
             range.push(
                 this.gameDataProxy.convertCredit2Cash(
-                    (array[i] * this.gameDataProxy.curTotalBet * 10) / this.gameDataProxy.curDenom
+                    MathUtil.div(
+                        MathUtil.mul(array[i], this.gameDataProxy.curTotalBet, 10),
+                        this.gameDataProxy.curDenom
+                    )
                 )
             );
         }
@@ -547,7 +550,7 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
     // 顯示最後盤面
     public showLastSymbolOfReels(data: { seatInfo: SeatInfo; mysterySymbol?: number }) {
         const self = this;
-        self.reelDataProxy.mathTableIndex = data.seatInfo.usedTableIndex;
+        self.reelDataProxy.mathTableIndex = data.seatInfo.usedTableIndex ? data.seatInfo.usedTableIndex : 0;
         self.setMysterySymbol(data.mysterySymbol);
         super.updateStrip();
         for (let infoIndex = 0; infoIndex < data.seatInfo.screenRngInfo.length; infoIndex++) {
