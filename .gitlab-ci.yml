@@ -26,6 +26,7 @@ include:
 stages:
   - prepare
   - build
+  - sendSourceMap
   - publish
   - deploy
   # - notify

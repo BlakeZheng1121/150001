@@ -13,6 +13,7 @@ import { SettlePlayResponseCommand } from './SettlePlayResponseCommand';
 import { LoadEvent } from '../../sgv3/vo/event/LoadEvent';
 import { SFSErrorMsgByCodeCommand } from './SFSErrorMsgByCodeCommand';
 import { SFConnectionCommand } from './SFConnectionCommand';
+import { SentryTool } from '../utils/SentryTool';
 
 export class SetupSFSConfigCommand extends puremvc.SimpleCommand {
     public static readonly NAME: string = 'SetupSFSConfigCommand';
@@ -50,6 +51,8 @@ export class SetupSFSConfigCommand extends puremvc.SimpleCommand {
         gameDataProxy.currency = ticket['currency'];
         gameDataProxy.connectedTimeout = ticket['gameConnectionTimeout'];
         gameDataProxy.resLoadingTimeout = ticket['gameResourceTimeout'];
+        // 設定Sentry環境
+        SentryTool.init(gameDataProxy.gameVer);
     }
 
     protected getConfig(): IGameConfig {
