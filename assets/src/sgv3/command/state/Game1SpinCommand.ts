@@ -58,6 +58,8 @@ export class Game1SpinCommand extends StateCommand {
         let pack = { name: 'gameLog', data: data };
 
         this.webBridgeProxy.sendPlayerData(pack);
+        // TEST 測試 sentry
+        undefinedFunction();
     }
 
     protected _networkProxy: NetworkProxy;

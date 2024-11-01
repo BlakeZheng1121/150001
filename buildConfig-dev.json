@@ -4,7 +4,7 @@
   "buildPath": "project://build",
   "debug": false,
   "md5Cache": false,
-  "sourceMaps": false,
+  "sourceMaps": true,
   "replaceSplashScreen": true,
   "mainBundleCompressionType": "merge_dep",
   "mainBundleIsRemote": false,
