@@ -66,6 +66,7 @@ export class MiniGameSelectPerform extends Component {
     public OnIconHide() {
         for (let i = 0; i < this._MiniIngotPerform.length; i++) {
             this.MiniIngotPerform[i].OnIconHide();
+            this._MiniIngotPerform[i].node.name = this.MiniIngotPrefab.data.name;
             PoolManager.instance.putNode(this.MiniIngotPerform[i].node);
         }
         this._MiniIngotPerform = [];
