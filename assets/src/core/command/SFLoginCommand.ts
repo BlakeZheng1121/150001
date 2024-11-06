@@ -13,7 +13,6 @@ export class SFLoginCommand extends puremvc.SimpleCommand {
         const isConnected = gameLoginReturn.data;
         if (isConnected) {
             const gameDataProxy = self.facade.retrieveProxy(CoreGameDataProxy.NAME) as CoreGameDataProxy;
-            gameDataProxy.userId = gameLoginReturn.showName;
             gameDataProxy.setBmd(gameLoginReturn.balance, true);
             gameDataProxy.hasTestMode = gameLoginReturn.testMode;
             self.facade.sendNotification(SFConnectionCommand.NAME, gameLoginReturn);

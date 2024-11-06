@@ -10,6 +10,7 @@ import { SpinRequestCommand } from '../spin/SpinRequestCommand';
 import { StateCommand } from './StateCommand';
 import { ButtonName } from 'common-ui/proxy/UIEnums';
 import { SpinButton } from 'common-ui/view/SpinButton';
+import { GA_Category, GoogleAnalyticsUtil } from 'src/core/utils/GoogleAnalyticsUtil';
 
 export class Game1SpinCommand extends StateCommand {
     public static readonly NAME = StateMachineProxy.GAME1_EV_SPIN;
@@ -46,18 +47,11 @@ export class Game1SpinCommand extends StateCommand {
         if (this.gameDataProxy.onAutoPlay) {
             this.sendNotification(AutoPlayOnSpinProcessCommand.NAME);
         }
-
-        //新增加速log
-        let data = {
-            gameID: this.gameDataProxy.machineType,
-            userName: this.gameDataProxy.userName,
-            logTag: 'slotSpeedMode',
-            logType: 'behavior',
-            SpeedMode: this._gameDataProxy.curSpeedMode
-        };
-        let pack = { name: 'gameLog', data: data };
-
-        this.webBridgeProxy.sendPlayerData(pack);
+        
+        GoogleAnalyticsUtil.setGAEvent(GA_Category.SPIN_SPEED_MODE, {
+            event_category: 'spinSpeedMode',
+            event_label: `每把使用的速度模式-${this.gameDataProxy.curSpeedMode}`
+        });
     }
 
     protected _networkProxy: NetworkProxy;

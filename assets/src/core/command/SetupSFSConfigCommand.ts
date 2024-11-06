@@ -14,6 +14,7 @@ import { LoadEvent } from '../../sgv3/vo/event/LoadEvent';
 import { SFSErrorMsgByCodeCommand } from './SFSErrorMsgByCodeCommand';
 import { SFConnectionCommand } from './SFConnectionCommand';
 import { SentryTool } from '../utils/SentryTool';
+import { GoogleAnalyticsUtil } from '../utils/GoogleAnalyticsUtil';
 
 export class SetupSFSConfigCommand extends puremvc.SimpleCommand {
     public static readonly NAME: string = 'SetupSFSConfigCommand';
@@ -41,18 +42,28 @@ export class SetupSFSConfigCommand extends puremvc.SimpleCommand {
             if (!this.networkProxy.isConnected()) {
                 this.sendNotification(LoadEvent.LOAD_GROUP_COMPLETE, LoadEvent.PRELOAD_GROUP);
             }
+            // 註冊GA
+            if (this.gameDataProxy.isDemoGame === false) {
+                if (!['https://gamedev.jigaming.com.tw', 'https://gamesit.jigaming.com.tw'].includes(e.origin)) {
+                    GoogleAnalyticsUtil.registerGA(this.gameDataProxy.userId);
+                } else {
+                    GoogleAnalyticsUtil.registerGAForTest(this.gameDataProxy.userId);
+                }
+            }
         }
     }
 
     protected setupGameDataProxy(ticket: any) {
-        let gameDataProxy: CoreGameDataProxy = this.getGameDataProxy();
-        gameDataProxy.gameType = ticket['gameType'];
-        gameDataProxy.machineType = ticket['machineType'];
-        gameDataProxy.currency = ticket['currency'];
-        gameDataProxy.connectedTimeout = ticket['gameConnectionTimeout'];
-        gameDataProxy.resLoadingTimeout = ticket['gameResourceTimeout'];
+        this.gameDataProxy.gameType = ticket['gameType'];
+        this.gameDataProxy.machineType = ticket['machineType'];
+        this.gameDataProxy.currency = ticket['currency'];
+        this.gameDataProxy.connectedTimeout = ticket['gameConnectionTimeout'];
+        this.gameDataProxy.resLoadingTimeout = ticket['gameResourceTimeout'];
+        this.gameDataProxy.userId = ticket['gameUid'];
+
         // 設定Sentry環境
-        SentryTool.init(gameDataProxy.gameVer);
+        SentryTool.init(this.gameDataProxy.gameVer);
+        SentryTool.setUserID(this.gameDataProxy.userId);
     }
 
     protected getConfig(): IGameConfig {
@@ -67,10 +78,6 @@ export class SetupSFSConfigCommand extends puremvc.SimpleCommand {
     protected getTicketRequest() {
         const webBridgeProxy = this.facade.retrieveProxy(CoreWebBridgeProxy.NAME) as CoreWebBridgeProxy;
         webBridgeProxy.getWebObjRequest(this, 'initTicket');
-    }
-
-    protected getGameDataProxy(): CoreGameDataProxy {
-        return this.facade.retrieveProxy(CoreGameDataProxy.NAME) as CoreGameDataProxy;
     }
 
     protected setupProxy(config: IGameConfig, otherData?: any): void {
@@ -97,5 +104,13 @@ export class SetupSFSConfigCommand extends puremvc.SimpleCommand {
             this._networkProxy = this.facade.retrieveProxy(NetworkProxy.NAME) as NetworkProxy;
         }
         return this._networkProxy;
+    }
+
+    protected _gameDataProxy: CoreGameDataProxy;
+    protected get gameDataProxy(): CoreGameDataProxy {
+        if (!this._gameDataProxy) {
+            this._gameDataProxy = this.facade.retrieveProxy(CoreGameDataProxy.NAME) as CoreGameDataProxy;
+        }
+        return this._gameDataProxy;
     }
 }

@@ -1,7 +1,6 @@
 import { GameDataProxy } from '../../sgv3/proxy/GameDataProxy';
 import { SGGameLoginReturn } from '../../sgv3/vo/result/SGGameLoginReturn';
 import { NetworkProxy } from '../proxy/NetworkProxy';
-import { SentryTool } from '../utils/SentryTool';
 import { ChangeBalanceCommand } from './ChangeBalanceCommand';
 
 export class SFConnectionCommand extends puremvc.SimpleCommand {
@@ -15,12 +14,10 @@ export class SFConnectionCommand extends puremvc.SimpleCommand {
     protected onConnectServer(notification: puremvc.INotification): void {
         let gameLoginReturn: SGGameLoginReturn = notification.getBody() as SGGameLoginReturn;
         // refactor 之後繼承SFSLoginCommand處理
-        this.gameDataProxy.userId = this.netProxy.getConfig().userName;
         this.gameDataProxy.setBmd(gameLoginReturn.balance, true);
         this.sendNotification(ChangeBalanceCommand.NAME, gameLoginReturn);
         // slot 必須在連線後送出初始化要求封包才能繼續做
         this.netProxy.sendInitRequest();
-        SentryTool.setUserID(this.gameDataProxy.userId);
     }
 
     protected _netProxy: NetworkProxy;
