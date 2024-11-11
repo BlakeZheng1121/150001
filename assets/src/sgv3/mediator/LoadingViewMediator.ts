@@ -37,7 +37,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
 
     /** preload 要預載的資源 */
     protected baseList(): string[] {
-        return [GameScene.Game_1, 'preload', 'common-ui', 'bbw'];
+        return [GameScene.Game_1, 'preload', 'common-ui', 'betMenu', 'bbw'];
     }
 
     /** 進入basegame後 要載的資源 */
@@ -264,6 +264,15 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
                     .catch((error) => {});
             } else if (assetName == 'bbw') {
                 await this.loadPrefab('common-ui', 'BBWView')
+                    .then((prefab) => this.instantiatePrefab(prefab))
+                    .then((obj) => {
+                        groupList.shift();
+                        this.wait(obj, 100);
+                    })
+                    .catch((error) => {});
+            } else if (assetName == 'betMenu') {
+                const prefabName = this.gameDataProxy.hasDenomMultiplier() ? 'BetDenomMenu' : 'BetMenu';
+                await this.loadPrefab('common-ui', prefabName)
                     .then((prefab) => this.instantiatePrefab(prefab))
                     .then((obj) => {
                         groupList.shift();
