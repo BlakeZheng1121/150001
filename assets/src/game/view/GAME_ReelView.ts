@@ -170,6 +170,13 @@ export class GAME_ReelView extends ReelView {
         self.setDefaultSymbolPlay(symbolInfo, SymbolPerformType.SHOW_ALL_WIN);
     }
 
+    public skipShowAllWinSymbol(symbolInfo: SymbolInfo) {
+        let symbol = this.getSymbol(symbolInfo);
+        if (symbol.currentStateId == SymbolPerformType.SHOW_ALL_WIN) {
+            symbol.skip();
+        }
+    }
+
     public showLoopWinSymbol(symbolInfo: SymbolInfo, featureInfo: SymbolPosData) {
         const self = this;
         switch (symbolInfo.sid) {

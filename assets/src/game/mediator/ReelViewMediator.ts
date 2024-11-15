@@ -27,6 +27,7 @@ import { AudioClipsEnum } from '../vo/enum/SoundMap';
 import { GlobalTimer } from '../../sgv3/util/GlobalTimer';
 import { MathUtil } from 'src/core/utils/MathUtil';
 import { SeatInfo } from 'src/sgv3/vo/result/ExtendInfoForBaseGameResult';
+import { WinType } from 'src/sgv3/vo/enum/WinType';
 
 const { ccclass } = _decorator;
 /** ByGame Win Reel判定實作 */
@@ -141,6 +142,38 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
             case ReelEvent.HIDE_WILD_SYMBOL:
                 this.hideWildSymbol();
                 break;
+            case ScreenEvent.ON_SPIN_DOWN:
+                break;
+        }
+    }
+
+    protected onBaseSpinDown(): void {
+        super.onBaseSpinDown();
+
+        if (this.gameDataProxy.showWinOnceComplete) {
+            this.skipShowAllWin();
+        }
+    }
+
+    private skipShowAllWin() {
+        if (
+            this.gameDataProxy.gameState == StateMachineProxy.GAME1_SHOWWIN ||
+            this.gameDataProxy.gameState == StateMachineProxy.GAME2_SHOWWIN
+        ) {
+            if (this.gameDataProxy.curRoundResult.displayInfo.winType < WinType.bigWin) {
+                this.gameDataProxy.curRoundResult.displayInfo.scoringTime = 0;
+            }
+            for (let y in this.winData.wayInfos) {
+                if (this.winData.wayInfos[y].symbolId < 0) {
+                    continue;
+                }
+                for (let i in this.winData.wayInfos[y].symbols) {
+                    let symbol: SymbolInfo = this.winData.wayInfos[y].symbols[i];
+                    if (symbol.sid >= 0) {
+                        this.reelView.skipShowAllWinSymbol(symbol);
+                    }
+                }
+            }
         }
     }
 

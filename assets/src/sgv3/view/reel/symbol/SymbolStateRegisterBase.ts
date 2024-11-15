@@ -96,6 +96,7 @@ export class SymbolAllWinState extends UIViewStateBase {
     onSkip() {
         this.symbolContent.tween.stop();
         this.symbolContent.mainSprite.enabled = true;
+        this.symbolContent.backgroundSprite.enabled = true;
         this.symbolContent.tween = null;
         this.onEffectFinished(true);
     }
