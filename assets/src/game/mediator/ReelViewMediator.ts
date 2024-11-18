@@ -568,9 +568,10 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
         if (mysterySymbolId != undefined) {
             let mysterySymbolList =
                 this.gameDataProxy.initEventData.executeSetting.baseGameSetting.baseGameExtendSetting.mysterySymbolList;
-            replaceSymbolId = replaceSymbolId
-                ? replaceSymbolId
-                : mysterySymbolList[MathUtil.randomBetween(0, mysterySymbolList.length - 1)];
+            replaceSymbolId =
+                replaceSymbolId > 0
+                    ? replaceSymbolId
+                    : mysterySymbolList[MathUtil.randomBetween(0, mysterySymbolList.length - 1)];
             for (let i = 0; i < this.reelDataProxy.rollingStrip.length; i++) {
                 for (let j = 0; j < this.reelDataProxy.rollingStrip[i].length; j++) {
                     if (this.reelDataProxy.rollingStrip[i][j] == mysterySymbolId) {
