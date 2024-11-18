@@ -78,7 +78,7 @@ export class MiniIngot extends Component {
 
     public OnIconPlayPrepare() {
         this.IconSpriteLight.node.active = false;
-
+        this.Particle.node.active = true;
         this.Particle?.SetParticleColor(this.ParticleColor[this.ThisSingleJackPotType]);
 
         this.IconAnimation?.play('PrepareLight');
@@ -86,7 +86,7 @@ export class MiniIngot extends Component {
 
     public OnIconPlayWin(cb: any | null = null) {
         this.IconSpriteLight.node.active = false;
-
+        this.Particle.node.active = true;
         this.Particle?.SetParticleColor(this.ParticleColor[this.ThisSingleJackPotType]);
 
         this.IconAnimation?.play('Win');
@@ -108,5 +108,6 @@ export class MiniIngot extends Component {
         this.IngotAnimation?.play('Hide');
 
         this.IconAnimation?.play('Hide');
+        this.Particle.node.active = false;
     }
 }
