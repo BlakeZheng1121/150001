@@ -884,31 +884,15 @@ export class GameDataProxy extends CoreGameDataProxy {
     }
 
     public getInitEmblemLevel(): number[] {
-        this.initEmblemLevelRange();
         let level: number[] = [];
-        try {
-            level[0] = this.getLevelMapping(
-                this.initEventData.initialData.seatStatusCache.seatInfo.statusAccumulation[0]
-            );
-        } catch (error) {
-            level[0] = 0;
-        }
+        level[0] = this.initEventData.initialData.seatStatusCache.seatInfo.miniGameWaterLevel;
         this.curEmblemLevel = level;
         return level;
     }
 
-    private initEmblemLevelRange() {
-        this.emblemLevelRange = [0, 3333, 6666, 10000];
-    }
-
-    public getLevelMapping(accumulation: number): number {
-        let level: number = 0;
-        for (let i = this.emblemLevelRange.length - 1; i >= 0; i--) {
-            if (accumulation >= this.emblemLevelRange[i] || this.isHitMiniGame()) {
-                level = i;
-                break;
-            }
-        }
+    public getEmblemLevelInBaseGame() {
+        let level: number[] = [];
+        level[0] = this.spinEventData.baseGameResult.extendInfoForbaseGameResult.seatInfo.miniGameWaterLevel;
         return level;
     }
 

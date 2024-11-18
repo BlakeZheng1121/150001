@@ -32,7 +32,7 @@ export class ChangeSceneViewCommand extends puremvc.SimpleCommand {
                     GlobalTimer.getInstance()
                         .registerTimer('Game1_TransitionBG', 1, this.Game1TransitionsBG, this)
                         .start();
-                    let emblemLevel = (this.gameDataProxy.curEmblemLevel = [0]);
+                    let emblemLevel = (this.gameDataProxy.curEmblemLevel = this.gameDataProxy.getEmblemLevelInBaseGame());
                     this.sendNotification(ViewMediatorEvent.INIT_EMBLEM_LEVEL, emblemLevel);
                 } else {
                     this.sendNotification(

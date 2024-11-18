@@ -15,7 +15,7 @@ export class EmblemControl extends Component {
 
     public initialLevel(index: number, level: number) {
         this.curLevel[index] = level;
-        this.emblemTimeline[index].play(`lv${level + 1}`);
+        this.emblemTimeline[index].play(`lv${level}`);
     }
 
     public updateLevel(index: number, finalLevel: number, callback?: Function) {
@@ -28,7 +28,7 @@ export class EmblemControl extends Component {
             }
             this.curLevel[index] = this.targetLevel[index];
             this.emblemTimeline[index].play(
-                `lv${this.curLevel[index] + 1}`,
+                `lv${this.curLevel[index]}`,
                 this.updateLevelComplete.bind(this, index, finalLevel), false
             );
             if (this.levelUpAudio) {

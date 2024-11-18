@@ -15,7 +15,8 @@ export class ExtendInfoForBaseGameResult {
 export class SeatInfo {
     public statusType: number;
     public statusCount: number;
-    public statusAccumulation: Array<number>;   // 紀錄該座位狀態機的累積程度
+    public statusAccumulation: Array<number>; // 紀錄該座位狀態機的累積程度
     public screenRngInfo: Array<Array<number>>; // 用以恢復該座位的盤面顯示
-    public usedTableIndex: number;              // 紀錄該座位使用的TableIndex
+    public usedTableIndex: number; // 紀錄該座位使用的TableIndex
+    public miniGameWaterLevel: number; // 紀錄該座位的彩金狀態機水位
 }
