@@ -222,7 +222,7 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
         for (let i = 0; i < this.reelDataProxy.reelStopSoundSequence[curReelStopIndex].length; i++) {
             let stopSound: AudioClipsEnum = this.reelDataProxy.reelStopSoundSequence[curReelStopIndex][i];
             if (this.preSpinStopSoundSequence[curReelStopIndex]) {
-                AudioManager.Instance.stop(this.preSpinStopSoundSequence[curReelStopIndex]);
+                AudioManager.Instance.stop(this.preSpinStopSoundSequence[curReelStopIndex], true);
             }
             AudioManager.Instance.play(stopSound);
             this.preSpinStopSoundSequence[curReelStopIndex] = stopSound;

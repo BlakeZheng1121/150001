@@ -146,12 +146,12 @@ export class ScoringHandleCommand extends puremvc.SimpleCommand {
         } else {
             if (winType != WinType.none) {
                 if (this.gameDataProxy.curScene == GameScene.Game_2) {
-                    AudioManager.Instance.stop(ScoringClipsEnum.Scoring_FreeEnd);
-                    AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Free);
+                    AudioManager.Instance.stop(ScoringClipsEnum.Scoring_FreeEnd, true);
+                    AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Free, true);
                     AudioManager.Instance.play(ScoringClipsEnum.Scoring_Free).loop(true);
                 } else {
-                    AudioManager.Instance.stop(ScoringClipsEnum.Scoring_BaseEnd);
-                    AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Base);
+                    AudioManager.Instance.stop(ScoringClipsEnum.Scoring_BaseEnd, true);
+                    AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Base, true);
                     if (winType < WinType.section_2) {
                         AudioManager.Instance.play(ScoringClipsEnum.Scoring_BaseEnd);
                     } else {
@@ -224,9 +224,9 @@ export class ScoringHandleCommand extends puremvc.SimpleCommand {
             }
         } else {
             if (this.gameDataProxy.curScene == GameScene.Game_2) {
-                AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Free);
+                AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Free, true);
             } else {
-                AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Base);
+                AudioManager.Instance.stop(ScoringClipsEnum.Scoring_Base, true);
             }
             if (this.gameDataProxy.winBoardState == WinBoardState.HIDE) {
                 if (this.gameDataProxy.scrollingEndPlayed == false) {

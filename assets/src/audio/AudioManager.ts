@@ -164,12 +164,14 @@ export class AudioManager extends Component {
         audioContainer?.fade({ vol: volume, duration: duration, endFn: endFn });
     }
 
-    stop(clipName: string) {
+    stop(clipName: string, isImmediately: boolean = false) {
         let audioContainer = this.getAudioContainerInActivePool(clipName);
 
         const options = {
             fade(vol: number, duration: number) {
-                audioContainer?.fade({ vol: vol, duration: duration, completeThenStop: true });
+                if (!isImmediately) {
+                    audioContainer?.fade({ vol: vol, duration: duration, completeThenStop: true });
+                }
                 return options;
             },
             callback(cb: () => void) {
@@ -177,7 +179,11 @@ export class AudioManager extends Component {
                 return options;
             }
         };
-        audioContainer?.fade({ vol: audioContainer.volume, duration: 0, completeThenStop: true });
+        if (isImmediately) {
+            audioContainer?.stop();
+        } else {
+            audioContainer?.fade({ vol: audioContainer.volume, duration: 0, completeThenStop: true });
+        }
         return options;
     }
 

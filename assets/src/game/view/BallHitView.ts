@@ -86,7 +86,7 @@ export class BallHitView extends BaseView {
     }
 
     public ballHitShow(hitInfo) {
-        AudioManager.Instance.stop(AudioClipsEnum.Base_C1Collect);
+        AudioManager.Instance.stop(AudioClipsEnum.Base_C1Collect, true);
         AudioManager.Instance.play(AudioClipsEnum.Base_C1Collect);
         let ballCount = 0;
         for (let i = 0; i < hitInfo.ballScreenLabel.length; i++) {
@@ -105,7 +105,7 @@ export class BallHitView extends BaseView {
                 () => {
                     GlobalTimer.getInstance().removeTimer('ballHitShow');
                     if (ballCount < 6) {
-                        AudioManager.Instance.stop(AudioClipsEnum.Base_C1CollectHit);
+                        AudioManager.Instance.stop(AudioClipsEnum.Base_C1CollectHit, true);
                         AudioManager.Instance.play(AudioClipsEnum.Base_C1CollectHit);
                     } else {
                         AudioManager.Instance.play(AudioClipsEnum.Base_C1CollectHitAlarm);
@@ -146,7 +146,7 @@ export class BallHitView extends BaseView {
                     if (playType == 1) {
                         AudioManager.Instance.play(AudioClipsEnum.Free_C1Collect);
                     } else {
-                        AudioManager.Instance.stop(AudioClipsEnum.DragonUp_C2Collect);
+                        AudioManager.Instance.stop(AudioClipsEnum.DragonUp_C2Collect, true);
                         AudioManager.Instance.play(AudioClipsEnum.DragonUp_C2Collect);
                     }
                 },

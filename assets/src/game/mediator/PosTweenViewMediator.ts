@@ -185,7 +185,7 @@ export class PosTweenViewMediator extends BaseMediator<PosTweenView> {
         } else {
             let curAudioBaseSequenceName = (sequenceIndex % 7) + 1; //打擊音效設定
             //打擊音效播放
-            AudioManager.Instance.stop(this.getAudioBaseSequenceName(curAudioBaseSequenceName - 1));
+            AudioManager.Instance.stop(this.getAudioBaseSequenceName(curAudioBaseSequenceName - 1), true);
             AudioManager.Instance.play(this.getAudioBaseSequenceName(curAudioBaseSequenceName));
         }
     }
