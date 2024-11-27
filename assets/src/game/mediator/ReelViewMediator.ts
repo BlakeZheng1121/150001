@@ -540,14 +540,10 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
     protected getCreditArray(array: Array<number>) {
         let range = Array<number>();
         for (let i = 0; i < array.length; i++) {
-            range.push(
-                this.gameDataProxy.convertCredit2Cash(
-                    MathUtil.div(
-                        MathUtil.mul(array[i], this.gameDataProxy.curTotalBet, 10),
-                        this.gameDataProxy.curDenom
-                    )
-                )
-            );
+            let credit = this.gameDataProxy.hasDenomMultiplier()
+                ? MathUtil.mul(array[i], this.gameDataProxy.curBet)
+                : MathUtil.div(MathUtil.mul(array[i], this.gameDataProxy.curTotalBet, 10), this.gameDataProxy.curDenom);
+            range.push(this.gameDataProxy.convertCredit2Cash(credit));
         }
         return range;
     }

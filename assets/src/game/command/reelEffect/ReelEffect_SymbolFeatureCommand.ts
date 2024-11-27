@@ -113,12 +113,13 @@ export class ReelEffect_SymbolFeatureCommand extends puremvc.SimpleCommand {
     protected isSpecialBall(value: number): boolean {
         const creditBall =
             this.gameDataProxy.initEventData.executeSetting.baseGameSetting.baseGameExtendSetting.creditBall;
-        let cash = this.gameDataProxy.convertCredit2Cash(
-            MathUtil.div(
-                MathUtil.mul(creditBall[creditBall.length - 1], this.gameDataProxy.curTotalBet),
-                this.gameDataProxy.curDenom
-            )
-        );
-        return MathUtil.mul(cash, 10) == value;
+        let credit = this.gameDataProxy.hasDenomMultiplier()
+            ? MathUtil.mul(creditBall[creditBall.length - 1], this.gameDataProxy.curBet)
+            : MathUtil.div(
+                  MathUtil.mul(creditBall[creditBall.length - 1], this.gameDataProxy.curTotalBet, 10),
+                  this.gameDataProxy.curDenom
+              );
+        let cash = this.gameDataProxy.convertCredit2Cash(credit);
+        return cash == value;
     }
 }
