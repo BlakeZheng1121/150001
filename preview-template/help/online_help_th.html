@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>DragoNova Game Help</title>
+        <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
+        />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="full-screen" content="true" />
+        <meta name="screen-orientation" content="portrait" />
+        <meta name="x5-fullscreen" content="true" />
+        <meta name="360-fullscreen" content="true" />
+        <style>
+            html,
+            body {
+                -ms-touch-action: none;
+                padding: 0;
+                border: 0;
+                margin: 0;
+                height: 100%;
+                background-color: #171528;
+                color: #b6b0f8;
+                font-family: 'Microsoft JhengHei', 'Microsoft YaHei', 'LiHei Pro Medium', 'SimHei', Helvetica,
+                    sans-serif;
+            }
+
+            ::-webkit-scrollbar {
+                height: 0px;
+                width: 0px;
+            }
+
+            ::-webkit-scrollbar-thumb {
+                border-radius: 15px;
+                background-color: rgba(#fff, 0.2);
+            }
+
+            ::-webkit-scrollbar-track {
+                border-radius: 0px;
+            }
+
+            #closeButton {
+                width: 50px;
+                height: 50px;
+                background-image: url('./back.png');
+                background-size: cover;
+                cursor: pointer;
+                margin: auto 0;
+                margin-left: 10px;
+            }
+
+            .topBar {
+                position: fixed;
+                height: 80px;
+                width: 100%;
+                background-color: #0f0d1a;
+                display: flex;
+                align-items: center;
+                z-index: 1;
+            }
+
+            .content {
+                padding: 10px 10px;
+                padding-top: 80px;
+                margin: auto;
+                width: 100%;
+                min-width: 360px;
+                overflow-x: hidden;
+                box-sizing: border-box;
+            }
+
+            .content h2 {
+                font-size: 1.3rem;
+                text-align: center;
+                color: #e4c23c;
+                font-weight: 700;
+            }
+
+            .yellow-font {
+                color: #e4c23c;
+                font-weight: 700;
+            }
+
+            .payout-font {
+                color: #e4c23c;
+                font-weight: 700;
+            }
+
+            .content ul li {
+                line-height: 1.2;
+                padding: 5px 0;
+                list-style-type: square;
+            }
+
+            .content hr {
+                opacity: 0.1;
+            }
+
+            .content img {
+                vertical-align: middle;
+                image-rendering: -moz-crisp-edges; /* Firefox */
+                image-rendering: -o-crisp-edges; /* Opera */
+                image-rendering: -webkit-optimize-contrast; /* Webkit (non-standard naming) */
+                image-rendering: crisp-edges;
+                -ms-interpolation-mode: nearest-neighbor; /* IE (non-standard property) */
+            }
+
+            .redText {
+                color: #ff2a2a;
+            }
+
+            .textImg {
+                width: 25px;
+            }
+
+            .textImgByH {
+                height: 25px;
+            }
+
+            .textBigImgByH {
+                height: 40px;
+            }
+
+            .content table {
+                border-collapse: collapse;
+            }
+
+            .tableTitle {
+                text-align: center;
+                line-height: 2.5;
+            }
+
+            .content td {
+                border: 2px solid #5e4dff;
+                text-align: center;
+            }
+
+            .content td img {
+                width: 80%;
+                margin: auto;
+            }
+
+            .payoutWrap {
+                display: flex;
+                align-items: center;
+                flex-flow: column;
+                padding-top: 20px;
+            }
+
+            .payTable {
+                width: 50%;
+                padding: 10px 0;
+            }
+
+            .payTableImg {
+                width: 50%;
+            }
+
+            .payoutWrap .payRowTitle {
+                display: flex;
+                justify-content: center;
+                flex-flow: column;
+                align-items: center;
+                min-width: 150px;
+            }
+
+            .payImg {
+                width: 150px;
+            }
+
+            .payRowValue {
+                width: 150px;
+            }
+
+            .payRowValue div {
+                min-width: 60px;
+            }
+
+            .flex-both-center {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .flex-justify-center {
+                display: flex;
+                justify-content: center;
+            }
+
+            .flex-align-center {
+                display: flex;
+                align-items: center;
+            }
+
+            .flex-align-start-with-margin {
+                display: flex;
+                align-items: start;
+                margin-left: 10px;
+            }
+
+            .flex-col {
+                flex-flow: column;
+            }
+
+            .flex-wrap {
+                flex-wrap: wrap;
+            }
+
+            .text-align-center {
+                text-align: center;
+            }
+
+            .w-100 {
+                width: 100%;
+            }
+
+            .p-5 {
+                padding: 5px;
+            }
+
+            .w-33 {
+                width: 33%;
+            }
+
+            @media (min-width: 600px) and (max-width: 1200px) {
+                .content {
+                    max-width: 70%;
+                }
+
+                .payoutWrap {
+                    flex-flow: row;
+                }
+            }
+
+            @media (min-width: 1200px) {
+                .content {
+                    max-width: 50%;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="topBar">
+            <div id="closeButton" onclick="window.openGameHelp(false)"></div>
+        </div>
+        <div class="content" id="helpContent">
+            <h2>ฟีเจอร์ <span class="redText">POWER UP</span></h2>
+            <ul>
+                <li>
+                    ทับซ้อนสัญลักษณ์ที่เหมือนกัน <span class="redText">2</span> อัน จะเปิดใช้ฟีเจอร์
+                    <span class="redText">POWER UP</span> และหลังจากนั้นคำนวณการจ่ายของสัญลักษณ์ดังกล่าวจะกลายเป็น
+                    <span class="redText">3</span> เท่า
+                </li>
+                <li>
+                    ทับซ้อนสัญลักษณ์ที่เหมือนกัน <span class="redText">3</span> อัน จะเปิดใช้ฟีเจอร์
+                    <span class="redText">POWER UP</span> และหลังจากนั้นคำนวณการจ่ายของสัญลักษณ์ดังกล่าวจะกลายเป็น
+                    <span class="redText">5</span> เท่า
+                </li>
+                <li>
+                    ทับซ้อนสัญลักษณ์ที่เหมือนกัน <span class="redText">4</span> อัน จะเปิดใช้ฟีเจอร์
+                    <span class="redText">POWER UP</span> และหลังจากนั้นคำนวณการจ่ายของสัญลักษณ์ดังกล่าวจะกลายเป็น
+                    <span class="redText">8</span> เท่า
+                </li>
+                <li>
+                    <img src="./M1_Power.png" class="textImg" /> , <img src="./M2_Power.png" class="textImg" /> ,
+                    <img src="./M3_Power.png" class="textImg" /> , <img src="./M4_Power.png" class="textImg" /> และ
+                    <img src="./M5_Power.png" class="textImg" /> จะกระตุ้นฟีเจอร์ <span class="redText">POWER UP</span>
+                </li>
+                <li>
+                    สัญลักษณ์ <img src="./Base_SymbolWW.png" class="textImg" /> จะไม่กระตุ้นฟีเจอร์
+                    <span class="redText">POWER UP</span>
+                </li>
+            </ul>
+            <hr class="solid" />
+            <h2>ฟีเจอร์ฟรีเกม</h2>
+            <ul>
+                <li>
+                    <img src="./C1_small.png" class="textImg" /> 3, 4 หรือ 5 อันที่ปรากฏต่อเนื่องจากซ้ายสุดไปขวา
+                    จะกระตุ้นหมุนฟรี <span class="redText">8</span> เกม
+                </li>
+                <li>คลิกเริ่มเพื่อเริ่มต้นฟีเจอร์เกมฟรี</li>
+                <li>
+                    <img src="./Base_SymbolWW.png" class="textImg" /> สามารถแทนที่สัญลักษณ์ทั้งหมด รวมทั้งแทนที่
+                    <img src="./C1_small.png" class="textImg" /> ในการกระตุ้นฟีเจอร์เกมฟรี
+                    <img src="./Base_SymbolWW.png" class="textImg" /> จะปรากฏในรีลที่ 2, 3 และ 4 เท่านั้น
+                </li>
+                <li>
+                    ในเกมฟรี รีลของเกมเปลี่ยนจาก <span class="redText">3X5</span> เป็น
+                    <span class="redText">4X5</span> และลบ <img src="./Base_SymbolA_small.png" class="textImg" /> ,
+                    <img src="./Base_SymbolK_small.png" class="textImg" /> ,
+                    <img src="./Base_SymbolQ_small.png" class="textImg" /> ,
+                    <img src="./Base_SymbolJ_small.png" class="textImg" /> ,
+                    <img src="./Base_Symbol10_small.png" class="textImg" /> ,
+                    <img src="./Base_Symbol9_small.png" class="textImg" /> ออก
+                </li>
+                <li>
+                    ในเกมฟรี เมื่อ
+                    <img src="./C1_small.png" class="textImg" /> 3, 4 หรือ 5 อันที่ปรากฏต่อเนื่องจากซ้ายสุดไปขวา
+                    จะได้รับหมุนฟรีเพิ่มเติม <span class="redText">8</span> เกม สูงสุดจะได้รับหมุนฟรี
+                    <span class="redText">40</span> เกม
+                </li>
+                <li>ในเกมฟรี การเดิมพันจะเหมือนกับเวลาที่กระตุ้นฟีเจอร์เกมฟรี</li>
+                <li>
+                    หากผู้เล่นหยุดเกมระหว่างเกมฟรี ระบบจะคำนวณผลลัพธ์ของเกมอัตโนมัติ
+                    และนำยอดเงินรางวัลที่จะได้บวกเข้าไปในยอดคงเหลือ
+                </li>
+            </ul>
+            <hr class="solid" />
+            <h2><img src="./th/JPLogo_th.png" class="textBigImgByH" /> JACKPOT FEATURE</h2>
+            <ul>
+                <li>
+                    <img src="./th/JPLogo_th.png" class="textImgByH" /> มินิเกมแจ็คพอตสุ่มกระตุ้น จาก
+                    <img src="./JPsymbol.png" class="textImg" /> ที่อยู่บนรีล
+                </li>
+                <li>
+                    ระหว่าง <img src="./th/JPLogo_th.png" class="textImgByH" /> มินิเกมแจ็คพอตจะ มี
+                    <img src="./Mini_Icon_Choose.png" class="textImg" /> 12 อัน ด้านหลังของ
+                    <img src="./Mini_Icon_Choose.png" class="textImg" /> จะมี สัญลักษณ์แจ็คพอต 4 อย่าง
+                    <img src="./th/Mini_Icon_Grand_th.png" class="textImgByH" /> ,
+                    <img src="./th/Mini_Icon_Major_th.png" class="textImgByH" /> ,
+                    <img src="./th/Mini_Icon_Minor_th.png" class="textImgByH" /> ,
+                    <img src="./th/Mini_Icon_Mini_th.png" class="textImgByH" /> และสัญลักษณ์
+                    <img src="./th/Mini_Icon_Wild_th.png" class="textImgByH" /> 1 อันซ่อนอยู่
+                </li>
+                <li>
+                    คลิก <img src="./Mini_Icon_Choose.png" class="textImg" /> อาจได้รับ 1 ในสัญลักษณ์
+                    <img src="./th/Mini_Icon_Grand_th.png" class="textImgByH" /> ,
+                    <img src="./th/Mini_Icon_Major_th.png" class="textImgByH" /> ,
+                    <img src="./th/Mini_Icon_Minor_th.png" class="textImgByH" /> ,
+                    <img src="./th/Mini_Icon_Mini_th.png" class="textImgByH" /> หรือ
+                    <img src="./th/Mini_Icon_Wild_th.png" class="textImgByH" /> เมื่อได้รับสัญลักษณ์ที่เหมือน กัน 3
+                    อันจะชนะแจ็คพอตและปิดชำระ เงินรางวัลรวม
+                </li>
+                <li>
+                    <img src="./th/Mini_Icon_Wild_th.png" class="textImgByH" /> สามารถแทนที่
+                    <img src="./th/Mini_Icon_Grand_th.png" class="textImgByH" /> ,
+                    <img src="./th/Mini_Icon_Major_th.png" class="textImgByH" /> ,
+                    <img src="./th/Mini_Icon_Minor_th.png" class="textImgByH" /> และ
+                    <img src="./th/Mini_Icon_Mini_th.png" class="textImgByH" /> หากเปิดได้ สัญลักษณ์
+                    <img src="./th/Mini_Icon_Wild_th.png" class="textImgByH" /> ผู้เล่นมีโอกาสรับ แจ็คพอตหลายอันพร้อมกัน
+                </li>
+                <li>
+                    <img src="./th/JPText_Major_th.png" class="textImgByH" /> ,
+                    <img src="./th/JPText_Minor_th.png" class="textImgByH" /> และ
+                    <img src="./th/JPText_Mini_th.png" class="textImgByH" /> เป็น เงินโบนัสจะมีเงินรางวัลตามเดิมพันของ
+                    แต่ละสปิน
+                </li>
+                <li>
+                    เดิมพันยิ่งสูงโอกาสกระตุ้น
+                    <img src="./th/JPLogo_th.png" class="textImgByH" /> มินิเกมแจ็คพอตจะยิ่งมาก
+                </li>
+                <li>
+                    หากผู้เล่นขาดการเชื่อมต่อระหว่าง มินิเกมแจ็คพอต ระบบจะคำนวณผลลัพธ์ อัตโนมัติและส่งยอดรางวัลเข้าไปใน
+                    ยอดคงเหลือ
+                </li>
+            </ul>
+            <hr class="solid" />
+            <h2>ค่าการจ่ายของสัญลักษณ์</h2>
+            <ul>
+                <li>สัญลักษณ์ทั้งหมดจะต้องปรากฏต่อเนื่องจากซ้ายสุดไปขวา จึงสามารถรับรางวัล</li>
+            </ul>
+            <div class="payoutWrap">
+                <div class="payRowTitle">
+                    <div class="yellow-font">รางวัลเกมฟรี</div>
+                    <img src="./Base_SymbolC1.png" class="payImg" />
+                </div>
+                <div class="payRowValue flex-both-center flex-col">
+                    <div>5 - <span class="yellow-font">60x</span></div>
+                    <div>4 - <span class="yellow-font">20x</span></div>
+                    <div>3 - <span class="yellow-font">6x</span></div>
+                </div>
+                <div class="text-align-center">
+                    แต้ม <img src="./Base_SymbolC1.png" class="textImgByH" /> คูณด้วยเดิมพันรวม พร้อมรับหมุนฟรี
+                    <span class="redText">8</span> เกม
+                </div>
+            </div>
+            <div class="payoutWrap">
+                <div class="payRowTitle">
+                    <div class="yellow-font">สัญลักษณ์ wild</div>
+                    <img src="./Base_SymbolWW.png" class="payImg" />
+                </div>
+                <div class="payRowValue flex-both-center flex-col"></div>
+                <div class="flex-both-center flex-col">
+                    <span
+                        ><img src="./Base_SymbolWW.png" class="textImgByH" /> สามารถแทนที่สัญลักษณ์ทั้งหมด นอกเหนือจาก
+                        <img src="./JPsymbol.png" class="textImgByH"
+                    /></span>
+                    <span
+                        ><img src="./Base_SymbolWW.png" class="textImgByH" /> จะปรากฏในรีลที่
+                        <span class="redText">2</span>, <span class="redText">3</span> และ
+                        <span class="redText">4</span> เท่านั้น</span
+                    >
+                </div>
+            </div>
+            <div class="flex-both-center flex-wrap">
+                <div class="flex-both-center payTable">
+                    <img src="./M1_Power.png" class="payTableImg" />
+                    <div class="payRowValue flex-align-start-with-margin flex-col">
+                        <div>5 - <span class="payout-font">0.3</span></div>
+                        <div>4 - <span class="payout-font">0.08</span></div>
+                        <div>3 - <span class="payout-font">0.03</span></div>
+                    </div>
+                </div>
+                <div class="flex-both-center payTable">
+                    <img src="./M2_Power.png" class="payTableImg" />
+                    <div class="payRowValue flex-align-start-with-margin flex-col">
+                        <div>5 - <span class="payout-font">0.18</span></div>
+                        <div>4 - <span class="payout-font">0.05</span></div>
+                        <div>3 - <span class="payout-font">0.02</span></div>
+                    </div>
+                </div>
+                <div class="flex-both-center payTable">
+                    <img src="./M3_Power.png" class="payTableImg" />
+                    <div class="payRowValue flex-align-start-with-margin flex-col">
+                        <div>5 - <span class="payout-font">0.14</span></div>
+                        <div>4 - <span class="payout-font">0.04</span></div>
+                        <div>3 - <span class="payout-font">0.02</span></div>
+                    </div>
+                </div>
+                <div class="flex-both-center payTable">
+                    <img src="./M4_Power.png" class="payTableImg" />
+                    <div class="payRowValue flex-align-start-with-margin flex-col">
+                        <div>5 - <span class="payout-font">0.09</span></div>
+                        <div>4 - <span class="payout-font">0.03</span></div>
+                        <div>3 - <span class="payout-font">0.01</span></div>
+                    </div>
+                </div>
+                <div class="flex-both-center payTable">
+                    <img src="./M5_Power.png" class="payTableImg" />
+                    <div class="payRowValue flex-align-start-with-margin flex-col">
+                        <div>5 - <span class="payout-font">0.06</span></div>
+                        <div>4 - <span class="payout-font">0.02</span></div>
+                        <div>3 - <span class="payout-font">0.01</span></div>
+                    </div>
+                </div>
+                <div class="flex-both-center payTable">
+                    <div class="flex-both-center flex-col">
+                        <img src=" ./MSymbol.png" style="width: 100%" /> ชนิดเดียวกัน
+                    </div>
+                    <div class="payRowValue flex-both-center flex-col">
+                        <div>5 - <span class="payout-font">0.03</span></div>
+                        <div>4 - <span class="payout-font">0.02</span></div>
+                        <div>3 - <span class="payout-font">0.01</span></div>
+                    </div>
+                </div>
+            </div>
+            <hr class="solid" />
+            <h2>จำนวนไลน์สูงสุด</h2>
+            <ul>
+                <li>สัญลักษณ์ทั้งหมดจะต้องปรากฏ ต่อเนื่องจากซ้ายสุดไปขวา จึงสามารถรับรางวัล</li>
+                <li>เมื่อมีชุดรางวัลหลายชนิดในไลน์เดียวกัน จะจ่ายให้กับชุดรางวัลสูงสุดเท่านั้น</li>
+                <li>การตั้งค่าเกมพื้นฐาน = สูงสุด243ไลน์</li>
+                <div style="display: flex; justify-content: center">
+                    <div class="flex-align-center flex-col p-5 w-33">
+                        <img src="./base_ways_1.png" class="w-100" />
+                        <span>สูงสุด 243 ไลน์</span>
+                    </div>
+                    <div class="flex-align-center flex-col p-5 w-33">
+                        <img src="./base_ways_2.png" class="w-100" />
+                        <span>3 เรียงไลน์จะจ่าย 2 ไลน์</span>
+                    </div>
+                    <div class="flex-align-center flex-col p-5 w-33">
+                        <img src="./base_ways_3.png" class="w-100" />
+                        <span>ไม่ได้รางวัล</span>
+                    </div>
+                </div>
+                <li>การตั้งค่าเกมฟรี = สูงสุด 1024ไลน์</li>
+                <div style="display: flex; justify-content: center">
+                    <div class="flex-align-center flex-col p-5 w-33">
+                        <img src="./free_ways_1.png" class="w-100" />
+                        <span>สูงสุด 1024 ไลน์</span>
+                    </div>
+                    <div class="flex-align-center flex-col p-5 w-33">
+                        <img src="./free_ways_2.png" class="w-100" />
+                        <span>3 เรียงไลน์จะจ่าย 2 ไลน์</span>
+                    </div>
+                    <div class="flex-align-center flex-col p-5 w-33">
+                        <img src="./free_ways_3.png" class="w-100" />
+                        <span>ไม่ได้รางวัล</span>
+                    </div>
+                </div>
+            </ul>
+            <hr class="solid" />
+            <h2>ข้อมูลเกม</h2>
+            <div class="text-align-center">เวอร์ชั่นเกม : <span id="gameVersionDom"></span></div>
+            <div class="text-align-center">เมื่อเกมเกิดข้อบกพร่อง การเล่นและการจ่ายทั้งหมดจะถือว่าโมฆะ</div>
+        </div>
+    </body>
+    <script>
+        let originUrl =
+            window.location.ancestorOrigins.length != 0 ? window.location.ancestorOrigins[0] : window.location.origin;
+
+        var openGameHelp = (boolean) => {
+            window.parent.postMessage(JSON.stringify({ name: 'openGameHelp', data: false }), originUrl);
+            window.parent['closeHelpPage']();
+        };
+
+        window.parent.postMessage(JSON.stringify({ name: 'getGameVersion', data: {} }), originUrl);
+
+        let gameVerSpan = document.getElementById('gameVersionDom');
+        // dynamic payout
+        const symbolPayoutArray = [
+            // M1
+            300, 80, 30,
+            // M2
+            180, 50, 20,
+            // M3
+            140, 40, 20,
+            // M4
+            90, 30, 10,
+            // M5
+            60, 20, 10,
+            // AKQJ109
+            30, 20, 10
+        ];
+        let calPayoutCredit = (oddsData, totalBetData) => oddsData * totalBetData;
+
+        let symbolArraySpan = document.getElementsByClassName('payout-font');
+        let updatePayout = function (totalBetData) {
+            if (Number.isNaN(Number(totalBetData)) || symbolArraySpan.length !== symbolPayoutArray.length) {
+                Array.prototype.forEach.call(symbolArraySpan, function (el) {
+                    el.textContent = Number.NaN;
+                });
+            } else {
+                Array.prototype.forEach.call(symbolArraySpan, function (el) {
+					el.textContent = calPayoutCredit(symbolPayoutArray.shift(), totalBetData).toFixed(2);
+                });
+            }
+        };
+
+        window.addEventListener('message', (e) => {
+            if (e.origin !== originUrl) return;
+            if (JSON.parse(e.data).name === 'getGameVersion') {
+                if (typeof JSON.parse(e.data).data === 'string') {
+                    gameVerSpan.textContent = JSON.parse(e.data).data;
+                } else {
+                    gameVerSpan.textContent = '-';
+                }
+            } else if (JSON.parse(e.data).name === 'getPayout') {
+                updatePayout(JSON.parse(e.data).data);
+            }
+        });
+
+        // requested to dynamic payout
+        window.parent.postMessage(JSON.stringify({ name: 'getPayout', data: {} }), originUrl);
+    </script>
+</html>

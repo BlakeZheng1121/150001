@@ -21,9 +21,17 @@ export class OpenHelpCommand extends puremvc.SimpleCommand {
                 lang: this.gameDataProxy.language,
                 bet: this.gameDataProxy.convertCredit2Cash(this.gameDataProxy.curBet),
                 gameVer: this.gameDataProxy.gameVer,
+                versionName: this.getVersionName(),
                 decimalPlace: MathUtil.decimalPlace
             })
         );
+    }
+
+    protected getVersionName(): string {
+        if (this.gameDataProxy.hasDenomMultiplier()) {
+            return 'omni_channel';
+        }
+        return 'online';
     }
 
     // ======================== Get Set ========================

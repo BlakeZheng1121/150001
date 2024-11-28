@@ -80,12 +80,14 @@
 
             // help iframe
             let gameHelp = document.getElementById('gameHelp');
+            var versionName = 'online';
+            var curHelpVersion = (val) => (versionName = val);
             var openGameHelp = (gameLocale) => {
                 if (gameLocale.toString() === 'false') {
                     gameHelp.src = '';
                     gameHelp.style.display = 'none';
                 } else {
-                    gameHelp.src = `./help/help_${gameLocale}.html`;
+                    gameHelp.src = `./help/${versionName}_help_${gameLocale}.html`;
                     gameHelp.style.display = UrlExists(gameHelp.src) ? 'block' : 'none';
                 }
             };

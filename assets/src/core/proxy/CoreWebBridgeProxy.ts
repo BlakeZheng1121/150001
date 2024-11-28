@@ -81,6 +81,7 @@ export class CoreWebBridgeProxy extends puremvc.Proxy {
      */
     public openHelp(message: any): void {
         var data = JSON.parse(message);
+        window['curHelpVersion'](data.versionName);
         window['openGameHelp'](data.lang);
         window['curGameVersion'](data.gameVer);
         window['curTotalBet'](data.bet);

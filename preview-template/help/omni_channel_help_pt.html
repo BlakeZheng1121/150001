@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>DragoNova Game Help</title>
+        <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
+        />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="full-screen" content="true" />
+        <meta name="screen-orientation" content="portrait" />
+        <meta name="x5-fullscreen" content="true" />
+        <meta name="360-fullscreen" content="true" />
+        <style>
+            html,
+            body {
+                -ms-touch-action: none;
+                padding: 0;
+                border: 0;
+                margin: 0;
+                height: 100%;
+                background-color: #171528;
+                color: #b6b0f8;
+                font-family: 'Microsoft JhengHei', 'Microsoft YaHei', 'LiHei Pro Medium', 'SimHei', Helvetica,
+                    sans-serif;
+            }
+
+            ::-webkit-scrollbar {
+                height: 0px;
+                width: 0px;
+            }
+
+            ::-webkit-scrollbar-thumb {
+                border-radius: 15px;
+                background-color: rgba(#fff, 0.2);
+            }
+
+            ::-webkit-scrollbar-track {
+                border-radius: 0px;
+            }
+
+            #closeButton {
+                width: 50px;
+                height: 50px;
+                background-image: url('./back.png');
+                background-size: cover;
+                cursor: pointer;
+                margin: auto 0;
+                margin-left: 10px;
+            }
+
+            .topBar {
+                position: fixed;
+                height: 80px;
+                width: 100%;
+                background-color: #0f0d1a;
+                display: flex;
+                align-items: center;
+                z-index: 1;
+            }
+
+            .content {
+                padding: 10px 10px;
+                padding-top: 80px;
+                margin: auto;
+                width: 100%;
+                min-width: 360px;
+                overflow-x: hidden;
+                box-sizing: border-box;
+            }
+
+            .content h2 {
+                font-size: 1.3rem;
+                text-align: center;
+                color: #e4c23c;
+                font-weight: 700;
+            }
+
+            .yellow-font {
+                color: #e4c23c;
+                font-weight: 700;
+            }
+
+            .payout-font {
+                color: #e4c23c;
+                font-weight: 700;
+            }
+
+            .content ul li {
+                line-height: 1.2;
+                padding: 5px 0;
+                list-style-type: square;
+            }
+
+            .content hr {
+                opacity: 0.1;
+            }
+
+            .content img {
+                vertical-align: middle;
+                image-rendering: -moz-crisp-edges; /* Firefox */
+                image-rendering: -o-crisp-edges; /* Opera */
+                image-rendering: -webkit-optimize-contrast; /* Webkit (non-standard naming) */
+                image-rendering: crisp-edges;
+                -ms-interpolation-mode: nearest-neighbor; /* IE (non-standard property) */
+            }
+
+            .redText {
+                color: #ff2a2a;
+            }
+
+            .textImg {
+                width: 25px;
+            }
+
+            .textImgByH {
+                height: 25px;
+            }
+
+            .textBigImgByH {
+                height: 40px;
+            }
+
+            .content table {
+                border-collapse: collapse;
+            }
+
+            .tableTitle {
+                text-align: center;
+                line-height: 2.5;
+            }
+
+            .content td {
+                border: 2px solid #5e4dff;
+                text-align: center;
+            }
+
+            .content td img {
+                width: 80%;
+                margin: auto;
+            }
+
+            .payoutWrap {
+                display: flex;
+                align-items: center;
+                flex-flow: column;
+                padding-top: 20px;
+            }
+
+            .payTable {
+                width: 50%;
+                padding: 10px 0;
+            }
+
+            .payTableImg {
+                width: 50%;
+            }
+
+            .payoutWrap .payRowTitle {
+                display: flex;
+                justify-content: center;
+                flex-flow: column;
+                align-items: center;
+                min-width: 150px;
+            }
+
+            .payImg {
+                width: 150px;
+            }
+
+            .payRowValue {
+                width: 150px;
+            }
+
+            .payRowValue div {
+                min-width: 60px;
+            }
+
+            .flex-both-center {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .flex-justify-center {
+                display: flex;
+                justify-content: center;
+            }
+
+            .flex-align-center {
+                display: flex;
+                align-items: center;
+            }
+
+            .flex-align-start-with-margin {
+                display: flex;
+                align-items: start;
+                margin-left: 10px;
+            }
+
+            .flex-col {
+                flex-flow: column;
+            }
+
+            .flex-wrap {
+                flex-wrap: wrap;
+            }
+
+            .text-align-center {
+                text-align: center;
+            }
+
+            .w-100 {
+                width: 100%;
+            }
+
+            .p-5 {
+                padding: 5px;
+            }
+
+            .w-33 {
+                width: 33%;
+            }
+
+            @media (min-width: 600px) and (max-width: 1200px) {
+                .content {
+                    max-width: 70%;
+                }
+
+                .payoutWrap {
+                    flex-flow: row;
+                }
+            }
+
+            @media (min-width: 1200px) {
+                .content {
+                    max-width: 50%;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="topBar">
+            <div id="closeButton" onclick="window.openGameHelp(false)"></div>
+        </div>
+        <div class="content" id="helpContent">
+            <h2><span class="redText">POWER UP</span> RECURSO</h2>
+            <ul>
+                <li>
+                    Empilhar <span class="redText">2</span> símbolos iguais para ativar o
+                    <span class="redText">POWER UP</span> RECURSO e aumentar <span class="redText">3</span> vezes mais o
+                    ganho nesse símbolo.
+                </li>
+                <li>
+                    Empilhar <span class="redText">3</span> símbolos iguais para ativar o
+                    <span class="redText">POWER UP</span> RECURSO e aumentar <span class="redText">5</span> vezes mais o
+                    ganho nesse símbolo.
+                </li>
+                <li>
+                    Empilhar <span class="redText">4</span> símbolos iguais para ativar o
+                    <span class="redText">POWER UP</span> RECURSO e aumentar <span class="redText">8</span> vezes mais o
+                    ganho nesse símbolo.
+                </li>
+                <li>
+                    <img src="./M1_Power.png" class="textImg" /> , <img src="./M2_Power.png" class="textImg" /> ,
+                    <img src="./M3_Power.png" class="textImg" /> , <img src="./M4_Power.png" class="textImg" /> e
+                    <img src="./M5_Power.png" class="textImg" /> acionarão
+                    <span class="redText">POWER UP</span> RECURSO.
+                </li>
+                <li>
+                    O símbolo <img src="./Base_SymbolWW.png" class="textImg" /> não acionará o RECURSO
+                    <span class="redText">POWER UP</span>.
+                </li>
+            </ul>
+            <hr class="solid" />
+            <h2>RECURSO DE JOGO GRÁTIS</h2>
+            <ul>
+                <li>
+                    3, 4 ou 5 <img src="./C1_small.png" class="textImg" /> consecutivos da bobina da extrema esquerda
+                    para a direita acionam <span class="redText">8</span> giros grátis.
+                </li>
+                <li>Pressione o botão INICIAR para começar o RECURSO DE JOGO GRÁTIS.</li>
+                <li>
+                    <img src="./Base_SymbolWW.png" class="textImg" /> substituirá todos os símbolos, incluindo
+                    <img src="./C1_small.png" class="textImg" /> para acionar o RECURSO DE JOGO GRÁTIS.
+                    <img src="./Base_SymbolWW.png" class="textImg" /> só aparece nas bobinas 2, 3 e 4.
+                </li>
+                <li>
+                    Durante os jogos grátis, a altura de todas as bobinas muda de
+                    <span class="redText">3</span> para <span class="redText">4</span> e remove
+                    <img src="./Base_SymbolA_small.png" class="textImg" /> ,
+                    <img src="./Base_SymbolK_small.png" class="textImg" /> ,
+                    <img src="./Base_SymbolQ_small.png" class="textImg" /> ,
+                    <img src="./Base_SymbolJ_small.png" class="textImg" /> ,
+                    <img src="./Base_Symbol10_small.png" class="textImg" /> ,
+                    <img src="./Base_Symbol9_small.png" class="textImg" />.
+                </li>
+                <li>
+                    Durante os jogos grátis, os giros grátis adicionais <span class="redText">8</span> podem ser dados
+                    se 3, 4 ou 5 <img src="./C1_small.png" class="textImg" /> consecutivos aparecerem da bobina da
+                    extrema esquerda para a direita. O máximo de giros grátis é <span class="redText">40</span>.
+                </li>
+                <li>Durante os jogos grátis, a aposta será a mesma quando o RECURSO DE JOGO GRÁTIS for acionado.</li>
+                <li>
+                    Se o jogador perder a conexão durante o JOGO GRÁTIS, o sistema calculará os resultados do jogo
+                    automaticamente e os prêmios vencedores serão adicionados ao saldo.
+                </li>
+            </ul>
+            <hr class="solid" />
+            <h2><img src="./pt/JPLogo_pt.png" class="textBigImgByH" /> RECURSO DE JACKPOT</h2>
+            <ul>
+                <li>
+                    M ini jogo de jackpot
+                    <img src="./pt/JPLogo_pt.png" class="textImgByH" /> é acionado aleatoriamente por
+                    <img src="./JPsymbol.png" class="textImg" /> nas bobinas.
+                </li>
+                <li>
+                    Durante o mini-jogo de jackpot <img src="./pt/JPLogo_pt.png" class="textImgByH" /> , existem 12
+                    <img src="./Mini_Icon_Choose.png" class="textImg" /> que consistem em símbolos
+                    <img src="./pt/Mini_Icon_Grand_pt.png" class="textImgByH" /> ,
+                    <img src="./pt/Mini_Icon_Major_pt.png" class="textImgByH" /> ,
+                    <img src="./pt/Mini_Icon_Minor_pt.png" class="textImgByH" /> ,
+                    <img src="./pt/Mini_Icon_Mini_pt.png" class="textImgByH" /> e um símbolo
+                    <img src="./pt/Mini_Icon_Wild_pt.png" class="textImgByH" /> .
+                </li>
+                <li>
+                    Clique em um <img src="./Mini_Icon_Choose.png" class="textImg" /> para revelar um símbolo de jackpot
+                    <img src="./pt/Mini_Icon_Grand_pt.png" class="textImgByH" /> ,
+                    <img src="./pt/Mini_Icon_Major_pt.png" class="textImgByH" /> ,
+                    <img src="./pt/Mini_Icon_Minor_pt.png" class="textImgByH" /> ,
+                    <img src="./pt/Mini_Icon_Mini_pt.png" class="textImgByH" /> ou um símbolo
+                    <img src="./pt/Mini_Icon_Wild_pt.png" class="textImgByH" /> . O jogador que obter três símbolos
+                    iguais de jackpot ganhará o jackpot e calculará os pagamentos totais.
+                </li>
+                <li>
+                    <img src="./pt/Mini_Icon_Wild_pt.png" class="textImgByH" /> pode substituir
+                    <img src="./pt/Mini_Icon_Grand_pt.png" class="textImgByH" /> ,
+                    <img src="./pt/Mini_Icon_Major_pt.png" class="textImgByH" /> ,
+                    <img src="./pt/Mini_Icon_Minor_pt.png" class="textImgByH" /> ,
+                    <img src="./pt/Mini_Icon_Mini_pt.png" class="textImgByH" />. O jogador tem a chance de ganhar mais
+                    de um prêmio de jackpot ao mesmo tempo se o jogador revelar um símbolo
+                    <img src="./pt/Mini_Icon_Wild_pt.png" class="textImgByH" /> .
+                </li>
+                <li>
+                    <img src="./pt/JPText_Major_pt.png" class="textImgByH" /> ,
+                    <img src="./pt/JPText_Minor_pt.png" class="textImgByH" /> e
+                    <img src="./pt/JPText_Mini_pt.png" class="textImgByH" /> são jackpots de bônus cujo pagamento é
+                    proporcional à aposta por giro.
+                </li>
+                <li>
+                    Quanto maior a aposta, maiores as chances de acionar o mini jogo de jackpot
+                    <img src="./pt/JPLogo_pt.png" class="textImgByH" /> .
+                </li>
+                <li>
+                    Se o jogador perder a conexão durante o mini-jogo de jackpot, o sistema calculará os resultados do
+                    jogo automaticamente e os prêmios vencedores serão adicionados ao saldo.
+                </li>
+            </ul>
+            <div class="tableTitle">Jackpot Increment Rate</div>
+            <table style="margin: auto; margin-bottom: 10px">
+                <tr>
+                    <td><img src="./pt/JPText_Grand_pt.png" style="padding: 10px" /></td>
+                </tr>
+                <tr>
+                    <td>
+                        <h2>0.30%</h2>
+                    </td>
+                </tr>
+            </table>
+            <hr class="solid" />
+            <h2>VALORES DE PAGAMENTO DE SÍMBOLOS</h2>
+            <ul>
+                <li>Todas as vitórias são da extrema esquerda para a direita.</li>
+            </ul>
+            <div class="payoutWrap">
+                <div class="payRowTitle">
+                    <div class="yellow-font">Bônus de Jogo Grátis</div>
+                    <img src="./Base_SymbolC1.png" class="payImg" />
+                </div>
+                <div class="payRowValue flex-both-center flex-col">
+                    <div>5 - <span class="yellow-font">60x</span></div>
+                    <div>4 - <span class="yellow-font">20x</span></div>
+                    <div>3 - <span class="yellow-font">6x</span></div>
+                </div>
+                <div class="text-align-center">
+                    <img src="./Base_SymbolC1.png" class="textImgByH" />
+                    ganhos multiplicados pelo total de apostas e recompensas <span class="redText">8</span> giros
+                    grátis.
+                </div>
+            </div>
+            <div class="payoutWrap">
+                <div class="payRowTitle">
+                    <div class="yellow-font">Símbolo Wild</div>
+                    <img src="./Base_SymbolWW.png" class="payImg" />
+                </div>
+                <div class="payRowValue flex-both-center flex-col"></div>
+                <div class="flex-both-center flex-col">
+                    <span
+                        ><img src="./Base_SymbolWW.png" class="textImgByH" /> substituirá todos os símbolos, exceto
+                        <img src="./JPsymbol.png" class="textImgByH" />.</span
+                    >
+                    <span><img src="./Base_SymbolWW.png" class="textImgByH" /> só aparece nas bobinas 2, 3 e 4.</span>
+                </div>
+            </div>
+            <div class="flex-both-center flex-wrap">
+                <div class="flex-both-center payTable">
+                    <img src="./M1_Power.png" class="payTableImg" />
+                    <div class="payRowValue flex-align-start-with-margin flex-col">
+                        <div>5 - <span class="payout-font">0.3</span></div>
+                        <div>4 - <span class="payout-font">0.08</span></div>
+                        <div>3 - <span class="payout-font">0.03</span></div>
+                    </div>
+                </div>
+                <div class="flex-both-center payTable">
+                    <img src="./M2_Power.png" class="payTableImg" />
+                    <div class="payRowValue flex-align-start-with-margin flex-col">
+                        <div>5 - <span class="payout-font">0.18</span></div>
+                        <div>4 - <span class="payout-font">0.05</span></div>
+                        <div>3 - <span class="payout-font">0.02</span></div>
+                    </div>
+                </div>
+                <div class="flex-both-center payTable">
+                    <img src="./M3_Power.png" class="payTableImg" />
+                    <div class="payRowValue flex-align-start-with-margin flex-col">
+                        <div>5 - <span class="payout-font">0.14</span></div>
+                        <div>4 - <span class="payout-font">0.04</span></div>
+                        <div>3 - <span class="payout-font">0.02</span></div>
+                    </div>
+                </div>
+                <div class="flex-both-center payTable">
+                    <img src="./M4_Power.png" class="payTableImg" />
+                    <div class="payRowValue flex-align-start-with-margin flex-col">
+                        <div>5 - <span class="payout-font">0.09</span></div>
+                        <div>4 - <span class="payout-font">0.03</span></div>
+                        <div>3 - <span class="payout-font">0.01</span></div>
+                    </div>
+                </div>
+                <div class="flex-both-center payTable">
+                    <img src="./M5_Power.png" class="payTableImg" />
+                    <div class="payRowValue flex-align-start-with-margin flex-col">
+                        <div>5 - <span class="payout-font">0.06</span></div>
+                        <div>4 - <span class="payout-font">0.02</span></div>
+                        <div>3 - <span class="payout-font">0.01</span></div>
+                    </div>
+                </div>
+                <div class="flex-both-center payTable">
+                    <div class="flex-both-center flex-col">
+                        <img src=" ./MSymbol.png" style="width: 100%" /> De um tipo
+                    </div>
+                    <div class="payRowValue flex-both-center flex-col">
+                        <div>5 - <span class="payout-font">0.03</span></div>
+                        <div>4 - <span class="payout-font">0.02</span></div>
+                        <div>3 - <span class="payout-font">0.01</span></div>
+                    </div>
+                </div>
+            </div>
+            <hr class="solid" />
+            <h2>FORMAS MÁXIMAS</h2>
+            <ul>
+                <li>
+                    As combinações vencedoras devem iniciar a partir da bobina da extrema esquerda e os símbolos devem
+                    estar em bobinas consecutivas.
+                </li>
+                <li>O maior ganho só é pago quando há mais de uma combinação vencedora com um determinado símbolo.</li>
+                <li>Configuração do jogo base = 243 formas máximas.</li>
+                <div style="display: flex; justify-content: center">
+                    <div class="flex-align-center flex-col p-5 w-33">
+                        <img src="./base_ways_1.png" class="w-100" />
+                        <span>243 formas máximas</span>
+                    </div>
+                    <div class="flex-align-center flex-col p-5 w-33">
+                        <img src="./base_ways_2.png" class="w-100" />
+                        <span>3 de um tipo paga de 2 formas</span>
+                    </div>
+                    <div class="flex-align-center flex-col p-5 w-33">
+                        <img src="./base_ways_3.png" class="w-100" />
+                        <span>Sem ganhos</span>
+                    </div>
+                </div>
+                <li>Configuração de jogo grátis = <span class="redText">1024</span> formas máximas.</li>
+                <div style="display: flex; justify-content: center">
+                    <div class="flex-align-center flex-col p-5 w-33">
+                        <img src="./free_ways_1.png" class="w-100" />
+                        <span>1024 formas máximas</span>
+                    </div>
+                    <div class="flex-align-center flex-col p-5 w-33">
+                        <img src="./free_ways_2.png" class="w-100" />
+                        <span>3 de um tipo paga de 2 formas</span>
+                    </div>
+                    <div class="flex-align-center flex-col p-5 w-33">
+                        <img src="./free_ways_3.png" class="w-100" />
+                        <span>Sem ganhos</span>
+                    </div>
+                </div>
+            </ul>
+            <hr class="solid" />
+            <h2>INFORMAÇÕES DO JOGO</h2>
+            <div class="text-align-center">Versão do jogo: <span id="gameVersionDom"></span></div>
+            <div class="text-align-center">THE THEORETICAL RETURN TO PLAYER FOR THIS GAME IS 96.15%.</div>
+            <div class="text-align-center">O MAU FUNCIONAMENTO ANULA TODOS OS PAGAMENTOS E JOGADAS.</div>
+            <div class="text-align-center">
+                THE PRODUCT AND THE COMPONENTS CONTAINED HEREIN ARE PROTECTED BY INTELLECTUAL PROPERTY RIGHTS OWNED BY
+                AND/OR LICENSED TO JUMBO INFINITY™.
+            </div>
+            <div class="text-align-center">© 2021 JUMBO INFINITY™ ALL RIGHTS RESERVED.</div>
+        </div>
+    </body>
+    <script>
+        let originUrl =
+            window.location.ancestorOrigins.length != 0 ? window.location.ancestorOrigins[0] : window.location.origin;
+
+        var openGameHelp = (boolean) => {
+            window.parent.postMessage(JSON.stringify({ name: 'openGameHelp', data: false }), originUrl);
+            window.parent['closeHelpPage']();
+        };
+
+        window.parent.postMessage(JSON.stringify({ name: 'getGameVersion', data: {} }), originUrl);
+
+        let gameVerSpan = document.getElementById('gameVersionDom');
+        // dynamic payout
+        const symbolPayoutArray = [
+            // M1
+            300, 80, 30,
+            // M2
+            180, 50, 20,
+            // M3
+            140, 40, 20,
+            // M4
+            90, 30, 10,
+            // M5
+            60, 20, 10,
+            // AKQJ109
+            30, 20, 10
+        ];
+        let calPayoutCredit = (oddsData, totalBetData) => oddsData * totalBetData;
+
+        let symbolArraySpan = document.getElementsByClassName('payout-font');
+        let updatePayout = function (totalBetData) {
+            if (Number.isNaN(Number(totalBetData)) || symbolArraySpan.length !== symbolPayoutArray.length) {
+                Array.prototype.forEach.call(symbolArraySpan, function (el) {
+                    el.textContent = Number.NaN;
+                });
+            } else {
+                Array.prototype.forEach.call(symbolArraySpan, function (el) {
+					el.textContent = calPayoutCredit(symbolPayoutArray.shift(), totalBetData).toFixed(2);
+                });
+            }
+        };
+
+        window.addEventListener('message', (e) => {
+            if (e.origin !== originUrl) return;
+            if (JSON.parse(e.data).name === 'getGameVersion') {
+                if (typeof JSON.parse(e.data).data === 'string') {
+                    gameVerSpan.textContent = JSON.parse(e.data).data;
+                } else {
+                    gameVerSpan.textContent = '-';
+                }
+            } else if (JSON.parse(e.data).name === 'getPayout') {
+                updatePayout(JSON.parse(e.data).data);
+            }
+        });
+
+        // requested to dynamic payout
+        window.parent.postMessage(JSON.stringify({ name: 'getPayout', data: {} }), originUrl);
+    </script>
+</html>
