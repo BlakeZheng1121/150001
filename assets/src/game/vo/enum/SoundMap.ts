@@ -88,6 +88,7 @@ export enum AudioClipsEnum {
     MiniHit02 = 'MiniHit02',
     MiniHit03 = 'MiniHit03',
     MiniHit04 = 'MiniHit04',
+    PrizePrediction = 'PrizePrediction',
     PrizePrediction01 = 'PrizePrediction01',
     PrizePrediction02 = 'PrizePrediction02',
     PrizePrediction03 = 'PrizePrediction03',

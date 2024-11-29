@@ -1,41 +1,41 @@
-import { _decorator, Component, Node, Prefab, CCString } from 'cc';
+import { _decorator, Component, Node, size, Size, Sprite, tween, UIOpacity, UITransform } from 'cc';
 import { TimelineTool } from 'TimelineTool';
-import { AudioManager } from '../../audio/AudioManager';
 import { AudioClipsEnum } from '../vo/enum/SoundMap';
+import { AudioManager } from 'src/audio/AudioManager';
+import { GameScene } from 'src/sgv3/vo/data/GameScene';
 import BaseView from 'src/base/BaseView';
 const { ccclass, property } = _decorator;
 
 @ccclass('PrizePredictionView')
 export class PrizePredictionView extends BaseView {
-    @property(TimelineTool) private anim: TimelineTool | null = null;
+    @property(TimelineTool)
+    private anim: TimelineTool;
 
-    private sounds: AudioClipsEnum[] = [
-        AudioClipsEnum.PrizePrediction01,
-        AudioClipsEnum.PrizePrediction02,
-        AudioClipsEnum.PrizePrediction03
-    ];
+    @property(UITransform)
+    private mask: UITransform;
+
+    @property(UITransform)
+    private blackBackground: UITransform;
+
+    private sounds: AudioClipsEnum[] = [AudioClipsEnum.PrizePrediction];
     private callBack: Function = null;
     onLoad() {
+        this.blackBackground.node.active = false;
         super.onLoad();
     }
 
     play(cb: Function): void {
-        this.callBack = cb;
-        this.onFinish();
-    }
-
-    public playHorizontal(cb: Function): void {
-        //
-        console.error("This Game No Horizontal Type");
-        //this.playSound();
-        //this.callBack = cb;
-        //this.anim.OnPlay(0, () => this.onFinish());
-    }
-
-    public playVertical(cb: Function): void {
-        this.playSound();
-        this.callBack = cb;
-        this.anim.play('Show', () => this.onFinish());
+        const self = this;
+        self.blackBackground.node.active = true;
+        self.playSound();
+        self.callBack = cb;
+        self.anim.play('Show', () => {
+            self.blackBackground.node.active = false;
+            self.onFinish();
+        });
+        // self.mask.opacity = 0;
+        // self.mask.node.active = true;
+        // tween(self.mask).to(0.5, { opacity: 255 }).start();
     }
 
     private playSound() {
@@ -47,9 +47,30 @@ export class PrizePredictionView extends BaseView {
         this.onFinish();
     }
 
+    public setMaskSizeState(gameScene: string) {
+        let size: Size;
+        switch (gameScene) {
+            case GameScene.Game_2:
+            case GameScene.Game_1:
+            default:
+                size = new Size(875, 508);
+                break;
+
+        }
+        this.setMaskScale(size);
+    }
+
+    private setMaskScale(size: Size) {
+        this.mask.contentSize = size;
+        this.blackBackground.contentSize = size;
+    }
+
     private onFinish() {
-        this.callBack?.();
+        const self = this;
+        self.callBack?.();
         this.callBack = null;
+        // this.mask.opacity = 0;
+        // this.mask.node.active = false;
     }
 
     public get isPlaying(): boolean {
