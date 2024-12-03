@@ -148,8 +148,7 @@ export class GAME_JackpotPoolViewMediator extends BaseMediator<GAME_JackpotPoolV
                     break;
             }
         }
-        if (this.curBonusMultiplier != denomMultiplier && this.gameDataProxy.curScene != GameScene.Init) {
-            this.curBonusMultiplier = denomMultiplier;
+        if (this.gameDataProxy.curScene != GameScene.Init) {
             this.view.updateFortuneMultiplier(poolFxList);
         }
     }
