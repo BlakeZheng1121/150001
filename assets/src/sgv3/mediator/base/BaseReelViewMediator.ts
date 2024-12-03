@@ -230,12 +230,13 @@ export class BaseReelViewMediator<T extends ReelView> extends BaseMediator<T> {
         const self = this;
         if (self.currentSequenceIndex < self.spinStopSequence.length && !self.isTriggerEmergencyStop) {
             if (self.reelDataProxy.isSlowMotionAry[self.currentSequenceIndex]) {
+                let singleReelContent = self.reelView.reelsList[self.currentSequenceIndex].singleReelContent;
+                self.sendNotification(ReelEvent.ON_SINGLE_REEL_START_STOP, singleReelContent);
                 self.reelView.reelSlowStop(self.spinStopSequence[self.currentSequenceIndex]);
             } else {
                 self.reelView.reelStop(self.spinStopSequence[self.currentSequenceIndex]);
             }
             self.gameDataProxy.spinSequenceNumber = self.currentSequenceIndex;
-            self.sendNotification(ReelEvent.ON_SINGLE_REEL_START_STOP, self.currentSequenceIndex);
         }
     }
 
@@ -255,7 +256,9 @@ export class BaseReelViewMediator<T extends ReelView> extends BaseMediator<T> {
         if (self.isTriggerErrorStop) {
             return;
         }
-        self.sendNotification(ReelEvent.ON_SINGLE_REEL_STOP_END, self.currentSequenceIndex);
+        if (self.reelDataProxy.isSlowMotionAry[self.currentSequenceIndex]) {
+            self.sendNotification(ReelEvent.ON_SINGLE_REEL_STOP_END, self.reelView.reelsList[self.currentSequenceIndex].singleReelContent.stripIndexer.fovLength);
+        }
         self.sendNotification(ReelEvent.ON_SINGLE_REEL_START_DAMPING, self.currentSequenceIndex);
         self.currentSequenceIndex++;
         self.onSingleReelStartStop();

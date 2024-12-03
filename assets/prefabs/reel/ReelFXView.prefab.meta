@@ -2,12 +2,12 @@
   "ver": "1.1.38",
   "importer": "prefab",
   "imported": true,
-  "uuid": "bacef6ae-f5f5-4b4f-a15a-1c6f3fd4d793",
+  "uuid": "7dd45874-7370-4912-aae7-ad8467630dfd",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "COM_ReelFX_SS"
+    "syncNodeName": "ReelFXView"
   }
 }
