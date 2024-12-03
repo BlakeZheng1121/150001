@@ -113,7 +113,7 @@ export class ReelEffect_SymbolFeatureCommand extends puremvc.SimpleCommand {
     protected isSpecialBall(value: number): boolean {
         const creditBall =
             this.gameDataProxy.initEventData.executeSetting.baseGameSetting.baseGameExtendSetting.creditBall;
-        let credit = this.gameDataProxy.hasDenomMultiplier()
+        let credit = this.gameDataProxy.isOmniChannel()
             ? MathUtil.mul(creditBall[creditBall.length - 1], this.gameDataProxy.curBet)
             : MathUtil.div(
                   MathUtil.mul(creditBall[creditBall.length - 1], this.gameDataProxy.curTotalBet, 10),

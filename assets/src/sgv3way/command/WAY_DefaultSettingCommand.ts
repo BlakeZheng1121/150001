@@ -31,7 +31,7 @@ export class WAY_DefaultSettingCommand extends CoreDefaultSettingCommand {
         this.gameDataProxy.curDenomMultiplier = +this.gameDataProxy.userSetting.denomMultiplier;
 
         let predicate: (bet: any, index: any) => boolean;
-        if (this.gameDataProxy.hasDenomMultiplier()) {
+        if (this.gameDataProxy.isOmniChannel()) {
             predicate = (bet, index) =>
                 bet == this.gameDataProxy.curTotalBet &&
                 this.gameDataProxy.initEventData.denomMultiplier[index] == this.gameDataProxy.curDenomMultiplier;

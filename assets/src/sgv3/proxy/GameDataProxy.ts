@@ -778,7 +778,7 @@ export class GameDataProxy extends CoreGameDataProxy {
         // 暫時固定 No Extra Bet
         this.curExtraBet = this.initEventData.executeSetting.baseGameSetting.betSpec.extraBetTypeList[0];
         let predicate: (bet: any, index: any) => boolean;
-        if (this.hasDenomMultiplier()) {
+        if (this.isOmniChannel()) {
             predicate = (bet, index) => bet == _value && this.initEventData.denomMultiplier[index] == _denomMultiplier;
         } else {
             predicate = (bet, index) => bet == _value;
@@ -786,7 +786,7 @@ export class GameDataProxy extends CoreGameDataProxy {
         const betIndex = this.totalBetList.findIndex(predicate);
         if (betIndex >= 0) {
             this.curBet = this.initEventData.betMultiplier[betIndex];
-            if (this.hasDenomMultiplier()) {
+            if (this.isOmniChannel()) {
                 this.curDenomMultiplier = this.initEventData.denomMultiplier[betIndex];
             } else {
                 this.curDenomMultiplier = NaN;
@@ -896,7 +896,7 @@ export class GameDataProxy extends CoreGameDataProxy {
         return level;
     }
 
-    public hasDenomMultiplier(): boolean {
+    public isOmniChannel(): boolean {
         const denomMultiplierList = this.initEventData.denomMultiplier;
         if (denomMultiplierList && denomMultiplierList.length > 1) {
             return true;
