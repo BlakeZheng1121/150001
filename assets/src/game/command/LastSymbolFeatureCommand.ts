@@ -70,7 +70,7 @@ export class LastSymbolFeatureCommand extends puremvc.SimpleCommand {
     protected isSpecialBall(value: number): boolean {
         const creditBall =
             this.gameDataProxy.initEventData.executeSetting.baseGameSetting.baseGameExtendSetting.creditBall;
-        let credit = this.gameDataProxy.isOmniChannel()
+        let credit = this.gameDataProxy.hasDenomMultiplier()
             ? MathUtil.mul(creditBall[creditBall.length - 1], this.gameDataProxy.curBet)
             : MathUtil.div(
                   MathUtil.mul(creditBall[creditBall.length - 1], this.gameDataProxy.curTotalBet, 10),

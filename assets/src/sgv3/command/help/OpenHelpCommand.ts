@@ -28,7 +28,7 @@ export class OpenHelpCommand extends puremvc.SimpleCommand {
     }
 
     protected getVersionName(): string {
-        if (this.gameDataProxy.isOmniChannel()) {
+        if (this.gameDataProxy.hasDenomMultiplier()) {
             return 'omni_channel';
         }
         return 'online';

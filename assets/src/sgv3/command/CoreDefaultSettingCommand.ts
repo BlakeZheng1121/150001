@@ -96,7 +96,7 @@ export abstract class CoreDefaultSettingCommand extends puremvc.SimpleCommand {
         // 初始化遊戲押注設定
         const curBet = this.gameDataProxy.totalBetList[_defaultIdx];
 
-        if (this.gameDataProxy.isOmniChannel()) {
+        if (this.gameDataProxy.hasDenomMultiplier()) {
             const curDenomMultiplier = this.gameDataProxy.initEventData?.denomMultiplier[_defaultIdx];
             this.gameDataProxy.resetBetInfo(curBet, curDenomMultiplier);
         } else {
