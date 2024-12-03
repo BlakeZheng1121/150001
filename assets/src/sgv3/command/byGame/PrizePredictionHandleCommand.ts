@@ -52,10 +52,9 @@ export class PrizePredictionHandleCommand extends puremvc.SimpleCommand {
             (gameStateResult) => gameStateResult.gameSceneName == GameScene.Game_3
         );
         const randomNumber = this.getRandomNumber(result, GameScene.Game_1);
-        const threshold = this.gameDataProxy.isOmniChannel() ? thresholdOmniChannel : thresholdNormal;
 
         const prizePredictionCondition =
-            (odds >= 25 && isMSymbolFiveOfKind && randomNumber < threshold) ||
+            (odds >= 25 && isMSymbolFiveOfKind && randomNumber < 0.8) ||
             ballCount >= 8 ||
             (ballCount >= 6 && hitMiniGame);
         const displayMethodCondition = odds >= 25 && isMSymbolFiveOfKind;
@@ -84,10 +83,9 @@ export class PrizePredictionHandleCommand extends puremvc.SimpleCommand {
                 (result) => result.hitNumber == 5 && result.symbolID >= SymbolId.M1 && result.symbolID <= SymbolId.M6
             );
             const randomNumber = this.getRandomNumber(result, GameScene.Game_1);
-            const threshold = this.gameDataProxy.isOmniChannel() ? thresholdOmniChannel : thresholdNormal;
             const reel1StackWW = result.screenSymbol[0].filter((id) => id == 0).length == 3;
 
-            const prizePredictionCondition = odds >= 25 && isMSymbolFiveOfKind && randomNumber < threshold;
+            const prizePredictionCondition = odds >= 25 && isMSymbolFiveOfKind && randomNumber < 0.8;
             const displayMethodCondition = (odds >= 25 && isMSymbolFiveOfKind) || reel1StackWW;
 
             result.displayInfo.prizePredictionType = prizePredictionCondition ? 'TYPE_1' : 'NoPrizePredictionType';
@@ -147,6 +145,3 @@ export class PrizePredictionHandleCommand extends puremvc.SimpleCommand {
         return this._gameDataProxy;
     }
 }
-
-const thresholdNormal = 0.8;
-const thresholdOmniChannel = 1;
