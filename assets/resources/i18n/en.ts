@@ -17,9 +17,9 @@ export const languages = {
     rules: 'Rules',
     sound: 'Sound',
     close: 'Close',
-    jpBonusUpgrade: 'JP BONUS UPGRADE',
-    jackpotUpgradeBet: 'Increased your bet to upgrade',
-    jackpotUpgradeBetRange: 'Bet {0} To {1}'
+    denomTitleInBetMenu: 'DENOMINATION',
+    betTitleInBetMenu: 'BET',
+    totalBetInBetMenu: 'TOTAL BET'
 };
 
 if (!win.languages) {

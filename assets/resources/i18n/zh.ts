@@ -17,9 +17,9 @@ export const languages = {
     rules: '规则',
     sound: '声音',
     close: '关闭',
-    jpBonusUpgrade: '彩金奖金升级',
-    jackpotUpgradeBet: '提高投注可以升级',
-    jackpotUpgradeBetRange: '投注 {0} 到 {1}'
+    denomTitleInBetMenu: '面额',
+    betTitleInBetMenu: '投注',
+    totalBetInBetMenu: '总投注'
 };
 
 if (!win.languages) {

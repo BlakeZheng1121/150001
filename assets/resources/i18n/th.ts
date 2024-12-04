@@ -11,10 +11,7 @@ export const languages = {
     autospin: 'สปินอัตโนมัติ',
     autospinnumber: 'จำนวนสปินอัตโนมัติ',
     betoption: 'ตัวเลือกเดิมพัน',
-    autoStart: 'เริ่มอัตโนมัติ:',
-    jpBonusUpgrade: 'อัพเกรดยอดเงินรางวัลแจ็คพอต',
-    jackpotUpgradeBet: 'ยอดเดิมพันสูงสุดสามารถ อัพเกรด',
-    jackpotUpgradeBetRange: 'เดิมพัน {0} ถึง {1}',
+    autoStart: 'เริ่มอัตโนมัติ:'
 };
 
 if (!win.languages) {
