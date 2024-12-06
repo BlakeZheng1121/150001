@@ -236,14 +236,17 @@
                     <img src="./C1_small.png" class="textImg" /> appear in the BASE GAME.
                 </li>
                 <li>
-                    There is <span class="yellowText">0.2X</span>, <span class="yellowText">0.4X</span>,
-                    <span class="yellowText">0.6X</span>, <span class="yellowText">0.8X</span>,
-                    <span class="yellowText">1X</span> or <span class="yellowText">10X</span> on each
-                    <img src="./C1_small.png" class="textImg" /> .
+                    The credits on each <img src="./C1_small.png" class="textImg" /> appears randomly in accordance with the bet.
+                </li>
+                <li>
+                    All credits show for bet multiplier 1x.
                 </li>
                 <li>
                     The winning is the values on the
                     <img src="./C1_small.png" class="textImg" /> multiplied by the bet multiplier.
+                </li>
+                <li>
+                    Below chart indicates the symbols appeared in the base game and free spins within each bet.
                 </li>
                 <li>
                     <span class="yellowText">6</span> or more <img src="./C1_small.png" class="textImg" /> will trigger
@@ -398,10 +401,10 @@
                     will win the jackpot and calculate total winnings.
                 </li>
                 <li>
-                    <img src="./Mini_Icon_Grand.png" class="textImg" /> is linked progressive jackpots.
+                    <img src="./Mini_Icon_Grand.png" class="textImg" /> and
+                    <img src="./Mini_Icon_Major.png" class="textImg" /> is linked progressive jackpots.
                 </li>
                 <li>
-                    <img src="./Mini_Icon_Major.png" class="textImg" /> , 
                     <img src="./Mini_Icon_Minor.png" class="textImg" /> and
                     <img src="./Mini_Icon_Mini.png" class="textImg" /> are bonuses. 
                     The bonuses will be changed due to different bet.
@@ -444,9 +447,9 @@
                         <img src="./Base_SymbolWW.png" class="textImg" /> appears on the reel
                         <span class="yellowText">2</span>, <span class="yellowText">3</span> and
                         <span class="yellowText">4</span> only in the BASE GAME. <br />
-                        DURING THE FREE GAME,
-                        <img src="./Base_SymbolWW.png" class="textImg" /> APPEARS ON THE REEL
-                        <span class="yellowText">1</span> AND <span class="yellowText"> 5 </span>ONLY.
+                        During the FREE GAME,
+                        <img src="./Base_SymbolWW.png" class="textImg" /> appears on the reel
+                        <span class="yellowText">1</span> and <span class="yellowText"> 5 </span>only.
                     </span>
                 </div>
             </div>
@@ -582,17 +585,17 @@
 
         const symbolPayoutArray = [
             // M1
-            250, 80, 30,
+            300, 80, 30,
             // M2
             150, 50, 20,
             // M3
-            100, 30, 20,
+            100, 30, 15,
             // M4
-            80, 30, 20,
+            80, 30, 15,
             // M5
             60, 20, 10,
             // M6
-            50, 20, 10
+            50, 15, 10
         ];
 		let calPayoutCredit = (oddsData, totalBetData) => oddsData * totalBetData;
 
