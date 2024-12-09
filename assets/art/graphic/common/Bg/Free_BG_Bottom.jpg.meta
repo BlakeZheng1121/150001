@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "cf1b1e81-c20b-4cbd-abcf-951bb7f80992",
+  "uuid": "940ef229-c711-4d77-963d-29bbb76719bd",
   "files": [
     ".jpg",
     ".json"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "cf1b1e81-c20b-4cbd-abcf-951bb7f80992@6c48a",
-      "displayName": "FS_BG",
+      "uuid": "940ef229-c711-4d77-963d-29bbb76719bd@6c48a",
+      "displayName": "Free_BG_Bottom",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "cf1b1e81-c20b-4cbd-abcf-951bb7f80992",
+        "imageUuidOrDatabaseUri": "940ef229-c711-4d77-963d-29bbb76719bd",
         "isUuid": true,
         "minfilter": "linear",
         "magfilter": "linear",
@@ -33,8 +33,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "cf1b1e81-c20b-4cbd-abcf-951bb7f80992@f9941",
-      "displayName": "FS_BG",
+      "uuid": "940ef229-c711-4d77-963d-29bbb76719bd@f9941",
+      "displayName": "Free_BG_Bottom",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -46,16 +46,16 @@
         "trimX": 0,
         "trimY": 0,
         "width": 900,
-        "height": 2000,
+        "height": 560,
         "rawWidth": 900,
-        "rawHeight": 2000,
+        "rawHeight": 560,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "cf1b1e81-c20b-4cbd-abcf-951bb7f80992@6c48a",
+        "imageUuidOrDatabaseUri": "940ef229-c711-4d77-963d-29bbb76719bd@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -70,6 +70,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": false,
-    "redirect": "cf1b1e81-c20b-4cbd-abcf-951bb7f80992@f9941"
+    "redirect": "940ef229-c711-4d77-963d-29bbb76719bd@f9941"
   }
 }
