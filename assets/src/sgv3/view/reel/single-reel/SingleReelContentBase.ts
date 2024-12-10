@@ -51,6 +51,8 @@ export class SingleReelContentBase extends Component {
 
     public fovEndIndex: number = -1;
 
+    public isHideC1AndC2: boolean = false;
+
     public set ishorizontalMode(value: boolean) {
         this._ishorizontalMode = value;
     }

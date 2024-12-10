@@ -96,6 +96,8 @@ export class ReelEvent {
     public static ON_REEL_PRIZE_PREDICTION: string = 'onReelPrizePrediction';
     public static ON_REEL_EFFECT_COMPLETE: string = 'onReelEffectComplete';
     public static ON_REELS_RESET: string = 'onReelsReset';
+
+    public static ON_HIDE_C1_AND_C2: string = 'onHideC1AndC2';
 }
 
 export class SpinResultProxyEvent {

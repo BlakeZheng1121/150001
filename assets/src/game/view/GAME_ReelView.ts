@@ -1,4 +1,4 @@
-import { Label, Vec3, _decorator, Node, Color } from 'cc';
+import { Label, Vec3, _decorator, Node, Color, UIOpacity } from 'cc';
 import { UIOrientation } from '../../core/ui/UIOrientation';
 import { SymbolPosData } from '../../sgv3/proxy/ReelDataProxy';
 import { BalanceUtil } from '../../sgv3/util/BalanceUtil';
@@ -25,6 +25,8 @@ export class GAME_ReelView extends ReelView {
     private _winScoreText: Label | null = null;
     @property({ type: Node, visible: true })
     private _winMask: Node | null = null;
+    @property({ type: UIOpacity, visible: true })
+    private _uiOpacity: UIOpacity | null = null;
 
     private _uiOrientation: Array<UIOrientation> | null = null;
 
@@ -228,6 +230,12 @@ export class GAME_ReelView extends ReelView {
     public hideWildSymbol(symbolInfo: SymbolInfo) {
         this.setDefaultSymbolPlay(symbolInfo, SymbolPerformType.HIDE);
     }
+
+    public hideC1AndC2Symbol(isHide : boolean) {
+        this.isHideC1AndC2 = isHide;
+        this._uiOpacity.enabled = isHide;
+    }
+
     ////
 
     //// Hook

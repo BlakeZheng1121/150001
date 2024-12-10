@@ -10,6 +10,7 @@ import { MockToContainerIconPosCommand } from '../command/MockToContainerIconPos
 import { MockReconnectCommand } from '../command/MockReconnectCommand';
 import { MockHitGrandCommand } from '../command/MockHitGrandCommand';
 import { MockEmblemLevelCommand } from '../command/MockEmblemLevelCommand';
+import { MockHideC1AndC2Command } from '../command/MockHideC1AndC2Command';
 
 export class MockViewMediator extends puremvc.Mediator {
     private parentView: Component = null;
@@ -59,7 +60,8 @@ export class MockViewMediator extends puremvc.Mediator {
             Reconnect: MockReconnectCommand.NAME,
             ToContainerIconPos: MockToContainerIconPosCommand.NAME,
             HitGrand: MockHitGrandCommand.NAME,
-            EmblemLevel: MockEmblemLevelCommand.NAME
+            EmblemLevel: MockEmblemLevelCommand.NAME,
+            HideC1AndC2: MockHideC1AndC2Command.NAME
         };
         const self = this;
         self.facade.registerCommand(MockWinboardCommand.NAME, MockWinboardCommand);
@@ -70,6 +72,7 @@ export class MockViewMediator extends puremvc.Mediator {
         self.facade.registerCommand(MockToContainerIconPosCommand.NAME, MockToContainerIconPosCommand);
         self.facade.registerCommand(MockHitGrandCommand.NAME, MockHitGrandCommand);
         self.facade.registerCommand(MockEmblemLevelCommand.NAME, MockEmblemLevelCommand);
+        self.facade.registerCommand(MockHideC1AndC2Command.NAME, MockHideC1AndC2Command);
         self.sendNotification('onAddExtraCase', caseList);
     }
 

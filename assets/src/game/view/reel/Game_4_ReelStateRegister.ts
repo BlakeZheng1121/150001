@@ -147,7 +147,7 @@ export class Game_4_RollStartState extends SingleReelRollStartState {
 
     onPlay(){
         //針對是否 Lock 位置開啟滾輪或FOV物件
-        if(this.content.fovFeature[0].lockType == LockType.NONE || this.content.fovFeature[0].lockType == LockType.NEW_LOCK){
+        if(this.content.fovFeature[0].lockType == LockType.NONE || this.content.fovFeature[0].lockType == LockType.NEW_LOCK || this.content.isHideC1AndC2){
             for(let i=0;i<this.content.symbols.length;i++){
                 this.content.symbols[i].play(SymbolPerformType.SHOW);
             }

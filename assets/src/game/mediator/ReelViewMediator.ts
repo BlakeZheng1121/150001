@@ -42,6 +42,8 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
     protected isPlayedWildScoring: boolean = false;
     protected preSpinStopSoundSequence: Array<string> = [];
 
+    protected isHideC1AndC2: boolean = false;
+
     public constructor(name?: string, component?: any) {
         super(name, component);
         this.reelView = this.viewComponent as GAME_ReelView;
@@ -74,7 +76,8 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
                     FreeGameEvent.ON_EXPAND_WILD,
                     ReelEvent.ON_REELS_RESTORE,
                     ReelEvent.HIDE_WILD_SYMBOL,
-                    ReelEvent.SHOW_LAST_SYMBOL_OF_REELS
+                    ReelEvent.SHOW_LAST_SYMBOL_OF_REELS,
+                    ReelEvent.ON_HIDE_C1_AND_C2
                 ].concat(super.baseListNotificationInterests())
             )
         );
@@ -143,6 +146,13 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
                 this.hideWildSymbol();
                 break;
             case ScreenEvent.ON_SPIN_DOWN:
+                break;
+            case ReelEvent.ON_HIDE_C1_AND_C2:
+                this.isHideC1AndC2 = !this.isHideC1AndC2;
+                this.reelView.hideC1AndC2Symbol(this.isHideC1AndC2);
+                for (let i = 0; i < this.reelView.reelsList.length; i++) {
+                    this.reelView.reelsList[i].singleReelContent.isHideC1AndC2 = this.isHideC1AndC2;
+                }
                 break;
         }
     }

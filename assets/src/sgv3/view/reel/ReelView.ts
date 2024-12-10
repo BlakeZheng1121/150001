@@ -72,6 +72,8 @@ export abstract class ReelView extends BaseView {
         }
         return this._reelsLayout;
     }
+
+    public isHideC1AndC2: boolean = false;
     ////
 
     //// property
@@ -146,6 +148,7 @@ export abstract class ReelView extends BaseView {
             this.reelsList[i].singleReelContent.id = i;
             this.reelsList[i].singleReelContent.ishorizontalMode = this.ishorizontalMode;
             this.reelsList[i].singleReelContent.overlaySymbolContainer = this.overlaySymbolContainer;
+            this.reelsList[i].singleReelContent.isHideC1AndC2 = this.isHideC1AndC2;
             this.reelsList[i].play(ReelType.INIT);
         }
         this._uiLayout.updateLayout();
