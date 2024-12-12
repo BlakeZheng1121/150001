@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "edd40b19-bd48-46a0-a716-42f9016e2cf7",
+  "uuid": "a5b9db9d-f4f3-4490-9d78-657fc8346901",
   "files": [
     ".json",
     ".png"
@@ -10,19 +10,19 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "edd40b19-bd48-46a0-a716-42f9016e2cf7@6c48a",
+      "uuid": "a5b9db9d-f4f3-4490-9d78-657fc8346901@6c48a",
       "displayName": "Ui_SpinStop",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "edd40b19-bd48-46a0-a716-42f9016e2cf7",
+        "imageUuidOrDatabaseUri": "a5b9db9d-f4f3-4490-9d78-657fc8346901",
+        "isUuid": true,
         "minfilter": "linear",
         "magfilter": "linear",
         "mipfilter": "none",
-        "anisotropy": 0,
-        "isUuid": true
+        "anisotropy": 0
       },
       "ver": "1.0.21",
       "imported": true,
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "edd40b19-bd48-46a0-a716-42f9016e2cf7@f9941",
+      "uuid": "a5b9db9d-f4f3-4490-9d78-657fc8346901@f9941",
       "displayName": "Ui_SpinStop",
       "id": "f9941",
       "name": "spriteFrame",
@@ -41,21 +41,21 @@
         "trimType": "auto",
         "trimThreshold": 1,
         "rotated": false,
-        "offsetX": 0,
-        "offsetY": -1,
-        "trimX": 75,
-        "trimY": 75,
-        "width": 56,
-        "height": 58,
-        "rawWidth": 206,
-        "rawHeight": 206,
+        "offsetX": 0.5,
+        "offsetY": -4,
+        "trimX": 69,
+        "trimY": 72,
+        "width": 65,
+        "height": 66,
+        "rawWidth": 202,
+        "rawHeight": 202,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "edd40b19-bd48-46a0-a716-42f9016e2cf7@6c48a",
+        "imageUuidOrDatabaseUri": "a5b9db9d-f4f3-4490-9d78-657fc8346901@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -68,8 +68,8 @@
   },
   "userData": {
     "type": "sprite-frame",
+    "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "edd40b19-bd48-46a0-a716-42f9016e2cf7@f9941",
-    "fixAlphaTransparencyArtifacts": false
+    "redirect": "a5b9db9d-f4f3-4490-9d78-657fc8346901@f9941"
   }
 }

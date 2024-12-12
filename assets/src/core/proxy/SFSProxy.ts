@@ -384,7 +384,8 @@ export class SFSProxy extends GameProxy {
         operation: string,
         waysBet: number,
         waysBetColumn: number,
-        denomMultiplier: number
+        denomMultiplier: number,
+        featureBet: number
     ): void {
         const reqName: string = 'h5.spin';
         let req: SFS2X.SFSObject = new SFS2X.SFSObject();
@@ -398,9 +399,8 @@ export class SFSProxy extends GameProxy {
         betRequest.putInt('waysBet', waysBet);
         betRequest.putInt('wayGameBetColumn', waysBetColumn);
         if (denomMultiplier > 0) {
-            let tempDenomStruct: any = new Object();
-            tempDenomStruct.denomMultiplier = denomMultiplier;
-            extendSpinRequest.putUtfString('byGameJson', JSON.stringify(tempDenomStruct));
+            betRequest.putInt('featureBet', featureBet);
+            betRequest.putInt('denomMultiplier', denomMultiplier);
         }
 
         entity.putSFSObject('betRequest', betRequest);

@@ -96,7 +96,8 @@ export abstract class GameProxy extends puremvc.Proxy {
         operation: string,
         waysBet: number,
         waysBetColumn: number,
-        denomMultiplier: number
+        denomMultiplier: number,
+        featureBet: number
     ): void;
 
     /**

@@ -19,7 +19,8 @@ export const languages = {
     close: 'Close',
     denomTitleInBetMenu: 'DENOMINATION',
     betTitleInBetMenu: 'BET',
-    totalBetInBetMenu: 'TOTAL BET'
+    totalBetInBetMenu: 'TOTAL BET',
+    confirm: 'CONFIRM'
 };
 
 if (!win.languages) {

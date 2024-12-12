@@ -57,7 +57,8 @@ export class NetworkProxy extends puremvc.Proxy {
         operation: string,
         waysBet: number,
         waysBetColumn: number,
-        denomMultiplier: number
+        denomMultiplier: number,
+        featureBet: number
     ): void {
         this.protocolProxy.sendSpinRequest(
             playerBet,
@@ -66,7 +67,8 @@ export class NetworkProxy extends puremvc.Proxy {
             operation,
             waysBet,
             waysBetColumn,
-            denomMultiplier
+            denomMultiplier,
+            featureBet
         );
         this.needSendSpinState = false;
         this.hasSentSpinRequest = true;

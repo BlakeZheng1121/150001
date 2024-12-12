@@ -37,7 +37,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
 
     /** preload 要預載的資源 */
     protected baseList(): string[] {
-        return [GameScene.Game_1, 'preload', 'common-ui', 'betMenu', 'bbw'];
+        return [GameScene.Game_1, 'preload', 'common-ui', 'betMenu', 'feature-bet', 'bbw'];
     }
 
     /** 進入basegame後 要載的資源 */
@@ -187,6 +187,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
                 .then(() => this.downloadBundle('scenes'))
                 .then(() => this.downloadBundle('common-ui'))
                 .then(() => this.downloadBundle('extend'))
+                .then(() => this.downloadBundle('feature-bet'))
                 .then(() => this.loadAssetsBundle(this.baseLoadList))
                 .catch((error) => {
                     // 一段時間後retry
@@ -242,12 +243,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
                 await this.loadPrefab('preload', 'Preload')
                     .then((prefab) => this.instantiatePrefab(prefab))
                     .then((preloadNode: Node) => {
-                        if (preloadNode.children.length > 0) {
-                            preloadNode.children.forEach((node) => {
-                                node.setParent(SceneManager.instance.node);
-                            });
-                        }
-                        preloadNode.destroy();
+                        this.arrangePreload(preloadNode);
                     })
                     .then((obj) => {
                         groupList.shift();
@@ -271,7 +267,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
                     })
                     .catch((error) => {});
             } else if (assetName == 'betMenu') {
-                const prefabName = this.gameDataProxy.hasDenomMultiplier() ? 'BetDenomMenu' : 'BetMenu';
+                const prefabName = this.gameDataProxy.isOmniChannel() ? 'OmniBetMenuView' : 'BetMenuView';
                 await this.loadPrefab('common-ui', prefabName)
                     .then((prefab) => this.instantiatePrefab(prefab))
                     .then((obj) => {
@@ -279,6 +275,19 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
                         this.wait(obj, 100);
                     })
                     .catch((error) => {});
+            } else if (assetName == 'feature-bet') {
+                if (this.gameDataProxy.isOmniChannel()) {
+                    await this.loadPrefab('feature-bet', 'FeatureBetView')
+                        .then((prefab) => this.instantiatePrefab(prefab))
+                        .then((obj) => {
+                            groupList.shift();
+                            this.wait(obj, 100);
+                        })
+                        .catch((error) => {});
+                } else {
+                    groupList.shift();
+                    this.finishedAssetsNum++;
+                }
             } else if (assetName == 'extend') {
                 await this.loadPrefab('extend', 'Extend')
                     .then((prefab) => this.instantiatePrefab(prefab))
@@ -309,6 +318,15 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
         }
 
         this.sendNotification(LoadEvent.LOAD_GROUP_COMPLETE, groupList);
+    }
+
+    private arrangePreload(preloadNode: Node) {
+        if (preloadNode.children.length > 0) {
+            while (preloadNode.children.length > 0) {
+                preloadNode.children[0].setParent(SceneManager.instance.node);
+            }
+        }
+        preloadNode.destroy();
     }
 
     loadPrefab(bundleName, assetName) {

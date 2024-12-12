@@ -501,6 +501,21 @@ export class GameDataProxy extends CoreGameDataProxy {
         return this._curDenomMultiplier;
     }
 
+    protected _curFeatureBet: number = NaN;
+    /** Feature Bet */
+    public set curFeatureBet(val) {
+        this._curFeatureBet = val;
+        this.saveUserSetting();
+    }
+    public get curFeatureBet(): number {
+        return this._curFeatureBet;
+    }
+
+    public get curFeatureIdx(): number {
+        const featureBetList = this.initEventData.featureBetList;
+        return featureBetList.indexOf(this.curFeatureBet);
+    }
+
     protected _curLine: number = NaN;
     /** 線數 */
     public set curLine(val) {
@@ -733,6 +748,11 @@ export class GameDataProxy extends CoreGameDataProxy {
         return MathUtil.div(_data, this.curDenom, 0.001);
     }
 
+    /** 依照玩家選擇的denom顯示對應的分數 */
+    public getCreditByDenomMultiplier(_data: number): number {
+        return MathUtil.div(_data, this.curDenomMultiplier);
+    }
+
     /** 載入玩家該遊戲使用的 denom、bet */
     public loadUserSetting(): void {
         try {
@@ -757,6 +777,7 @@ export class GameDataProxy extends CoreGameDataProxy {
         saveData.extraBet = this.curExtraBet;
         saveData.betMultiplier = this.curBet.toString();
         saveData.denomMultiplier = this.curDenomMultiplier.toString();
+        saveData.featureBet = this.curFeatureBet.toString();
         try {
             if (window.localStorage) localStorage.setItem(this.localStorageKey, JSON.stringify(saveData));
         } catch (e) {}
@@ -767,7 +788,7 @@ export class GameDataProxy extends CoreGameDataProxy {
      * @param _value User 所選值
      * @param _denomMultiplier 面額倍率
      */
-    public resetBetInfo(_value: number, _denomMultiplier: number = undefined): any {
+    public resetBetInfo(_value: number, _denomMultiplier?: number, _betMultiplier?: number, _featureBet?: number): any {
         let _exist: boolean = false;
         this.curDenom = MathUtil.mul(this.initEventData.denoms[0], 0.001);
         // maxBetLine > 0 代表是 Line Game，否則是 Way Game
@@ -777,23 +798,19 @@ export class GameDataProxy extends CoreGameDataProxy {
         this.curLine = maxBetLine > 0 ? maxBetLine : screenColumn;
         // 暫時固定 No Extra Bet
         this.curExtraBet = this.initEventData.executeSetting.baseGameSetting.betSpec.extraBetTypeList[0];
-        let predicate: (bet: any, index: any) => boolean;
-        if (this.hasDenomMultiplier()) {
-            predicate = (bet, index) => bet == _value && this.initEventData.denomMultiplier[index] == _denomMultiplier;
-        } else {
-            predicate = (bet, index) => bet == _value;
-        }
-        const betIndex = this.totalBetList.findIndex(predicate);
-        if (betIndex >= 0) {
-            this.curBet = this.initEventData.betMultiplier[betIndex];
-            if (this.hasDenomMultiplier()) {
-                this.curDenomMultiplier = this.initEventData.denomMultiplier[betIndex];
-            } else {
-                this.curDenomMultiplier = NaN;
-            }
+        if (this.isOmniChannel()) {
+            this.curBet = _betMultiplier;
+            this.curDenomMultiplier = _denomMultiplier;
+            this.curFeatureBet = _featureBet;
             _exist = true;
         } else {
-            _exist = false;
+            const betIndex = this.totalBetList.findIndex((bet, index) => bet == _value);
+            if (betIndex >= 0) {
+                this.curBet = this.initEventData.betMultiplier[betIndex];
+                _exist = true;
+            } else {
+                _exist = false;
+            }
         }
 
         if (_exist) {
@@ -896,7 +913,7 @@ export class GameDataProxy extends CoreGameDataProxy {
         return level;
     }
 
-    public hasDenomMultiplier(): boolean {
+    public isOmniChannel(): boolean {
         const denomMultiplierList = this.initEventData.denomMultiplier;
         if (denomMultiplierList && denomMultiplierList.length > 1) {
             return true;

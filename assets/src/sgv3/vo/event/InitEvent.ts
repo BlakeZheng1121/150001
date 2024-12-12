@@ -99,6 +99,11 @@ export class InitEvent {
      * 且 Jackpot bonus 會依照玩家選擇 denom 倍數來計算
      */
     public denomMultiplier: Array<number>;
+
+    /**
+     * @summary 押注組合的特色押注
+     */
+    public featureBetList: Array<number>;
 }
 
 export class InitialData {

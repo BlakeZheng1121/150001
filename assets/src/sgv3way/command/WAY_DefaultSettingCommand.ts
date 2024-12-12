@@ -29,18 +29,52 @@ export class WAY_DefaultSettingCommand extends CoreDefaultSettingCommand {
         this.gameDataProxy.curExtraBet = this.gameDataProxy.userSetting.extraBet;
         this.gameDataProxy.curBet = +this.gameDataProxy.userSetting.betMultiplier;
         this.gameDataProxy.curDenomMultiplier = +this.gameDataProxy.userSetting.denomMultiplier;
+        this.gameDataProxy.curFeatureBet = +this.gameDataProxy.userSetting.featureBet;
 
-        let predicate: (bet: any, index: any) => boolean;
-        if (this.gameDataProxy.hasDenomMultiplier()) {
-            predicate = (bet, index) =>
-                bet == this.gameDataProxy.curTotalBet &&
-                this.gameDataProxy.initEventData.denomMultiplier[index] == this.gameDataProxy.curDenomMultiplier;
-        } else {
-            predicate = (bet, index) => bet == this.gameDataProxy.curTotalBet;
+        if (!this.gameDataProxy.isOmniChannel()) {
+            _defaultIdx = this.gameDataProxy.totalBetList.findIndex((bet) => bet == this.gameDataProxy.curTotalBet);
         }
-        _defaultIdx = this.gameDataProxy.totalBetList.findIndex(predicate);
 
         return _defaultIdx;
+    }
+
+    protected checkBetInfo() {
+        this.checkBetMultiplier();
+        this.checkDenomMultiplier();
+        this.checkFeatureBet();
+        this.gameDataProxy.curTotalBet = MathUtil.mul(
+            this.gameDataProxy.curBet,
+            this.gameDataProxy.curDenomMultiplier,
+            this.gameDataProxy.curFeatureBet
+        );
+    }
+
+    private checkFeatureBet() {
+        const validFeatureBet =
+            this.gameDataProxy.initEventData.featureBetList.findIndex(
+                (featureBet) => featureBet == this.gameDataProxy.curFeatureBet
+            ) > 0;
+        this.gameDataProxy.curFeatureBet = validFeatureBet
+            ? this.gameDataProxy.curFeatureBet
+            : this.gameDataProxy.initEventData.featureBetList[0];
+    }
+
+    private checkDenomMultiplier() {
+        const validDenomMultiplier =
+            this.gameDataProxy.initEventData.denomMultiplier.findIndex(
+                (denom) => denom == this.gameDataProxy.curDenomMultiplier
+            ) > 0;
+        this.gameDataProxy.curDenomMultiplier = validDenomMultiplier
+            ? this.gameDataProxy.curDenomMultiplier
+            : this.gameDataProxy.initEventData.denomMultiplier[0];
+    }
+
+    private checkBetMultiplier() {
+        const validBetMultiplier =
+            this.gameDataProxy.initEventData.betMultiplier.findIndex((bet) => bet == this.gameDataProxy.curBet) > 0;
+        this.gameDataProxy.curBet = validBetMultiplier
+            ? this.gameDataProxy.curBet
+            : this.gameDataProxy.initEventData.betMultiplier[0];
     }
     // ======================== Get Set ========================
     protected _gameDataProxy: WAY_GameDataProxy;

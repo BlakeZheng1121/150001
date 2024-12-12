@@ -16,6 +16,7 @@ export class WAY_SpinRequestCommand extends SpinRequestCommand {
         let wayColumn = this.gameDataProxy.curLine;
         let wayBet = this.gameDataProxy.curBet;
         let denomMultiplier = this.gameDataProxy.curDenomMultiplier;
+        let featureBet = this.gameDataProxy.curFeatureBet;
 
         this.netProxy.sendSpinRequest(
             playBet,
@@ -24,7 +25,8 @@ export class WAY_SpinRequestCommand extends SpinRequestCommand {
             operationRequest,
             wayBet,
             wayColumn,
-            denomMultiplier
+            denomMultiplier,
+            featureBet
         );
     }
 

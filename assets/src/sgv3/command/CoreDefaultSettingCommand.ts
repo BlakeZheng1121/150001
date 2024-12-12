@@ -82,8 +82,6 @@ export abstract class CoreDefaultSettingCommand extends puremvc.SimpleCommand {
             // 使用玩家上次使用的押注設定
             this.gameDataProxy.curDenom = MathUtil.mul(+this.gameDataProxy.userSetting.denom, 0.001);
             _defaultIdx = this.setBetAndLine(_defaultIdx); // 該值會隨line or way調整
-        } else {
-            this.gameDataProxy.curExtraBet = this.gameDataProxy.sceneSetting.betCombinationsType.NO_EXTRA_BET;
         }
 
         // 確認是否有該 押注設定
@@ -96,9 +94,14 @@ export abstract class CoreDefaultSettingCommand extends puremvc.SimpleCommand {
         // 初始化遊戲押注設定
         const curBet = this.gameDataProxy.totalBetList[_defaultIdx];
 
-        if (this.gameDataProxy.hasDenomMultiplier()) {
-            const curDenomMultiplier = this.gameDataProxy.initEventData?.denomMultiplier[_defaultIdx];
-            this.gameDataProxy.resetBetInfo(curBet, curDenomMultiplier);
+        if (this.gameDataProxy.isOmniChannel()) {
+            this.checkBetInfo();
+            this.gameDataProxy.resetBetInfo(
+                this.gameDataProxy.curTotalBet,
+                this.gameDataProxy.curDenomMultiplier,
+                this.gameDataProxy.curBet,
+                this.gameDataProxy.curFeatureBet
+            );
         } else {
             this.gameDataProxy.resetBetInfo(curBet);
         }
@@ -131,6 +134,9 @@ export abstract class CoreDefaultSettingCommand extends puremvc.SimpleCommand {
      * 設定gamedataproxy betline and bet
      */
     protected abstract setBetAndLine(_val: number): number;
+
+    protected abstract checkBetInfo(): void;
+
     // ======================== Get Set ========================
     protected _webBridgeProxy: WebBridgeProxy;
     protected get webBridgeProxy(): WebBridgeProxy {

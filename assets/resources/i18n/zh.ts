@@ -19,7 +19,8 @@ export const languages = {
     close: '关闭',
     denomTitleInBetMenu: '面额',
     betTitleInBetMenu: '投注',
-    totalBetInBetMenu: '总投注'
+    totalBetInBetMenu: '总投注',
+    confirm: '确定'
 };
 
 if (!win.languages) {

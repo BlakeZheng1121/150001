@@ -5,4 +5,5 @@ export class UserSetting {
     public extraBet: string;
     public betMultiplier: string;
     public denomMultiplier: string;
+    public featureBet: string;
 }
