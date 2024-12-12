@@ -8,13 +8,14 @@
       "__id__": 1
     },
     "optimizationPolicy": 0,
-    "asyncLoadAssets": false,
-    "persistent": false
+    "persistent": false,
+    "asyncLoadAssets": false
   },
   {
     "__type__": "cc.Node",
     "_name": "Mini_Background",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "_parent": null,
     "_children": [
       {
@@ -33,7 +34,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 294,
+      "y": 0,
       "z": 0
     },
     "_lrot": {
@@ -120,7 +121,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 900,
-      "height": 1412
+      "height": 2000
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -156,12 +157,12 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "f0919a88-d681-47c9-ac6e-ce934d9d4f1a@f9941",
+      "__uuid__": "e6da8d1b-214d-4088-bdaa-0ab6ad46edd6@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 0,
+    "_sizeMode": 2,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
