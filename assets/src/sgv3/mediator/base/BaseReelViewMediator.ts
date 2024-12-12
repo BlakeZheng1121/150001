@@ -185,6 +185,10 @@ export class BaseReelViewMediator<T extends ReelView> extends BaseMediator<T> {
                             );
                             self.webBridgeProxy.sendGameState(WebBridgeProxy.curScene, WebGameState.SPIN);
                             self.reelDataProxy.reelState = ReelState.WaitRNG;
+                            // 收到結果前，先替換對應 Feature bet 的輪帶表，避免預滾的輪帶錯誤
+                            if (this.gameDataProxy.isOmniChannel()) {
+                                self.changeWheelData();
+                            }
                             break;
                         case GameScene.Game_2:
                             self.sendNotification(
@@ -213,6 +217,13 @@ export class BaseReelViewMediator<T extends ReelView> extends BaseMediator<T> {
                     //}
                 }
                 break;
+        }
+    }
+
+    private changeWheelData() {
+        if (this.gameDataProxy.curFeatureIdx >= 0) {
+            this.stateSetting.setWheelData(this.gameDataProxy.curFeatureIdx);
+            this.reelDataProxy.mathTableIndex = 0;
         }
     }
 

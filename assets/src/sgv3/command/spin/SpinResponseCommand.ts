@@ -80,24 +80,15 @@ export class SpinResponseCommand extends puremvc.SimpleCommand {
         GameStateId.END = stateId;
     }
     protected changeWheelData(spinResult: SpinResult) {
-        //檢查有沒有 groupIndex
-        //修改每個場景的 wheelData
-        if (
-            spinResult.baseGameResult.extendInfoForbaseGameResult.groupingIdx === undefined ||
-            spinResult.baseGameResult.extendInfoForbaseGameResult.groupingIdx === null
-        ) {
-            return;
-        }
-
-        let groupingIdx = spinResult.baseGameResult.extendInfoForbaseGameResult.groupingIdx;
-
-        if (groupingIdx >= 0) {
+        // 檢查有沒有 featureIdx
+        // 修改每個場景的 wheelData
+        let featureIdx = spinResult.baseGameResult.extendInfoForbaseGameResult.featureIdx;
+        if (featureIdx >= 0) {
             let gameSceneList = Object.entries(GameSceneOption);
             for (let i = 2; i < gameSceneList.length; i++) {
                 let GameStateSetting = this.gameDataProxy.getStateSettingByName(GameSceneOption[i]);
-
-                if (GameStateSetting) {
-                    GameStateSetting.setWheelData(groupingIdx);
+                if (GameStateSetting != undefined) {
+                    GameStateSetting.setWheelData(featureIdx);
                 }
             }
         }
