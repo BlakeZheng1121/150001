@@ -1,25 +1,12 @@
-import { _decorator, Component, Node } from 'cc';
+import { _decorator } from 'cc';
 import { BaseScoringDuration } from '../../../game/vo/enum/SoundMap';
 import { GameDataProxy } from '../../proxy/GameDataProxy';
 import { FreeGameEvent } from '../../util/Constant';
 import { WinType } from '../../vo/enum/WinType';
-import { DisplayInfo } from '../../vo/info/DisplayInfo';
-import { BaseGameResult } from '../../vo/result/BaseGameResult';
-import { CommonGameResult } from '../../vo/result/CommonGameResult';
-import { GameStateResult } from '../../vo/result/GameStateResult';
-const { ccclass, property } = _decorator;
-
-/**
- * Predefined variables
- * Name = MultipleCalculateCommand
- * DateTime = Wed Feb 09 2022 10:15:35 GMT+0800 (台北標準時間)
- * Author = aryanaqq
- * FileBasename = MultipleCalculateCommand.ts
- * FileBasenameNoExtension = MultipleCalculateCommand
- * URL = db://assets/src/sgv3/command/byGame/MultipleCalculateCommand.ts
- * ManualUrl = https://docs.cocos.com/creator/3.3/manual/en/
- *
- */
+import { GameScene } from 'src/sgv3/vo/data/GameScene';
+import { MathUtil } from 'src/core/utils/MathUtil';
+import { CommonGameResult } from 'src/sgv3/vo/result/CommonGameResult';
+const { ccclass } = _decorator;
 
 @ccclass('MultipleCalculateCommand')
 export class MultipleCalculateCommand extends puremvc.SimpleCommand {
@@ -30,175 +17,66 @@ export class MultipleCalculateCommand extends puremvc.SimpleCommand {
 
     protected multipleSet() {
         this.gameDataProxy.spinEventData.gameStateResult.forEach((gameStateResult) => {
+            const { gameSceneName, roundResult } = gameStateResult;
+            const { baseGameResult, playerTotalWin } = this.gameDataProxy.spinEventData;
+            const curTotalBet = this.gameDataProxy.curTotalBet;
+
             //BaseGame
-            if (gameStateResult.gameSceneName == 'Game_1') {
-                gameStateResult.roundResult.forEach((commonGameResult) => {
-                    let playerWin = this.gameDataProxy.convertCredit2Cash(
-                        this.gameDataProxy.spinEventData.baseGameResult.baseGameTotalWin
-                    );
-                    let multiple = playerWin / this.gameDataProxy.curTotalBet;
-                    commonGameResult.displayInfo.scoringTime = this.getScoringTime(multiple);
-                    commonGameResult.displayInfo.winType = this.getWinType(multiple);
-                    // this.gameDataProxy.spinEventData.baseGameResult.displayInfo.bigWinType =
-                    //     this.getWinType(multiple);
+            if (gameSceneName == GameScene.Game_1) {
+                roundResult.forEach((commonGameResult) => {
+                    let playerWin = this.gameDataProxy.convertCredit2Cash(baseGameResult.baseGameTotalWin);
+                    this.processRoundResult(playerWin, curTotalBet, commonGameResult);
                 });
-                let totalWinAmount = this.gameDataProxy.convertCredit2Cash(this.gameDataProxy.spinEventData.playerTotalWin);
-                let totalMultiple = totalWinAmount / this.gameDataProxy.curTotalBet;
-                this.gameDataProxy.totalWinAmount = totalWinAmount;
-                this.gameDataProxy.totalScoringTime = this.getScoringTime(totalMultiple);
-                this.gameDataProxy.totalWinType = this.getWinType(totalMultiple);
+                this.processTotalResult(playerTotalWin, curTotalBet);
             }
             //FreeGame
-            if (gameStateResult.gameSceneName == 'Game_2') {
-                let playerWin;
-                gameStateResult.roundResult.forEach((commonGameResult) => {
-                    playerWin = this.gameDataProxy.convertCredit2Cash(commonGameResult.waysGameResult.playerWin);
-                    let multiple = playerWin / this.gameDataProxy.curTotalBet;
-                    commonGameResult.displayInfo.scoringTime = this.getScoringTime(multiple);
-                    commonGameResult.displayInfo.winType = this.getWinType(multiple);
+            if (gameSceneName == GameScene.Game_2) {
+                roundResult.forEach((commonGameResult) => {
+                    let playerWin = this.gameDataProxy.convertCredit2Cash(commonGameResult.waysGameResult.playerWin);
+                    this.processRoundResult(playerWin, curTotalBet, commonGameResult);
                 });
             }
         });
     }
+
+    private processRoundResult(playerWin: number, curTotalBet: number, commonGameResult: CommonGameResult) {
+        let multiple = MathUtil.div(playerWin, curTotalBet);
+        commonGameResult.displayInfo.scoringTime = this.getScoringTime(multiple);
+        commonGameResult.displayInfo.winType = this.getWinType(multiple);
+    }
+
+    private processTotalResult(playerTotalWin: number, curTotalBet: number) {
+        let totalWinAmount = this.gameDataProxy.convertCredit2Cash(playerTotalWin);
+        let totalMultiple = MathUtil.div(totalWinAmount, curTotalBet);
+        this.gameDataProxy.totalWinAmount = totalWinAmount;
+        this.gameDataProxy.totalScoringTime = this.getScoringTime(totalMultiple);
+        this.gameDataProxy.totalWinType = this.getWinType(totalMultiple);
+    }
+
     protected getWinType(winMultiple: number): WinType {
-        let winType: WinType;
-        switch (true) {
-            case winMultiple > 0 && winMultiple < 1:
-                winType = WinType.section_1;
-                break;
-            case winMultiple >= 1 && winMultiple < 2:
-                winType = WinType.section_2;
-                break;
-            case winMultiple >= 2 && winMultiple < 3:
-                winType = WinType.section_3;
-                break;
-            case winMultiple >= 3 && winMultiple < 4:
-                winType = WinType.section_4;
-                break;
-            case winMultiple >= 4 && winMultiple < 5:
-                winType = WinType.section_5;
-                break;
-            case winMultiple >= 5 && winMultiple < 6:
-                winType = WinType.section_6;
-                break;
-            case winMultiple >= 6 && winMultiple < 7:
-                winType = WinType.section_7;
-                break;
-            case winMultiple >= 7 && winMultiple < 8:
-                winType = WinType.section_8;
-                break;
-            case winMultiple >= 8 && winMultiple < 9:
-                winType = WinType.section_9;
-                break;
-            case winMultiple >= 9 && winMultiple < 10:
-                winType = WinType.section_10;
-                break;
-            case winMultiple >= 10 && winMultiple < 11:
-                winType = WinType.section_11;
-                break;
-            case winMultiple >= 11 && winMultiple < 12:
-                winType = WinType.section_12;
-                break;
-            case winMultiple >= 12 && winMultiple < 13:
-                winType = WinType.section_13;
-                break;
-            case winMultiple >= 13 && winMultiple < 14:
-                winType = WinType.section_14;
-                break;
-            case winMultiple >= 14 && winMultiple < 15:
-                winType = WinType.section_15;
-                break;
-            //BigWin
-            case winMultiple >= 15 && winMultiple < 35:
-                winType = WinType.bigWin;
-                break;
-            //MegaWin
-            case winMultiple >= 35 && winMultiple < 60:
-                winType = WinType.megaWin;
-                break;
-            //SuperWin
-            case winMultiple >= 60 && winMultiple < 100:
-                winType = WinType.superWin;
-                break;
-            //JumboWin
-            case winMultiple >= 100:
-                winType = WinType.jumboWin;
-                break;
-            default:
-                winType = WinType.none;
-                break;
+        const winTypeRanges = this.gameDataProxy.isOmniChannel() ? winTypeRangesOmniChannel : winTypeRangesNormal;
+        if (winMultiple > 0) {
+            for (const range of winTypeRanges) {
+                if (winMultiple >= range.min && winMultiple < range.max) {
+                    return range.type;
+                }
+            }
+        } else {
+            return WinType.none;
         }
-        return winType;
     }
 
     protected getScoringTime(winMultiple: number): number {
-        let scoringTime = 0;
-        switch (true) {
-            case winMultiple > 0 && winMultiple < 1:
-                scoringTime = BaseScoringDuration.Scoring01;
-                break;
-            case winMultiple >= 1 && winMultiple < 2:
-                scoringTime = BaseScoringDuration.Scoring02;
-                break;
-            case winMultiple >= 2 && winMultiple < 3:
-                scoringTime = BaseScoringDuration.Scoring03;
-                break;
-            case winMultiple >= 3 && winMultiple < 4:
-                scoringTime = BaseScoringDuration.Scoring04;
-                break;
-            case winMultiple >= 4 && winMultiple < 5:
-                scoringTime = BaseScoringDuration.Scoring05;
-                break;
-            case winMultiple >= 5 && winMultiple < 6:
-                scoringTime = BaseScoringDuration.Scoring06;
-                break;
-            case winMultiple >= 6 && winMultiple < 7:
-                scoringTime = BaseScoringDuration.Scoring07;
-                break;
-            case winMultiple >= 7 && winMultiple < 8:
-                scoringTime = BaseScoringDuration.Scoring08;
-                break;
-            case winMultiple >= 8 && winMultiple < 9:
-                scoringTime = BaseScoringDuration.Scoring09;
-                break;
-            case winMultiple >= 9 && winMultiple < 10:
-                scoringTime = BaseScoringDuration.Scoring10;
-                break;
-            case winMultiple >= 10 && winMultiple < 11:
-                scoringTime = BaseScoringDuration.Scoring11;
-                break;
-            case winMultiple >= 11 && winMultiple < 12:
-                scoringTime = BaseScoringDuration.Scoring12;
-                break;
-            case winMultiple >= 12 && winMultiple < 13:
-                scoringTime = BaseScoringDuration.Scoring13;
-                break;
-            case winMultiple >= 13 && winMultiple < 14:
-                scoringTime = BaseScoringDuration.Scoring14;
-                break;
-            case winMultiple >= 14 && winMultiple < 15:
-                scoringTime = BaseScoringDuration.Scoring15;
-                break;
-            //BigWin
-            case winMultiple >= 15 && winMultiple < 35:
-                scoringTime = BaseScoringDuration.Scoring_Win01;
-                break;
-            //MegaWin
-            case winMultiple >= 35 && winMultiple < 60:
-                scoringTime = BaseScoringDuration.Scoring_Win02;
-                break;
-            //SuperWin
-            case winMultiple >= 60 && winMultiple < 100:
-                scoringTime = BaseScoringDuration.Scoring_Win03;
-                break;
-            //JumboWin
-            case winMultiple >= 100:
-                scoringTime = BaseScoringDuration.Scoring_Win04;
-                break;
-            default:
-                break;
+        const winTypeRanges = this.gameDataProxy.isOmniChannel() ? winTypeRangesOmniChannel : winTypeRangesNormal;
+        if (winMultiple > 0) {
+            for (const range of winTypeRanges) {
+                if (winMultiple >= range.min && winMultiple < range.max) {
+                    return range.duration;
+                }
+            }
+        } else {
+            return 0;
         }
-        return scoringTime;
     }
 
     protected _gameDataProxy: GameDataProxy;
@@ -210,13 +88,47 @@ export class MultipleCalculateCommand extends puremvc.SimpleCommand {
     }
 }
 
-/**
- * [1] Class member could be defined like this.
- * [2] Use `property` decorator if your want the member to be serializable.
- * [3] Your initialization goes here.
- * [4] Your update function goes here.
- *
- * Learn more about scripting: https://docs.cocos.com/creator/3.3/manual/en/scripting/
- * Learn more about CCClass: https://docs.cocos.com/creator/3.3/manual/en/scripting/ccclass.html
- * Learn more about life-cycle callbacks: https://docs.cocos.com/creator/3.3/manual/en/scripting/life-cycle-callbacks.html
- */
+// 純線上廳的獎項與滾分門檻
+const winTypeRangesNormal = [
+    { min: 0, max: 1, type: WinType.section_1, duration: BaseScoringDuration.Scoring01 },
+    { min: 1, max: 2, type: WinType.section_2, duration: BaseScoringDuration.Scoring02 },
+    { min: 2, max: 3, type: WinType.section_3, duration: BaseScoringDuration.Scoring03 },
+    { min: 3, max: 4, type: WinType.section_4, duration: BaseScoringDuration.Scoring04 },
+    { min: 4, max: 5, type: WinType.section_5, duration: BaseScoringDuration.Scoring05 },
+    { min: 5, max: 6, type: WinType.section_6, duration: BaseScoringDuration.Scoring06 },
+    { min: 6, max: 7, type: WinType.section_7, duration: BaseScoringDuration.Scoring07 },
+    { min: 7, max: 8, type: WinType.section_8, duration: BaseScoringDuration.Scoring08 },
+    { min: 8, max: 9, type: WinType.section_9, duration: BaseScoringDuration.Scoring09 },
+    { min: 9, max: 10, type: WinType.section_10, duration: BaseScoringDuration.Scoring10 },
+    { min: 10, max: 11, type: WinType.section_11, duration: BaseScoringDuration.Scoring11 },
+    { min: 11, max: 12, type: WinType.section_12, duration: BaseScoringDuration.Scoring12 },
+    { min: 12, max: 13, type: WinType.section_13, duration: BaseScoringDuration.Scoring13 },
+    { min: 13, max: 14, type: WinType.section_14, duration: BaseScoringDuration.Scoring14 },
+    { min: 14, max: 15, type: WinType.section_15, duration: BaseScoringDuration.Scoring15 },
+    { min: 15, max: 35, type: WinType.bigWin, duration: BaseScoringDuration.Scoring_Win01 },
+    { min: 35, max: 60, type: WinType.megaWin, duration: BaseScoringDuration.Scoring_Win02 },
+    { min: 60, max: 100, type: WinType.superWin, duration: BaseScoringDuration.Scoring_Win03 },
+    { min: 100, max: Infinity, type: WinType.jumboWin, duration: BaseScoringDuration.Scoring_Win04 }
+];
+
+const winTypeRangesOmniChannel = [
+    { min: 0, max: 1, type: WinType.section_1, duration: BaseScoringDuration.Scoring01 },
+    { min: 1, max: 2, type: WinType.section_2, duration: BaseScoringDuration.Scoring02 },
+    { min: 2, max: 3, type: WinType.section_3, duration: BaseScoringDuration.Scoring03 },
+    { min: 3, max: 4, type: WinType.section_4, duration: BaseScoringDuration.Scoring04 },
+    { min: 4, max: 5, type: WinType.section_5, duration: BaseScoringDuration.Scoring05 },
+    { min: 5, max: 6, type: WinType.section_6, duration: BaseScoringDuration.Scoring06 },
+    { min: 6, max: 7, type: WinType.section_7, duration: BaseScoringDuration.Scoring07 },
+    { min: 7, max: 8, type: WinType.section_8, duration: BaseScoringDuration.Scoring08 },
+    { min: 8, max: 9, type: WinType.section_9, duration: BaseScoringDuration.Scoring09 },
+    { min: 9, max: 10, type: WinType.section_10, duration: BaseScoringDuration.Scoring10 },
+    { min: 10, max: 11, type: WinType.section_11, duration: BaseScoringDuration.Scoring11 },
+    { min: 11, max: 12, type: WinType.section_12, duration: BaseScoringDuration.Scoring12 },
+    { min: 12, max: 13, type: WinType.section_13, duration: BaseScoringDuration.Scoring13 },
+    { min: 13, max: 14, type: WinType.section_14, duration: BaseScoringDuration.Scoring14 },
+    { min: 14, max: 17, type: WinType.section_15, duration: BaseScoringDuration.Scoring15 },
+    { min: 17, max: 40, type: WinType.bigWin, duration: BaseScoringDuration.Scoring_Win01 },
+    { min: 40, max: 60, type: WinType.megaWin, duration: BaseScoringDuration.Scoring_Win02 },
+    { min: 60, max: 100, type: WinType.superWin, duration: BaseScoringDuration.Scoring_Win03 },
+    { min: 100, max: Infinity, type: WinType.jumboWin, duration: BaseScoringDuration.Scoring_Win04 }
+];

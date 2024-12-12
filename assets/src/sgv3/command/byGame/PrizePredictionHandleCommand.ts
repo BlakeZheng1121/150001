@@ -52,9 +52,10 @@ export class PrizePredictionHandleCommand extends puremvc.SimpleCommand {
             (gameStateResult) => gameStateResult.gameSceneName == GameScene.Game_3
         );
         const randomNumber = this.getRandomNumber(result, GameScene.Game_1);
+        const threshold = this.gameDataProxy.isOmniChannel() ? thresholdOmniChannel : thresholdNormal;
 
         const prizePredictionCondition =
-            (odds >= 25 && isMSymbolFiveOfKind && randomNumber < 0.8) ||
+            (odds >= 25 && isMSymbolFiveOfKind && randomNumber < threshold) ||
             ballCount >= 8 ||
             (ballCount >= 6 && hitMiniGame);
         const displayMethodCondition = odds >= 25 && isMSymbolFiveOfKind;
@@ -83,9 +84,10 @@ export class PrizePredictionHandleCommand extends puremvc.SimpleCommand {
                 (result) => result.hitNumber == 5 && result.symbolID >= SymbolId.M1 && result.symbolID <= SymbolId.M6
             );
             const randomNumber = this.getRandomNumber(result, GameScene.Game_1);
+            const threshold = this.gameDataProxy.isOmniChannel() ? thresholdOmniChannel : thresholdNormal;
             const reel1StackWW = result.screenSymbol[0].filter((id) => id == 0).length == 3;
 
-            const prizePredictionCondition = odds >= 25 && isMSymbolFiveOfKind && randomNumber < 0.8;
+            const prizePredictionCondition = odds >= 25 && isMSymbolFiveOfKind && randomNumber < threshold;
             const displayMethodCondition = (odds >= 25 && isMSymbolFiveOfKind) || reel1StackWW;
 
             result.displayInfo.prizePredictionType = prizePredictionCondition ? 'TYPE_1' : 'NoPrizePredictionType';
@@ -116,7 +118,12 @@ export class PrizePredictionHandleCommand extends puremvc.SimpleCommand {
         let newC2Count = result.extendInfoForTopUpGameResult.goldCreditBallScreenLabel
             .reduce(convert2dTo1dArray, [])
             .filter((value) => value > 0).length;
-        if (multi >= 300 && newC2Count >= 2) {
+
+        const isOmniChannel = this.gameDataProxy.isOmniChannel();
+        const omniChannelCondition = (multi >= 300 && newC2Count >= 3) || (multi >= 500 && newC2Count >= 2);
+        const normalCondition = multi >= 300 && newC2Count >= 2;
+
+        if ((isOmniChannel && omniChannelCondition) || (!isOmniChannel && normalCondition)) {
             result.displayInfo.prizePredictionType = 'TYPE_1';
         }
     }
@@ -145,3 +152,6 @@ export class PrizePredictionHandleCommand extends puremvc.SimpleCommand {
         return this._gameDataProxy;
     }
 }
+
+const thresholdNormal = 0.8;
+const thresholdOmniChannel = 1;
