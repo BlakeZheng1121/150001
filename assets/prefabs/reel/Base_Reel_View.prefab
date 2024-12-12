@@ -1584,7 +1584,7 @@
   },
   {
     "__type__": "AnimPrefab",
-    "_id": 9,
+    "_id": 14,
     "_anim": {
       "__uuid__": "ee655154-60ee-4ef8-b85b-740c9b2108c3",
       "__expectedType__": "cc.Prefab"

@@ -162,8 +162,8 @@
     ],
     "value": {
       "__type__": "cc.Vec3",
-      "x": -326,
-      "y": 156,
+      "x": -325,
+      "y": 111,
       "z": 0
     }
   },
@@ -1517,7 +1517,7 @@
     "value": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -405,
+      "y": -447,
       "z": 0
     }
   },
@@ -2254,7 +2254,7 @@
     "value": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 0,
+      "y": -42,
       "z": 0
     }
   },
@@ -2335,7 +2335,7 @@
     "__type__": "cc.PrefabInstance",
     "fileId": "f80LIoHd9Ber/4ZjDNc0tW",
     "prefabRootNode": {
-      "__id__": 1
+      "__id__": 161
     },
     "mountedChildren": [],
     "mountedComponents": [],

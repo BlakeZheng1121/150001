@@ -42,16 +42,16 @@ export enum SymbolId {
     M4 = 5,
     M5 = 6,
     M6 = 7,
-    C2 = 9,
+    C2 = 14,
 
-    SUB = 20,
+    SUB = 20
 }
 
 export enum SymbolPartType {
     BACKGROUND,
     MAIN,
     LABEL,
-    SUB,
+    SUB
 }
 
 export enum LockType {

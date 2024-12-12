@@ -41,7 +41,7 @@ export class GAME_SceneSetting extends SceneSetting {
         let result = new GameSceneData();
         result = {
             gameStateIds: [1],
-            reelSymbolFrameByIDs: [0, 1, 2, 3, 4, 5, 6, 7],
+            reelSymbolFrameByIDs: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
             animationIDs: [0, 1],
             reelSpinStopSequence: [[0], [1], [2], [3], [4]],
             symbolWidth: 224,
@@ -79,7 +79,7 @@ export class GAME_SceneSetting extends SceneSetting {
         let result = new GameSceneData();
         result = {
             gameStateIds: [2],
-            reelSymbolFrameByIDs: [0, 2, 3, 4, 5, 6, 7],
+            reelSymbolFrameByIDs: [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
             animationIDs: [0],
             reelSpinStopSequence: [[0], [1], [2], [3], [4]],
             symbolWidth: 224,
@@ -147,9 +147,9 @@ export class GAME_SceneSetting extends SceneSetting {
         let result = new GameSceneData();
         result = {
             gameStateIds: [4],
-            reelSymbolFrameByIDs: [2, 3, 4, 5, 6, 7, 9],
+            reelSymbolFrameByIDs: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
             animationIDs: [],
-            reelSpinStopSequence:  [
+            reelSpinStopSequence: [
                 [0, 5, 10],
                 [1, 6, 11],
                 [2, 7, 12],
