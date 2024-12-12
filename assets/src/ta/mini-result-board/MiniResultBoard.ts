@@ -77,7 +77,7 @@ export class MiniResultBoard extends Component {
             .getComponent(ParticleContentTool);
         this.winCoinFall.node.position = new Vec3(0, 540, 0);
         this.winCoinFall.node.setSiblingIndex(1);
-        this.winCoinFall.ParticlePlay(true, 0.5);
+        this.winCoinFall.ParticlePlay(0.5);
     }
 
     public stopWinCoinFall() {
