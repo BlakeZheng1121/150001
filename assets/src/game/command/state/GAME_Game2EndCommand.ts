@@ -12,7 +12,6 @@ export class GAME_Game2EndCommand extends Game2EndCommand {
     /** game2結束面板處理 */
     protected playGame2EndBoard() {
         this.showTotalWinSum();
-
         this.gameDataProxy.afterFeatureGame = true;
     }
 

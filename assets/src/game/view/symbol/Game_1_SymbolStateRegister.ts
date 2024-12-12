@@ -1,6 +1,5 @@
 import { _decorator } from 'cc';
 import { UIViewStateBase } from '../../../core/uiview/UIViewStateRegister';
-import { BalanceUtil } from '../../../sgv3/util/BalanceUtil';
 import {
     SymbolHideState,
     SymbolRollCycledState,
@@ -86,8 +85,7 @@ export class Game_1_RollCycledState extends SymbolRollCycledState {
 
         if (this.content.labelText.enabled) {
             this.content.labelText.font = this.content.isSpecialFont ? this.content.specialFont : this.content.baseFont;
-            this.content.labelText.string =
-                this.content.credit > 0 ? BalanceUtil.formatBalanceWithExpressingUnits(this.content.credit) : String();
+            this.content.labelText.string = this.content.creditDisplay;
         } else {
             this.content.labelText.string = String();
         }
@@ -114,8 +112,7 @@ export class Game_1_SymbolShowState extends SymbolShowState {
         if (this.content.labelText.enabled) {
             this.content.forceRecycleParticlePrefab();
             this.content.labelText.font = this.content.isSpecialFont ? this.content.specialFont : this.content.baseFont;
-            this.content.labelText.string =
-                this.content.credit > 0 ? BalanceUtil.formatBalanceWithExpressingUnits(this.content.credit) : '';
+            this.content.labelText.string = this.content.creditDisplay;
         }
     }
 }

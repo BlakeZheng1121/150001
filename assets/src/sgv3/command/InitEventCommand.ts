@@ -6,6 +6,7 @@ import { InitEvent } from '../vo/event/InitEvent';
 import { NetworkProxy } from '../../core/proxy/NetworkProxy';
 import { RecoveryData } from '../vo/data/RecoveryData';
 import { AfterReconnectionCommand } from './connect/AfterReconnectionCommand';
+import { BalanceUtil } from '../util/BalanceUtil';
 
 /**
  * 遊戲初始化的parser
@@ -22,7 +23,9 @@ export class InitEventCommand extends puremvc.SimpleCommand {
         this.gameDataProxy.initEventData = initEventData;
         this.gameDataProxy.initEventData.gameStateSettings =
             RefactoringGameData.RefactoringGameStateSetting(initEventData);
-
+        if (!this.gameDataProxy.isOmniChannel()) {
+            BalanceUtil.dollarSign = '';
+        }
         //取得本機 儲存的押注組合
         this.gameDataProxy.loadUserSetting();
 
@@ -58,7 +61,7 @@ export class InitEventCommand extends puremvc.SimpleCommand {
     protected endInit() {
         if (this.gameDataProxy.isReconnecting) {
             this.sendNotification(AfterReconnectionCommand.NAME);
-        }else{
+        } else {
             this.sendNotification(GameProxyEvent.RESPONSE_INIT);
         }
     }

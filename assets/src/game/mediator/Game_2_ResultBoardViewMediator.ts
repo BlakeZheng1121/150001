@@ -3,10 +3,10 @@ import BaseMediator from '../../base/BaseMediator';
 import { SceneManager } from '../../core/utils/SceneManager';
 import { StateWinEvent } from '../../sgv3/util/Constant';
 import { GameScene } from '../../sgv3/vo/data/GameScene';
-import { AudioManager } from '../../audio/AudioManager';
 import { GAME_GameDataProxy } from '../proxy/GAME_GameDataProxy';
 import { Game_2_ResultBoardView } from '../view/Game_2_ResultBoardView';
-import { BGMClipsEnum } from '../vo/enum/SoundMap';
+import { BalanceUtil } from 'src/sgv3/util/BalanceUtil';
+import { MathUtil } from 'src/core/utils/MathUtil';
 
 const { ccclass } = _decorator;
 
@@ -44,7 +44,10 @@ export class Game_2_ResultBoardViewMediator extends BaseMediator<Game_2_ResultBo
     private showWinBoard(score: number) {
         let self = this;
         let curScene = self.gameDataProxy.curScene;
-        self.view.showWinBoard(score, curScene);
+        const scoreDisplay = self.gameDataProxy.isOmniChannel()
+            ? MathUtil.floor(this.gameDataProxy.getCreditByDenomMultiplier(score), 0).toString()
+            : BalanceUtil.formatBalance(score);
+        self.view.showWinBoard(scoreDisplay, curScene);
     }
 
     private _gameDataProxy: GAME_GameDataProxy;

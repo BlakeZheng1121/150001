@@ -77,6 +77,7 @@ export class Game_1_ReelShowState extends SingleReelShowState {
             this.content.symbols[symbolIndex].symbolContent.fovIndex = i;
             let content = this.content.symbols[symbolIndex].symbolContent as Game_1_SymbolContent;
             content.credit = this.content.fovFeature[i].creditCent;
+            content.creditDisplay = this.content.fovFeature[i].creditDisplay;
             content.isSpecialFont = this.content.fovFeature[i].isSpecial;
             this.content.symbols[symbolIndex].play(SymbolPerformType.SHOW);
         }
@@ -105,6 +106,7 @@ export class Game_1_EmergencyStopState extends SingleReelEmergencyStopState {
         if (this.content.first.symbolContent.symbolData.id == SymbolId.C1) {
             let symbolContent = this.content.first.symbolContent as SymbolContent;
             symbolContent.credit = this.content.getCredit(symbolContent.fovIndex);
+            symbolContent.creditDisplay = this.content.getCreditDisplay(symbolContent.fovIndex);
             symbolContent.isSpecialFont = this.content.isSpecialBall(symbolContent.credit);
         }
         super.onRollCycled();
@@ -129,6 +131,7 @@ export class Game_1_RollAfterState extends SingleReelRollAfterState {
         if (this.content.first.symbolContent.symbolData.id == SymbolId.C1) {
             let symbolContent = this.content.first.symbolContent as SymbolContent;
             symbolContent.credit = this.content.getCredit(symbolContent.fovIndex);
+            symbolContent.creditDisplay = this.content.getCreditDisplay(symbolContent.fovIndex);
             symbolContent.isSpecialFont = this.content.isSpecialBall(symbolContent.credit);
         }
         super.onRollCycled();
@@ -149,8 +152,9 @@ export class Game_1_RollStartState extends SingleReelRollStartState {
 
     onPlay() {
         let firstContent = this.content.first.symbolContent as Game_1_SymbolContent;
-        if(firstContent.symbolData.id == SymbolId.C1 && firstContent.credit == 0){
+        if (firstContent.symbolData.id == SymbolId.C1 && firstContent.credit == 0) {
             firstContent.credit = this.content.getCredit(-1);
+            firstContent.creditDisplay = this.content.getCreditDisplay(-1);
         }
         this.content.first.play(SymbolPerformType.SHOW);
         super.onPlay();
@@ -162,6 +166,7 @@ export class Game_1_RollStartState extends SingleReelRollStartState {
         if (this.content.first.symbolContent.symbolData.id == SymbolId.C1) {
             let symbolContent = this.content.first.symbolContent as SymbolContent;
             symbolContent.credit = this.content.getCredit(symbolContent.fovIndex);
+            symbolContent.creditDisplay = this.content.getCreditDisplay(symbolContent.fovIndex);
             symbolContent.isSpecialFont = this.content.isSpecialBall(symbolContent.credit);
         }
         super.onRollCycled();
@@ -188,6 +193,7 @@ export class Game_1_SlowStopState extends SingleReelSlowStopState {
         if (this.content.first.symbolContent.symbolData.id == SymbolId.C1) {
             let symbolContent = this.content.first.symbolContent as SymbolContent;
             symbolContent.credit = this.content.getCredit(symbolContent.fovIndex);
+            symbolContent.creditDisplay = this.content.getCreditDisplay(symbolContent.fovIndex);
             symbolContent.isSpecialFont = this.content.isSpecialBall(symbolContent.credit);
         }
         super.onRollCycled();
@@ -212,6 +218,7 @@ export class Game_1_StopState extends SingleReelStopState {
         if (this.content.first.symbolContent.symbolData.id == SymbolId.C1) {
             let symbolContent = this.content.first.symbolContent as SymbolContent;
             symbolContent.credit = this.content.getCredit(symbolContent.fovIndex);
+            symbolContent.creditDisplay = this.content.getCreditDisplay(symbolContent.fovIndex);
             symbolContent.isSpecialFont = this.content.isSpecialBall(symbolContent.credit);
         }
         super.onRollCycled();

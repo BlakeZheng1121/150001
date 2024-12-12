@@ -1,12 +1,10 @@
 import { Label, Vec3, _decorator, Node, Color, UIOpacity } from 'cc';
 import { UIOrientation } from '../../core/ui/UIOrientation';
 import { SymbolPosData } from '../../sgv3/proxy/ReelDataProxy';
-import { BalanceUtil } from '../../sgv3/util/BalanceUtil';
 import { ReelsEffectAnimManager } from '../../sgv3/view/reel/reel-effect/ReelsEffectAnimManager';
 import { ReelView } from '../../sgv3/view/reel/ReelView';
 import { SingleReelContent } from '../../sgv3/view/reel/single-reel/SingleReelContent';
 import { UISymbol } from '../../sgv3/view/reel/symbol/UISymbol';
-import { Layer } from '../../sgv3/vo/enum/Layer';
 import { SymbolId, SymbolPerformType } from '../../sgv3/vo/enum/Reel';
 import { SymbolInfo } from '../../sgv3/vo/info/SymbolInfo';
 import { GAME_GameScene } from '../vo/data/GAME_GameScene';
@@ -91,20 +89,16 @@ export class GAME_ReelView extends ReelView {
         anim.play(SymbolPerformType.SHOW_BASE_CREDIT_COLLECT);
     }
 
-    public dragonUpGetCreditResult(targertInfo: Array<number>) {
-        let reelIndex = targertInfo[0]; //index 0: 表示金球TargertIndex
-        let curCreditCent = targertInfo[1]; //Index 1: 表示金球最後金額
+    public dragonUpGetCreditResult(reelIndex: number, credit: string) {
         let anim: SymbolFX = this.animManager.pool.get(reelIndex);
         anim.play(SymbolPerformType.SHOW_TARGERT_CREDIT_RESULT);
-        anim.setLabelText(String(BalanceUtil.formatBalanceWithExpressingUnits(curCreditCent)));
+        anim.setLabelText(credit);
     }
 
-    public dragonUpTargertCreditUpdate(targertInfo: Array<number>) {
-        let reelIndex = targertInfo[0]; //index 0: 表示金球TargertIndex
-        let curCreditCent = targertInfo[1]; //Index 1: 表示金球當前累積金額
+    public dragonUpTargertCreditUpdate(reelIndex: number, credit: string) {
         let anim: SymbolFX = this.animManager.pool.get(reelIndex);
         anim.play(SymbolPerformType.SHOW_TARGERT_CREDIT_COLLECT);
-        anim.setLabelText(String(BalanceUtil.formatBalanceWithExpressingUnits(curCreditCent)));
+        anim.setLabelText(credit);
     }
 
     public dragonUpMultipleAccumulate(targertIndex: number) {
@@ -137,15 +131,15 @@ export class GAME_ReelView extends ReelView {
     ////
 
     ////Common API
-    public setWinScoreInfo(symbolInfo: SymbolInfo, symbolWin: number) {
+    public setWinScoreInfo(symbolInfo: SymbolInfo, symbolWin: string) {
         const self = this;
-        if (symbolInfo.sid < 0 || symbolWin == 0 || self._winScoreText == null) {
+        if (symbolInfo.sid < 0 || self._winScoreText == null) {
             return;
         }
         //設定贏分位置
         self._winScoreText.node.setWorldPosition(self.getScoreTextPosition(symbolInfo));
         //贏分資訊
-        self._winScoreText.string = BalanceUtil.formatBalance(symbolWin);
+        self._winScoreText.string = symbolWin;
         self._winScoreText.node.active = true;
     }
 

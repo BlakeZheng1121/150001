@@ -95,7 +95,9 @@ export abstract class BaseWinBoardViewMediator<T extends WinBoardView> extends B
     /**
      * loading complete完成後處理
      */
-    protected loadingComplete() {}
+    protected loadingComplete() {
+        this.view.isFormatBalance = !this.gameDataProxy.isOmniChannel();
+    }
 
     /**
      * 水平方向改變
@@ -166,6 +168,10 @@ export abstract class BaseWinBoardViewMediator<T extends WinBoardView> extends B
 
     protected runWinboardLabel(startAmount: number, winAmount: number, winType: WinType, scoringTime: number) {
         this.startShowWinboard(winType, scoringTime);
+        if (this.gameDataProxy.isOmniChannel()) {
+            startAmount = this.gameDataProxy.getCreditByDenomMultiplier(startAmount);
+            winAmount = this.gameDataProxy.getCreditByDenomMultiplier(winAmount);
+        }
         this.view?.runWinboardLabel(startAmount, winAmount, scoringTime);
     }
 
@@ -177,6 +183,9 @@ export abstract class BaseWinBoardViewMediator<T extends WinBoardView> extends B
         this.gameDataProxy.scrollingWinLabel = false;
         this.BBWLabelComplete(data.targetAmount);
         if (data.winType >= WinType.bigWin) {
+            if (this.gameDataProxy.isOmniChannel()) {
+                data.winBoardTargetAmount = this.gameDataProxy.getCreditByDenomMultiplier(data.winBoardTargetAmount);
+            }
             this.winboardLabelComplete(data.winType, data.winBoardTargetAmount);
         }
     }

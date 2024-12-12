@@ -3,6 +3,7 @@ import { TimelineTool } from 'TimelineTool';
 import { BalanceUtil } from '../util/BalanceUtil';
 import { LevelWinType, WinType } from '../vo/enum/WinType';
 import BaseView from 'src/base/BaseView';
+import { MathUtil } from 'src/core/utils/MathUtil';
 
 const { ccclass, property } = _decorator;
 
@@ -25,6 +26,7 @@ export abstract class WinBoardView extends BaseView {
     public curWinboardAmount: number = 0;
     public targetAmount: number;
     public targetWinboardAmount: number;
+    public isFormatBalance: boolean = true;
 
     protected abstract stopParticleBigWin(): void;
     protected abstract playParticleBigWin(): void;
@@ -48,7 +50,7 @@ export abstract class WinBoardView extends BaseView {
 
     protected start(): void {
         this.node.active = false;
-    }    
+    }
     /**
      * 執行大獎面板且滾分
      * @param _type 面板類型
@@ -118,7 +120,9 @@ export abstract class WinBoardView extends BaseView {
 
     /** 更新winboardText */
     public updateWinboardText(amount: number): void {
-        this.winBoardScore.string = BalanceUtil.formatBalance(amount);
+        this.winBoardScore.string = this.isFormatBalance
+            ? BalanceUtil.formatBalance(amount)
+            : MathUtil.floor(amount, 0).toString();
     }
 
     /**滾動並刷新BBW的顯示數值

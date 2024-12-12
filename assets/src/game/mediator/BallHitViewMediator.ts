@@ -133,7 +133,7 @@ export class BallHitViewMediator extends BaseMediator<BallHitView> {
     private initView() {
         this.view.baseGameIdle();
         let initLevel: number[] = [];
-        initLevel = this.gameDataProxy.getInitEmblemLevel()
+        initLevel = this.gameDataProxy.getInitEmblemLevel();
         this.initEmblemLevel(initLevel);
     }
 
@@ -180,7 +180,9 @@ export class BallHitViewMediator extends BaseMediator<BallHitView> {
 
     private freeGameTransition() {
         this.numInBall = this.gameDataProxy.ballTotalCredit;
-        let ballCash = BalanceUtil.formatBalance(this.numInBall);
+        let ballCash = this.gameDataProxy.isOmniChannel()
+            ? this.numInBall.toString()
+            : BalanceUtil.formatBalance(this.numInBall);
         this.view.setBallCredit(ballCash, 4);
     }
 
@@ -219,7 +221,9 @@ export class BallHitViewMediator extends BaseMediator<BallHitView> {
         let pos: Vec2 = infoArray[0]; // index 0: 位置資訊Index
         this.numInBall = MathUtil.add(this.numInBall, infoArray[1]); // index 1: 顯示數值資訊
         let index = Number(pos.x * 3 + pos.y);
-        let ballCash = BalanceUtil.formatBalance(this.numInBall);
+        let ballCash = this.gameDataProxy.isOmniChannel()
+            ? this.numInBall.toString()
+            : BalanceUtil.formatBalance(this.numInBall);
         switch (this.gameDataProxy.curScene) {
             case GameScene.Game_1:
                 this.view.setBallCredit(ballCash, 0);

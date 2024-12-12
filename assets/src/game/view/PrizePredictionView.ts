@@ -33,9 +33,6 @@ export class PrizePredictionView extends BaseView {
             self.blackBackground.node.active = false;
             self.onFinish();
         });
-        // self.mask.opacity = 0;
-        // self.mask.node.active = true;
-        // tween(self.mask).to(0.5, { opacity: 255 }).start();
     }
 
     private playSound() {
@@ -69,8 +66,6 @@ export class PrizePredictionView extends BaseView {
         const self = this;
         self.callBack?.();
         this.callBack = null;
-        // this.mask.opacity = 0;
-        // this.mask.node.active = false;
     }
 
     public get isPlaying(): boolean {

@@ -46,13 +46,14 @@ export class Game_2_SpecialView extends BaseView {
     }
 
     //** 出現角落球 */
-    public showSideBall(freeGameSpecialInfo: FreeGameSpecialInfo) {
+    public showSideBall(freeGameSpecialInfo: FreeGameSpecialInfo, isFormatBalance: boolean) {
         let self = this;
         self.freeGameSpecialInfo = freeGameSpecialInfo;
         if (freeGameSpecialInfo.hitBall.isShowHitBall) {
             self.freeC1SubOnPerform.showSideBall(
                 self.freeGameSpecialInfo.hitBall.sideCreditBall,
-                self.freeGameSpecialInfo.hitBall.sideCreditBallPos
+                self.freeGameSpecialInfo.hitBall.sideCreditBallPos,
+                isFormatBalance
             );
         }
     }

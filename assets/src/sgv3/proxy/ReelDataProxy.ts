@@ -152,6 +152,8 @@ export class SymbolPosData {
     public lockType: LockType = LockType.NONE;
     /** 語系的判斷 */
     public language: string = '';
+    /** 分數球顯示內容 */
+    public creditDisplay: string = '';
 
     /** 複製內容 */
     public concat(): SymbolPosData {
@@ -163,6 +165,7 @@ export class SymbolPosData {
         _symbolPosData.lockType = this.lockType;
         _symbolPosData.isSpecial = this.isSpecial;
         _symbolPosData.language = this.language;
+        _symbolPosData.creditDisplay = this.creditDisplay;
         return _symbolPosData;
     }
 }

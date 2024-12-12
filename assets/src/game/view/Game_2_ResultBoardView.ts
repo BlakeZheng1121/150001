@@ -1,6 +1,5 @@
 import { _decorator, Label } from 'cc';
 import { TimelineTool } from 'TimelineTool';
-import { BalanceUtil } from '../../sgv3/util/BalanceUtil';
 import { GameScene } from '../../sgv3/vo/data/GameScene';
 import { AudioManager } from '../../audio/AudioManager';
 import { AudioClipsEnum, BGMClipsEnum } from '../vo/enum/SoundMap';
@@ -15,10 +14,10 @@ export class Game_2_ResultBoardView extends BaseView {
     @property(Label)
     private resultLabel: Label;
 
-    public showWinBoard(score: number, curScene: string) {
+    public showWinBoard(score: string, curScene: string) {
         this.resultBoard.node.active = true;
         let self = this;
-        self.resultLabel.string = BalanceUtil.formatBalance(score);
+        self.resultLabel.string = score;
         self.resultBoard.play('Perform', self.winBoardEnd.bind(self));
         if (curScene == GameScene.Game_2) {
             AudioManager.Instance.stop(BGMClipsEnum.BGM_FreeGame).fade(0, 0.2);

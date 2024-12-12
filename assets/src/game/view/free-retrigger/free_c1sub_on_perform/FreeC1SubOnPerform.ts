@@ -35,7 +35,7 @@ export class FreeC1SubOnPerform extends Component {
     private intervalTime = 1.2;
 
     // 出現角落球 燃燒
-    public showSideBall(sideCredit: Array<Array<number>>, symbolFeature: Array<Array<Vec3>>) {
+    public showSideBall(sideCredit: Array<Array<number>>, symbolFeature: Array<Array<Vec3>>, isFormatBalance: boolean) {
         let self = this;
 
         self.hitSpecialInfo = self.getC1SubOn(sideCredit, symbolFeature);
@@ -47,7 +47,9 @@ export class FreeC1SubOnPerform extends Component {
                 .getChildByName('Num')
                 .getComponent(Label);
 
-            label.string = BalanceUtil.formatBalanceWithExpressingUnits(self.hitSpecialInfo[i].Score);
+            label.string = isFormatBalance
+                ? BalanceUtil.formatBalanceWithExpressingUnits(self.hitSpecialInfo[i].Score)
+                : self.hitSpecialInfo[i].Score.toString();
 
             self.hitSpecialInfo[i].c1Sub?.play('Hit');
         }

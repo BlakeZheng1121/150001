@@ -60,6 +60,13 @@ export class SingleReelContent extends SingleReelContentBase {
         return (fovIndex >= 0) ? this.fovFeature[fovIndex].creditCent : this.getRandomCredit();
     }
 
+    public getCreditDisplay(fovIndex: number): string {
+        if (this.creditArray == null || this.creditWeight == null) {
+            return '';
+        }
+        return fovIndex >= 0 ? this.fovFeature[fovIndex].creditDisplay : this.getRandomCredit().toString();
+    }
+
     public getFreeCredit(fovIndex: number): number {
         if (this.freeCreditWeight == null) {
             return 0;

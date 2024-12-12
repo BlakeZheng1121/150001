@@ -17,6 +17,7 @@ export class Game_1_SymbolContent extends SymbolContentBase {
     public particlePrefab: Prefab | null = null;
 
     public credit: number = 0;
+    public creditDisplay: string = '';
 
     public isSpecialFont: boolean = false;
 

@@ -13,6 +13,7 @@ export class SymbolContent extends SymbolContentBase {
     public specialFont: Font | null = null;
 
     public credit: number = 0;
+    public creditDisplay: string = '';
 
     public isSpecialFont: boolean = false;
 

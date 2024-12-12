@@ -6,6 +6,7 @@ import { ButtonName, ButtonState } from 'common-ui/proxy/UIEnums';
 import { SpeedMode } from 'src/game/vo/enum/Game_UIEnums';
 import { setEngineTimeScale } from 'src/core/utils/SceneManager';
 import { UIProxy } from 'common-ui/proxy/UIProxy';
+import { BalanceUtil } from 'src/sgv3/util/BalanceUtil';
 
 export class GAME_Game1FeatureSelectionCommand extends Game1FeatureSelectionCommand {
     public execute(notification: puremvc.INotification): void {
@@ -34,9 +35,13 @@ export class GAME_Game1FeatureSelectionCommand extends Game1FeatureSelectionComm
     public showFeatureSelection() {
         this.disableQuickSpin();
         let result = this.gameDataProxy.spinEventData.baseGameResult;
+        let ballCash = this.gameDataProxy.convertCredit2Cash(result.extendInfoForbaseGameResult.ballTotalCredit); // 換算成錢
+        let ballDisplay = this.gameDataProxy.isOmniChannel()
+            ? this.gameDataProxy.getCreditByDenomMultiplier(ballCash).toString()
+            : BalanceUtil.formatBalance(ballCash);
         this.sendNotification(ViewMediatorEvent.SHOW_FEATURE_SELECTION, [
             result.extendInfoForbaseGameResult.ballCount,
-            this.gameDataProxy.convertCredit2Cash(result.extendInfoForbaseGameResult.ballTotalCredit) // 換算成錢
+            ballDisplay
         ]);
     }
 

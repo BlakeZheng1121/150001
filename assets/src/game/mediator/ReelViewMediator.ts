@@ -28,6 +28,7 @@ import { GlobalTimer } from '../../sgv3/util/GlobalTimer';
 import { MathUtil } from 'src/core/utils/MathUtil';
 import { SeatInfo } from 'src/sgv3/vo/result/ExtendInfoForBaseGameResult';
 import { WinType } from 'src/sgv3/vo/enum/WinType';
+import { BalanceUtil } from 'src/sgv3/util/BalanceUtil';
 
 const { ccclass } = _decorator;
 /** ByGame Win Reel判定實作 */
@@ -230,8 +231,9 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
 
     protected playReelStopSound(curReelStopIndex: number) {
         for (let i = 0; i < this.reelDataProxy.reelStopSoundSequence[curReelStopIndex].length; i++) {
-            let stopSound: AudioClipsEnum = this.reelDataProxy.reelStopSoundSequence[curReelStopIndex][i];
-            if (this.preSpinStopSoundSequence[curReelStopIndex]) {
+            const stopSound: AudioClipsEnum = this.reelDataProxy.reelStopSoundSequence[curReelStopIndex][i];
+            const preStopSound = this.preSpinStopSoundSequence[curReelStopIndex];
+            if (preStopSound == AudioClipsEnum.SpinStop) {
                 AudioManager.Instance.stop(this.preSpinStopSoundSequence[curReelStopIndex], true);
             }
             AudioManager.Instance.play(stopSound);
@@ -281,12 +283,12 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
         this.reelView.dragonUpMultipleAccumulate(reelIndex);
     }
 
-    protected targertCreditUpdate(targertInfo: Array<number>) {
-        this.reelView.dragonUpTargertCreditUpdate(targertInfo);
+    protected targertCreditUpdate(data: { reelIndex: number; credit: string }) {
+        this.reelView.dragonUpTargertCreditUpdate(data.reelIndex, data.credit);
     }
 
-    protected getCreditResult(targertInfo: Array<number>) {
-        this.reelView.dragonUpGetCreditResult(targertInfo);
+    protected getCreditResult(data: { reelIndex: number; credit: string }) {
+        this.reelView.dragonUpGetCreditResult(data.reelIndex, data.credit);
     }
 
     protected baseCreditUpdate(reelIndex: number) {
@@ -433,7 +435,12 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
             return;
         }
         let symbolWin = self.winData.wayInfos[wayInfoIndex].symbolWin;
-        self.reelView.setWinScoreInfo(self.firstWinSymbol, symbolWin);
+        if (symbolWin > 0) {
+            let scoreDisplay: string = self.gameDataProxy.isOmniChannel()
+                ? MathUtil.floor(self.gameDataProxy.getCreditByDenomMultiplier(symbolWin), 0).toString()
+                : BalanceUtil.formatBalance(symbolWin);
+            self.reelView.setWinScoreInfo(self.firstWinSymbol, scoreDisplay);
+        }
 
         for (let i in self.winData.wayInfos[wayInfoIndex].symbols) {
             let symbol: SymbolInfo = self.winData.wayInfos[wayInfoIndex].symbols[i];
@@ -550,10 +557,19 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
     protected getCreditArray(array: Array<number>) {
         let range = Array<number>();
         for (let i = 0; i < array.length; i++) {
-            let credit = this.gameDataProxy.hasDenomMultiplier()
-                ? MathUtil.mul(array[i], this.gameDataProxy.curBet)
-                : MathUtil.div(MathUtil.mul(array[i], this.gameDataProxy.curTotalBet, 10), this.gameDataProxy.curDenom);
-            range.push(this.gameDataProxy.convertCredit2Cash(credit));
+            let display: number;
+            if (this.gameDataProxy.isOmniChannel()) {
+                let credit = MathUtil.mul(array[i], this.gameDataProxy.curBet);
+                let cash = this.gameDataProxy.convertCredit2Cash(credit);
+                display = this.gameDataProxy.getCreditByDenomMultiplier(cash);
+            } else {
+                let credit = MathUtil.div(
+                    MathUtil.mul(array[i], this.gameDataProxy.curTotalBet, 10),
+                    this.gameDataProxy.curDenom
+                );
+                display = this.gameDataProxy.convertCredit2Cash(credit);
+            }
+            range.push(display);
         }
         return range;
     }
@@ -590,6 +606,7 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
     // 顯示最後盤面
     public showLastSymbolOfReels(data: { seatInfo: SeatInfo; mysterySymbol?: number }) {
         const self = this;
+        this.stateSetting.setWheelData(data.seatInfo.featureIdx);
         self.reelDataProxy.mathTableIndex = data.seatInfo.usedTableIndex ? data.seatInfo.usedTableIndex : 0;
         self.setMysterySymbol(data.mysterySymbol);
         super.updateStrip();

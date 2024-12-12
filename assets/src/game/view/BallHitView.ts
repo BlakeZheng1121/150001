@@ -258,7 +258,7 @@ export class BallHitView extends BaseView {
     }
 
     public changeScene(curScene: string) {
-        let curLevel = this.emblemControl.getLevel();
+        let curLevel = this.emblemControl.getLevel() - 1;
         let emblemSetting = this.emblemTransformSetting.find((setting) => setting.scene == curScene);
         if (emblemSetting) {
             let settingByLevel = emblemSetting.transformSetting.find((setting) => setting.level == curLevel);

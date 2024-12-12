@@ -33,6 +33,11 @@ export class GAME_ParseStateWinResultCommand extends ParseStateWinResultCommand 
             (this.gameDataProxy.spinEventData.baseGameResult as BaseGameResult).extendInfoForbaseGameResult
                 .ballTotalCredit
         );
+        if (this.gameDataProxy.isOmniChannel()) {
+            this.gameDataProxy.ballTotalCredit = this.gameDataProxy.getCreditByDenomMultiplier(
+                this.gameDataProxy.ballTotalCredit
+            );
+        }
         if (!!this.gameDataProxy.spinEventData.freeGameResult) {
             this.gameDataProxy.stateWinData.wayInfos.unshift(
                 this.getScatterWinInfo(this.gameDataProxy.spinEventData.freeGameResult.freeGameTotalWin)

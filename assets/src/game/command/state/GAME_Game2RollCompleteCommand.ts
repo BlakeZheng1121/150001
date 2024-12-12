@@ -94,6 +94,9 @@ export class GAME_Game2RollCompleteCommand extends WAY_Game2RollCompleteCommand 
                 if (sideCreditBall[i][j] > 0) {
                     freeGameSpecialInfo.hitBall.isShowHitBall = true;
                     sideCreditBall[i][j] = this.gameDataProxy.convertCredit2Cash(sideCreditBall[i][j]);
+                    if (this.gameDataProxy.isOmniChannel()) {
+                        sideCreditBall[i][j] = this.gameDataProxy.getCreditByDenomMultiplier(sideCreditBall[i][j]);
+                    }
                 }
                 sideCreditBallPos[i].push(this.reelDataProxy.getFovPos(i, j));
             }

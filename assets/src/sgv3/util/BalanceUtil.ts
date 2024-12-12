@@ -5,7 +5,7 @@ export class BalanceUtil {
     private static _dollarSign: string = '';
 
     public static set dollarSign(dollarSign: string) {
-        this._dollarSign = '';
+        this._dollarSign = dollarSign;
     }
 
     public static get dollarSign() {
@@ -13,7 +13,7 @@ export class BalanceUtil {
     }
 
     public static get dollarISO() {
-		if (this._dollarSign != '') return this._dollarSign;
+        if (this._dollarSign != '') return this._dollarSign;
         else return '';
     }
     /**

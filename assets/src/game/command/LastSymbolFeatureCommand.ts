@@ -1,38 +1,20 @@
 import { _decorator } from 'cc';
-import { MathUtil } from 'src/core/utils/MathUtil';
 import { GameDataProxy } from 'src/sgv3/proxy/GameDataProxy';
-import { ReelDataProxy, SymbolPosData } from 'src/sgv3/proxy/ReelDataProxy';
+import { ReelDataProxy } from 'src/sgv3/proxy/ReelDataProxy';
 import { ReelEvent } from 'src/sgv3/util/Constant';
-import { LockType } from 'src/sgv3/vo/enum/Reel';
+import { ReelEffect_SymbolFeatureCommand } from './reelEffect/ReelEffect_SymbolFeatureCommand';
 // 最後一把 by game 的 symbol 特色資料
 export class LastSymbolFeatureCommand extends puremvc.SimpleCommand {
     public static readonly NAME = 'LastSymbolFeatureCommand';
 
     public execute(notification: puremvc.INotification) {
-        if (this.ballScreenLabel != null) {
-            if (this.reelDataProxy.symbolFeature == null) {
-                this.reelDataProxy.symbolFeature = [];
-                for (let i = 0; i < this.ballScreenLabel.length; i++) {
-                    let tempArray = Array<SymbolPosData>();
-                    for (let j = 0; j < this.ballScreenLabel[i].length; j++) {
-                        let posData = new SymbolPosData();
-                        tempArray.push(posData);
-                    }
-                    this.reelDataProxy.symbolFeature.push(tempArray);
-                }
-            }
-            //Game_1資料處理
-            for (let i = 0; i < this.ballScreenLabel.length; i++) {
-                for (let j = 0; j < this.ballScreenLabel[i].length; j++) {
-                    let posData = this.reelDataProxy.symbolFeature[i][j];
-                    posData.creditCent = this.gameDataProxy.convertCredit2Cash(this.ballScreenLabel[i][j]);
-                    posData.isSpecial = posData.creditCent > 0 ? this.isSpecialBall(posData.creditCent) : false;
-                    posData.lockType = posData.creditCent > 0 ? LockType.BASE_LOCK : LockType.NONE;
-                    posData.language = this.gameDataProxy.language;
-                }
-            }
-        }
         let seatInfo = this.gameDataProxy.initEventData.initialData.seatStatusCache.seatInfo;
+        if (this.ballScreenLabel != null) {
+            const tempDenomMultiplier = this.gameDataProxy.curDenomMultiplier;
+            this.gameDataProxy.curDenomMultiplier = seatInfo.denomMultiplier;
+            this.sendNotification(ReelEffect_SymbolFeatureCommand.NAME, this.ballScreenLabel);
+            this.gameDataProxy.curDenomMultiplier = tempDenomMultiplier;
+        }
         if (seatInfo.screenRngInfo) {
             let mysterySymbol = this.gameDataProxy.initEventData.initialData.seatStatusCache.mysterySymbol;
             this.sendNotification(ReelEvent.SHOW_LAST_SYMBOL_OF_REELS, {
@@ -65,18 +47,5 @@ export class LastSymbolFeatureCommand extends puremvc.SimpleCommand {
             this._ballScreenLabel = this.gameDataProxy.initEventData.initialData.seatStatusCache.ballScreenLabel;
         }
         return this._ballScreenLabel;
-    }
-    // 依 Cash 比對
-    protected isSpecialBall(value: number): boolean {
-        const creditBall =
-            this.gameDataProxy.initEventData.executeSetting.baseGameSetting.baseGameExtendSetting.creditBall;
-        let credit = this.gameDataProxy.hasDenomMultiplier()
-            ? MathUtil.mul(creditBall[creditBall.length - 1], this.gameDataProxy.curBet)
-            : MathUtil.div(
-                  MathUtil.mul(creditBall[creditBall.length - 1], this.gameDataProxy.curTotalBet, 10),
-                  this.gameDataProxy.curDenom
-              );
-        let cash = this.gameDataProxy.convertCredit2Cash(credit);
-        return cash == value;
     }
 }

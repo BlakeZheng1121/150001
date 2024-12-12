@@ -13,6 +13,7 @@ import { GAME_GameDataProxy } from '../proxy/GAME_GameDataProxy';
 import { PosTweenView } from '../view/dragon-up/PosTweenView';
 import { AudioClipsEnum } from '../vo/enum/SoundMap';
 import { SymbolPartType } from 'src/sgv3/vo/enum/Reel';
+import { BalanceUtil } from 'src/sgv3/util/BalanceUtil';
 const { ccclass } = _decorator;
 
 @ccclass('PosTweenViewMediator')
@@ -166,18 +167,20 @@ export class PosTweenViewMediator extends BaseMediator<PosTweenView> {
 
     /** 每顆 C1球已經收集至金球上時  */
     private onBaseCreditCollectEnd(sequenceIndex: number) {
-        let tempArray = new Array<number>();
-        let targertIndex =
-            this.curTargertSequence.y * this.reelDataProxy.symbolFeature.length + this.curTargertSequence.x;
+        let reelIndex = this.curTargertSequence.y * this.reelDataProxy.symbolFeature.length + this.curTargertSequence.x;
         this.curTargertCredit = MathUtil.add(
             this.curTargertCredit,
             this.reelDataProxy.symbolFeature[this.getCurBaseSequenceByIndex(sequenceIndex).x][
                 this.getCurBaseSequenceByIndex(sequenceIndex).y
             ].creditCent
         );
-        tempArray.push(targertIndex); //index 0: 表示金球TargertIndex
-        tempArray.push(this.curTargertCredit); //Index 1: 表示金球當前累積金額
-        this.sendNotification(DragonUpEvent.ON_BASE_CREDIT_COLLECT_END, tempArray);
+        let creditDisplay = this.gameDataProxy.isOmniChannel()
+            ? this.curTargertCredit.toString()
+            : BalanceUtil.formatBalanceWithExpressingUnits(this.curTargertCredit);
+        this.sendNotification(DragonUpEvent.ON_BASE_CREDIT_COLLECT_END, {
+            reelIndex: reelIndex,
+            credit: creditDisplay
+        });
 
         if (sequenceIndex >= this.baseCreditCollectSequence.length - 1) {
             AudioManager.Instance.play(AudioClipsEnum.DragonUp_C1CollectHitEnd);
@@ -222,10 +225,13 @@ export class PosTweenViewMediator extends BaseMediator<PosTweenView> {
                 this.curTargertSequence.y * this.reelDataProxy.symbolFeature.length + this.curTargertSequence.x;
             let targertCreditResult =
                 this.reelDataProxy.symbolFeature[this.curTargertSequence.x][this.curTargertSequence.y].creditCent;
-            let tempArray = new Array<number>();
-            tempArray.push(targertIndex); //index 0: 表示金球TargertIndex
-            tempArray.push(targertCreditResult); //Index 1: 表示金球累積金額
-            this.sendNotification(DragonUpEvent.ON_GET_MULTIPLE_RESULT_END, tempArray);
+            let creditDisplay = this.gameDataProxy.isOmniChannel()
+                ? targertCreditResult.toString()
+                : BalanceUtil.formatBalanceWithExpressingUnits(targertCreditResult);
+            this.sendNotification(DragonUpEvent.ON_GET_MULTIPLE_RESULT_END, {
+                reelIndex: targertIndex,
+                credit: creditDisplay
+            });
 
             AudioManager.Instance.play(AudioClipsEnum.DragonUp_PercentHit);
         }
@@ -308,11 +314,15 @@ export class PosTweenViewMediator extends BaseMediator<PosTweenView> {
     }
 
     protected get isHasMultipleResult(): boolean {
+        const ballInCash = this.gameDataProxy.convertCredit2Cash(
+            this.gameDataProxy.spinEventData.baseGameResult.extendInfoForbaseGameResult.ballTotalCredit
+        );
+        let creditDisplay = this.gameDataProxy.isOmniChannel()
+            ? this.gameDataProxy.getCreditByDenomMultiplier(ballInCash)
+            : ballInCash;
         return (
             this.reelDataProxy.symbolFeature[this.curTargertSequence.x][this.curTargertSequence.y].creditCent !=
-            this.gameDataProxy.convertCredit2Cash(
-                this.gameDataProxy.spinEventData.baseGameResult.extendInfoForbaseGameResult.ballTotalCredit
-            )
+            creditDisplay
         );
     }
 }
