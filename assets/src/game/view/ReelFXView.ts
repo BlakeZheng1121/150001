@@ -50,7 +50,7 @@ export class ReelFXView extends BaseView {
     }
 
     public setAnimPosition(singleReelContent: SingleReelContent) {
-        this.node.setWorldPosition(singleReelContent.node.worldPosition.x, this.node.worldPosition.y, 0);
+        this.node.setWorldPosition(singleReelContent.node.worldPosition.x, singleReelContent.node.worldPosition.y, 0);
     }
 
     public playShow(singleReelContent: SingleReelContent): void {
