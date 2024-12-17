@@ -303,7 +303,10 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
                     let baseExtendSetting =
                         this.gameDataProxy.initEventData.executeSetting.baseGameSetting.baseGameExtendSetting;
                     content.creditArray = this.getCreditArray(baseExtendSetting.creditBall);
-                    content.creditWeight = this.getWeight(baseExtendSetting.creditBallWeight[0]);
+                    const creditWeight = this.gameDataProxy.isOmniChannel()
+                        ? baseExtendSetting.groupingCreditBallWeight[this.gameDataProxy.curFeatureIdx]
+                        : baseExtendSetting.creditBallWeight[0];
+                    content.creditWeight = this.getWeight(creditWeight);
                 }
                 break;
             case GameScene.Game_2:
@@ -559,9 +562,7 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
         for (let i = 0; i < array.length; i++) {
             let display: number;
             if (this.gameDataProxy.isOmniChannel()) {
-                let credit = MathUtil.mul(array[i], this.gameDataProxy.curBet);
-                let cash = this.gameDataProxy.convertCredit2Cash(credit);
-                display = this.gameDataProxy.getCreditByDenomMultiplier(cash);
+                display = MathUtil.mul(array[i], this.gameDataProxy.curBet);
             } else {
                 let credit = MathUtil.div(
                     MathUtil.mul(array[i], this.gameDataProxy.curTotalBet, 10),
