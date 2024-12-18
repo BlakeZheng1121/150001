@@ -307,6 +307,7 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
                         ? baseExtendSetting.groupingCreditBallWeight[this.gameDataProxy.curFeatureIdx]
                         : baseExtendSetting.creditBallWeight[0];
                     content.creditWeight = this.getWeight(creditWeight);
+                    content.specialBallCredit = this.getSpecialBallCredit(content.creditArray, creditWeight);
                 }
                 break;
             case GameScene.Game_2:
@@ -555,6 +556,17 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
             range.push(temp);
         }
         return range;
+    }
+
+    protected getSpecialBallCredit(creditArray: Array<number>, weight: Array<number>) {
+        let specialBallCredit = 0;
+        for (let i = weight.length - 1; i >= 0; i--) {
+            if (weight[i] > 0) {
+                specialBallCredit = creditArray[i];
+                break;
+            }
+        }
+        return specialBallCredit;
     }
 
     protected getCreditArray(array: Array<number>) {

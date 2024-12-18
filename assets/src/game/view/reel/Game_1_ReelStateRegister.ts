@@ -155,6 +155,7 @@ export class Game_1_RollStartState extends SingleReelRollStartState {
         if (firstContent.symbolData.id == SymbolId.C1 && firstContent.credit == 0) {
             firstContent.credit = this.content.getCredit(-1);
             firstContent.creditDisplay = this.content.getCreditDisplay(-1);
+            firstContent.isSpecialFont = this.content.isSpecialBall(firstContent.credit);
         }
         this.content.first.play(SymbolPerformType.SHOW);
         super.onPlay();

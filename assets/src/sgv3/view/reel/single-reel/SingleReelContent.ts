@@ -28,6 +28,8 @@ export class SingleReelContent extends SingleReelContentBase {
     public isMaxReSpin: boolean = false;
 
     public isTriggerFeatureReSpin: boolean = false;
+    
+    public specialBallCredit: number = 0;
 
     public get creditMaxWeight(): number {
         return this.creditWeight[this.creditWeight.length - 1];
@@ -83,10 +85,7 @@ export class SingleReelContent extends SingleReelContentBase {
 
     // 依 Cent 比對
     public isSpecialBall(value: number): boolean {
-        if (this.creditArray == null) {
-            return false;
-        }
-        return this.creditArray[this.creditArray.length - 1] == value;
+        return this.specialBallCredit == value;
     }
 
     // 確認是否需要忽略壓暗顯示

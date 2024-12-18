@@ -128,18 +128,31 @@ export class ReelEffect_SymbolFeatureCommand extends puremvc.SimpleCommand {
         const creditBall =
             this.gameDataProxy.initEventData.executeSetting.baseGameSetting.baseGameExtendSetting.creditBall;
         let credit = this.gameDataProxy.isOmniChannel()
-            ? MathUtil.mul(creditBall[creditBall.length - 1], this.gameDataProxy.curBet)
+            ? MathUtil.mul(this.getLastBallCredit(creditBall), this.gameDataProxy.curBet)
             : MathUtil.div(
                   MathUtil.mul(creditBall[creditBall.length - 1], this.gameDataProxy.curTotalBet, 10),
                   this.gameDataProxy.curDenom
               );
-        let cash = this.gameDataProxy.convertCredit2Cash(credit);
         if (this.gameDataProxy.isOmniChannel()) {
-            let creditByDenom = this.gameDataProxy.getCreditByDenomMultiplier(cash);
-            isSpecial = creditByDenom == value;
+            isSpecial = credit == value;
         } else {
+            let cash = this.gameDataProxy.convertCredit2Cash(credit);
             isSpecial = cash == value;
         }
         return isSpecial;
+    }
+
+    private getLastBallCredit(creditBall: Array<number>): number {
+        let ballCredit = 0;
+        const creditWeight =
+            this.gameDataProxy.initEventData.executeSetting.baseGameSetting.baseGameExtendSetting
+                .groupingCreditBallWeight[this.gameDataProxy.curFeatureIdx];
+        for (let i = creditWeight.length - 1; i >= 0; i--) {
+            if (creditWeight[i] > 0) {
+                ballCredit = creditBall[i];
+                break;
+            }
+        }
+        return ballCredit;
     }
 }
