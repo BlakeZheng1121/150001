@@ -8,13 +8,14 @@
       "__id__": 1
     },
     "optimizationPolicy": 0,
-    "asyncLoadAssets": false,
-    "persistent": false
+    "persistent": false,
+    "asyncLoadAssets": false
   },
   {
     "__type__": "cc.Node",
     "_name": "Free_PreResultBoard_FX",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "_parent": null,
     "_children": [
       {
@@ -86,7 +87,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -3.455,
+      "x": 0,
       "y": 0,
       "z": 0
     },
@@ -123,6 +124,7 @@
     "__prefab": {
       "__id__": 4
     },
+    "_visFlags": 0,
     "_materials": [
       {
         "__uuid__": "dc6c3b67-ed23-438b-bb51-76c3609ee597",
@@ -130,7 +132,6 @@
       },
       null
     ],
-    "_visFlags": 0,
     "startColor": {
       "__id__": 5
     },
@@ -188,6 +189,13 @@
         "__id__": 18
       }
     ],
+    "_renderCulling": false,
+    "_cullingMode": 0,
+    "_aabbHalfX": 0,
+    "_aabbHalfY": 0,
+    "_aabbHalfZ": 0,
+    "_dataCulling": false,
+    "enableCulling": false,
     "_colorOverLifetimeModule": {
       "__id__": 20
     },
@@ -218,7 +226,6 @@
     "renderer": {
       "__id__": 62
     },
-    "enableCulling": false,
     "_prewarm": false,
     "_capacity": 100,
     "_simulationSpace": 1,
@@ -248,7 +255,7 @@
   {
     "__type__": "cc.CurveRange",
     "mode": 0,
-    "constant": 130,
+    "constant": 100,
     "multiplier": 1
   },
   {
@@ -802,7 +809,8 @@
       "__uuid__": "4ae9b648-49dc-456e-a4d6-ca6e1b209f80@6c48a",
       "__expectedType__": "cc.Texture2D"
     },
-    "_useGPU": false
+    "_useGPU": false,
+    "_alignSpace": 2
   },
   {
     "__type__": "cc.UITransform",
@@ -920,6 +928,7 @@
     "__prefab": {
       "__id__": 70
     },
+    "_visFlags": 0,
     "_materials": [
       {
         "__uuid__": "78e7bf63-42b7-4916-a653-1f8712765454",
@@ -927,7 +936,6 @@
       },
       null
     ],
-    "_visFlags": 0,
     "startColor": {
       "__id__": 71
     },
@@ -985,6 +993,13 @@
         "__id__": 87
       }
     ],
+    "_renderCulling": false,
+    "_cullingMode": 0,
+    "_aabbHalfX": 0,
+    "_aabbHalfY": 0,
+    "_aabbHalfZ": 0,
+    "_dataCulling": false,
+    "enableCulling": false,
     "_colorOverLifetimeModule": {
       "__id__": 89
     },
@@ -1015,7 +1030,6 @@
     "renderer": {
       "__id__": 131
     },
-    "enableCulling": false,
     "_prewarm": false,
     "_capacity": 400,
     "_simulationSpace": 1,
@@ -1626,7 +1640,8 @@
       "__uuid__": "cb4c539c-0c1c-49e2-ace0-5a9477d591d0@6c48a",
       "__expectedType__": "cc.Texture2D"
     },
-    "_useGPU": false
+    "_useGPU": false,
+    "_alignSpace": 2
   },
   {
     "__type__": "cc.UITransform",
