@@ -1,6 +1,7 @@
 import { SingleReelContentBase } from './SingleReelContentBase';
 import { _decorator } from 'cc';
 import { SymbolPosData } from '../../../proxy/ReelDataProxy';
+import { BalanceUtil } from 'src/sgv3/util/BalanceUtil';
 const { ccclass } = _decorator;
 
 @ccclass('SingleReelContent')
@@ -29,6 +30,8 @@ export class SingleReelContent extends SingleReelContentBase {
 
     public isTriggerFeatureReSpin: boolean = false;
     
+    public isOmniChannel: boolean = false;
+
     public specialBallCredit: number = 0;
 
     public get creditMaxWeight(): number {
@@ -62,11 +65,18 @@ export class SingleReelContent extends SingleReelContentBase {
         return (fovIndex >= 0) ? this.fovFeature[fovIndex].creditCent : this.getRandomCredit();
     }
 
-    public getCreditDisplay(fovIndex: number): string {
+    public getCreditDisplay(fovIndex: number, randomCredit: number): string {
         if (this.creditArray == null || this.creditWeight == null) {
             return '';
         }
-        return fovIndex >= 0 ? this.fovFeature[fovIndex].creditDisplay : this.getRandomCredit().toString();
+
+        if (fovIndex >= 0) {
+            return this.fovFeature[fovIndex].creditDisplay;
+        }
+
+        return this.isOmniChannel
+            ? randomCredit.toString()
+            : BalanceUtil.formatBalanceWithExpressingUnits(randomCredit);
     }
 
     public getFreeCredit(fovIndex: number): number {

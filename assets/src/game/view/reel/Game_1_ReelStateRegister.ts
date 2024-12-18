@@ -106,7 +106,7 @@ export class Game_1_EmergencyStopState extends SingleReelEmergencyStopState {
         if (this.content.first.symbolContent.symbolData.id == SymbolId.C1) {
             let symbolContent = this.content.first.symbolContent as SymbolContent;
             symbolContent.credit = this.content.getCredit(symbolContent.fovIndex);
-            symbolContent.creditDisplay = this.content.getCreditDisplay(symbolContent.fovIndex);
+            symbolContent.creditDisplay = this.content.getCreditDisplay(symbolContent.fovIndex, symbolContent.credit);
             symbolContent.isSpecialFont = this.content.isSpecialBall(symbolContent.credit);
         }
         super.onRollCycled();
@@ -131,7 +131,7 @@ export class Game_1_RollAfterState extends SingleReelRollAfterState {
         if (this.content.first.symbolContent.symbolData.id == SymbolId.C1) {
             let symbolContent = this.content.first.symbolContent as SymbolContent;
             symbolContent.credit = this.content.getCredit(symbolContent.fovIndex);
-            symbolContent.creditDisplay = this.content.getCreditDisplay(symbolContent.fovIndex);
+            symbolContent.creditDisplay = this.content.getCreditDisplay(symbolContent.fovIndex, symbolContent.credit);
             symbolContent.isSpecialFont = this.content.isSpecialBall(symbolContent.credit);
         }
         super.onRollCycled();
@@ -154,7 +154,7 @@ export class Game_1_RollStartState extends SingleReelRollStartState {
         let firstContent = this.content.first.symbolContent as Game_1_SymbolContent;
         if (firstContent.symbolData.id == SymbolId.C1 && firstContent.credit == 0) {
             firstContent.credit = this.content.getCredit(-1);
-            firstContent.creditDisplay = this.content.getCreditDisplay(-1);
+            firstContent.creditDisplay = this.content.getCreditDisplay(-1, firstContent.credit);
             firstContent.isSpecialFont = this.content.isSpecialBall(firstContent.credit);
         }
         this.content.first.play(SymbolPerformType.SHOW);
@@ -167,7 +167,7 @@ export class Game_1_RollStartState extends SingleReelRollStartState {
         if (this.content.first.symbolContent.symbolData.id == SymbolId.C1) {
             let symbolContent = this.content.first.symbolContent as SymbolContent;
             symbolContent.credit = this.content.getCredit(symbolContent.fovIndex);
-            symbolContent.creditDisplay = this.content.getCreditDisplay(symbolContent.fovIndex);
+            symbolContent.creditDisplay = this.content.getCreditDisplay(symbolContent.fovIndex, symbolContent.credit);
             symbolContent.isSpecialFont = this.content.isSpecialBall(symbolContent.credit);
         }
         super.onRollCycled();
@@ -194,7 +194,7 @@ export class Game_1_SlowStopState extends SingleReelSlowStopState {
         if (this.content.first.symbolContent.symbolData.id == SymbolId.C1) {
             let symbolContent = this.content.first.symbolContent as SymbolContent;
             symbolContent.credit = this.content.getCredit(symbolContent.fovIndex);
-            symbolContent.creditDisplay = this.content.getCreditDisplay(symbolContent.fovIndex);
+            symbolContent.creditDisplay = this.content.getCreditDisplay(symbolContent.fovIndex, symbolContent.credit);
             symbolContent.isSpecialFont = this.content.isSpecialBall(symbolContent.credit);
         }
         super.onRollCycled();
@@ -219,7 +219,7 @@ export class Game_1_StopState extends SingleReelStopState {
         if (this.content.first.symbolContent.symbolData.id == SymbolId.C1) {
             let symbolContent = this.content.first.symbolContent as SymbolContent;
             symbolContent.credit = this.content.getCredit(symbolContent.fovIndex);
-            symbolContent.creditDisplay = this.content.getCreditDisplay(symbolContent.fovIndex);
+            symbolContent.creditDisplay = this.content.getCreditDisplay(symbolContent.fovIndex, symbolContent.credit);
             symbolContent.isSpecialFont = this.content.isSpecialBall(symbolContent.credit);
         }
         super.onRollCycled();

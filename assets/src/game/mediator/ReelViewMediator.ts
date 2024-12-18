@@ -308,6 +308,7 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
                         : baseExtendSetting.creditBallWeight[0];
                     content.creditWeight = this.getWeight(creditWeight);
                     content.specialBallCredit = this.getSpecialBallCredit(content.creditArray, creditWeight);
+                    content.isOmniChannel = this.gameDataProxy.isOmniChannel();
                 }
                 break;
             case GameScene.Game_2:
