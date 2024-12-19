@@ -123,7 +123,7 @@ export abstract class BaseWinBoardViewMediator<T extends WinBoardView> extends B
 
     /** 點擊SpinDown後處理 */
     protected onSpinDown() {
-        if (this.gameDataProxy.scrollingWinLabel) {
+        if (this.gameDataProxy.scrollingWinLabel && this.gameDataProxy.scrollingWinLabelCanSkip) {
             this.sendNotification(WinEvent.FORCE_WIN_LABEL_COMPLETE);
         }
     }
@@ -139,12 +139,10 @@ export abstract class BaseWinBoardViewMediator<T extends WinBoardView> extends B
         runCompleteCallback?: Function;
     }) {
         this.runBBWLabel(data.startAmount, data.targetAmount, data.scoringTime, data.runCompleteCallback);
+        this.gameDataProxy.scrollingWinLabelCanSkip = true;
         //達到winboard倍率
         if (data.winType >= WinType.bigWin) {
-            this.gameDataProxy.scrollingWinLabelCanSkip = false;
             this.runWinboardLabel(data.winBoardStartAmount, data.winBoardTargetAmount, data.winType, data.scoringTime);
-        } else {
-            this.gameDataProxy.scrollingWinLabelCanSkip = true;
         }
     }
 
@@ -261,27 +259,9 @@ export abstract class BaseWinBoardViewMediator<T extends WinBoardView> extends B
                 break;
         }
         if (winType >= WinType.bigWin) {
-            this.gameDataProxy.scrollingWinLabelCanSkip = false;
             this.view?.startWinboard(winType, language);
-            this.winboardCanSkipTimer();
         }
     }
-    /**3 秒後才能 skip 大獎 */
-    protected winboardCanSkipTimer(delayTime: number = 3.0) {
-        GlobalTimer.getInstance().removeTimer(this.canSkipWinboardTimerName);
-        GlobalTimer.getInstance()
-            .registerTimer(
-                this.canSkipWinboardTimerName,
-                delayTime,
-                () => {
-                    this.gameDataProxy.scrollingWinLabelCanSkip = true;
-                    GlobalTimer.getInstance().removeTimer(this.canSkipWinboardTimerName);
-                },
-                this
-            )
-            .start();
-    }
-
     // ======================== Get Set ========================
     protected _gameDataProxy: GameDataProxy;
     protected get gameDataProxy(): GameDataProxy {
