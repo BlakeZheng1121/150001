@@ -87,7 +87,7 @@ export class Game_3_ViewMediator extends BaseMediator<Game_3_View> {
         this.view.node.active = false;
     }
 
-    protected lazyEventListener(): void {}
+    protected lazyEventListener(): void { }
 
     public listNotificationInterests(): Array<any> {
         const self = this;
@@ -256,6 +256,7 @@ export class Game_3_ViewMediator extends BaseMediator<Game_3_View> {
         let idx = self.symbolClickState[Formula.getRndInt(self.symbolClickState.length)];
         if (self.view.clickData.has(buttonList[idx].node.name) == false) {
             self.onClickSymbol(buttonList[idx].node, idx);
+            self.view.getAllSymbolButton()[idx].node.off(SystemEvent.EventType.TOUCH_END, self.onTouchTap, self);
             return;
         }
     }
@@ -339,6 +340,7 @@ export class Game_3_ViewMediator extends BaseMediator<Game_3_View> {
         while (idx < buttonList.length) {
             if (buttonList[idx].node == (e.currentTarget as Node)) {
                 self.onClickSymbol(buttonList[idx].node, idx);
+                self.view.getAllSymbolButton()[idx].node.off(SystemEvent.EventType.TOUCH_END, self.onTouchTap, self);
                 return;
             }
             idx++;
