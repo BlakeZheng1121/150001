@@ -19,11 +19,6 @@ export class GAME_Game1HitSpecialCommand extends Game1HitSpecialCommand {
     }
 
     protected endGame1HitGrand() {
-        // 移除已經表演過的bonus資料
-        const removeResult = (result: BonusGameOneRoundResult) =>
-            result.specialHitInfo != SpecialHitInfo[SpecialHitInfo.bonusGame_02];
-        this.gameDataProxy.spinEventData.bonusGameResult.bonusGameOneRoundResult =
-            this.gameDataProxy.spinEventData.bonusGameResult.bonusGameOneRoundResult.filter(removeResult);
         this.changeState(StateMachineProxy.GAME1_BEFORESHOW);
     }
 }
