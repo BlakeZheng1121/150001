@@ -53,8 +53,8 @@ export class SpinInfoView extends BaseView {
             this.curFreeSpinTimes.string = '' + _curTimes;
         }
         this.maxFreeSpinTimes.string = '' + _maxTimes;
-        if (_curTimes == 0) {
-            this.isSpinMax = false;
+        if (_curTimes == 1) {
+            this.showMaxSpinInfo(false);
         }
     }
 
