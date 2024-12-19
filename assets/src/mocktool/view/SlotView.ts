@@ -78,7 +78,7 @@ export class SlotView extends BaseView implements ReelTestPasserListener {
         const len = rowDataList?.length;
         for (let i = 1; i < len; i++) {
             const rowData = rowDataList[i];
-
+            if (!rowData.values) continue;
             if (!rowData.values[0].formattedValue) return Logger.i('your sheet not set RNG_KEY item');
             if (!rowData.values[1].formattedValue) continue;
 
