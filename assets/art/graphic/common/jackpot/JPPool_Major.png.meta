@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "b1ecdbd9-f240-41da-82f4-dd69997e1a44",
+  "uuid": "e6c4e16a-1351-4407-aac5-62b29c180fff",
   "files": [
     ".json",
     ".png"
@@ -10,19 +10,19 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "b1ecdbd9-f240-41da-82f4-dd69997e1a44@6c48a",
+      "uuid": "e6c4e16a-1351-4407-aac5-62b29c180fff@6c48a",
       "displayName": "JPPool_Major",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
+        "imageUuidOrDatabaseUri": "e6c4e16a-1351-4407-aac5-62b29c180fff",
+        "isUuid": true,
         "minfilter": "linear",
         "magfilter": "linear",
         "mipfilter": "none",
-        "anisotropy": 0,
-        "isUuid": true,
-        "imageUuidOrDatabaseUri": "b1ecdbd9-f240-41da-82f4-dd69997e1a44"
+        "anisotropy": 0
       },
       "ver": "1.0.21",
       "imported": true,
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "b1ecdbd9-f240-41da-82f4-dd69997e1a44@f9941",
+      "uuid": "e6c4e16a-1351-4407-aac5-62b29c180fff@f9941",
       "displayName": "JPPool_Major",
       "id": "f9941",
       "name": "spriteFrame",
@@ -42,20 +42,20 @@
         "trimThreshold": 1,
         "rotated": false,
         "offsetX": 0,
-        "offsetY": 0,
+        "offsetY": -1,
         "trimX": 0,
-        "trimY": 0,
-        "width": 297,
-        "height": 121,
-        "rawWidth": 297,
-        "rawHeight": 121,
+        "trimY": 2,
+        "width": 457,
+        "height": 133,
+        "rawWidth": 457,
+        "rawHeight": 135,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "b1ecdbd9-f240-41da-82f4-dd69997e1a44@6c48a",
+        "imageUuidOrDatabaseUri": "e6c4e16a-1351-4407-aac5-62b29c180fff@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -67,9 +67,9 @@
     }
   },
   "userData": {
-    "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "b1ecdbd9-f240-41da-82f4-dd69997e1a44@f9941",
-    "fixAlphaTransparencyArtifacts": false
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": true,
+    "redirect": "e6c4e16a-1351-4407-aac5-62b29c180fff@f9941"
   }
 }
