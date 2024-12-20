@@ -8,13 +8,14 @@
       "__id__": 1
     },
     "optimizationPolicy": 0,
-    "asyncLoadAssets": false,
-    "persistent": false
+    "persistent": false,
+    "asyncLoadAssets": false
   },
   {
     "__type__": "cc.Node",
     "_name": "WinSumFXView",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "_parent": null,
     "_children": [
       {
@@ -209,7 +210,7 @@
     "__prefab": {
       "__id__": 13
     },
-    "renderOrder": 101,
+    "renderOrder": 103,
     "winSumAnim": null,
     "_id": ""
   },
