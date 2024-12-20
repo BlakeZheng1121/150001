@@ -122,8 +122,6 @@ export class Game_2_EmergencyStopState extends SingleReelEmergencyStopState {
 
     onStop() {
         super.onStop();
-        this.content.isBlackSymbol = false;
-        this.content.respinSymbolId = [];
     }
     ////
 
