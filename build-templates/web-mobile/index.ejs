@@ -59,7 +59,6 @@
             <div id="Cocos3dGameContainer" style="position: absolute">
                 <canvas id="GameCanvas" oncontextmenu="event.preventDefault()" tabindex="0"></canvas>
             </div>
-            <iframe src="" id="gameHelp" style="display: none"></iframe>
         </div>
 
         <%- include(cocosTemplate, {}) %>
@@ -79,16 +78,24 @@
             window['serviceProvider'] = serviceProvider;
 
             // help iframe
+            const iframeWrap = document.getElementById('GameDiv');
+            const iframe = `<iframe src="" id="gameHelp" style="display: none"></iframe>`;
+            iframeWrap.innerHTML += iframe;
             let gameHelp = document.getElementById('gameHelp');
             var versionName = 'online';
             var curHelpVersion = (val) => (versionName = val);
             var openGameHelp = (gameLocale) => {
                 if (gameLocale.toString() === 'false') {
-                    gameHelp.src = '';
                     gameHelp.style.display = 'none';
                 } else {
                     gameHelp.src = `./help/${versionName}_help_${gameLocale}.html`;
-                    gameHelp.style.display = UrlExists(gameHelp.src) ? 'block' : 'none';
+                    if (UrlExists(gameHelp.src)) {
+                        gameHelp.onload = () => {
+                            gameHelp.style.display = 'block';
+                        };
+                    } else {
+                        gameHelp.style.display = 'none';
+                    }
                 }
             };
 
