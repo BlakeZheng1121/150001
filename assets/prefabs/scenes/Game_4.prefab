@@ -28,14 +28,14 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 24
+        "__id__": 25
       },
       {
-        "__id__": 26
+        "__id__": 27
       }
     ],
     "_prefab": {
-      "__id__": 28
+      "__id__": 29
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -429,7 +429,11 @@
         "__id__": 23
       }
     ],
-    "removedComponents": []
+    "removedComponents": [
+      {
+        "__id__": 24
+      }
+    ]
   },
   {
     "__type__": "CCPropertyOverrideInfo",
@@ -458,7 +462,7 @@
     "value": {
       "__type__": "cc.Vec3",
       "x": 285,
-      "y": 173,
+      "y": 130,
       "z": 0
     }
   },
@@ -494,6 +498,12 @@
     }
   },
   {
+    "__type__": "cc.TargetInfo",
+    "localID": [
+      "050Z9ZuRpAnLbkrbI70sBP"
+    ]
+  },
+  {
     "__type__": "c5831j2r/JBeZRudoaxY3UR",
     "_name": "",
     "_objFlags": 0,
@@ -502,7 +512,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 25
+      "__id__": 26
     },
     "renderOrder": 2,
     "reelPrefab": {
@@ -525,7 +535,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 27
+      "__id__": 28
     },
     "_contentSize": {
       "__type__": "cc.Size",
@@ -554,10 +564,10 @@
     "fileId": "718QtWhfJLRYpNfGxD9MOn",
     "targetOverrides": [
       {
-        "__id__": 29
+        "__id__": 30
       },
       {
-        "__id__": 32
+        "__id__": 33
       }
     ],
     "nestedPrefabInstanceRoots": [
@@ -572,7 +582,7 @@
       "__id__": 16
     },
     "sourceInfo": {
-      "__id__": 30
+      "__id__": 31
     },
     "propertyPath": [
       "AnimationList",
@@ -586,7 +596,7 @@
       "__id__": 16
     },
     "targetInfo": {
-      "__id__": 31
+      "__id__": 32
     }
   },
   {
@@ -604,7 +614,7 @@
   {
     "__type__": "cc.TargetOverrideInfo",
     "source": {
-      "__id__": 24
+      "__id__": 25
     },
     "sourceInfo": null,
     "propertyPath": [
@@ -614,7 +624,7 @@
       "__id__": 16
     },
     "targetInfo": {
-      "__id__": 33
+      "__id__": 34
     }
   },
   {
