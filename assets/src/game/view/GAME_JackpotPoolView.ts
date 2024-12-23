@@ -27,6 +27,8 @@ export class GAME_JackpotPoolView extends BaseView {
     public jackpotPoolMinor: Node;
     @property({ type: Node })
     public jackpotPoolMini: Node;
+    @property({ type: Node })
+    public jackpotLogo: Node;
 
     // 彩金池 Label
     @property({ type: Label })
@@ -322,6 +324,7 @@ export class GAME_JackpotPoolView extends BaseView {
         switch (gameScene) {
             case GameScene.Game_1:
             case GameScene.Game_3:
+                this.jackpotLogo.active = true;
                 this.jackpotPoolGrand.active = true;
                 this.jackpotPoolMajor.active = true;
                 this.jackpotPoolMinor.active = true;
@@ -329,6 +332,7 @@ export class GAME_JackpotPoolView extends BaseView {
                 break;
             case GameScene.Game_2:
             case GameScene.Game_4:
+                this.jackpotLogo.active = false;
                 this.jackpotPoolGrand.active = false;
                 this.jackpotPoolMajor.active = false;
                 this.jackpotPoolMinor.active = false;
