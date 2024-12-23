@@ -1559,7 +1559,7 @@
   },
   {
     "__type__": "Timeline",
-    "timelineName": "Appear_A",
+    "timelineName": "Appear",
     "timelineData": [
       {
         "__id__": 106
@@ -1835,7 +1835,7 @@
   },
   {
     "__type__": "Timeline",
-    "timelineName": "Disappear_A",
+    "timelineName": "Disappear",
     "timelineData": [
       {
         "__id__": 128

@@ -1,7 +1,7 @@
 [
   {
     "__type__": "cc.AnimationClip",
-    "_name": "Appear",
+    "_name": "Appear_A",
     "_objFlags": 0,
     "_native": "",
     "sample": 30,
@@ -99,8 +99,12 @@
   },
   {
     "__type__": "cc.ObjectCurve",
-    "_times": [],
-    "_values": []
+    "_times": [
+      0
+    ],
+    "_values": [
+      false
+    ]
   },
   {
     "__type__": "cc.animation.ObjectTrack",
@@ -184,7 +188,7 @@
     "__type__": "cc.RealCurve",
     "_times": [
       0,
-      0.26666666666666666
+      0.2666666805744171
     ],
     "_values": [
       {

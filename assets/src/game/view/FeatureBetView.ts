@@ -1,4 +1,4 @@
-import { _decorator, Color, Sprite } from 'cc';
+import { _decorator, Sprite } from 'cc';
 import { AudioManager } from 'src/audio/AudioManager';
 import BaseView from 'src/base/BaseView';
 import { TimelineTool } from 'TimelineTool';
@@ -14,6 +14,7 @@ export class FeatureBetView extends BaseView {
     private preFeatureIdx: number = 0;
     private soundList: string[] = [];
     private fxActiveList: boolean[] = [];
+    // [9, 10, J, Q, K, A]
     private symbolActiveList: boolean[][] = [
         [true, true, true, true, true, true],
         [false, true, true, true, true, true],
@@ -40,31 +41,59 @@ export class FeatureBetView extends BaseView {
     }
 
     public restoreFeatureBet(featureIdx: number) {
-        this.setSymbol(featureIdx);
+        this.restoreSymbol(featureIdx);
     }
 
     private setSymbol(featureIdx: number) {
         for (let i = 0; i < this.symbolList.length; i++) {
             const active = this.symbolActiveList[featureIdx][i];
-            this.setSymbolActive(i, active);
-            // this.setSymbolFXActive(i, active);
+            if (!active) {
+                this.setSymbolActive(i, false);
+            }
+            this.setSymbolFXActive(i, active);
         }
     }
 
     private setSymbolActive(index: number, active: boolean) {
-        this.symbolList[index].color = active ? Color.WHITE : Color.GRAY;
+        this.symbolList[index].node.active = active;
     }
 
     private setSymbolFXActive(index: number, active: boolean) {
         if (this.fxActiveList[index] != active) {
             this.fxActiveList[index] = active;
             if (active) {
-                this.symbolFXlList[index].play('Start');
+                this.symbolFXlList[index].play('Appear');
             } else {
-                this.symbolFXlList[index].play('Empty');
+                this.symbolFXlList[index].play('Disappear');
             }
         }
     }
 
-    public hideAllMenu() {}
+    private restoreSymbol(featureIdx: number) {
+        for (let i = 0; i < this.symbolFXlList.length; i++) {
+            const active = this.symbolActiveList[featureIdx][i];
+            if (this.fxActiveList[i] != active) {
+                this.fxActiveList[i] = active;
+                if (active) {
+                    this.symbolFXlList[i].play('Default');
+                } else {
+                    this.symbolFXlList[i].play('Empty');
+                }
+            }
+        }
+    }
+
+    public hideAllMenu() {
+        for (let i = 0; i < this.symbolFXlList.length; i++) {
+            this.setSymbolActive(i, this.fxActiveList[i]);
+            if (this.fxActiveList[i]) {
+                if (this.symbolFXlList[i].isPlaying) {
+                    this.symbolFXlList[i].play('Default');
+                }
+            }
+            if (this.symbolFXlList[i].isPlaying) {
+                this.symbolFXlList[i].play('Empty');
+            }
+        }
+    }
 }

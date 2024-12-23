@@ -687,10 +687,12 @@
   {
     "__type__": "cc.ObjectCurve",
     "_times": [
-      0
+      0,
+      0.4
     ],
     "_values": [
-      true
+      true,
+      false
     ]
   },
   {
