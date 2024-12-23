@@ -38,6 +38,9 @@ export class GAME_JackpotPoolView extends BaseView {
     @property({ type: Label })
     public miniAmount: Label;
 
+    @property({ type: Label })
+    public grandAmountInFreeGame: Label;
+
     // 加押特效
     @property({ type: TimelineTool })
     public raiseJackpotFX: TimelineTool;
@@ -276,6 +279,7 @@ export class GAME_JackpotPoolView extends BaseView {
     public updateGrandAmount() {
         if (!this.tempGrandAmount) return;
         this.grandAmount.string = BalanceUtil.formatBalanceWithDollarSign(this.tempGrandAmount);
+        this.grandAmountInFreeGame.string = this.grandAmount.string;
     }
 
     public updateMajorAmount() {
@@ -295,6 +299,7 @@ export class GAME_JackpotPoolView extends BaseView {
 
     private runGrandAmountComplete() {
         this.grandAmount.string = BalanceUtil.formatBalanceWithDollarSign(this.totalGrandAmount);
+        this.grandAmountInFreeGame.string = this.grandAmount.string;
     }
 
     private runMajorAmountComplete() {
@@ -314,40 +319,21 @@ export class GAME_JackpotPoolView extends BaseView {
     }
 
     private setPoolPosByOri(gameScene: string, orientation: string) {
-        if (orientation === GAME_JackpotPoolView.HORIZONTAL) {
-            switch (gameScene) {
-                case GameScene.Game_1:
-                case GameScene.Game_3:
-                    this.jackpotPoolMajor.active = true;
-                    this.jackpotPoolMinor.active = true;
-                    this.jackpotPoolMini.active = true;
-                    break;
-                case GameScene.Game_2:
-                case GameScene.Game_4:
-                    this.jackpotPoolMajor.active = false;
-                    this.jackpotPoolMinor.active = false;
-                    this.jackpotPoolMini.active = false;
-                    break;
-            }
-        } else {
-            switch (gameScene) {
-                case GameScene.Game_1:
-                    this.jackpotPoolMajor.active = true;
-                    this.jackpotPoolMinor.active = true;
-                    this.jackpotPoolMini.active = true;
-                    break;
-                case GameScene.Game_3:
-                    this.jackpotPoolMajor.active = true;
-                    this.jackpotPoolMinor.active = true;
-                    this.jackpotPoolMini.active = true;
-                    break;
-                case GameScene.Game_2:
-                case GameScene.Game_4:
-                    this.jackpotPoolMajor.active = false;
-                    this.jackpotPoolMinor.active = false;
-                    this.jackpotPoolMini.active = false;
-                    break;
-            }
+        switch (gameScene) {
+            case GameScene.Game_1:
+            case GameScene.Game_3:
+                this.jackpotPoolGrand.active = true;
+                this.jackpotPoolMajor.active = true;
+                this.jackpotPoolMinor.active = true;
+                this.jackpotPoolMini.active = true;
+                break;
+            case GameScene.Game_2:
+            case GameScene.Game_4:
+                this.jackpotPoolGrand.active = false;
+                this.jackpotPoolMajor.active = false;
+                this.jackpotPoolMinor.active = false;
+                this.jackpotPoolMini.active = false;
+                break;
         }
     }
     // 改用 Timeout 來實作滾動彩金池，避免 Turbo mode 引擎加速時，數值滾動太快
