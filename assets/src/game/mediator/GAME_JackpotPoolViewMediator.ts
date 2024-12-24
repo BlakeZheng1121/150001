@@ -179,10 +179,7 @@ export class GAME_JackpotPoolViewMediator extends BaseMediator<GAME_JackpotPoolV
                     newPoolInitValue.push(mulValue);
                     break;
                 case JackpotPoolValueType.DenomMultiplier:
-                    let bonusCredit = MathUtil.mul(
-                        this.gameDataProxy.initEventData.denomMultiplier[this.gameDataProxy.totalBetIdx],
-                        jpValue
-                    );
+                    let bonusCredit = MathUtil.mul(this.gameDataProxy.curDenomMultiplier, jpValue);
                     newPoolInitValue.push(this.gameDataProxy.convertCredit2Cash(bonusCredit));
                     break;
             }
