@@ -35,7 +35,7 @@
       }
     ],
     "_prefab": {
-      "__id__": 172
+      "__id__": 170
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -997,7 +997,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 0,
+      "y": 105,
       "z": 0
     },
     "_lrot": {
@@ -2165,10 +2165,10 @@
       "__id__": 159
     },
     "timelineSpine": {
-      "__id__": 166
+      "__id__": 164
     },
     "timelineTime": {
-      "__id__": 169
+      "__id__": 167
     }
   },
   {
@@ -2194,9 +2194,6 @@
       },
       {
         "__id__": 163
-      },
-      {
-        "__id__": 165
       }
     ]
   },
@@ -2241,43 +2238,6 @@
   {
     "__type__": "ParticleSetupData",
     "particle": {
-      "__id__": 164
-    },
-    "delayTime": 0,
-    "particleState": 0,
-    "isParticleLoop": false,
-    "initParticleColor": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "cycleTime": 0,
-    "clearParticleTime": 4
-  },
-  {
-    "__type__": "200e7cueHpF9oO/55msUhzu",
-    "_name": "",
-    "_objFlags": 0,
-    "node": null,
-    "_enabled": true,
-    "__prefab": null,
-    "IsLoop": false,
-    "InitColor": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "LoopOverTime": 0,
-    "ClearObjectTime": 4,
-    "_id": "37XVcCWeNDsYcPHsc2Skow"
-  },
-  {
-    "__type__": "ParticleSetupData",
-    "particle": {
       "__id__": 145
     },
     "delayTime": 0,
@@ -2309,10 +2269,10 @@
     "useAnim": false,
     "useParticle": false,
     "spineSetupData": {
-      "__id__": 167
+      "__id__": 165
     },
     "animSetupData": {
-      "__id__": 168
+      "__id__": 166
     },
     "particleData": []
   },
@@ -2343,10 +2303,10 @@
     "useAnim": false,
     "useParticle": false,
     "spineSetupData": {
-      "__id__": 170
+      "__id__": 168
     },
     "animSetupData": {
-      "__id__": 171
+      "__id__": 169
     },
     "particleData": []
   },
