@@ -3,7 +3,10 @@
     <head>
         <meta charset="utf-8" />
         <title>游戏说明</title>
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, viewport-fit=cover, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="full-screen" content="true" />
         <meta name="screen-orientation" content="portrait" />
@@ -381,9 +384,7 @@
                     <img src="./Mini_Icon_Mini.png" class="textImg" alt="" />
                     ，当获得三个相同的符号即可赢得该彩金并结算总奖金。
                 </li>
-                <li>
-                    <img src="./Mini_Icon_Grand.png" class="textImg" alt="" /> 为连机累进彩金。
-                </li>
+                <li><img src="./Mini_Icon_Grand.png" class="textImg" alt="" /> 为连机累进彩金。</li>
                 <li>
                     <img src="./Mini_Icon_Major.png" class="textImg" alt="" /> 、
                     <img src="./Mini_Icon_Minor.png" class="textImg" alt="" /> 和
@@ -564,7 +565,6 @@
 
         // dynamic payout
 
-
         const symbolPayoutArray = [
             // M1
             250, 80, 30,
@@ -579,7 +579,7 @@
             // M6
             50, 20, 10
         ];
-		let calPayoutCredit = (oddsData, totalBetData) => oddsData * totalBetData;
+        let calPayoutCredit = (oddsData, totalBetData) => oddsData * totalBetData;
 
         let symbolArraySpan = document.getElementsByClassName('payout-font');
         let updatePayout = function (totalBetData) {
@@ -609,5 +609,37 @@
 
         // requested to dynamic payout
         window.parent.postMessage(JSON.stringify({ name: 'getPayout', data: {} }), originUrl);
+
+        document.addEventListener(
+            'touchstart',
+            (event) => {
+                if (event.touches && event.touches.length > 1) {
+                    // 禁止多指觸控
+                    event.preventDefault();
+                }
+            },
+            { passive: false }
+        );
+
+        document.addEventListener(
+            'touchmove',
+            (event) => {
+                if (event.touches && event.touches.length > 1) {
+                    // 禁止多指觸控
+                    event.preventDefault();
+                }
+            },
+            { passive: false }
+        );
+
+        document.addEventListener('gesturestart', function (e) {
+            e.preventDefault();
+        });
+        document.addEventListener('gesturechange', function (e) {
+            e.preventDefault();
+        });
+        document.addEventListener('gestureend', function (e) {
+            e.preventDefault();
+        });
     </script>
 </html>

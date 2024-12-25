@@ -3,7 +3,10 @@
     <head>
         <meta charset="utf-8" />
         <title>游戏说明</title>
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, viewport-fit=cover, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="full-screen" content="true" />
         <meta name="screen-orientation" content="portrait" />
@@ -238,16 +241,12 @@
                     每个 <img src="./C1_small.png" class="textImg" alt="" />
                     上的分数将依据投注随机出现
                 </li>
-                <li>
-                    所有分数以投注倍数一倍显示
-                </li>
+                <li>所有分数以投注倍数一倍显示</li>
                 <li>
                     出现在 <img src="./C1_small.png" class="textImg" alt="" />
                     的值将随着玩家选择不同的投注倍数，而乘上相对的投注倍数。
                 </li>
-                <li>
-                    增加投注分数时，在基本游戏和免费游戏下只会出现以下符号。
-                </li>
+                <li>增加投注分数时，在基本游戏和免费游戏下只会出现以下符号。</li>
                 <li>
                     在基本游戏中，<span class="yellowText">6</span>个或<span class="yellowText">6</span>个以上的
                     <img src="./C1_small.png" class="textImg" alt="" /> 出现时，将触发特色选择。
@@ -568,7 +567,6 @@
 
         // dynamic payout
 
-
         const symbolPayoutArray = [
             // M1
             250, 80, 30,
@@ -583,7 +581,7 @@
             // M6
             50, 20, 10
         ];
-		let calPayoutCredit = (oddsData, totalBetData) => oddsData * totalBetData;
+        let calPayoutCredit = (oddsData, totalBetData) => oddsData * totalBetData;
 
         let symbolArraySpan = document.getElementsByClassName('payout-font');
         let updatePayout = function (totalBetData) {
@@ -613,5 +611,37 @@
 
         // requested to dynamic payout
         window.parent.postMessage(JSON.stringify({ name: 'getPayout', data: {} }), originUrl);
+
+        document.addEventListener(
+            'touchstart',
+            (event) => {
+                if (event.touches && event.touches.length > 1) {
+                    // 禁止多指觸控
+                    event.preventDefault();
+                }
+            },
+            { passive: false }
+        );
+
+        document.addEventListener(
+            'touchmove',
+            (event) => {
+                if (event.touches && event.touches.length > 1) {
+                    // 禁止多指觸控
+                    event.preventDefault();
+                }
+            },
+            { passive: false }
+        );
+
+        document.addEventListener('gesturestart', function (e) {
+            e.preventDefault();
+        });
+        document.addEventListener('gesturechange', function (e) {
+            e.preventDefault();
+        });
+        document.addEventListener('gestureend', function (e) {
+            e.preventDefault();
+        });
     </script>
 </html>

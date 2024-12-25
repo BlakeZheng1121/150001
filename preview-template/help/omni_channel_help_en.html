@@ -3,7 +3,10 @@
     <head>
         <meta charset="utf-8" />
         <title>Game Help</title>
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, viewport-fit=cover, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="full-screen" content="true" />
         <meta name="screen-orientation" content="portrait" />
@@ -236,18 +239,15 @@
                     <img src="./C1_small.png" class="textImg" /> appear in the BASE GAME.
                 </li>
                 <li>
-                    The credits on each <img src="./C1_small.png" class="textImg" /> appears randomly in accordance with the bet.
+                    The credits on each <img src="./C1_small.png" class="textImg" /> appears randomly in accordance with
+                    the bet.
                 </li>
-                <li>
-                    All credits show for bet multiplier 1x.
-                </li>
+                <li>All credits show for bet multiplier 1x.</li>
                 <li>
                     The winning is the values on the
                     <img src="./C1_small.png" class="textImg" /> multiplied by the bet multiplier.
                 </li>
-                <li>
-                    Below chart indicates the symbols appeared in the base game and free spins within each bet.
-                </li>
+                <li>Below chart indicates the symbols appeared in the base game and free spins within each bet.</li>
                 <li>
                     <span class="yellowText">6</span> or more <img src="./C1_small.png" class="textImg" /> will trigger
                     the FEATURE SELECTION in the BASE GAME.
@@ -312,10 +312,9 @@
                     reels.<br />
                     In RESPIN GAME FEATURE, the reels <span class="yellowText">2</span>,
                     <span class="yellowText">3</span> and <span class="yellowText">4</span> will respin once
-                    additionally.
-                    <img src="./Base_HorseExpanding.png" class="textImg" /> is a wild symbol and will become
-                    <img src="./Base_WildExpanding.png" class="textImg" /> when winning combination appears during
-                    RESPIN FEATURE.
+                    additionally. <img src="./Base_HorseExpanding.png" class="textImg" /> is a wild symbol and will
+                    become <img src="./Base_WildExpanding.png" class="textImg" /> when winning combination appears
+                    during RESPIN FEATURE.
                 </li>
             </ul>
             <hr class="solid" />
@@ -381,7 +380,8 @@
                 </li>
                 <li>
                     There are <span class="yellowText">12</span> <img src="./Mini_Icon_Choose.png" class="textImg" /> on
-                    the screen in the <img src="./en/GoldenTrophyLink_small.png" class="textImgByH" /> JACKPOT MINI GAME.
+                    the screen in the <img src="./en/GoldenTrophyLink_small.png" class="textImgByH" /> JACKPOT MINI
+                    GAME.
                 </li>
                 <li>
                     The
@@ -405,11 +405,12 @@
                 </li>
                 <li>
                     <img src="./Mini_Icon_Minor.png" class="textImg" /> and
-                    <img src="./Mini_Icon_Mini.png" class="textImg" /> are bonuses. 
-                    The bonuses will be changed due to different bet.
+                    <img src="./Mini_Icon_Mini.png" class="textImg" /> are bonuses. The bonuses will be changed due to
+                    different bet.
                 </li>
                 <li>
-                    The higher the bet, the higher the chances to trigger <img src="./en/GoldenTrophyLink_small.png" class="textImgByH" />
+                    The higher the bet, the higher the chances to trigger
+                    <img src="./en/GoldenTrophyLink_small.png" class="textImgByH" />
                     JACKPOT MINI GAME.
                 </li>
                 <li>
@@ -600,7 +601,7 @@
             // M6
             50, 15, 10
         ];
-		let calPayoutCredit = (oddsData, totalBetData) => oddsData * totalBetData;
+        let calPayoutCredit = (oddsData, totalBetData) => oddsData * totalBetData;
 
         let symbolArraySpan = document.getElementsByClassName('payout-font');
         let updatePayout = function (totalBetData) {
@@ -630,5 +631,37 @@
 
         // requested to dynamic payout
         window.parent.postMessage(JSON.stringify({ name: 'getPayout', data: {} }), originUrl);
+
+        document.addEventListener(
+            'touchstart',
+            (event) => {
+                if (event.touches && event.touches.length > 1) {
+                    // 禁止多指觸控
+                    event.preventDefault();
+                }
+            },
+            { passive: false }
+        );
+
+        document.addEventListener(
+            'touchmove',
+            (event) => {
+                if (event.touches && event.touches.length > 1) {
+                    // 禁止多指觸控
+                    event.preventDefault();
+                }
+            },
+            { passive: false }
+        );
+
+        document.addEventListener('gesturestart', function (e) {
+            e.preventDefault();
+        });
+        document.addEventListener('gesturechange', function (e) {
+            e.preventDefault();
+        });
+        document.addEventListener('gestureend', function (e) {
+            e.preventDefault();
+        });
     </script>
 </html>
