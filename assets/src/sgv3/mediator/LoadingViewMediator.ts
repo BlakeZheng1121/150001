@@ -56,7 +56,8 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
         Logger.i('LoadingViewMediator initial done');
 
         GTMUtil.setGTMEvent('Visible', {
-            Member_ID: this.netProxy.getConfig().userName,
+            Member_ID: this.gameDataProxy.userId,
+            Game_ID: this.gameDataProxy.machineType,
             DateTime: Date.now(),
         });
     }
@@ -168,7 +169,8 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
     /** 因為一開始的loading畫面，如果沒有delay會看到loading bar未載完就進入遊戲的狀況 */
     protected delayEnterLobby(): void {
         GTMUtil.setGTMEvent('EnterGame', {
-            Member_ID: this.netProxy.getConfig().userName,
+            Member_ID: this.gameDataProxy.userId,
+            Game_ID: this.gameDataProxy.machineType,
             DateTime: Date.now(),
         });
 
@@ -194,7 +196,8 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
             this.sendNotification(CoreDefaultSettingCommand.NAME);
         } else {
             GTMUtil.setGTMEvent('StartLoading', {
-                Member_ID: this.netProxy.getConfig().userName,
+                Member_ID: this.gameDataProxy.userId,
+                Game_ID: this.gameDataProxy.machineType,
                 DateTime: Date.now(),
             });
 
@@ -402,7 +405,8 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
         AudioManager.Instance.loadAudio();
 
         GTMUtil.setGTMEvent('LoadComplete', {
-            Member_ID: this.netProxy.getConfig().userName,
+            Member_ID: this.gameDataProxy.userId,
+            Game_ID: this.gameDataProxy.machineType,
             DateTime: Date.now(),
         });
     }
