@@ -12,6 +12,7 @@ import { StateMachineProxy } from '../../proxy/StateMachineProxy';
 import { MathUtil } from '../../../core/utils/MathUtil';
 import { GameSceneOption } from '../../vo/data/GameScene';
 import { UIEvent } from 'common-ui/proxy/UIEvent';
+import { GTMUtil } from 'src/core/utils/GTMUtil';
 
 /**
  * 接收到Server打過來的資料後進行處理
@@ -74,6 +75,8 @@ export class SpinResponseCommand extends puremvc.SimpleCommand {
         self.sendNotification(ByGameHandleCommand.NAME);
         // 開始解析資料
         self.sendNotification(CheckGameFlowCommand.NAME);
+
+        this.sentGTMEvent(notifyObj);
     }
 
     protected setEndGameStateId(stateId: number): void {
@@ -92,6 +95,59 @@ export class SpinResponseCommand extends puremvc.SimpleCommand {
                 }
             }
         }
+    }
+
+    protected sentGTMEvent(notifyObj: SpinGSResult) {
+        if (!this.gameDataProxy.isFirstSpin) {
+            GTMUtil.setGTMEvent('FirstSpin', {
+                Member_ID: this.gameDataProxy.userId,
+                Game_ID: this.gameDataProxy.machineType,
+                DateTime: Date.now(),
+            });
+            this.gameDataProxy.isFirstSpin = true;
+        }
+
+        let jp_Type = [];
+        if (notifyObj.spinResult.bonusGameResult) {
+            for (let i = 0; i < notifyObj.spinResult.bonusGameResult.bonusGameOneRoundResult.length; i++) {
+                jp_Type.push(notifyObj.spinResult.bonusGameResult.bonusGameOneRoundResult[i].hitPool);
+            }
+        }
+
+        let freeGameType = '0';
+        if (notifyObj.spinResult.freeGameResult) {
+            const specialHitInfo = notifyObj.spinResult.freeGameResult.freeGameOneRoundResult[0]?.specialHitInfo;
+            switch (specialHitInfo) {
+                case 'freeGame_01':
+                    freeGameType = '1';
+                    break;
+                case 'freeGame_02':
+                    freeGameType = '2';
+                    break;
+                case 'freeGame_03':
+                    freeGameType = '3';
+                    break;
+            }
+        }
+        
+        if (notifyObj.spinResult.topUpGameResult) {
+            freeGameType = '4';
+        }
+
+        GTMUtil.setGTMEvent('SpinResponse', {
+            GameSeqNo: notifyObj.gameSeq,
+            Bet_Type: '0',
+            Bet_Multiplier: this.gameDataProxy.curBet,
+            Feature_Bet: this._gameDataProxy.isOmniChannel() ? this.gameDataProxy.curFeatureBet : '1',
+            OmniDenom: this._gameDataProxy.isOmniChannel() ? this.gameDataProxy.curDenomMultiplier : '1',
+            BaseGame_Win: notifyObj.spinResult.baseGameResult.baseGameTotalWin,
+            FreeGame_Win: notifyObj.spinResult.freeGameResult ? notifyObj.spinResult.freeGameResult.freeGameTotalWin : '0',
+            FreeGame_Type: freeGameType,
+            FreeGame_Spin: notifyObj.spinResult.freeGameResult ? notifyObj.spinResult.freeGameResult.totalRound : '0',
+            FeatureGame_Win: notifyObj.spinResult.topUpGameResult ? notifyObj.spinResult.topUpGameResult.topUpGameTotalWin : '0',
+            JP_Type: jp_Type,
+            SpinSpeedMode: this.gameDataProxy.curSpeedMode,
+        });
     }
     // ======================== Get Set ========================
 

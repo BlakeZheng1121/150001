@@ -930,6 +930,15 @@ export class GameDataProxy extends CoreGameDataProxy {
         this._gameData.onFreePlay = _val;
     }
 
+    //紀錄是否為初次Spin
+    private _isFirstSpin: boolean = false;
+    public get isFirstSpin(): boolean {
+        return this._isFirstSpin;
+    }
+    public set isFirstSpin(_val: boolean) {
+        this._isFirstSpin = _val;
+    }
+
     protected _networkProxy: NetworkProxy;
     protected get networkProxy(): NetworkProxy {
         if (!this._networkProxy) {

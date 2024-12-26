@@ -6,6 +6,7 @@ import { IGameConfig } from '../vo/IGameConfig';
 import { GameDataProxy } from '../../sgv3/proxy/GameDataProxy';
 import { CoreWebBridgeProxy } from '../proxy/CoreWebBridgeProxy';
 import { StateMachineProxy } from '../../sgv3/proxy/StateMachineProxy';
+import { GTMUtil } from '../utils/GTMUtil';
 
 export class SFReconnectCommand extends puremvc.SimpleCommand {
     public static readonly NAME: string = 'EV_RECONNECT';
@@ -59,6 +60,12 @@ export class SFReconnectCommand extends puremvc.SimpleCommand {
                 self.countdownDisconnect();
                 self.sendGetTicketRequest();
                 self.registeringGetTicketRequest();
+
+                GTMUtil.setGTMEvent('Reconnect', {
+                    Member_ID: self.gameDataProxy.userId,
+                    Game_ID: self.gameDataProxy.machineType,
+                    DateTime: Date.now(),
+                });
             } else {
                 self.sendNotification(CoreSFDisconnectionCommand.NAME, self.notification);
             }

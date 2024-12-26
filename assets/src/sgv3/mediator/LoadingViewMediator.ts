@@ -16,6 +16,7 @@ import { GameProxyEvent } from '../vo/event/GameProxyEvent';
 import { LoadEvent } from '../vo/event/LoadEvent';
 import { PendingEvent } from '../vo/event/PendingEvent';
 import { KibanaLog, LogType } from '../vo/log/KibanaLog';
+import { GTMUtil } from '../../core/utils/GTMUtil';
 const { ccclass } = _decorator;
 
 @ccclass('LoadingViewMediator')
@@ -53,9 +54,14 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
 
     public onRegister(): void {
         Logger.i('LoadingViewMediator initial done');
+
+        GTMUtil.setGTMEvent('Visible', {
+            Member_ID: this.netProxy.getConfig().userName,
+            DateTime: Date.now(),
+        });
     }
 
-    protected lazyEventListener(): void {}
+    protected lazyEventListener(): void { }
 
     public listNotificationInterests(): Array<any> {
         return [
@@ -161,6 +167,11 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
 
     /** 因為一開始的loading畫面，如果沒有delay會看到loading bar未載完就進入遊戲的狀況 */
     protected delayEnterLobby(): void {
+        GTMUtil.setGTMEvent('EnterGame', {
+            Member_ID: this.netProxy.getConfig().userName,
+            DateTime: Date.now(),
+        });
+
         //進行 Recovery流程
         this.sendNotification(CheckRecoveryFlowCommand.NAME);
 
@@ -182,6 +193,11 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
             this.gameDataProxy.isMaintaining = false;
             this.sendNotification(CoreDefaultSettingCommand.NAME);
         } else {
+            GTMUtil.setGTMEvent('StartLoading', {
+                Member_ID: this.netProxy.getConfig().userName,
+                DateTime: Date.now(),
+            });
+
             this.headGroup = this.baseLoadList;
             this.downloadBundle('preload')
                 .then(() => this.downloadBundle('scenes'))
@@ -219,8 +235,8 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
                 sceneName,
                 setProgress
                     ? (completedCount, totalCount) => {
-                          this.onLoadSceneProgress(completedCount, totalCount);
-                      }
+                        this.onLoadSceneProgress(completedCount, totalCount);
+                    }
                     : null,
                 (error) => {
                     if (!error) {
@@ -249,7 +265,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
                         groupList.shift();
                         this.wait(obj, 100);
                     })
-                    .catch((error) => {});
+                    .catch((error) => { });
             } else if (assetName == 'common-ui') {
                 await this.loadPrefab('common-ui', 'ControlPanel')
                     .then((prefab) => this.instantiatePrefab(prefab))
@@ -257,7 +273,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
                         groupList.shift();
                         this.wait(obj, 100);
                     })
-                    .catch((error) => {});
+                    .catch((error) => { });
             } else if (assetName == 'bbw') {
                 await this.loadPrefab('common-ui', 'BBWView')
                     .then((prefab) => this.instantiatePrefab(prefab))
@@ -265,7 +281,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
                         groupList.shift();
                         this.wait(obj, 100);
                     })
-                    .catch((error) => {});
+                    .catch((error) => { });
             } else if (assetName == 'betMenu') {
                 const prefabName = this.gameDataProxy.isOmniChannel() ? 'OmniBetMenuView' : 'BetMenuView';
                 await this.loadPrefab('common-ui', prefabName)
@@ -274,7 +290,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
                         groupList.shift();
                         this.wait(obj, 100);
                     })
-                    .catch((error) => {});
+                    .catch((error) => { });
             } else if (assetName == 'feature-bet') {
                 if (this.gameDataProxy.isOmniChannel()) {
                     await this.loadPrefab('feature-bet', 'FeatureBetView')
@@ -283,7 +299,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
                             groupList.shift();
                             this.wait(obj, 100);
                         })
-                        .catch((error) => {});
+                        .catch((error) => { });
                 } else {
                     groupList.shift();
                     this.finishedAssetsNum++;
@@ -313,7 +329,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
                         groupList.shift();
                         this.wait(obj, 100);
                     })
-                    .catch((error) => {});
+                    .catch((error) => { });
             }
         }
 
@@ -384,6 +400,11 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
         self.sendNotification(self.gameDataProxy.orientationEvent);
         this.webBridgeProxy.notifyGameReady();
         AudioManager.Instance.loadAudio();
+
+        GTMUtil.setGTMEvent('LoadComplete', {
+            Member_ID: this.netProxy.getConfig().userName,
+            DateTime: Date.now(),
+        });
     }
 
     /** 觸發 pendloading */

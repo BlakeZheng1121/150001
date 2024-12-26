@@ -15,6 +15,7 @@ import { SFSErrorMsgByCodeCommand } from './SFSErrorMsgByCodeCommand';
 import { SFConnectionCommand } from './SFConnectionCommand';
 import { SentryTool } from '../utils/SentryTool';
 import { GoogleAnalyticsUtil } from '../utils/GoogleAnalyticsUtil';
+import { GTMUtil } from '../utils/GTMUtil';
 
 export class SetupSFSConfigCommand extends puremvc.SimpleCommand {
     public static readonly NAME: string = 'SetupSFSConfigCommand';
@@ -27,6 +28,12 @@ export class SetupSFSConfigCommand extends puremvc.SimpleCommand {
             this.setupGameDataProxy(ticket);
             this.setupProxy(this.config, ticket);
             this.registerCommand();
+            GTMUtil.registerGTM('GTM-53Z8F4BH');
+            GTMUtil.setGTMEvent('GAInit', {
+                Member_ID: this.gameDataProxy.userId,
+                Game_ID: this.gameDataProxy.machineType,
+                DateTime: Date.now(),
+            });
         } else {
             this.getTicketRequest();
         }
@@ -46,9 +53,16 @@ export class SetupSFSConfigCommand extends puremvc.SimpleCommand {
             if (this.gameDataProxy.isDemoGame === false) {
                 if (!['https://gamedev.jigaming.com.tw', 'https://gamesit.jigaming.com.tw'].includes(e.origin)) {
                     GoogleAnalyticsUtil.registerGA(this.gameDataProxy.userId);
+                    GTMUtil.registerGTM('GTM-T2XTCNK9');
                 } else {
                     GoogleAnalyticsUtil.registerGAForTest(this.gameDataProxy.userId);
                 }
+
+                GTMUtil.setGTMEvent('GAInit', {
+                    Member_ID: this.gameDataProxy.userId,
+                    Game_ID: this.gameDataProxy.machineType,
+                    DateTime: Date.now(),
+                });
             }
         }
     }

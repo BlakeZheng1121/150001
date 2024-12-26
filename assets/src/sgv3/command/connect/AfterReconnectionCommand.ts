@@ -4,6 +4,7 @@ import { SpinRequestCommand } from '../spin/SpinRequestCommand';
 import { CoreWebBridgeProxy } from '../../../core/proxy/CoreWebBridgeProxy';
 import { GameDataProxy } from '../../proxy/GameDataProxy';
 import { NetworkProxy } from '../../../core/proxy/NetworkProxy';
+import { GTMUtil } from 'src/core/utils/GTMUtil';
 
 /**
  * 在Reconnect結束後恢復連線時, 當下狀態判斷進行處理的Commond
@@ -22,6 +23,12 @@ export class AfterReconnectionCommand extends puremvc.SimpleCommand {
         if (this.gameDataProxy.isSpinning) {
             this.sendNotification(SpinRequestCommand.NAME);
         }
+
+        GTMUtil.setGTMEvent('AfterReconnection', {
+            Member_ID: this.gameDataProxy.userId,
+            Game_ID: this.gameDataProxy.machineType,
+            DateTime: Date.now(),
+        });
     }
 
     // ======================== Get Set ========================
