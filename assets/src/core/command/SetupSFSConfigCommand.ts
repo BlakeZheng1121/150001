@@ -28,12 +28,6 @@ export class SetupSFSConfigCommand extends puremvc.SimpleCommand {
             this.setupGameDataProxy(ticket);
             this.setupProxy(this.config, ticket);
             this.registerCommand();
-            GTMUtil.registerGTM('GTM-53Z8F4BH');
-            GTMUtil.setGTMEvent('GAInit', {
-                Member_ID: this.gameDataProxy.userId,
-                Game_ID: this.gameDataProxy.machineType,
-                DateTime: Date.now(),
-            });
         } else {
             this.getTicketRequest();
         }
