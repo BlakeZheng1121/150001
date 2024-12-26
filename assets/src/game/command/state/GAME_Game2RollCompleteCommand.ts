@@ -98,7 +98,7 @@ export class GAME_Game2RollCompleteCommand extends WAY_Game2RollCompleteCommand 
                         sideCreditBall[i][j] = this.gameDataProxy.getCreditByDenomMultiplier(sideCreditBall[i][j]);
                     }
                 }
-                sideCreditBallPos[i].push(this.reelDataProxy.getFovPos(i, j));
+                sideCreditBallPos[i].push(this.reelDataProxy.getFovLocalPos(i, j));
             }
         }
 

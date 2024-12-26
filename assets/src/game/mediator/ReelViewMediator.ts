@@ -299,6 +299,7 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
         switch (this.view.mySceneName) {
             case GameScene.Game_1:
                 for (let i = 0; i < this.reelView.reelsList.length; i++) {
+                    this.reelDataProxy.reelsPos[i] = this.reelView.reelsList[i].node.position;
                     let content = this.reelView.reelsList[i].singleReelContent as SingleReelContent;
                     let baseExtendSetting =
                         this.gameDataProxy.initEventData.executeSetting.baseGameSetting.baseGameExtendSetting;

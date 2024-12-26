@@ -18,6 +18,8 @@ export class ReelDataProxy extends puremvc.Proxy {
     public runtimeStrip: number[][] = []; // Runtime Strip, 專門用來讓滾動的滾輪做效果使用
     public isSlowMotionAry: boolean[] = []; // 滾輪瞇牌資訊
     public reelState: ReelState = ReelState.None;
+    
+    public reelsPos: Vec3[] = []; // 滾輪位置
 
     protected symbolsNode: Array<Array<Node>> = []; //Symbol上 Node資料
     protected reelTable: WheelData[] = [];
@@ -99,6 +101,18 @@ export class ReelDataProxy extends puremvc.Proxy {
             symbols.sort(this.positionCompare);
         });
         return this.symbolsNode[reelIndex][fovIndex + 1].getComponent(UISymbol).getSymbolPosWithType(partType);
+    }
+
+    // 取得滾輪框內的Symbol位置，可指定Symbol特定部位的"本地"位置
+    public getFovLocalPos(reelIndex: number, fovIndex: number, partType?: SymbolPartType): Vec3 {
+        this.symbolsNode.forEach((symbols) => {
+            symbols.sort(this.positionCompare);
+        });
+        
+        // 這邊這麼做是因為，表演時手機瘋狂旋轉會導致位置錯誤，所以要取得本地位置，並且拿到輪帶本身的X軸位置，去補正本地位置X=0的問題
+        var pos = this.symbolsNode[reelIndex][fovIndex + 1].getComponent(UISymbol).getSymbolLocalPosWithType(partType);
+        pos = new Vec3(this.reelsPos[reelIndex].x, pos.y, pos.z);
+        return pos;
     }
 
     public setSymbolsNode(symbols: Array<Array<Node>>) {

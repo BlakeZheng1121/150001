@@ -34,6 +34,14 @@ export class UISymbol extends UIViewBase {
         if (this.symbolContent.parts.get(type)) return this.symbolContent.parts.get(type).node.worldPosition;
         else return this.node.worldPosition;
     }
+
+    public getSymbolLocalPosWithType(type: SymbolPartType) {
+        if (this.symbolContent.parts.get(type)) {
+            return this.symbolContent.parts.get(type).node.position;
+        } else {
+            return this.node.position;
+        }
+    }
     ////
 
     //// API

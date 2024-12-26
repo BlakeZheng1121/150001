@@ -165,7 +165,7 @@ export class FreeC1SubOnPerform extends Component {
                 if (sideCredit[i][j] > 0) {
                     let c1 = PoolManager.instance.getNode(this.c1SubOn, this.node);
 
-                    c1.setWorldPosition(symbolFeature[i][j]);
+                    c1.setPosition(symbolFeature[i][j]);
                     c1.getComponentsInChildren(ParticleContentTool).forEach((element) => {
                         element.ParticleClear();
                     });
