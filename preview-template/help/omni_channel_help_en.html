@@ -624,7 +624,7 @@
                 });
             } else {
                 Array.prototype.forEach.call(symbolArraySpan, function (el) {
-                    el.textContent = calPayoutCredit(symbolPayoutArray.shift(), totalBetData).toFixed(2);
+                    el.textContent = calPayoutCredit(symbolPayoutArray.shift(), totalBetData);
                 });
             }
         };

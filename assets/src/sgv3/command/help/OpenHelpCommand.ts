@@ -19,7 +19,7 @@ export class OpenHelpCommand extends puremvc.SimpleCommand {
         this.webBridgeProxy.openHelp(
             JSON.stringify({
                 lang: this.gameDataProxy.language,
-                bet: this.gameDataProxy.convertCredit2Cash(this.gameDataProxy.curBet),
+                bet: this.gameDataProxy.isOmniChannel() ? this.gameDataProxy.curBet : this.gameDataProxy.convertCredit2Cash(this.gameDataProxy.curBet),
                 gameVer: this.gameDataProxy.gameVer,
                 versionName: this.getVersionName(),
                 decimalPlace: MathUtil.decimalPlace
