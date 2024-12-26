@@ -5,9 +5,6 @@ export const languages = {
     loading: 'LOADING ANOTHER SCENE ASSETS...',
     quickSpinEnabled: 'Quick Spin Enabled',
     quickSpinDisabled: 'Quick Spin Disabled',
-    balance: 'BALANCE',
-    win: 'WIN',
-    bet: 'TOTAL BET',
     autospin: 'AUTO SPIN',
     autospinnumber: 'Number of Auto Spin',
     betoption: 'BET OPTIONS',
@@ -17,10 +14,9 @@ export const languages = {
     rules: 'Rules',
     sound: 'Sound',
     close: 'Close',
-    denomTitleInBetMenu: 'DENOMINATION',
     betTitleInBetMenu: 'BET',
-    totalBetInBetMenu: 'TOTAL BET',
-    confirm: 'CONFIRM'
+    totalBetInBetMenu: 'TOTAL BET : ',
+    confirm: 'CONFIRM',
 };
 
 if (!win.languages) {
