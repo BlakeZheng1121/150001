@@ -50,6 +50,7 @@ export class SetupSFSConfigCommand extends puremvc.SimpleCommand {
                     GTMUtil.registerGTM('GTM-T2XTCNK9');
                 } else {
                     GoogleAnalyticsUtil.registerGAForTest(this.gameDataProxy.userId);
+                    GTMUtil.registerGTM('GTM-53Z8F4BH');
                 }
 
                 GTMUtil.setGTMEvent('GAInit', {
