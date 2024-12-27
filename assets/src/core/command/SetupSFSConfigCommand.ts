@@ -14,7 +14,6 @@ import { LoadEvent } from '../../sgv3/vo/event/LoadEvent';
 import { SFSErrorMsgByCodeCommand } from './SFSErrorMsgByCodeCommand';
 import { SFConnectionCommand } from './SFConnectionCommand';
 import { SentryTool } from '../utils/SentryTool';
-import { GoogleAnalyticsUtil } from '../utils/GoogleAnalyticsUtil';
 import { GTMUtil } from '../utils/GTMUtil';
 
 export class SetupSFSConfigCommand extends puremvc.SimpleCommand {
@@ -46,10 +45,8 @@ export class SetupSFSConfigCommand extends puremvc.SimpleCommand {
             // 註冊GA
             if (this.gameDataProxy.isDemoGame === false) {
                 if (!['https://gamedev.jigaming.com.tw', 'https://gamesit.jigaming.com.tw'].includes(e.origin)) {
-                    GoogleAnalyticsUtil.registerGA(this.gameDataProxy.userId);
                     GTMUtil.registerGTM('GTM-T2XTCNK9');
                 } else {
-                    GoogleAnalyticsUtil.registerGAForTest(this.gameDataProxy.userId);
                     GTMUtil.registerGTM('GTM-53Z8F4BH');
                 }
 
