@@ -110,11 +110,13 @@ export class SpinResponseCommand extends puremvc.SimpleCommand {
         let jp_Type = [];
         if (notifyObj.spinResult.bonusGameResult) {
             for (let i = 0; i < notifyObj.spinResult.bonusGameResult.bonusGameOneRoundResult.length; i++) {
-                jp_Type.push(notifyObj.spinResult.bonusGameResult.bonusGameOneRoundResult[i].hitPool);
+                jp_Type.push(...notifyObj.spinResult.bonusGameResult.bonusGameOneRoundResult[i].hitPool);
             }
         }
 
         let freeGameType = '0';
+        let freeGameWin = 0;
+        let freeGameSpin = 0;
         if (notifyObj.spinResult.freeGameResult) {
             const specialHitInfo = notifyObj.spinResult.freeGameResult.freeGameOneRoundResult[0]?.specialHitInfo;
             switch (specialHitInfo) {
@@ -128,10 +130,16 @@ export class SpinResponseCommand extends puremvc.SimpleCommand {
                     freeGameType = '3';
                     break;
             }
+
+            freeGameWin = notifyObj.spinResult.freeGameResult.freeGameTotalWin;
+            freeGameSpin = notifyObj.spinResult.freeGameResult.totalRound;
         }
         
         if (notifyObj.spinResult.topUpGameResult) {
             freeGameType = '4';
+
+            freeGameWin = notifyObj.spinResult.topUpGameResult.topUpGameTotalWin;
+            freeGameSpin = notifyObj.spinResult.topUpGameResult.totalRound;
         }
 
         GTMUtil.setGTMEvent('SpinResponse', {
@@ -141,10 +149,10 @@ export class SpinResponseCommand extends puremvc.SimpleCommand {
             Feature_Bet: this._gameDataProxy.isOmniChannel() ? this.gameDataProxy.curFeatureBet : '1',
             OmniDenom: this._gameDataProxy.isOmniChannel() ? this.gameDataProxy.curDenomMultiplier : '1',
             BaseGame_Win: notifyObj.spinResult.baseGameResult.baseGameTotalWin,
-            FreeGame_Win: notifyObj.spinResult.freeGameResult ? notifyObj.spinResult.freeGameResult.freeGameTotalWin : '0',
+            FreeGame_Win: freeGameWin,
             FreeGame_Type: freeGameType,
-            FreeGame_Spin: notifyObj.spinResult.freeGameResult ? notifyObj.spinResult.freeGameResult.totalRound : '0',
-            FeatureGame_Win: notifyObj.spinResult.topUpGameResult ? notifyObj.spinResult.topUpGameResult.topUpGameTotalWin : '0',
+            FreeGame_Spin: freeGameSpin,
+            FeatureGame_Win: '0',
             JP_Type: jp_Type,
             SpinSpeedMode: this.gameDataProxy.curSpeedMode,
         });
