@@ -54,6 +54,7 @@ export class SetupSFSConfigCommand extends puremvc.SimpleCommand {
                     Member_ID: this.gameDataProxy.userId,
                     Game_ID: this.gameDataProxy.machineType,
                     DateTime: Date.now(),
+                    Session_ID: self.gameDataProxy.sessionId,
                 });
             }
         }

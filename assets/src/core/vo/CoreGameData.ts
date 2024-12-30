@@ -137,4 +137,6 @@ export class CoreGameData {
 
     /** ProviderLogo url for SpinBtn */
     public providerLogoUrl: string;
+
+    public sessionId: string;
 }

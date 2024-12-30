@@ -106,6 +106,7 @@ export class SetupGameConfigCommand extends puremvc.SimpleCommand {
         gameDataProxy.useDollarSign = userInfo['useDollarSign'];
         gameDataProxy.dollarSign = userInfo['currencySymbol'];
         gameDataProxy.dollarCurrency = userInfo['currencySystemName'];
+        gameDataProxy.sessionId = userInfo['sessionId'];
         //BalanceUtil.dollarSign = gameDataProxy.useDollarSign ? gameDataProxy.dollarSign : '';
         BalanceUtil.dollarSign = gameDataProxy.dollarCurrency;
         this.sendNotification(SceneEvent.LOAD_USER_INFO_COMPLETE);

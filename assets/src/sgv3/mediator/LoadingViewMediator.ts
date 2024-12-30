@@ -59,6 +59,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
             Member_ID: this.gameDataProxy.userId,
             Game_ID: this.gameDataProxy.machineType,
             DateTime: Date.now(),
+            Session_ID: this.gameDataProxy.sessionId,
         });
     }
 
@@ -172,6 +173,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
             Member_ID: this.gameDataProxy.userId,
             Game_ID: this.gameDataProxy.machineType,
             DateTime: Date.now(),
+            Session_ID: this.gameDataProxy.sessionId,
         });
 
         //進行 Recovery流程
@@ -199,6 +201,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
                 Member_ID: this.gameDataProxy.userId,
                 Game_ID: this.gameDataProxy.machineType,
                 DateTime: Date.now(),
+                Session_ID: this.gameDataProxy.sessionId,
             });
 
             this.headGroup = this.baseLoadList;
@@ -408,6 +411,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
             Member_ID: this.gameDataProxy.userId,
             Game_ID: this.gameDataProxy.machineType,
             DateTime: Date.now(),
+            Session_ID: this.gameDataProxy.sessionId,
         });
     }
 

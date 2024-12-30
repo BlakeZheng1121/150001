@@ -103,6 +103,7 @@ export class SpinResponseCommand extends puremvc.SimpleCommand {
                 Member_ID: this.gameDataProxy.userId,
                 Game_ID: this.gameDataProxy.machineType,
                 DateTime: Date.now(),
+                Session_ID: this.gameDataProxy.sessionId,
             });
             this.gameDataProxy.isFirstSpin = true;
         }
@@ -155,6 +156,7 @@ export class SpinResponseCommand extends puremvc.SimpleCommand {
             FeatureGame_Win: '0',
             JP_Type: jp_Type,
             SpinSpeedMode: this.gameDataProxy.curSpeedMode,
+            Session_ID: this.gameDataProxy.sessionId,
         });
     }
     // ======================== Get Set ========================

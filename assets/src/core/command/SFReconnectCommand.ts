@@ -65,6 +65,7 @@ export class SFReconnectCommand extends puremvc.SimpleCommand {
                     Member_ID: self.gameDataProxy.userId,
                     Game_ID: self.gameDataProxy.machineType,
                     DateTime: Date.now(),
+                    Session_ID: self.gameDataProxy.sessionId,
                 });
             } else {
                 self.sendNotification(CoreSFDisconnectionCommand.NAME, self.notification);

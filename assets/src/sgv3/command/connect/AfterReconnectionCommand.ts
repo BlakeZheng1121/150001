@@ -28,6 +28,7 @@ export class AfterReconnectionCommand extends puremvc.SimpleCommand {
             Member_ID: this.gameDataProxy.userId,
             Game_ID: this.gameDataProxy.machineType,
             DateTime: Date.now(),
+            Session_ID: this.gameDataProxy.sessionId,
         });
     }
 

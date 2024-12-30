@@ -251,4 +251,11 @@ export class CoreGameDataProxy extends puremvc.Proxy {
     public set providerLogoUrl(_val) {
         this.gameData.providerLogoUrl = _val;
     }
+
+    public get sessionId() {
+        return this.gameData.sessionId;
+    }
+    public set sessionId(_val) {
+        this.gameData.sessionId = _val;
+    }
 }
