@@ -29,7 +29,7 @@ export class LastSymbolFeatureCommand extends puremvc.SimpleCommand {
     private handleOmniChannel(seatInfo: SeatInfo) {
         const tempDenomMultiplier = this.gameDataProxy.curDenomMultiplier;
         const tempFeatureBet = this.gameDataProxy.curFeatureBet;
-        this.gameDataProxy.curDenomMultiplier = seatInfo.denomMultiplier;
+        this.gameDataProxy.curDenomMultiplier = this.gameDataProxy.convertCredit2Cash(seatInfo.denomMultiplier);
         this.gameDataProxy.curFeatureBet = this.gameDataProxy.initEventData.featureBetList[seatInfo.featureIdx];
         this.sendNotification(ReelEffect_SymbolFeatureCommand.NAME, this.ballScreenLabel);
         this.gameDataProxy.curDenomMultiplier = tempDenomMultiplier;

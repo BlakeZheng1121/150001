@@ -80,21 +80,12 @@ export abstract class CoreDefaultSettingCommand extends puremvc.SimpleCommand {
 
         if (this.gameDataProxy.userSetting) {
             // 使用玩家上次使用的押注設定
-            this.gameDataProxy.curDenom = MathUtil.mul(+this.gameDataProxy.userSetting.denom, 0.001);
             _defaultIdx = this.setBetAndLine(_defaultIdx); // 該值會隨line or way調整
         }
-
-        // 確認是否有該 押注設定
-        if (!this.gameDataProxy.totalBetList[_defaultIdx]) {
-            _defaultIdx = 0;
-        }
-
-        this.gameDataProxy.totalBetIdx = _defaultIdx;
-
-        // 初始化遊戲押注設定
-        const curBet = this.gameDataProxy.totalBetList[_defaultIdx];
+        this.gameDataProxy.curDenom = MathUtil.mul(this.gameDataProxy.initEventData.denoms[0], 0.001);
 
         if (this.gameDataProxy.isOmniChannel()) {
+            this.convertDenomMultiplier();
             this.checkBetInfo();
             this.gameDataProxy.resetBetInfo(
                 this.gameDataProxy.curTotalBet,
@@ -103,6 +94,13 @@ export abstract class CoreDefaultSettingCommand extends puremvc.SimpleCommand {
                 this.gameDataProxy.curFeatureBet
             );
         } else {
+            // 確認是否有該 押注設定
+            if (!this.gameDataProxy.totalBetList[_defaultIdx]) {
+                _defaultIdx = 0;
+            }
+            this.gameDataProxy.totalBetIdx = _defaultIdx;
+            // 初始化遊戲押注設定
+            const curBet = this.gameDataProxy.totalBetList[_defaultIdx];
             this.gameDataProxy.resetBetInfo(curBet);
         }
 
@@ -129,13 +127,20 @@ export abstract class CoreDefaultSettingCommand extends puremvc.SimpleCommand {
      * 設定totalbetList
      */
     protected setTotalBetList() {}
-    
+
     /**
      * 設定gamedataproxy betline and bet
      */
     protected abstract setBetAndLine(_val: number): number;
 
     protected abstract checkBetInfo(): void;
+
+    protected convertDenomMultiplier() {
+        let denomMultiplier = this.gameDataProxy.initEventData.denomMultiplier;
+        for (let i = 0; i < denomMultiplier.length; i++) {
+            denomMultiplier[i] = this.gameDataProxy.convertCredit2Cash(denomMultiplier[i]);
+        }
+    }
 
     // ======================== Get Set ========================
     protected _webBridgeProxy: WebBridgeProxy;

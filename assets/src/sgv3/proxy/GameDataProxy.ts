@@ -790,7 +790,6 @@ export class GameDataProxy extends CoreGameDataProxy {
      */
     public resetBetInfo(_value: number, _denomMultiplier?: number, _betMultiplier?: number, _featureBet?: number): any {
         let _exist: boolean = false;
-        this.curDenom = MathUtil.mul(this.initEventData.denoms[0], 0.001);
         // maxBetLine > 0 代表是 Line Game，否則是 Way Game
         // Line Game curLine 固定為 maxBetLine，Way Game curLine 固定為 screenColumn
         const maxBetLine = this.initEventData.executeSetting.baseGameSetting.maxBetLine;
