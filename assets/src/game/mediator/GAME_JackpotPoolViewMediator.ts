@@ -143,7 +143,7 @@ export class GAME_JackpotPoolViewMediator extends BaseMediator<GAME_JackpotPoolV
             switch (jpType) {
                 case JackpotPoolValueType.DenomMultiplier:
                     let bonusCredit = MathUtil.mul(denomMultiplier, jpValue);
-                    this.view.updateBonusPoolByBetRange(i, this.gameDataProxy.convertCredit2Cash(bonusCredit));
+                    this.view.updateBonusPoolByBetRange(i, bonusCredit);
                     poolFxList.push(i);
                     break;
             }
@@ -180,7 +180,7 @@ export class GAME_JackpotPoolViewMediator extends BaseMediator<GAME_JackpotPoolV
                     break;
                 case JackpotPoolValueType.DenomMultiplier:
                     let bonusCredit = MathUtil.mul(this.gameDataProxy.curDenomMultiplier, jpValue);
-                    newPoolInitValue.push(this.gameDataProxy.convertCredit2Cash(bonusCredit));
+                    newPoolInitValue.push(bonusCredit);
                     break;
             }
         }
@@ -209,7 +209,7 @@ export class GAME_JackpotPoolViewMediator extends BaseMediator<GAME_JackpotPoolV
                 break;
             case JackpotPoolValueType.DenomMultiplier:
                 let bonusCredit = MathUtil.mul(this.gameDataProxy.curDenomMultiplier, jpValue);
-                initJackpotValue = this.gameDataProxy.convertCredit2Cash(bonusCredit);
+                initJackpotValue = bonusCredit;
                 break;
         }
 
