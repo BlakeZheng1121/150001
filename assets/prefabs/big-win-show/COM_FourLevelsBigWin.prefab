@@ -14145,7 +14145,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 850,
+      "width": 800,
       "height": 130
     },
     "_anchorPoint": {
@@ -14189,7 +14189,7 @@
     "_fontFamily": "Arial",
     "_lineHeight": 80,
     "_overflow": 2,
-    "_enableWrapText": true,
+    "_enableWrapText": false,
     "_font": {
       "__uuid__": "c9ac0698-13ed-43de-932c-5dc9009ec2fc",
       "__expectedType__": "cc.BitmapFont"
