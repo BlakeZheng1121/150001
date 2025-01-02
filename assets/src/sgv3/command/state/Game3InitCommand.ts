@@ -31,7 +31,7 @@ export class Game3InitCommand extends StateCommand {
         }
         GlobalTimer.getInstance().registerTimer(self.timerKey, delayTime, self.endGame3Init, self).start();
 
-        this.checkJackpotPool();
+        this.gameDataProxy.checkJackpotPool();
     }
 
     protected endGame3Init() {

@@ -3,7 +3,6 @@ import { StateMachineObject } from '../../../core/proxy/CoreStateMachineProxy';
 import { GameDataProxy } from '../../proxy/GameDataProxy';
 import { StateMachineProxy } from '../../proxy/StateMachineProxy';
 import { WebBridgeProxy } from '../../proxy/WebBridgeProxy';
-import { JackpotPool } from '../../util/Constant';
 
 export class StateCommand extends puremvc.SimpleCommand {
     public execute(notification: puremvc.INotification): void {}
@@ -16,22 +15,6 @@ export class StateCommand extends puremvc.SimpleCommand {
 
     protected changeState(state: string, body?: any): void {
         this.sendNotification(StateMachineCommand.NAME, new StateMachineObject(state, body));
-    }
-
-    protected checkJackpotPool() {
-        // 當連中 2次 Grand 時，下一次場景需要更新到最新的 JackpotPool 數值
-        this.gameDataProxy.hitJackpotPoolType = 0;
-        if (this.gameDataProxy.spinEventData.bonusGameResult) {
-            const bonusGameOneRoundResultLength = this.gameDataProxy.spinEventData.bonusGameResult.totalRound;
-            const lastBonusResult =
-                this.gameDataProxy.spinEventData.bonusGameResult.bonusGameOneRoundResult[
-                    bonusGameOneRoundResultLength - 1
-                ];
-            const result = lastBonusResult.jpHitInfo;
-            this.gameDataProxy.hitJackpotPoolType = lastBonusResult.hitPool[0];
-
-            this.sendNotification(JackpotPool.HIT_JACKPOT_TO_POOL_VALUE_UPDATE, result);
-        }
     }
 
     // ======================== Get Set ========================

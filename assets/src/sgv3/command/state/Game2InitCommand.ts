@@ -35,7 +35,7 @@ export class Game2InitCommand extends StateCommand {
 
             // 剛進入FreeGame場景時，重置盤面(※中間回來的不用重置盤面)
             if (freeGameOneRoundResult.roundInfo.roundNumber == 1) {
-                if (this.isHitGrand()) this.checkJackpotPool();
+                if (this.isHitGrand()) this.gameDataProxy.checkJackpotPool();
                 this.sendNotification(WinEvent.FORCE_WIN_DISPOSE);
                 this.sendNotification(WinEvent.FORCE_UPDATE_WIN_LABEL, cashAmount);
             }

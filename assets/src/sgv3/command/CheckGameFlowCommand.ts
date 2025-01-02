@@ -142,6 +142,7 @@ export class CheckGameFlowCommand extends puremvc.SimpleCommand {
                     ? this.gameDataProxy.curStateResult.roundResult.shift()
                     : null;
         }
+        this.checkJackpotPool();
         if (this.gameDataProxy.curScene == SceneName) {
             Logger.i('[CheckGameFlowCommand] 同場景 ' + this.gameDataProxy.curScene);
             Logger.i(
@@ -173,6 +174,11 @@ export class CheckGameFlowCommand extends puremvc.SimpleCommand {
         this.sendNotification(ParseRoundWinResultCommand.NAME);
     }
 
+    private checkJackpotPool() {
+        if (this.gameDataProxy.isHitMiniGame() || this.gameDataProxy.isHitGrand()) {
+            this.gameDataProxy.checkJackpotPool();
+        }
+    }
     // ======================== Get Set ========================
     protected _gameDataProxy: GameDataProxy;
     protected get gameDataProxy(): GameDataProxy {

@@ -27,6 +27,7 @@ import { RecoveryData } from '../vo/data/RecoveryData';
 import { SpecialFeatureResult } from '../vo/result/SpecialFeatureResult';
 import { WinType } from '../vo/enum/WinType';
 import { UIEvent } from 'common-ui/proxy/UIEvent';
+import { JackpotPool } from '../util/Constant';
 
 /** 全遊戲資料 */
 export class GameDataProxy extends CoreGameDataProxy {
@@ -878,6 +879,22 @@ export class GameDataProxy extends CoreGameDataProxy {
             result.specialHitInfo === SpecialHitInfo[SpecialHitInfo.bonusGame_02];
         isHitGrand = self?.curRoundResult?.specialFeatureResult.some(hasBonus02);
         return isHitGrand ? isHitGrand : false;
+    }
+
+    public checkJackpotPool() {
+        // 當連中 2次 Grand 時，下一次場景需要更新到最新的 JackpotPool 數值
+        this.hitJackpotPoolType = 0;
+        if (this.spinEventData.bonusGameResult) {
+            const bonusGameOneRoundResultLength = this.spinEventData.bonusGameResult.totalRound;
+            const lastBonusResult =
+                this.spinEventData.bonusGameResult.bonusGameOneRoundResult[
+                    bonusGameOneRoundResultLength - 1
+                ];
+            const result = lastBonusResult.jpHitInfo;
+            this.hitJackpotPoolType = lastBonusResult.hitPool[0];
+
+            this.sendNotification(JackpotPool.HIT_JACKPOT_TO_POOL_VALUE_UPDATE, result);
+        }
     }
 
     /** 是否資料有 Feature selection */
