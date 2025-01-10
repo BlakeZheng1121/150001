@@ -72,7 +72,7 @@ export class MathUtil {
             const d1 = v1Arr.length == 2 ? v1Arr[1].length : 0;
             const d2 = v2Arr.length == 2 ? v2Arr[1].length : 0;
             const decimalLength = d1 + d2;
-            const v1 = Number(String(result).replace('.', ''));
+            const v1 = Number(String(result).replace(',', '').replace('.', ''));
             const v2 = Number(String(value).replace('.', ''));
             result = (v1 * v2) / Math.pow(10, decimalLength);
         }
