@@ -29,7 +29,7 @@ export class Game3EndCommand extends StateCommand {
         const self = this;
         self.sendNotification(
             StateWinEvent.SHOW_LAST_CREDIT_BOARD,
-            self.gameDataProxy.spinEventData.bonusGameResult.bonusGameOneRoundResult[0]
+            self.gameDataProxy.spinEventData.bonusGameResult.bonusGameOneRoundResult.shift()
         );
     }
 }

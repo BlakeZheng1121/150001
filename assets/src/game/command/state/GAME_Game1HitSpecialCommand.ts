@@ -9,9 +9,16 @@ export class GAME_Game1HitSpecialCommand extends Game1HitSpecialCommand {
     public execute(notification: puremvc.INotification): void {
         const getGrand = (oneRoundResult: BonusGameOneRoundResult) =>
             oneRoundResult.specialHitInfo == SpecialHitInfo[SpecialHitInfo.bonusGame_02];
-        // only Hit Grand in one game cycle
-        let grandCash =
-            this.gameDataProxy.spinEventData.bonusGameResult.bonusGameOneRoundResult.find(getGrand).oneRoundJPTotalWin;
+        const index = this.gameDataProxy.spinEventData.bonusGameResult.bonusGameOneRoundResult.findIndex(getGrand);
+
+        let grandCash = 0;
+        if (index !== -1) {
+            grandCash = this.gameDataProxy.spinEventData.bonusGameResult.bonusGameOneRoundResult[index].oneRoundJPTotalWin;
+
+            // 陣列移除此筆，避免重複處理
+            this.gameDataProxy.spinEventData.bonusGameResult.bonusGameOneRoundResult.splice(index, 1);
+        }
+
         this.sendNotification(WinEvent.ON_HIT_GRAND, {
             grandCash: grandCash,
             callback: this.endGame1HitGrand.bind(this)

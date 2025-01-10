@@ -885,11 +885,7 @@ export class GameDataProxy extends CoreGameDataProxy {
         // 當連中 2次 Grand 時，下一次場景需要更新到最新的 JackpotPool 數值
         this.hitJackpotPoolType = 0;
         if (this.spinEventData.bonusGameResult) {
-            const bonusGameOneRoundResultLength = this.spinEventData.bonusGameResult.totalRound;
-            const lastBonusResult =
-                this.spinEventData.bonusGameResult.bonusGameOneRoundResult[
-                    bonusGameOneRoundResultLength - 1
-                ];
+            const lastBonusResult = this.spinEventData.bonusGameResult.bonusGameOneRoundResult[0];
             const result = lastBonusResult.jpHitInfo;
             this.hitJackpotPoolType = lastBonusResult.hitPool[0];
 
