@@ -154,6 +154,7 @@ export class GAME_JackpotPoolViewMediator extends BaseMediator<GAME_JackpotPoolV
     }
 
     protected initView(): void {
+        this.view.isOmniChannel = this.gameDataProxy.isOmniChannel();
         this.initBonusPool();
         this.onBetLevelChange();
     }

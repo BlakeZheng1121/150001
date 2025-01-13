@@ -74,11 +74,11 @@ export class BalanceUtil {
         return formatValue;
     }
 
-    public static formatBalanceWithDollarSign(cash: number): string {
+    public static formatBalanceWithDollarSign(cash: number, hasDecimal: boolean = true): string {
         let dollarSign = this.dollarSign;
         const value = MathUtil.floor(cash, MathUtil.decimalPlace);
 
-        return dollarSign + StringUtil.formatCash(value, MathUtil.decimalPlace);
+        return dollarSign + StringUtil.formatCash(value, hasDecimal ? MathUtil.decimalPlace : 0);
     }
 
     public static getDollarSignWithCurrency(currency: string): string {

@@ -58,6 +58,8 @@ export class GAME_JackpotPoolView extends BaseView {
     public totalMinorAmount: number = 0;
     public totalMiniAmount: number = 0;
 
+    public isOmniChannel: boolean = false;
+
     private timeoutMap: Map<number, number> = new Map<number, number>();
     private scaleUp: Vec3 = new Vec3(1.2, 1.2);
 
@@ -291,12 +293,12 @@ export class GAME_JackpotPoolView extends BaseView {
 
     public updateMinorAmount() {
         if (!this.tempMinorAmount) return;
-        this.minorAmount.string = BalanceUtil.formatBalanceWithDollarSign(this.tempMinorAmount);
+        this.minorAmount.string = BalanceUtil.formatBalanceWithDollarSign(this.tempMinorAmount, !this.isOmniChannel);
     }
 
     public updateMiniAmount() {
         if (!this.tempMiniAmount) return;
-        this.miniAmount.string = BalanceUtil.formatBalanceWithDollarSign(this.tempMiniAmount);
+        this.miniAmount.string = BalanceUtil.formatBalanceWithDollarSign(this.tempMiniAmount, !this.isOmniChannel);
     }
 
     private runGrandAmountComplete() {
