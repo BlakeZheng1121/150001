@@ -154,6 +154,7 @@ export class SpinResponseCommand extends puremvc.SimpleCommand {
             FreeGame_Type: freeGameType,
             FreeGame_Spin: freeGameSpin,
             FeatureGame_Win: '0',
+            FeatureGame_Type: '0',
             JP_Type: jp_Type,
             SpinSpeedMode: this.gameDataProxy.curSpeedMode,
             Session_ID: this.gameDataProxy.sessionId,
