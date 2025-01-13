@@ -130,32 +130,41 @@ export class AudioManager extends Component {
             return;
         }
         let audioContainer = this.createAudioContainerFromPool({ clipName: clipName });
-        if (audioContainer == null) {
-            return;
-        }
         const options = {
             fade(vol: number, duration: number) {
-                audioContainer.fade({ vol: vol, duration: duration });
+                if (audioContainer) {
+                    audioContainer.fade({ vol: vol, duration: duration });
+                }
                 return options;
             },
             volume(vol: number) {
-                audioContainer.volume = vol;
+                if (audioContainer) {
+                    audioContainer.volume = vol;
+                }
                 return options;
             },
             loop(loop: boolean) {
-                audioContainer.loop = loop;
+                if (audioContainer) {
+                    audioContainer.loop = loop;
+                }
                 return options;
             },
             callback(cb: () => void) {
-                audioContainer.playCallback = cb;
+                if (audioContainer) {
+                    audioContainer.playCallback = cb;
+                }
                 return options;
             },
             replay() {
-                audioContainer.replay();
+                if (audioContainer) {
+                    audioContainer.replay();
+                }
                 return options;
             }
         };
-        audioContainer.play();
+        if (audioContainer != null) {
+            audioContainer.play();
+        }
         return options;
     }
 
