@@ -97,8 +97,7 @@ export class GAME_4_CreditCollectResultCommand extends puremvc.MacroCommand {
         let sceneData = this.gameDataProxy.getSceneDataByName(GameScene.Game_4);
         let runningTime = sceneData.wonCreditBoardRunningTime + sceneData.wonCreditBoardEndTime;
         let totalWin: number = this.gameDataProxy.convertCredit2Cash(
-            this.gameDataProxy.spinEventData.topUpGameResult.topUpGameTotalWin +
-                this.gameDataProxy.spinEventData.baseGameResult.baseGameTotalWin
+            this.gameDataProxy.spinEventData.topUpGameResult.topUpGameTotalWin
         );
         this.sendNotification(StateWinEvent.SHOW_LAST_CREDIT_BOARD, totalWin);
         GlobalTimer.getInstance().registerTimer('showCreditBoard', runningTime, this.delayCloseBoard, this).start();
