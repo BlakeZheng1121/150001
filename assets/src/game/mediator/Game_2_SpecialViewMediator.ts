@@ -56,7 +56,7 @@ export class Game_2_SpecialViewMediator extends BaseMediator<Game_2_SpecialView>
         }
     }
     private onSideBallShow(freeGameSpecialInfo: FreeGameSpecialInfo) {
-        this.view.showSideBall(freeGameSpecialInfo);
+        this.view.showSideBall(freeGameSpecialInfo, !this.gameDataProxy.isOmniChannel());
     }
 
     protected onHitSpecial(showWinEvent: Function) {
