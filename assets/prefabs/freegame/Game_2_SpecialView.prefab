@@ -140,7 +140,6 @@
     "__type__": "219b5lxdlNPTq8aPNOE2rdI",
     "_name": "",
     "_objFlags": 0,
-    "__editorExtras__": {},
     "node": {
       "__id__": 1
     },
@@ -148,13 +147,9 @@
     "__prefab": {
       "__id__": 7
     },
-    "renderOrder": 104,
+    "renderOrder": 11,
     "freeC1SubOnPerform": {
       "__id__": 3
-    },
-    "free_RetriggerBoard": {
-      "__uuid__": "51648d43-3130-4939-8003-aa22469b1952",
-      "__expectedType__": "cc.Prefab"
     },
     "_id": ""
   },

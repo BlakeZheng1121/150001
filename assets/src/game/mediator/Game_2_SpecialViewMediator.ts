@@ -1,14 +1,6 @@
 import { _decorator } from 'cc';
 import BaseMediator from '../../base/BaseMediator';
-import { SceneManager } from '../../core/utils/SceneManager';
-import {
-    FreeGameEvent,
-    GameStateProxyEvent,
-    ReelEvent,
-    StateWinEvent,
-    ViewMediatorEvent,
-    WinEvent
-} from '../../sgv3/util/Constant';
+import { FreeGameEvent, GameStateProxyEvent, ViewMediatorEvent } from '../../sgv3/util/Constant';
 import { GameScene } from '../../sgv3/vo/data/GameScene';
 import { GAME_GameDataProxy } from '../proxy/GAME_GameDataProxy';
 import { Game_2_SpecialView } from '../view/free-retrigger/Game_2_SpecialView';
@@ -30,7 +22,6 @@ export class Game_2_SpecialViewMediator extends BaseMediator<Game_2_SpecialView>
 
     public listNotificationInterests(): Array<any> {
         return [
-            ViewMediatorEvent.SHOW_RETRIGGER_BOARD,
             FreeGameEvent.ON_SIDE_BALL_SHOW,
             FreeGameEvent.ON_SIDE_BALL_SCORE_SHOW,
             GameStateProxyEvent.ON_SCENE_BEFORE_CHANGE
@@ -41,9 +32,6 @@ export class Game_2_SpecialViewMediator extends BaseMediator<Game_2_SpecialView>
         let name = notification.getName();
         let self = this;
         switch (name) {
-            case ViewMediatorEvent.SHOW_RETRIGGER_BOARD:
-                self.showRetriggerBoard(notification.getBody()[0]);
-                break;
             case FreeGameEvent.ON_SIDE_BALL_SHOW:
                 self.onSideBallShow(notification.getBody());
                 break;
@@ -65,10 +53,6 @@ export class Game_2_SpecialViewMediator extends BaseMediator<Game_2_SpecialView>
 
     private onCollectCredit(hitInfo: Array<any>) {
         this.facade.sendNotification(ViewMediatorEvent.COLLECT_CREDIT_BALL, hitInfo);
-    }
-
-    protected showRetriggerBoard(addRound: number) {
-        this.view.retriggerShow(addRound);
     }
 
     public sceneChange() {

@@ -1,10 +1,8 @@
 import { _decorator, Prefab, instantiate } from 'cc';
-import { GlobalTimer } from '../../../sgv3/util/GlobalTimer';
 import { AudioManager } from '../../../audio/AudioManager';
 import { AudioClipsEnum } from '../../vo/enum/SoundMap';
 import { FreeGameSpecialInfo } from '../../vo/FreeGameSpecialInfo';
 import { FreeC1SubOnPerform } from './free_c1sub_on_perform/FreeC1SubOnPerform';
-import { Free_RetriggerBoard } from './Free_RetriggerBoard';
 import BaseView from 'src/base/BaseView';
 const { ccclass, property } = _decorator;
 
@@ -12,9 +10,6 @@ const { ccclass, property } = _decorator;
 export class Game_2_SpecialView extends BaseView {
     @property(FreeC1SubOnPerform)
     private freeC1SubOnPerform: FreeC1SubOnPerform | null = null;
-
-    @property(Prefab)
-    private free_RetriggerBoard: Prefab | null = null;
 
     private onSpecialEndCallBack: Function = null;
 
@@ -30,19 +25,8 @@ export class Game_2_SpecialView extends BaseView {
         self.language = lang;
     }
 
-    private _freeRetriggerBoard: Free_RetriggerBoard | null = null;
-
-    private get freeRetriggerBoard() {
-        return this._freeRetriggerBoard.retriggerBoard;
-    }
-
     public onLoad() {
         super.onLoad();
-        let self = this;
-        let retriggerBoard = instantiate(self.free_RetriggerBoard);
-
-        retriggerBoard.parent = this.node;
-        self._freeRetriggerBoard = retriggerBoard.getComponent(Free_RetriggerBoard);
     }
 
     //** 出現角落球 */
@@ -56,14 +40,6 @@ export class Game_2_SpecialView extends BaseView {
                 isFormatBalance
             );
         }
-    }
-
-    //** show retriger board */
-    public retriggerShow(addRound: number) {
-        let self = this;
-        self.freeRetriggerBoard?.play('Show');
-
-        AudioManager.Instance.play(AudioClipsEnum[`FreeRetrigger_${self.language}`]);
     }
 
     //** 角落球特色打擊 */
