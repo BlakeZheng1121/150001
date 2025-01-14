@@ -1,7 +1,7 @@
 import { _decorator } from 'cc';
 import BaseMediator from 'src/base/BaseMediator';
 import { SpinInfoView } from '../view/SpinInfoView';
-import { DragonUpEvent, SpinResultProxyEvent, ViewMediatorEvent } from 'src/sgv3/util/Constant';
+import { DragonUpEvent, SpinResultProxyEvent, ViewMediatorEvent, StateWinEvent } from 'src/sgv3/util/Constant';
 import { GameDataProxy } from 'src/sgv3/proxy/GameDataProxy';
 import { GameScene } from 'src/sgv3/vo/data/GameScene';
 import { StateMachineProxy } from 'src/sgv3/proxy/StateMachineProxy';
@@ -10,7 +10,7 @@ const { ccclass } = _decorator;
 
 @ccclass('SpinInfoViewMediator')
 export class SpinInfoViewMediator extends BaseMediator<SpinInfoView> {
-    protected lazyEventListener(): void {}
+    protected lazyEventListener(): void { }
 
     public listNotificationInterests(): Array<any> {
         let eventList = [
@@ -21,7 +21,9 @@ export class SpinInfoViewMediator extends BaseMediator<SpinInfoView> {
             StateMachineProxy.GAME2_INIT,
             StateMachineProxy.GAME4_INIT,
             DragonUpEvent.ON_RESPIN_NEXT_END,
-            SpinResultProxyEvent.RESPONSE_SPIN
+            SpinResultProxyEvent.RESPONSE_SPIN,
+            StateWinEvent.ON_GAME2_TRANSITIONS,
+            StateWinEvent.ON_GAME4_TRANSITIONS
         ];
         return eventList;
     }
@@ -72,6 +74,10 @@ export class SpinInfoViewMediator extends BaseMediator<SpinInfoView> {
                     notification.getBody(),
                     freeGameOneRoundResult.displayLogicInfo.maxTriggerCountFlag
                 );
+                break;
+            case StateWinEvent.ON_GAME2_TRANSITIONS:
+            case StateWinEvent.ON_GAME4_TRANSITIONS:
+                this.view.showMaxSpinInfo(false);
                 break;
         }
     }
