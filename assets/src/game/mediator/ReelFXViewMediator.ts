@@ -10,7 +10,7 @@ const { ccclass, property } = _decorator;
 
 @ccclass('ReelFXViewMediator')
 export class ReelFXViewMediator extends BaseMediator<ReelFXView> {
-    protected lazyEventListener(): void { }
+    protected lazyEventListener(): void {}
 
     public listNotificationInterests(): Array<any> {
         return [
@@ -18,7 +18,7 @@ export class ReelFXViewMediator extends BaseMediator<ReelFXView> {
             ReelEvent.ON_SINGLE_REEL_STOP_END,
             ReelEvent.ON_REELS_EMERGENCY_STOP,
             WinEvent.FORCE_WIN_DISPOSE,
-            SceneEvent.LOAD_BASE_COMPLETE,
+            SceneEvent.LOAD_BASE_COMPLETE
         ];
     }
 
@@ -61,13 +61,14 @@ export class ReelFXViewMediator extends BaseMediator<ReelFXView> {
         this.playShow(singleReelContent);
     }
 
-    onHideReelSqueeze(fovLength: number): void {
+    onHideReelSqueeze(data: { fovLength: number; isHit: boolean }): void {
+        let { fovLength, isHit } = data;
         // 急停的情況，且不是正在瞇牌，則不播放動畫
         if (this.view.isEmergencyStop && !this.view.isShowing) {
             this.stop();
             return;
         }
-        this.playEnd(fovLength);
+        this.playEnd(fovLength, isHit);
     }
 
     /* 播放動畫
@@ -78,8 +79,11 @@ export class ReelFXViewMediator extends BaseMediator<ReelFXView> {
         AudioManager.Instance.play(AudioClipsEnum.BigWinPrediction);
     }
 
-    playEnd(fovLength: number) {
+    playEnd(fovLength: number, isHit: boolean = false): void {
         this.view.playEnd(fovLength);
+        if (isHit) {
+            AudioManager.Instance.play(AudioClipsEnum.BigWinHit);
+        }
         AudioManager.Instance.stop(AudioClipsEnum.BigWinPrediction).fade(0, 0.1);
     }
 

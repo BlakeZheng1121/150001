@@ -268,12 +268,17 @@ export class BaseReelViewMediator<T extends ReelView> extends BaseMediator<T> {
             return;
         }
         if (self.reelDataProxy.isSlowMotionAry[self.currentSequenceIndex]) {
-            self.sendNotification(ReelEvent.ON_SINGLE_REEL_STOP_END, self.reelView.reelsList[self.currentSequenceIndex].singleReelContent.stripIndexer.fovLength);
+            self.sendNotification(ReelEvent.ON_SINGLE_REEL_STOP_END, {
+                fovLength: self.reelView.reelsList[self.currentSequenceIndex].singleReelContent.stripIndexer.fovLength,
+                isHit: self.handleSlowMotionHit()
+            });
         }
         self.sendNotification(ReelEvent.ON_SINGLE_REEL_START_DAMPING, self.currentSequenceIndex);
         self.currentSequenceIndex++;
         self.onSingleReelStartStop();
     }
+
+    protected handleSlowMotionHit() {}
 
     /** 單一ReelDamping 結束 與所有Reel滾停 事件通知 */
     protected onReelDampingEnd(): void {

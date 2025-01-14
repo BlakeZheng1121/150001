@@ -633,4 +633,28 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
         }
         self.reelView.reelsShow();
     }
+
+    protected handleSlowMotionHit() {
+        if (
+            (this.gameDataProxy.curRoundResult as FreeGameOneRoundResult).extendInfoForFreeGameResult?.isRespinFeature
+        ) {
+            const slowReel = 3;
+            if (this.reelDataProxy.isSlowMotionAry[slowReel] == false) {
+                return false;
+            }
+            const isFiveOfKind = this.gameDataProxy.curRoundResult.waysGameResult.waysResult.some(
+                (result) => result.hitNumber == 5
+            );
+            return isFiveOfKind;
+        } else {
+            const lastReel = 4;
+            if (this.reelDataProxy.isSlowMotionAry[lastReel] == false) {
+                return false;
+            }
+            const isFiveOfKind = this.gameDataProxy.curRoundResult.waysGameResult.waysResult.some(
+                (result) => result.hitNumber == 5
+            );
+            return isFiveOfKind;
+        }
+    }
 }

@@ -61,7 +61,6 @@ export class ReelEffect_DampingSoundCommand extends puremvc.SimpleCommand {
             //處理最後一顆C1音效
             this.setLastHitSequenceSound();
         }
-        this.handleBigWinHit();
     }
 
     protected handleGame2SoundSequence() {
@@ -83,13 +82,6 @@ export class ReelEffect_DampingSoundCommand extends puremvc.SimpleCommand {
                 freeHitC1Count++;
                 curSequence.push(AudioClipsEnum.Free_C1Hit01);
             }
-        }
-        const totalBet = this.gameDataProxy.curTotalBet;
-        const result = this.gameDataProxy.curRoundResult as FreeGameOneRoundResult;
-        const playerWin = result.waysGameResult.playerWin;
-        const odds = this.gameDataProxy.convertCredit2Cash(playerWin) / totalBet;
-        if (odds >= 25) {
-            this.handleBigWinHit();
         }
         this.handleRespin();
     }
@@ -161,34 +153,6 @@ export class ReelEffect_DampingSoundCommand extends puremvc.SimpleCommand {
                 return isSpecial ? AudioClipsEnum.Base_C1Hit8884 : AudioClipsEnum.Base_C1Hit04;
             case 4:
                 return isSpecial ? AudioClipsEnum.Base_C1Hit888Last : AudioClipsEnum.Base_C1HitLast;
-        }
-    }
-
-    protected handleBigWinHit() {
-        if (
-            (this.gameDataProxy.curRoundResult as FreeGameOneRoundResult).extendInfoForFreeGameResult?.isRespinFeature
-        ) {
-            const slowReel = 3;
-            if (this.reelDataProxy.isSlowMotionAry[slowReel] == false) {
-                return;
-            }
-            const isFiveOfKind = this.gameDataProxy.curRoundResult.waysGameResult.waysResult.some(
-                (result) => result.hitNumber == 5
-            );
-            if (isFiveOfKind) {
-                this.reelDataProxy.reelStopSoundSequence[slowReel].push(AudioClipsEnum.BigWinHit);
-            }
-        } else {
-            const lastReel = 4;
-            if (this.reelDataProxy.isSlowMotionAry[lastReel] == false) {
-                return;
-            }
-            const isFiveOfKind = this.gameDataProxy.curRoundResult.waysGameResult.waysResult.some(
-                (result) => result.hitNumber == 5
-            );
-            if (isFiveOfKind) {
-                this.reelDataProxy.reelStopSoundSequence[lastReel].push(AudioClipsEnum.BigWinHit);
-            }
         }
     }
 
