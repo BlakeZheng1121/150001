@@ -267,15 +267,22 @@ export class BaseReelViewMediator<T extends ReelView> extends BaseMediator<T> {
         if (self.isTriggerErrorStop) {
             return;
         }
+        if (!self.isTriggerEmergencyStop) {
+            self.handleSlowMotion();
+        }
+        self.sendNotification(ReelEvent.ON_SINGLE_REEL_START_DAMPING, self.currentSequenceIndex);
+        self.currentSequenceIndex++;
+        self.onSingleReelStartStop();
+    }
+
+    protected handleSlowMotion() {
+        let self = this;
         if (self.reelDataProxy.isSlowMotionAry[self.currentSequenceIndex]) {
             self.sendNotification(ReelEvent.ON_SINGLE_REEL_STOP_END, {
                 fovLength: self.reelView.reelsList[self.currentSequenceIndex].singleReelContent.stripIndexer.fovLength,
                 isHit: self.handleSlowMotionHit()
             });
         }
-        self.sendNotification(ReelEvent.ON_SINGLE_REEL_START_DAMPING, self.currentSequenceIndex);
-        self.currentSequenceIndex++;
-        self.onSingleReelStartStop();
     }
 
     protected handleSlowMotionHit() {}
@@ -337,6 +344,7 @@ export class BaseReelViewMediator<T extends ReelView> extends BaseMediator<T> {
         const self = this;
         self.isTriggerEmergencyStop = true;
         self.reelView.reelsEmergencyStop();
+        self.handleSlowMotion();
         //送出Reel spinning事件通知其他組件
         self.sendNotification(ReelEvent.ON_REELS_EMERGENCY_STOP);
     }
