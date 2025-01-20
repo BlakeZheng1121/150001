@@ -43,8 +43,9 @@ export class LoadingView extends BaseView {
     }
 
     protected update() {
-        if (this.introBG.spriteFrame && this.isIntroBGLoadComplete == false) {
+        if (this.isAllIntroBackgroundsLoaded() && this.isIntroBGLoadComplete == false) {
             // TODO 通知 Container 關閉品牌載入頁面，並顯示遊戲畫面
+            this.notifyParentLoadingComplete();
             this.initProgressBar();
             this.isIntroBGLoadComplete = true;
         }
@@ -116,5 +117,29 @@ export class LoadingView extends BaseView {
 
     private initProgressBar() {
         this.setProgress(this.targetProgress);
+    }
+
+    private isAllIntroBackgroundsLoaded(): boolean {
+        // 判斷是否所有 intro 圖片都已載入
+        return (
+            this.introBG.spriteFrame !== null &&
+            this.introBG
+                .getComponentsInChildren(Sprite)
+                .every(sprite => sprite.spriteFrame !== null)
+        );
+    }
+
+    private notifyParentLoadingComplete() {
+        // 通知 Container 關閉Loading頁面
+        let url_string = window.location.href;
+        let url = new URL(url_string);
+        var cUrl = url.searchParams.get('curl');
+        window.parent.postMessage(
+            JSON.stringify({
+                name: 'setLoading',
+                data: false
+            }),
+            cUrl
+        );
     }
 }
