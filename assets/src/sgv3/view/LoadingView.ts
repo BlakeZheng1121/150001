@@ -71,9 +71,9 @@ export class LoadingView extends BaseView {
 
     // 設定進度
     public setProgress(position: number): void {
-        this.targetProgress = position;
+        this.targetProgress = position * 0.1 + 0.9;
         if (this.targetProgress < 1) {
-            this.progressDuration = 0.5;
+            this.progressDuration = 1.0;
         } else {
             this.progressDuration = 0.2;
         }
