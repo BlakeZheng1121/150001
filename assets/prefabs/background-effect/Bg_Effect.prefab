@@ -8,13 +8,14 @@
       "__id__": 1
     },
     "optimizationPolicy": 0,
-    "asyncLoadAssets": false,
-    "persistent": false
+    "persistent": false,
+    "asyncLoadAssets": false
   },
   {
     "__type__": "cc.Node",
     "_name": "Bg_Effect",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "_parent": null,
     "_children": [
       {
@@ -146,7 +147,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -196.94,
+      "y": -221.562,
       "z": 0
     },
     "_lrot": {
@@ -158,8 +159,8 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 49.99999999999997,
-      "y": 50,
+      "x": 70,
+      "y": 70,
       "z": 0.9999999999999997
     },
     "_layer": 33554432,
@@ -183,6 +184,7 @@
     "__prefab": {
       "__id__": 5
     },
+    "_visFlags": 0,
     "_materials": [
       {
         "__uuid__": "ed02b351-ec03-4b37-92da-53ed6f74b218",
@@ -190,7 +192,6 @@
       },
       null
     ],
-    "_visFlags": 0,
     "startColor": {
       "__id__": 6
     },
@@ -230,7 +231,7 @@
     "startLifetime": {
       "__id__": 15
     },
-    "duration": 0.6,
+    "duration": 0.5,
     "loop": false,
     "simulationSpeed": 1,
     "playOnAwake": false,
@@ -244,6 +245,13 @@
       "__id__": 20
     },
     "bursts": [],
+    "_renderCulling": false,
+    "_cullingMode": 0,
+    "_aabbHalfX": 0,
+    "_aabbHalfY": 0,
+    "_aabbHalfZ": 0,
+    "_dataCulling": false,
+    "enableCulling": false,
     "_colorOverLifetimeModule": {
       "__id__": 21
     },
@@ -274,7 +282,6 @@
     "renderer": {
       "__id__": 63
     },
-    "enableCulling": false,
     "_prewarm": false,
     "_capacity": 50,
     "_simulationSpace": 1,
@@ -346,8 +353,9 @@
   },
   {
     "__type__": "cc.CurveRange",
-    "mode": 0,
-    "constant": 0.8,
+    "mode": 3,
+    "constantMin": 0.65,
+    "constantMax": 0.8,
     "multiplier": 1
   },
   {
@@ -603,8 +611,8 @@
     "__type__": "cc.RealCurve",
     "_times": [
       0,
-      0.2641025641025641,
-      0.6358974358974359,
+      0.38974358974358975,
+      0.6794871794871795,
       1
     ],
     "_values": [
@@ -612,7 +620,7 @@
         "__type__": "cc.RealKeyframeValue",
         "interpolationMode": 2,
         "tangentWeightMode": 0,
-        "value": 0.18518518518518517,
+        "value": 0.3407407407407408,
         "rightTangent": -0.014739229024943316,
         "rightTangentWeight": 1,
         "leftTangent": -0.014739229024943316,
@@ -623,10 +631,10 @@
         "__type__": "cc.RealKeyframeValue",
         "interpolationMode": 2,
         "tangentWeightMode": 0,
-        "value": 0.32222222222222224,
-        "rightTangent": 2.0222222222222217,
+        "value": 0.5148148148148148,
+        "rightTangent": 1.351254480286738,
         "rightTangentWeight": 0,
-        "leftTangent": 2.0222222222222217,
+        "leftTangent": 1.351254480286738,
         "leftTangentWeight": 0,
         "easingMethod": 0
       },
@@ -634,10 +642,10 @@
         "__type__": "cc.RealKeyframeValue",
         "interpolationMode": 2,
         "tangentWeightMode": 0,
-        "value": 0.9444444444444444,
-        "rightTangent": 0.4126984126984134,
+        "value": 0.8777777777777778,
+        "rightTangent": 1.0111111111111124,
         "rightTangentWeight": 0,
-        "leftTangent": 0.4126984126984134,
+        "leftTangent": 1.0111111111111124,
         "leftTangentWeight": 0,
         "easingMethod": 0
       },
@@ -963,7 +971,8 @@
       "__uuid__": "856904f2-ac1a-409d-80af-282250c70ca4@6c48a",
       "__expectedType__": "cc.Texture2D"
     },
-    "_useGPU": false
+    "_useGPU": false,
+    "_alignSpace": 2
   },
   {
     "__type__": "cc.UITransform",
@@ -1120,8 +1129,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1055.38134765625,
-      "height": 311.9996337890625
+      "width": 1146.625,
+      "height": 365.80120849609375
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1158,7 +1167,6 @@
       "a": 255
     },
     "loop": true,
-    "_premultipliedAlpha": false,
     "_timeScale": 1,
     "_useTint": false,
     "_preCacheMode": 0,
@@ -1170,6 +1178,7 @@
       "__uuid__": "03da5c7a-fce1-4eba-b0a0-ca2d9fab3471",
       "__expectedType__": "sp.SkeletonData"
     },
+    "_premultipliedAlpha": false,
     "defaultSkin": "default",
     "defaultAnimation": "",
     "_sockets": [],
