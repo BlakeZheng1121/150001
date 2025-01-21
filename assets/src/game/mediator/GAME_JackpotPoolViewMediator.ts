@@ -180,7 +180,7 @@ export class GAME_JackpotPoolViewMediator extends BaseMediator<GAME_JackpotPoolV
                     newPoolInitValue.push(mulValue);
                     break;
                 case JackpotPoolValueType.DenomMultiplier:
-                    let bonusCredit = MathUtil.mul(this.gameDataProxy.curDenomMultiplier, jpValue);
+                    let bonusCredit = MathUtil.mul(this.getMultiplierOfDenom(), jpValue);
                     newPoolInitValue.push(bonusCredit);
                     break;
             }
@@ -209,7 +209,7 @@ export class GAME_JackpotPoolViewMediator extends BaseMediator<GAME_JackpotPoolV
                 );
                 break;
             case JackpotPoolValueType.DenomMultiplier:
-                let bonusCredit = MathUtil.mul(this.gameDataProxy.curDenomMultiplier, jpValue);
+                let bonusCredit = MathUtil.mul(this.getMultiplierOfDenom(), jpValue);
                 initJackpotValue = bonusCredit;
                 break;
         }
@@ -253,6 +253,13 @@ export class GAME_JackpotPoolViewMediator extends BaseMediator<GAME_JackpotPoolV
     private setJpPoolPos() {
         this.view.enterGamePos(this.gameDataProxy.curScene);
         this.view.restoreLayer();
+    }
+
+    // 選擇Denom的倍數
+    private getMultiplierOfDenom() {
+        const minimumDenom = this.gameDataProxy.initEventData.denomMultiplier[0];
+        const multiplierOfDenom = MathUtil.div(this.gameDataProxy.curDenomMultiplier, minimumDenom);
+        return multiplierOfDenom;
     }
 
     // ======================== Get Set ========================
