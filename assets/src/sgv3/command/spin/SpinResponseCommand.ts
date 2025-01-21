@@ -146,7 +146,7 @@ export class SpinResponseCommand extends puremvc.SimpleCommand {
         GTMUtil.setGTMEvent('SpinResponse', {
             GameSeqNo: notifyObj.gameSeq,
             Bet_Type: '0',
-            Bet_Multiplier: this.gameDataProxy.curBet,
+            Bet_Multiplier: this._gameDataProxy.isOmniChannel() ? this.gameDataProxy.curBet : this.gameDataProxy.curTotalBet,
             Feature_Bet: this._gameDataProxy.isOmniChannel() ? this.gameDataProxy.curFeatureBet : '1',
             OmniDenom: this._gameDataProxy.isOmniChannel() ? this.gameDataProxy.curDenomMultiplier : '1',
             BaseGame_Win: this._gameDataProxy.convertCredit2Cash(notifyObj.spinResult.baseGameResult.baseGameTotalWin),
