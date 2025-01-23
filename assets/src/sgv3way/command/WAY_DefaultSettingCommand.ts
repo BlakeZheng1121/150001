@@ -64,7 +64,7 @@ export class WAY_DefaultSettingCommand extends CoreDefaultSettingCommand {
         const validDenomMultiplier =
             this.gameDataProxy.initEventData.denomMultiplier.findIndex(
                 (denom) => denom == this.gameDataProxy.curDenomMultiplier
-            ) > 0;
+            ) >= 0;
         this.gameDataProxy.curDenomMultiplier = validDenomMultiplier
             ? this.gameDataProxy.curDenomMultiplier
             : this.gameDataProxy.initEventData.denomMultiplier[0];
