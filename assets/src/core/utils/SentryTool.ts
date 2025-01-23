@@ -7,7 +7,7 @@ export class SentryTool {
     public static init(version: string) {
         try {
             this.instance()?.init({
-                dsn: 'https://950dab570879da635122846f4eb166a2@o4506421333721088.ingest.us.sentry.io/4508554799808512',
+                dsn: 'https://e5603c21146452f130e4e52d40e01865@o4508635464859648.ingest.us.sentry.io/4508685657112576',
                 release: version
             });
         } catch (e) {}

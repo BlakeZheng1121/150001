@@ -11,6 +11,7 @@ import { MockReconnectCommand } from '../command/MockReconnectCommand';
 import { MockHitGrandCommand } from '../command/MockHitGrandCommand';
 import { MockEmblemLevelCommand } from '../command/MockEmblemLevelCommand';
 import { MockHideC1AndC2Command } from '../command/MockHideC1AndC2Command';
+import { MockErrorTestCommand } from '../command/MockErrorTestCommand';
 
 export class MockViewMediator extends puremvc.Mediator {
     private parentView: Component = null;
@@ -53,6 +54,7 @@ export class MockViewMediator extends puremvc.Mediator {
     /** 設定預設按鈕 */
     protected setDefaultBtn() {
         const caseList = {
+            ErrorTest: MockErrorTestCommand.NAME,
             WinBoard: MockWinboardCommand.NAME,
             PrizePrediction: MockPrizePredictionCommand.NAME,
             Disconnection: MockDisconnectionCommand.NAME,
@@ -64,6 +66,7 @@ export class MockViewMediator extends puremvc.Mediator {
             HideC1AndC2: MockHideC1AndC2Command.NAME
         };
         const self = this;
+        self.facade.registerCommand(MockErrorTestCommand.NAME, MockErrorTestCommand);
         self.facade.registerCommand(MockWinboardCommand.NAME, MockWinboardCommand);
         self.facade.registerCommand(MockPrizePredictionCommand.NAME, MockPrizePredictionCommand);
         self.facade.registerCommand(MockDisconnectionCommand.NAME, MockDisconnectionCommand);
