@@ -284,6 +284,9 @@ export class GAME_JackpotPoolView extends BaseView {
         if (!this.tempGrandAmount) return;
         this.grandAmount.string = BalanceUtil.formatBalanceWithDollarSign(this.tempGrandAmount);
         this.grandAmountInFreeGame.string = this.grandAmount.string;
+        // 強制更新Label，並同步Grand和Major的字體大小
+        this.grandAmount.updateRenderData(true);
+        this.majorAmount.fontSize = this.grandAmount.actualFontSize;
     }
 
     public updateMajorAmount() {
@@ -294,6 +297,9 @@ export class GAME_JackpotPoolView extends BaseView {
     public updateMinorAmount() {
         if (!this.tempMinorAmount) return;
         this.minorAmount.string = BalanceUtil.formatBalanceWithDollarSign(this.tempMinorAmount, !this.isOmniChannel);
+        // 強制更新Label，同步Minor和Mini的字體大小
+        this.minorAmount.updateRenderData(true);
+        this.miniAmount.fontSize = this.minorAmount.actualFontSize;
     }
 
     public updateMiniAmount() {
