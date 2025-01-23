@@ -53,10 +53,11 @@ export class WAY_DefaultSettingCommand extends CoreDefaultSettingCommand {
         const validFeatureBet =
             this.gameDataProxy.initEventData.featureBetList.findIndex(
                 (featureBet) => featureBet == this.gameDataProxy.curFeatureBet
-            ) > 0;
+            ) >= 0;
+        const lastIndex = this.gameDataProxy.initEventData.featureBetList.length - 1;
         this.gameDataProxy.curFeatureBet = validFeatureBet
             ? this.gameDataProxy.curFeatureBet
-            : this.gameDataProxy.initEventData.featureBetList[0];
+            : this.gameDataProxy.initEventData.featureBetList[lastIndex];
     }
 
     private checkDenomMultiplier() {
