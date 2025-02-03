@@ -47,10 +47,10 @@ export class SetupSFSConfigCommand extends puremvc.SimpleCommand {
             if (this.gameDataProxy.isDemoGame === false) {
                 if (!['https://gamedev.jigaming.com.tw', 'https://gamesit.jigaming.com.tw'].includes(e.origin)) {
                     GTMUtil.registerGTM('GTM-T2XTCNK9');
-                    this.env = ['https://gamedev.jigaming.com.tw'].includes(e.origin) ? 'dev' : 'sit';
+                    this.env = 'prod';
                 } else {
                     GTMUtil.registerGTM('GTM-53Z8F4BH');
-                    this.env = 'prod';
+                    this.env = ['https://gamedev.jigaming.com.tw'].includes(e.origin) ? 'dev' : 'sit';
                 }
 
                 GTMUtil.setGTMEvent('GAInit', {
@@ -60,6 +60,10 @@ export class SetupSFSConfigCommand extends puremvc.SimpleCommand {
                     Session_ID: this.gameDataProxy.sessionId
                 });
             }
+
+            // 設定Sentry環境
+            SentryTool.init(this.gameDataProxy.gameVer, this.env);
+            SentryTool.setUserID(this.gameDataProxy.userId);
         }
     }
 
@@ -70,10 +74,6 @@ export class SetupSFSConfigCommand extends puremvc.SimpleCommand {
         this.gameDataProxy.connectedTimeout = ticket['gameConnectionTimeout'];
         this.gameDataProxy.resLoadingTimeout = ticket['gameResourceTimeout'];
         this.gameDataProxy.userId = ticket['gameUid'];
-
-        // 設定Sentry環境
-        SentryTool.init(this.gameDataProxy.gameVer, this.env);
-        SentryTool.setUserID(this.gameDataProxy.userId);
     }
 
     protected getConfig(): IGameConfig {
