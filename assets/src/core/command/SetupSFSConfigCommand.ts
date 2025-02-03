@@ -19,6 +19,7 @@ import { GTMUtil } from '../utils/GTMUtil';
 export class SetupSFSConfigCommand extends puremvc.SimpleCommand {
     public static readonly NAME: string = 'SetupSFSConfigCommand';
     private config: IGameConfig;
+    private env: string = 'debug';
 
     public execute(notification: puremvc.INotification): void {
         this.config = {};
@@ -46,15 +47,17 @@ export class SetupSFSConfigCommand extends puremvc.SimpleCommand {
             if (this.gameDataProxy.isDemoGame === false) {
                 if (!['https://gamedev.jigaming.com.tw', 'https://gamesit.jigaming.com.tw'].includes(e.origin)) {
                     GTMUtil.registerGTM('GTM-T2XTCNK9');
+                    this.env = ['https://gamedev.jigaming.com.tw'].includes(e.origin) ? 'dev' : 'sit';
                 } else {
                     GTMUtil.registerGTM('GTM-53Z8F4BH');
+                    this.env = 'prod';
                 }
 
                 GTMUtil.setGTMEvent('GAInit', {
                     Member_ID: this.gameDataProxy.userId,
                     Game_ID: this.gameDataProxy.machineType,
                     DateTime: Date.now(),
-                    Session_ID: this.gameDataProxy.sessionId,
+                    Session_ID: this.gameDataProxy.sessionId
                 });
             }
         }
@@ -69,7 +72,7 @@ export class SetupSFSConfigCommand extends puremvc.SimpleCommand {
         this.gameDataProxy.userId = ticket['gameUid'];
 
         // 設定Sentry環境
-        SentryTool.init(this.gameDataProxy.gameVer);
+        SentryTool.init(this.gameDataProxy.gameVer, this.env);
         SentryTool.setUserID(this.gameDataProxy.userId);
     }
 

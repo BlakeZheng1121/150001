@@ -4,11 +4,12 @@ export class SentryTool {
     }
 
     /** 初始化 */
-    public static init(version: string) {
+    public static init(version: string, env: string) {
         try {
             this.instance()?.init({
                 dsn: 'https://e5603c21146452f130e4e52d40e01865@o4508635464859648.ingest.us.sentry.io/4508685657112576',
-                release: version
+                release: version,
+                environment: env
             });
         } catch (e) {}
     }
