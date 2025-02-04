@@ -19,7 +19,6 @@ export class AfterReconnectionCommand extends puremvc.SimpleCommand {
         clearTimeout(this.networkProxy.reconnectionRegister);
         this.gameDataProxy.isReconnecting = false;
         this.networkProxy.resetSendSpinState();
-        this.sendNotification(AutoPlayClickOptionCommand.NAME, [0, 0]);
         if (this.gameDataProxy.isSpinning) {
             this.sendNotification(SpinRequestCommand.NAME);
         }
