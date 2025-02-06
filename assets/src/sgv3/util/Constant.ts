@@ -10,6 +10,7 @@ export class SceneEvent {
     public static LOAD_UI_VERSION_COMPLETE: string = 'loadUIVersionComplete';
     public static LOAD_GAME_DATA_COMPLETE: string = 'loadGameDataComplete';
     public static LOAD_LOGO_URL: string = 'loadLogoUrl';
+    public static LOAD_PROVIDER_URL: string = 'loadProviderUrl';
     public static LOAD_SPIN_LOGO_URL: string = 'loadSpinLogoUrl';
 }
 

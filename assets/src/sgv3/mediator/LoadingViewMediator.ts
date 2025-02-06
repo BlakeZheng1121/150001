@@ -59,11 +59,11 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
             Member_ID: this.gameDataProxy.userId,
             Game_ID: this.gameDataProxy.machineType,
             DateTime: Date.now(),
-            Session_ID: this.gameDataProxy.sessionId,
+            Session_ID: this.gameDataProxy.sessionId
         });
     }
 
-    protected lazyEventListener(): void { }
+    protected lazyEventListener(): void {}
 
     public listNotificationInterests(): Array<any> {
         return [
@@ -71,6 +71,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
             LoadEvent.LOAD_ITEM_PROGRESS,
             GameProxyEvent.RESPONSE_INIT,
             SceneEvent.LOAD_LOGO_URL,
+            SceneEvent.LOAD_PROVIDER_URL,
             SceneEvent.BATCH_LOADING_COMPLETE,
             SceneEvent.PENDING_EVENT_AND_SHOW_LOADING,
             SceneManager.EV_ORIENTATION_VERTICAL,
@@ -96,6 +97,9 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
                 break;
             case SceneEvent.LOAD_LOGO_URL:
                 this.initLogo(notification.getBody() as string);
+                break;
+            case SceneEvent.LOAD_PROVIDER_URL:
+                this.initProvider(notification.getBody() as string);
                 break;
         }
     }
@@ -173,7 +177,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
             Member_ID: this.gameDataProxy.userId,
             Game_ID: this.gameDataProxy.machineType,
             DateTime: Date.now(),
-            Session_ID: this.gameDataProxy.sessionId,
+            Session_ID: this.gameDataProxy.sessionId
         });
 
         //進行 Recovery流程
@@ -201,7 +205,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
                 Member_ID: this.gameDataProxy.userId,
                 Game_ID: this.gameDataProxy.machineType,
                 DateTime: Date.now(),
-                Session_ID: this.gameDataProxy.sessionId,
+                Session_ID: this.gameDataProxy.sessionId
             });
 
             this.headGroup = this.baseLoadList;
@@ -241,8 +245,8 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
                 sceneName,
                 setProgress
                     ? (completedCount, totalCount) => {
-                        this.onLoadSceneProgress(completedCount, totalCount);
-                    }
+                          this.onLoadSceneProgress(completedCount, totalCount);
+                      }
                     : null,
                 (error) => {
                     if (!error) {
@@ -271,7 +275,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
                         groupList.shift();
                         this.wait(obj, 100);
                     })
-                    .catch((error) => { });
+                    .catch((error) => {});
             } else if (assetName == 'common-ui') {
                 await this.loadPrefab('common-ui', 'ControlPanel')
                     .then((prefab) => this.instantiatePrefab(prefab))
@@ -279,7 +283,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
                         groupList.shift();
                         this.wait(obj, 100);
                     })
-                    .catch((error) => { });
+                    .catch((error) => {});
             } else if (assetName == 'bbw') {
                 await this.loadPrefab('common-ui', 'BBWView')
                     .then((prefab) => this.instantiatePrefab(prefab))
@@ -287,7 +291,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
                         groupList.shift();
                         this.wait(obj, 100);
                     })
-                    .catch((error) => { });
+                    .catch((error) => {});
             } else if (assetName == 'betMenu') {
                 const prefabName = this.gameDataProxy.isOmniChannel() ? 'OmniBetMenuView' : 'BetMenuView';
                 await this.loadPrefab('common-ui', prefabName)
@@ -296,7 +300,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
                         groupList.shift();
                         this.wait(obj, 100);
                     })
-                    .catch((error) => { });
+                    .catch((error) => {});
             } else if (assetName == 'feature-bet') {
                 if (this.gameDataProxy.isOmniChannel()) {
                     await this.loadPrefab('feature-bet', 'FeatureBetView')
@@ -305,7 +309,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
                             groupList.shift();
                             this.wait(obj, 100);
                         })
-                        .catch((error) => { });
+                        .catch((error) => {});
                 } else {
                     groupList.shift();
                     this.finishedAssetsNum++;
@@ -335,7 +339,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
                         groupList.shift();
                         this.wait(obj, 100);
                     })
-                    .catch((error) => { });
+                    .catch((error) => {});
             }
         }
 
@@ -411,7 +415,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
             Member_ID: this.gameDataProxy.userId,
             Game_ID: this.gameDataProxy.machineType,
             DateTime: Date.now(),
-            Session_ID: this.gameDataProxy.sessionId,
+            Session_ID: this.gameDataProxy.sessionId
         });
     }
 
@@ -425,6 +429,11 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
     protected initLogo(url: string) {
         this.view.logo.url = url;
         this.view.logo.updateFrame();
+    }
+
+    protected initProvider(url: string) {
+        this.view.provider.url = url;
+        this.view.provider.updateFrame();
     }
     // ======================== Get Set ========================
     protected _netProxy: NetworkProxy;

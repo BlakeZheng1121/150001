@@ -245,6 +245,14 @@ export class CoreGameDataProxy extends puremvc.Proxy {
     }
 
     /** 取得SPIN鍵的Provider Logo連結 */
+    public get spinLogoUrl() {
+        return this.gameData.spinLogoUrl;
+    }
+    public set spinLogoUrl(_val) {
+        this.gameData.spinLogoUrl = _val;
+    }
+
+    /** 取得Provider Logo連結 */
     public get providerLogoUrl() {
         return this.gameData.providerLogoUrl;
     }

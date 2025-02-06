@@ -38,6 +38,7 @@ export class SetupGameConfigCommand extends puremvc.SimpleCommand {
             self.getGameVerRequest();
             self.getUIVersionRequest();
             self.getLogoUrlRequest();
+            self.getProviderUrlRequest();
             self.getSpinLogoUrlRequest();
         }
     }
@@ -70,6 +71,10 @@ export class SetupGameConfigCommand extends puremvc.SimpleCommand {
                 let logoUrl = data;
                 self.setupLogoUrl(logoUrl);
                 break;
+            case 'getProviderUrl':
+                let providerUrl = data;
+                self.setupProviderUrl(providerUrl);
+                break;
             case 'getSpinLogoUrl':
                 let spinLogoUrl = data;
                 self.setupSpinLogoUrl(spinLogoUrl);
@@ -82,73 +87,67 @@ export class SetupGameConfigCommand extends puremvc.SimpleCommand {
             return;
         }
         this.sendNotification(SceneEvent.LOAD_LOGO_URL, url);
+        this.gameDataProxy.providerLogoUrl = url;
+    }
+
+    protected setupProviderUrl(url: any) {
+        if (window['serviceProvider'] === ServiceProvider.OTHERS || url === undefined || url === null) {
+            return;
+        }
+        this.sendNotification(SceneEvent.LOAD_PROVIDER_URL, url);
     }
 
     protected setupSpinLogoUrl(url: any) {
         if (window['serviceProvider'] === ServiceProvider.OTHERS || url === undefined || url === null) {
             return;
         }
-        this.sendNotification(SceneEvent.LOAD_SPIN_LOGO_URL, url);
-
-        let gameDataProxy: CoreGameDataProxy = this.getGameDataProxy();
-        gameDataProxy.providerLogoUrl = url;
+        this.gameDataProxy.spinLogoUrl = url;
     }
 
     protected setupServInfo(servInfo: any) {
-        let gameDataProxy: CoreGameDataProxy = this.getGameDataProxy();
-        gameDataProxy.host = servInfo['gameHost'];
+        this.gameDataProxy.host = servInfo['gameHost'];
         Logger.enable = String(servInfo['enableInfoLog']) == 'true' ? true : false;
     }
 
     protected setupUserInfo(userInfo: any) {
-        let gameDataProxy: CoreGameDataProxy = this.getGameDataProxy();
         this.setupSupportedLanguage(userInfo['lang']);
-        gameDataProxy.useDollarSign = userInfo['useDollarSign'];
-        gameDataProxy.dollarSign = userInfo['currencySymbol'];
-        gameDataProxy.dollarCurrency = userInfo['currencySystemName'];
-        gameDataProxy.sessionId = userInfo['sessionId'];
+        this.gameDataProxy.useDollarSign = userInfo['useDollarSign'];
+        this.gameDataProxy.dollarSign = userInfo['currencySymbol'];
+        this.gameDataProxy.dollarCurrency = userInfo['currencySystemName'];
+        this.gameDataProxy.sessionId = userInfo['sessionId'];
         //BalanceUtil.dollarSign = gameDataProxy.useDollarSign ? gameDataProxy.dollarSign : '';
-        BalanceUtil.dollarSign = gameDataProxy.dollarCurrency;
+        BalanceUtil.dollarSign = this.gameDataProxy.dollarCurrency;
         this.sendNotification(SceneEvent.LOAD_USER_INFO_COMPLETE);
     }
 
     private setupSupportedLanguage(lang: string) {
         lang = String(lang).toLowerCase().slice(0, 2);
         i18n.init(lang);
-
-        let gameDataProxy: CoreGameDataProxy = this.getGameDataProxy();
-        gameDataProxy.language = i18n.getSupportedLanguage(lang);
+        this.gameDataProxy.language = i18n.getSupportedLanguage(lang);
     }
 
     protected setupGameData(gameData: any) {
-        let gameDataProxy: CoreGameDataProxy = this.getGameDataProxy();
         this.setupBrandCommonUI(gameData['brandId']);
-        gameDataProxy.isDemoGame = gameData['isDemo'];
-        gameDataProxy.hasGoHome = gameData['isShowGoHome'];
-        gameDataProxy.hasPlayerReport = gameData['isShowPlayerReport'];
+        this.gameDataProxy.isDemoGame = gameData['isDemo'];
+        this.gameDataProxy.hasGoHome = gameData['isShowGoHome'];
+        this.gameDataProxy.hasPlayerReport = gameData['isShowPlayerReport'];
         this.sendNotification(SceneEvent.LOAD_GAME_DATA_COMPLETE);
     }
 
     protected setupGameVer(gameVer: any) {
-        let gameDataProxy: CoreGameDataProxy = this.getGameDataProxy();
-        gameDataProxy.gameVer = gameVer;
-        gameDataProxy.resPath = `${gameDataProxy.host}${gameDataProxy.gameType}/${gameDataProxy.machineType}/${gameDataProxy.gameVer}/`;
+        this.gameDataProxy.gameVer = gameVer;
+        this.gameDataProxy.resPath = `${this.gameDataProxy.host}${this.gameDataProxy.gameType}/${this.gameDataProxy.machineType}/${this.gameDataProxy.gameVer}/`;
     }
 
     protected setupUIVersion(uiVersion: any) {
-        let gameDataProxy: CoreGameDataProxy = this.getGameDataProxy();
-        gameDataProxy.gameAndUiVer = `v${uiVersion.version} / v${uiVersion.gameVersion}`;
-        gameDataProxy.gameVer = uiVersion.gameVersion;
+        this.gameDataProxy.gameAndUiVer = `v${uiVersion.version} / v${uiVersion.gameVersion}`;
+        this.gameDataProxy.gameVer = uiVersion.gameVersion;
         this.sendNotification(SceneEvent.LOAD_UI_VERSION_COMPLETE);
     }
 
     protected setupBrandCommonUI(brandId: string) {
         let _brandID: string = Number(brandId) > 0 ? brandId : '1';
         brand.init(_brandID);
-    }
-
-    protected getGameDataProxy(): CoreGameDataProxy {
-        return this.facade.retrieveProxy(CoreGameDataProxy.NAME) as CoreGameDataProxy;
     }
 
     protected getWebBridgeProxy(): CoreWebBridgeProxy {
@@ -203,12 +202,24 @@ export class SetupGameConfigCommand extends puremvc.SimpleCommand {
         this.getWebBridgeProxy().getWebObjRequest(this, 'getLogoUrl');
     }
 
+    protected getProviderUrlRequest() {
+        this.webBridgeProxy.getWebObjRequest(this, 'getProviderUrl');
+    }
+
     protected getSpinLogoUrlRequest() {
         this.getWebBridgeProxy().getWebObjRequest(this, 'getSpinLogoUrl');
     }
 
     protected getUIVersionRequest(): any {
         return this.getWebBridgeProxy().getWebFunRequest(this, 'getUIVersion');
+    }
+
+    protected _gameDataProxy: CoreGameDataProxy;
+    public get gameDataProxy(): CoreGameDataProxy {
+        if (!this._gameDataProxy) {
+            this._gameDataProxy = this.facade.retrieveProxy(CoreGameDataProxy.NAME) as CoreGameDataProxy;
+        }
+        return this._gameDataProxy;
     }
 
     private _webBridgeProxy: WebBridgeProxy;

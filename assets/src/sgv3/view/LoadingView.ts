@@ -16,6 +16,9 @@ export class LoadingView extends BaseView {
 
     @property({ type: UrlLogoSetting })
     public logo: UrlLogoSetting;
+    
+    @property({ type: UrlLogoSetting })
+    public provider: UrlLogoSetting;
 
     @property({ type: Node })
     public intro: Node;

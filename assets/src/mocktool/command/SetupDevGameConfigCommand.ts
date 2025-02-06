@@ -5,8 +5,7 @@ export class SetupDevGameConfigCommand extends SetupGameConfigCommand {
     public execute(notification: puremvc.INotification): void {
         super.execute(notification);
 
-        let gameDataProxy = this.getGameDataProxy();
-        gameDataProxy.resPath = '';
+        this.gameDataProxy.resPath = '';
         if (window['servInfo'].enableDebugLog) {
             Logger.enable = window['servInfo'].enableDebugLog;
         }
