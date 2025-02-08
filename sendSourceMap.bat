@@ -20,7 +20,7 @@ if exist "%folderPath%" (
     )
     :: 移除 JS 文件中的 sourceMappingURL 註解
     for /r "%folderPath%" %%i in (*.js) do (
-        powershell -Command "(Get-Content '%%i') -replace '//# sourceMappingURL=.*', '' | Set-Content '%%i'"
+        powershell -Command "(Get-Content '%%i' -Encoding UTF8) -replace '//# sourceMappingURL=.*', '' | Set-Content '%%i' -Encoding UTF8"
         echo Removed sourceMappingURL from: %%i
     )
     echo Process complete.
