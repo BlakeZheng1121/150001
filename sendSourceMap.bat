@@ -9,15 +9,21 @@ powershell sentry-cli sourcemaps inject --org jumbo-igaming --project golden-hor
 powershell sentry-cli sourcemaps upload --org jumbo-igaming --project golden-horse-treasure ./build/%PROJECT_ID%/assets/main
 powershell sentry-cli sourcemaps upload --org jumbo-igaming --project golden-horse-treasure ./build/%PROJECT_ID%/cocos-js
 
-:: 移除source-map
+:: 移除source-map和sourceMappingURL註解
 set folderPath=./build/%PROJECT_ID%
 if exist "%folderPath%" (
-    echo Deleting .map files in %folderPath% and its subfolders...
+    echo Deleting .map files and removing sourceMappingURL comments...
+    :: 刪除 .map 文件
     for /r "%folderPath%" %%i in (*.map) do (
         del "%%i"
         echo Deleted: %%i
     )
-    echo Deletion complete.
+    :: 移除 JS 文件中的 sourceMappingURL 註解
+    for /r "%folderPath%" %%i in (*.js) do (
+        powershell -Command "(Get-Content '%%i') -replace '//# sourceMappingURL=.*', '' | Set-Content '%%i'"
+        echo Removed sourceMappingURL from: %%i
+    )
+    echo Process complete.
 ) else (
     echo Folder not found: %folderPath%
 )
