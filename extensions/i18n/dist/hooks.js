@@ -37,6 +37,9 @@ async function removeReference() {
         await Editor.Message.request('asset-db', 'query-assets', {
             pattern: 'db://assets/**'
         }).then((infos) => Array.prototype.push.apply(assets, infos.filter(filterFn)));
+        await Editor.Message.request('asset-db', 'query-assets', {
+            pattern: 'db://common-ui/**'
+        }).then((infos) => Array.prototype.push.apply(assets, infos.filter(filterFn)));
         for (let i = 0; i < assets.length; i++) {
             await setNullToReference(assets[i], localizedSpriteUuid, localizedSkeletonUuid);
         }
@@ -48,7 +51,7 @@ function filterFn(info) {
     return info.type == 'cc.Prefab' || info.type == 'cc.SceneAsset';
 }
 async function setNullToReference(info, localizedSpriteUuid, localizedSkeletonUuid) {
-    let path = (0, path_1.join)(Editor.Project.path, info.url.replace('db://', ''));
+    let path = info.file;
     let data = fs_1.default.readFileSync(path, 'utf8');
     let needToSave = false;
     if (data.includes(localizedSpriteUuid)) {
