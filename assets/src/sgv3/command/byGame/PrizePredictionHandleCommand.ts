@@ -60,10 +60,7 @@ export class PrizePredictionHandleCommand extends puremvc.SimpleCommand {
             (ballCount >= 6 && hitMiniGame);
         const displayMethodCondition = odds >= 25 && isMSymbolFiveOfKind;
 
-        result.displayInfo.prizePredictionType =
-            prizePredictionCondition && this.gameDataProxy.curSpeedMode !== SpeedMode.STATUS_TURBO
-                ? 'TYPE_1'
-                : 'NoPrizePredictionType';
+        result.displayInfo.prizePredictionType = prizePredictionCondition ? 'TYPE_1' : 'NoPrizePredictionType';
         result.displayInfo.displayMethod = Array.from([false, false, false, false, displayMethodCondition], (x) => [x]);
     }
     /**
