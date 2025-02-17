@@ -10,6 +10,7 @@ import { GameOperation } from '../../vo/enum/GameOperation';
 import { StateCommand } from './StateCommand';
 import { UIEvent } from 'common-ui/proxy/UIEvent';
 import { LastSymbolFeatureCommand } from 'src/game/command/LastSymbolFeatureCommand';
+import { TakeWinCommand } from '../balance/TakeWinCommand';
 
 export class Game1InitCommand extends StateCommand {
     public static readonly NAME = StateMachineProxy.GAME1_EV_INIT;
@@ -32,10 +33,7 @@ export class Game1InitCommand extends StateCommand {
                     this.changeState(StateMachineProxy.GAME1_SHOWWIN);
                 } else {
                     // 從game3出來 game1沒分數就不用showWin了 所以直接清除TempWon讓錶底加上miniGame的值
-                    let totalWin = this.gameDataProxy._tempWonCredit;
-                    this.gameDataProxy.resetTempWonCredit();
-                    this.sendNotification(UIEvent.UPDATE_PLAYER_BALANCE, this.gameDataProxy.cash);
-                    this.networkProxy.sendSettlePlay(totalWin);
+                    this.sendNotification(TakeWinCommand.NAME);
                     this.changeState(StateMachineProxy.GAME1_IDLE);
                 }
                 break;
