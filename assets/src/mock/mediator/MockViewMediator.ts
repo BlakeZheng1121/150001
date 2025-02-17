@@ -12,6 +12,7 @@ import { MockHitGrandCommand } from '../command/MockHitGrandCommand';
 import { MockEmblemLevelCommand } from '../command/MockEmblemLevelCommand';
 import { MockHideC1AndC2Command } from '../command/MockHideC1AndC2Command';
 import { MockErrorTestCommand } from '../command/MockErrorTestCommand';
+import { MockChangeTimeScaleCommand } from '../command/MockChangeTimeScaleCommand';
 
 export class MockViewMediator extends puremvc.Mediator {
     private parentView: Component = null;
@@ -63,7 +64,8 @@ export class MockViewMediator extends puremvc.Mediator {
             ToContainerIconPos: MockToContainerIconPosCommand.NAME,
             HitGrand: MockHitGrandCommand.NAME,
             EmblemLevel: MockEmblemLevelCommand.NAME,
-            HideC1AndC2: MockHideC1AndC2Command.NAME
+            HideC1AndC2: MockHideC1AndC2Command.NAME,
+            "RunSpeed_x1~20": MockChangeTimeScaleCommand.NAME
         };
         const self = this;
         self.facade.registerCommand(MockErrorTestCommand.NAME, MockErrorTestCommand);
@@ -76,6 +78,7 @@ export class MockViewMediator extends puremvc.Mediator {
         self.facade.registerCommand(MockHitGrandCommand.NAME, MockHitGrandCommand);
         self.facade.registerCommand(MockEmblemLevelCommand.NAME, MockEmblemLevelCommand);
         self.facade.registerCommand(MockHideC1AndC2Command.NAME, MockHideC1AndC2Command);
+        self.facade.registerCommand(MockChangeTimeScaleCommand.NAME, MockChangeTimeScaleCommand);
         self.sendNotification('onAddExtraCase', caseList);
     }
 

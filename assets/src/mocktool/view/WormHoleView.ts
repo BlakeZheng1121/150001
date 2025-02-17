@@ -27,6 +27,7 @@ export class WormHoleView extends BaseView {
 
     private opacityOpaque: number = 255;
     private opacityTransparent: number = 0;
+    private timeoutId: number = 0;
 
     protected onLoad() {
         super.onLoad();
@@ -76,9 +77,10 @@ export class WormHoleView extends BaseView {
         }
         self.holeTween.stop();
         self.holeTween.start();
-
-        this.unschedule(self.resetClickedCount);
-        this.scheduleOnce(self.resetClickedCount, 0.6);
+        if (self.timeoutId) {
+            clearTimeout(self.timeoutId);
+        }
+        self.timeoutId = setTimeout(self.resetClickedCount.bind(self), 600);
         self.clickedCount++;
 
         if (self.clickedCount >= 2) {
