@@ -112,10 +112,12 @@ export class ChangeSceneViewCommand extends puremvc.SimpleCommand {
 
     private enableQuickSpin() {
         this.sendNotification(UIEvent.CHANGE_BUTTON_STATE, { name: ButtonName.QUICK_SPIN, state: ButtonState.ENABLED });
-        this.sendNotification(UIEvent.CHECK_QUICK_SPIN_STATUS);
         //判斷是否需要還原三倍速
         if (this.gameDataProxy.curSpeedMode === SpeedMode.STATUS_TURBO) {
             setEngineTimeScale(3);
+            this.UIProxy.isQuickSpin = true;
+        } else if (this.gameDataProxy.curSpeedMode === SpeedMode.STATUS_QUICK) {
+            this.UIProxy.isQuickSpin = true;
         }
     }
 

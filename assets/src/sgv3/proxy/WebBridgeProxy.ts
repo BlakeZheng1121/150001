@@ -10,6 +10,7 @@ import { GameDataProxy } from './GameDataProxy';
 import { StateMachineProxy } from './StateMachineProxy';
 import { ServiceProvider } from '../../core/vo/NetworkType';
 import { UIEvent } from 'common-ui/proxy/UIEvent';
+import { SpeedMode } from 'common-ui/proxy/UIEnums';
 
 /**
  * [GAME to HTML]
@@ -27,7 +28,7 @@ export class WebBridgeProxy extends CoreWebBridgeProxy {
     protected initAPI(): void {
         window['onWebListClick'] = (_val) => this.onWebListClick(_val);
         window['onSpinBtnClick'] = () => this.spinRequest();
-        window['setTurboValue'] = (_val) => this.setTurboValue(_val);
+        window['setTurboValue'] = (_val) => this.setQuickValue(_val);
         window['onWebAutoPlayClick'] = (_val, _val2) => this.onWebAutoPlayClick(_val, _val2);
         window['setGameFeature'] = (_val) => this.setFeature(_val);
         window['checkMenuEnable'] = () => this.checkMenuEnable();
@@ -138,7 +139,7 @@ export class WebBridgeProxy extends CoreWebBridgeProxy {
                 break;
             case 'updateTurboMode':
                 let data = JSON.parse(e.data).data;
-                this.setTurboValue(data);
+                this.setQuickValue(data);
                 break;
             default:
                 super.handleContainerMsg(e);
@@ -167,8 +168,12 @@ export class WebBridgeProxy extends CoreWebBridgeProxy {
      * @param _value - true 啟動加速.
      * @param _value - false 關閉加速.
      */
-    protected setTurboValue(_val: boolean): void {
-        this.sendNotification(UIEvent.SET_QUICK_SPIN_FROM_WEB, _val);
+    protected setQuickValue(_val: boolean): void {
+        if (this.gameDataProxy.curScene == GameScene.Game_1) {
+            this.sendNotification(UIEvent.SET_QUICK_SPIN_FROM_WEB, _val);
+        } else {
+            this.gameDataProxy.curSpeedMode = SpeedMode.STATUS_QUICK;
+        }
     }
 
     /**
