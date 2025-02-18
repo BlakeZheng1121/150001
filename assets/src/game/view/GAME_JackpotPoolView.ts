@@ -317,11 +317,11 @@ export class GAME_JackpotPoolView extends BaseView {
     }
 
     private runMinorAmountComplete() {
-        this.minorAmount.string = BalanceUtil.formatBalanceWithDollarSign(this.totalMinorAmount);
+        this.minorAmount.string = BalanceUtil.formatBalanceWithDollarSign(this.totalMinorAmount, !this.isOmniChannel);
     }
 
     private runMiniAmountComplete() {
-        this.miniAmount.string = BalanceUtil.formatBalanceWithDollarSign(this.totalMiniAmount);
+        this.miniAmount.string = BalanceUtil.formatBalanceWithDollarSign(this.totalMiniAmount, !this.isOmniChannel);
     }
 
     public enterGamePos(scene: string) {
