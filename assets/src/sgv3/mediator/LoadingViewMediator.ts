@@ -1,4 +1,5 @@
-import { assetManager, Component, director, instantiate, Prefab, Node, _decorator } from 'cc';
+import * as i18n from 'i18n/LanguageData';
+import { assetManager, Component, director, instantiate, Prefab, Node, _decorator, sp } from 'cc';
 import { AudioManager } from '../../audio/AudioManager';
 import BaseMediator from '../../base/BaseMediator';
 import { NetworkProxy } from '../../core/proxy/NetworkProxy';
@@ -43,7 +44,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
 
     /** 進入basegame後 要載的資源 */
     protected extendList(): string[] {
-        return ['extend', GameScene.Game_2, GameScene.Game_3, GameScene.Game_4];
+        return ['extend', GameScene.Game_2, GameScene.Game_3, GameScene.Game_4, i18n._language];
     }
 
     public constructor(name?: string, component?: any) {
@@ -63,7 +64,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
         });
     }
 
-    protected lazyEventListener(): void {}
+    protected lazyEventListener(): void { }
 
     public listNotificationInterests(): Array<any> {
         return [
@@ -214,6 +215,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
                 .then(() => this.downloadBundle('common-ui'))
                 .then(() => this.downloadBundle('extend'))
                 .then(() => this.downloadBundle('feature-bet'))
+                .then(() => this.downloadBundle(i18n._language))
                 .then(() => this.loadAssetsBundle(this.baseLoadList))
                 .catch((error) => {
                     // 一段時間後retry
@@ -245,8 +247,8 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
                 sceneName,
                 setProgress
                     ? (completedCount, totalCount) => {
-                          this.onLoadSceneProgress(completedCount, totalCount);
-                      }
+                        this.onLoadSceneProgress(completedCount, totalCount);
+                    }
                     : null,
                 (error) => {
                     if (!error) {
@@ -275,7 +277,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
                         groupList.shift();
                         this.wait(obj, 100);
                     })
-                    .catch((error) => {});
+                    .catch((error) => { });
             } else if (assetName == 'common-ui') {
                 await this.loadPrefab('common-ui', 'ControlPanel')
                     .then((prefab) => this.instantiatePrefab(prefab))
@@ -283,7 +285,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
                         groupList.shift();
                         this.wait(obj, 100);
                     })
-                    .catch((error) => {});
+                    .catch((error) => { });
             } else if (assetName == 'bbw') {
                 await this.loadPrefab('common-ui', 'BBWView')
                     .then((prefab) => this.instantiatePrefab(prefab))
@@ -291,7 +293,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
                         groupList.shift();
                         this.wait(obj, 100);
                     })
-                    .catch((error) => {});
+                    .catch((error) => { });
             } else if (assetName == 'betMenu') {
                 const prefabName = this.gameDataProxy.isOmniChannel() ? 'OmniBetMenuView' : 'BetMenuView';
                 await this.loadPrefab('common-ui', prefabName)
@@ -300,7 +302,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
                         groupList.shift();
                         this.wait(obj, 100);
                     })
-                    .catch((error) => {});
+                    .catch((error) => { });
             } else if (assetName == 'feature-bet') {
                 if (this.gameDataProxy.isOmniChannel()) {
                     await this.loadPrefab('feature-bet', 'FeatureBetView')
@@ -309,7 +311,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
                             groupList.shift();
                             this.wait(obj, 100);
                         })
-                        .catch((error) => {});
+                        .catch((error) => { });
                 } else {
                     groupList.shift();
                     this.finishedAssetsNum++;
@@ -329,6 +331,13 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
                         groupList.shift();
                         this.wait(obj, 100);
                     });
+            } else if (assetName == i18n._language) {
+                await this.fetchBundleAssets(i18n._language)
+                    .then((obj) => {
+                        groupList.shift();
+                        this.wait(obj, 100);
+                    })
+                    .catch((error) => { });
             } else {
                 await this.loadPrefab('scenes', assetName)
                     .then((prefab) => this.instantiatePrefab(prefab))
@@ -339,7 +348,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
                         groupList.shift();
                         this.wait(obj, 100);
                     })
-                    .catch((error) => {});
+                    .catch((error) => { });
             }
         }
 
@@ -364,6 +373,24 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
 
                 Logger.i(assetName + ' load complete');
                 resolve(prefab);
+            });
+        });
+    }
+
+    fetchBundleAssets(bundleName) {
+        return new Promise<void>((resolve, reject) => {
+            // 取得 bundle 內的所有資源資訊
+            let bundle = assetManager.getBundle(bundleName);
+            const assetsInfo = bundle.getDirWithPath("");
+        
+            // 依序載入這些資源
+            assetsInfo.forEach((info) => {
+                bundle.load(info.path, (err, asset) => {
+                    if (err) {
+                        return reject(err);
+                    }
+                    resolve();
+                });
             });
         });
     }
