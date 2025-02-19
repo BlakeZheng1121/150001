@@ -44,7 +44,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
 
     /** 進入basegame後 要載的資源 */
     protected extendList(): string[] {
-        return ['extend', GameScene.Game_2, GameScene.Game_3, GameScene.Game_4, i18n._language];
+        return ['extend', GameScene.Game_2, GameScene.Game_3, GameScene.Game_4];
     }
 
     public constructor(name?: string, component?: any) {
@@ -75,6 +75,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
             SceneEvent.LOAD_PROVIDER_URL,
             SceneEvent.BATCH_LOADING_COMPLETE,
             SceneEvent.PENDING_EVENT_AND_SHOW_LOADING,
+            SceneEvent.LOAD_USER_INFO_COMPLETE,
             SceneManager.EV_ORIENTATION_VERTICAL,
             SceneManager.EV_ORIENTATION_HORIZONTAL
         ];
@@ -101,6 +102,9 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
                 break;
             case SceneEvent.LOAD_PROVIDER_URL:
                 this.initProvider(notification.getBody() as string);
+                break;
+            case SceneEvent.LOAD_USER_INFO_COMPLETE:
+                this.enqueueExtraLoad();
                 break;
         }
     }
@@ -129,6 +133,10 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
         log.errorCode = 220;
         Logger.init(LogType.ERROR_LOADITEM, this.gameDataProxy.gameType, this.gameDataProxy.machineType);
         Logger.kibana(log);
+    }
+
+    protected enqueueExtraLoad() {
+        this.extraLoadList.push(i18n._language);
     }
 
     protected onLoadGroupComplete(v: puremvc.INotification): void {
@@ -382,7 +390,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
             // 取得 bundle 內的所有資源資訊
             let bundle = assetManager.getBundle(bundleName);
             const assetsInfo = bundle.getDirWithPath("");
-        
+
             // 依序載入這些資源
             assetsInfo.forEach((info) => {
                 bundle.load(info.path, (err, asset) => {
