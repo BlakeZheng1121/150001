@@ -1,4 +1,4 @@
-import { Button, Component, EventTouch, Label, Node, _decorator } from 'cc';
+import { Button, Component, EventKeyboard, EventTouch, KeyCode, Label, Node, _decorator } from 'cc';
 import { NetworkProxy } from '../../core/proxy/NetworkProxy';
 import { Logger } from '../../core/utils/Logger';
 import { TSMap } from '../../core/utils/TSMap';
@@ -10,6 +10,7 @@ import { WormHoleViewMediator } from './WormHoleViewMediator';
 import { GameDataProxy } from '../../sgv3/proxy/GameDataProxy';
 import { ReelPasser } from '../../sgv3/vo/match/ReelMatchInfo';
 import { ReelEvent } from '../../sgv3/util/Constant';
+import { KeyboardProxy } from 'src/core/proxy/KeyboardProxy';
 const { ccclass } = _decorator;
 
 /**
@@ -260,6 +261,10 @@ export class SlotViewMediator extends BaseMediator<SlotView> implements SlotView
     public onApplyReelPasser(sceneName: string, reelPasser: ReelPasser): void {
         const self = this;
         self.sendNotification(ReelEvent.ON_REELS_RESET, { sceneName: sceneName, reelPasser: reelPasser });
+    }
+
+    public onClickStaticData(e: EventTouch): void {
+        this.sendNotification(KeyboardProxy.EV_KEY_DOWN, new EventKeyboard(KeyCode.KEY_X, true));
     }
 
     protected onHorizontalOrientation() {

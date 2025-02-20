@@ -31,6 +31,7 @@ export class WormHoleViewMediator extends BaseMediator<WormHoleView> implements 
         const self = this;
         self.whView = self.viewComponent;
         self.whView.initView(self);
+        self.whView.registerTouchEvent();
     }
 
     public listNotificationInterests(): Array<any> {
@@ -42,7 +43,6 @@ export class WormHoleViewMediator extends BaseMediator<WormHoleView> implements 
 
         switch (notification.getName()) {
             case SceneEvent.LOAD_BASE_COMPLETE:
-                self.whView.registerTouchEvent();
                 break;
         }
     }

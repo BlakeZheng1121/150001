@@ -65,6 +65,7 @@ export class SlotView extends BaseView implements ReelTestPasserListener {
         self.createButton(['SetRNG', self.listener.onClickSetRNG, self.listener], true);
         self.createButton(['SetMathRNG', self.listener.onClickSetMathRNG, self.listener], true);
         self.createButton([self.REFRESH_BTN_NAME, self.listener.onClickRefreshSheet, self.listener], true);
+        self.createButton(['StaticData', self.listener.onClickStaticData, self.listener], true);
     }
 
     /** 清除內容 */
@@ -236,6 +237,7 @@ export interface SlotViewListener {
     onClickRefreshSheet(e: EventTouch): void;
     onClickExtraCase(e: EventTouch): void;
     onApplyReelPasser(sceneName: string, reelPasser: ReelPasser): void;
+    onClickStaticData(e: EventTouch): void;
 }
 
 export class CreateButtonData {
