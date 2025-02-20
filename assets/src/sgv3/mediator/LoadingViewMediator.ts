@@ -217,6 +217,10 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
                 Session_ID: this.gameDataProxy.sessionId
             });
 
+            // 如果是 Demo 模式，新增 demo-panel 到 baseLoadList
+            if (this.gameDataProxy.isDemoGame) {
+                this.baseLoadList.push('demo-panel');
+            }
             this.headGroup = this.baseLoadList;
             this.downloadBundle('preload')
                 .then(() => this.downloadBundle('scenes'))
@@ -224,6 +228,7 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
                 .then(() => this.downloadBundle('extend'))
                 .then(() => this.downloadBundle('feature-bet'))
                 .then(() => this.downloadBundle(i18n._language))
+                .then(() => (this.gameDataProxy.isDemoGame ? this.downloadBundle('demo-panel') : Promise.resolve()))
                 .then(() => this.loadAssetsBundle(this.baseLoadList))
                 .catch((error) => {
                     // 一段時間後retry
@@ -339,6 +344,14 @@ export default class LoadingViewMediator extends BaseMediator<LoadingView> {
                         groupList.shift();
                         this.wait(obj, 100);
                     });
+            } else if (assetName == 'demo-panel') {
+                await this.loadPrefab('demo-panel', 'DemoPanel')
+                    .then((prefab) => this.instantiatePrefab(prefab))
+                    .then((obj) => {
+                        groupList.shift();
+                        this.wait(obj, 100);
+                    })
+                    .catch((error) => { });
             } else if (assetName == i18n._language) {
                 await this.fetchBundleAssets(i18n._language)
                     .then((obj) => {
