@@ -142,4 +142,7 @@ export class CoreGameData {
     public providerLogoUrl: string;
 
     public sessionId: string;
+
+    /** 部屬環境 */
+    public deployEnv: string;
 }

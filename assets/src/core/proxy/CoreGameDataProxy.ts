@@ -266,4 +266,11 @@ export class CoreGameDataProxy extends puremvc.Proxy {
     public set sessionId(_val) {
         this.gameData.sessionId = _val;
     }
+
+    public get deployEnv() {
+        return this.gameData.deployEnv;
+    }
+    public set deployEnv(_val) {
+        this.gameData.deployEnv = _val;
+    }
 }

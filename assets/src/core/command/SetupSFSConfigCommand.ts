@@ -45,12 +45,10 @@ export class SetupSFSConfigCommand extends puremvc.SimpleCommand {
             }
             // 註冊GA
             if (this.gameDataProxy.isDemoGame === false) {
-                if (!['https://gamedev.jigaming.com.tw', 'https://gamesit.jigaming.com.tw'].includes(e.origin)) {
+                if (this.gameDataProxy.deployEnv === 'prod') {
                     GTMUtil.registerGTM('GTM-T2XTCNK9');
-                    this.env = 'prod';
                 } else {
                     GTMUtil.registerGTM('GTM-53Z8F4BH');
-                    this.env = ['https://gamedev.jigaming.com.tw'].includes(e.origin) ? 'dev' : 'sit';
                 }
 
                 GTMUtil.setGTMEvent('GAInit', {
@@ -62,7 +60,7 @@ export class SetupSFSConfigCommand extends puremvc.SimpleCommand {
             }
 
             // 設定Sentry環境
-            SentryTool.init(this.gameDataProxy.gameVer, this.env);
+            SentryTool.init(this.gameDataProxy.gameVer, this.gameDataProxy.deployEnv);
             SentryTool.setUserID(this.gameDataProxy.userId);
         }
     }

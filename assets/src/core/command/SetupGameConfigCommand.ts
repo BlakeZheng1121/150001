@@ -40,6 +40,7 @@ export class SetupGameConfigCommand extends puremvc.SimpleCommand {
             self.getLogoUrlRequest();
             self.getProviderUrlRequest();
             self.getSpinLogoUrlRequest();
+            self.getDeployEnvRequest();
         }
     }
 
@@ -78,6 +79,8 @@ export class SetupGameConfigCommand extends puremvc.SimpleCommand {
             case 'getSpinLogoUrl':
                 let spinLogoUrl = data;
                 self.setupSpinLogoUrl(spinLogoUrl);
+                break;
+            case 'getDeployEnv':
                 break;
         }
     }
@@ -143,6 +146,10 @@ export class SetupGameConfigCommand extends puremvc.SimpleCommand {
         this.gameDataProxy.gameAndUiVer = `v${uiVersion.version} / v${uiVersion.gameVersion}`;
         this.gameDataProxy.gameVer = uiVersion.gameVersion;
         this.sendNotification(SceneEvent.LOAD_UI_VERSION_COMPLETE);
+    }
+
+    protected setupDeployEnv(env: any) {
+        this.gameDataProxy.deployEnv = env;
     }
 
     protected setupBrandCommonUI(brandId: string) {
@@ -212,6 +219,10 @@ export class SetupGameConfigCommand extends puremvc.SimpleCommand {
 
     protected getUIVersionRequest(): any {
         return this.getWebBridgeProxy().getWebFunRequest(this, 'getUIVersion');
+    }
+
+    protected getDeployEnvRequest(): any {
+        return this.webBridgeProxy.getWebFunRequest(this, 'getDeployEnv');
     }
 
     protected _gameDataProxy: CoreGameDataProxy;
