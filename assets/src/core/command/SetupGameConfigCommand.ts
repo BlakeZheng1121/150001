@@ -81,6 +81,7 @@ export class SetupGameConfigCommand extends puremvc.SimpleCommand {
                 self.setupSpinLogoUrl(spinLogoUrl);
                 break;
             case 'getDeployEnv':
+                self.setupDeployEnv(data);
                 break;
         }
     }
