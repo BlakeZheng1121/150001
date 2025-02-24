@@ -85,7 +85,6 @@ export abstract class CoreDefaultSettingCommand extends puremvc.SimpleCommand {
         this.gameDataProxy.curDenom = MathUtil.mul(this.gameDataProxy.initEventData.denoms[0], 0.001);
 
         if (this.gameDataProxy.isOmniChannel()) {
-            this.convertDenomMultiplier();
             this.checkBetInfo();
             this.gameDataProxy.resetBetInfo(
                 this.gameDataProxy.curTotalBet,
@@ -134,13 +133,6 @@ export abstract class CoreDefaultSettingCommand extends puremvc.SimpleCommand {
     protected abstract setBetAndLine(_val: number): number;
 
     protected abstract checkBetInfo(): void;
-
-    protected convertDenomMultiplier() {
-        let denomMultiplier = this.gameDataProxy.initEventData.denomMultiplier;
-        for (let i = 0; i < denomMultiplier.length; i++) {
-            denomMultiplier[i] = this.gameDataProxy.convertCredit2Cash(denomMultiplier[i]);
-        }
-    }
 
     // ======================== Get Set ========================
     protected _webBridgeProxy: WebBridgeProxy;

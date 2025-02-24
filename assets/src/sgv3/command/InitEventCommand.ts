@@ -7,6 +7,7 @@ import { NetworkProxy } from '../../core/proxy/NetworkProxy';
 import { RecoveryData } from '../vo/data/RecoveryData';
 import { AfterReconnectionCommand } from './connect/AfterReconnectionCommand';
 import { BalanceUtil } from '../util/BalanceUtil';
+import { MathUtil } from 'src/core/utils/MathUtil';
 
 /**
  * 遊戲初始化的parser
@@ -25,6 +26,8 @@ export class InitEventCommand extends puremvc.SimpleCommand {
             RefactoringGameData.RefactoringGameStateSetting(initEventData);
         if (!this.gameDataProxy.isOmniChannel()) {
             BalanceUtil.dollarSign = '';
+        } else {
+            this.convertDenomMultiplier();
         }
         //取得本機 儲存的押注組合
         this.gameDataProxy.loadUserSetting();
@@ -63,6 +66,14 @@ export class InitEventCommand extends puremvc.SimpleCommand {
             this.sendNotification(AfterReconnectionCommand.NAME);
         } else {
             this.sendNotification(GameProxyEvent.RESPONSE_INIT);
+        }
+    }
+
+    protected convertDenomMultiplier() {
+        const denom = this.gameDataProxy.initEventData.denoms[0];
+        let denomMultiplier = this.gameDataProxy.initEventData.denomMultiplier;
+        for (let i = 0; i < denomMultiplier.length; i++) {
+            denomMultiplier[i] = MathUtil.mul(denomMultiplier[i], denom, 0.001);
         }
     }
 
