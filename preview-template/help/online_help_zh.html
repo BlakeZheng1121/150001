@@ -23,6 +23,9 @@
                 color: #fdb4b4;
                 font-family: 'Microsoft JhengHei', 'Microsoft YaHei', 'LiHei Pro Medium', 'SimHei', Helvetica,
                     sans-serif;
+                overflow: hidden; /* 隱藏整個頁面的滾動條 */
+                touch-action: none;
+                pointer-events: auto;
             }
 
             ::-webkit-scrollbar {
@@ -50,7 +53,7 @@
             }
 
             .topBar {
-                position: fixed;
+                position: relative;
                 height: 80px;
                 width: 100%;
                 background-color: #2d0b0b;
@@ -60,13 +63,16 @@
             }
 
             .content {
+                position: relative;
                 padding: 10px 10px;
-                padding-top: 80px;
                 margin: auto;
                 width: 100%;
+                height: calc(100% - 80px);
                 min-width: 360px;
                 overflow-x: hidden;
+                overflow-y: auto;
                 box-sizing: border-box;
+                justify-content: center;
             }
 
             .content h2 {
