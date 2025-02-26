@@ -13,7 +13,7 @@ import {
     WinEvent
 } from '../../sgv3/util/Constant';
 import { SingleReelContent } from '../../sgv3/view/reel/single-reel/SingleReelContent';
-import { GameScene } from '../../sgv3/vo/data/GameScene';
+import { GameScene, GameSceneOption } from '../../sgv3/vo/data/GameScene';
 import { ReelType, SymbolId } from '../../sgv3/vo/enum/Reel';
 import { SpecialHitInfo } from '../../sgv3/vo/enum/SpecialHitInfo';
 import { SymbolInfo } from '../../sgv3/vo/info/SymbolInfo';
@@ -29,6 +29,7 @@ import { MathUtil } from 'src/core/utils/MathUtil';
 import { SeatInfo } from 'src/sgv3/vo/result/ExtendInfoForBaseGameResult';
 import { WinType } from 'src/sgv3/vo/enum/WinType';
 import { BalanceUtil } from 'src/sgv3/util/BalanceUtil';
+import { UIEvent } from 'common-ui/proxy/UIEvent';
 
 const { ccclass } = _decorator;
 /** ByGame Win Reel判定實作 */
@@ -78,7 +79,8 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
                     ReelEvent.ON_REELS_RESTORE,
                     ReelEvent.HIDE_WILD_SYMBOL,
                     ReelEvent.SHOW_LAST_SYMBOL_OF_REELS,
-                    ReelEvent.ON_HIDE_C1_AND_C2
+                    ReelEvent.ON_HIDE_C1_AND_C2,
+                    UIEvent.UPDATE_TOTAL_BET
                 ].concat(super.baseListNotificationInterests())
             )
         );
@@ -155,6 +157,9 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
                     this.reelView.reelsList[i].singleReelContent.isHideC1AndC2 = this.isHideC1AndC2;
                 }
                 break;
+            case UIEvent.UPDATE_TOTAL_BET:
+                this.changeWheelData();
+                break;
         }
     }
 
@@ -163,6 +168,25 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
 
         if (this.gameDataProxy.showWinOnceComplete) {
             this.skipShowAllWin();
+        }
+    }
+
+    protected changeWheelData() {
+        // 修改每個場景的 wheelData
+        if (this.gameDataProxy.isOmniChannel()) {
+            let featureIdx = this.gameDataProxy.curFeatureIdx;
+            if (featureIdx >= 0) {
+                let gameSceneList = Object.entries(GameSceneOption);
+                for (let i = 2; i < gameSceneList.length; i++) {
+                    let GameStateSetting = this.gameDataProxy.getStateSettingByName(GameSceneOption[i]);
+                    if (GameStateSetting != undefined) {
+                        GameStateSetting.setWheelData(featureIdx);
+                    }
+                }
+            }
+            if (this.gameDataProxy.curScene == GameScene.Game_1) {
+                this.reelDataProxy.mathTableIndex = 0;
+            }
         }
     }
 
@@ -632,6 +656,9 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
             }
         }
         self.reelView.reelsShow();
+        // 恢復當前輪帶
+        self.stateSetting.setWheelData(self.gameDataProxy.curFeatureIdx);
+        self.reelDataProxy.mathTableIndex = 0;
     }
 
     protected handleSlowMotionHit() {

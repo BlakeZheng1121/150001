@@ -2,14 +2,13 @@ import { RefactoringGameData } from '../../../core/utils/RefactoringGameData';
 import { Logger } from '../../../core/utils/Logger';
 import { GameDataProxy } from '../../proxy/GameDataProxy';
 import { WebBridgeProxy } from '../../proxy/WebBridgeProxy';
-import { SpinGSResult, SpinResult } from '../../vo/result/SpinResult';
+import { SpinGSResult } from '../../vo/result/SpinResult';
 import { CheckGameFlowCommand } from '../CheckGameFlowCommand';
 import { GameStateId } from '../../vo/data/GameStateId';
 import { NetworkProxy } from '../../../core/proxy/NetworkProxy';
 import { ByGameHandleCommand } from './ByGameHandleCommand';
 import { StateMachineProxy } from '../../proxy/StateMachineProxy';
 import { MathUtil } from '../../../core/utils/MathUtil';
-import { GameSceneOption } from '../../vo/data/GameScene';
 import { UIEvent } from 'common-ui/proxy/UIEvent';
 
 /**
@@ -22,7 +21,6 @@ export class SpinResponseCommand extends puremvc.SimpleCommand {
         Logger.i('[SpinResponseCommand] Execute');
         let notifyObj: SpinGSResult = notification.getBody() as SpinGSResult;
         let gameStateResult = RefactoringGameData.RefactoringGameResult(notifyObj.spinResult);
-        this.changeWheelData(notifyObj.spinResult);
         Logger.i(JSON.stringify(notifyObj));
         this.networkProxy.setGameSeqNo(notifyObj.gameSeq);
         this.networkProxy.resetSentSpinRequest();
@@ -77,20 +75,6 @@ export class SpinResponseCommand extends puremvc.SimpleCommand {
 
     protected setEndGameStateId(stateId: number): void {
         GameStateId.END = stateId;
-    }
-    protected changeWheelData(spinResult: SpinResult) {
-        // 檢查有沒有 featureIdx
-        // 修改每個場景的 wheelData
-        let featureIdx = spinResult.baseGameResult.extendInfoForbaseGameResult.featureIdx;
-        if (featureIdx >= 0) {
-            let gameSceneList = Object.entries(GameSceneOption);
-            for (let i = 2; i < gameSceneList.length; i++) {
-                let GameStateSetting = this.gameDataProxy.getStateSettingByName(GameSceneOption[i]);
-                if (GameStateSetting != undefined) {
-                    GameStateSetting.setWheelData(featureIdx);
-                }
-            }
-        }
     }
     // ======================== Get Set ========================
 
