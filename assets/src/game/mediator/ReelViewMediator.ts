@@ -656,9 +656,11 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
             }
         }
         self.reelView.reelsShow();
-        // 恢復當前輪帶
-        self.stateSetting.setWheelData(self.gameDataProxy.curFeatureIdx);
-        self.reelDataProxy.mathTableIndex = 0;
+        if (self.gameDataProxy.isOmniChannel()) {
+            // 恢復當前輪帶
+            self.stateSetting.setWheelData(self.gameDataProxy.curFeatureIdx);
+            self.reelDataProxy.mathTableIndex = 0;
+        }
     }
 
     protected handleSlowMotionHit() {
