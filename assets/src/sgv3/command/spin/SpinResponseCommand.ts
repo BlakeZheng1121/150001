@@ -1,5 +1,4 @@
 import { RefactoringGameData } from '../../../core/utils/RefactoringGameData';
-import { ChangeBalanceCommand } from '../../../core/command/ChangeBalanceCommand';
 import { Logger } from '../../../core/utils/Logger';
 import { GameDataProxy } from '../../proxy/GameDataProxy';
 import { WebBridgeProxy } from '../../proxy/WebBridgeProxy';
@@ -12,7 +11,6 @@ import { StateMachineProxy } from '../../proxy/StateMachineProxy';
 import { MathUtil } from '../../../core/utils/MathUtil';
 import { GameSceneOption } from '../../vo/data/GameScene';
 import { UIEvent } from 'common-ui/proxy/UIEvent';
-import { GTMUtil } from 'src/core/utils/GTMUtil';
 
 /**
  * 接收到Server打過來的資料後進行處理
@@ -75,8 +73,6 @@ export class SpinResponseCommand extends puremvc.SimpleCommand {
         self.sendNotification(ByGameHandleCommand.NAME);
         // 開始解析資料
         self.sendNotification(CheckGameFlowCommand.NAME);
-
-        this.sentGTMEvent(notifyObj);
     }
 
     protected setEndGameStateId(stateId: number): void {
@@ -95,70 +91,6 @@ export class SpinResponseCommand extends puremvc.SimpleCommand {
                 }
             }
         }
-    }
-
-    protected sentGTMEvent(notifyObj: SpinGSResult) {
-        if (!this.gameDataProxy.isFirstSpin) {
-            GTMUtil.setGTMEvent('FirstSpin', {
-                Member_ID: this.gameDataProxy.userId,
-                Game_ID: this.gameDataProxy.machineType,
-                DateTime: Date.now(),
-                Session_ID: this.gameDataProxy.sessionId,
-            });
-            this.gameDataProxy.isFirstSpin = true;
-        }
-
-        let jp_Type = [];
-        if (notifyObj.spinResult.bonusGameResult) {
-            for (let i = 0; i < notifyObj.spinResult.bonusGameResult.bonusGameOneRoundResult.length; i++) {
-                jp_Type.push(...notifyObj.spinResult.bonusGameResult.bonusGameOneRoundResult[i].hitPool);
-            }
-        }
-
-        let freeGameType = '0';
-        let freeGameWin = 0;
-        let freeGameSpin = 0;
-        if (notifyObj.spinResult.freeGameResult) {
-            const specialHitInfo = notifyObj.spinResult.freeGameResult.freeGameOneRoundResult[0]?.specialHitInfo;
-            switch (specialHitInfo) {
-                case 'freeGame_01':
-                    freeGameType = '1';
-                    break;
-                case 'freeGame_02':
-                    freeGameType = '2';
-                    break;
-                case 'freeGame_03':
-                    freeGameType = '3';
-                    break;
-            }
-
-            freeGameWin = notifyObj.spinResult.freeGameResult.freeGameTotalWin;
-            freeGameSpin = notifyObj.spinResult.freeGameResult.totalRound;
-        }
-        
-        if (notifyObj.spinResult.topUpGameResult) {
-            freeGameType = '4';
-
-            freeGameWin = notifyObj.spinResult.topUpGameResult.topUpGameTotalWin;
-            freeGameSpin = notifyObj.spinResult.topUpGameResult.totalRound;
-        }
-
-        GTMUtil.setGTMEvent('SpinResponse', {
-            GameSeqNo: notifyObj.gameSeq,
-            Bet_Type: '0',
-            Bet_Multiplier: this._gameDataProxy.isOmniChannel() ? this.gameDataProxy.curBet : this.gameDataProxy.curTotalBet,
-            Feature_Bet: this._gameDataProxy.isOmniChannel() ? this.gameDataProxy.curFeatureBet : '1',
-            OmniDenom: this._gameDataProxy.isOmniChannel() ? this.gameDataProxy.curDenomMultiplier : '1',
-            BaseGame_Win: this._gameDataProxy.convertCredit2Cash(notifyObj.spinResult.baseGameResult.baseGameTotalWin),
-            FreeGame_Win: this._gameDataProxy.convertCredit2Cash(freeGameWin),
-            FreeGame_Type: freeGameType,
-            FreeGame_Spin: freeGameSpin,
-            FeatureGame_Win: '0',
-            FeatureGame_Type: '0',
-            JP_Type: jp_Type,
-            SpinSpeedMode: this.gameDataProxy.curSpeedMode,
-            Session_ID: this.gameDataProxy.sessionId,
-        });
     }
     // ======================== Get Set ========================
 

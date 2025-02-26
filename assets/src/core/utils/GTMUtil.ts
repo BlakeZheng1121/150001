@@ -18,13 +18,16 @@ export class GTMUtil {
         document.head.appendChild(script);
     }
 
-    public static setGTMEvent(eventName: string, eventParams: Record<string, any>) {
-        window.dataLayer = window.dataLayer || [];
-
-        // 推送自訂事件到 dataLayer
-        window.dataLayer.push({
-            event: eventName, // 自訂事件名稱
-           ...eventParams,
+    public static async setGTMEvent(eventName: string, eventParams: Record<string, any>): Promise<void> {
+        await new Promise<void>((resolve) => {
+            setTimeout(() => {
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({
+                    event: eventName,
+                    ...eventParams
+                });
+                resolve();
+            }, 0);
         });
     }
 }
