@@ -30,6 +30,7 @@ import { SeatInfo } from 'src/sgv3/vo/result/ExtendInfoForBaseGameResult';
 import { WinType } from 'src/sgv3/vo/enum/WinType';
 import { BalanceUtil } from 'src/sgv3/util/BalanceUtil';
 import { UIEvent } from 'common-ui/proxy/UIEvent';
+import { AfterReconnectionCommand } from 'src/sgv3/command/connect/AfterReconnectionCommand';
 
 const { ccclass } = _decorator;
 /** ByGame Win Reel判定實作 */
@@ -80,7 +81,8 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
                     ReelEvent.HIDE_WILD_SYMBOL,
                     ReelEvent.SHOW_LAST_SYMBOL_OF_REELS,
                     ReelEvent.ON_HIDE_C1_AND_C2,
-                    UIEvent.UPDATE_TOTAL_BET
+                    UIEvent.UPDATE_TOTAL_BET,
+                    AfterReconnectionCommand.NAME
                 ].concat(super.baseListNotificationInterests())
             )
         );
@@ -158,6 +160,7 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
                 }
                 break;
             case UIEvent.UPDATE_TOTAL_BET:
+            case AfterReconnectionCommand.NAME:
                 this.changeWheelData();
                 break;
         }
