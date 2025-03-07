@@ -21,6 +21,8 @@ export class JackpotPoolCommand extends puremvc.SimpleCommand {
                 const target = jackpotTypeObj.typeItems.find((newItem) => newItem.poolName === curItem.poolName);
                 if (target) {
                     jackpotPoolObj.push(target);
+                }else{
+                    jackpotPoolObj.push(curItem);
                 }
             }); 
             jackpotTypeObj.typeItems = jackpotPoolObj;
