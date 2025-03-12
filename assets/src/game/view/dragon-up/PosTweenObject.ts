@@ -38,12 +38,12 @@ export class PosTweenObject extends Component {
     @property({ group: { name: 'getResult' }, type: CCFloat, visible: true })
     public getResultTimeBase: number = 0;
 
-    public setBaseCreditSetting(isSpecial: boolean, credit: number) {
+    public setBaseCreditSetting(isSpecial: boolean, credit: number, isOmniChannel: boolean) {
         this.mainSprite.enabled = true;
         this.Animation.play('C1Collect');
         this.labelText.string = String();
         this.labelText.font = isSpecial ? this.specialFont : this.baseFont;
-        this.labelText.string = BalanceUtil.formatBalanceWithExpressingUnits(credit);
+        this.labelText.string = isOmniChannel ? String(credit) : BalanceUtil.formatBalanceWithExpressingUnits(credit);
     }
 
     public setMultipleSetting(multiple: number) {

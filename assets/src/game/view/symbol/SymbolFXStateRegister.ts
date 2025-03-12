@@ -64,9 +64,9 @@ export class SymbolFXShowState extends UIViewStateBase {
                     this.content.labelText.font = this.content.isSpecialFont
                         ? this.content.specialFont
                         : this.content.baseFont;
-                    this.content.labelText.string = String(
-                        BalanceUtil.formatBalanceWithExpressingUnits(this.content.credit)
-                    );
+                    this.content.labelText.string = this.content.isOmniChannel
+                        ? String(this.content.credit)
+                        : String(BalanceUtil.formatBalanceWithExpressingUnits(this.content.credit));
                     break;
                 case SymbolId.C2:
                     this.content.labelText.string = String();
