@@ -67,11 +67,12 @@ export class Game_2_RollCycledState extends SymbolRollCycledState {
         if (this.content.freeCredit > 0) {
             this.content.freeCredit = 0;
             let sub: SymbolPart = this.content.parts.get(SymbolPartType.SUB);
-            sub.offsetPos = sub.offsetPos = new Vec3(
+            sub.offsetPos = new Vec3(
                 this.content.C1TrailOffsetPos.x * this.content.node.worldScale.x,
                 this.content.C1TrailOffsetPos.y * this.content.node.worldScale.y,
                 1
             );
+            sub.setPartPos(this.content.node.worldPosition);
             this.content.freeC1.node.active = true;
             this.content.freeC1.play('Rolling');
             AudioManager.Instance.play(AudioClipsEnum.Free_C1FireThrough);
