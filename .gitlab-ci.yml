@@ -15,7 +15,7 @@ include:
     ref: master
     file: 
       - game_client/build-game-cocos-command.yaml
-      # - game_client/post-result-message-command.yaml     
+      - game_client/post-result-message-command.yaml     
   - project: h5_cicd/gitlab-yml
     ref: master
     file:
@@ -29,7 +29,7 @@ stages:
   - sendSourceMap
   - publish
   - deploy
-  # - notify
+  - notify
 
 variables:
   COCOS_VERSION: '3.5.2'
