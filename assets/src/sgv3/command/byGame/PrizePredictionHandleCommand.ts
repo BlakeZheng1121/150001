@@ -72,26 +72,27 @@ export class PrizePredictionHandleCommand extends puremvc.SimpleCommand {
      * @param result FreeGameOneRoundResult
      */
     checkFreeGame(result: FreeGameOneRoundResult): void {
+        const totalBet = this.gameDataProxy.curTotalBet;
+        const odds = this.gameDataProxy.convertCredit2Cash(result.waysGameResult.playerWin) / totalBet;
+        const isMSymbolFiveOfKind = result.waysGameResult.waysResult.some(
+            (result) => result.hitNumber == 5 && result.symbolID >= SymbolId.M1 && result.symbolID <= SymbolId.M6
+        );
+        const randomNumber = this.getRandomNumber(result, GameScene.Game_1);
+        const threshold = this.gameDataProxy.isOmniChannel() ? thresholdOmniChannel : thresholdNormal;
+
         if (result.extendInfoForFreeGameResult.isRespinFeature) {
             this.checkRespin(result);
         } else {
-            const totalBet = this.gameDataProxy.curTotalBet;
-            const odds = this.gameDataProxy.convertCredit2Cash(result.playerWin) / totalBet;
-            const isMSymbolFiveOfKind = result.waysGameResult.waysResult.some(
-                (result) => result.hitNumber == 5 && result.symbolID >= SymbolId.M1 && result.symbolID <= SymbolId.M6
-            );
-            const randomNumber = this.getRandomNumber(result, GameScene.Game_1);
-            const threshold = this.gameDataProxy.isOmniChannel() ? thresholdOmniChannel : thresholdNormal;
             const reel1StackWW = result.screenSymbol[0].filter((id) => id == 0).length == 3;
-
-            const prizePredictionCondition = odds >= 25 && isMSymbolFiveOfKind && randomNumber < threshold;
             const displayMethodCondition = (odds >= 25 && isMSymbolFiveOfKind) || reel1StackWW;
 
-            result.displayInfo.prizePredictionType = prizePredictionCondition ? 'TYPE_1' : 'NoPrizePredictionType';
             result.displayInfo.displayMethod = Array.from([false, false, false, false, displayMethodCondition], (x) => [
                 x
             ]);
         }
+
+        const prizePredictionCondition = odds >= 25 && isMSymbolFiveOfKind && randomNumber < threshold;
+        result.displayInfo.prizePredictionType = prizePredictionCondition ? 'TYPE_1' : 'NoPrizePredictionType';
     }
 
     checkRespin(result: FreeGameOneRoundResult): void {
