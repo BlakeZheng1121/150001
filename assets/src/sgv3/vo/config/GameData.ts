@@ -32,7 +32,7 @@ export class GameData extends CoreGameData {
     /** 是否可以更新 Jackpot Pool */
     public canUpdateJackpotPool: boolean = true;
     /** 拉中 Jackpot 為 Grand or Major */
-    public hitJackpotPoolType: number = 0;
+    public hitJackpotPoolTypes: number[] = [];
     /** Jackpot 資料 */
     public jackpotData: JackpotEvent[] = [];
     /** 彩金 */

@@ -191,30 +191,32 @@ export class GAME_JackpotPoolViewMediator extends BaseMediator<GAME_JackpotPoolV
     }
 
     protected hitJackpotToInitPoolValue() {
-        const hitJackpotPoolType = this.gameDataProxy.hitJackpotPoolType;
-        const jpPoolData = this.gameDataProxy.initEventData.executeSetting.jackpotSetting.jackpotPoolData[0];
-        const betRangeMapIndex = this.gameDataProxy.getJackpotPoolRangeIndexWithBet();
-        let initJackpotValue: number = 0;
+        const hitJackpotPoolTypes = this.gameDataProxy.hitJackpotPoolTypes;
+        for (const type of hitJackpotPoolTypes) {
+            const jpPoolData = this.gameDataProxy.initEventData.executeSetting.jackpotSetting.jackpotPoolData[0];
+            const betRangeMapIndex = this.gameDataProxy.getJackpotPoolRangeIndexWithBet();
+            let initJackpotValue: number = 0;
 
-        let jpType = jpPoolData.jackpotExtendSetting.poolInitValueType[hitJackpotPoolType - 1];
-        let jpValue = jpPoolData.jackpotExtendSetting.poolInitValue[betRangeMapIndex][hitJackpotPoolType - 1];
-        switch (jpType) {
-            case JackpotPoolValueType.Credit:
-                initJackpotValue = this.gameDataProxy.convertCredit2Cash(jpValue);
-                break;
-            case JackpotPoolValueType.Multiplier:
-                initJackpotValue = MathUtil.mul(
-                    this.gameDataProxy.totalBetList[this.gameDataProxy.totalBetIdx],
-                    jpValue
-                );
-                break;
-            case JackpotPoolValueType.DenomMultiplier:
-                let bonusCredit = MathUtil.mul(this.getMultiplierOfDenom(), jpValue);
-                initJackpotValue = bonusCredit;
-                break;
+            let jpType = jpPoolData.jackpotExtendSetting.poolInitValueType[type - 1];
+            let jpValue = jpPoolData.jackpotExtendSetting.poolInitValue[betRangeMapIndex][type - 1];
+            switch (jpType) {
+                case JackpotPoolValueType.Credit:
+                    initJackpotValue = this.gameDataProxy.convertCredit2Cash(jpValue);
+                    break;
+                case JackpotPoolValueType.Multiplier:
+                    initJackpotValue = MathUtil.mul(
+                        this.gameDataProxy.totalBetList[this.gameDataProxy.totalBetIdx],
+                        jpValue
+                    );
+                    break;
+                case JackpotPoolValueType.DenomMultiplier:
+                    let bonusCredit = MathUtil.mul(this.getMultiplierOfDenom(), jpValue);
+                    initJackpotValue = bonusCredit;
+                    break;
+            }
+
+            this.runPoolLabel(initJackpotValue, type, true);
         }
-
-        this.runPoolLabel(initJackpotValue, hitJackpotPoolType, true);
     }
 
     protected hitJackpotToUpdatePoolValue(hitInfos: PoolHitInfo[]) {

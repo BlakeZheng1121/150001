@@ -217,11 +217,11 @@ export class GameDataProxy extends CoreGameDataProxy {
     }
 
     /** 拉中 Jackpot 類型為 Grand or Major */
-    public get hitJackpotPoolType(): number {
-        return this._gameData.hitJackpotPoolType;
+    public get hitJackpotPoolTypes(): number[] {
+        return this._gameData.hitJackpotPoolTypes;
     }
-    public set hitJackpotPoolType(_val: number) {
-        this._gameData.hitJackpotPoolType = _val;
+    public set hitJackpotPoolTypes(_val: number[]) {
+        this._gameData.hitJackpotPoolTypes = _val;
     }
 
     /** Jackpot 資料 */
@@ -883,11 +883,11 @@ export class GameDataProxy extends CoreGameDataProxy {
 
     public checkJackpotPool() {
         // 當連中 2次 Grand 時，下一次場景需要更新到最新的 JackpotPool 數值
-        this.hitJackpotPoolType = 0;
+        this.hitJackpotPoolTypes = [];
         if (this.spinEventData.bonusGameResult) {
             const lastBonusResult = this.spinEventData.bonusGameResult.bonusGameOneRoundResult[0];
             const result = lastBonusResult.jpHitInfo;
-            this.hitJackpotPoolType = lastBonusResult.hitPool[0];
+            this.hitJackpotPoolTypes = lastBonusResult.hitPool || [];
 
             this.sendNotification(JackpotPool.HIT_JACKPOT_TO_POOL_VALUE_UPDATE, result);
         }
