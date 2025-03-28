@@ -488,7 +488,7 @@ export class Game_3_ViewMediator extends BaseMediator<Game_3_View> {
             case MiniGameSymbol.Grand:
                 if (self.grandCnt == 2) {
                     self.view.expectationSymbol(resultID, this.openingSeqArr);
-                    AudioManager.Instance.play(AudioClipsEnum.Mini_Expectation);
+                    AudioManager.Instance.play(AudioClipsEnum.Mini_Expectation).loop(true);
                 }
                 break;
             case MiniGameSymbol.Major:
