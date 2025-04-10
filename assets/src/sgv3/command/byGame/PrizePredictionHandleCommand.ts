@@ -6,7 +6,7 @@ import { BaseGameResult } from '../../vo/result/BaseGameResult';
 import { CommonGameResult } from '../../vo/result/CommonGameResult';
 import { FreeGameOneRoundResult } from '../../vo/result/FreeGameOneRoundResult';
 import { TopUpGameOneRoundResult } from '../../vo/result/TopUpGameOneRoundResult';
-import { SpeedMode } from '../../../game/vo/enum/Game_UIEnums';
+import { PreviewType } from 'src/sgv3/vo/enum/PreviewType';
 const { ccclass } = _decorator;
 
 @ccclass('PrizePredictionHandleCommand')
@@ -62,7 +62,32 @@ export class PrizePredictionHandleCommand extends puremvc.SimpleCommand {
 
         result.displayInfo.prizePredictionType = prizePredictionCondition ? 'TYPE_1' : 'NoPrizePredictionType';
         result.displayInfo.displayMethod = Array.from([false, false, false, false, displayMethodCondition], (x) => [x]);
+
+        this.setPrizePreviewType(result);
     }
+
+    /**
+     * GTM大獎預告與瞇牌數據
+     * 都沒有: -1
+     * 大獎預告: 1
+     * 瞇牌，盤面大分: 2
+     * 瞇牌，FG: 3
+     * 瞇牌，JP: 4
+     * 複合式範例，大獎預告+瞇牌盤面大分: 12
+     */
+    private setPrizePreviewType(result: CommonGameResult) {
+        let previewType: string = PreviewType.None;
+        const hasPrizePrediction = result.displayInfo.prizePredictionType == 'TYPE_1';
+        if (hasPrizePrediction) {
+            previewType = PreviewType.PrizePrediction;
+        }
+        const hasSlowMotion = result.displayInfo.displayMethod.some((row) => row.includes(true));
+        if (hasSlowMotion) {
+            previewType += PreviewType.BigWinSlowMotion;
+        }
+        this.gameDataProxy.previewType = previewType;
+    }
+
     /**
      * check Free Game Prediction
      * 大獎預告:

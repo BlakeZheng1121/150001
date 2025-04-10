@@ -126,9 +126,10 @@ export class GAME_Game1RollCompleteCommand extends Game1RollCompleteCommand {
             FreeGame_Spin: freeGameSpin,
             FeatureGame_Win: '0',
             FeatureGame_Type: '0',
-            JP_Type: jp_Type,
+            JP_Type: jp_Type.length > 0 ? jp_Type : undefined,
             SpinSpeedMode: this.gameDataProxy.curSpeedMode,
             Session_ID: this.gameDataProxy.sessionId,
+            PreviewType: this.gameDataProxy.previewType
         });
     }
 }

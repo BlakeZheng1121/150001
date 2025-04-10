@@ -951,6 +951,15 @@ export class GameDataProxy extends CoreGameDataProxy {
         this._isFirstSpin = _val;
     }
 
+    // 紀錄BaseGame大獎預告與瞇牌狀態
+    private _previewType: string = '';
+    public get previewType(): string {
+        return this._previewType;
+    }
+    public set previewType(_val: string) {
+        this._previewType = _val;
+    }
+    
     protected _networkProxy: NetworkProxy;
     protected get networkProxy(): NetworkProxy {
         if (!this._networkProxy) {
