@@ -236,7 +236,6 @@ export class BaseReelViewMediator<T extends ReelView> extends BaseMediator<T> {
             } else {
                 self.reelView.reelStop(self.spinStopSequence[self.currentSequenceIndex]);
             }
-            self.gameDataProxy.spinSequenceNumber = self.currentSequenceIndex;
         }
     }
 

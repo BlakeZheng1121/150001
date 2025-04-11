@@ -115,7 +115,7 @@ export class GAME_Game1RollCompleteCommand extends Game1RollCompleteCommand {
         }
 
         GTMUtil.setGTMEvent('SpinResponse', {
-            GameSeqNo: this.gameDataProxy.gameSeq,
+            GameSeqNo: this.gameDataProxy.spinSequenceNumber,
             Bet_Type: '0',
             Bet_Multiplier: this._gameDataProxy.isOmniChannel() ? this.gameDataProxy.curBet : this.gameDataProxy.curTotalBet,
             Feature_Bet: this._gameDataProxy.isOmniChannel() ? this.gameDataProxy.curFeatureBet : '1',
