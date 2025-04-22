@@ -37,12 +37,4 @@ export class SymbolFX extends UIViewBase {
             this.symbolcontent.subSprite.enabled = false;
         }
     }
-
-    public set isOmniChannel(isOmniChannel: boolean) {
-        this.symbolcontent.isOmniChannel = isOmniChannel;
-    }
-
-    public get isOmniChannel() {
-        return this.symbolcontent.isOmniChannel;
-    }
 }

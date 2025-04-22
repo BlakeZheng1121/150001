@@ -100,6 +100,4 @@ export class SymbolFXContent extends Component {
     public symbolId: number = 0;
 
     public language: string = '';
-
-    public isOmniChannel: boolean = false;
 }

@@ -18,8 +18,8 @@ export class CreditTweenObject extends Component {
     @property({ type: CCFloat, visible: true })
     public timeInterval: number = 0;
 
-    public setBaseCreditSetting(isSpecial: boolean, credit: number, isOmniChannel: boolean) {
+    public setBaseCreditSetting(isSpecial: boolean, credit: number) {
         this.labelText.font = isSpecial ? this.specialFont : this.baseFont;
-        this.labelText.string = isOmniChannel ? String(credit) : BalanceUtil.formatBalanceWithExpressingUnits(credit);
+        this.labelText.string = BalanceUtil.formatBalanceWithExpressingUnits(credit);
     }
 }

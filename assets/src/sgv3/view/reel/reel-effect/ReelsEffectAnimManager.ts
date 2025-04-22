@@ -2,8 +2,6 @@ import { _decorator, Component, Node, Prefab, CCInteger } from 'cc';
 import { TSMap } from '../../../../core/utils/TSMap';
 import { SymbolFX } from '../../../../game/view/symbol/SymbolFX';
 import { PoolManager } from '../../../PoolManager';
-import { AppFacade } from 'src/core/AppFacade';
-import { GAME_GameDataProxy } from 'src/game/proxy/GAME_GameDataProxy';
 const { ccclass, property } = _decorator;
 
 @ccclass('AnimPrefab')
@@ -46,22 +44,12 @@ export class ReelsEffectAnimManager extends Component {
         return false;
     }
 
-    protected _gameDataProxy: GAME_GameDataProxy;
-    protected get gameDataProxy(): GAME_GameDataProxy {
-        if (!this._gameDataProxy) {
-            this._gameDataProxy = AppFacade.getInstance().retrieveProxy(GAME_GameDataProxy.NAME) as GAME_GameDataProxy;
-        }
-        return this._gameDataProxy;
-    }
-    protected isOmniChannel = this.gameDataProxy.isOmniChannel();
 
 
     public getAnim(symbolId: number,poolKey: number): Node {
         let anim: Node;
-        anim = PoolManager.instance.getNode(this.getPrefab(symbolId), this.node);
-        let symbolFX = anim.getComponent(SymbolFX);
-        symbolFX.isOmniChannel = this.isOmniChannel;
-        this.pool.set(poolKey, symbolFX);
+        anim = PoolManager.instance.getNode(this.getPrefab(symbolId), this.node);   
+        this.pool.set(poolKey, anim.getComponent(SymbolFX));
         anim.active = false;
         return anim;
     }

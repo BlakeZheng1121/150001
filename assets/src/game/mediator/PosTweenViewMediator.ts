@@ -143,8 +143,7 @@ export class PosTweenViewMediator extends BaseMediator<PosTweenView> {
                         this.view.cloneArrayPrefab();
                         this.view.arrayObject[this.curbaseSequenceIndex].setBaseCreditSetting(
                             this.reelDataProxy.symbolFeature[this.curBaseSequence.x][this.curBaseSequence.y].isSpecial,
-                            this.reelDataProxy.symbolFeature[this.curBaseSequence.x][this.curBaseSequence.y].creditCent,
-                            this.gameDataProxy.isOmniChannel()
+                            this.reelDataProxy.symbolFeature[this.curBaseSequence.x][this.curBaseSequence.y].creditCent
                         );
                         //BaseCredit收集表演
                         this.view.onBaseCreditCollect(this.curbaseSequenceIndex, basePos, targertPos, (idx: number) =>

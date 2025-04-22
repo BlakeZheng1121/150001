@@ -86,8 +86,7 @@ export class BallCreditTweenViewMediator extends BaseMediator<BallCreditTweenVie
         this.view.clonePrefab();
         this.view.curObject.setBaseCreditSetting(
             this.reelDataProxy.symbolFeature[this.curBaseSequence.x][this.curBaseSequence.y].isSpecial,
-            this.reelDataProxy.symbolFeature[this.curBaseSequence.x][this.curBaseSequence.y].creditCent,
-            this.gameDataProxy.isOmniChannel()
+            this.reelDataProxy.symbolFeature[this.curBaseSequence.x][this.curBaseSequence.y].creditCent
         );
         AudioManager.Instance.play(AudioClipsEnum.Base_FeatureInitialCollect);
         //BaseCredit收集表演
