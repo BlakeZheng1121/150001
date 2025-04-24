@@ -48,7 +48,7 @@ export class BallHitViewMediator extends BaseMediator<BallHitView> {
 
     public listNotificationInterests(): Array<any> {
         return [
-            ReelEvent.ON_REELS_PERFORM_END,
+            ReelEvent.ON_SINGLE_REEL_START_DAMPING,
             SceneEvent.LOAD_BASE_COMPLETE,
             StateWinEvent.ON_GAME1_TRANSITIONS,
             StateWinEvent.ON_GAME2_TRANSITIONS,
@@ -74,8 +74,8 @@ export class BallHitViewMediator extends BaseMediator<BallHitView> {
     public handleNotification(notification: puremvc.INotification): void {
         let name = notification.getName();
         switch (name) {
-            case ReelEvent.ON_REELS_PERFORM_END:
-                this.ballHitShow();
+            case ReelEvent.ON_SINGLE_REEL_START_DAMPING:
+                this.ballHitShow(notification.getBody());
                 break;
             case SceneEvent.LOAD_BASE_COMPLETE:
                 this.view.node.active = true;
@@ -147,11 +147,11 @@ export class BallHitViewMediator extends BaseMediator<BallHitView> {
         }
     }
 
-    private ballHitShow() {
+    private ballHitShow(curReelStopIndex: number) {
         if (this.gameDataProxy.curScene != GameScene.Game_1) return;
         let ballHitInfo = this.gameDataProxy.spinEventData.baseGameResult.extendInfoForbaseGameResult;
         if (ballHitInfo['ballCount'] > 0) {
-            this.view.ballHitShow(ballHitInfo);
+            this.view.ballHitShow(ballHitInfo, curReelStopIndex);
         }
     }
 

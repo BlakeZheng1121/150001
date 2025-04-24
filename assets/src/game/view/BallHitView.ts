@@ -85,18 +85,18 @@ export class BallHitView extends BaseView {
         this.jackPotPerformControl.freeIdle();
     }
 
-    public ballHitShow(hitInfo) {
+    public ballHitShow(hitInfo, curReelStopIndex:number) {
         AudioManager.Instance.stop(AudioClipsEnum.Base_C1Collect, true);
         AudioManager.Instance.play(AudioClipsEnum.Base_C1Collect);
         let ballCount = 0;
-        for (let i = 0; i < hitInfo.ballScreenLabel.length; i++) {
-            for (let j = 0; j < hitInfo.ballScreenLabel[i].length; j++) {
-                if (hitInfo.ballScreenLabel[i][j] > 0) {
-                    ballCount++;
-                    this.jackPotPerformControl.BaseTrailPerform(Number(i * 3 + j));
-                }
+        
+        for (let j = 0; j < hitInfo.ballScreenLabel[curReelStopIndex].length; j++) {
+            if (hitInfo.ballScreenLabel[curReelStopIndex][j] > 0) {
+                ballCount++;
+                this.jackPotPerformControl.BaseTrailPerform(Number(curReelStopIndex * 3 + j));
             }
         }
+        
         GlobalTimer.getInstance().removeTimer('ballHitShow');
         GlobalTimer.getInstance()
             .registerTimer(
