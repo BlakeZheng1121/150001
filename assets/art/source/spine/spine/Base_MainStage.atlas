@@ -1,0 +1,2807 @@
+
+Base_MainStage.png
+size: 693,766
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Bowl_Glow
+  rotate: false
+  xy: 291, 448
+  size: 278, 178
+  orig: 309, 247
+  offset: 14, 3
+  index: -1
+Bowl_back
+  rotate: false
+  xy: 2, 267
+  size: 211, 54
+  orig: 309, 247
+  offset: 48, 111
+  index: -1
+Coin_Glow
+  rotate: false
+  xy: 258, 311
+  size: 225, 135
+  orig: 240, 144
+  offset: 5, 2
+  index: -1
+Cover_Close_Glow
+  rotate: false
+  xy: 2, 323
+  size: 254, 165
+  orig: 309, 247
+  offset: 27, 69
+  index: -1
+Cover_OpenBack
+  rotate: false
+  xy: 2, 628
+  size: 287, 136
+  orig: 309, 247
+  offset: 7, 89
+  index: -1
+Cover_Open_Glow
+  rotate: false
+  xy: 291, 628
+  size: 287, 136
+  orig: 309, 247
+  offset: 7, 89
+  index: -1
+Cover_Open_light
+  rotate: false
+  xy: 2, 490
+  size: 287, 136
+  orig: 309, 247
+  offset: 7, 89
+  index: -1
+Cover_Open_top_Glow
+  rotate: false
+  xy: 2, 211
+  size: 72, 54
+  orig: 309, 247
+  offset: 118, 177
+  index: -1
+Effect_star_2
+  rotate: false
+  xy: 215, 281
+  size: 40, 40
+  orig: 44, 44
+  offset: 2, 2
+  index: -1
+FA_Frame_Glow_00
+  rotate: false
+  xy: 258, 474
+  size: 16, 14
+  orig: 113, 108
+  offset: 47, 89
+  index: -1
+FA_Frame_Glow_01
+  rotate: false
+  xy: 300, 18
+  size: 75, 87
+  orig: 113, 108
+  offset: 16, 21
+  index: -1
+FA_Frame_Glow_02
+  rotate: false
+  xy: 485, 358
+  size: 79, 88
+  orig: 113, 108
+  offset: 15, 20
+  index: -1
+FA_Frame_Glow_03
+  rotate: false
+  xy: 271, 113
+  size: 86, 89
+  orig: 113, 108
+  offset: 14, 19
+  index: -1
+FA_Frame_Glow_04
+  rotate: true
+  xy: 94, 10
+  size: 95, 90
+  orig: 113, 108
+  offset: 11, 18
+  index: -1
+FA_Frame_Glow_05
+  rotate: true
+  xy: 2, 2
+  size: 103, 90
+  orig: 113, 108
+  offset: 6, 18
+  index: -1
+FA_Frame_Glow_06
+  rotate: false
+  xy: 580, 577
+  size: 110, 89
+  orig: 113, 108
+  offset: 1, 19
+  index: -1
+FA_Frame_Glow_07
+  rotate: true
+  xy: 599, 244
+  size: 112, 90
+  orig: 113, 108
+  offset: 0, 18
+  index: -1
+FA_Frame_Glow_08
+  rotate: true
+  xy: 599, 130
+  size: 112, 90
+  orig: 113, 108
+  offset: 0, 18
+  index: -1
+FA_Frame_Glow_09
+  rotate: true
+  xy: 599, 16
+  size: 112, 90
+  orig: 113, 108
+  offset: 0, 18
+  index: -1
+FA_Frame_Glow_10
+  rotate: false
+  xy: 186, 12
+  size: 112, 93
+  orig: 113, 108
+  offset: 0, 15
+  index: -1
+FA_Frame_Glow_11
+  rotate: false
+  xy: 371, 107
+  size: 112, 98
+  orig: 113, 108
+  offset: 0, 10
+  index: -1
+FA_Frame_Glow_12
+  rotate: false
+  xy: 371, 207
+  size: 112, 102
+  orig: 113, 108
+  offset: 0, 6
+  index: -1
+FA_Frame_Glow_13
+  rotate: false
+  xy: 257, 204
+  size: 112, 105
+  orig: 113, 108
+  offset: 0, 3
+  index: -1
+FA_Frame_Glow_14
+  rotate: false
+  xy: 571, 358
+  size: 112, 107
+  orig: 113, 108
+  offset: 0, 1
+  index: -1
+FA_Frame_Glow_15
+  rotate: false
+  xy: 571, 467
+  size: 112, 108
+  orig: 113, 108
+  offset: 0, 0
+  index: -1
+FA_Frame_Glow_16
+  rotate: false
+  xy: 485, 250
+  size: 112, 106
+  orig: 113, 108
+  offset: 0, 0
+  index: -1
+FA_Frame_Glow_17
+  rotate: false
+  xy: 485, 149
+  size: 112, 99
+  orig: 113, 108
+  offset: 0, 0
+  index: -1
+FA_Frame_Glow_18
+  rotate: false
+  xy: 485, 51
+  size: 112, 96
+  orig: 113, 108
+  offset: 0, 0
+  index: -1
+FA_Frame_Glow_19
+  rotate: false
+  xy: 580, 668
+  size: 111, 96
+  orig: 113, 108
+  offset: 0, 0
+  index: -1
+FA_Frame_Glow_20
+  rotate: false
+  xy: 2, 107
+  size: 100, 95
+  orig: 113, 108
+  offset: 5, 1
+  index: -1
+FA_Frame_Glow_21
+  rotate: false
+  xy: 104, 107
+  size: 87, 95
+  orig: 113, 108
+  offset: 13, 1
+  index: -1
+FA_Frame_Glow_22
+  rotate: false
+  xy: 193, 109
+  size: 76, 93
+  orig: 113, 108
+  offset: 15, 1
+  index: -1
+FA_Frame_Glow_23
+  rotate: false
+  xy: 571, 625
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
+FA_Word_Glow
+  rotate: false
+  xy: 377, 34
+  size: 74, 71
+  orig: 113, 108
+  offset: 16, 22
+  index: -1
+
+Base_MainStage2.png
+size: 988,1000
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Coin/Bowl_Coin_Lv1_idle_01
+  rotate: false
+  xy: 414, 931
+  size: 204, 67
+  orig: 360, 216
+  offset: 75, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_02
+  rotate: false
+  xy: 620, 931
+  size: 203, 67
+  orig: 360, 216
+  offset: 75, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_03
+  rotate: false
+  xy: 417, 443
+  size: 206, 69
+  orig: 360, 216
+  offset: 74, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_04
+  rotate: false
+  xy: 2, 863
+  size: 204, 67
+  orig: 360, 216
+  offset: 75, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_05
+  rotate: false
+  xy: 208, 863
+  size: 204, 67
+  orig: 360, 216
+  offset: 75, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_06
+  rotate: false
+  xy: 414, 654
+  size: 205, 68
+  orig: 360, 216
+  offset: 75, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_07
+  rotate: true
+  xy: 905, 379
+  size: 206, 69
+  orig: 360, 216
+  offset: 74, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_08
+  rotate: false
+  xy: 625, 378
+  size: 206, 69
+  orig: 360, 216
+  offset: 75, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_09
+  rotate: false
+  xy: 621, 654
+  size: 206, 68
+  orig: 360, 216
+  offset: 74, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_10
+  rotate: false
+  xy: 414, 862
+  size: 205, 67
+  orig: 360, 216
+  offset: 75, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_11
+  rotate: false
+  xy: 621, 862
+  size: 207, 67
+  orig: 360, 216
+  offset: 76, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_12
+  rotate: true
+  xy: 899, 794
+  size: 204, 68
+  orig: 360, 216
+  offset: 76, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_13
+  rotate: false
+  xy: 2, 794
+  size: 205, 67
+  orig: 360, 216
+  offset: 75, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_14
+  rotate: false
+  xy: 209, 793
+  size: 205, 67
+  orig: 360, 216
+  offset: 76, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_15
+  rotate: false
+  xy: 2, 585
+  size: 206, 68
+  orig: 360, 216
+  offset: 75, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_16
+  rotate: true
+  xy: 899, 587
+  size: 205, 69
+  orig: 360, 216
+  offset: 75, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_17
+  rotate: false
+  xy: 210, 584
+  size: 206, 68
+  orig: 360, 216
+  offset: 76, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_18
+  rotate: false
+  xy: 418, 584
+  size: 206, 68
+  orig: 360, 216
+  offset: 76, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_19
+  rotate: false
+  xy: 626, 519
+  size: 206, 68
+  orig: 360, 216
+  offset: 75, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_20
+  rotate: true
+  xy: 829, 589
+  size: 204, 68
+  orig: 360, 216
+  offset: 76, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_21
+  rotate: false
+  xy: 2, 515
+  size: 205, 68
+  orig: 360, 216
+  offset: 75, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_22
+  rotate: false
+  xy: 416, 793
+  size: 205, 67
+  orig: 360, 216
+  offset: 75, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_23
+  rotate: false
+  xy: 209, 514
+  size: 206, 68
+  orig: 360, 216
+  offset: 75, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_24
+  rotate: false
+  xy: 417, 514
+  size: 206, 68
+  orig: 360, 216
+  offset: 75, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_25
+  rotate: true
+  xy: 830, 795
+  size: 203, 67
+  orig: 360, 216
+  offset: 76, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_26
+  rotate: false
+  xy: 625, 449
+  size: 206, 68
+  orig: 360, 216
+  offset: 75, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_27
+  rotate: false
+  xy: 623, 793
+  size: 204, 67
+  orig: 360, 216
+  offset: 75, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_28
+  rotate: false
+  xy: 2, 373
+  size: 206, 69
+  orig: 360, 216
+  offset: 75, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_29
+  rotate: false
+  xy: 209, 444
+  size: 206, 68
+  orig: 360, 216
+  offset: 74, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_30
+  rotate: false
+  xy: 210, 372
+  size: 207, 69
+  orig: 360, 216
+  offset: 74, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_31
+  rotate: false
+  xy: 2, 301
+  size: 206, 70
+  orig: 360, 216
+  offset: 75, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_32
+  rotate: true
+  xy: 834, 380
+  size: 205, 69
+  orig: 360, 216
+  offset: 75, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_33
+  rotate: false
+  xy: 2, 445
+  size: 205, 68
+  orig: 360, 216
+  offset: 75, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_34
+  rotate: false
+  xy: 2, 725
+  size: 204, 67
+  orig: 360, 216
+  offset: 75, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_35
+  rotate: false
+  xy: 208, 724
+  size: 204, 67
+  orig: 360, 216
+  offset: 75, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_36
+  rotate: false
+  xy: 419, 235
+  size: 206, 70
+  orig: 360, 216
+  offset: 74, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_37
+  rotate: false
+  xy: 627, 235
+  size: 206, 70
+  orig: 360, 216
+  offset: 74, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_38
+  rotate: true
+  xy: 912, 166
+  size: 211, 74
+  orig: 360, 216
+  offset: 72, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_39
+  rotate: false
+  xy: 426, 159
+  size: 211, 74
+  orig: 360, 216
+  offset: 72, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_40
+  rotate: false
+  xy: 433, 12
+  size: 212, 77
+  orig: 360, 216
+  offset: 72, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_41
+  rotate: false
+  xy: 647, 12
+  size: 212, 77
+  orig: 360, 216
+  offset: 72, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_42
+  rotate: true
+  xy: 836, 167
+  size: 210, 74
+  orig: 360, 216
+  offset: 72, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_43
+  rotate: false
+  xy: 419, 307
+  size: 206, 69
+  orig: 360, 216
+  offset: 74, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_44
+  rotate: false
+  xy: 2, 932
+  size: 204, 66
+  orig: 360, 216
+  offset: 75, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_45
+  rotate: false
+  xy: 208, 932
+  size: 204, 66
+  orig: 360, 216
+  offset: 75, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_46
+  rotate: false
+  xy: 414, 724
+  size: 204, 67
+  orig: 360, 216
+  offset: 75, 18
+  index: -1
+Coin/Bowl_Coin_Lv1_idle_47
+  rotate: false
+  xy: 620, 724
+  size: 204, 67
+  orig: 360, 216
+  offset: 75, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv2_01
+  rotate: false
+  xy: 2, 656
+  size: 204, 67
+  orig: 360, 216
+  offset: 75, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv2_02
+  rotate: false
+  xy: 627, 307
+  size: 207, 69
+  orig: 360, 216
+  offset: 74, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv2_03
+  rotate: false
+  xy: 2, 227
+  size: 209, 72
+  orig: 360, 216
+  offset: 73, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv2_04
+  rotate: false
+  xy: 639, 91
+  size: 212, 74
+  orig: 360, 216
+  offset: 72, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv2_05
+  rotate: false
+  xy: 217, 81
+  size: 214, 76
+  orig: 360, 216
+  offset: 71, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv5_01
+  rotate: false
+  xy: 208, 655
+  size: 204, 67
+  orig: 360, 216
+  offset: 75, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv5_02
+  rotate: false
+  xy: 210, 301
+  size: 207, 69
+  orig: 360, 216
+  offset: 74, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv5_03
+  rotate: false
+  xy: 213, 161
+  size: 211, 72
+  orig: 360, 216
+  offset: 72, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv5_04
+  rotate: false
+  xy: 2, 84
+  size: 213, 75
+  orig: 360, 216
+  offset: 71, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv5_05
+  rotate: false
+  xy: 2, 2
+  size: 215, 77
+  orig: 360, 216
+  offset: 70, 18
+  index: -1
+
+Base_MainStage3.png
+size: 983,1021
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Coin/Bowl_Coin_Lv1toLv2_06
+  rotate: false
+  xy: 2, 941
+  size: 216, 78
+  orig: 360, 216
+  offset: 70, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv2_07
+  rotate: false
+  xy: 669, 852
+  size: 220, 83
+  orig: 360, 216
+  offset: 69, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv2_11
+  rotate: true
+  xy: 896, 133
+  size: 221, 85
+  orig: 360, 216
+  offset: 69, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv2_12
+  rotate: false
+  xy: 439, 937
+  size: 220, 82
+  orig: 360, 216
+  offset: 69, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv2_13
+  rotate: false
+  xy: 661, 937
+  size: 220, 82
+  orig: 360, 216
+  offset: 69, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv2_14
+  rotate: false
+  xy: 2, 770
+  size: 221, 83
+  orig: 360, 216
+  offset: 69, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv2_15
+  rotate: false
+  xy: 225, 768
+  size: 221, 83
+  orig: 360, 216
+  offset: 69, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv2_16
+  rotate: false
+  xy: 2, 685
+  size: 221, 83
+  orig: 360, 216
+  offset: 69, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv5_06
+  rotate: false
+  xy: 220, 939
+  size: 217, 80
+  orig: 360, 216
+  offset: 70, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv5_07
+  rotate: false
+  xy: 225, 683
+  size: 221, 83
+  orig: 360, 216
+  offset: 69, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_01
+  rotate: false
+  xy: 669, 682
+  size: 221, 83
+  orig: 360, 216
+  offset: 69, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_02
+  rotate: false
+  xy: 2, 600
+  size: 221, 83
+  orig: 360, 216
+  offset: 69, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_03
+  rotate: false
+  xy: 225, 256
+  size: 222, 84
+  orig: 360, 216
+  offset: 69, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_04
+  rotate: false
+  xy: 225, 598
+  size: 221, 83
+  orig: 360, 216
+  offset: 69, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_05
+  rotate: false
+  xy: 448, 597
+  size: 221, 83
+  orig: 360, 216
+  offset: 69, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_06
+  rotate: true
+  xy: 893, 578
+  size: 220, 84
+  orig: 360, 216
+  offset: 70, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_07
+  rotate: false
+  xy: 671, 255
+  size: 223, 84
+  orig: 360, 216
+  offset: 69, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_09
+  rotate: false
+  xy: 2, 174
+  size: 221, 84
+  orig: 360, 216
+  offset: 70, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_10
+  rotate: false
+  xy: 669, 767
+  size: 220, 83
+  orig: 360, 216
+  offset: 70, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_11
+  rotate: true
+  xy: 891, 800
+  size: 219, 83
+  orig: 360, 216
+  offset: 72, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_12
+  rotate: false
+  xy: 225, 427
+  size: 220, 84
+  orig: 360, 216
+  offset: 70, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_13
+  rotate: false
+  xy: 671, 597
+  size: 220, 83
+  orig: 360, 216
+  offset: 70, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_14
+  rotate: false
+  xy: 448, 768
+  size: 219, 83
+  orig: 360, 216
+  offset: 71, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_15
+  rotate: false
+  xy: 225, 170
+  size: 221, 84
+  orig: 360, 216
+  offset: 70, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_16
+  rotate: true
+  xy: 893, 356
+  size: 220, 85
+  orig: 360, 216
+  offset: 70, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_17
+  rotate: false
+  xy: 448, 683
+  size: 219, 83
+  orig: 360, 216
+  offset: 72, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_18
+  rotate: false
+  xy: 671, 341
+  size: 220, 84
+  orig: 360, 216
+  offset: 71, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_19
+  rotate: false
+  xy: 448, 170
+  size: 221, 84
+  orig: 360, 216
+  offset: 70, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_20
+  rotate: false
+  xy: 2, 515
+  size: 221, 83
+  orig: 360, 216
+  offset: 70, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_21
+  rotate: false
+  xy: 671, 169
+  size: 221, 84
+  orig: 360, 216
+  offset: 70, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_22
+  rotate: false
+  xy: 225, 513
+  size: 220, 83
+  orig: 360, 216
+  offset: 70, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_23
+  rotate: false
+  xy: 2, 88
+  size: 221, 84
+  orig: 360, 216
+  offset: 70, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_24
+  rotate: false
+  xy: 449, 256
+  size: 220, 84
+  orig: 360, 216
+  offset: 70, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_25
+  rotate: false
+  xy: 2, 855
+  size: 221, 82
+  orig: 360, 216
+  offset: 69, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_26
+  rotate: false
+  xy: 225, 84
+  size: 221, 84
+  orig: 360, 216
+  offset: 70, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_27
+  rotate: false
+  xy: 447, 512
+  size: 221, 83
+  orig: 360, 216
+  offset: 69, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_28
+  rotate: false
+  xy: 448, 84
+  size: 221, 84
+  orig: 360, 216
+  offset: 70, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_29
+  rotate: false
+  xy: 671, 83
+  size: 222, 84
+  orig: 360, 216
+  offset: 69, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_33
+  rotate: false
+  xy: 2, 2
+  size: 221, 84
+  orig: 360, 216
+  offset: 70, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_34
+  rotate: false
+  xy: 670, 512
+  size: 221, 83
+  orig: 360, 216
+  offset: 71, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_35
+  rotate: false
+  xy: 2, 430
+  size: 221, 83
+  orig: 360, 216
+  offset: 69, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_41
+  rotate: false
+  xy: 225, 853
+  size: 220, 82
+  orig: 360, 216
+  offset: 69, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_42
+  rotate: false
+  xy: 447, 853
+  size: 220, 82
+  orig: 360, 216
+  offset: 69, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_43
+  rotate: false
+  xy: 447, 427
+  size: 221, 83
+  orig: 360, 216
+  offset: 69, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_44
+  rotate: false
+  xy: 670, 427
+  size: 221, 83
+  orig: 360, 216
+  offset: 69, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_45
+  rotate: false
+  xy: 2, 345
+  size: 221, 83
+  orig: 360, 216
+  offset: 69, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_46
+  rotate: false
+  xy: 225, 342
+  size: 221, 83
+  orig: 360, 216
+  offset: 69, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_47
+  rotate: false
+  xy: 448, 342
+  size: 221, 83
+  orig: 360, 216
+  offset: 69, 18
+  index: -1
+Coin/Bowl_Coin_Lv2toLv3_01
+  rotate: false
+  xy: 2, 260
+  size: 221, 83
+  orig: 360, 216
+  offset: 69, 18
+  index: -1
+
+Base_MainStage4.png
+size: 1013,999
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Coin/Bowl_Coin_Lv1toLv2_08
+  rotate: true
+  xy: 899, 774
+  size: 223, 88
+  orig: 360, 216
+  offset: 69, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv2_09
+  rotate: false
+  xy: 228, 639
+  size: 224, 92
+  orig: 360, 216
+  offset: 69, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv2_10
+  rotate: false
+  xy: 2, 733
+  size: 223, 89
+  orig: 360, 216
+  offset: 69, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv5_08
+  rotate: false
+  xy: 673, 823
+  size: 224, 87
+  orig: 360, 216
+  offset: 69, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv5_09
+  rotate: false
+  xy: 454, 731
+  size: 227, 90
+  orig: 360, 216
+  offset: 68, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv5_10
+  rotate: false
+  xy: 2, 543
+  size: 232, 94
+  orig: 360, 216
+  offset: 65, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv5_11
+  rotate: true
+  xy: 913, 537
+  size: 235, 98
+  orig: 360, 216
+  offset: 63, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv5_12
+  rotate: false
+  xy: 2, 435
+  size: 236, 102
+  orig: 360, 216
+  offset: 63, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv5_13
+  rotate: false
+  xy: 244, 2
+  size: 241, 106
+  orig: 360, 216
+  offset: 59, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_08
+  rotate: false
+  xy: 2, 912
+  size: 221, 85
+  orig: 360, 216
+  offset: 70, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_30
+  rotate: false
+  xy: 225, 912
+  size: 223, 85
+  orig: 360, 216
+  offset: 69, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_31
+  rotate: false
+  xy: 225, 824
+  size: 221, 86
+  orig: 360, 216
+  offset: 70, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_32
+  rotate: false
+  xy: 450, 912
+  size: 221, 85
+  orig: 360, 216
+  offset: 70, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_36
+  rotate: false
+  xy: 673, 912
+  size: 222, 85
+  orig: 360, 216
+  offset: 69, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_37
+  rotate: false
+  xy: 683, 682
+  size: 224, 90
+  orig: 360, 216
+  offset: 69, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_38
+  rotate: false
+  xy: 454, 637
+  size: 225, 92
+  orig: 360, 216
+  offset: 69, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_39
+  rotate: false
+  xy: 2, 641
+  size: 224, 90
+  orig: 360, 216
+  offset: 69, 18
+  index: -1
+Coin/Bowl_Coin_Lv2_idle_40
+  rotate: false
+  xy: 2, 825
+  size: 221, 85
+  orig: 360, 216
+  offset: 69, 18
+  index: -1
+Coin/Bowl_Coin_Lv2toLv3_02
+  rotate: false
+  xy: 448, 824
+  size: 223, 86
+  orig: 360, 216
+  offset: 69, 18
+  index: -1
+Coin/Bowl_Coin_Lv2toLv3_03
+  rotate: false
+  xy: 227, 733
+  size: 225, 89
+  orig: 360, 216
+  offset: 69, 18
+  index: -1
+Coin/Bowl_Coin_Lv2toLv3_04
+  rotate: false
+  xy: 681, 587
+  size: 230, 93
+  orig: 360, 216
+  offset: 66, 18
+  index: -1
+Coin/Bowl_Coin_Lv2toLv3_05
+  rotate: false
+  xy: 236, 539
+  size: 234, 96
+  orig: 360, 216
+  offset: 63, 18
+  index: -1
+Coin/Bowl_Coin_Lv2toLv3_06
+  rotate: false
+  xy: 472, 486
+  size: 235, 99
+  orig: 360, 216
+  offset: 63, 18
+  index: -1
+Coin/Bowl_Coin_Lv2toLv3_07
+  rotate: false
+  xy: 709, 431
+  size: 237, 104
+  orig: 360, 216
+  offset: 62, 18
+  index: -1
+Coin/Bowl_Coin_Lv2toLv3_12
+  rotate: false
+  xy: 240, 379
+  size: 239, 105
+  orig: 360, 216
+  offset: 60, 18
+  index: -1
+Coin/Bowl_Coin_Lv2toLv3_13
+  rotate: false
+  xy: 481, 324
+  size: 240, 105
+  orig: 360, 216
+  offset: 59, 18
+  index: -1
+Coin/Bowl_Coin_Lv2toLv3_14
+  rotate: false
+  xy: 723, 324
+  size: 240, 105
+  orig: 360, 216
+  offset: 59, 18
+  index: -1
+Coin/Bowl_Coin_Lv2toLv3_15
+  rotate: false
+  xy: 487, 2
+  size: 240, 106
+  orig: 360, 216
+  offset: 59, 18
+  index: -1
+Coin/Bowl_Coin_Lv2toLv3_16
+  rotate: false
+  xy: 729, 2
+  size: 241, 106
+  orig: 360, 216
+  offset: 59, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_04
+  rotate: false
+  xy: 2, 272
+  size: 241, 105
+  orig: 360, 216
+  offset: 58, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_11
+  rotate: false
+  xy: 245, 217
+  size: 241, 105
+  orig: 360, 216
+  offset: 60, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_14
+  rotate: false
+  xy: 488, 217
+  size: 240, 105
+  orig: 360, 216
+  offset: 60, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_22
+  rotate: false
+  xy: 730, 217
+  size: 241, 105
+  orig: 360, 216
+  offset: 59, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_25
+  rotate: false
+  xy: 2, 165
+  size: 240, 105
+  orig: 360, 216
+  offset: 60, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_27
+  rotate: false
+  xy: 244, 110
+  size: 241, 105
+  orig: 360, 216
+  offset: 59, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_41
+  rotate: false
+  xy: 487, 110
+  size: 239, 105
+  orig: 360, 216
+  offset: 60, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_42
+  rotate: false
+  xy: 728, 110
+  size: 240, 105
+  orig: 360, 216
+  offset: 59, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_43
+  rotate: false
+  xy: 2, 58
+  size: 240, 105
+  orig: 360, 216
+  offset: 59, 18
+  index: -1
+
+Base_MainStage5.png
+size: 974,974
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Coin/Bowl_Coin_Lv1toLv5_26
+  rotate: true
+  xy: 810, 435
+  size: 267, 156
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv5_27
+  rotate: true
+  xy: 812, 704
+  size: 268, 160
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv5_28
+  rotate: false
+  xy: 2, 810
+  size: 268, 162
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv5_29
+  rotate: true
+  xy: 2, 434
+  size: 268, 160
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv5_30
+  rotate: true
+  xy: 322, 167
+  size: 266, 155
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_34
+  rotate: true
+  xy: 164, 566
+  size: 242, 106
+  orig: 360, 216
+  offset: 59, 18
+  index: -1
+Coin/Bowl_Coin_Lv3toLv4_06
+  rotate: false
+  xy: 164, 438
+  size: 254, 126
+  orig: 360, 216
+  offset: 51, 18
+  index: -1
+Coin/Bowl_Coin_Lv4toLv5_08
+  rotate: false
+  xy: 272, 649
+  size: 267, 159
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv4toLv5_09
+  rotate: false
+  xy: 272, 810
+  size: 268, 162
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv4toLv5_10
+  rotate: false
+  xy: 541, 649
+  size: 267, 159
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv4toLv5_11
+  rotate: true
+  xy: 479, 167
+  size: 266, 155
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_07
+  rotate: true
+  xy: 636, 381
+  size: 266, 155
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_30
+  rotate: false
+  xy: 540, 10
+  size: 266, 155
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_31
+  rotate: false
+  xy: 272, 8
+  size: 266, 156
+  orig: 360, 216
+  offset: 48, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_32
+  rotate: true
+  xy: 793, 167
+  size: 266, 155
+  orig: 360, 216
+  offset: 48, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_36
+  rotate: true
+  xy: 164, 166
+  size: 267, 156
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_37
+  rotate: true
+  xy: 2, 164
+  size: 268, 160
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_38
+  rotate: false
+  xy: 542, 810
+  size: 268, 162
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_39
+  rotate: false
+  xy: 2, 2
+  size: 268, 160
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+
+Base_MainStage6.png
+size: 963,935
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Coin/Bowl_Coin_Lv1toLv5_25
+  rotate: false
+  xy: 538, 624
+  size: 266, 153
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv5_34
+  rotate: false
+  xy: 538, 469
+  size: 266, 153
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv5_35
+  rotate: false
+  xy: 270, 468
+  size: 266, 153
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv5_36
+  rotate: false
+  xy: 538, 314
+  size: 266, 153
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv4toLv5_15
+  rotate: false
+  xy: 2, 467
+  size: 266, 153
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv4toLv5_16
+  rotate: false
+  xy: 270, 313
+  size: 266, 153
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_01
+  rotate: false
+  xy: 2, 312
+  size: 266, 153
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_02
+  rotate: false
+  xy: 538, 159
+  size: 266, 153
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_03
+  rotate: false
+  xy: 270, 779
+  size: 266, 154
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_05
+  rotate: false
+  xy: 270, 158
+  size: 266, 153
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_06
+  rotate: false
+  xy: 538, 4
+  size: 266, 153
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_08
+  rotate: true
+  xy: 806, 668
+  size: 265, 155
+  orig: 360, 216
+  offset: 48, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_09
+  rotate: true
+  xy: 806, 134
+  size: 265, 154
+  orig: 360, 216
+  offset: 48, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_16
+  rotate: true
+  xy: 806, 401
+  size: 265, 155
+  orig: 360, 216
+  offset: 48, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_18
+  rotate: false
+  xy: 538, 779
+  size: 266, 154
+  orig: 360, 216
+  offset: 48, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_20
+  rotate: false
+  xy: 2, 157
+  size: 266, 153
+  orig: 360, 216
+  offset: 48, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_24
+  rotate: false
+  xy: 270, 3
+  size: 266, 153
+  orig: 360, 216
+  offset: 48, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_26
+  rotate: false
+  xy: 2, 2
+  size: 266, 153
+  orig: 360, 216
+  offset: 48, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_28
+  rotate: false
+  xy: 270, 623
+  size: 266, 154
+  orig: 360, 216
+  offset: 48, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_29
+  rotate: false
+  xy: 2, 622
+  size: 266, 154
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_40
+  rotate: false
+  xy: 2, 778
+  size: 266, 155
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+
+Base_MainStage7.png
+size: 979,981
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Coin/Bowl_Coin_Lv2toLv3_11
+  rotate: false
+  xy: 245, 113
+  size: 241, 108
+  orig: 360, 216
+  offset: 58, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_01
+  rotate: false
+  xy: 2, 873
+  size: 240, 106
+  orig: 360, 216
+  offset: 59, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_02
+  rotate: false
+  xy: 244, 873
+  size: 240, 106
+  orig: 360, 216
+  offset: 59, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_03
+  rotate: false
+  xy: 2, 332
+  size: 242, 107
+  orig: 360, 216
+  offset: 57, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_05
+  rotate: false
+  xy: 486, 873
+  size: 241, 106
+  orig: 360, 216
+  offset: 59, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_06
+  rotate: false
+  xy: 729, 873
+  size: 241, 106
+  orig: 360, 216
+  offset: 59, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_07
+  rotate: false
+  xy: 246, 332
+  size: 243, 107
+  orig: 360, 216
+  offset: 57, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_08
+  rotate: false
+  xy: 488, 113
+  size: 241, 108
+  orig: 360, 216
+  offset: 59, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_09
+  rotate: false
+  xy: 491, 332
+  size: 242, 107
+  orig: 360, 216
+  offset: 58, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_10
+  rotate: false
+  xy: 2, 765
+  size: 241, 106
+  orig: 360, 216
+  offset: 59, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_12
+  rotate: false
+  xy: 245, 765
+  size: 241, 106
+  orig: 360, 216
+  offset: 59, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_13
+  rotate: false
+  xy: 488, 765
+  size: 241, 106
+  orig: 360, 216
+  offset: 59, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_15
+  rotate: false
+  xy: 735, 332
+  size: 242, 107
+  orig: 360, 216
+  offset: 58, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_16
+  rotate: false
+  xy: 2, 223
+  size: 241, 107
+  orig: 360, 216
+  offset: 59, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_17
+  rotate: false
+  xy: 731, 765
+  size: 241, 106
+  orig: 360, 216
+  offset: 60, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_18
+  rotate: false
+  xy: 245, 223
+  size: 241, 107
+  orig: 360, 216
+  offset: 59, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_19
+  rotate: false
+  xy: 2, 657
+  size: 241, 106
+  orig: 360, 216
+  offset: 59, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_20
+  rotate: false
+  xy: 245, 657
+  size: 241, 106
+  orig: 360, 216
+  offset: 59, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_21
+  rotate: false
+  xy: 488, 223
+  size: 241, 107
+  orig: 360, 216
+  offset: 59, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_23
+  rotate: false
+  xy: 488, 657
+  size: 241, 106
+  orig: 360, 216
+  offset: 59, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_24
+  rotate: false
+  xy: 731, 657
+  size: 241, 106
+  orig: 360, 216
+  offset: 59, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_26
+  rotate: false
+  xy: 2, 549
+  size: 241, 106
+  orig: 360, 216
+  offset: 59, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_28
+  rotate: false
+  xy: 731, 223
+  size: 241, 107
+  orig: 360, 216
+  offset: 59, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_29
+  rotate: false
+  xy: 2, 114
+  size: 241, 107
+  orig: 360, 216
+  offset: 58, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_30
+  rotate: false
+  xy: 731, 113
+  size: 243, 108
+  orig: 360, 216
+  offset: 57, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_31
+  rotate: false
+  xy: 733, 2
+  size: 241, 109
+  orig: 360, 216
+  offset: 59, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_32
+  rotate: false
+  xy: 245, 3
+  size: 242, 108
+  orig: 360, 216
+  offset: 58, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_33
+  rotate: false
+  xy: 245, 549
+  size: 241, 106
+  orig: 360, 216
+  offset: 59, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_35
+  rotate: false
+  xy: 488, 549
+  size: 240, 106
+  orig: 360, 216
+  offset: 59, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_36
+  rotate: false
+  xy: 489, 3
+  size: 242, 108
+  orig: 360, 216
+  offset: 58, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_40
+  rotate: false
+  xy: 2, 4
+  size: 241, 108
+  orig: 360, 216
+  offset: 58, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_44
+  rotate: false
+  xy: 730, 549
+  size: 240, 106
+  orig: 360, 216
+  offset: 59, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_45
+  rotate: false
+  xy: 2, 441
+  size: 241, 106
+  orig: 360, 216
+  offset: 59, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_46
+  rotate: false
+  xy: 245, 441
+  size: 241, 106
+  orig: 360, 216
+  offset: 59, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_47
+  rotate: false
+  xy: 488, 441
+  size: 241, 106
+  orig: 360, 216
+  offset: 59, 18
+  index: -1
+Coin/Bowl_Coin_Lv3toLv4_01
+  rotate: false
+  xy: 731, 441
+  size: 241, 106
+  orig: 360, 216
+  offset: 59, 18
+  index: -1
+
+Base_MainStage8.png
+size: 959,1005
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Coin/Bowl_Coin_Lv1toLv5_31
+  rotate: true
+  xy: 157, 425
+  size: 266, 152
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv5_32
+  rotate: true
+  xy: 157, 157
+  size: 266, 152
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv5_33
+  rotate: true
+  xy: 466, 426
+  size: 266, 152
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv4toLv5_12
+  rotate: true
+  xy: 466, 158
+  size: 266, 152
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv4toLv5_13
+  rotate: true
+  xy: 620, 427
+  size: 266, 152
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv4toLv5_14
+  rotate: true
+  xy: 620, 159
+  size: 266, 152
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_04
+  rotate: true
+  xy: 774, 427
+  size: 266, 152
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_10
+  rotate: false
+  xy: 269, 694
+  size: 265, 153
+  orig: 360, 216
+  offset: 48, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_12
+  rotate: false
+  xy: 2, 849
+  size: 265, 154
+  orig: 360, 216
+  offset: 48, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_14
+  rotate: true
+  xy: 774, 159
+  size: 266, 152
+  orig: 360, 216
+  offset: 48, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_15
+  rotate: false
+  xy: 2, 693
+  size: 265, 154
+  orig: 360, 216
+  offset: 48, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_21
+  rotate: false
+  xy: 269, 849
+  size: 265, 154
+  orig: 360, 216
+  offset: 48, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_25
+  rotate: false
+  xy: 311, 4
+  size: 266, 152
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_27
+  rotate: true
+  xy: 2, 425
+  size: 266, 153
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_33
+  rotate: false
+  xy: 536, 850
+  size: 266, 153
+  orig: 360, 216
+  offset: 48, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_34
+  rotate: true
+  xy: 2, 157
+  size: 266, 153
+  orig: 360, 216
+  offset: 48, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_35
+  rotate: false
+  xy: 536, 695
+  size: 266, 153
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_41
+  rotate: false
+  xy: 620, 5
+  size: 266, 152
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_44
+  rotate: true
+  xy: 804, 737
+  size: 266, 153
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_45
+  rotate: false
+  xy: 2, 2
+  size: 266, 153
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_46
+  rotate: true
+  xy: 311, 426
+  size: 266, 153
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_47
+  rotate: true
+  xy: 311, 158
+  size: 266, 153
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+
+Base_MainStage9.png
+size: 988,967
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Coin/Bowl_Coin_Lv1toLv5_14
+  rotate: true
+  xy: 157, 566
+  size: 245, 111
+  orig: 360, 216
+  offset: 55, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv5_18
+  rotate: false
+  xy: 529, 568
+  size: 256, 130
+  orig: 360, 216
+  offset: 51, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv5_22
+  rotate: true
+  xy: 838, 156
+  size: 261, 144
+  orig: 360, 216
+  offset: 48, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv5_23
+  rotate: false
+  xy: 580, 419
+  size: 261, 147
+  orig: 360, 216
+  offset: 48, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv5_24
+  rotate: false
+  xy: 692, 816
+  size: 264, 149
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv2toLv3_08
+  rotate: true
+  xy: 312, 167
+  size: 243, 111
+  orig: 360, 216
+  offset: 57, 18
+  index: -1
+Coin/Bowl_Coin_Lv3toLv4_02
+  rotate: false
+  xy: 425, 700
+  size: 244, 110
+  orig: 360, 216
+  offset: 56, 18
+  index: -1
+Coin/Bowl_Coin_Lv3toLv4_03
+  rotate: false
+  xy: 692, 700
+  size: 247, 114
+  orig: 360, 216
+  offset: 53, 18
+  index: -1
+Coin/Bowl_Coin_Lv3toLv4_04
+  rotate: false
+  xy: 580, 299
+  size: 249, 118
+  orig: 360, 216
+  offset: 51, 18
+  index: -1
+Coin/Bowl_Coin_Lv3toLv4_07
+  rotate: false
+  xy: 270, 566
+  size: 257, 132
+  orig: 360, 216
+  offset: 50, 18
+  index: -1
+Coin/Bowl_Coin_Lv3toLv4_09
+  rotate: true
+  xy: 843, 437
+  size: 261, 143
+  orig: 360, 216
+  offset: 48, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_38
+  rotate: false
+  xy: 312, 2
+  size: 261, 145
+  orig: 360, 216
+  offset: 48, 18
+  index: -1
+Coin/Bowl_Coin_Lv4toLv5_05
+  rotate: true
+  xy: 690, 36
+  size: 261, 146
+  orig: 360, 216
+  offset: 48, 18
+  index: -1
+Coin/Bowl_Coin_Lv4toLv5_06
+  rotate: false
+  xy: 425, 149
+  size: 263, 148
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv4toLv5_07
+  rotate: true
+  xy: 2, 12
+  size: 265, 152
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_11
+  rotate: true
+  xy: 270, 700
+  size: 265, 153
+  orig: 360, 216
+  offset: 49, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_13
+  rotate: true
+  xy: 2, 546
+  size: 265, 153
+  orig: 360, 216
+  offset: 48, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_17
+  rotate: true
+  xy: 2, 279
+  size: 265, 153
+  orig: 360, 216
+  offset: 49, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_19
+  rotate: false
+  xy: 425, 812
+  size: 265, 153
+  orig: 360, 216
+  offset: 48, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_22
+  rotate: true
+  xy: 425, 299
+  size: 265, 153
+  orig: 360, 216
+  offset: 48, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_23
+  rotate: true
+  xy: 157, 145
+  size: 265, 153
+  orig: 360, 216
+  offset: 48, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_42
+  rotate: false
+  xy: 2, 813
+  size: 266, 152
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+Coin/Bowl_Coin_Lv5_idle_43
+  rotate: false
+  xy: 157, 412
+  size: 266, 152
+  orig: 360, 216
+  offset: 47, 18
+  index: -1
+
+Base_MainStage10.png
+size: 934,929
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Coin/Bowl_Coin_Lv1toLv5_15
+  rotate: true
+  xy: 668, 142
+  size: 248, 115
+  orig: 360, 216
+  offset: 52, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv5_16
+  rotate: true
+  xy: 668, 392
+  size: 250, 120
+  orig: 360, 216
+  offset: 51, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv5_20
+  rotate: true
+  xy: 790, 403
+  size: 261, 138
+  orig: 360, 216
+  offset: 48, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv5_21
+  rotate: true
+  xy: 791, 666
+  size: 261, 141
+  orig: 360, 216
+  offset: 48, 18
+  index: -1
+Coin/Bowl_Coin_Lv2toLv3_09
+  rotate: false
+  xy: 250, 387
+  size: 245, 114
+  orig: 360, 216
+  offset: 55, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_38
+  rotate: false
+  xy: 2, 386
+  size: 246, 115
+  orig: 360, 216
+  offset: 54, 18
+  index: -1
+Coin/Bowl_Coin_Lv3toLv4_08
+  rotate: false
+  xy: 528, 644
+  size: 260, 139
+  orig: 360, 216
+  offset: 49, 18
+  index: -1
+Coin/Bowl_Coin_Lv3toLv4_10
+  rotate: false
+  xy: 265, 642
+  size: 261, 141
+  orig: 360, 216
+  offset: 48, 18
+  index: -1
+Coin/Bowl_Coin_Lv3toLv4_11
+  rotate: false
+  xy: 263, 3
+  size: 260, 137
+  orig: 360, 216
+  offset: 49, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_03
+  rotate: false
+  xy: 525, 3
+  size: 260, 137
+  orig: 360, 216
+  offset: 49, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_07
+  rotate: false
+  xy: 2, 242
+  size: 260, 137
+  orig: 360, 216
+  offset: 49, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_30
+  rotate: false
+  xy: 264, 242
+  size: 260, 137
+  orig: 360, 216
+  offset: 49, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_31
+  rotate: false
+  xy: 2, 2
+  size: 259, 138
+  orig: 360, 216
+  offset: 50, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_32
+  rotate: false
+  xy: 2, 503
+  size: 260, 137
+  orig: 360, 216
+  offset: 49, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_36
+  rotate: true
+  xy: 790, 141
+  size: 260, 138
+  orig: 360, 216
+  offset: 49, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_37
+  rotate: false
+  xy: 265, 785
+  size: 261, 142
+  orig: 360, 216
+  offset: 48, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_39
+  rotate: false
+  xy: 528, 785
+  size: 261, 142
+  orig: 360, 216
+  offset: 48, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_40
+  rotate: false
+  xy: 264, 503
+  size: 260, 137
+  orig: 360, 216
+  offset: 49, 18
+  index: -1
+Coin/Bowl_Coin_Lv4toLv5_02
+  rotate: true
+  xy: 528, 381
+  size: 261, 138
+  orig: 360, 216
+  offset: 48, 18
+  index: -1
+Coin/Bowl_Coin_Lv4toLv5_03
+  rotate: false
+  xy: 2, 642
+  size: 261, 140
+  orig: 360, 216
+  offset: 48, 18
+  index: -1
+Coin/Bowl_Coin_Lv4toLv5_04
+  rotate: false
+  xy: 2, 784
+  size: 261, 143
+  orig: 360, 216
+  offset: 48, 18
+  index: -1
+
+Base_MainStage11.png
+size: 940,922
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Coin/Bowl_Coin_Lv1toLv5_17
+  rotate: false
+  xy: 510, 542
+  size: 254, 125
+  orig: 360, 216
+  offset: 51, 18
+  index: -1
+Coin/Bowl_Coin_Lv1toLv5_19
+  rotate: true
+  xy: 403, 275
+  size: 260, 135
+  orig: 360, 216
+  offset: 49, 18
+  index: -1
+Coin/Bowl_Coin_Lv2toLv3_10
+  rotate: false
+  xy: 649, 670
+  size: 244, 112
+  orig: 360, 216
+  offset: 56, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_37
+  rotate: true
+  xy: 141, 537
+  size: 245, 113
+  orig: 360, 216
+  offset: 55, 18
+  index: -1
+Coin/Bowl_Coin_Lv3_idle_39
+  rotate: false
+  xy: 403, 669
+  size: 244, 113
+  orig: 360, 216
+  offset: 56, 18
+  index: -1
+Coin/Bowl_Coin_Lv3toLv4_05
+  rotate: false
+  xy: 256, 537
+  size: 252, 122
+  orig: 360, 216
+  offset: 51, 18
+  index: -1
+Coin/Bowl_Coin_Lv3toLv4_16
+  rotate: false
+  xy: 540, 144
+  size: 260, 135
+  orig: 360, 216
+  offset: 49, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_06
+  rotate: true
+  xy: 2, 263
+  size: 259, 136
+  orig: 360, 216
+  offset: 49, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_08
+  rotate: true
+  xy: 264, 661
+  size: 259, 137
+  orig: 360, 216
+  offset: 50, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_09
+  rotate: false
+  xy: 403, 784
+  size: 259, 136
+  orig: 360, 216
+  offset: 49, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_12
+  rotate: true
+  xy: 140, 138
+  size: 259, 136
+  orig: 360, 216
+  offset: 50, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_15
+  rotate: false
+  xy: 2, 784
+  size: 260, 136
+  orig: 360, 216
+  offset: 49, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_16
+  rotate: true
+  xy: 2, 524
+  size: 258, 137
+  orig: 360, 216
+  offset: 50, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_18
+  rotate: true
+  xy: 2, 2
+  size: 259, 136
+  orig: 360, 216
+  offset: 50, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_19
+  rotate: false
+  xy: 664, 784
+  size: 259, 136
+  orig: 360, 216
+  offset: 50, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_21
+  rotate: true
+  xy: 540, 281
+  size: 259, 136
+  orig: 360, 216
+  offset: 50, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_23
+  rotate: true
+  xy: 802, 144
+  size: 259, 136
+  orig: 360, 216
+  offset: 50, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_24
+  rotate: false
+  xy: 415, 6
+  size: 259, 136
+  orig: 360, 216
+  offset: 50, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_26
+  rotate: false
+  xy: 676, 6
+  size: 259, 136
+  orig: 360, 216
+  offset: 50, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_28
+  rotate: false
+  xy: 141, 399
+  size: 260, 136
+  orig: 360, 216
+  offset: 49, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_47
+  rotate: false
+  xy: 678, 405
+  size: 260, 135
+  orig: 360, 216
+  offset: 49, 18
+  index: -1
+Coin/Bowl_Coin_Lv4toLv5_01
+  rotate: true
+  xy: 278, 13
+  size: 260, 135
+  orig: 360, 216
+  offset: 49, 18
+  index: -1
+
+Base_MainStage12.png
+size: 935,935
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Coin/Bowl_Coin_Lv3toLv4_14
+  rotate: true
+  xy: 2, 536
+  size: 259, 135
+  orig: 360, 216
+  offset: 49, 18
+  index: -1
+Coin/Bowl_Coin_Lv3toLv4_15
+  rotate: false
+  xy: 139, 537
+  size: 259, 135
+  orig: 360, 216
+  offset: 49, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_01
+  rotate: true
+  xy: 400, 413
+  size: 259, 135
+  orig: 360, 216
+  offset: 49, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_02
+  rotate: false
+  xy: 401, 798
+  size: 259, 135
+  orig: 360, 216
+  offset: 49, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_04
+  rotate: true
+  xy: 2, 275
+  size: 259, 135
+  orig: 360, 216
+  offset: 49, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_05
+  rotate: true
+  xy: 139, 276
+  size: 259, 135
+  orig: 360, 216
+  offset: 49, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_10
+  rotate: false
+  xy: 276, 276
+  size: 259, 135
+  orig: 360, 216
+  offset: 50, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_13
+  rotate: false
+  xy: 139, 139
+  size: 259, 135
+  orig: 360, 216
+  offset: 50, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_14
+  rotate: true
+  xy: 2, 14
+  size: 259, 135
+  orig: 360, 216
+  offset: 50, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_20
+  rotate: false
+  xy: 400, 139
+  size: 259, 135
+  orig: 360, 216
+  offset: 50, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_27
+  rotate: true
+  xy: 537, 537
+  size: 259, 135
+  orig: 360, 216
+  offset: 49, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_29
+  rotate: false
+  xy: 2, 797
+  size: 259, 136
+  orig: 360, 216
+  offset: 49, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_33
+  rotate: true
+  xy: 263, 674
+  size: 259, 136
+  orig: 360, 216
+  offset: 50, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_34
+  rotate: false
+  xy: 662, 798
+  size: 259, 135
+  orig: 360, 216
+  offset: 50, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_35
+  rotate: false
+  xy: 537, 400
+  size: 259, 135
+  orig: 360, 216
+  offset: 49, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_43
+  rotate: false
+  xy: 674, 661
+  size: 259, 135
+  orig: 360, 216
+  offset: 49, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_44
+  rotate: true
+  xy: 661, 139
+  size: 259, 135
+  orig: 360, 216
+  offset: 49, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_45
+  rotate: true
+  xy: 798, 400
+  size: 259, 135
+  orig: 360, 216
+  offset: 49, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_46
+  rotate: true
+  xy: 798, 139
+  size: 259, 135
+  orig: 360, 216
+  offset: 49, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_49
+  rotate: false
+  xy: 139, 2
+  size: 259, 135
+  orig: 360, 216
+  offset: 49, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_50
+  rotate: false
+  xy: 400, 2
+  size: 259, 135
+  orig: 360, 216
+  offset: 49, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_51
+  rotate: false
+  xy: 661, 2
+  size: 259, 135
+  orig: 360, 216
+  offset: 49, 18
+  index: -1
+
+Base_MainStage13.png
+size: 820,523
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Coin/Bowl_Coin_Lv3toLv4_12
+  rotate: true
+  xy: 412, 263
+  size: 258, 134
+  orig: 360, 216
+  offset: 50, 18
+  index: -1
+Coin/Bowl_Coin_Lv3toLv4_13
+  rotate: true
+  xy: 413, 3
+  size: 258, 134
+  orig: 360, 216
+  offset: 50, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_11
+  rotate: true
+  xy: 2, 2
+  size: 258, 135
+  orig: 360, 216
+  offset: 51, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_17
+  rotate: true
+  xy: 139, 2
+  size: 258, 135
+  orig: 360, 216
+  offset: 51, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_22
+  rotate: true
+  xy: 276, 2
+  size: 258, 135
+  orig: 360, 216
+  offset: 50, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_25
+  rotate: true
+  xy: 548, 263
+  size: 258, 134
+  orig: 360, 216
+  offset: 50, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_41
+  rotate: true
+  xy: 549, 3
+  size: 258, 134
+  orig: 360, 216
+  offset: 50, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_42
+  rotate: true
+  xy: 684, 263
+  size: 258, 134
+  orig: 360, 216
+  offset: 50, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_48
+  rotate: true
+  xy: 276, 262
+  size: 259, 134
+  orig: 360, 216
+  offset: 49, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_52
+  rotate: true
+  xy: 2, 262
+  size: 259, 135
+  orig: 360, 216
+  offset: 49, 18
+  index: -1
+Coin/Bowl_Coin_Lv4_idle_53
+  rotate: true
+  xy: 139, 262
+  size: 259, 135
+  orig: 360, 216
+  offset: 49, 18
+  index: -1
+
+Base_MainStage14.png
+size: 769,391
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Gold/Bowl
+  rotate: true
+  xy: 580, 144
+  size: 245, 122
+  orig: 309, 247
+  offset: 30, 15
+  index: -1
+Gold/Bowl_back_golden
+  rotate: false
+  xy: 219, 2
+  size: 220, 51
+  orig: 309, 247
+  offset: 44, 115
+  index: -1
+Gold/Bowl_dn
+  rotate: false
+  xy: 441, 11
+  size: 162, 28
+  orig: 309, 247
+  offset: 70, 11
+  index: -1
+Gold/Bowl_top_golden
+  rotate: false
+  xy: 219, 55
+  size: 224, 58
+  orig: 309, 247
+  offset: 42, 84
+  index: -1
+Gold/Cover_Close
+  rotate: false
+  xy: 2, 8
+  size: 215, 105
+  orig: 309, 247
+  offset: 46, 89
+  index: -1
+Gold/Cover_Close_dn_golden
+  rotate: true
+  xy: 704, 165
+  size: 224, 63
+  orig: 309, 247
+  offset: 42, 84
+  index: -1
+Gold/Cover_Close_golden
+  rotate: false
+  xy: 445, 41
+  size: 204, 72
+  orig: 309, 247
+  offset: 52, 122
+  index: -1
+Gold/Cover_Close_top
+  rotate: false
+  xy: 605, 3
+  size: 56, 36
+  orig: 309, 247
+  offset: 126, 182
+  index: -1
+Gold/Cover_Open
+  rotate: false
+  xy: 2, 253
+  size: 287, 136
+  orig: 309, 247
+  offset: 7, 89
+  index: -1
+Gold/Cover_OpenBack_golden
+  rotate: false
+  xy: 2, 115
+  size: 287, 136
+  orig: 309, 246
+  offset: 7, 89
+  index: -1
+Gold/Cover_Open_dn_golden
+  rotate: false
+  xy: 291, 253
+  size: 287, 136
+  orig: 309, 247
+  offset: 7, 89
+  index: -1
+Gold/Cover_Open_golden
+  rotate: false
+  xy: 291, 115
+  size: 287, 136
+  orig: 309, 247
+  offset: 7, 89
+  index: -1
+Gold/Cover_Open_top
+  rotate: false
+  xy: 580, 118
+  size: 46, 24
+  orig: 309, 247
+  offset: 131, 192
+  index: -1
+Gold/FA
+  rotate: true
+  xy: 651, 41
+  size: 101, 96
+  orig: 309, 247
+  offset: 103, 14
+  index: -1

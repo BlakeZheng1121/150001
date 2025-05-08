@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "ed629a41-5a04-432f-b11c-64ab9fc702b7",
+  "uuid": "604f770b-73cd-41cf-b095-705f4a9eaea0",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "ed629a41-5a04-432f-b11c-64ab9fc702b7@6c48a",
+      "uuid": "604f770b-73cd-41cf-b095-705f4a9eaea0@6c48a",
       "displayName": "Base_SymbolWILD_2_Loop_07",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "ed629a41-5a04-432f-b11c-64ab9fc702b7",
+        "imageUuidOrDatabaseUri": "604f770b-73cd-41cf-b095-705f4a9eaea0",
         "isUuid": true,
         "minfilter": "linear",
         "magfilter": "linear",
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "ed629a41-5a04-432f-b11c-64ab9fc702b7@f9941",
+      "uuid": "604f770b-73cd-41cf-b095-705f4a9eaea0@f9941",
       "displayName": "Base_SymbolWILD_2_Loop_07",
       "id": "f9941",
       "name": "spriteFrame",
@@ -42,20 +42,20 @@
         "trimThreshold": 1,
         "rotated": false,
         "offsetX": 0,
-        "offsetY": 21.5,
-        "trimX": 67,
-        "trimY": 60,
-        "width": 366,
-        "height": 637,
-        "rawWidth": 500,
-        "rawHeight": 800,
+        "offsetY": 7,
+        "trimX": 15,
+        "trimY": 0,
+        "width": 220,
+        "height": 386,
+        "rawWidth": 250,
+        "rawHeight": 400,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "ed629a41-5a04-432f-b11c-64ab9fc702b7@6c48a",
+        "imageUuidOrDatabaseUri": "604f770b-73cd-41cf-b095-705f4a9eaea0@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -70,6 +70,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "ed629a41-5a04-432f-b11c-64ab9fc702b7@f9941"
+    "redirect": "604f770b-73cd-41cf-b095-705f4a9eaea0@f9941"
   }
 }

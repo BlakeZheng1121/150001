@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "c325e747-d847-4a38-b17f-c99a3b3a056d",
+  "uuid": "4a991cae-b62c-4395-8e4c-bd61b48ce079",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "c325e747-d847-4a38-b17f-c99a3b3a056d@6c48a",
+      "uuid": "4a991cae-b62c-4395-8e4c-bd61b48ce079@6c48a",
       "displayName": "Base_SymbolWILD_1_Show_09",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "c325e747-d847-4a38-b17f-c99a3b3a056d",
+        "imageUuidOrDatabaseUri": "4a991cae-b62c-4395-8e4c-bd61b48ce079",
         "isUuid": true,
         "minfilter": "linear",
         "magfilter": "linear",
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "c325e747-d847-4a38-b17f-c99a3b3a056d@f9941",
+      "uuid": "4a991cae-b62c-4395-8e4c-bd61b48ce079@f9941",
       "displayName": "Base_SymbolWILD_1_Show_09",
       "id": "f9941",
       "name": "spriteFrame",
@@ -41,21 +41,21 @@
         "trimType": "auto",
         "trimThreshold": 1,
         "rotated": false,
-        "offsetX": -0.5,
-        "offsetY": 1,
-        "trimX": 67,
-        "trimY": 83,
-        "width": 365,
-        "height": 332,
-        "rawWidth": 500,
-        "rawHeight": 500,
+        "offsetX": 0,
+        "offsetY": 7.5,
+        "trimX": 15,
+        "trimY": 22,
+        "width": 220,
+        "height": 213,
+        "rawWidth": 250,
+        "rawHeight": 272,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "c325e747-d847-4a38-b17f-c99a3b3a056d@6c48a",
+        "imageUuidOrDatabaseUri": "4a991cae-b62c-4395-8e4c-bd61b48ce079@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -70,6 +70,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "c325e747-d847-4a38-b17f-c99a3b3a056d@f9941"
+    "redirect": "4a991cae-b62c-4395-8e4c-bd61b48ce079@f9941"
   }
 }

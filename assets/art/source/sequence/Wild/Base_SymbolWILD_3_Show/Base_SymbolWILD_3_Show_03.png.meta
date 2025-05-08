@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "4623c821-1f83-43e4-8089-f04ce1adaf48",
+  "uuid": "8c947c51-b5f0-43b2-9f03-a13f9d5be559",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "4623c821-1f83-43e4-8089-f04ce1adaf48@6c48a",
+      "uuid": "8c947c51-b5f0-43b2-9f03-a13f9d5be559@6c48a",
       "displayName": "Base_SymbolWILD_3_Show_03",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "4623c821-1f83-43e4-8089-f04ce1adaf48",
+        "imageUuidOrDatabaseUri": "8c947c51-b5f0-43b2-9f03-a13f9d5be559",
         "isUuid": true,
         "minfilter": "linear",
         "magfilter": "linear",
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "4623c821-1f83-43e4-8089-f04ce1adaf48@f9941",
+      "uuid": "8c947c51-b5f0-43b2-9f03-a13f9d5be559@f9941",
       "displayName": "Base_SymbolWILD_3_Show_03",
       "id": "f9941",
       "name": "spriteFrame",
@@ -41,21 +41,21 @@
         "trimType": "auto",
         "trimThreshold": 1,
         "rotated": false,
-        "offsetX": 0,
-        "offsetY": 15.5,
-        "trimX": 100,
-        "trimY": 72,
-        "width": 300,
-        "height": 825,
-        "rawWidth": 500,
-        "rawHeight": 1000,
+        "offsetX": -8,
+        "offsetY": 147.5,
+        "trimX": 15,
+        "trimY": 34,
+        "width": 204,
+        "height": 197,
+        "rawWidth": 250,
+        "rawHeight": 560,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "4623c821-1f83-43e4-8089-f04ce1adaf48@6c48a",
+        "imageUuidOrDatabaseUri": "8c947c51-b5f0-43b2-9f03-a13f9d5be559@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -70,6 +70,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "4623c821-1f83-43e4-8089-f04ce1adaf48@f9941"
+    "redirect": "8c947c51-b5f0-43b2-9f03-a13f9d5be559@f9941"
   }
 }

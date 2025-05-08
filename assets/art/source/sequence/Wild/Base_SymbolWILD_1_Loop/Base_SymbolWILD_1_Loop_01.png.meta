@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "955f080b-b242-45cb-8877-4cba4d63e479",
+  "uuid": "324ab4f3-3d17-49e3-8ce1-0ac94538ced6",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "955f080b-b242-45cb-8877-4cba4d63e479@6c48a",
+      "uuid": "324ab4f3-3d17-49e3-8ce1-0ac94538ced6@6c48a",
       "displayName": "Base_SymbolWILD_1_Loop_01",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "955f080b-b242-45cb-8877-4cba4d63e479",
+        "imageUuidOrDatabaseUri": "324ab4f3-3d17-49e3-8ce1-0ac94538ced6",
         "isUuid": true,
         "minfilter": "linear",
         "magfilter": "linear",
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "955f080b-b242-45cb-8877-4cba4d63e479@f9941",
+      "uuid": "324ab4f3-3d17-49e3-8ce1-0ac94538ced6@f9941",
       "displayName": "Base_SymbolWILD_1_Loop_01",
       "id": "f9941",
       "name": "spriteFrame",
@@ -42,20 +42,20 @@
         "trimThreshold": 1,
         "rotated": false,
         "offsetX": 0.5,
-        "offsetY": 19.5,
-        "trimX": 68,
-        "trimY": 48,
-        "width": 365,
-        "height": 365,
-        "rawWidth": 500,
-        "rawHeight": 500,
+        "offsetY": 12,
+        "trimX": 16,
+        "trimY": 14,
+        "width": 219,
+        "height": 220,
+        "rawWidth": 250,
+        "rawHeight": 272,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "955f080b-b242-45cb-8877-4cba4d63e479@6c48a",
+        "imageUuidOrDatabaseUri": "324ab4f3-3d17-49e3-8ce1-0ac94538ced6@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -70,6 +70,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "955f080b-b242-45cb-8877-4cba4d63e479@f9941"
+    "redirect": "324ab4f3-3d17-49e3-8ce1-0ac94538ced6@f9941"
   }
 }
