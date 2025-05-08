@@ -42,7 +42,7 @@ export class GAME_SceneSetting extends SceneSetting {
         result = {
             gameStateIds: [1],
             reelSymbolFrameByIDs: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
-            animationIDs: [0, 1],
+            animationIDs: [0, 1, 2, 3, 4, 5],
             reelSpinStopSequence: [[0], [1], [2], [3], [4]],
             symbolWidth: 224,
             symbolHeight: 196,
@@ -80,7 +80,7 @@ export class GAME_SceneSetting extends SceneSetting {
         result = {
             gameStateIds: [2],
             reelSymbolFrameByIDs: [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
-            animationIDs: [0],
+            animationIDs: [0, 1, 2, 3, 4, 5],
             reelSpinStopSequence: [[0], [1], [2], [3], [4]],
             symbolWidth: 224,
             symbolHeight: 196,

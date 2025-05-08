@@ -19,6 +19,10 @@ export class SymbolFXStateRegister extends UIViewStateRegister {
     onRegister() {
         switch (this.content.symbolType) {
             case SymbolId.WILD:
+            case SymbolId.M1:
+            case SymbolId.M2:
+            case SymbolId.M3:
+            case SymbolId.M4:
                 this.registerState(new SymbolFXShowState(this.content));
                 break;
             case SymbolId.SUB:

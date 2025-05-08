@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "SatackWW",
+    "_name": "M4",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": null,
@@ -395,7 +395,7 @@
     "playOnLoad": false,
     "_clips": [
       {
-        "__uuid__": "a2007663-91f5-4d02-b3e3-76bb83b87ecd",
+        "__uuid__": "664fe401-e99c-422a-bfc3-97de188d3799",
         "__expectedType__": "cc.AnimationClip"
       }
     ],
@@ -456,7 +456,7 @@
       "__id__": 15
     },
     "_animationName": 0,
-    "animationNameString": "Base_SymbolWILD_1_Loop",
+    "animationNameString": "M4",
     "delayTime": 0,
     "useSpine": false,
     "useAnim": false,
@@ -604,7 +604,7 @@
     "__prefab": {
       "__id__": 34
     },
-    "symbolType": 0,
+    "symbolType": 5,
     "animation": {
       "__id__": 17
     },
