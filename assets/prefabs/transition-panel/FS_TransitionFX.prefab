@@ -32,7 +32,7 @@
       }
     ],
     "_prefab": {
-      "__id__": 35
+      "__id__": 33
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -159,7 +159,7 @@
       "b": 255,
       "a": 255
     },
-    "loop": true,
+    "loop": false,
     "_timeScale": 1,
     "_useTint": false,
     "_preCacheMode": 0,
@@ -249,7 +249,7 @@
         "__id__": 13
       },
       {
-        "__id__": 25
+        "__id__": 23
       }
     ]
   },
@@ -263,7 +263,7 @@
       "__id__": 17
     },
     "timelineTime": {
-      "__id__": 22
+      "__id__": 20
     }
   },
   {
@@ -314,8 +314,8 @@
     "timeScale": 1,
     "delayTime": 0,
     "isLoop": false,
-    "isResetSlots": false,
-    "isResetBones": false,
+    "isResetSlots": true,
+    "isResetBones": true,
     "isEndClose": false,
     "useSpine": false,
     "useAnim": false,
@@ -324,67 +324,22 @@
       "__id__": 18
     },
     "animSetupData": {
-      "__id__": 21
+      "__id__": 19
     },
     "particleData": []
   },
   {
     "__type__": "SpineSetupData",
-    "spine": {
-      "__id__": 19
-    },
-    "_spineName": 1,
-    "spineNameString": "Fire_Up_V",
+    "spine": null,
+    "_spineName": 0,
+    "spineNameString": "",
     "trackIndex": 0,
     "timeScale": 1,
-    "delayTime": 0.2,
+    "delayTime": 0,
     "isLoop": false,
     "isResetSlots": false,
     "isResetBones": false,
-    "isEndClose": true
-  },
-  {
-    "__type__": "sp.Skeleton",
-    "_name": "",
-    "_objFlags": 0,
-    "node": null,
-    "_enabled": true,
-    "__prefab": {
-      "__id__": 20
-    },
-    "_visFlags": 0,
-    "_customMaterial": null,
-    "_srcBlendFactor": 2,
-    "_dstBlendFactor": 4,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "loop": true,
-    "_timeScale": 1,
-    "_useTint": false,
-    "_preCacheMode": 0,
-    "_cacheMode": 0,
-    "_defaultCacheMode": 0,
-    "_debugBones": false,
-    "_debugSlots": false,
-    "_skeletonData": {
-      "__uuid__": "87ead4eb-7a2e-4c11-bd52-a65c2200c543",
-      "__expectedType__": "sp.SkeletonData"
-    },
-    "_premultipliedAlpha": true,
-    "defaultSkin": "",
-    "defaultAnimation": "",
-    "_sockets": [],
-    "_debugMesh": false,
-    "_id": "88+dH30k5AnrZwAdplbMvf"
-  },
-  {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "b2lkMlIQtOX4tinBh1zgoe"
+    "isEndClose": false
   },
   {
     "__type__": "AnimationSetupData",
@@ -400,10 +355,10 @@
     "useAnim": false,
     "useParticle": false,
     "spineSetupData": {
-      "__id__": 23
+      "__id__": 21
     },
     "animSetupData": {
-      "__id__": 24
+      "__id__": 22
     },
     "particleData": []
   },
@@ -431,13 +386,13 @@
     "__type__": "TimelineSetupData",
     "timelineType": 0,
     "timelineAnimation": {
-      "__id__": 26
+      "__id__": 24
     },
     "timelineSpine": {
-      "__id__": 29
+      "__id__": 27
     },
     "timelineTime": {
-      "__id__": 32
+      "__id__": 30
     }
   },
   {
@@ -450,10 +405,10 @@
     "useAnim": false,
     "useParticle": false,
     "spineSetupData": {
-      "__id__": 27
+      "__id__": 25
     },
     "animSetupData": {
-      "__id__": 28
+      "__id__": 26
     },
     "particleData": []
   },
@@ -488,17 +443,17 @@
     "timeScale": 1,
     "delayTime": 0,
     "isLoop": false,
-    "isResetSlots": false,
-    "isResetBones": false,
+    "isResetSlots": true,
+    "isResetBones": true,
     "isEndClose": true,
     "useSpine": false,
     "useAnim": false,
     "useParticle": false,
     "spineSetupData": {
-      "__id__": 30
+      "__id__": 28
     },
     "animSetupData": {
-      "__id__": 31
+      "__id__": 29
     },
     "particleData": []
   },
@@ -529,10 +484,10 @@
     "useAnim": false,
     "useParticle": false,
     "spineSetupData": {
-      "__id__": 33
+      "__id__": 31
     },
     "animSetupData": {
-      "__id__": 34
+      "__id__": 32
     },
     "particleData": []
   },
