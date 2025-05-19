@@ -1,7 +1,7 @@
 [
   {
     "__type__": "cc.AnimationClip",
-    "_name": "Transtion",
+    "_name": "Transition",
     "_objFlags": 0,
     "_native": "",
     "sample": 24,
@@ -65,7 +65,7 @@
     "__type__": "cc.RealCurve",
     "_times": [
       0,
-      1.0416666666666667
+      1.0416666269302368
     ],
     "_values": [
       {
@@ -106,7 +106,7 @@
     "__type__": "cc.RealCurve",
     "_times": [
       0,
-      1.0416666666666667
+      1.0416666269302368
     ],
     "_values": [
       {
@@ -147,7 +147,7 @@
     "__type__": "cc.RealCurve",
     "_times": [
       0,
-      1.0416666666666667
+      1.0416666269302368
     ],
     "_values": [
       {
