@@ -32,13 +32,10 @@
       },
       {
         "__id__": 81
-      },
-      {
-        "__id__": 104
       }
     ],
     "_prefab": {
-      "__id__": 106
+      "__id__": 104
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -340,7 +337,7 @@
     "duration": 2,
     "loop": true,
     "simulationSpeed": 2,
-    "playOnAwake": false,
+    "playOnAwake": true,
     "gravityModifier": {
       "__id__": 29
     },
@@ -997,7 +994,12 @@
       "__id__": 77
     },
     "playOnLoad": false,
-    "_clips": [],
+    "_clips": [
+      {
+        "__uuid__": "082b122f-77c6-47d9-bb82-5c6a1f961c73",
+        "__expectedType__": "cc.AnimationClip"
+      }
+    ],
     "_defaultClip": null,
     "_id": ""
   },
@@ -1141,7 +1143,7 @@
     "isResetBones": true,
     "isEndClose": false,
     "useSpine": false,
-    "useAnim": false,
+    "useAnim": true,
     "useParticle": false,
     "spineSetupData": {
       "__id__": 89
@@ -1166,9 +1168,11 @@
   },
   {
     "__type__": "AnimationSetupData",
-    "animation": null,
+    "animation": {
+      "__id__": 76
+    },
     "_animationName": 0,
-    "animationNameString": "",
+    "animationNameString": "Transition",
     "delayTime": 0
   },
   {
@@ -1333,34 +1337,6 @@
     "_animationName": 0,
     "animationNameString": "",
     "delayTime": 0
-  },
-  {
-    "__type__": "cc.Animation",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "__prefab": {
-      "__id__": 105
-    },
-    "playOnLoad": false,
-    "_clips": [
-      {
-        "__uuid__": "082b122f-77c6-47d9-bb82-5c6a1f961c73",
-        "__expectedType__": "cc.AnimationClip"
-      }
-    ],
-    "_defaultClip": {
-      "__uuid__": "082b122f-77c6-47d9-bb82-5c6a1f961c73",
-      "__expectedType__": "cc.AnimationClip"
-    },
-    "_id": ""
-  },
-  {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "db5kvCjDdNxqoZkFbQRqhG"
   },
   {
     "__type__": "cc.PrefabInfo",
