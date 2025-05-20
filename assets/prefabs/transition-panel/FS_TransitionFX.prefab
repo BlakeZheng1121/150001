@@ -176,7 +176,7 @@
     },
     "_premultipliedAlpha": true,
     "defaultSkin": "default",
-    "defaultAnimation": "Transition_Hide",
+    "defaultAnimation": "Over",
     "_sockets": [],
     "_debugMesh": false,
     "_id": ""
