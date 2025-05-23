@@ -133,7 +133,7 @@ export class MockSFSProxy extends GameProxy implements TaskHandlerListener {
         waysBetColumn: number
     ): void {
         let requestName = 'h5.spin';
-        this.caseManager.handleTask(operation, this);
+        this.caseManager.handleTask(requestName, this);
         this.hasSentSpinRequest= true;
     }
 

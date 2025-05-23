@@ -1,0 +1,300 @@
+{
+    "name": "h5.spin",
+    "data": {
+  "balance": 3901451387.18,
+  "spinResult": {
+    "playerTotalWin": 800,
+    "baseGameResult": {
+      "usedTableIndex": 0,
+      "screenSymbol": [
+        [
+          9,
+          11,
+          2
+        ],
+        [
+          6,
+          11,
+          7
+        ],
+        [
+          0,
+          12,
+          10
+        ],
+        [
+          9,
+          11,
+          6
+        ],
+        [
+          7,
+          12,
+          2
+        ]
+      ],
+      "baseGameTotalWin": 800,
+      "waysGameResult": {
+        "playerWin": 800,
+        "waysResult": [
+          {
+            "symbolID": 11,
+            "hitDirection": "LeftToRight",
+            "hitNumber": 4,
+            "count": 1,
+            "hitOdds": 8,
+            "symbolWin": 800,
+            "screenHitData": [
+              [
+                false,
+                true,
+                false
+              ],
+              [
+                false,
+                true,
+                false
+              ],
+              [
+                true,
+                false,
+                false
+              ],
+              [
+                false,
+                true,
+                false
+              ],
+              [
+                false,
+                false,
+                false
+              ]
+            ]
+          }
+        ]
+      },
+      "specialFeatureResult": [
+        {
+          "specialHitInfo": "noSpecialHit",
+          "specialOperations": [],
+          "specialScreenHitData": [
+            [
+              false,
+              false,
+              false
+            ],
+            [
+              false,
+              false,
+              false
+            ],
+            [
+              false,
+              false,
+              false
+            ],
+            [
+              false,
+              false,
+              false
+            ],
+            [
+              false,
+              false,
+              false
+            ]
+          ],
+          "specialScreenWin": 0
+        },
+        {
+          "specialHitInfo": "noSpecialHit",
+          "specialOperations": [],
+          "specialScreenHitData": [
+            [
+              false,
+              false,
+              false
+            ],
+            [
+              false,
+              false,
+              false
+            ],
+            [
+              false,
+              false,
+              false
+            ],
+            [
+              false,
+              false,
+              false
+            ],
+            [
+              false,
+              false,
+              false
+            ]
+          ],
+          "specialScreenWin": 0
+        },
+        {
+          "specialHitInfo": "noSpecialHit",
+          "specialOperations": [],
+          "specialScreenHitData": [
+            [
+              false,
+              false,
+              false
+            ],
+            [
+              false,
+              false,
+              false
+            ],
+            [
+              false,
+              false,
+              false
+            ],
+            [
+              false,
+              false,
+              false
+            ],
+            [
+              false,
+              false,
+              false
+            ]
+          ],
+          "specialScreenWin": 0
+        }
+      ],
+      "displayInfo": {
+        "displayMethod": [
+          [
+            false
+          ],
+          [
+            false
+          ],
+          [
+            false
+          ],
+          [
+            false
+          ],
+          [
+            false
+          ]
+        ],
+        "bigWinType": "normal_1",
+        "dampInfo": [
+          [
+            4,
+            8,
+            13,
+            6,
+            5
+          ],
+          [
+            10,
+            2,
+            4,
+            7,
+            7
+          ]
+        ],
+        "rngInfo": [
+          [
+            1,
+            15,
+            3,
+            16,
+            4
+          ]
+        ]
+      },
+      "extendInfoForbaseGameResult": {
+        "featureIdx": 0,
+        "isPowerUp": false,
+        "ballCount": 0,
+        "ballTotalCredit": 0,
+        "ballScreenLabel": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "mysterySymbol": -1,
+        "seatInfo": {
+          "statusAccumulation": [
+            10000
+          ],
+          "miniGameWaterLevel": 4,
+          "denomMultiplier": 100,
+          "betMultiplierIndex": 0,
+          "featureIdx": 0,
+          "usedTableIndex": 0,
+          "screenRngInfo": [
+            [
+              1,
+              15,
+              3,
+              16,
+              4
+            ]
+          ]
+        },
+        "extendPlayerWin": 0,
+        "extendGameFeature": 0
+      },
+      "isHitFeatureGame": false
+    },
+    "bigWinType": "normal_2",
+    "probabilityDetail": {
+      "randomNumberUsed": 6,
+      "randomDataUsed": [
+        0,
+        1,
+        15,
+        3,
+        16,
+        4
+      ],
+      "settingId": "0-0-0"
+    }
+  },
+  "gameSeq": 433089243,
+  "minusBetBalance": 3901451379.18,
+  "ts": 1747978556958
+},
+    "description": "無得分盤面",
+    "event": "h5.spinResponse",
+    "delay": 0,
+    "repeat": 1,
+    "duration": 0
+}
