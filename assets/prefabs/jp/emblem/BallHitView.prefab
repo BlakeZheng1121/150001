@@ -838,7 +838,7 @@
       "_skeletonData"
     ],
     "value": {
-      "__uuid__": "2461694e-aae0-4535-846c-0b00168010d6",
+      "__uuid__": "c763bc18-bd1c-4333-84ad-9e8fa48b4b43",
       "__expectedType__": "sp.SkeletonData"
     }
   },
@@ -856,7 +856,7 @@
     "propertyPath": [
       "defaultSkin"
     ],
-    "value": "default"
+    "value": ""
   },
   {
     "__type__": "CCPropertyOverrideInfo",
@@ -1430,7 +1430,7 @@
     "propertyPath": [
       "defaultAnimation"
     ],
-    "value": "MainStage_Lv1"
+    "value": ""
   },
   {
     "__type__": "CCPropertyOverrideInfo",
