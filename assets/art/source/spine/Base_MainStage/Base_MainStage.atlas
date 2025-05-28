@@ -4,255 +4,289 @@ size: 1024,1024
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-Bowl_Glow
-  rotate: false
-  xy: 2, 811
-  size: 325, 208
-  orig: 361, 288
-  offset: 16, 3
-  index: -1
 Bowl_back
   rotate: false
-  xy: 300, 115
+  xy: 630, 851
   size: 245, 63
   orig: 361, 288
   offset: 57, 129
   index: -1
 Coin/Bowl_Coin_Lv5_idle_01
   rotate: false
-  xy: 2, 630
+  xy: 674, 2
   size: 314, 179
   orig: 420, 252
   offset: 54, 21
   index: -1
 Coin_Glow
   rotate: false
-  xy: 658, 541
+  xy: 2, 398
   size: 262, 158
   orig: 280, 168
   offset: 6, 2
   index: -1
-Cover_Close_Glow
-  rotate: false
-  xy: 2, 99
-  size: 296, 193
-  orig: 361, 288
-  offset: 32, 80
-  index: -1
 Cover_OpenBack
-  rotate: true
-  xy: 2, 294
+  rotate: false
+  xy: 266, 368
   size: 334, 158
   orig: 361, 288
   offset: 9, 104
   index: -1
 Cover_Open_Glow
   rotate: false
-  xy: 666, 861
+  xy: 602, 343
   size: 334, 158
   orig: 361, 288
   offset: 9, 104
   index: -1
 Cover_Open_light
-  rotate: true
-  xy: 162, 294
+  rotate: false
+  xy: 2, 208
   size: 334, 158
   orig: 361, 288
   offset: 9, 104
   index: -1
 Cover_Open_top_Glow
-  rotate: true
-  xy: 780, 58
+  rotate: false
+  xy: 877, 850
   size: 85, 64
   orig: 361, 288
   offset: 137, 206
   index: -1
+Effect_star_2
+  rotate: false
+  xy: 79, 883
+  size: 31, 31
+  orig: 34, 34
+  offset: 1, 2
+  index: -1
 FA_Frame_Glow_00
   rotate: false
-  xy: 300, 275
+  xy: 2, 897
   size: 19, 17
   orig: 131, 126
   offset: 54, 104
   index: -1
 FA_Frame_Glow_02
   rotate: true
-  xy: 675, 51
+  xy: 2, 719
   size: 92, 103
   orig: 131, 126
   offset: 17, 23
   index: -1
 FA_Frame_Glow_04
   rotate: false
-  xy: 564, 50
+  xy: 107, 707
   size: 109, 104
   orig: 131, 126
   offset: 13, 22
   index: -1
 FA_Frame_Glow_06
-  rotate: true
-  xy: 863, 411
+  rotate: false
+  xy: 218, 682
   size: 128, 104
   orig: 131, 126
   offset: 1, 22
   index: -1
 FA_Frame_Glow_08
   rotate: false
-  xy: 586, 277
+  xy: 348, 673
   size: 130, 104
   orig: 131, 126
   offset: 0, 22
   index: -1
 FA_Frame_Glow_10
   rotate: false
-  xy: 300, 5
+  xy: 480, 669
   size: 130, 108
   orig: 131, 126
   offset: 0, 18
   index: -1
 FA_Frame_Glow_12
   rotate: false
-  xy: 581, 156
+  xy: 2, 586
   size: 130, 119
   orig: 131, 126
   offset: 0, 7
   index: -1
 FA_Frame_Glow_14
-  rotate: true
-  xy: 838, 279
+  rotate: false
+  xy: 266, 546
   size: 130, 125
   orig: 131, 126
   offset: 0, 1
   index: -1
 FA_Frame_Glow_16
   rotate: false
-  xy: 713, 145
+  xy: 134, 558
   size: 130, 122
   orig: 131, 126
   offset: 0, 1
   index: -1
 FA_Frame_Glow_18
   rotate: false
-  xy: 432, 2
+  xy: 612, 652
   size: 130, 111
   orig: 131, 126
   offset: 0, 1
   index: -1
 FA_Frame_Glow_20
   rotate: false
-  xy: 845, 166
+  xy: 744, 648
   size: 117, 111
   orig: 131, 126
   offset: 5, 1
   index: -1
 FA_Frame_Glow_22
-  rotate: false
-  xy: 922, 590
+  rotate: true
+  xy: 858, 761
   size: 87, 109
   orig: 131, 126
   offset: 18, 1
   index: -1
 FA_Word_Glow
   rotate: false
-  xy: 846, 81
+  xy: 266, 788
   size: 85, 83
   orig: 131, 126
   offset: 19, 26
   index: -1
 Gold/Bowl
   rotate: false
-  xy: 322, 397
+  xy: 651, 503
   size: 286, 142
   orig: 361, 288
   offset: 36, 18
   index: -1
 Gold/Bowl_back_golden
   rotate: false
-  xy: 322, 266
+  xy: 371, 854
   size: 257, 60
   orig: 361, 288
   offset: 51, 134
   index: -1
 Gold/Bowl_dn
   rotate: false
-  xy: 610, 383
+  xy: 112, 882
   size: 189, 32
   orig: 361, 288
   offset: 82, 13
   index: -1
 Gold/Bowl_top_golden
   rotate: false
-  xy: 322, 328
+  xy: 2, 813
   size: 262, 67
   orig: 361, 288
   offset: 49, 98
   index: -1
 Gold/Cover_Close
   rotate: false
-  xy: 610, 417
+  xy: 398, 528
   size: 251, 122
   orig: 361, 288
   offset: 54, 104
   index: -1
 Gold/Cover_Close_dn_golden
   rotate: false
-  xy: 2, 24
+  xy: 353, 779
   size: 262, 73
   orig: 361, 288
   offset: 49, 98
   index: -1
 Gold/Cover_Close_golden
   rotate: false
-  xy: 300, 180
+  xy: 617, 765
   size: 239, 84
   orig: 361, 288
   offset: 60, 142
   index: -1
 Gold/Cover_Close_top
   rotate: false
-  xy: 922, 547
+  xy: 303, 873
   size: 66, 41
   orig: 361, 288
   offset: 147, 213
   index: -1
 Gold/Cover_Open
   rotate: false
-  xy: 329, 701
+  xy: 338, 183
   size: 334, 158
   orig: 361, 288
   offset: 9, 104
   index: -1
 Gold/Cover_OpenBack_golden
   rotate: false
-  xy: 329, 861
+  xy: 674, 183
   size: 335, 158
   orig: 360, 287
   offset: 8, 104
   index: -1
 Gold/Cover_Open_dn_golden
   rotate: false
-  xy: 665, 701
+  xy: 2, 48
   size: 334, 158
   orig: 361, 288
   offset: 9, 104
   index: -1
 Gold/Cover_Open_golden
   rotate: false
-  xy: 322, 541
+  xy: 338, 23
   size: 334, 158
   orig: 361, 288
   offset: 9, 104
   index: -1
 Gold/Cover_Open_top
-  rotate: true
-  xy: 266, 43
+  rotate: false
+  xy: 23, 886
   size: 54, 28
   orig: 361, 288
   offset: 153, 224
   index: -1
 Gold/FA
   rotate: false
-  xy: 718, 269
+  xy: 863, 647
   size: 118, 112
   orig: 361, 288
   offset: 120, 16
+  index: -1
+
+Base_MainStage2.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Bowl_Glow
+  rotate: false
+  xy: 470, 39
+  size: 325, 208
+  orig: 361, 288
+  offset: 16, 3
+  index: -1
+Cover_Close_Glow
+  rotate: true
+  xy: 704, 653
+  size: 296, 193
+  orig: 361, 288
+  offset: 32, 80
+  index: -1
+Flare_1
+  rotate: true
+  xy: 2, 2
+  size: 245, 254
+  orig: 245, 254
+  offset: 0, 0
+  index: -1
+Flare_2
+  rotate: false
+  xy: 2, 249
+  size: 700, 700
+  orig: 700, 700
+  offset: 0, 0
+  index: -1
+Parti
+  rotate: false
+  xy: 258, 37
+  size: 210, 210
+  orig: 210, 210
+  offset: 0, 0
   index: -1
