@@ -126,8 +126,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1061.08,
-      "height": 2427.62
+      "width": 899.92724609375,
+      "height": 1600.080322265625
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -171,7 +171,7 @@
     "_debugBones": false,
     "_debugSlots": false,
     "_skeletonData": {
-      "__uuid__": "34a562f3-3d05-422d-b15b-fdfcf346b7f2",
+      "__uuid__": "f44785f5-e568-438c-8c79-e3b8741512e2",
       "__expectedType__": "sp.SkeletonData"
     },
     "_premultipliedAlpha": true,

@@ -2,9 +2,9 @@
   "ver": "1.0.0",
   "importer": "*",
   "imported": true,
-  "uuid": "03ca8068-6297-42b9-83e0-8f2f4a250adc",
+  "uuid": "4dd50bd5-70cd-4291-a310-906c5d0c3cf1",
   "files": [
-    ".atlas",
+    ".db",
     ".json"
   ],
   "subMetas": {},
