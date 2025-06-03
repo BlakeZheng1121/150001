@@ -168,6 +168,8 @@ export class SymbolPosData {
     public language: string = '';
     /** 分數球顯示內容 */
     public creditDisplay: string = '';
+    /** 是否為 Wild 位置，1:Wild 0:非Wild */
+    public wildFlag: number = 0;
 
     /** 複製內容 */
     public concat(): SymbolPosData {
@@ -180,6 +182,7 @@ export class SymbolPosData {
         _symbolPosData.isSpecial = this.isSpecial;
         _symbolPosData.language = this.language;
         _symbolPosData.creditDisplay = this.creditDisplay;
+        _symbolPosData.wildFlag = this.wildFlag;
         return _symbolPosData;
     }
 }

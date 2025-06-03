@@ -2,7 +2,7 @@ import { MathUtil } from 'src/core/utils/MathUtil';
 import { GameDataProxy } from '../../../sgv3/proxy/GameDataProxy';
 import { ReelDataProxy, SymbolPosData } from '../../../sgv3/proxy/ReelDataProxy';
 import { GameScene } from '../../../sgv3/vo/data/GameScene';
-import { LockType } from '../../../sgv3/vo/enum/Reel';
+import { LockType, SymbolId } from '../../../sgv3/vo/enum/Reel';
 import { FreeGameOneRoundResult } from '../../../sgv3/vo/result/FreeGameOneRoundResult';
 import { TopUpGameOneRoundResult } from '../../../sgv3/vo/result/TopUpGameOneRoundResult';
 import { BalanceUtil } from 'src/sgv3/util/BalanceUtil';
@@ -47,6 +47,17 @@ export class ReelEffect_SymbolFeatureCommand extends puremvc.SimpleCommand {
         }
         //ByGame 依場景 做資料覆蓋處理
         switch (myGameScene) {
+            case GameScene.Game_1:
+                let screenSymbol = this.gameDataProxy.curRoundResult?.screenSymbol;
+                if (screenSymbol) {
+                    for (let i = 0; i < screenSymbol.length; i++) {
+                        for (let j = 0; j < screenSymbol[i].length; j++) {
+                            this.reelDataProxy.symbolFeature[i][j].wildFlag =
+                                screenSymbol[i][j] === SymbolId.WILD ? 1 : 0;
+                        }
+                    }
+                }
+                break;
             case GameScene.Game_2:
                 let game2TopUpData = this.gameDataProxy.curRoundResult as FreeGameOneRoundResult;
                 let extendInfo = game2TopUpData.extendInfoForFreeGameResult;
