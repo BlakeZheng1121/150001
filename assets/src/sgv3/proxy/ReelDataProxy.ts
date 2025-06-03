@@ -168,7 +168,12 @@ export class SymbolPosData {
     public language: string = '';
     /** 分數球顯示內容 */
     public creditDisplay: string = '';
-    /** Wild stack count on this reel if position is wild, otherwise 0 */
+    /**
+     * Wild stack flag
+     * - stack size when this position is the top of a wild stack
+     * - -1 when this position is a stacked wild but not the top
+     * - 0 when this position is not a wild
+     */
     public wildFlag: number = 0;
 
     /** 複製內容 */
