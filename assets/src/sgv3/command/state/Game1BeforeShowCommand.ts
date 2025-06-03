@@ -24,11 +24,22 @@ export class Game1BeforeShowCommand extends StateCommand {
             this.sendNotification(ViewMediatorEvent.FORTUNE_LEVEL_CHANGE, baseGameResult.displayInfo.fortuneLevelType);
         }
 
-        if (baseGameResult.baseGameTotalWin > 0 || this.gameDataProxy.isHitSpecial()) {
-            this.changeState(StateMachineProxy.GAME1_SHOWWIN);
-        } else {
-            this.changeState(StateMachineProxy.GAME1_END);
-        }
+        let nextState =
+            baseGameResult.baseGameTotalWin > 0 || this.gameDataProxy.isHitSpecial()
+                ? StateMachineProxy.GAME1_SHOWWIN
+                : StateMachineProxy.GAME1_END;
+
+        GlobalTimer.getInstance()
+            .registerTimer(
+                this.timerKey,
+                3,
+                () => {
+                    GlobalTimer.getInstance().removeTimer(this.timerKey);
+                    this.changeState(nextState);
+                },
+                this
+            )
+            .start();
     }
 
     private clearTimerKey() {
