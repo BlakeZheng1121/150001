@@ -51,9 +51,15 @@ export class ReelEffect_SymbolFeatureCommand extends puremvc.SimpleCommand {
                 let screenSymbol = this.gameDataProxy.curRoundResult?.screenSymbol;
                 if (screenSymbol) {
                     for (let i = 0; i < screenSymbol.length; i++) {
+                        let wildStack = 0;
+                        for (let j = 0; j < screenSymbol[i].length; j++) {
+                            if (screenSymbol[i][j] === SymbolId.WILD) {
+                                wildStack++;
+                            }
+                        }
                         for (let j = 0; j < screenSymbol[i].length; j++) {
                             this.reelDataProxy.symbolFeature[i][j].wildFlag =
-                                screenSymbol[i][j] === SymbolId.WILD ? 1 : 0;
+                                screenSymbol[i][j] === SymbolId.WILD ? wildStack : 0;
                         }
                     }
                 }

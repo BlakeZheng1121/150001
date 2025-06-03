@@ -168,7 +168,7 @@ export class SymbolPosData {
     public language: string = '';
     /** 分數球顯示內容 */
     public creditDisplay: string = '';
-    /** 是否為 Wild 位置，1:Wild 0:非Wild */
+    /** Wild stack count on this reel if position is wild, otherwise 0 */
     public wildFlag: number = 0;
 
     /** 複製內容 */
