@@ -1,9 +1,12 @@
 import { StateMachineProxy } from '../../proxy/StateMachineProxy';
+import { macro } from 'cc';
 import { ReelEvent, ViewMediatorEvent } from '../../util/Constant';
 import { ReelDataProxy } from '../../proxy/ReelDataProxy';
 import { SymbolInfo } from '../../vo/info/SymbolInfo';
 import { SymbolId } from '../../vo/enum/Reel';
 import { GlobalTimer } from '../../util/GlobalTimer';
+import { ReelViewMediator } from '../../../game/mediator/ReelViewMediator';
+import { GAME_ReelView } from '../../../game/view/GAME_ReelView';
 import { BaseGameResult } from '../../vo/result/BaseGameResult';
 import { StateCommand } from './StateCommand';
 
@@ -42,17 +45,22 @@ export class Game1BeforeShowCommand extends StateCommand {
             GlobalTimer.getInstance()
                 .registerTimer(
                     this.timerKey,
-                    1,
-                    () => {
-                        GlobalTimer.getInstance().removeTimer(this.timerKey);
-                        this.afterStackWild();
-                    },
-                    this
+                    0.1,
+                    this.checkStackWildFinish,
+                    this,
+                    macro.REPEAT_FOREVER
                 )
                 .start();
             return true;
         }
         return false;
+    }
+
+    private checkStackWildFinish() {
+        if (!this.reelView.isSymbolPlaying()) {
+            GlobalTimer.getInstance().removeTimer(this.timerKey);
+            this.afterStackWild();
+        }
     }
 
     private afterStackWild() {
@@ -70,17 +78,7 @@ export class Game1BeforeShowCommand extends StateCommand {
                 ? StateMachineProxy.GAME1_SHOWWIN
                 : StateMachineProxy.GAME1_END;
 
-        GlobalTimer.getInstance()
-            .registerTimer(
-                this.timerKey,
-                3,
-                () => {
-                    GlobalTimer.getInstance().removeTimer(this.timerKey);
-                    this.changeState(nextState);
-                },
-                this
-            )
-            .start();
+        this.changeState(nextState);
     }
 
     protected _reelDataProxy: ReelDataProxy;
@@ -89,5 +87,16 @@ export class Game1BeforeShowCommand extends StateCommand {
             this._reelDataProxy = this.facade.retrieveProxy(ReelDataProxy.NAME) as ReelDataProxy;
         }
         return this._reelDataProxy;
+    }
+
+    protected _reelView: GAME_ReelView;
+    protected get reelView(): GAME_ReelView {
+        if (!this._reelView) {
+            const mediator = this.facade.retrieveMediator(
+                ReelViewMediator.NAME
+            ) as ReelViewMediator;
+            this._reelView = mediator.getViewComponent() as GAME_ReelView;
+        }
+        return this._reelView;
     }
 }
