@@ -6,7 +6,7 @@ import { LockType, SymbolId } from '../../../sgv3/vo/enum/Reel';
 import { FreeGameOneRoundResult } from '../../../sgv3/vo/result/FreeGameOneRoundResult';
 import { TopUpGameOneRoundResult } from '../../../sgv3/vo/result/TopUpGameOneRoundResult';
 import { BalanceUtil } from 'src/sgv3/util/BalanceUtil';
-import { WAY_GameResult } from '../../../sgv3way/vo/result/WAY_GameResult';
+import { WAY_AllWinData } from '../../../sgv3way/vo/datas/WAY_AllWinData';
 
 export class ReelEffect_SymbolFeatureCommand extends puremvc.SimpleCommand {
     public static readonly NAME = 'ReelEffect_SymbolFeatureCommand';
@@ -50,13 +50,11 @@ export class ReelEffect_SymbolFeatureCommand extends puremvc.SimpleCommand {
         switch (myGameScene) {
             case GameScene.Game_1:
                 const screenSymbol = this.gameDataProxy.curRoundResult?.screenSymbol;
-                const waysResult = (
-                    this.gameDataProxy.curRoundResult?.waysGameResult as WAY_GameResult
-                )?.waysResult;
+                const wayInfos = (this.gameDataProxy.curWinData as WAY_AllWinData)?.wayInfos;
                 const isWinning = (x: number, y: number): boolean => {
-                    if (!waysResult) return false;
-                    for (const result of waysResult) {
-                        if (result.screenHitData?.[x]?.[y]) {
+                    if (!wayInfos) return false;
+                    for (const info of wayInfos) {
+                        if (info.screenHitData?.[x]?.[y]) {
                             return true;
                         }
                     }
@@ -71,11 +69,7 @@ export class ReelEffect_SymbolFeatureCommand extends puremvc.SimpleCommand {
                             if (col[j] === SymbolId.WILD && isWinning(i, j)) {
                                 const start = j;
                                 let stackLen = 0;
-                                while (
-                                    j < col.length &&
-                                    col[j] === SymbolId.WILD &&
-                                    isWinning(i, j)
-                                ) {
+                                while (j < col.length && col[j] === SymbolId.WILD && isWinning(i, j)) {
                                     stackLen++;
                                     j++;
                                 }
