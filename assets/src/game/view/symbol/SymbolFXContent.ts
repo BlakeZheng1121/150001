@@ -100,4 +100,6 @@ export class SymbolFXContent extends Component {
     public symbolId: number = 0;
 
     public language: string = '';
+
+    public wildFlag: number = 0;
 }

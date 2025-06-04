@@ -22,6 +22,7 @@ export class SymbolFX extends UIViewBase {
         this.symbolcontent.multiple = symbolData.multiple;
         this.symbolcontent.isSpecialFont = symbolData.isSpecial;
         this.symbolcontent.language = symbolData.language;
+        this.symbolcontent.wildFlag = symbolData.wildFlag;
         this.symbolcontent.symbolId = id;
     }
 

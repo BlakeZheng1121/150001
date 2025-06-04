@@ -94,14 +94,15 @@ export class SymbolFXShowState extends UIViewStateBase {
             }
         }
         if (this.content.symbolId === SymbolId.WILD) {
-            if (this.content.language === 'zh') {
-                animationIndex = 0;
-                this.content.animation.play('PlayWin');
-            }else {
-                animationIndex = 1;
+            if (this.content.wildFlag > 0) {
+                this.content.animation.play(`ShowStack_${this.content.wildFlag}`);
+            } else if (this.content.wildFlag === -1) {
+                this.onEffectFinished();
+                return;
+            } else {
                 this.content.animation.play('PlayWin');
             }
-        }else{
+        } else {
             this.content.animation.play('PlayWin');
         }
         //TO DO: Perform Time CallBack;
