@@ -194,6 +194,14 @@ export class GAME_ReelView extends ReelView {
         }
     }
 
+    public showStackWildSymbol(symbolInfo: SymbolInfo, featureInfo: SymbolPosData) {
+        if (symbolInfo.sid !== SymbolId.WILD) {
+            return;
+        }
+        this.setAnimSymbolPlay(symbolInfo, featureInfo, SymbolPerformType.SHOW_STACK_WILD);
+        this.setDefaultSymbolPlay(symbolInfo, SymbolPerformType.HIDE);
+    }
+
     public skipReelWin() {
         if (this.winScoreText != null) {
             this.winScoreText.node.active = false;
@@ -263,7 +271,11 @@ export class GAME_ReelView extends ReelView {
         this.restoreSymbolParent(symbol, symbolInfo.x);
     }
 
-    protected setAnimSymbolPlay(symbolInfo: SymbolInfo, featureInfo: SymbolPosData) {
+    protected setAnimSymbolPlay(
+        symbolInfo: SymbolInfo,
+        featureInfo: SymbolPosData,
+        type: SymbolPerformType = SymbolPerformType.SHOW
+    ) {
         const self = this;
         let poolKey: number = symbolInfo.y * self.reelsList.length + symbolInfo.x;
         let anim: SymbolFX = self.animManager.pool.get(poolKey);
@@ -271,7 +283,7 @@ export class GAME_ReelView extends ReelView {
         anim.node.setWorldPosition(self.getSymbolPosition(symbolInfo.x, symbolInfo.y));
         anim.setInfo(symbolInfo.sid, featureInfo);
         anim.node.active = true;
-        anim.play(SymbolPerformType.SHOW);
+        anim.play(type);
     }
 
     protected setDefaultSymbolPlay(symbolInfo: SymbolInfo, type: SymbolPerformType) {

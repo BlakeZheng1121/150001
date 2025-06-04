@@ -24,6 +24,7 @@ export class SymbolFXStateRegister extends UIViewStateRegister {
             case SymbolId.M3:
             case SymbolId.M4:
                 this.registerState(new SymbolFXShowState(this.content));
+                this.registerState(new SymbolFXStackShowState(this.content));
                 break;
             case SymbolId.SUB:
                 this.registerState(new SymbolFXReSpinState(this.content));
@@ -117,6 +118,25 @@ export class SymbolFXShowState extends UIViewStateBase {
     onSkip() {
         this.tempTween.stop();
         this.onEffectFinished();
+    }
+}
+
+export class SymbolFXStackShowState extends UIViewStateBase {
+    private content: SymbolFXContent | null = null;
+
+    public effectId: number = SymbolPerformType.SHOW_STACK_WILD;
+
+    constructor(content: SymbolFXContent) {
+        super();
+        this.content = content;
+    }
+
+    onPlay() {
+        if (this.content.animation == null || this.content.wildFlag <= 0) {
+            this.onEffectFinished();
+            return;
+        }
+        this.content.animation.play(`ShowStack_${this.content.wildFlag}`, () => this.onEffectFinished());
     }
 }
 
