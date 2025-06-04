@@ -6,7 +6,7 @@ import { LockType, SymbolId } from '../../../sgv3/vo/enum/Reel';
 import { FreeGameOneRoundResult } from '../../../sgv3/vo/result/FreeGameOneRoundResult';
 import { TopUpGameOneRoundResult } from '../../../sgv3/vo/result/TopUpGameOneRoundResult';
 import { BalanceUtil } from 'src/sgv3/util/BalanceUtil';
-import { WAY_AllWinData } from '../../../sgv3way/vo/datas/WAY_AllWinData';
+import { WAY_GameResult } from '../../../sgv3way/vo/result/WAY_GameResult';
 
 export class ReelEffect_SymbolFeatureCommand extends puremvc.SimpleCommand {
     public static readonly NAME = 'ReelEffect_SymbolFeatureCommand';
@@ -50,11 +50,13 @@ export class ReelEffect_SymbolFeatureCommand extends puremvc.SimpleCommand {
         switch (myGameScene) {
             case GameScene.Game_1:
                 const screenSymbol = this.gameDataProxy.curRoundResult?.screenSymbol;
-                const winData = this.gameDataProxy.curWinData as WAY_AllWinData;
+                const waysResult = (
+                    this.gameDataProxy.curRoundResult?.waysGameResult as WAY_GameResult
+                )?.waysResult;
                 const isWinning = (x: number, y: number): boolean => {
-                    if (!winData?.wayInfos) return false;
-                    for (const info of winData.wayInfos) {
-                        if (info.screenHitData && info.screenHitData[x]?.[y]) {
+                    if (!waysResult) return false;
+                    for (const result of waysResult) {
+                        if (result.screenHitData?.[x]?.[y]) {
                             return true;
                         }
                     }
