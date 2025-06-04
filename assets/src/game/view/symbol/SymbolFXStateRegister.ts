@@ -95,7 +95,7 @@ export class SymbolFXShowState extends UIViewStateBase {
         }
         if (this.content.symbolId === SymbolId.WILD) {
             if (this.content.wildFlag > 0) {
-                this.content.animation.play(`ShowStack_${this.content.wildFlag}`);
+                this.content.animation.play(`PlayStackWin_${this.content.wildFlag}`);
             } else if (this.content.wildFlag === -1) {
                 this.onEffectFinished();
                 return;
