@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "9c9df724-30ac-46ab-833f-3aa4b64eadd1",
+  "uuid": "1c0aa97d-e4dd-4708-b31d-5c0dd432fe03",
   "files": [
     ".json",
     ".png"
@@ -10,19 +10,19 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "9c9df724-30ac-46ab-833f-3aa4b64eadd1@6c48a",
-      "displayName": "Reel_FramePillar",
+      "uuid": "1c0aa97d-e4dd-4708-b31d-5c0dd432fe03@6c48a",
+      "displayName": "Base_ReelFrame_Side_Left",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
+        "imageUuidOrDatabaseUri": "1c0aa97d-e4dd-4708-b31d-5c0dd432fe03",
+        "isUuid": true,
         "minfilter": "linear",
         "magfilter": "linear",
         "mipfilter": "none",
-        "anisotropy": 0,
-        "isUuid": true,
-        "imageUuidOrDatabaseUri": "9c9df724-30ac-46ab-833f-3aa4b64eadd1"
+        "anisotropy": 0
       },
       "ver": "1.0.21",
       "imported": true,
@@ -33,8 +33,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "9c9df724-30ac-46ab-833f-3aa4b64eadd1@f9941",
-      "displayName": "Reel_FramePillar",
+      "uuid": "1c0aa97d-e4dd-4708-b31d-5c0dd432fe03@f9941",
+      "displayName": "Base_ReelFrame_Side_Left",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -43,19 +43,19 @@
         "rotated": false,
         "offsetX": 0,
         "offsetY": 0,
-        "trimX": 10,
+        "trimX": 0,
         "trimY": 0,
-        "width": 8,
-        "height": 523,
-        "rawWidth": 28,
-        "rawHeight": 523,
+        "width": 11,
+        "height": 813,
+        "rawWidth": 11,
+        "rawHeight": 813,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "9c9df724-30ac-46ab-833f-3aa4b64eadd1@6c48a",
+        "imageUuidOrDatabaseUri": "1c0aa97d-e4dd-4708-b31d-5c0dd432fe03@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -67,9 +67,9 @@
     }
   },
   "userData": {
-    "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "9c9df724-30ac-46ab-833f-3aa4b64eadd1@f9941",
-    "fixAlphaTransparencyArtifacts": false
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": false,
+    "redirect": "1c0aa97d-e4dd-4708-b31d-5c0dd432fe03@f9941"
   }
 }
