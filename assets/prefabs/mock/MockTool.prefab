@@ -1090,9 +1090,37 @@
     "value": "Description"
   },
   {
-    "__type__": "cc.TargetInfo",
+    "value": 17
     "localID": [
-      "8bgyKYvnFNs7jtgB75fqRT"
+  {
+    "__type__": "CCPropertyOverrideInfo",
+    "targetInfo": {
+      "__id__": 80
+    },
+    "propertyPath": [
+      "caseList",
+      "16"
+    ],
+    "value": {
+      "__uuid__": "d132a005-36ef-45af-99d6-fc701d2bc7d6",
+      "__expectedType__": "cc.JsonAsset"
+    }
+  },
+    "value": 21
+  {
+    "__type__": "CCPropertyOverrideInfo",
+    "targetInfo": {
+      "__id__": 80
+    },
+    "propertyPath": [
+      "taskList",
+      "20"
+    ],
+    "value": {
+      "__uuid__": "469b851d-084c-4c09-9751-1a3b154bd9a5",
+      "__expectedType__": "cc.JsonAsset"
+    }
+  },
     ]
   },
   {
