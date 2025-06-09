@@ -51,6 +51,10 @@
         {
             "name": "WinMultiMiniGameInFreeGameLogin_json",
             "path": "resource/config/mock/WinMultiMiniGameInFreeGameLogin.json"
+        },
+        {
+            "name": "FreeGameNoWinLogin_json",
+            "path": "resource/config/mock/FreeGameNoWinLogin.json"
         }
     ],
     "tasks": [
@@ -121,6 +125,10 @@
         {
             "name": "WinMultiMiniGameInFreeGame_SpinResponse.json",
             "path": "resource/config/mock/tasks/WinMultiMiniGameInFreeGame_SpinResponse.json"
+        },
+        {
+            "name": "FreeGame_NoWin_SpinResponse.json",
+            "path": "resource/config/mock/tasks/FreeGame_NoWin_SpinResponse.json"
         }
     ]
 }
