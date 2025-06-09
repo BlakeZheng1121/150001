@@ -7,9 +7,9 @@
             "baseGameResult": {
                 "usedTableIndex": 0,
                 "screenSymbol": [
-                    [1, 1, 1],
-                    [1, 1, 1],
-                    [1, 1, 1],
+                    [14, 1, 1],
+                    [1, 14, 1],
+                    [1, 1, 14],
                     [7, 3, 5],
                     [2, 4, 6]
                 ],
@@ -20,15 +20,9 @@
                 },
                 "specialFeatureResult": [
                     {
-                        "specialHitInfo": "waitingForClient",
-                        "specialOperations": [
-                            "waitingForClient",
-                            "freeGame_03",
-                            "freeGame_02",
-                            "freeGame_01",
-                            "topUpGame_01"
-                        ],
-                        "jsonExtendData": "{\"ballCount\":9,\"ballTotalCredit\":0,\"ballScreenLabel\":[[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]]}",
+                        "specialHitInfo": "noSpecialHit",
+                        "specialOperations": [],
+                        "jsonExtendData": null,
                         "specialScreenHitData": [
                             [false, false, false],
                             [false, false, false],
@@ -73,9 +67,9 @@
                         "playerWin": 0,
                         "usedTableIndex": 0,
                         "screenSymbol": [
-                            [1, 1, 1],
-                            [1, 1, 1],
-                            [1, 1, 1],
+                            [14, 1, 1],
+                            [1, 14, 1],
+                            [1, 1, 14],
                             [7, 3, 5],
                             [2, 4, 6]
                         ],

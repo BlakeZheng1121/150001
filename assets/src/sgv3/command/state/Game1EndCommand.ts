@@ -5,6 +5,8 @@ import { TakeWinCommand } from '../balance/TakeWinCommand';
 import { StateCommand } from './StateCommand';
 import { NetworkProxy } from '../../../core/proxy/NetworkProxy';
 import { GameStateId } from '../../vo/data/GameStateId';
+import { BaseGameResult } from '../../vo/result/BaseGameResult';
+import { SymbolId } from '../../vo/enum/Reel';
 
 export class Game1EndCommand extends StateCommand {
     public static readonly NAME = StateMachineProxy.GAME1_EV_END;
@@ -17,6 +19,11 @@ export class Game1EndCommand extends StateCommand {
             this.gameDataProxy.reStateResult?.gameStateId == GameStateId.WAIT_FOR_CLIENT
         ) {
             this.changeState(StateMachineProxy.GAME1_FEATURESELECTION);
+            return;
+        }
+
+        if (this.hasThreeC2(this.gameDataProxy.curRoundResult as BaseGameResult)) {
+            this.changeState(StateMachineProxy.GAME2_TRANSITIONS);
             return;
         }
 
@@ -38,5 +45,20 @@ export class Game1EndCommand extends StateCommand {
             this._networkProxy = this.facade.retrieveProxy(NetworkProxy.NAME) as NetworkProxy;
         }
         return this._networkProxy;
+    }
+
+    private hasThreeC2(curRoundResult: BaseGameResult): boolean {
+        let count = 0;
+        for (let i = 0; i < curRoundResult.screenSymbol.length; i++) {
+            for (let j = 0; j < curRoundResult.screenSymbol[i].length; j++) {
+                if (curRoundResult.screenSymbol[i][j] == SymbolId.C2) {
+                    count++;
+                    if (count >= 3) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }
