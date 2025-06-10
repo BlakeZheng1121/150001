@@ -16,7 +16,7 @@ export class Game1EndCommand extends StateCommand {
             this.gameDataProxy.spinEventData != undefined &&
             this.gameDataProxy.reStateResult?.gameStateId == GameStateId.WAIT_FOR_CLIENT
         ) {
-            this.changeState(StateMachineProxy.GAME2_INIT);
+            this.sendNotification(CheckGameFlowCommand.NAME);
             return;
         }
 

@@ -67,7 +67,7 @@
             },
             "freeGameResult": {
                 "freeGameTotalWin": 0,
-                "totalRound": 3,
+                "totalRound": 1,
                 "freeGameOneRoundResult": [
                     {
                         "playerWin": 0,
@@ -99,7 +99,7 @@
                         },
                         "roundInfo": {
                             "roundNumber": 1,
-                            "totalRound": 3,
+                            "totalRound": 1,
                             "addRound": 0
                         },
                         "displayInfo": {

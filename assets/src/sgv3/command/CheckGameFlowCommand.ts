@@ -111,6 +111,12 @@ export class CheckGameFlowCommand extends puremvc.SimpleCommand {
         this.sendNotification(WinEvent.FORCE_WIN_DISPOSE);
         //傳送Recovery紀錄資料
         this.sendNotification(SaveRecoveryDataCommand.NAME, null);
+        if (!this.gameDataProxy.curRoundResult) {
+            this.gameDataProxy.curRoundResult =
+                this.gameDataProxy.curStateResult.roundResult.length > 0
+                    ? this.gameDataProxy.curStateResult.roundResult.shift()
+                    : null;
+        }
         this.sendNotification(
             StateMachineCommand.NAME,
             new StateMachineObject(StateMachineProxy.GAME2_INIT)
