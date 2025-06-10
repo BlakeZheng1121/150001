@@ -35,8 +35,6 @@ export class StateMachineProxy extends CoreStateMachineProxy {
     public static readonly GAME1_END: string = 'game1End';
     public static readonly GAME1_EV_END: string = 'game1EvEnd';
 
-    public static readonly GAME1_FEATURESELECTION: string = 'game1FeatureSelection';
-    public static readonly GAME1_EV_FEATURESELECTION: string = 'game1EvFeatureSelection';
 
     // game2
     public static readonly GAME2_INIT: string = 'game2Init';
@@ -155,11 +153,6 @@ export class StateMachineProxy extends CoreStateMachineProxy {
             StateMachineProxy.GAME1_INIT,
             StateMachineProxy.GAME2_INIT,
             StateMachineProxy.GAME3_INIT,
-            StateMachineProxy.GAME4_INIT,
-            StateMachineProxy.GAME1_FEATURESELECTION
-        ];
-        this.stateMachineMap[StateMachineProxy.GAME1_FEATURESELECTION] = [
-            StateMachineProxy.GAME2_INIT,
             StateMachineProxy.GAME4_INIT
         ];
 
@@ -250,7 +243,6 @@ export class StateMachineProxy extends CoreStateMachineProxy {
         this.stateEventMap[StateMachineProxy.GAME1_SHOWWIN] = StateMachineProxy.GAME1_EV_SHOWWIN;
         this.stateEventMap[StateMachineProxy.GAME1_AFTERSHOW] = StateMachineProxy.GAME1_EV_AFTERSHOW;
         this.stateEventMap[StateMachineProxy.GAME1_END] = StateMachineProxy.GAME1_EV_END;
-        this.stateEventMap[StateMachineProxy.GAME1_FEATURESELECTION] = StateMachineProxy.GAME1_EV_FEATURESELECTION;
 
         /** Game 2 */
         this.stateEventMap[StateMachineProxy.GAME2_INIT] = StateMachineProxy.GAME2_EV_INIT;
@@ -291,10 +283,7 @@ export class StateMachineProxy extends CoreStateMachineProxy {
      * @returns true為進行維護
      */
     public checkMaintenanceState(state: string): boolean {
-        return (
-            (state == StateMachineProxy.GAME1_IDLE && !this.gameDataProxy.onHitJackpot) ||
-            (state == StateMachineProxy.GAME1_FEATURESELECTION && !this.gameDataProxy.hasSelectionResponse)
-        );
+        return state == StateMachineProxy.GAME1_IDLE && !this.gameDataProxy.onHitJackpot;
     }
 
     /**
@@ -328,9 +317,7 @@ export class StateMachineProxy extends CoreStateMachineProxy {
         //如果this.gameDataProxy.spinEventData 為null 遇到!!就會變false
         return (
             (this.gameDataProxy.gameState == StateMachineProxy.GAME1_IDLE && !this.gameDataProxy.onHitJackpot) ||
-            (this.gameDataProxy.gameState == StateMachineProxy.GAME1_SPIN && !this.gameDataProxy.spinEventData) ||
-            (this.gameDataProxy.gameState == StateMachineProxy.GAME1_FEATURESELECTION &&
-                !this.gameDataProxy.hasSelectionResponse)
+            (this.gameDataProxy.gameState == StateMachineProxy.GAME1_SPIN && !this.gameDataProxy.spinEventData)
         );
     }
 

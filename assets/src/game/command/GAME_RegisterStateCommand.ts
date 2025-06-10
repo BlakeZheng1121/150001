@@ -3,7 +3,6 @@
 
 /** WAY GAME 需要 import的元件 */
 import { WAY_RegisterStateCommand } from '../../sgv3way/command/WAY_RegisterStateCommand';
-import { GAME_Game1FeatureSelectionCommand } from './state/GAME_Game1FeatureSelectionCommand';
 import { GAME_Game1HitSpecialCommand } from './state/GAME_Game1HitSpecialCommand';
 import { GAME_Game1RollCompleteCommand } from './state/GAME_Game1RollCompleteCommand';
 import { GAME_Game2BeforeShowCommand } from './state/GAME_Game2BeforeShowCommand';
@@ -21,7 +20,6 @@ export class GAME_RegisterStateCommand extends WAY_RegisterStateCommand {
         /** Game1 */
         this.facade.registerCommand(GAME_Game1RollCompleteCommand.NAME, GAME_Game1RollCompleteCommand);
         this.facade.registerCommand(GAME_Game1HitSpecialCommand.NAME, GAME_Game1HitSpecialCommand);
-        this.facade.registerCommand(GAME_Game1FeatureSelectionCommand.NAME, GAME_Game1FeatureSelectionCommand);
 
         /** Game2 */
         this.facade.registerCommand(GAME_Game2RollCompleteCommand.NAME, GAME_Game2RollCompleteCommand);
