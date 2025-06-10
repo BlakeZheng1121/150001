@@ -51,10 +51,7 @@ export class SFReconnectCommand extends puremvc.SimpleCommand {
         } else {
             const self = this;
             const netProxy = self.facade.retrieveProxy(NetworkProxy.NAME) as NetworkProxy;
-            if (
-                !netProxy.getSentSpinRequest() &&
-                this.gameDataProxy.gameState != StateMachineProxy.GAME1_FEATURESELECTION
-            ) {
+            if (!netProxy.getSentSpinRequest()) {
                 self.retryTime = 0;
                 self.gameDataProxy.isReconnecting = true;
                 self.countdownDisconnect();

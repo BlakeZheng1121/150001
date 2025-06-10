@@ -79,16 +79,6 @@ export class CheckGameFlowCommand extends puremvc.SimpleCommand {
      */
     protected initialGameState() {
         this.sendNotification(ParseStateWinResultCommand.NAME);
-        // 當前狀態是 Feature selection，表示收到選擇後的結果
-        if (this.gameDataProxy.gameState == StateMachineProxy.GAME1_FEATURESELECTION) {
-            // 跳過前面的資料，直接取得 Feature selection 後的結果
-            while (this.gameDataProxy.spinEventData.gameStateResult.length > 0) {
-                let gameStateResult = this.gameDataProxy.spinEventData.gameStateResult.shift();
-                if (gameStateResult.gameStateId == GameStateId.WAIT_FOR_CLIENT) {
-                    break;
-                }
-            }
-        }
         this.sendNotification(CheckGameFlowCommand.NAME);
     }
 
@@ -118,15 +108,13 @@ export class CheckGameFlowCommand extends puremvc.SimpleCommand {
      * 等待玩家選擇遊戲
      */
     protected waitForClientSelectGameState() {
-        if (this.gameDataProxy.gameState != StateMachineProxy.GAME1_FEATURESELECTION) {
-            this.sendNotification(WinEvent.FORCE_WIN_DISPOSE);
-            //傳送Recovery紀錄資料
-            this.sendNotification(SaveRecoveryDataCommand.NAME, null);
-            this.sendNotification(
-                StateMachineCommand.NAME,
-                new StateMachineObject(StateMachineProxy.GAME1_FEATURESELECTION)
-            );
-        }
+        this.sendNotification(WinEvent.FORCE_WIN_DISPOSE);
+        //傳送Recovery紀錄資料
+        this.sendNotification(SaveRecoveryDataCommand.NAME, null);
+        this.sendNotification(
+            StateMachineCommand.NAME,
+            new StateMachineObject(StateMachineProxy.GAME2_INIT)
+        );
     }
 
     /** 其他遊戲狀態 */

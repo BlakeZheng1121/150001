@@ -63,10 +63,6 @@ export class SpinResponseCommand extends puremvc.SimpleCommand {
         // 刷新 Credit
         this.sendNotification(UIEvent.UPDATE_PLAYER_BALANCE, this.gameDataProxy.cash);
 
-        // 判斷是否為 Feature selection 結果
-        if (this.gameDataProxy.gameState == StateMachineProxy.GAME1_FEATURESELECTION) {
-            this.gameDataProxy.hasSelectionResponse = true;
-        }
         // By Game Data Handle
         self.sendNotification(ByGameHandleCommand.NAME);
         // 開始解析資料

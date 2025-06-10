@@ -1,7 +1,6 @@
 import { Game1AfterShowCommand } from '../state/Game1AfterShowCommand';
 import { Game1BeforeShowCommand } from '../state/Game1BeforeShowCommand';
 import { Game1EndCommand } from '../state/Game1EndCommand';
-import { Game1FeatureSelectionCommand } from '../state/Game1FeatureSelectionCommand';
 import { Game1HitSpecialCommand } from '../state/Game1HitSpecialCommand';
 import { Game1IdleCommand } from '../state/Game1IdleCommand';
 import { Game1InitCommand } from '../state/Game1InitCommand';
@@ -43,7 +42,6 @@ export class RegisterStateCommand extends puremvc.SimpleCommand {
         this.facade.registerCommand(Game1ShowWinCommand.NAME, Game1ShowWinCommand);
         this.facade.registerCommand(Game1AfterShowCommand.NAME, Game1AfterShowCommand);
         this.facade.registerCommand(Game1EndCommand.NAME, Game1EndCommand);
-        this.facade.registerCommand(Game1FeatureSelectionCommand.NAME, Game1FeatureSelectionCommand);
         /** Game2 */
         this.facade.registerCommand(Game2InitCommand.NAME, Game2InitCommand);
         this.facade.registerCommand(Game2TransitionCommand.NAME, Game2TransitionCommand);
