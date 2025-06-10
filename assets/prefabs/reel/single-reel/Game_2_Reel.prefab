@@ -34,14 +34,14 @@
         "__id__": 47
       },
       {
-        "__id__": 63
+        "__id__": 66
       },
       {
-        "__id__": 65
+        "__id__": 68
       }
     ],
     "_prefab": {
-      "__id__": 67
+      "__id__": 70
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -1042,6 +1042,15 @@
       },
       {
         "__id__": 62
+      },
+      {
+        "__id__": 63
+      },
+      {
+        "__id__": 64
+      },
+      {
+        "__id__": 65
       }
     ],
     "_id": ""
@@ -1079,146 +1088,215 @@
   },
   {
     "__type__": "SymbolData",
-    "_name": "m1",
+    "_name": "c2",
     "_id": 2,
+    "_orderLayer": 2,
+    "_mainSpriteFrame": {
+      "__uuid__": "a3a3a9f2-bbc8-4811-b7b2-ea4afae99f67@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
+    "_bgSpriteFrame": {
+      "__uuid__": "6f786580-d734-4e46-97ae-d8e7e09b5f73@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
+    "_isImprovedFOV": false
+  },
+  {
+    "__type__": "SymbolData",
+    "_name": "c3",
+    "_id": 3,
+    "_orderLayer": 2,
+    "_mainSpriteFrame": null,
+    "_bgSpriteFrame": {
+      "__uuid__": "6f786580-d734-4e46-97ae-d8e7e09b5f73@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
+    "_isImprovedFOV": false
+  },
+  {
+    "__type__": "SymbolData",
+    "_name": "m1",
+    "_id": 4,
     "_orderLayer": 2,
     "_mainSpriteFrame": {
       "__uuid__": "9b21b929-9734-4b21-a33b-2793f231c5e8@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
-    "_bgSpriteFrame": null,
+    "_bgSpriteFrame": {
+      "__uuid__": "6f786580-d734-4e46-97ae-d8e7e09b5f73@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
     "_isImprovedFOV": false
   },
   {
     "__type__": "SymbolData",
     "_name": "m2",
-    "_id": 3,
+    "_id": 5,
     "_orderLayer": 2,
     "_mainSpriteFrame": {
       "__uuid__": "218b0b1e-e46e-4719-921c-460170679c69@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
-    "_bgSpriteFrame": null,
+    "_bgSpriteFrame": {
+      "__uuid__": "6f786580-d734-4e46-97ae-d8e7e09b5f73@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
     "_isImprovedFOV": false
   },
   {
     "__type__": "SymbolData",
     "_name": "m3",
-    "_id": 4,
+    "_id": 6,
     "_orderLayer": 2,
     "_mainSpriteFrame": {
       "__uuid__": "7ccb46b3-b9e5-4f0a-b352-afea8504e485@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
-    "_bgSpriteFrame": null,
+    "_bgSpriteFrame": {
+      "__uuid__": "6f786580-d734-4e46-97ae-d8e7e09b5f73@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
     "_isImprovedFOV": false
   },
   {
     "__type__": "SymbolData",
     "_name": "m4",
-    "_id": 5,
+    "_id": 7,
     "_orderLayer": 2,
     "_mainSpriteFrame": {
       "__uuid__": "9d2db6ba-013c-4346-9d5c-3ac17292facb@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
-    "_bgSpriteFrame": null,
+    "_bgSpriteFrame": {
+      "__uuid__": "6f786580-d734-4e46-97ae-d8e7e09b5f73@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
     "_isImprovedFOV": false
   },
   {
     "__type__": "SymbolData",
     "_name": "m5",
-    "_id": 6,
+    "_id": 8,
     "_orderLayer": 2,
-    "_mainSpriteFrame": {
-      "__uuid__": "4d123dce-0592-4da1-bf6e-31505be0f1f8@f9941",
+    "_mainSpriteFrame": null,
+    "_bgSpriteFrame": {
+      "__uuid__": "6f786580-d734-4e46-97ae-d8e7e09b5f73@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
-    "_bgSpriteFrame": null,
     "_isImprovedFOV": false
   },
   {
     "__type__": "SymbolData",
     "_name": "m6",
-    "_id": 7,
+    "_id": 9,
     "_orderLayer": 2,
-    "_mainSpriteFrame": {
-      "__uuid__": "3061204d-a91e-4afc-9aae-6a8697602f97@f9941",
+    "_mainSpriteFrame": null,
+    "_bgSpriteFrame": {
+      "__uuid__": "6f786580-d734-4e46-97ae-d8e7e09b5f73@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
-    "_bgSpriteFrame": null,
+    "_isImprovedFOV": false
+  },
+  {
+    "__type__": "SymbolData",
+    "_name": "my",
+    "_id": 10,
+    "_orderLayer": 2,
+    "_mainSpriteFrame": null,
+    "_bgSpriteFrame": {
+      "__uuid__": "6f786580-d734-4e46-97ae-d8e7e09b5f73@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
     "_isImprovedFOV": false
   },
   {
     "__type__": "SymbolData",
     "_name": "A",
-    "_id": 8,
+    "_id": 11,
     "_orderLayer": 2,
     "_mainSpriteFrame": {
       "__uuid__": "320f8c3f-d53a-4b2e-ae0c-ebc4467d2636@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
-    "_bgSpriteFrame": null,
+    "_bgSpriteFrame": {
+      "__uuid__": "6f786580-d734-4e46-97ae-d8e7e09b5f73@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
     "_isImprovedFOV": false
   },
   {
     "__type__": "SymbolData",
     "_name": "K",
-    "_id": 9,
+    "_id": 12,
     "_orderLayer": 2,
     "_mainSpriteFrame": {
       "__uuid__": "9d6722d6-7e3f-4814-bd18-331696d3d6e8@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
-    "_bgSpriteFrame": null,
+    "_bgSpriteFrame": {
+      "__uuid__": "6f786580-d734-4e46-97ae-d8e7e09b5f73@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
     "_isImprovedFOV": false
   },
   {
     "__type__": "SymbolData",
     "_name": "Q",
-    "_id": 10,
+    "_id": 13,
     "_orderLayer": 2,
     "_mainSpriteFrame": {
       "__uuid__": "b40676b1-1080-4d78-949e-9625443ef584@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
-    "_bgSpriteFrame": null,
+    "_bgSpriteFrame": {
+      "__uuid__": "6f786580-d734-4e46-97ae-d8e7e09b5f73@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
     "_isImprovedFOV": false
   },
   {
     "__type__": "SymbolData",
     "_name": "J",
-    "_id": 11,
+    "_id": 14,
     "_orderLayer": 2,
     "_mainSpriteFrame": {
       "__uuid__": "5b37c598-0fb6-4695-a4d0-f7da6872617c@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
-    "_bgSpriteFrame": null,
+    "_bgSpriteFrame": {
+      "__uuid__": "6f786580-d734-4e46-97ae-d8e7e09b5f73@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
     "_isImprovedFOV": false
   },
   {
     "__type__": "SymbolData",
     "_name": "10",
-    "_id": 12,
+    "_id": 15,
     "_orderLayer": 2,
     "_mainSpriteFrame": {
-      "__uuid__": "aaf9316b-435d-44f9-a42d-a56c87ff2f13@f9941",
+      "__uuid__": "178353ca-2b53-4701-ace9-1c776c77c16d@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
-    "_bgSpriteFrame": null,
+    "_bgSpriteFrame": {
+      "__uuid__": "6f786580-d734-4e46-97ae-d8e7e09b5f73@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
     "_isImprovedFOV": false
   },
   {
     "__type__": "SymbolData",
     "_name": "9",
-    "_id": 13,
+    "_id": 16,
     "_orderLayer": 2,
     "_mainSpriteFrame": {
       "__uuid__": "89a94724-cda3-420e-ab03-fc749768d6be@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
-    "_bgSpriteFrame": null,
+    "_bgSpriteFrame": {
+      "__uuid__": "6f786580-d734-4e46-97ae-d8e7e09b5f73@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
     "_isImprovedFOV": false
   },
   {
@@ -1230,7 +1308,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 64
+      "__id__": 67
     },
     "_id": ""
   },
@@ -1247,7 +1325,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 66
+      "__id__": 69
     },
     "_id": ""
   },
