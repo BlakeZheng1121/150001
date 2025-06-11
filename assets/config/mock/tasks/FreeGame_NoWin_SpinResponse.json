@@ -140,12 +140,9 @@
             "specialScreenWin": 0
           },
           {
-            "specialHitInfo": "waitingForClient",
-            "specialOperations": [
-              "freeGame_01",
-              "topUpGame_01"
-            ],
-            "jsonExtendData": "{\"ballCount\":6,\"ballTotalCredit\":4800,\"ballScreenLabel\":[[0,0,800],[0,0,800],[0,0,800],[0,0,800],[0,800,800]],\"jackpotResult\":{\"hitCase\":-1},\"groupingIdx\":0,\"bonusHitPool\":-1,\"bonusHitCase\":-1,\"playerBetLevel\":0}",
+            "specialHitInfo": "freeGame_01",
+            "specialOperations": [],
+            "jsonExtendData": "{\n  \"jackpotResult\": {\n    \"hitCase\": -1\n  },\n  \"groupingIdx\": 0,\n  \"bonusHitPool\": -1,\n  \"bonusHitCase\": -1,\n  \"playerBetLevel\": 0\n}",
             "specialScreenHitData": [
               [
                 false,
