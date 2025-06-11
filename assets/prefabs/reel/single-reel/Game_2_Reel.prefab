@@ -316,9 +316,9 @@
     "_reelSize": {
       "__type__": "cc.Size",
       "width": 202.4,
-      "height": 504
+      "height": 453
     },
-    "_symbolHeight": 168,
+    "_symbolHeight": 151,
     "startPos": 0,
     "endPos": 0
   },
