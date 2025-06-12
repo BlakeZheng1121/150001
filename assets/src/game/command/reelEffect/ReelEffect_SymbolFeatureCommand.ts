@@ -95,6 +95,42 @@ export class ReelEffect_SymbolFeatureCommand extends puremvc.SimpleCommand {
                 let game2TopUpData = this.gameDataProxy.curRoundResult as FreeGameOneRoundResult;
                 let extendInfo = game2TopUpData.extendInfoForFreeGameResult;
 
+                const screenSymbol2 = this.gameDataProxy.curRoundResult?.screenSymbol;
+                const waysResult2 = (this.gameDataProxy.curRoundResult?.waysGameResult as WAY_GameResult)?.waysResult;
+                const isWinning2 = (x: number, y: number): boolean => {
+                    if (!waysResult2) return false;
+                    for (const result of waysResult2) {
+                        if (result.screenHitData?.[x]?.[y]) {
+                            return true;
+                        }
+                    }
+                    return false;
+                };
+
+                if (screenSymbol2) {
+                    for (let i = 0; i < screenSymbol2.length; i++) {
+                        const col = screenSymbol2[i];
+                        let j = 0;
+                        while (j < col.length) {
+                            if (col[j] === SymbolId.WILD && isWinning2(i, j)) {
+                                const start = j;
+                                let stackLen = 0;
+                                while (j < col.length && col[j] === SymbolId.WILD && isWinning2(i, j)) {
+                                    stackLen++;
+                                    j++;
+                                }
+                                this.reelDataProxy.symbolFeature[i][start].wildFlag = stackLen;
+                                for (let k = start + 1; k < start + stackLen; k++) {
+                                    this.reelDataProxy.symbolFeature[i][k].wildFlag = -1;
+                                }
+                            } else {
+                                this.reelDataProxy.symbolFeature[i][j].wildFlag = 0;
+                                j++;
+                            }
+                        }
+                    }
+                }
+
                 for (let i = 0; i < extendInfo.sideCreditBallScreenLabel.length; i++) {
                     for (let j = 0; j < extendInfo.sideCreditBallScreenLabel[i].length; j++) {
                         this.reelDataProxy.symbolFeature[i][j].creditCent = this.gameDataProxy.convertCredit2Cash(
