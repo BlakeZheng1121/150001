@@ -1,0 +1,13 @@
+
+Base_BGStage.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Lv03
+  rotate: false
+  xy: 2, 2
+  size: 902, 260
+  orig: 902, 2002
+  offset: 0, 988
+  index: -1
