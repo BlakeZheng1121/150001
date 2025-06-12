@@ -17,6 +17,7 @@ export class Game2BeforeShowCommand extends StateCommand {
     protected timerKey = 'game2BeforeShow';
 
     public execute(notification: puremvc.INotification): void {
+        Logger.i('[Game2BeforeShowCommand] execute');
         this.notifyWebControl();
 
         this.clearTimerKey(); //避免timer沒有清除的問題
@@ -46,7 +47,7 @@ export class Game2BeforeShowCommand extends StateCommand {
             }
         }
 
-        Logger.d(`[Game2] wildFlag = ${JSON.stringify(wildFlags)}`);
+        Logger.i(`[Game2] wildFlag = ${JSON.stringify(wildFlags)}`);
 
         if (infos.length > 0) {
             this.sendNotification(ReelEvent.SHOW_STACK_WILD, infos);
