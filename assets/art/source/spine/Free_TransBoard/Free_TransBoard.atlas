@@ -1,0 +1,40 @@
+
+Free_TransBoard.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+New_ReBoard
+  rotate: false
+  xy: 2, 2
+  size: 744, 410
+  orig: 902, 547
+  offset: 79, 79
+  index: -1
+New_ResultBoard
+  rotate: false
+  xy: 42, 414
+  size: 964, 396
+  orig: 1018, 422
+  offset: 27, 13
+  index: -1
+star
+  rotate: false
+  xy: 2, 772
+  size: 38, 38
+  orig: 46, 43
+  offset: 3, 2
+  index: -1
+
+Free_TransBoard2.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+New_TransBoard
+  rotate: false
+  xy: 2, 2
+  size: 879, 460
+  orig: 937, 519
+  offset: 29, 30
+  index: -1
