@@ -1,9 +1,12 @@
-import { _decorator } from 'cc';
+import { _decorator, macro } from 'cc';
 import { Game2BeforeShowCommand } from '../../../sgv3/command/state/Game2BeforeShowCommand';
 import { ReelDataProxy } from '../../../sgv3/proxy/ReelDataProxy';
 import { StateMachineProxy } from '../../../sgv3/proxy/StateMachineProxy';
-import { FreeGameEvent, ViewMediatorEvent } from '../../../sgv3/util/Constant';
+import { FreeGameEvent, ReelEvent, ViewMediatorEvent } from '../../../sgv3/util/Constant';
 import { GlobalTimer } from '../../../sgv3/util/GlobalTimer';
+import { Logger } from '../../../core/utils/Logger';
+import { SymbolInfo } from '../../../sgv3/vo/info/SymbolInfo';
+import { SymbolId } from '../../../sgv3/vo/enum/Reel';
 import { FreeGameOneRoundResult } from '../../../sgv3/vo/result/FreeGameOneRoundResult';
 const { ccclass } = _decorator;
 
@@ -12,41 +15,72 @@ export class GAME_Game2BeforeShowCommand extends Game2BeforeShowCommand {
     protected timerKey = 'game2BeforeShow';
 
     public execute(notification: puremvc.INotification): void {
-        let self = this;
+        Logger.i('[GAME_Game2BeforeShowCommand] execute');
+        this.notifyWebControl();
 
-        self.notifyWebControl();
+        this.GAME_clearTimerKey(); // 避免timer沒有清除的問題
 
-        self.GAME_clearTimerKey(); //避免timer沒有清除的問題
+        const startFlow = () => {
+            if (!this.playStackWild()) {
+                this.afterStackWild();
+            }
+        };
 
-        if (self.isBallScoreShow() || self.isWildShow()) {
-            self.sendNotification(FreeGameEvent.ON_SIDE_BALL_SCORE_SHOW, self.beforeShow.bind(self));
+        if (this.isBallScoreShow() || this.isWildShow()) {
+            this.sendNotification(FreeGameEvent.ON_SIDE_BALL_SCORE_SHOW, startFlow);
         } else {
-            self.beforeShow();
+            startFlow();
         }
     }
 
-    private beforeShow() {
-        this.notifyWebControl();
+    private playStackWild(): boolean {
+        let infos: SymbolInfo[] = [];
+        let wildFlags: number[][] = [];
+        if (this.reelDataProxy.symbolFeature) {
+            for (let x = 0; x < this.reelDataProxy.symbolFeature.length; x++) {
+                wildFlags[x] = [];
+                for (let y = 0; y < this.reelDataProxy.symbolFeature[x].length; y++) {
+                    const flag = this.reelDataProxy.symbolFeature[x][y].wildFlag;
+                    wildFlags[x][y] = flag;
+                    if (flag > 0) {
+                        infos.push({ x: x, y: y, sid: SymbolId.WILD });
+                    }
+                }
+            }
+        }
 
-        this.GAME_clearTimerKey();
+        Logger.i(`[Game2] wildFlag = ${JSON.stringify(wildFlags)}`);
 
-        let freeGameOneRoundResult: FreeGameOneRoundResult = this.gameDataProxy
-            .curRoundResult as FreeGameOneRoundResult;
+        if (infos.length > 0) {
+            this.sendNotification(ReelEvent.SHOW_STACK_WILD, infos);
+            GlobalTimer.getInstance()
+                .registerTimer(this.timerKey, 0.1, this.checkStackWildFinish, this, macro.REPEAT_FOREVER)
+                .start();
+            return true;
+        }
+        return false;
+    }
+
+    private checkStackWildFinish() {
+        if (!this.reelView.isSymbolPlaying()) {
+            GlobalTimer.getInstance().removeTimer(this.timerKey);
+            this.afterStackWild();
+        }
+    }
+
+    private afterStackWild() {
+        let freeGameOneRoundResult: FreeGameOneRoundResult = this.gameDataProxy.curRoundResult as FreeGameOneRoundResult;
         let sceneData = this.gameDataProxy.getSceneDataByName(this.gameDataProxy.curScene);
 
-        //判斷fortuneLevel參數是否需要變動;
         if (
             this.gameDataProxy.lastFortuneLevel == null ||
             this.gameDataProxy.lastFortuneLevel != freeGameOneRoundResult.displayInfo.fortuneLevelType
         ) {
             this.gameDataProxy.lastFortuneLevel = freeGameOneRoundResult.displayInfo.fortuneLevelType;
-            this.sendNotification(
-                ViewMediatorEvent.FORTUNE_LEVEL_CHANGE,
-                freeGameOneRoundResult.displayInfo.fortuneLevelType
-            );
+            this.sendNotification(ViewMediatorEvent.FORTUNE_LEVEL_CHANGE, freeGameOneRoundResult.displayInfo.fortuneLevelType);
         }
 
-        if (this.gameDataProxy.curWinData.totalAmount() > 0) {
+        if (freeGameOneRoundResult.playerWin > 0) {
             this.changeState(StateMachineProxy.GAME2_SHOWWIN);
         } else {
             let stayTime = sceneData.noWinStayTime;
