@@ -1,6 +1,7 @@
 import { StateMachineProxy } from '../../proxy/StateMachineProxy';
 import { macro } from 'cc';
 import { ReelEvent, ViewMediatorEvent } from '../../util/Constant';
+import { Logger } from '../../../core/utils/Logger';
 import { ReelDataProxy } from '../../proxy/ReelDataProxy';
 import { SymbolInfo } from '../../vo/info/SymbolInfo';
 import { SymbolId } from '../../vo/enum/Reel';
@@ -31,15 +32,22 @@ export class Game2BeforeShowCommand extends StateCommand {
 
     private playStackWild(): boolean {
         let infos: SymbolInfo[] = [];
+        let wildFlags: number[][] = [];
         if (this.reelDataProxy.symbolFeature) {
             for (let x = 0; x < this.reelDataProxy.symbolFeature.length; x++) {
+                wildFlags[x] = [];
                 for (let y = 0; y < this.reelDataProxy.symbolFeature[x].length; y++) {
-                    if (this.reelDataProxy.symbolFeature[x][y].wildFlag > 0) {
+                    const flag = this.reelDataProxy.symbolFeature[x][y].wildFlag;
+                    wildFlags[x][y] = flag;
+                    if (flag > 0) {
                         infos.push({ x: x, y: y, sid: SymbolId.WILD });
                     }
                 }
             }
         }
+
+        Logger.d(`[Game2] wildFlag = ${JSON.stringify(wildFlags)}`);
+
         if (infos.length > 0) {
             this.sendNotification(ReelEvent.SHOW_STACK_WILD, infos);
             GlobalTimer.getInstance()
