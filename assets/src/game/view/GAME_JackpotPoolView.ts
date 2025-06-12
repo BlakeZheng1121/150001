@@ -40,9 +40,6 @@ export class GAME_JackpotPoolView extends BaseView {
     @property({ type: Label })
     public miniAmount: Label;
 
-    @property({ type: Label })
-    public grandAmountInFreeGame: Label;
-
     // 加押特效
     @property({ type: TimelineTool })
     public raiseJackpotFX: TimelineTool;
@@ -283,7 +280,6 @@ export class GAME_JackpotPoolView extends BaseView {
     public updateGrandAmount() {
         if (!this.tempGrandAmount) return;
         this.grandAmount.string = BalanceUtil.formatBalanceWithDollarSign(this.tempGrandAmount);
-        this.grandAmountInFreeGame.string = this.grandAmount.string;
         // 強制更新Label，並同步Grand和Major的字體大小
         this.grandAmount.updateRenderData(true);
         this.majorAmount.fontSize = this.grandAmount.actualFontSize;
@@ -309,7 +305,6 @@ export class GAME_JackpotPoolView extends BaseView {
 
     private runGrandAmountComplete() {
         this.grandAmount.string = BalanceUtil.formatBalanceWithDollarSign(this.totalGrandAmount);
-        this.grandAmountInFreeGame.string = this.grandAmount.string;
     }
 
     private runMajorAmountComplete() {
@@ -331,6 +326,7 @@ export class GAME_JackpotPoolView extends BaseView {
     private setPoolPosByOri(gameScene: string, orientation: string) {
         switch (gameScene) {
             case GameScene.Game_1:
+            case GameScene.Game_2:
             case GameScene.Game_3:
                 this.jackpotLogo.active = true;
                 this.jackpotPoolGrand.active = true;
@@ -338,7 +334,6 @@ export class GAME_JackpotPoolView extends BaseView {
                 this.jackpotPoolMinor.active = true;
                 this.jackpotPoolMini.active = true;
                 break;
-            case GameScene.Game_2:
             case GameScene.Game_4:
                 this.jackpotLogo.active = false;
                 this.jackpotPoolGrand.active = false;
