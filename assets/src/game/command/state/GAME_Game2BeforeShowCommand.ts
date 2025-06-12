@@ -136,4 +136,13 @@ export class GAME_Game2BeforeShowCommand extends Game2BeforeShowCommand {
         }
         return this._reelDataProxy;
     }
+
+    protected _reelView: GAME_ReelView;
+    protected get reelView(): GAME_ReelView {
+        if (!this._reelView) {
+            const mediator = this.facade.retrieveMediator(ReelViewMediator.NAME) as ReelViewMediator;
+            this._reelView = mediator.getViewComponent() as GAME_ReelView;
+        }
+        return this._reelView;
+    }
 }
