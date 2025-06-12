@@ -276,43 +276,114 @@
         "isHitFeatureGame": false
       },
       "freeGameResult": {
-        "freeGameTotalWin": 13800,
-        "totalRound": 8,
+        "freeGameTotalWin": 15400,
+        "totalRound": 6,
         "freeGameOneRoundResult": [
           {
             "specialHitInfo": "freeGame_01",
-            "playerWin": 0,
+            "playerWin": 100,
             "usedTableIndex": 0,
             "screenSymbol": [
               [
-                8,
-                9,
+                6,
+                11,
+                1
+              ],
+              [
+                0,
+                0,
                 0
               ],
               [
-                6,
-                11,
-                9
+                0,
+                0,
+                0
               ],
               [
-                2,
-                8,
-                3
+                0,
+                0,
+                0
               ],
               [
-                4,
-                8,
-                7
-              ],
-              [
-                8,
-                2,
-                8
+                0,
+                0,
+                11
               ]
             ],
             "waysGameResult": {
-              "playerWin": 0,
-              "waysResult": []
+              "playerWin": 1600,
+              "waysResult": [
+                {
+                  "symbolID": 11,
+                  "hitDirection": "LeftToRight",
+                  "hitNumber": 4,
+                  "count": 2,
+                  "hitOdds": 8,
+                  "symbolWin": 800,
+                  "screenHitData": [
+                    [
+                      true,
+                      false,
+                      false
+                    ],
+                    [
+                      true,
+                      true,
+                      true
+                    ],
+                    [
+                      true,
+                      true,
+                      true
+                    ],
+                    [
+                      true,
+                      true,
+                      true
+                    ],
+                    [
+                      true,
+                      true,
+                      false
+                    ]
+                  ]
+                },
+                {
+                  "symbolID": 6,
+                  "hitDirection": "LeftToRight",
+                  "hitNumber": 4,
+                  "count": 1,
+                  "hitOdds": 8,
+                  "symbolWin": 800,
+                  "screenHitData": [
+                    [
+                      false,
+                      true,
+                      false
+                    ],
+                    [
+                      true,
+                      true,
+                      true
+                    ],
+                    [
+                      true,
+                      true,
+                      true
+                    ],
+                    [
+                      true,
+                      true,
+                      true
+                    ],
+                    [
+                      true,
+                      true,
+                      true
+                    ]
+                  ]
+                }
+              ]
             },
             "specialFeatureResult": [
               {
@@ -330,7 +401,7 @@
             },
             "roundInfo": {
               "roundNumber": 1,
-              "totalRound": 8,
+              "totalRound": 6,
               "addRound": 0
             },
             "displayInfo": {
@@ -370,11 +441,11 @@
               ],
               "rngInfo": [
                 [
-                  29,
-                  64,
-                  67,
-                  62,
-                  10
+                  1,
+                  1,
+                  1,
+                  1,
+                  1
                 ]
               ]
             },
@@ -468,7 +539,7 @@
             },
             "roundInfo": {
               "roundNumber": 2,
-              "totalRound": 8,
+              "totalRound": 6,
               "addRound": 0
             },
             "displayInfo": {
@@ -508,11 +579,11 @@
               ],
               "rngInfo": [
                 [
-                  18,
-                  64,
-                  13,
-                  30,
-                  32
+                  4,
+                  4,
+                  4,
+                  4,
+                  4
                 ]
               ]
             },
@@ -606,7 +677,7 @@
             },
             "roundInfo": {
               "roundNumber": 3,
-              "totalRound": 8,
+              "totalRound": 6,
               "addRound": 0
             },
             "displayInfo": {
@@ -646,11 +717,11 @@
               ],
               "rngInfo": [
                 [
-                  29,
-                  53,
-                  2,
-                  20,
-                  22
+                  7,
+                  7,
+                  7,
+                  7,
+                  7
                 ]
               ]
             },
@@ -744,7 +815,7 @@
             },
             "roundInfo": {
               "roundNumber": 4,
-              "totalRound": 8,
+              "totalRound": 6,
               "addRound": 0
             },
             "displayInfo": {
@@ -784,11 +855,11 @@
               ],
               "rngInfo": [
                 [
-                  13,
-                  0,
-                  19,
-                  49,
-                  21
+                  10,
+                  10,
+                  10,
+                  10,
+                  10
                 ]
               ]
             },
@@ -918,7 +989,7 @@
             },
             "roundInfo": {
               "roundNumber": 5,
-              "totalRound": 8,
+              "totalRound": 6,
               "addRound": 0
             },
             "displayInfo": {
@@ -958,11 +1029,11 @@
               ],
               "rngInfo": [
                 [
-                  10,
-                  57,
-                  1,
-                  1,
-                  19
+                  13,
+                  13,
+                  13,
+                  13,
+                  13
                 ]
               ]
             },
@@ -1056,7 +1127,7 @@
             },
             "roundInfo": {
               "roundNumber": 6,
-              "totalRound": 8,
+              "totalRound": 6,
               "addRound": 0
             },
             "displayInfo": {
@@ -1096,11 +1167,11 @@
               ],
               "rngInfo": [
                 [
-                  17,
-                  29,
-                  29,
-                  39,
-                  29
+                  16,
+                  16,
+                  16,
+                  16,
+                  16
                 ]
               ]
             },
@@ -1139,318 +1210,6 @@
               "isRespinFeature": false,
               "displayAccumulateWinBeforeRespin": 1000,
               "displayAccumulateWinAfterRespin": 1000,
-              "extendPlayerWin": 0,
-              "specialFeatureIndex": 0
-            }
-          },
-          {
-            "specialHitInfo": "freeGame_01",
-            "playerWin": 8000,
-            "usedTableIndex": 0,
-            "screenSymbol": [
-              [
-                13,
-                6,
-                0
-              ],
-              [
-                4,
-                8,
-                5
-              ],
-              [
-                5,
-                9,
-                7
-              ],
-              [
-                12,
-                5,
-                8
-              ],
-              [
-                0,
-                11,
-                13
-              ]
-            ],
-            "waysGameResult": {
-              "playerWin": 8000,
-              "waysResult": [
-                {
-                  "symbolID": 5,
-                  "hitDirection": "LeftToRight",
-                  "hitNumber": 5,
-                  "count": 1,
-                  "hitOdds": 80,
-                  "symbolWin": 8000,
-                  "screenHitData": [
-                    [
-                      false,
-                      false,
-                      true
-                    ],
-                    [
-                      false,
-                      false,
-                      true
-                    ],
-                    [
-                      true,
-                      false,
-                      false
-                    ],
-                    [
-                      false,
-                      true,
-                      false
-                    ],
-                    [
-                      true,
-                      false,
-                      false
-                    ]
-                  ]
-                }
-              ]
-            },
-            "specialFeatureResult": [
-              {
-                "specialHitInfo": "noSpecialHit",
-                "specialOperations": [],
-                "specialScreenWin": 0
-              }
-            ],
-            "displayLogicInfo": {
-              "maxTriggerCountFlag": false,
-              "beforeAccumulateWinWithoutBaseGameWin": 1000,
-              "afterAccumulateWinWithoutBaseGameWin": 9000,
-              "beforeAccumulateWinWithBaseGameWin": 1000,
-              "afterAccumulateWinWithBaseGameWin": 9000
-            },
-            "roundInfo": {
-              "roundNumber": 7,
-              "totalRound": 8,
-              "addRound": 0
-            },
-            "displayInfo": {
-              "displayMethod": [
-                [
-                  false
-                ],
-                [
-                  false
-                ],
-                [
-                  false
-                ],
-                [
-                  false
-                ],
-                [
-                  false
-                ]
-              ],
-              "bigWinType": "normal_1",
-              "dampInfo": [
-                [
-                  0,
-                  7,
-                  13,
-                  7,
-                  0
-                ],
-                [
-                  0,
-                  9,
-                  5,
-                  7,
-                  4
-                ]
-              ],
-              "rngInfo": [
-                [
-                  23,
-                  53,
-                  19,
-                  22,
-                  26
-                ]
-              ]
-            },
-            "extendInfoForFreeGameResult": {
-              "featureIdx": 0,
-              "sideCreditBallScreenLabel": [
-                [
-                  0,
-                  0,
-                  0
-                ],
-                [
-                  0,
-                  0,
-                  0
-                ],
-                [
-                  0,
-                  0,
-                  0
-                ],
-                [
-                  0,
-                  0,
-                  0
-                ],
-                [
-                  0,
-                  0,
-                  0
-                ]
-              ],
-              "accumulateCredit": 0,
-              "sideCreditBallCount": 0,
-              "isRetrigger": false,
-              "isRespinFeature": false,
-              "displayAccumulateWinBeforeRespin": 9000,
-              "displayAccumulateWinAfterRespin": 9000,
-              "extendPlayerWin": 0,
-              "specialFeatureIndex": 0
-            }
-          },
-          {
-            "specialHitInfo": "freeGame_01",
-            "playerWin": 0,
-            "usedTableIndex": 0,
-            "screenSymbol": [
-              [
-                9,
-                0,
-                0
-              ],
-              [
-                10,
-                4,
-                11
-              ],
-              [
-                7,
-                8,
-                13
-              ],
-              [
-                4,
-                11,
-                7
-              ],
-              [
-                6,
-                5,
-                10
-              ]
-            ],
-            "waysGameResult": {
-              "playerWin": 0,
-              "waysResult": []
-            },
-            "specialFeatureResult": [
-              {
-                "specialHitInfo": "noSpecialHit",
-                "specialOperations": [],
-                "specialScreenWin": 0
-              }
-            ],
-            "displayLogicInfo": {
-              "maxTriggerCountFlag": false,
-              "beforeAccumulateWinWithoutBaseGameWin": 9000,
-              "afterAccumulateWinWithoutBaseGameWin": 9000,
-              "beforeAccumulateWinWithBaseGameWin": 9000,
-              "afterAccumulateWinWithBaseGameWin": 9000
-            },
-            "roundInfo": {
-              "roundNumber": 8,
-              "totalRound": 8,
-              "addRound": 0
-            },
-            "displayInfo": {
-              "displayMethod": [
-                [
-                  false
-                ],
-                [
-                  false
-                ],
-                [
-                  false
-                ],
-                [
-                  false
-                ],
-                [
-                  false
-                ]
-              ],
-              "bigWinType": "normal_1",
-              "dampInfo": [
-                [
-                  8,
-                  9,
-                  6,
-                  6,
-                  0
-                ],
-                [
-                  0,
-                  6,
-                  2,
-                  9,
-                  0
-                ]
-              ],
-              "rngInfo": [
-                [
-                  30,
-                  31,
-                  64,
-                  10,
-                  3
-                ]
-              ]
-            },
-            "extendInfoForFreeGameResult": {
-              "featureIdx": 0,
-              "sideCreditBallScreenLabel": [
-                [
-                  0,
-                  0,
-                  0
-                ],
-                [
-                  0,
-                  0,
-                  0
-                ],
-                [
-                  0,
-                  0,
-                  0
-                ],
-                [
-                  0,
-                  0,
-                  0
-                ],
-                [
-                  0,
-                  0,
-                  0
-                ]
-              ],
-              "accumulateCredit": 0,
-              "sideCreditBallCount": 0,
-              "isRetrigger": false,
-              "isRespinFeature": false,
-              "displayAccumulateWinBeforeRespin": 9000,
-              "displayAccumulateWinAfterRespin": 9000,
               "extendPlayerWin": 0,
               "specialFeatureIndex": 0
             }
