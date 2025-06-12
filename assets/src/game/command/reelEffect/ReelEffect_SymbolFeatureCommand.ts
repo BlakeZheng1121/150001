@@ -7,7 +7,6 @@ import { FreeGameOneRoundResult } from '../../../sgv3/vo/result/FreeGameOneRound
 import { TopUpGameOneRoundResult } from '../../../sgv3/vo/result/TopUpGameOneRoundResult';
 import { BalanceUtil } from 'src/sgv3/util/BalanceUtil';
 import { WAY_GameResult } from '../../../sgv3way/vo/result/WAY_GameResult';
-import { Logger } from '../../../core/utils/Logger';
 
 export class ReelEffect_SymbolFeatureCommand extends puremvc.SimpleCommand {
     public static readonly NAME = 'ReelEffect_SymbolFeatureCommand';
@@ -54,43 +53,7 @@ export class ReelEffect_SymbolFeatureCommand extends puremvc.SimpleCommand {
                 const waysResult = (
                     this.gameDataProxy.curRoundResult?.waysGameResult as WAY_GameResult
                 )?.waysResult;
-                const isWinning = (x: number, y: number): boolean => {
-                    if (!waysResult) return false;
-                    for (const result of waysResult) {
-                        if (result.screenHitData?.[x]?.[y]) {
-                            return true;
-                        }
-                    }
-                    return false;
-                };
-
-                if (screenSymbol) {
-                    for (let i = 0; i < screenSymbol.length; i++) {
-                        const col = screenSymbol[i];
-                        let j = 0;
-                        while (j < col.length) {
-                            if (col[j] === SymbolId.WILD && isWinning(i, j)) {
-                                const start = j;
-                                let stackLen = 0;
-                                while (
-                                    j < col.length &&
-                                    col[j] === SymbolId.WILD &&
-                                    isWinning(i, j)
-                                ) {
-                                    stackLen++;
-                                    j++;
-                                }
-                                this.reelDataProxy.symbolFeature[i][start].wildFlag = stackLen;
-                                for (let k = start + 1; k < start + stackLen; k++) {
-                                    this.reelDataProxy.symbolFeature[i][k].wildFlag = -1;
-                                }
-                            } else {
-                                this.reelDataProxy.symbolFeature[i][j].wildFlag = 0;
-                                j++;
-                            }
-                        }
-                    }
-                }
+                this.setStackWildFlag(screenSymbol, waysResult);
                 break;
             case GameScene.Game_2:
                 let game2TopUpData = this.gameDataProxy.curRoundResult as FreeGameOneRoundResult;
@@ -98,43 +61,8 @@ export class ReelEffect_SymbolFeatureCommand extends puremvc.SimpleCommand {
 
                 const screenSymbol2 = game2TopUpData.screenSymbol;
                 const waysResult2 = (game2TopUpData.waysGameResult as WAY_GameResult)?.waysResult;
-                const isWinning2 = (x: number, y: number): boolean => {
-                    if (!waysResult2) return false;
-                    for (const result of waysResult2) {
-                        if (result.screenHitData?.[x]?.[y]) {
-                            return true;
-                        }
-                    }
-                    return false;
-                };
+                this.setStackWildFlag(screenSymbol2, waysResult2);
 
-                if (screenSymbol2) {
-                    for (let i = 0; i < screenSymbol2.length; i++) {
-                        const col = screenSymbol2[i];
-                        let j = 0;
-                        while (j < col.length) {
-                            if (col[j] === SymbolId.WILD && isWinning2(i, j)) {
-                                const start = j;
-                                let stackLen = 0;
-                                while (j < col.length && col[j] === SymbolId.WILD && isWinning2(i, j)) {
-                                    stackLen++;
-                                    j++;
-                                }
-                                this.reelDataProxy.symbolFeature[i][start].wildFlag = stackLen;
-                                for (let k = start + 1; k < start + stackLen; k++) {
-                                    this.reelDataProxy.symbolFeature[i][k].wildFlag = -1;
-                                }
-                            } else {
-                                this.reelDataProxy.symbolFeature[i][j].wildFlag = 0;
-                                j++;
-                            }
-                        }
-                    }
-                }
-
-                Logger.i('[Game_2 screenSymbol] ' + JSON.stringify(screenSymbol2));
-                Logger.i('[Game_2 waysResult] ' + JSON.stringify(waysResult2));
-                Logger.i('[Game_2 wildFlag] ' + JSON.stringify(this.reelDataProxy.symbolFeature.map((c) => c.map((d) => d.wildFlag))));
 
                 for (let i = 0; i < extendInfo.sideCreditBallScreenLabel.length; i++) {
                     for (let j = 0; j < extendInfo.sideCreditBallScreenLabel[i].length; j++) {
@@ -179,6 +107,46 @@ export class ReelEffect_SymbolFeatureCommand extends puremvc.SimpleCommand {
                     }
                 }
                 break;
+        }
+    }
+
+    private setStackWildFlag(
+        screenSymbol?: number[][],
+        waysResult?: Array<{ screenHitData?: number[][] }>
+    ) {
+        if (!screenSymbol) {
+            return;
+        }
+        const isWinning = (x: number, y: number): boolean => {
+            if (!waysResult) return false;
+            for (const result of waysResult) {
+                if (result.screenHitData?.[x]?.[y]) {
+                    return true;
+                }
+            }
+            return false;
+        };
+
+        for (let i = 0; i < screenSymbol.length; i++) {
+            const col = screenSymbol[i];
+            let j = 0;
+            while (j < col.length) {
+                if (col[j] === SymbolId.WILD && isWinning(i, j)) {
+                    const start = j;
+                    let stackLen = 0;
+                    while (j < col.length && col[j] === SymbolId.WILD && isWinning(i, j)) {
+                        stackLen++;
+                        j++;
+                    }
+                    this.reelDataProxy.symbolFeature[i][start].wildFlag = stackLen;
+                    for (let k = start + 1; k < start + stackLen; k++) {
+                        this.reelDataProxy.symbolFeature[i][k].wildFlag = -1;
+                    }
+                } else {
+                    this.reelDataProxy.symbolFeature[i][j].wildFlag = 0;
+                    j++;
+                }
+            }
         }
     }
 
