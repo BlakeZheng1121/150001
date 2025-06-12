@@ -1,10 +1,18 @@
-import { _decorator } from 'cc';
+import { _decorator, macro } from 'cc';
 import { Game2BeforeShowCommand } from '../../../sgv3/command/state/Game2BeforeShowCommand';
 import { ReelDataProxy } from '../../../sgv3/proxy/ReelDataProxy';
 import { StateMachineProxy } from '../../../sgv3/proxy/StateMachineProxy';
-import { FreeGameEvent, ViewMediatorEvent } from '../../../sgv3/util/Constant';
+import {
+    FreeGameEvent,
+    ReelEvent,
+    ViewMediatorEvent,
+} from '../../../sgv3/util/Constant';
 import { GlobalTimer } from '../../../sgv3/util/GlobalTimer';
 import { FreeGameOneRoundResult } from '../../../sgv3/vo/result/FreeGameOneRoundResult';
+import { SymbolInfo } from '../../../sgv3/vo/info/SymbolInfo';
+import { SymbolId } from '../../../sgv3/vo/enum/Reel';
+import { ReelViewMediator } from '../../mediator/ReelViewMediator';
+import { GAME_ReelView } from '../../view/GAME_ReelView';
 const { ccclass } = _decorator;
 
 @ccclass('GAME_Game2BeforeShowCommand')
@@ -12,16 +20,12 @@ export class GAME_Game2BeforeShowCommand extends Game2BeforeShowCommand {
     protected timerKey = 'game2BeforeShow';
 
     public execute(notification: puremvc.INotification): void {
-        let self = this;
+        this.notifyWebControl();
 
-        self.notifyWebControl();
+        this.GAME_clearTimerKey(); //避免timer沒有清除的問題
 
-        self.GAME_clearTimerKey(); //避免timer沒有清除的問題
-
-        if (self.isBallScoreShow() || self.isWildShow()) {
-            self.sendNotification(FreeGameEvent.ON_SIDE_BALL_SCORE_SHOW, self.beforeShow.bind(self));
-        } else {
-            self.beforeShow();
+        if (!this.playStackWild()) {
+            this.afterStackWild();
         }
     }
 
@@ -63,6 +67,42 @@ export class GAME_Game2BeforeShowCommand extends Game2BeforeShowCommand {
                 .start();
         }
     }
+
+    private playStackWild(): boolean {
+        let infos: SymbolInfo[] = [];
+        if (this.reelDataProxy.symbolFeature) {
+            for (let x = 0; x < this.reelDataProxy.symbolFeature.length; x++) {
+                for (let y = 0; y < this.reelDataProxy.symbolFeature[x].length; y++) {
+                    if (this.reelDataProxy.symbolFeature[x][y].wildFlag > 0) {
+                        infos.push({ x: x, y: y, sid: SymbolId.WILD });
+                    }
+                }
+            }
+        }
+        if (infos.length > 0) {
+            this.sendNotification(ReelEvent.SHOW_STACK_WILD, infos);
+            GlobalTimer.getInstance()
+                .registerTimer(this.timerKey, 0.1, this.checkStackWildFinish, this, macro.REPEAT_FOREVER)
+                .start();
+            return true;
+        }
+        return false;
+    }
+
+    private checkStackWildFinish() {
+        if (!this.reelView.isSymbolPlaying()) {
+            GlobalTimer.getInstance().removeTimer(this.timerKey);
+            this.afterStackWild();
+        }
+    }
+
+    private afterStackWild() {
+        if (this.isBallScoreShow() || this.isWildShow()) {
+            this.sendNotification(FreeGameEvent.ON_SIDE_BALL_SCORE_SHOW, this.beforeShow.bind(this));
+        } else {
+            this.beforeShow();
+        }
+    }
     private GAME_clearTimerKey() {
         GlobalTimer.getInstance().removeTimer(this.timerKey);
     }
@@ -101,5 +141,16 @@ export class GAME_Game2BeforeShowCommand extends Game2BeforeShowCommand {
             this._reelDataProxy = this.facade.retrieveProxy(ReelDataProxy.NAME) as ReelDataProxy;
         }
         return this._reelDataProxy;
+    }
+
+    protected _reelView: GAME_ReelView;
+    protected get reelView(): GAME_ReelView {
+        if (!this._reelView) {
+            const mediator = this.facade.retrieveMediator(
+                ReelViewMediator.NAME
+            ) as ReelViewMediator;
+            this._reelView = mediator.getViewComponent() as GAME_ReelView;
+        }
+        return this._reelView;
     }
 }
