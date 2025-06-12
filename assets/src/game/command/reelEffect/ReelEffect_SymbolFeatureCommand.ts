@@ -132,6 +132,8 @@ export class ReelEffect_SymbolFeatureCommand extends puremvc.SimpleCommand {
                     }
                 }
 
+                Logger.i('[Game_2 screenSymbol] ' + JSON.stringify(screenSymbol2));
+                Logger.i('[Game_2 waysResult] ' + JSON.stringify(waysResult2));
                 Logger.i('[Game_2 wildFlag] ' + JSON.stringify(this.reelDataProxy.symbolFeature.map((c) => c.map((d) => d.wildFlag))));
 
                 for (let i = 0; i < extendInfo.sideCreditBallScreenLabel.length; i++) {
