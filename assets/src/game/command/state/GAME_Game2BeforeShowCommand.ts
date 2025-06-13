@@ -97,42 +97,11 @@ export class GAME_Game2BeforeShowCommand extends Game2BeforeShowCommand {
     }
 
     private afterStackWild() {
-        if (this.isBallScoreShow() || this.isWildShow()) {
-            this.sendNotification(FreeGameEvent.ON_SIDE_BALL_SCORE_SHOW, this.beforeShow.bind(this));
-        } else {
-            this.beforeShow();
-        }
+        this.beforeShow();
     }
+    
     private GAME_clearTimerKey() {
         GlobalTimer.getInstance().removeTimer(this.timerKey);
-    }
-
-    // 取得 角落球、retrigger、wild 表演資訊flag
-
-    private isBallScoreShow() {
-        let freeGameOneRoundResult = this.gameDataProxy.curRoundResult as FreeGameOneRoundResult;
-        let sideCreditBall: Array<Array<number>> =
-            freeGameOneRoundResult.extendInfoForFreeGameResult.sideCreditBallScreenLabel;
-        for (let i = 0; i < sideCreditBall.length; i++) {
-            for (let j = 0; j < sideCreditBall[i].length; j++) {
-                if (sideCreditBall[i][j] > 0) {
-                    return true;
-                }
-            }
-        }
-    }
-
-    private isWildShow() {
-        let freeGameOneRoundResult = this.gameDataProxy.curRoundResult as FreeGameOneRoundResult;
-
-        // 判斷是否有wild加倍
-        if (freeGameOneRoundResult.waysGameResult.waysResult.length > 0) {
-            for (let i = 0; i < freeGameOneRoundResult.screenSymbol[2].length; i++) {
-                if (freeGameOneRoundResult.screenSymbol[2][i] == 0) {
-                    return true;
-                }
-            }
-        }
     }
 
     protected _reelDataProxy: ReelDataProxy;

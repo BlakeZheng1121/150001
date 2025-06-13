@@ -32,35 +32,7 @@ export class GAME_Game2RollCompleteCommand extends WAY_Game2RollCompleteCommand 
         let freeGameSpecialInfo: FreeGameSpecialInfo = this.getSpecialInfo();
         this.freeGameSpecialInfo = freeGameSpecialInfo;
 
-        // 判斷是否有角落球需要先show
-        if (freeGameSpecialInfo.hitBall.isShowHitBall) {
-            GlobalTimer.getInstance()
-                .registerTimer(this.timeKey_sideBallShow, this.sideBallShowTimeOut, this.showSideBall, this)
-                .start();
-        } else {
-            this.sendNotification(FreeGameEvent.ON_SIDE_BALL_SHOW, this.freeGameSpecialInfo);
-            this.nextState();
-        }
-    }
-
-    // 因damping後銜接動畫破綻問題, 暫時用timer解
-    private showSideBall() {
-        GlobalTimer.getInstance().removeTimer(this.timeKey_sideBallShow);
-        this.sendNotification(FreeGameEvent.ON_SIDE_BALL_SHOW, this.freeGameSpecialInfo);
-
-        GlobalTimer.getInstance()
-            .registerTimer(this.timeKey_sideBallShowAfter, this.sideBallAfterTimeOut, this.showHitSpecialAfter, this)
-            .start();
-
-        GlobalTimer.getInstance()
-            .registerTimer(this.timeKey_sideBallShowEnd, this.sideBallShowEndTimeOut, this.nextState, this)
-            .start();
-    }
-
-    // 隱藏滾輪上燃燒球
-    private showHitSpecialAfter() {
-        GlobalTimer.getInstance().removeTimer(this.timeKey_sideBallShowAfter);
-        this.facade.sendNotification(FreeGameEvent.ON_SIDE_BALL_SHOW_AFTER);
+        this.nextState();
     }
 
     private nextState() {
