@@ -523,7 +523,7 @@
               "playerWin": 1000,
               "waysResult": [
                 {
-                  "symbolID": 9,
+                  "symbolID": 14,
                   "hitDirection": "LeftToRight",
                   "hitNumber": 3,
                   "count": 2,
@@ -533,22 +533,22 @@
                     [
                       false,
                       true,
+                      false
+                    ],
+                    [
+                      true,
+                      true,
                       true
                     ],
                     [
                       false,
                       true,
-                      false
+                      true
                     ],
                     [
                       true,
-                      false,
-                      false
-                    ],
-                    [
-                      false,
-                      false,
-                      false
+                      true,
+                      true
                     ],
                     [
                       false,
@@ -574,7 +574,7 @@
               "afterAccumulateWinWithBaseGameWin": 1000
             },
             "roundInfo": {
-              "roundNumber": 5,
+              "roundNumber": 2,
               "totalRound": 6,
               "addRound": 0
             },
