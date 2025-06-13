@@ -45,7 +45,7 @@ export enum SymbolId {
     M4 = 7,
     M5 = 8,
     M6 = 9,
-    NY = 10,
+    MY = 10,
 
     SUB = 20
 }

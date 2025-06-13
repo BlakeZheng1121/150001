@@ -427,7 +427,7 @@
   },
   {
     "__type__": "Timeline",
-    "timelineName": "PlayWin",
+    "timelineName": "PlayMystery",
     "timelineData": [
       {
         "__id__": 20
@@ -601,7 +601,7 @@
     "__prefab": {
       "__id__": 34
     },
-    "symbolType": 5,
+    "symbolType": 10,
     "animation": {
       "__id__": 17
     },
