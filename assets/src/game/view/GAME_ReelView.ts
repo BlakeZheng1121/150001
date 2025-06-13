@@ -181,6 +181,7 @@ export class GAME_ReelView extends ReelView {
                 break;
             case SymbolId.WILD:
             case SymbolId.C1:
+            case SymbolId.C2:
             case SymbolId.M1:
             case SymbolId.M2:
             case SymbolId.M3:

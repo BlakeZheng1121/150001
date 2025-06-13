@@ -73,25 +73,6 @@ export class SymbolFXShowState extends UIViewStateBase {
                         BalanceUtil.formatBalanceWithExpressingUnits(this.content.credit)
                     );
                     break;
-                case SymbolId.C2:
-                    this.content.labelText.string = String();
-                    this.content.labelText.font =
-                        this.content.lockType == LockType.OLD_LOCK ? this.content.goldFont : this.content.multipleFont;
-
-                    this.content.subSprite.spriteFrame = this.content.respinNumFrames[this.content.reSpinNum - 1];
-                    this.content.subSprite.enabled =
-                        this.content.lockType == LockType.NEW_LOCK && this.content.reSpinNum > 0;
-
-                    if (this.content.lockType == LockType.NEW_LOCK) {
-                        this.content.labelText.string =
-                            this.content.multiple > 0 ? String(this.content.multiple + '%') : String();
-                        this.content.labelText.node.position =
-                            this.content.reSpinNum > 0 ? this.content.hasReSpinPos : this.content.multiPos;
-                    } else {
-                        this.content.labelText.string = String(BalanceUtil.formatBalance(this.content.credit));
-                        this.content.labelText.node.position = this.content.normalPos;
-                    }
-                    break;
             }
         }
         if (this.content.symbolId === SymbolId.WILD) {
@@ -216,10 +197,6 @@ export class SymbolFXTargertCreditUpdateState extends UIViewStateBase {
                 this.content.labelText.font = this.content.isSpecialFont
                     ? this.content.specialFont
                     : this.content.baseFont;
-                break;
-            case SymbolId.C2:
-                this.content.labelText.font = this.content.goldFont;
-                this.content.labelText.node.setPosition(this.content.normalPos);
                 break;
         }
         this.onEffectFinished();
