@@ -95,7 +95,7 @@ export class GAME_SceneSetting extends SceneSetting {
             wonCreditBoardRunningTime: 0, //結算分數，不滾分表演
             wonCreditBoardEndTime: 3, //結算看板，顯示時間
             completeBoardRunningTime: 3,
-            completeFadeOutSceneTime: 0.5,
+            completeFadeOutSceneTime: 1.2,
             noWinStayTime: 0.5,
             bonusGamePlayBGMAfterEnterTime: 0,
             bonusGameWinSymbolShowTime: 0,
