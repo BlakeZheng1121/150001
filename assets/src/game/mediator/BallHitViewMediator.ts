@@ -183,7 +183,7 @@ export class BallHitViewMediator extends BaseMediator<BallHitView> {
         let ballCash = this.gameDataProxy.isOmniChannel()
             ? this.numInBall.toString()
             : BalanceUtil.formatBalance(this.numInBall);
-        this.view.setBallCredit(ballCash, 4);
+        //this.view.setBallCredit(ballCash, 4);
     }
 
     private topUpGameTransition() {
