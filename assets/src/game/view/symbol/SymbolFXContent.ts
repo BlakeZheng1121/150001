@@ -13,7 +13,7 @@ export class SymbolFXContent extends Component {
     @property({
         type: Label,
         visible() {
-            return this.symbolType == SymbolId.C1 || this.symbolType == SymbolId.C2;
+            return this.symbolType == SymbolId.C1;
         }
     })
     public labelText: Label | null = null;
