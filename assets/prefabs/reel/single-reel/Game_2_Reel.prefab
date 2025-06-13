@@ -1206,7 +1206,10 @@
       "__uuid__": "61570708-e877-4361-87ab-22e171616daa@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
-    "_bgSpriteFrame": null,
+    "_bgSpriteFrame": {
+      "__uuid__": "6f786580-d734-4e46-97ae-d8e7e09b5f73@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
     "_isImprovedFOV": false
   },
   {
