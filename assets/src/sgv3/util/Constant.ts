@@ -92,6 +92,7 @@ export class ReelEvent {
     public static SHOW_HOLD_SPIN_WIN: string = 'showHoldSpinWin';
     public static SHOW_REELS_LOOP_WIN: string = 'showReelsLoopWin';
     public static SHOW_STACK_WILD: string = 'showStackWild';
+    public static SHOW_MYSTERY: string = 'showMystery';
     public static HIDE_WILD_SYMBOL: string = 'hideWildSymbol';
     public static SHOW_LAST_SYMBOL_OF_REELS: string = 'showLastSymbolOfReels';
 

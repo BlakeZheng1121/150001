@@ -1,12 +1,16 @@
-import { _decorator, Vec3 } from 'cc';
+import { _decorator, Vec3, macro } from 'cc';
 import { ReelDataProxy } from '../../../sgv3/proxy/ReelDataProxy';
 import { StateMachineProxy } from '../../../sgv3/proxy/StateMachineProxy';
-import { FreeGameEvent } from '../../../sgv3/util/Constant';
+import { ReelEvent } from '../../../sgv3/util/Constant';
 import { GlobalTimer } from '../../../sgv3/util/GlobalTimer';
 import { GameScene } from '../../../sgv3/vo/data/GameScene';
 import { FreeGameOneRoundResult } from '../../../sgv3/vo/result/FreeGameOneRoundResult';
+import { SymbolInfo } from '../../../sgv3/vo/info/SymbolInfo';
+import { SymbolId } from '../../../sgv3/vo/enum/Reel';
 import { WAY_Game2RollCompleteCommand } from '../../../sgv3way/command/state/WAY_Game2RollCompleteCommand';
 import { FreeGameSpecialInfo } from '../../vo/FreeGameSpecialInfo';
+import { ReelViewMediator } from '../../mediator/ReelViewMediator';
+import { GAME_ReelView } from '../../view/GAME_ReelView';
 const { ccclass } = _decorator;
 
 @ccclass('GAME_Game2RollCompleteCommand')
@@ -22,6 +26,8 @@ export class GAME_Game2RollCompleteCommand extends WAY_Game2RollCompleteCommand 
     readonly timeKey_sideBallShowEnd = 'timeKey_sideBallShowEnd';
     readonly sideBallShowEndTimeOut = 1;
 
+    readonly timeKey_mystery = 'timeKey_mystery';
+
     public execute(notification: puremvc.INotification): void {
         //super.execute(notification);
         this.notifyWebControl();
@@ -32,7 +38,9 @@ export class GAME_Game2RollCompleteCommand extends WAY_Game2RollCompleteCommand 
         let freeGameSpecialInfo: FreeGameSpecialInfo = this.getSpecialInfo();
         this.freeGameSpecialInfo = freeGameSpecialInfo;
 
-        this.nextState();
+        if (!this.playMystery()) {
+            this.nextState();
+        }
     }
 
     private nextState() {
@@ -41,6 +49,35 @@ export class GAME_Game2RollCompleteCommand extends WAY_Game2RollCompleteCommand 
             this.changeState(StateMachineProxy.GAME2_HITSPECIAL, this.freeGameSpecialInfo);
         } else {
             this.changeState(StateMachineProxy.GAME2_BEFORESHOW);
+        }
+    }
+
+    private playMystery(): boolean {
+        let infos: SymbolInfo[] = [];
+        const screen = (this.gameDataProxy.curRoundResult as FreeGameOneRoundResult).screenSymbol;
+        if (screen) {
+            for (let x = 0; x < screen.length; x++) {
+                for (let y = 0; y < screen[x].length; y++) {
+                    if (screen[x][y] === SymbolId.MY) {
+                        infos.push({ x: x, y: y, sid: SymbolId.MY });
+                    }
+                }
+            }
+        }
+        if (infos.length > 0) {
+            this.sendNotification(ReelEvent.SHOW_MYSTERY, infos);
+            GlobalTimer.getInstance()
+                .registerTimer(this.timeKey_mystery, 0.1, this.checkMysteryFinish, this, macro.REPEAT_FOREVER)
+                .start();
+            return true;
+        }
+        return false;
+    }
+
+    private checkMysteryFinish() {
+        if (!this.reelView.isSymbolPlaying()) {
+            GlobalTimer.getInstance().removeTimer(this.timeKey_mystery);
+            this.nextState();
         }
     }
 
@@ -89,5 +126,16 @@ export class GAME_Game2RollCompleteCommand extends WAY_Game2RollCompleteCommand 
             this._reelDataProxy = this.facade.retrieveProxy(ReelDataProxy.NAME) as ReelDataProxy;
         }
         return this._reelDataProxy;
+    }
+
+    protected _reelView: GAME_ReelView;
+    protected get reelView(): GAME_ReelView {
+        if (!this._reelView) {
+            const mediator = this.facade.retrieveMediator(
+                ReelViewMediator.NAME
+            ) as ReelViewMediator;
+            this._reelView = mediator.getViewComponent() as GAME_ReelView;
+        }
+        return this._reelView;
     }
 }

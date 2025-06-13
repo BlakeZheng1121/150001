@@ -26,6 +26,10 @@ export class SymbolFXStateRegister extends UIViewStateRegister {
                 this.registerState(new SymbolFXShowState(this.content));
                 this.registerState(new SymbolFXStackShowState(this.content));
                 break;
+            case SymbolId.MY:
+                this.registerState(new SymbolFXShowState(this.content));
+                this.registerState(new SymbolFXMysteryState(this.content));
+                break;
             case SymbolId.SUB:
                 this.registerState(new SymbolFXReSpinState(this.content));
                 break;
@@ -248,5 +252,24 @@ export class SymbolFXGetTargertCreditResultState extends UIViewStateBase {
             this.content.animation.play('PlayLastCollect');
         }
         this.onEffectFinished();
+    }
+}
+
+export class SymbolFXMysteryState extends UIViewStateBase {
+    private content: SymbolFXContent | null = null;
+
+    public effectId: number = SymbolPerformType.SHOW_MYSTERY;
+
+    constructor(content: SymbolFXContent) {
+        super();
+        this.content = content;
+    }
+
+    onPlay() {
+        if (this.content.animation == null) {
+            this.onEffectFinished();
+            return;
+        }
+        this.content.animation.play('PlayMystery', () => this.onEffectFinished());
     }
 }
