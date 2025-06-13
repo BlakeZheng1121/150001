@@ -2008,14 +2008,6 @@
   },
   {
     "__type__": "AnimPrefab",
-    "_id": 20,
-    "_anim": {
-      "__uuid__": "c3765e68-f035-4016-b91b-43b28531761d",
-      "__expectedType__": "cc.Prefab"
-    }
-  },
-  {
-    "__type__": "AnimPrefab",
     "_id": 4,
     "_anim": {
       "__uuid__": "9648b422-4134-4797-bdd0-a9d4e1af799d",
@@ -2043,6 +2035,14 @@
     "_id": 7,
     "_anim": {
       "__uuid__": "4934ab04-e287-4dc8-968f-f57baa8d9a54",
+      "__expectedType__": "cc.Prefab"
+    }
+  },
+  {
+    "__type__": "AnimPrefab",
+    "_id": 10,
+    "_anim": {
+      "__uuid__": "fac4b2df-f6ab-40bc-882b-6ca11569bb7f",
       "__expectedType__": "cc.Prefab"
     }
   },
