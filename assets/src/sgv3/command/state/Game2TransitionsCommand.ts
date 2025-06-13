@@ -11,7 +11,7 @@ export class Game2TransitionCommand extends StateCommand {
     protected timerKey = 'game2Transition';
     public execute(notification: puremvc.INotification): void {
         this.sendNotification(StateWinEvent.ON_GAME2_TRANSITIONS, false);
-        GlobalTimer.getInstance().registerTimer(this.timerKey, 0.85, this.showOpening, this).start();
+        this.showOpening();
     }
 
     /** 播放開頭動畫 */

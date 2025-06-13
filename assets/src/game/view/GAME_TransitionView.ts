@@ -16,6 +16,9 @@ export class GAME_TransitionView extends BaseView {
     @property(TimelineTool)
     private Transition: TimelineTool | null = null;
 
+    @property(TimelineTool)
+    private Free_StartBoard: TimelineTool | null = null;
+
     protected isTransitionBG: boolean = false; //判斷是否進行轉場.
 
     protected onLoad() {
@@ -33,6 +36,13 @@ export class GAME_TransitionView extends BaseView {
         this.setNodeActivity(true);
         this.Transition?.play('FS_Transition');
         AudioManager.Instance.play(AudioClipsEnum.FeatureSelection_DragonRoar);
+    }
+
+    /** FreeGame Start Board*/
+    public showStartBoard(): void {
+        const self = this;
+        this.setNodeActivity(true);
+        this.Free_StartBoard?.play('Free_StartBoard');
     }
 
     public setNodeActivity(active: boolean) {

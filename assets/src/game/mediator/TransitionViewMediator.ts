@@ -45,6 +45,8 @@ export class TransitionViewMediator extends BaseMediator<GAME_TransitionView> {
                 self.onOrientationHorizontal();
                 break;
             case StateWinEvent.ON_GAME2_TRANSITIONS:
+                if (notification.getBody() == true) self.onTransitionToFree();
+                break;
             case StateWinEvent.ON_GAME4_TRANSITIONS:
                 if (notification.getBody() == true) self.onTransitionBGEffect();
                 break;
@@ -74,6 +76,21 @@ export class TransitionViewMediator extends BaseMediator<GAME_TransitionView> {
                 () => {
                     GlobalTimer.getInstance().removeTimer('onTransitionBGEffect');
                     this.transitionView.showTransition();
+                },
+                this
+            )
+            .start();
+    }
+
+    /** FreeGame Start Board*/
+    protected onTransitionToFree() {
+        GlobalTimer.getInstance()
+            .registerTimer(
+                'onTransitionBGEffect',
+                1.3,
+                () => {
+                    GlobalTimer.getInstance().removeTimer('onTransitionBGEffect');
+                    this.transitionView.showStartBoard();
                 },
                 this
             )
