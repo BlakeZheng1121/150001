@@ -1,0 +1,452 @@
+{
+  "name": "h5.spin",
+  "data": {
+    "balance": 3980550791.73,
+    "spinResult": {
+      "playerTotalWin": 0,
+      "baseGameResult": {
+        "usedTableIndex": 0,
+        "screenSymbol": [
+          [
+            2,
+            14,
+            6
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            2,
+            11,
+            13
+          ],
+          [
+            2,
+            15,
+            7
+          ],
+          [
+            2,
+            12,
+            15
+          ]
+        ],
+        "baseGameTotalWin": 0,
+        "waysGameResult": {
+          "playerWin": 0,
+          "waysResult": [
+            {
+              "symbolID": 2,
+              "hitDirection": "LeftToRight",
+              "hitNumber": 4,
+              "count": 1,
+              "hitOdds": 8,
+              "symbolWin": 800,
+              "screenHitData": [
+                [
+                  true,
+                  false,
+                  false
+                ],
+                [
+                  false,
+                  false,
+                  false
+                ],
+                [
+                  true,
+                  false,
+                  false
+                ],
+                [
+                  true,
+                  false,
+                  false
+                ],
+                [
+                  true,
+                  false,
+                  false
+                ]
+              ]
+            }
+          ]
+        },
+        "specialFeatureResult": [
+          {
+            "specialHitInfo": "noSpecialHit",
+            "specialOperations": [],
+            "specialScreenHitData": [
+              [
+                false,
+                false,
+                false
+              ],
+              [
+                false,
+                false,
+                false
+              ],
+              [
+                false,
+                false,
+                false
+              ],
+              [
+                false,
+                false,
+                false
+              ],
+              [
+                false,
+                false,
+                false
+              ]
+            ],
+            "specialScreenWin": 0
+          },
+          {
+            "specialHitInfo": "noSpecialHit",
+            "specialOperations": [],
+            "specialScreenHitData": [
+              [
+                false,
+                false,
+                false
+              ],
+              [
+                false,
+                false,
+                false
+              ],
+              [
+                false,
+                false,
+                false
+              ],
+              [
+                false,
+                false,
+                false
+              ],
+              [
+                false,
+                false,
+                false
+              ]
+            ],
+            "specialScreenWin": 0
+          },
+          {
+            "specialHitInfo": "freeGame_01",
+            "specialOperations": [],
+            "jsonExtendData": "{\n  \"jackpotResult\": {\n    \"hitCase\": -1\n  },\n  \"groupingIdx\": 0,\n  \"bonusHitPool\": -1,\n  \"bonusHitCase\": -1,\n  \"playerBetLevel\": 0\n}",
+            "specialScreenHitData": [
+              [
+                false,
+                false,
+                false
+              ],
+              [
+                false,
+                false,
+                false
+              ],
+              [
+                false,
+                false,
+                false
+              ],
+              [
+                false,
+                false,
+                false
+              ],
+              [
+                false,
+                false,
+                false
+              ]
+            ],
+            "specialScreenWin": 0
+          }
+        ],
+        "displayInfo": {
+          "displayMethod": [
+            [
+              false
+            ],
+            [
+              false
+            ],
+            [
+              false
+            ],
+            [
+              false
+            ],
+            [
+              false
+            ]
+          ],
+          "bigWinType": "normal_1",
+          "dampInfo": [
+            [
+              7,
+              12,
+              2,
+              13,
+              5
+            ],
+            [
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          ],
+          "rngInfo": [
+            [
+              26,
+              26,
+              30,
+              33,
+              25
+            ]
+          ]
+        },
+        "extendInfoForbaseGameResult": {
+          "featureIdx": 0,
+          "isPowerUp": false,
+          "ballCount": 6,
+          "ballTotalCredit": 4800,
+          "ballScreenLabel": [
+            [
+              0,
+              0,
+              800
+            ],
+            [
+              0,
+              0,
+              800
+            ],
+            [
+              0,
+              0,
+              800
+            ],
+            [
+              0,
+              0,
+              800
+            ],
+            [
+              0,
+              800,
+              800
+            ]
+          ],
+          "mysterySymbol": -1,
+          "seatInfo": {
+            "statusAccumulation": [
+              10000
+            ],
+            "miniGameWaterLevel": 4,
+            "denomMultiplier": 100,
+            "betMultiplierIndex": 0,
+            "featureIdx": 0,
+            "usedTableIndex": 0,
+            "screenRngInfo": [
+              [
+                26,
+                26,
+                30,
+                33,
+                25
+              ]
+            ]
+          },
+          "extendPlayerWin": 0,
+          "extendGameFeature": 0
+        },
+        "isHitFeatureGame": false
+      },
+      "freeGameResult": {
+        "freeGameTotalWin": 15400,
+        "totalRound": 1,
+        "freeGameOneRoundResult": [
+          {
+            "specialHitInfo": "freeGame_01",
+            "playerWin": 0,
+            "usedTableIndex": 0,
+            "screenSymbol": [
+              [
+                6,
+                11,
+                1
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                11
+              ]
+            ],
+            "waysGameResult": {
+              "playerWin": 0,
+              "waysResult": []
+            },
+            "specialFeatureResult": [
+              {
+                "specialHitInfo": "noSpecialHit",
+                "specialOperations": [],
+                "specialScreenWin": 0
+              }
+            ],
+            "displayLogicInfo": {
+              "maxTriggerCountFlag": false,
+              "beforeAccumulateWinWithoutBaseGameWin": 0,
+              "afterAccumulateWinWithoutBaseGameWin": 0,
+              "beforeAccumulateWinWithBaseGameWin": 0,
+              "afterAccumulateWinWithBaseGameWin": 0
+            },
+            "roundInfo": {
+              "roundNumber": 1,
+              "totalRound": 1,
+              "addRound": 0
+            },
+            "displayInfo": {
+              "displayMethod": [
+                [
+                  false
+                ],
+                [
+                  false
+                ],
+                [
+                  false
+                ],
+                [
+                  false
+                ],
+                [
+                  false
+                ]
+              ],
+              "bigWinType": "normal_1",
+              "dampInfo": [
+                [
+                  0,
+                  8,
+                  13,
+                  9,
+                  0
+                ],
+                [
+                  0,
+                  6,
+                  11,
+                  4,
+                  0
+                ]
+              ],
+              "rngInfo": [
+                [
+                  1,
+                  1,
+                  1,
+                  1,
+                  1
+                ]
+              ]
+            },
+            "extendInfoForFreeGameResult": {
+              "featureIdx": 0,
+              "sideCreditBallScreenLabel": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              "accumulateCredit": 0,
+              "sideCreditBallCount": 0,
+              "isRetrigger": false,
+              "isRespinFeature": false,
+              "displayAccumulateWinBeforeRespin": 0,
+              "displayAccumulateWinAfterRespin": 0,
+              "extendPlayerWin": 0,
+              "specialFeatureIndex": 0
+            }
+          }
+        ]
+      },
+      "bigWinType": "normal_1",
+      "probabilityDetail": {
+        "randomNumberUsed": 6,
+        "randomDataUsed": [
+          0,
+          30,
+          36,
+          13,
+          36,
+          25,
+          999999999,
+          806,
+          680,
+          38,
+          854,
+          822,
+          570
+        ],
+        "settingId": "0-0-0"
+      }
+    },
+    "gameSeq": 433118025,
+    "minusBetBalance": 3980550791.73,
+    "ts": 1749459603513
+  },
+  "description": "獲得FreeGame盤面",
+  "event": "h5.spinResponse",
+  "delay": 0,
+  "repeat": 1,
+  "duration": 0
+}
