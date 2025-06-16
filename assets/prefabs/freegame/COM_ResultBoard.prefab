@@ -420,8 +420,8 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
+      "x": 0,
+      "y": 0,
       "z": 1
     },
     "_layer": 33554432,
@@ -441,7 +441,7 @@
       "__id__": 15
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 17
@@ -459,7 +459,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 120,
+      "y": 0,
       "z": 0
     },
     "_lrot": {
@@ -497,8 +497,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 320,
-      "height": 50
+      "width": 397,
+      "height": 275
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -564,7 +564,7 @@
     "__prefab": {
       "__id__": 22
     },
-    "spriteUrl": "db://assets/art/language/${i18n._language}/common/result-board/WinText_Total.png@f9941",
+    "spriteUrl": "db://assets/art/language/${i18n._language}/freegame/Free_ResultBoard_TotalWin.png@f9941",
     "_id": ""
   },
   {
