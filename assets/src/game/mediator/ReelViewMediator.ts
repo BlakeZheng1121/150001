@@ -641,41 +641,11 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
         return range;
     }
 
-    protected updateStrip(): void {
-        if (this.gameDataProxy.curScene == GameScene.Game_1) {
-            let replaceSymbolId =
-                this.gameDataProxy.spinEventData?.baseGameResult.extendInfoForbaseGameResult?.mysterySymbol;
-            this.setMysterySymbol(replaceSymbolId);
-        }
-        super.updateStrip();
-    }
-
-    private setMysterySymbol(replaceSymbolId: number) {
-        let mysterySymbolId: number =
-            this.gameDataProxy.initEventData.executeSetting.baseGameSetting.baseGameExtendSetting.mysterySymbolId;
-        // 有 Mystery symbol 才需要變換 symbol
-        if (mysterySymbolId != undefined) {
-            let mysterySymbolList =
-                this.gameDataProxy.initEventData.executeSetting.baseGameSetting.baseGameExtendSetting.mysterySymbolList;
-            replaceSymbolId =
-                replaceSymbolId > 0
-                    ? replaceSymbolId
-                    : mysterySymbolList[MathUtil.randomBetween(0, mysterySymbolList.length - 1)];
-            for (let i = 0; i < this.reelDataProxy.rollingStrip.length; i++) {
-                for (let j = 0; j < this.reelDataProxy.rollingStrip[i].length; j++) {
-                    if (this.reelDataProxy.rollingStrip[i][j] == mysterySymbolId) {
-                        this.reelDataProxy.rollingStrip[i][j] = replaceSymbolId;
-                    }
-                }
-            }
-        }
-    }
     // 顯示最後盤面
     public showLastSymbolOfReels(data: { seatInfo: SeatInfo; mysterySymbol?: number }) {
         const self = this;
         this.stateSetting.setWheelData(data.seatInfo.featureIdx);
         self.reelDataProxy.mathTableIndex = data.seatInfo.usedTableIndex ? data.seatInfo.usedTableIndex : 0;
-        self.setMysterySymbol(data.mysterySymbol);
         super.updateStrip();
         for (let infoIndex = 0; infoIndex < data.seatInfo.screenRngInfo.length; infoIndex++) {
             let rngInfo: Array<number> = data.seatInfo.screenRngInfo[infoIndex];
