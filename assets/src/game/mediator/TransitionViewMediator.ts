@@ -22,6 +22,7 @@ export class TransitionViewMediator extends BaseMediator<GAME_TransitionView> {
 
     public transitionView: GAME_TransitionView = null;
     private waitForSpin: boolean = false;
+    private readonly waitForSpinTimerKey = 'wait_for_spin_delay';
 
     constructor(name?: string, component?: any) {
         super(TransitionViewMediator.NAME, component);
@@ -70,7 +71,17 @@ export class TransitionViewMediator extends BaseMediator<GAME_TransitionView> {
                 if (self.waitForSpin) {
                     self.waitForSpin = false;
                     self.onHideStartBoard();
-                    self.startGame2Transition();
+                    GlobalTimer.getInstance()
+                        .registerTimer(
+                            this.waitForSpinTimerKey,
+                            1,
+                            () => {
+                                GlobalTimer.getInstance().removeTimer(this.waitForSpinTimerKey);
+                                self.startGame2Transition();
+                            },
+                            self
+                        )
+                        .start();
                 }
                 break;
         }
