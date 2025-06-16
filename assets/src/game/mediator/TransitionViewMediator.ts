@@ -63,7 +63,7 @@ export class TransitionViewMediator extends BaseMediator<GAME_TransitionView> {
                     GlobalTimer.getInstance()
                         .registerTimer(
                             this.waitForSpinTimerKey,
-                            1,
+                            2,
                             () => {
                                 GlobalTimer.getInstance().removeTimer(this.waitForSpinTimerKey);
                                 self.waitForSpin = true;
