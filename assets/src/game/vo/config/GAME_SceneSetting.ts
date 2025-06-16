@@ -91,7 +91,7 @@ export class GAME_SceneSetting extends SceneSetting {
             specialHitRunningTime: 3,
             miniGameHitRunningTime: 1,
             wonSpinBoardRunningTime: 3,
-            retriggerBoardRunningTime: 2,
+            retriggerBoardRunningTime: 5,
             wonCreditBoardRunningTime: 0, //結算分數，不滾分表演
             wonCreditBoardEndTime: 3, //結算看板，顯示時間
             completeBoardRunningTime: 3,
