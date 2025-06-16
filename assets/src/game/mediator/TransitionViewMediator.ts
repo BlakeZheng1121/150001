@@ -2,7 +2,16 @@ import { _decorator } from 'cc';
 import BaseMediator from '../../base/BaseMediator';
 import { Logger } from '../../core/utils/Logger';
 import { SceneManager } from '../../core/utils/SceneManager';
-import { StateWinEvent, ViewMediatorEvent } from '../../sgv3/util/Constant';
+import {
+    ScreenEvent,
+    StateWinEvent,
+    ViewMediatorEvent,
+    WebGameState
+} from '../../sgv3/util/Constant';
+import { StateMachineCommand } from '../../core/command/StateMachineCommand';
+import { StateMachineObject } from '../../core/proxy/CoreStateMachineProxy';
+import { StateMachineProxy } from '../../sgv3/proxy/StateMachineProxy';
+import { WebBridgeProxy } from '../../sgv3/proxy/WebBridgeProxy';
 import { GlobalTimer } from '../../sgv3/util/GlobalTimer';
 import { GAME_TransitionView } from '../view/GAME_TransitionView';
 const { ccclass } = _decorator;
@@ -12,6 +21,8 @@ export class TransitionViewMediator extends BaseMediator<GAME_TransitionView> {
     public static readonly NAME: string = 'TransitionViewMediator';
 
     public transitionView: GAME_TransitionView = null;
+    private waitForSpin: boolean = false;
+    private readonly waitForSpinTimerKey = 'wait_for_spin_delay';
 
     constructor(name?: string, component?: any) {
         super(TransitionViewMediator.NAME, component);
@@ -28,7 +39,8 @@ export class TransitionViewMediator extends BaseMediator<GAME_TransitionView> {
             SceneManager.EV_ORIENTATION_HORIZONTAL,
             StateWinEvent.ON_GAME2_TRANSITIONS,
             StateWinEvent.ON_GAME4_TRANSITIONS,
-            ViewMediatorEvent.CHANGE_DISPLAY_CONTAINER
+            ViewMediatorEvent.CHANGE_DISPLAY_CONTAINER,
+            ScreenEvent.ON_SPIN_DOWN
         ];
         return eventList;
     }
@@ -45,10 +57,33 @@ export class TransitionViewMediator extends BaseMediator<GAME_TransitionView> {
                 self.onOrientationHorizontal();
                 break;
             case StateWinEvent.ON_GAME2_TRANSITIONS:
-                if (notification.getBody() == true) self.onTransitionToFree();
+                if (notification.getBody() == true) {
+                    self.waitForSpin = false;
+                    self.onTransitionToFree();
+                    GlobalTimer.getInstance()
+                        .registerTimer(
+                            this.waitForSpinTimerKey,
+                            1,
+                            () => {
+                                GlobalTimer.getInstance().removeTimer(this.waitForSpinTimerKey);
+                                self.waitForSpin = true;
+                            },
+                            self
+                        )
+                        .start();
+                } else {
+                    self.onHideStartBoard();
+                }
                 break;
             case StateWinEvent.ON_GAME4_TRANSITIONS:
                 if (notification.getBody() == true) self.onTransitionBGEffect();
+                break;
+            case ScreenEvent.ON_SPIN_DOWN:
+                if (self.waitForSpin) {
+                    self.waitForSpin = false;
+                    self.onHideStartBoard();
+                    self.startGame2Transition();
+                }
                 break;
         }
     }
@@ -95,5 +130,25 @@ export class TransitionViewMediator extends BaseMediator<GAME_TransitionView> {
                 this
             )
             .start();
+    }
+
+    protected onHideStartBoard() {
+        this.transitionView.hideStartBoard?.();
+    }
+
+    protected startGame2Transition() {
+        this.sendNotification(StateMachineCommand.NAME, new StateMachineObject(StateMachineProxy.GAME2_INIT));
+
+        this.sendNotification(ViewMediatorEvent.LEAVE);
+        this.sendNotification(ViewMediatorEvent.ENTER);
+        this.webBridgeProxy.sendGameState(WebBridgeProxy.curScene, WebGameState.INIT);
+    }
+
+    private _webBridgeProxy: WebBridgeProxy;
+    protected get webBridgeProxy(): WebBridgeProxy {
+        if (!this._webBridgeProxy) {
+            this._webBridgeProxy = this.facade.retrieveProxy(WebBridgeProxy.NAME) as WebBridgeProxy;
+        }
+        return this._webBridgeProxy;
     }
 }

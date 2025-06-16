@@ -45,6 +45,10 @@ export class GAME_TransitionView extends BaseView {
         this.Free_StartBoard?.play('Board_Show');
     }
 
+    public hideStartBoard(): void {
+        this.Free_StartBoard?.play('Board_Hide');
+    }
+
     public setNodeActivity(active: boolean) {
         this.node.active = active;
     }
