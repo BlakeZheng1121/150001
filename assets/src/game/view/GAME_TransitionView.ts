@@ -42,7 +42,7 @@ export class GAME_TransitionView extends BaseView {
     public showStartBoard(): void {
         const self = this;
         this.setNodeActivity(true);
-        this.Free_StartBoard?.play('Free_StartBoard');
+        this.Free_StartBoard?.play('Board_Show');
     }
 
     public setNodeActivity(active: boolean) {

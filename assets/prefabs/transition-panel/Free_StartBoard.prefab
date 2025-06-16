@@ -29,7 +29,7 @@
       }
     ],
     "_prefab": {
-      "__id__": 67
+      "__id__": 68
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -726,6 +726,9 @@
     "arrayTimelineData": [
       {
         "__id__": 36
+      },
+      {
+        "__id__": 57
       }
     ],
     "_id": ""
@@ -736,16 +739,13 @@
   },
   {
     "__type__": "Timeline",
-    "timelineName": "StartBoard",
+    "timelineName": "Board_Show",
     "timelineData": [
       {
         "__id__": 37
       },
       {
         "__id__": 47
-      },
-      {
-        "__id__": 57
       }
     ]
   },
@@ -940,7 +940,7 @@
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
-    "isLoop": false,
+    "isLoop": true,
     "isResetSlots": false,
     "isResetBones": false,
     "isEndClose": false,
@@ -1010,16 +1010,25 @@
     "delayTime": 0
   },
   {
+    "__type__": "Timeline",
+    "timelineName": "Board_Hide",
+    "timelineData": [
+      {
+        "__id__": 58
+      }
+    ]
+  },
+  {
     "__type__": "TimelineSetupData",
     "timelineType": 0,
     "timelineAnimation": {
-      "__id__": 58
+      "__id__": 59
     },
     "timelineSpine": {
-      "__id__": 61
+      "__id__": 62
     },
     "timelineTime": {
-      "__id__": 64
+      "__id__": 65
     }
   },
   {
@@ -1032,10 +1041,10 @@
     "useAnim": false,
     "useParticle": false,
     "spineSetupData": {
-      "__id__": 59
+      "__id__": 60
     },
     "animSetupData": {
-      "__id__": 60
+      "__id__": 61
     },
     "particleData": []
   },
@@ -1077,10 +1086,10 @@
     "useAnim": true,
     "useParticle": false,
     "spineSetupData": {
-      "__id__": 62
+      "__id__": 63
     },
     "animSetupData": {
-      "__id__": 63
+      "__id__": 64
     },
     "particleData": []
   },
@@ -1113,10 +1122,10 @@
     "useAnim": false,
     "useParticle": false,
     "spineSetupData": {
-      "__id__": 65
+      "__id__": 66
     },
     "animSetupData": {
-      "__id__": 66
+      "__id__": 67
     },
     "particleData": []
   },
