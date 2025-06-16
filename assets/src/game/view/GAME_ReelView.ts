@@ -150,6 +150,21 @@ export class GAME_ReelView extends ReelView {
         });
     }
 
+    public removeAnimSymbols(symbolInfo: any) {
+        const self = this;
+        symbolInfo.forEach(function (value: SymbolInfo) {
+            self.removeAnimSymbol(value);
+        });
+    }
+
+    public removeAnimSymbol(value: SymbolInfo) {
+        const self = this;
+        let poolKey: number = value.y * self.reelsList.length + value.x;
+        if (self.animManager.pool.has(poolKey)) {
+            self.animManager.putAnim(poolKey);
+        }
+    }
+
     public createAnimSymbol(value: SymbolInfo, isSubSymbol = false) {
         const self = this;
         let poolKey: number = isSubSymbol ? value.y * 5 + value.x + SymbolId.SUB : value.y * 5 + value.x;
