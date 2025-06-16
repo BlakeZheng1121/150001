@@ -484,7 +484,8 @@
               "displayAccumulateWinBeforeRespin": 0,
               "displayAccumulateWinAfterRespin": 0,
               "extendPlayerWin": 0,
-              "specialFeatureIndex": 0
+              "specialFeatureIndex": 0,
+              "mysterySymbol": 1
             }
           },
           {
@@ -658,7 +659,8 @@
               "displayAccumulateWinBeforeRespin": 1000,
               "displayAccumulateWinAfterRespin": 1000,
               "extendPlayerWin": 0,
-              "specialFeatureIndex": 0
+              "specialFeatureIndex": 0,
+              "mysterySymbol": 2
             }
           },
           {
@@ -832,7 +834,8 @@
               "displayAccumulateWinBeforeRespin": 1000,
               "displayAccumulateWinAfterRespin": 1000,
               "extendPlayerWin": 0,
-              "specialFeatureIndex": 0
+              "specialFeatureIndex": 0,
+              "mysterySymbol": 3
             }
           },
           {
@@ -1006,7 +1009,8 @@
               "displayAccumulateWinBeforeRespin": 1000,
               "displayAccumulateWinAfterRespin": 1000,
               "extendPlayerWin": 0,
-              "specialFeatureIndex": 0
+              "specialFeatureIndex": 0,
+              "mysterySymbol": 4
             }
           },
           {
@@ -1180,7 +1184,8 @@
               "displayAccumulateWinBeforeRespin": 1000,
               "displayAccumulateWinAfterRespin": 1000,
               "extendPlayerWin": 0,
-              "specialFeatureIndex": 0
+              "specialFeatureIndex": 0,
+              "mysterySymbol": 5
             }
           },
           {
@@ -1354,7 +1359,8 @@
               "displayAccumulateWinBeforeRespin": 1000,
               "displayAccumulateWinAfterRespin": 1000,
               "extendPlayerWin": 0,
-              "specialFeatureIndex": 0
+              "specialFeatureIndex": 0,
+              "mysterySymbol": 6
             }
           }
         ]
