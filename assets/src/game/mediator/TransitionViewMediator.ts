@@ -58,8 +58,19 @@ export class TransitionViewMediator extends BaseMediator<GAME_TransitionView> {
                 break;
             case StateWinEvent.ON_GAME2_TRANSITIONS:
                 if (notification.getBody() == true) {
+                    self.waitForSpin = false;
                     self.onTransitionToFree();
-                    self.waitForSpin = true;
+                    GlobalTimer.getInstance()
+                        .registerTimer(
+                            this.waitForSpinTimerKey,
+                            1,
+                            () => {
+                                GlobalTimer.getInstance().removeTimer(this.waitForSpinTimerKey);
+                                self.waitForSpin = true;
+                            },
+                            self
+                        )
+                        .start();
                 } else {
                     self.onHideStartBoard();
                 }
@@ -71,17 +82,7 @@ export class TransitionViewMediator extends BaseMediator<GAME_TransitionView> {
                 if (self.waitForSpin) {
                     self.waitForSpin = false;
                     self.onHideStartBoard();
-                    GlobalTimer.getInstance()
-                        .registerTimer(
-                            this.waitForSpinTimerKey,
-                            1,
-                            () => {
-                                GlobalTimer.getInstance().removeTimer(this.waitForSpinTimerKey);
-                                self.startGame2Transition();
-                            },
-                            self
-                        )
-                        .start();
+                    self.startGame2Transition();
                 }
                 break;
         }
