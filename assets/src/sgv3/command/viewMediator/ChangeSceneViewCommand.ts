@@ -67,9 +67,7 @@ export class ChangeSceneViewCommand extends puremvc.SimpleCommand {
                     this.webBridgeProxy.setElementDisplayById('maxSpinIcon', 'none');
                     this.sendNotification(StateWinEvent.ON_GAME2_TRANSITIONS, true); //通知轉場動畫
                     this.sendNotification(WinEvent.FORCE_WIN_DISPOSE);
-                    GlobalTimer.getInstance()
-                        .registerTimer('Game2_TransitionBG', 5.5, this.Game2TransitionsBG, this)
-                        .start();
+                    // 等待玩家按下 SPIN，由 TransitionViewMediator 觸發後續流程
                     return;
                 }
                 break;
