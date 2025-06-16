@@ -214,7 +214,12 @@ export class GAME_ReelView extends ReelView {
         if (symbolInfo.sid !== SymbolId.MY) {
             return;
         }
-        this.setAnimSymbolPlay(symbolInfo, featureInfo, SymbolPerformType.SHOW_MYSTERY);
+        this.setAnimSymbolPlay(
+            symbolInfo,
+            featureInfo,
+            SymbolPerformType.SHOW_MYSTERY,
+            () => this.removeAnimSymbol(symbolInfo)
+        );
         this.setDefaultSymbolPlay(symbolInfo, SymbolPerformType.HIDE);
     }
 
@@ -290,7 +295,8 @@ export class GAME_ReelView extends ReelView {
     protected setAnimSymbolPlay(
         symbolInfo: SymbolInfo,
         featureInfo: SymbolPosData,
-        type: SymbolPerformType = SymbolPerformType.SHOW
+        type: SymbolPerformType = SymbolPerformType.SHOW,
+        finishedCallback?: () => void
     ) {
         const self = this;
         let poolKey: number = symbolInfo.y * self.reelsList.length + symbolInfo.x;
@@ -299,7 +305,7 @@ export class GAME_ReelView extends ReelView {
         anim.node.setWorldPosition(self.getSymbolPosition(symbolInfo.x, symbolInfo.y));
         anim.setInfo(symbolInfo.sid, featureInfo);
         anim.node.active = true;
-        anim.play(type);
+        anim.play(type, finishedCallback ?? null);
     }
 
     protected setDefaultSymbolPlay(symbolInfo: SymbolInfo, type: SymbolPerformType) {
