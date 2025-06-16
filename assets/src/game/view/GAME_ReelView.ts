@@ -161,6 +161,13 @@ export class GAME_ReelView extends ReelView {
         anim.setParent(self.animManager.node);
     }
 
+    public removeAnimSymbol(value: SymbolInfo) {
+        const poolKey: number = value.y * this.reelsList.length + value.x;
+        if (this.animManager.pool.has(poolKey)) {
+            this.animManager.putAnim(poolKey);
+        }
+    }
+
     public showAllWinSymbol(symbolInfo: SymbolInfo) {
         const self = this;
         self.setDefaultSymbolPlay(symbolInfo, SymbolPerformType.SHOW_ALL_WIN);
