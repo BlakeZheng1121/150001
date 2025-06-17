@@ -76,7 +76,7 @@ export class Game_2_ViewMediator extends BaseGameViewMediator<Game_2_View> {
         this.webBridgeProxy.sendGameState('FreeGame');
         this.facade.sendNotification(
             StateMachineCommand.NAME,
-            new StateMachineObject(StateMachineProxy.GAME2_TRANSITIONS)
+            new StateMachineObject(StateMachineProxy.GAME2_IDLE)
         );
         AudioManager.Instance.play(BGMClipsEnum.BGM_FreeGame).loop(true).volume(0).fade(1, 1);
     }
