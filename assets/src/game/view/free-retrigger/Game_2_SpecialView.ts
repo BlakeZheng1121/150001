@@ -1,11 +1,8 @@
-import { _decorator, Prefab, instantiate, Vec3 } from 'cc';
-import { AudioManager } from '../../../audio/AudioManager';
-import { AudioClipsEnum } from '../../vo/enum/SoundMap';
+import { _decorator, Vec3 } from 'cc';
 import { FreeGameSpecialInfo } from '../../vo/FreeGameSpecialInfo';
 import { FreeC1SubOnPerform } from './free_c1sub_on_perform/FreeC1SubOnPerform';
 import BaseView from 'src/base/BaseView';
 import { FreeMysteryOnPerform } from './free_mystery_on_perform/FreeMysteryOnPerform';
-import { SymbolInfo } from 'src/sgv3/vo/info/SymbolInfo';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_2_SpecialView')

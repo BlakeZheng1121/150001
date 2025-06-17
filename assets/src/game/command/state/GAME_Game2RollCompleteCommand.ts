@@ -17,15 +17,6 @@ const { ccclass } = _decorator;
 export class GAME_Game2RollCompleteCommand extends WAY_Game2RollCompleteCommand {
     private freeGameSpecialInfo: FreeGameSpecialInfo;
 
-    readonly timeKey_sideBallShow = 'timeKey_sideBallShow';
-    readonly sideBallShowTimeOut = 0.5;
-
-    readonly timeKey_sideBallShowAfter = 'timeKey_sideBallShowAfter';
-    readonly sideBallAfterTimeOut = 0.3;
-
-    readonly timeKey_sideBallShowEnd = 'timeKey_sideBallShowEnd';
-    readonly sideBallShowEndTimeOut = 1;
-
     readonly timeKey_mystery = 'timeKey_mystery';
     readonly mysteryShowEndTimeOut = 1.5;
 
@@ -45,7 +36,6 @@ export class GAME_Game2RollCompleteCommand extends WAY_Game2RollCompleteCommand 
     }
 
     private nextState() {
-        GlobalTimer.getInstance().removeTimer(this.timeKey_sideBallShowEnd);
         if (this.freeGameSpecialInfo.retrigger.isRetrigger || this.freeGameSpecialInfo.isHitGrand) {
             this.changeState(StateMachineProxy.GAME2_HITSPECIAL, this.freeGameSpecialInfo);
         } else {
