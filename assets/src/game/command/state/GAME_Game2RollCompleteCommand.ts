@@ -1,7 +1,7 @@
 import { _decorator, Vec3, macro } from 'cc';
 import { ReelDataProxy } from '../../../sgv3/proxy/ReelDataProxy';
 import { StateMachineProxy } from '../../../sgv3/proxy/StateMachineProxy';
-import { ReelEvent } from '../../../sgv3/util/Constant';
+import { FreeGameEvent, ReelEvent } from '../../../sgv3/util/Constant';
 import { GlobalTimer } from '../../../sgv3/util/GlobalTimer';
 import { GameScene } from '../../../sgv3/vo/data/GameScene';
 import { FreeGameOneRoundResult } from '../../../sgv3/vo/result/FreeGameOneRoundResult';
@@ -26,6 +26,9 @@ export class GAME_Game2RollCompleteCommand extends WAY_Game2RollCompleteCommand 
     readonly timeKey_sideBallShowEnd = 'timeKey_sideBallShowEnd';
     readonly sideBallShowEndTimeOut = 1;
 
+    readonly timeKey_mystery = 'timeKey_mystery';
+    readonly mysteryShowEndTimeOut = 1.5;
+
     public execute(notification: puremvc.INotification): void {
         //super.execute(notification);
         this.notifyWebControl();
@@ -36,7 +39,9 @@ export class GAME_Game2RollCompleteCommand extends WAY_Game2RollCompleteCommand 
         let freeGameSpecialInfo: FreeGameSpecialInfo = this.getSpecialInfo();
         this.freeGameSpecialInfo = freeGameSpecialInfo;
 
-        this.nextState();
+        if (!this.playMystery()) {
+            this.nextState();
+        }
     }
 
     private nextState() {
@@ -46,6 +51,38 @@ export class GAME_Game2RollCompleteCommand extends WAY_Game2RollCompleteCommand 
         } else {
             this.changeState(StateMachineProxy.GAME2_BEFORESHOW);
         }
+    }
+
+    private playMystery(): boolean {
+        let posInfos: Array<Vec3> = new Array<Vec3>();
+        const screen = (this.gameDataProxy.curRoundResult as FreeGameOneRoundResult).screenSymbol;
+        if (screen) {
+            for (let x = 0; x < screen.length; x++) {
+                for (let y = 0; y < screen[x].length; y++) {
+                    if (screen[x][y] === SymbolId.MY) {
+                        posInfos.push(this.reelDataProxy.getFovLocalPos(x, y));
+                    }
+                }
+            }
+        }
+        if (posInfos.length > 0) {
+            this.sendNotification(FreeGameEvent.SHOW_MYSTERY, posInfos);
+
+            GlobalTimer.getInstance()
+                .registerTimer(
+                    this.timeKey_mystery,
+                    this.mysteryShowEndTimeOut,
+                    () => {
+                        GlobalTimer.getInstance().removeTimer(this.timeKey_mystery);
+                        this.nextState();
+                    },
+                    this
+                )
+                .start();
+
+            return true;
+        }
+        return false;
     }
 
     // 取得 特色 表演資訊
@@ -95,4 +132,14 @@ export class GAME_Game2RollCompleteCommand extends WAY_Game2RollCompleteCommand 
         return this._reelDataProxy;
     }
 
+    protected _reelView: GAME_ReelView;
+    protected get reelView(): GAME_ReelView {
+        if (!this._reelView) {
+            const mediator = this.facade.retrieveMediator(
+                ReelViewMediator.NAME
+            ) as ReelViewMediator;
+            this._reelView = mediator.getViewComponent() as GAME_ReelView;
+        }
+        return this._reelView;
+    }
 }

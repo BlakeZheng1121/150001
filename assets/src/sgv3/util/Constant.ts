@@ -254,4 +254,5 @@ export class FreeGameEvent {
     public static ON_EXPAND_WILD: string = 'onExpandWild';
     /** */
     public static ON_CALCULATE_MULTIPLE: string = 'onCalculateMultiple';
+    public static SHOW_MYSTERY: string = 'showMystery';
 }

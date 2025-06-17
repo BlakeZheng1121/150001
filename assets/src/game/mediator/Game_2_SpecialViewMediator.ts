@@ -1,10 +1,11 @@
-import { _decorator } from 'cc';
+import { _decorator, Vec3 } from 'cc';
 import BaseMediator from '../../base/BaseMediator';
 import { FreeGameEvent, GameStateProxyEvent, ViewMediatorEvent } from '../../sgv3/util/Constant';
 import { GameScene } from '../../sgv3/vo/data/GameScene';
 import { GAME_GameDataProxy } from '../proxy/GAME_GameDataProxy';
 import { Game_2_SpecialView } from '../view/free-retrigger/Game_2_SpecialView';
 import { FreeGameSpecialInfo } from '../vo/FreeGameSpecialInfo';
+import { SymbolInfo } from 'src/sgv3/vo/info/SymbolInfo';
 const { ccclass } = _decorator;
 
 @ccclass('Game_2_SpecialViewMediator')
@@ -22,6 +23,7 @@ export class Game_2_SpecialViewMediator extends BaseMediator<Game_2_SpecialView>
 
     public listNotificationInterests(): Array<any> {
         return [
+            FreeGameEvent.SHOW_MYSTERY,
             FreeGameEvent.ON_SIDE_BALL_SHOW,
             FreeGameEvent.ON_SIDE_BALL_SCORE_SHOW,
             GameStateProxyEvent.ON_SCENE_BEFORE_CHANGE
@@ -32,6 +34,9 @@ export class Game_2_SpecialViewMediator extends BaseMediator<Game_2_SpecialView>
         let name = notification.getName();
         let self = this;
         switch (name) {
+            case FreeGameEvent.SHOW_MYSTERY:
+                self.onShowMystery(notification.getBody());
+                break;
             case FreeGameEvent.ON_SIDE_BALL_SHOW:
                 self.onSideBallShow(notification.getBody());
                 break;
@@ -43,6 +48,11 @@ export class Game_2_SpecialViewMediator extends BaseMediator<Game_2_SpecialView>
                 break;
         }
     }
+
+    private onShowMystery(posInfos: Array<Vec3>) {
+        this.view.showMystery(posInfos);
+    }
+
     private onSideBallShow(freeGameSpecialInfo: FreeGameSpecialInfo) {
         this.view.showSideBall(freeGameSpecialInfo, !this.gameDataProxy.isOmniChannel());
     }
