@@ -26,8 +26,6 @@ export class GAME_Game2RollCompleteCommand extends WAY_Game2RollCompleteCommand 
     readonly timeKey_sideBallShowEnd = 'timeKey_sideBallShowEnd';
     readonly sideBallShowEndTimeOut = 1;
 
-    readonly timeKey_mystery = 'timeKey_mystery';
-
     public execute(notification: puremvc.INotification): void {
         //super.execute(notification);
         this.notifyWebControl();
@@ -38,9 +36,7 @@ export class GAME_Game2RollCompleteCommand extends WAY_Game2RollCompleteCommand 
         let freeGameSpecialInfo: FreeGameSpecialInfo = this.getSpecialInfo();
         this.freeGameSpecialInfo = freeGameSpecialInfo;
 
-        if (!this.playMystery()) {
-            this.nextState();
-        }
+        this.nextState();
     }
 
     private nextState() {
@@ -49,35 +45,6 @@ export class GAME_Game2RollCompleteCommand extends WAY_Game2RollCompleteCommand 
             this.changeState(StateMachineProxy.GAME2_HITSPECIAL, this.freeGameSpecialInfo);
         } else {
             this.changeState(StateMachineProxy.GAME2_BEFORESHOW);
-        }
-    }
-
-    private playMystery(): boolean {
-        let infos: SymbolInfo[] = [];
-        const screen = (this.gameDataProxy.curRoundResult as FreeGameOneRoundResult).screenSymbol;
-        if (screen) {
-            for (let x = 0; x < screen.length; x++) {
-                for (let y = 0; y < screen[x].length; y++) {
-                    if (screen[x][y] === SymbolId.MY) {
-                        infos.push({ x: x, y: y, sid: SymbolId.MY });
-                    }
-                }
-            }
-        }
-        if (infos.length > 0) {
-            this.sendNotification(ReelEvent.SHOW_MYSTERY, infos);
-            GlobalTimer.getInstance()
-                .registerTimer(this.timeKey_mystery, 0.1, this.checkMysteryFinish, this, macro.REPEAT_FOREVER)
-                .start();
-            return true;
-        }
-        return false;
-    }
-
-    private checkMysteryFinish() {
-        if (!this.reelView.isSymbolPlaying()) {
-            GlobalTimer.getInstance().removeTimer(this.timeKey_mystery);
-            this.nextState();
         }
     }
 
@@ -128,14 +95,4 @@ export class GAME_Game2RollCompleteCommand extends WAY_Game2RollCompleteCommand 
         return this._reelDataProxy;
     }
 
-    protected _reelView: GAME_ReelView;
-    protected get reelView(): GAME_ReelView {
-        if (!this._reelView) {
-            const mediator = this.facade.retrieveMediator(
-                ReelViewMediator.NAME
-            ) as ReelViewMediator;
-            this._reelView = mediator.getViewComponent() as GAME_ReelView;
-        }
-        return this._reelView;
-    }
 }

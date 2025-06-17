@@ -81,7 +81,6 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
                     ReelEvent.HIDE_WILD_SYMBOL,
                     ReelEvent.SHOW_LAST_SYMBOL_OF_REELS,
                     ReelEvent.SHOW_STACK_WILD,
-                    ReelEvent.SHOW_MYSTERY,
                     ReelEvent.ON_HIDE_C1_AND_C2,
                     UIEvent.UPDATE_TOTAL_BET,
                     AfterReconnectionCommand.NAME
@@ -148,9 +147,6 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
                 break;
             case ReelEvent.SHOW_STACK_WILD:
                 this.showStackWild(notification.getBody());
-                break;
-            case ReelEvent.SHOW_MYSTERY:
-                this.showMystery(notification.getBody());
                 break;
             case ReelEvent.ON_REELS_RESTORE:
                 this.setSymbolPosData();
@@ -429,14 +425,6 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
         for (let i = 0; i < symbolInfos.length; i++) {
             const info = symbolInfos[i];
             this.reelView.showStackWildSymbol(info, this.reelDataProxy.symbolFeature[info.x][info.y]);
-        }
-    }
-
-    protected showMystery(symbolInfos: Array<SymbolInfo>) {
-        this.reelView.createAnimSymbols(symbolInfos);
-        for (let i = 0; i < symbolInfos.length; i++) {
-            const info = symbolInfos[i];
-            this.reelView.showMysterySymbol(info, this.reelDataProxy.symbolFeature[info.x][info.y]);
         }
     }
 

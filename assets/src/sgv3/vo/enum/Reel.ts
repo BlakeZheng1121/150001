@@ -32,7 +32,6 @@ export enum SymbolPerformType {
     SHOW_TARGERT_CREDIT_COLLECT = 13, //升龍賞 C2 球 收集 表演
     SHOW_TARGERT_CREDIT_RESULT = 14, //升龍賞 C2 球 最終結果 表演
     SHOW_STACK_WILD = 15, // 堆疊 Wild 表演
-    SHOW_MYSTERY = 16 // Mystery 表演
 }
 
 export enum SymbolId {

@@ -203,14 +203,6 @@ export class GAME_ReelView extends ReelView {
         this.setDefaultSymbolPlay(symbolInfo, SymbolPerformType.HIDE);
     }
 
-    public showMysterySymbol(symbolInfo: SymbolInfo, featureInfo: SymbolPosData) {
-        if (symbolInfo.sid !== SymbolId.MY) {
-            return;
-        }
-        this.setAnimSymbolPlay(symbolInfo, featureInfo, SymbolPerformType.SHOW_MYSTERY);
-        this.setDefaultSymbolPlay(symbolInfo, SymbolPerformType.HIDE);
-    }
-
     public skipReelWin() {
         if (this.winScoreText != null) {
             this.winScoreText.node.active = false;
