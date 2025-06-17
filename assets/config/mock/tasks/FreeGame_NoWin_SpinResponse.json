@@ -3,7 +3,7 @@
   "data": {
     "balance": 3980550791.73,
     "spinResult": {
-      "playerTotalWin": 0,
+      "playerTotalWin": 888800,
       "baseGameResult": {
         "usedTableIndex": 0,
         "screenSymbol": [
@@ -275,7 +275,7 @@
         "isHitFeatureGame": false
       },
       "freeGameResult": {
-        "freeGameTotalWin": 15400,
+        "freeGameTotalWin": 0,
         "totalRound": 7,
         "freeGameOneRoundResult": [
           {
