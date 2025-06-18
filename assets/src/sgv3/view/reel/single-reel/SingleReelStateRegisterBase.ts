@@ -1,9 +1,10 @@
 import { tween, Tween, Vec3, _decorator, instantiate, Color } from 'cc';
 import { UIViewStateBase, UIViewStateRegister } from '../../../../core/uiview/UIViewStateRegister';
 import { Layer } from '../../../vo/enum/Layer';
-import { ReelType, SymbolPerformType } from '../../../vo/enum/Reel';
+import { ReelType, SymbolId, SymbolPerformType } from '../../../vo/enum/Reel';
 import { UISymbol } from '../symbol/UISymbol';
 import { SingleReelContentBase } from './SingleReelContentBase';
+import { Logger } from 'src/core/utils/Logger';
 const { ccclass } = _decorator;
 
 @ccclass('SingleReelStateRegisterBase')
@@ -26,6 +27,7 @@ export class SingleReelStateRegisterBase extends UIViewStateRegister {
         this.registerState(new SingleReelShowState(this.singleReelContent));
         this.registerState(new SingleReelSlowStopState(this.singleReelContent));
         this.registerState(new SingleReelStopState(this.singleReelContent));
+        this.registerState(new SingleReelUpdateMysteryState(this.singleReelContent));
     }
 }
 
@@ -508,6 +510,34 @@ export class SingleReelStopState extends UIViewStateBase {
 
     protected onRollCycled() {
         this.singleReelContent!.first.play(SymbolPerformType.ROLL_CYCLED);
+    }
+    ////
+}
+
+export class SingleReelUpdateMysteryState extends UIViewStateBase {
+    //// Internal Member
+    private singleReelContent: SingleReelContentBase | null = null;
+    ////
+
+    //// API
+    public effectId: number = ReelType.UPDATE_MYSTERY;
+    ////
+
+    //// Hook
+    constructor(content: SingleReelContentBase) {
+        super();
+        this.singleReelContent = content;
+    }
+    ////
+
+    ////Internal Method
+    protected onPlay() {
+        
+        for (let i = 0; i < this.singleReelContent.symbols.length; i++) {
+
+            this.singleReelContent.symbols[i].play(SymbolPerformType.SHOW);
+        }
+        this.onEffectFinished();
     }
     ////
 }

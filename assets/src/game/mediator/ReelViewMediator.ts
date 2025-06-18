@@ -83,7 +83,8 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
                     ReelEvent.SHOW_STACK_WILD,
                     ReelEvent.ON_HIDE_C1_AND_C2,
                     UIEvent.UPDATE_TOTAL_BET,
-                    AfterReconnectionCommand.NAME
+                    AfterReconnectionCommand.NAME,
+                    FreeGameEvent.SHOW_MYSTERY
                 ].concat(super.baseListNotificationInterests())
             )
         );
@@ -167,6 +168,9 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
             case UIEvent.UPDATE_TOTAL_BET:
             case AfterReconnectionCommand.NAME:
                 this.changeWheelData();
+                break;
+            case FreeGameEvent.SHOW_MYSTERY:
+                this.updateMystery();
                 break;
         }
     }
@@ -671,5 +675,10 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
             );
             return isFiveOfKind;
         }
+    }
+
+    private updateMystery(){
+        let freeGame = this.gameDataProxy.curRoundResult as FreeGameOneRoundResult;
+        this.reelView.reelUpdateMystery(freeGame.extendInfoForFreeGameResult.mysterySymbol);
     }
 }

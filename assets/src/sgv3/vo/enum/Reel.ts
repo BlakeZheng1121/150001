@@ -8,7 +8,8 @@ export enum ReelType {
     DAMP = 6,
     SHOW = 7,
     HIDE = 8,
-    BLACK_SHOW = 9 // ByGame
+    BLACK_SHOW = 9, // ByGame
+    UPDATE_MYSTERY = 10 // ByGame
 }
 
 export enum MotionType {

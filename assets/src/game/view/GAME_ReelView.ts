@@ -5,7 +5,7 @@ import { ReelsEffectAnimManager } from '../../sgv3/view/reel/reel-effect/ReelsEf
 import { ReelView } from '../../sgv3/view/reel/ReelView';
 import { SingleReelContent } from '../../sgv3/view/reel/single-reel/SingleReelContent';
 import { UISymbol } from '../../sgv3/view/reel/symbol/UISymbol';
-import { SymbolId, SymbolPerformType } from '../../sgv3/vo/enum/Reel';
+import { ReelType, SymbolId, SymbolPerformType } from '../../sgv3/vo/enum/Reel';
 import { SymbolInfo } from '../../sgv3/vo/info/SymbolInfo';
 import { GAME_GameScene } from '../vo/data/GAME_GameScene';
 import { Game_2_SymbolContent } from './symbol/Game_2_SymbolContent';
@@ -126,6 +126,21 @@ export class GAME_ReelView extends ReelView {
                 let content = this.reelsList[i].singleReelContent!.symbols[j].symbolContent as Game_2_SymbolContent;
                 content.freeC1.node.active = false;
             }
+        }
+    }
+
+    
+    public reelUpdateMystery(mySymbolId: SymbolId){
+        for (let i = 0; i < this.reelsList.length; i++) {
+            let singleReelContent = this.reelsList[i].singleReelContent;
+
+            for (let j = 0; j < singleReelContent.symbols.length; j++) {
+                let symbolContent = singleReelContent.symbols[j].symbolContent;
+                if (symbolContent!.symbolData.id == SymbolId.MY) {
+                    symbolContent!.symbolData = singleReelContent.getSymbolDataBySymbolId(mySymbolId);
+                }
+            }
+            this.reelsList[i].play(ReelType.UPDATE_MYSTERY);
         }
     }
     ////

@@ -205,6 +205,9 @@ export class SingleReelContentBase extends Component {
             this.stripIndexer.strip[this.stripIndexer.getRng(symbolIndex, this.symbols.length)]
         );
     }
+    public getSymbolDataBySymbolId(symbolId: number): SymbolData {
+        return this.symbolDataPlist!.getDataById(symbolId);
+    }
     /**由 FOV Index 取得 對應當前SymbolData */
     public getTargetSymbolData(fovIndex: number): SymbolData {
         return this.symbolDataPlist!.getDataById(
