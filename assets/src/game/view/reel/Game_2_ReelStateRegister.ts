@@ -1,16 +1,17 @@
 import { _decorator } from 'cc';
-import { UIViewStateBase } from '../../../core/uiview/UIViewStateRegister';
 import { SingleReelContent } from '../../../sgv3/view/reel/single-reel/SingleReelContent';
 import {
     SingleReelDampState,
     SingleReelEmergencyStopState,
     SingleReelRollAfterState,
     SingleReelRollStartState,
+    SingleReelShowState,
     SingleReelSlowStopState,
     SingleReelStateRegisterBase,
     SingleReelStopState
 } from '../../../sgv3/view/reel/single-reel/SingleReelStateRegisterBase';
-import { ReelType, SymbolPerformType } from '../../../sgv3/vo/enum/Reel';
+import { SymbolContent } from '../../../sgv3/view/reel/symbol/SymbolContent';
+import { ReelType, SymbolId, SymbolPerformType } from '../../../sgv3/vo/enum/Reel';
 import { Game_2_SymbolContent } from '../symbol/Game_2_SymbolContent';
 const { ccclass } = _decorator;
 
@@ -27,49 +28,13 @@ export class Game_2_ReelStateRegister extends SingleReelStateRegisterBase {
 
     onRegister() {
         super.onRegister();
-        this.registerState(new Game_2_DampState(this.content));
         this.registerState(new Game_2_EmergencyStopState(this.content));
+        this.registerState(new Game_2_ReelShowState(this.content));
         this.registerState(new Game_2_RollAfterState(this.content));
         this.registerState(new Game_2_RollStartState(this.content));
         this.registerState(new Game_2_SlowStopState(this.content));
         this.registerState(new Game_2_StopState(this.content));
-        this.registerState(new Game_2_BlackShowState(this.content));
-    }
-}
-
-// ByGame 針對respin 壓暗
-export class Game_2_BlackShowState extends UIViewStateBase {
-    //// Internal Member
-    private content: SingleReelContent | null = null;
-    ////
-
-    //// API
-    public effectId: number = ReelType.BLACK_SHOW;
-    ////
-
-    //// Hook
-    constructor(content: SingleReelContent) {
-        super();
-        this.content = content;
-    }
-    ////
-
-    ////Internal Method
-    protected onPlay() {
-        for (let i = this.content.fovStartIndex; i <= this.content.fovEndIndex; i++) {
-            if (
-                this.content.isBlackSymbol &&
-                !this.content.isRespinBlackId(this.content.symbols[i].symbolContent.symbolData.id)
-            ) {
-                this.content.symbols[i].setOverlay(this.content.overlaySymbolContainer);
-            } else {
-                this.content.symbols[i].restoreParent();
-            }
-        }
-
-        this.content.isBlackSymbol = false;
-        this.content.respinSymbolId = [];
-        this.onEffectFinished();
+        this.registerState(new Game_2_DampState(this.content));
     }
 }
 
@@ -85,27 +50,42 @@ export class Game_2_DampState extends SingleReelDampState {
     }
 
     onPlay() {
-        if (this.content.isTriggerFeatureReSpin) {
-            this.onEffectFinished();
-            return;
-        } else {
-            super.onPlay();
-        }
-
-        for (let i = 0; i < this.content!.symbols!.length; i++) {
-            let symbolContent = this.content!.symbols[i].symbolContent as Game_2_SymbolContent;
-            if (
-                (symbolContent.freeC1.node.active || !this.content.isRespinBlackId(symbolContent.symbolData.id)) &&
-                symbolContent.fovIndex >= 0
-            ) {
-                this.content!.symbols[i].play(SymbolPerformType.DAMPING);
-                this.content!.symbols[i].setOverlay(this.content.overlaySymbolContainer);
-            } else {
-                this.content.symbols[i].restoreParent();
-                symbolContent.freeC1.node.active = false;
+        super.onPlay();
+        for (let i = this.content.fovStartIndex; i <= this.content.fovEndIndex; i++) {
+            if (this.content.symbols[i].symbolContent.symbolData.id == SymbolId.C1) {
+                this.content.symbols[i].play(SymbolPerformType.DAMPING);
             }
         }
     }
+    ////
+}
+
+export class Game_2_ReelShowState extends SingleReelShowState {
+    //// Internal Member
+    private content: SingleReelContent | null = null;
+    ////
+
+    //// Hook
+    constructor(content: SingleReelContent) {
+        super(content);
+        this.content = content;
+    }
+
+    onPlay() {
+        for (let i = 0; i < this.content.fovFeature.length; i++) {
+            let symbolIndex = this.content.getSymbolIndex(i);
+            this.content.symbols[symbolIndex].symbolContent.fovIndex = i;
+            let content = this.content.symbols[symbolIndex].symbolContent as Game_2_SymbolContent;
+            content.credit = this.content.fovFeature[i].creditCent;
+            content.creditDisplay = this.content.fovFeature[i].creditDisplay;
+            content.isSpecialFont = this.content.fovFeature[i].isSpecial;
+            this.content.symbols[symbolIndex].play(SymbolPerformType.SHOW);
+        }
+        super.onPlay();
+    }
+    ////
+
+    ////Internal Method
     ////
 }
 
@@ -119,23 +99,17 @@ export class Game_2_EmergencyStopState extends SingleReelEmergencyStopState {
         super(content);
         this.content = content;
     }
-
-    onStop() {
-        super.onStop();
-    }
     ////
 
     ////Internal Method
     protected onRollCycled() {
-        let symbolContent = this.content.first.symbolContent as Game_2_SymbolContent;
-        let credit = this.content.getFreeCredit(symbolContent.fovIndex);
-        symbolContent.freeCredit = credit;
-        super.onRollCycled();
-        if (!this.content.isRespinBlackId(symbolContent.symbolData.id)) {
-            this.content.first.setOverlay(this.content.overlaySymbolContainer);
-        } else {
-            this.content.first.restoreParent();
+        if (this.content.first.symbolContent.symbolData.id == SymbolId.C1) {
+            let symbolContent = this.content.first.symbolContent as SymbolContent;
+            symbolContent.credit = this.content.getCredit(symbolContent.fovIndex);
+            symbolContent.creditDisplay = this.content.getCreditDisplay(symbolContent.fovIndex, symbolContent.credit);
+            symbolContent.isSpecialFont = this.content.isSpecialBall(symbolContent.credit);
         }
+        super.onRollCycled();
     }
     ////
 }
@@ -154,9 +128,12 @@ export class Game_2_RollAfterState extends SingleReelRollAfterState {
 
     ////Internal Method
     protected onRollCycled() {
-        let symbolContent = this.content.first.symbolContent as Game_2_SymbolContent;
-        let credit = this.content.getFreeCredit(symbolContent.fovIndex);
-        symbolContent.freeCredit = credit;
+        if (this.content.first.symbolContent.symbolData.id == SymbolId.C1) {
+            let symbolContent = this.content.first.symbolContent as SymbolContent;
+            symbolContent.credit = this.content.getCredit(symbolContent.fovIndex);
+            symbolContent.creditDisplay = this.content.getCreditDisplay(symbolContent.fovIndex, symbolContent.credit);
+            symbolContent.isSpecialFont = this.content.isSpecialBall(symbolContent.credit);
+        }
         super.onRollCycled();
     }
     ////
@@ -172,13 +149,27 @@ export class Game_2_RollStartState extends SingleReelRollStartState {
         super(content);
         this.content = content;
     }
+
+    onPlay() {
+        let firstContent = this.content.first.symbolContent as Game_2_SymbolContent;
+        if (firstContent.symbolData.id == SymbolId.C1 && firstContent.credit == 0) {
+            firstContent.credit = this.content.getCredit(-1);
+            firstContent.creditDisplay = this.content.getCreditDisplay(-1, firstContent.credit);
+            firstContent.isSpecialFont = this.content.isSpecialBall(firstContent.credit);
+        }
+        this.content.first.play(SymbolPerformType.SHOW);
+        super.onPlay();
+    }
     ////
 
     ////Internal Method
     protected onRollCycled() {
-        let symbolContent = this.content.first.symbolContent as Game_2_SymbolContent;
-        let credit = this.content.getFreeCredit(symbolContent.fovIndex);
-        symbolContent.freeCredit = credit;
+        if (this.content.first.symbolContent.symbolData.id == SymbolId.C1) {
+            let symbolContent = this.content.first.symbolContent as SymbolContent;
+            symbolContent.credit = this.content.getCredit(symbolContent.fovIndex);
+            symbolContent.creditDisplay = this.content.getCreditDisplay(symbolContent.fovIndex, symbolContent.credit);
+            symbolContent.isSpecialFont = this.content.isSpecialBall(symbolContent.credit);
+        }
         super.onRollCycled();
     }
     ////
@@ -194,25 +185,19 @@ export class Game_2_SlowStopState extends SingleReelSlowStopState {
         super(content);
         this.content = content;
     }
-
-    onStop() {
-        super.onStop();
-        this.content.isBlackSymbol = false;
-        this.content.respinSymbolId = [];
-    }
     ////
 
     //// API
+    public effectId: number = ReelType.SLOW_STOP;
+    ////
     protected onRollCycled() {
-        let symbolContent = this.content.first.symbolContent as Game_2_SymbolContent;
-        let credit = this.content.getFreeCredit(symbolContent.fovIndex);
-        symbolContent.freeCredit = credit;
-        super.onRollCycled();
-        if (!this.content.isRespinBlackId(symbolContent.symbolData.id)) {
-            this.content.first.setOverlay(this.content.overlaySymbolContainer);
-        } else {
-            this.content.first.restoreParent();
+        if (this.content.first.symbolContent.symbolData.id == SymbolId.C1) {
+            let symbolContent = this.content.first.symbolContent as SymbolContent;
+            symbolContent.credit = this.content.getCredit(symbolContent.fovIndex);
+            symbolContent.creditDisplay = this.content.getCreditDisplay(symbolContent.fovIndex, symbolContent.credit);
+            symbolContent.isSpecialFont = this.content.isSpecialBall(symbolContent.credit);
         }
+        super.onRollCycled();
     }
     ////
 }
@@ -231,9 +216,12 @@ export class Game_2_StopState extends SingleReelStopState {
 
     ////Internal Method
     protected onRollCycled() {
-        let symbolContent = this.content.first.symbolContent as Game_2_SymbolContent;
-        let credit = this.content.getFreeCredit(symbolContent.fovIndex);
-        symbolContent.freeCredit = credit;
+        if (this.content.first.symbolContent.symbolData.id == SymbolId.C1) {
+            let symbolContent = this.content.first.symbolContent as SymbolContent;
+            symbolContent.credit = this.content.getCredit(symbolContent.fovIndex);
+            symbolContent.creditDisplay = this.content.getCreditDisplay(symbolContent.fovIndex, symbolContent.credit);
+            symbolContent.isSpecialFont = this.content.isSpecialBall(symbolContent.credit);
+        }
         super.onRollCycled();
     }
     ////

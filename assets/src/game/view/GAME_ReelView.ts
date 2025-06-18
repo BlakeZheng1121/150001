@@ -120,16 +120,7 @@ export class GAME_ReelView extends ReelView {
     ////
 
     ////FreeGsme API
-    public freeGameHideSideBall() {
-        for (let i = 0; i < this.reelsList.length; i++) {
-            for (let j = 0; j < this.reelsList[i].singleReelContent!.symbols!.length; j++) {
-                let content = this.reelsList[i].singleReelContent!.symbols[j].symbolContent as Game_2_SymbolContent;
-                content.freeC1.node.active = false;
-            }
-        }
-    }
 
-    
     public reelUpdateMystery(mySymbolId: SymbolId){
         for (let i = 0; i < this.reelsList.length; i++) {
             let singleReelContent = this.reelsList[i].singleReelContent;

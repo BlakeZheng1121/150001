@@ -139,9 +139,6 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
                 this.onReSpinNext(notification.getBody());
                 break;
             case FreeGameEvent.ON_SIDE_BALL_SHOW_AFTER:
-                if (this.gameDataProxy.curScene == GameScene.Game_2) {
-                    this.view.freeGameHideSideBall();
-                }
                 break;
             case ReelEvent.SHOW_LAST_SYMBOL_OF_REELS:
                 this.showLastSymbolOfReels(notification.getBody());

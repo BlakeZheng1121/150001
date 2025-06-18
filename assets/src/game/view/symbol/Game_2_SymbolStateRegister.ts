@@ -1,19 +1,17 @@
-import { Vec3, _decorator } from 'cc';
+import { _decorator } from 'cc';
 import { UIViewStateBase } from '../../../core/uiview/UIViewStateRegister';
-import { SymbolPart } from '../../../sgv3/view/reel/symbol/SymbolPart';
 import {
+    SymbolHideState,
     SymbolRollCycledState,
     SymbolShowState,
     SymbolStateRegisterBase
 } from '../../../sgv3/view/reel/symbol/SymbolStateRegisterBase';
-import { SymbolPartType, SymbolPerformType } from '../../../sgv3/vo/enum/Reel';
-import { AudioManager } from '../../../audio/AudioManager';
-import { AudioClipsEnum } from '../../vo/enum/SoundMap';
+import { SymbolId, SymbolPerformType } from '../../../sgv3/vo/enum/Reel';
 import { Game_2_SymbolContent } from './Game_2_SymbolContent';
 const { ccclass } = _decorator;
 
-@ccclass('Game_2_SymbolStateRegister')
-export class Game_2_SymbolStateRegister extends SymbolStateRegisterBase {
+@ccclass('Game2SymbolStateRegister')
+export class Game2SymbolStateRegister extends SymbolStateRegisterBase {
     private _content: Game_2_SymbolContent | null = null;
 
     private get content() {
@@ -25,62 +23,10 @@ export class Game_2_SymbolStateRegister extends SymbolStateRegisterBase {
 
     onRegister() {
         super.onRegister();
+        this.registerState(new Game_2_SymbolHideState(this.content));
         this.registerState(new Game_2_RollCycledState(this.content));
         this.registerState(new Game_2_SymbolShowState(this.content));
         this.registerState(new Game_2_SymbolDampingState(this.content));
-    }
-}
-
-export class Game_2_SymbolShowState extends SymbolShowState {
-    //// Internal Member
-    private content: Game_2_SymbolContent | null = null;
-    ////
-
-    //// Hook
-    constructor(content: Game_2_SymbolContent) {
-        super(content);
-        this.content = content;
-    }
-
-    onPlay() {
-        if (this.content.backgroundSprite != null) {
-            this.content.backgroundSprite.enabled = true;
-        }
-        this.content.mainSprite.enabled = true;
-
-        this.onEffectFinished();
-    }
-}
-
-export class Game_2_RollCycledState extends SymbolRollCycledState {
-    //// Internal Member
-    private content: Game_2_SymbolContent | null = null;
-    ////
-
-    //// Hook
-    constructor(content: Game_2_SymbolContent) {
-        super();
-        this.content = content;
-    }
-
-    onPlay() {
-        if (this.content.freeCredit > 0) {
-            this.content.freeCredit = 0;
-            let sub: SymbolPart = this.content.parts.get(SymbolPartType.SUB);
-            sub.offsetPos = new Vec3(
-                this.content.C1TrailOffsetPos.x * this.content.node.worldScale.x,
-                this.content.C1TrailOffsetPos.y * this.content.node.worldScale.y,
-                1
-            );
-            sub.setPartPos(this.content.node.worldPosition);
-            this.content.freeC1.node.active = true;
-            this.content.freeC1.play('Rolling');
-            AudioManager.Instance.play(AudioClipsEnum.Free_C1FireThrough);
-        } else {
-            this.content.freeC1.node.active = false;
-        }
-
-        this.onEffectFinished();
     }
 }
 
@@ -96,18 +42,77 @@ export class Game_2_SymbolDampingState extends UIViewStateBase {
         super();
         this.content = content;
     }
+    ////
 
     onPlay() {
-        if (this.content.freeC1.node.active) {
-            let sub: SymbolPart = this.content.parts.get(SymbolPartType.SUB);
-            sub.offsetPos = new Vec3(
-                this.content.C1HitOffsetPos.x * this.content.node.worldScale.x,
-                this.content.C1HitOffsetPos.y * this.content.node.worldScale.y,
-                1
-            );
-            sub.setPartPos(this.content.node.worldPosition);
-            this.content.freeC1.play('Damp');
-        }
+        this.content.createParticlePrefab();
         this.onEffectFinished();
+    }
+    ////
+}
+
+export class Game_2_SymbolHideState extends SymbolHideState {
+    //// Internal Member
+    private content: Game_2_SymbolContent | null = null;
+    ////
+
+    //// Hook
+    constructor(content: Game_2_SymbolContent) {
+        super(content);
+        this.content = content;
+    }
+
+    onPlay() {
+        super.onPlay();
+        this.content.labelText.enabled = false;
+    }
+    ////
+}
+
+export class Game_2_RollCycledState extends SymbolRollCycledState {
+    //// Internal Member
+    private content: Game_2_SymbolContent | null = null;
+    ////
+
+    //// Hook
+    constructor(content: Game_2_SymbolContent) {
+        super();
+        this.content = content;
+    }
+
+    onPlay() {
+        this.content.labelText.enabled = this.content.symbolData.id == SymbolId.C1;
+
+        if (this.content.labelText.enabled) {
+            this.content.labelText.font = this.content.isSpecialFont ? this.content.specialFont : this.content.baseFont;
+            this.content.labelText.string = this.content.creditDisplay;
+        } else {
+            this.content.labelText.string = String();
+        }
+
+        this.onEffectFinished();
+    }
+}
+
+export class Game_2_SymbolShowState extends SymbolShowState {
+    //// Internal Member
+    private content: Game_2_SymbolContent | null = null;
+    ////
+
+    //// Hook
+    constructor(content: Game_2_SymbolContent) {
+        super(content);
+        this.content = content;
+    }
+
+    onPlay() {
+        super.onPlay();
+        this.content.labelText.enabled = this.content.symbolData.id == SymbolId.C1;
+
+        if (this.content.labelText.enabled) {
+            this.content.forceRecycleParticlePrefab();
+            this.content.labelText.font = this.content.isSpecialFont ? this.content.specialFont : this.content.baseFont;
+            this.content.labelText.string = this.content.creditDisplay;
+        }
     }
 }
