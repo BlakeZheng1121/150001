@@ -444,7 +444,18 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
         let self = this;
         self.winData = WinData.concat();
         self.curIndex = -1;
-        self.reelView.createAnimSymbols(WinData.animationInfos);
+        const freeResult = this.gameDataProxy.curRoundResult as FreeGameOneRoundResult;
+        const mysterySymbol = freeResult?.extendInfoForFreeGameResult?.mysterySymbol;
+        const animInfos: SymbolInfo[] = [];
+        WinData.animationInfos.forEach((info: SymbolInfo) => {
+            const animInfo = { ...info };
+            if (animInfo.sid === SymbolId.MY && mysterySymbol !== undefined) {
+                this.reelView.removeAnimSymbol(animInfo);
+                animInfo.sid = mysterySymbol;
+            }
+            animInfos.push(animInfo);
+        });
+        self.reelView.createAnimSymbols(animInfos);
         this.view.setReelWinMask(true);
         this.playAllLoopWin();
         this.reelView.checkNextLoopWin = () => self.checkNextWin();
@@ -492,6 +503,8 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
         if (self.winData.wayInfos[wayInfoIndex].symbolId < 0) {
             return;
         }
+        const freeResult = this.gameDataProxy.curRoundResult as FreeGameOneRoundResult;
+        const mysterySymbol = freeResult?.extendInfoForFreeGameResult?.mysterySymbol;
         let symbolWin = self.winData.wayInfos[wayInfoIndex].symbolWin;
         if (symbolWin > 0) {
             let scoreDisplay: string = self.gameDataProxy.isOmniChannel()
@@ -503,10 +516,14 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
         for (let i in self.winData.wayInfos[wayInfoIndex].symbols) {
             let symbol: SymbolInfo = self.winData.wayInfos[wayInfoIndex].symbols[i];
             if (symbol.sid >= 0) {
+                let playSymbol = symbol;
+                if (symbol.sid == SymbolId.MY && mysterySymbol !== undefined) {
+                    playSymbol = { ...symbol, sid: mysterySymbol };
+                }
                 if (symbol.sid == SymbolId.WILD && !self.isPlayedWildScoring) {
                     self.isPlayedWildScoring = true;
                 }
-                this.reelView.showLoopWinSymbol(symbol, self.reelDataProxy.symbolFeature[symbol.x][symbol.y]);
+                this.reelView.showLoopWinSymbol(playSymbol, self.reelDataProxy.symbolFeature[symbol.x][symbol.y]);
             } else {
                 this.reelView.setAnimSymbolHide(symbol);
             }
