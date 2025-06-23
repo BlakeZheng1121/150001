@@ -1209,7 +1209,7 @@
       "caseList",
       "length"
     ],
-    "value": 4
+    "value": 5
   },
   {
     "__type__": "cc.TargetInfo",
@@ -1240,7 +1240,7 @@
       "taskList",
       "length"
     ],
-    "value": 13
+    "value": 14
   },
   {
     "__type__": "CCPropertyOverrideInfo",
@@ -1406,7 +1406,7 @@
       "4"
     ],
     "value": {
-      "__uuid__": "d132a005-36ef-45af-99d6-fc701d2bc7d6",
+      "__uuid__": "0e3d93f7-9748-4571-9481-342ce87c5ce1",
       "__expectedType__": "cc.JsonAsset"
     }
   },
@@ -1602,7 +1602,7 @@
       "13"
     ],
     "value": {
-      "__uuid__": "8c5b1821-1806-40f6-ae89-8c727d60721d",
+      "__uuid__": "6688f800-e058-40d2-ad2e-3ebc6ed6ffac",
       "__expectedType__": "cc.JsonAsset"
     }
   },
