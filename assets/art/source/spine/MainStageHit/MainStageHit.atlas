@@ -1,0 +1,146 @@
+
+MainStageHit.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+FaCoin_01
+  rotate: true
+  xy: 2, 365
+  size: 180, 179
+  orig: 205, 205
+  offset: 13, 16
+  index: -1
+FaCoin_02
+  rotate: true
+  xy: 183, 365
+  size: 180, 178
+  orig: 205, 205
+  offset: 13, 16
+  index: -1
+FaCoin_03
+  rotate: true
+  xy: 178, 183
+  size: 180, 172
+  orig: 205, 205
+  offset: 13, 18
+  index: -1
+FaCoin_04
+  rotate: false
+  xy: 686, 395
+  size: 180, 159
+  orig: 205, 205
+  offset: 13, 23
+  index: -1
+FaCoin_05
+  rotate: true
+  xy: 2, 2
+  size: 179, 139
+  orig: 205, 205
+  offset: 13, 32
+  index: -1
+FaCoin_06
+  rotate: false
+  xy: 498, 76
+  size: 178, 114
+  orig: 205, 205
+  offset: 14, 44
+  index: -1
+FaCoin_07
+  rotate: false
+  xy: 714, 307
+  size: 178, 86
+  orig: 205, 205
+  offset: 14, 58
+  index: -1
+FaCoin_08
+  rotate: false
+  xy: 714, 252
+  size: 178, 53
+  orig: 205, 205
+  offset: 14, 75
+  index: -1
+FaCoin_09
+  rotate: true
+  xy: 265, 3
+  size: 178, 60
+  orig: 205, 205
+  offset: 14, 73
+  index: -1
+FaCoin_10
+  rotate: true
+  xy: 678, 12
+  size: 178, 92
+  orig: 205, 205
+  offset: 14, 57
+  index: -1
+FaCoin_11
+  rotate: true
+  xy: 143, 2
+  size: 179, 120
+  orig: 205, 205
+  offset: 13, 43
+  index: -1
+FaCoin_12
+  rotate: true
+  xy: 352, 13
+  size: 180, 144
+  orig: 205, 205
+  offset: 13, 31
+  index: -1
+FaCoin_13
+  rotate: true
+  xy: 686, 556
+  size: 180, 162
+  orig: 205, 205
+  offset: 13, 21
+  index: -1
+FaCoin_14
+  rotate: true
+  xy: 2, 183
+  size: 180, 174
+  orig: 205, 205
+  offset: 13, 14
+  index: -1
+FaCoin_15
+  rotate: false
+  xy: 504, 556
+  size: 180, 180
+  orig: 205, 205
+  offset: 13, 10
+  index: -1
+FaCoin_16
+  rotate: false
+  xy: 504, 374
+  size: 180, 180
+  orig: 205, 205
+  offset: 13, 10
+  index: -1
+FaCoin_17
+  rotate: false
+  xy: 363, 195
+  size: 180, 177
+  orig: 205, 205
+  offset: 13, 11
+  index: -1
+FaCoin_18
+  rotate: true
+  xy: 545, 192
+  size: 180, 167
+  orig: 205, 205
+  offset: 13, 15
+  index: -1
+FaCoin_19
+  rotate: true
+  xy: 850, 556
+  size: 180, 151
+  orig: 205, 205
+  offset: 13, 23
+  index: -1
+FireTrail_01
+  rotate: false
+  xy: 2, 547
+  size: 500, 189
+  orig: 500, 189
+  offset: 0, 0
+  index: -1
