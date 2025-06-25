@@ -182,7 +182,7 @@
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 2,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -623,8 +623,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 168,
-      "height": 168
+      "width": 172,
+      "height": 151
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
