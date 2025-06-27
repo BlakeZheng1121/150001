@@ -30,11 +30,11 @@ export class Game_4_View extends BaseView {
     }
 
     public init(accMultiple: number) {
-        this.posTweenView.init(accMultiple);
+        //this.posTweenView.init(accMultiple);
     }
 
     public togglePosTweenView(enabled: boolean) {
-        this.posTweenView.node.active = enabled;
+        //this.posTweenView.node.active = enabled;
     }
 
     public changeOrientation(orientation: string, scene: string) {

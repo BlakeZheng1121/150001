@@ -60,7 +60,6 @@ export class BallHitViewMediator extends BaseMediator<BallHitView> {
             ViewMediatorEvent.COLLECT_CREDIT_BALL_SKIP_CALLBACK,
             ViewMediatorEvent.INIT_EMBLEM_LEVEL,
             ViewMediatorEvent.UPDATE_EMBLEM_LEVEL,
-            DragonUpEvent.ON_ALL_CREDIT_COLLECT_START,
             DragonUpEvent.ON_C2_COUNT_UPDATE,
             SceneManager.EV_ORIENTATION_VERTICAL,
             SceneManager.EV_ORIENTATION_HORIZONTAL,
