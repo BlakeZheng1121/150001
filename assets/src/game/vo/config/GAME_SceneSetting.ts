@@ -147,7 +147,7 @@ export class GAME_SceneSetting extends SceneSetting {
         let result = new GameSceneData();
         result = {
             gameStateIds: [4],
-            reelSymbolFrameByIDs: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+            reelSymbolFrameByIDs: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
             animationIDs: [],
             reelSpinStopSequence: [
                 [0, 5, 10],
