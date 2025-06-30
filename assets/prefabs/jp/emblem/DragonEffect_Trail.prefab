@@ -8,13 +8,14 @@
       "__id__": 1
     },
     "optimizationPolicy": 0,
-    "asyncLoadAssets": false,
-    "persistent": false
+    "persistent": false,
+    "asyncLoadAssets": false
   },
   {
     "__type__": "cc.Node",
     "_name": "DragonEffect_Trail",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "_parent": null,
     "_children": [],
     "_active": true,
@@ -76,8 +77,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1233.21875,
-      "height": 2195.00341796875
+      "width": 948.3070068359375,
+      "height": 2000
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -113,7 +114,6 @@
       "a": 255
     },
     "loop": false,
-    "_premultipliedAlpha": true,
     "_timeScale": 1,
     "_useTint": false,
     "_preCacheMode": 0,
@@ -122,9 +122,10 @@
     "_debugBones": false,
     "_debugSlots": false,
     "_skeletonData": {
-      "__uuid__": "cc96aa85-a610-4ace-932f-c7fc327db7cf",
+      "__uuid__": "982c08e8-1e58-4b1d-b831-804bbfeed21b",
       "__expectedType__": "sp.SkeletonData"
     },
+    "_premultipliedAlpha": true,
     "defaultSkin": "default",
     "defaultAnimation": "",
     "_sockets": [],
@@ -299,8 +300,8 @@
     "spine": {
       "__id__": 4
     },
-    "_spineName": 13,
-    "spineNameString": "Trail0",
+    "_spineName": 1,
+    "spineNameString": "MainStage_Trail_0",
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -437,8 +438,8 @@
     "spine": {
       "__id__": 4
     },
-    "_spineName": 14,
-    "spineNameString": "Trail1",
+    "_spineName": 2,
+    "spineNameString": "MainStage_Trail_1",
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -575,8 +576,8 @@
     "spine": {
       "__id__": 4
     },
-    "_spineName": 15,
-    "spineNameString": "Trail2",
+    "_spineName": 3,
+    "spineNameString": "MainStage_Trail_2",
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -713,8 +714,8 @@
     "spine": {
       "__id__": 4
     },
-    "_spineName": 16,
-    "spineNameString": "Trail3",
+    "_spineName": 4,
+    "spineNameString": "MainStage_Trail_3",
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -851,8 +852,8 @@
     "spine": {
       "__id__": 4
     },
-    "_spineName": 17,
-    "spineNameString": "Trail4",
+    "_spineName": 5,
+    "spineNameString": "MainStage_Trail_4",
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -989,8 +990,8 @@
     "spine": {
       "__id__": 4
     },
-    "_spineName": 18,
-    "spineNameString": "Trail5",
+    "_spineName": 6,
+    "spineNameString": "MainStage_Trail_5",
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -1127,8 +1128,8 @@
     "spine": {
       "__id__": 4
     },
-    "_spineName": 19,
-    "spineNameString": "Trail6",
+    "_spineName": 7,
+    "spineNameString": "MainStage_Trail_6",
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -1265,8 +1266,8 @@
     "spine": {
       "__id__": 4
     },
-    "_spineName": 20,
-    "spineNameString": "Trail7",
+    "_spineName": 8,
+    "spineNameString": "MainStage_Trail_7",
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -1403,8 +1404,8 @@
     "spine": {
       "__id__": 4
     },
-    "_spineName": 21,
-    "spineNameString": "Trail8",
+    "_spineName": 9,
+    "spineNameString": "MainStage_Trail_8",
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -1541,8 +1542,8 @@
     "spine": {
       "__id__": 4
     },
-    "_spineName": 22,
-    "spineNameString": "Trail9",
+    "_spineName": 10,
+    "spineNameString": "MainStage_Trail_9",
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -1679,8 +1680,8 @@
     "spine": {
       "__id__": 4
     },
-    "_spineName": 23,
-    "spineNameString": "Trail10",
+    "_spineName": 11,
+    "spineNameString": "MainStage_Trail_10",
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -1817,8 +1818,8 @@
     "spine": {
       "__id__": 4
     },
-    "_spineName": 24,
-    "spineNameString": "Trail11",
+    "_spineName": 12,
+    "spineNameString": "MainStage_Trail_11",
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -1955,8 +1956,8 @@
     "spine": {
       "__id__": 4
     },
-    "_spineName": 25,
-    "spineNameString": "Trail12",
+    "_spineName": 13,
+    "spineNameString": "MainStage_Trail_12",
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -2093,8 +2094,8 @@
     "spine": {
       "__id__": 4
     },
-    "_spineName": 26,
-    "spineNameString": "Trail13",
+    "_spineName": 14,
+    "spineNameString": "MainStage_Trail_13",
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -2231,8 +2232,8 @@
     "spine": {
       "__id__": 4
     },
-    "_spineName": 27,
-    "spineNameString": "Trail14",
+    "_spineName": 15,
+    "spineNameString": "MainStage_Trail_14",
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -2369,8 +2370,8 @@
     "spine": {
       "__id__": 4
     },
-    "_spineName": 1,
-    "spineNameString": "MiniEntry0",
+    "_spineName": 0,
+    "spineNameString": "",
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -2507,8 +2508,8 @@
     "spine": {
       "__id__": 4
     },
-    "_spineName": 2,
-    "spineNameString": "MiniEntry1",
+    "_spineName": 0,
+    "spineNameString": "",
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -2645,8 +2646,8 @@
     "spine": {
       "__id__": 4
     },
-    "_spineName": 3,
-    "spineNameString": "MiniEntry2",
+    "_spineName": 0,
+    "spineNameString": "",
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -2783,8 +2784,8 @@
     "spine": {
       "__id__": 4
     },
-    "_spineName": 4,
-    "spineNameString": "MiniEntry3",
+    "_spineName": 0,
+    "spineNameString": "",
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -2921,8 +2922,8 @@
     "spine": {
       "__id__": 4
     },
-    "_spineName": 5,
-    "spineNameString": "MiniEntry4",
+    "_spineName": 0,
+    "spineNameString": "",
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -3059,8 +3060,8 @@
     "spine": {
       "__id__": 4
     },
-    "_spineName": 6,
-    "spineNameString": "MiniEntry5",
+    "_spineName": 0,
+    "spineNameString": "",
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -3197,8 +3198,8 @@
     "spine": {
       "__id__": 4
     },
-    "_spineName": 7,
-    "spineNameString": "MiniEntry6",
+    "_spineName": 0,
+    "spineNameString": "",
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -3335,8 +3336,8 @@
     "spine": {
       "__id__": 4
     },
-    "_spineName": 8,
-    "spineNameString": "MiniEntry7",
+    "_spineName": 0,
+    "spineNameString": "",
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -3473,8 +3474,8 @@
     "spine": {
       "__id__": 4
     },
-    "_spineName": 9,
-    "spineNameString": "MiniEntry8",
+    "_spineName": 0,
+    "spineNameString": "",
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -3611,8 +3612,8 @@
     "spine": {
       "__id__": 4
     },
-    "_spineName": 10,
-    "spineNameString": "MiniEntry9",
+    "_spineName": 0,
+    "spineNameString": "",
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -3749,8 +3750,8 @@
     "spine": {
       "__id__": 4
     },
-    "_spineName": 11,
-    "spineNameString": "MiniEntry10",
+    "_spineName": 0,
+    "spineNameString": "",
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -3887,8 +3888,8 @@
     "spine": {
       "__id__": 4
     },
-    "_spineName": 12,
-    "spineNameString": "MiniEntry11",
+    "_spineName": 0,
+    "spineNameString": "",
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
