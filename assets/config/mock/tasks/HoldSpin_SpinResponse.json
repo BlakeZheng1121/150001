@@ -8,9 +8,9 @@
         "usedTableIndex": 0,
         "screenSymbol": [
           [
-            2,
-            14,
-            6
+            1,
+            1,
+            1
           ],
           [
             1,
@@ -38,35 +38,35 @@
           "playerWin": 0,
           "waysResult": [
             {
-              "symbolID": 2,
+              "symbolID": 1,
               "hitDirection": "LeftToRight",
               "hitNumber": 4,
               "count": 1,
               "hitOdds": 8,
-              "symbolWin": 800,
+              "symbolWin": 0,
               "screenHitData": [
                 [
                   true,
-                  false,
-                  false
-                ],
-                [
-                  false,
-                  false,
-                  false
+                  true,
+                  true
                 ],
                 [
                   true,
+                  true,
+                  true
+                ],
+                [
+                  false,
                   false,
                   false
                 ],
                 [
-                  true,
+                  false,
                   false,
                   false
                 ],
                 [
-                  true,
+                  false,
                   false,
                   false
                 ]
@@ -210,7 +210,7 @@
           ],
           "rngInfo": [
             [
-              26,
+              10,
               26,
               30,
               33,
@@ -225,9 +225,9 @@
           "ballTotalCredit": 4800,
           "ballScreenLabel": [
             [
-              0,
-              0,
-              0
+              800,
+              800,
+              800
             ],
             [
               800,
@@ -261,7 +261,7 @@
             "usedTableIndex": 0,
             "screenRngInfo": [
               [
-                26,
+                10,
                 26,
                 30,
                 33,
@@ -275,7 +275,7 @@
         "isHitFeatureGame": false
       },
       "topUpGameResult": {
-        "topUpGameTotalWin": 75000,
+        "topUpGameTotalWin": 888800,
         "totalRound": 3,
         "topUpGameOneRoundResult": [
           {
