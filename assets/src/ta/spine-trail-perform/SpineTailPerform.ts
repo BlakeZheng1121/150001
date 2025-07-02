@@ -11,16 +11,11 @@ export class SpineTailPerform extends Component {
     @property({ type: Prefab, visible: true })
     public trailPrefab: Prefab | null = null;
     @property({ type: Prefab, visible: true })
-    public trailHitPrefab: Prefab | null = null;
-
-    public spineDragonTrailHit: TimelineTool[] = [];
 
     public spineDragonTrail: TimelineTool[] = [];
     public trailName: string[] = [];
 
     private listIndex: number = 0;
-
-    private HitBackID: number = 0;
 
     private TRAIL_STRING: String = String('Trail'); // trail of DragonBall hit
 
@@ -37,19 +32,11 @@ export class SpineTailPerform extends Component {
 
         this.spineDragonTrail.push(trail);
         this.trailName.push(trailName);
-
-        if (this.spineDragonTrailHit.length < 2) {
-            let trailHit: TimelineTool = PoolManager.instance
-                .getNode(this.trailHitPrefab, this.effectTarget)
-                .getComponent(TimelineTool);
-
-            this.spineDragonTrailHit.push(trailHit);
-        }
     }
 
     public SpineTrailEffect() {
         let trailName = this.trailName[this.trailName.length - 1];
-        this.spineDragonTrail[this.spineDragonTrail.length - 1].play(trailName, () => this.spineDragonTrailHitPerform());
+        this.spineDragonTrail[this.spineDragonTrail.length - 1].play(trailName);
 
         this.scheduleOnce(() => {
             this.trailName.shift();
@@ -82,13 +69,5 @@ export class SpineTailPerform extends Component {
             let trail = this.spineDragonTrail.shift();
             PoolManager.instance.putNode(trail.node);
         }, 3);
-    }
-
-    private spineDragonTrailHitPerform() {
-        this.spineDragonTrailHit[this.HitBackID]?.play('Hit');
-        this.HitBackID++;
-        if (this.HitBackID > 1) {
-            this.HitBackID = 0;
-        }
     }
 }
