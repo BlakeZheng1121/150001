@@ -45,8 +45,8 @@ export class JackPotPerformControl extends Component {
             .start();
     }
 
-    public FreeTrailPerform(spineDragonTrailAnimatID: number) {
-        this.DragonSpineTrailPerform?.UpdateAnimationObjectID(spineDragonTrailAnimatID);
+    public TrailPerform(spineDragonTrailAnimatID: number, playType: number) {
+        this.DragonSpineTrailPerform?.UpdateAnimationObjectID(spineDragonTrailAnimatID, playType);
         this.DragonSpineTrailPerform?.SpineFreeTrailEffect();
     }
 

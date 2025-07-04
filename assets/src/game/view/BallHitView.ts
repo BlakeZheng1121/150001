@@ -142,7 +142,7 @@ export class BallHitView extends BaseView {
                 trailDelayTime,
                 () => {
                     GlobalTimer.getInstance().removeTimer('performTrail' + index);
-                    this.jackPotPerformControl.FreeTrailPerform(index);
+                    this.jackPotPerformControl.TrailPerform(index, playType);
                     if (playType == 1) {
                         AudioManager.Instance.play(AudioClipsEnum.Free_C1Collect);
                     } else {

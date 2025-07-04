@@ -18,17 +18,27 @@ export class SpineTailPerform extends Component {
     private listIndex: number = 0;
 
     private TRAIL_STRING: String = String('Trail'); // trail of DragonBall hit
+    private SCORE_STRING: String = String('Score'); 
 
     private MINI_ENTRY_STRING: String = String('MiniEntry'); // miniGame explosive items
 
     private dragonBallPos: Array<number> = [10, 5, 0, 11, 6, 1, 12, 7, 2, 13, 8, 3, 14, 9, 4]; // symbol items pos (3 X 5)
     private miniEntryPos: Array<number> = [8, 4, 0, 9, 5, 1, 10, 6, 2, 11, 7, 3]; // miniGame items pos (3 X 4)
 
-    public UpdateAnimationObjectID(index: number) {
+    public UpdateAnimationObjectID(index: number, playType: number=0) {
         let trail: TimelineTool = PoolManager.instance.getNode(this.trailPrefab, this.node).getComponent(TimelineTool);
 
         this.listIndex = index;
-        let trailName = String(this.TRAIL_STRING) + this.dragonBallPos[this.listIndex];
+
+        let string;
+        if(playType == 2){ // Hold and Spin
+            string = this.SCORE_STRING;
+        }
+        else{
+            string = this.TRAIL_STRING;
+        }
+
+        let trailName = string + this.dragonBallPos[this.listIndex];
 
         this.spineDragonTrail.push(trail);
         this.trailName.push(trailName);

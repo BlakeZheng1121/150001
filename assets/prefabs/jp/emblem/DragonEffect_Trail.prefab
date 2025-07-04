@@ -30,11 +30,11 @@
         "__id__": 6
       },
       {
-        "__id__": 305
+        "__id__": 338
       }
     ],
     "_prefab": {
-      "__id__": 307
+      "__id__": 340
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -228,6 +228,15 @@
       },
       {
         "__id__": 294
+      },
+      {
+        "__id__": 305
+      },
+      {
+        "__id__": 316
+      },
+      {
+        "__id__": 327
       }
     ],
     "_id": ""
@@ -2308,7 +2317,7 @@
   },
   {
     "__type__": "Timeline",
-    "timelineName": "MiniEntry0",
+    "timelineName": "Score0",
     "timelineData": [
       {
         "__id__": 174
@@ -2370,8 +2379,8 @@
     "spine": {
       "__id__": 4
     },
-    "_spineName": 0,
-    "spineNameString": "",
+    "_spineName": 17,
+    "spineNameString": "ScoreHit_0",
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -2446,7 +2455,7 @@
   },
   {
     "__type__": "Timeline",
-    "timelineName": "MiniEntry1",
+    "timelineName": "Score1",
     "timelineData": [
       {
         "__id__": 185
@@ -2508,8 +2517,8 @@
     "spine": {
       "__id__": 4
     },
-    "_spineName": 0,
-    "spineNameString": "",
+    "_spineName": 18,
+    "spineNameString": "ScoreHit_1",
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -2584,7 +2593,7 @@
   },
   {
     "__type__": "Timeline",
-    "timelineName": "MiniEntry2",
+    "timelineName": "Score2",
     "timelineData": [
       {
         "__id__": 196
@@ -2646,8 +2655,8 @@
     "spine": {
       "__id__": 4
     },
-    "_spineName": 0,
-    "spineNameString": "",
+    "_spineName": 19,
+    "spineNameString": "ScoreHit_2",
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -2722,7 +2731,7 @@
   },
   {
     "__type__": "Timeline",
-    "timelineName": "MiniEntry3",
+    "timelineName": "Score3",
     "timelineData": [
       {
         "__id__": 207
@@ -2784,8 +2793,8 @@
     "spine": {
       "__id__": 4
     },
-    "_spineName": 0,
-    "spineNameString": "",
+    "_spineName": 20,
+    "spineNameString": "ScoreHit_3",
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -2860,7 +2869,7 @@
   },
   {
     "__type__": "Timeline",
-    "timelineName": "MiniEntry4",
+    "timelineName": "Score4",
     "timelineData": [
       {
         "__id__": 218
@@ -2922,8 +2931,8 @@
     "spine": {
       "__id__": 4
     },
-    "_spineName": 0,
-    "spineNameString": "",
+    "_spineName": 21,
+    "spineNameString": "ScoreHit_4",
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -2998,7 +3007,7 @@
   },
   {
     "__type__": "Timeline",
-    "timelineName": "MiniEntry5",
+    "timelineName": "Score5",
     "timelineData": [
       {
         "__id__": 229
@@ -3060,8 +3069,8 @@
     "spine": {
       "__id__": 4
     },
-    "_spineName": 0,
-    "spineNameString": "",
+    "_spineName": 22,
+    "spineNameString": "ScoreHit_5",
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -3136,7 +3145,7 @@
   },
   {
     "__type__": "Timeline",
-    "timelineName": "MiniEntry6",
+    "timelineName": "Score6",
     "timelineData": [
       {
         "__id__": 240
@@ -3198,8 +3207,8 @@
     "spine": {
       "__id__": 4
     },
-    "_spineName": 0,
-    "spineNameString": "",
+    "_spineName": 23,
+    "spineNameString": "ScoreHit_6",
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -3274,7 +3283,7 @@
   },
   {
     "__type__": "Timeline",
-    "timelineName": "MiniEntry7",
+    "timelineName": "Score7",
     "timelineData": [
       {
         "__id__": 251
@@ -3336,8 +3345,8 @@
     "spine": {
       "__id__": 4
     },
-    "_spineName": 0,
-    "spineNameString": "",
+    "_spineName": 24,
+    "spineNameString": "ScoreHit_7",
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -3412,7 +3421,7 @@
   },
   {
     "__type__": "Timeline",
-    "timelineName": "MiniEntry8",
+    "timelineName": "Score8",
     "timelineData": [
       {
         "__id__": 262
@@ -3474,8 +3483,8 @@
     "spine": {
       "__id__": 4
     },
-    "_spineName": 0,
-    "spineNameString": "",
+    "_spineName": 25,
+    "spineNameString": "ScoreHit_8",
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -3550,7 +3559,7 @@
   },
   {
     "__type__": "Timeline",
-    "timelineName": "MiniEntry9",
+    "timelineName": "Score9",
     "timelineData": [
       {
         "__id__": 273
@@ -3612,8 +3621,8 @@
     "spine": {
       "__id__": 4
     },
-    "_spineName": 0,
-    "spineNameString": "",
+    "_spineName": 26,
+    "spineNameString": "ScoreHit_9",
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -3688,7 +3697,7 @@
   },
   {
     "__type__": "Timeline",
-    "timelineName": "MiniEntry10",
+    "timelineName": "Score10",
     "timelineData": [
       {
         "__id__": 284
@@ -3750,8 +3759,8 @@
     "spine": {
       "__id__": 4
     },
-    "_spineName": 0,
-    "spineNameString": "",
+    "_spineName": 27,
+    "spineNameString": "ScoreHit_10",
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -3826,7 +3835,7 @@
   },
   {
     "__type__": "Timeline",
-    "timelineName": "MiniEntry11",
+    "timelineName": "Score11",
     "timelineData": [
       {
         "__id__": 295
@@ -3888,8 +3897,8 @@
     "spine": {
       "__id__": 4
     },
-    "_spineName": 0,
-    "spineNameString": "",
+    "_spineName": 28,
+    "spineNameString": "ScoreHit_11",
     "trackIndex": 0,
     "timeScale": 1,
     "delayTime": 0,
@@ -3963,6 +3972,420 @@
     "delayTime": 0
   },
   {
+    "__type__": "Timeline",
+    "timelineName": "Score12",
+    "timelineData": [
+      {
+        "__id__": 306
+      }
+    ]
+  },
+  {
+    "__type__": "TimelineSetupData",
+    "timelineType": 0,
+    "timelineAnimation": {
+      "__id__": 307
+    },
+    "timelineSpine": {
+      "__id__": 310
+    },
+    "timelineTime": {
+      "__id__": 313
+    }
+  },
+  {
+    "__type__": "TimelineAnimationSetupData",
+    "animation": null,
+    "_animationName": 0,
+    "animationNameString": "",
+    "delayTime": 0,
+    "useSpine": false,
+    "useAnim": false,
+    "useParticle": false,
+    "spineSetupData": {
+      "__id__": 308
+    },
+    "animSetupData": {
+      "__id__": 309
+    },
+    "particleData": []
+  },
+  {
+    "__type__": "SpineSetupData",
+    "spine": null,
+    "_spineName": 0,
+    "spineNameString": "",
+    "trackIndex": 0,
+    "timeScale": 1,
+    "delayTime": 0,
+    "isLoop": false,
+    "isResetSlots": false,
+    "isResetBones": false,
+    "isEndClose": false
+  },
+  {
+    "__type__": "AnimationSetupData",
+    "animation": null,
+    "_animationName": 0,
+    "animationNameString": "",
+    "delayTime": 0
+  },
+  {
+    "__type__": "TimelineSpineSetupData",
+    "spine": {
+      "__id__": 4
+    },
+    "_spineName": 29,
+    "spineNameString": "ScoreHit_12",
+    "trackIndex": 0,
+    "timeScale": 1,
+    "delayTime": 0,
+    "isLoop": false,
+    "isResetSlots": false,
+    "isResetBones": false,
+    "isEndClose": false,
+    "useSpine": false,
+    "useAnim": false,
+    "useParticle": false,
+    "spineSetupData": {
+      "__id__": 311
+    },
+    "animSetupData": {
+      "__id__": 312
+    },
+    "particleData": []
+  },
+  {
+    "__type__": "SpineSetupData",
+    "spine": null,
+    "_spineName": 0,
+    "spineNameString": "",
+    "trackIndex": 0,
+    "timeScale": 1,
+    "delayTime": 0,
+    "isLoop": false,
+    "isResetSlots": false,
+    "isResetBones": false,
+    "isEndClose": false
+  },
+  {
+    "__type__": "AnimationSetupData",
+    "animation": null,
+    "_animationName": 0,
+    "animationNameString": "",
+    "delayTime": 0
+  },
+  {
+    "__type__": "TimelineTimeSetupData",
+    "toNextStateTime": 0,
+    "useSpine": false,
+    "useAnim": false,
+    "useParticle": false,
+    "spineSetupData": {
+      "__id__": 314
+    },
+    "animSetupData": {
+      "__id__": 315
+    },
+    "particleData": []
+  },
+  {
+    "__type__": "SpineSetupData",
+    "spine": null,
+    "_spineName": 0,
+    "spineNameString": "",
+    "trackIndex": 0,
+    "timeScale": 1,
+    "delayTime": 0,
+    "isLoop": false,
+    "isResetSlots": false,
+    "isResetBones": false,
+    "isEndClose": false
+  },
+  {
+    "__type__": "AnimationSetupData",
+    "animation": null,
+    "_animationName": 0,
+    "animationNameString": "",
+    "delayTime": 0
+  },
+  {
+    "__type__": "Timeline",
+    "timelineName": "Score13",
+    "timelineData": [
+      {
+        "__id__": 317
+      }
+    ]
+  },
+  {
+    "__type__": "TimelineSetupData",
+    "timelineType": 0,
+    "timelineAnimation": {
+      "__id__": 318
+    },
+    "timelineSpine": {
+      "__id__": 321
+    },
+    "timelineTime": {
+      "__id__": 324
+    }
+  },
+  {
+    "__type__": "TimelineAnimationSetupData",
+    "animation": null,
+    "_animationName": 0,
+    "animationNameString": "",
+    "delayTime": 0,
+    "useSpine": false,
+    "useAnim": false,
+    "useParticle": false,
+    "spineSetupData": {
+      "__id__": 319
+    },
+    "animSetupData": {
+      "__id__": 320
+    },
+    "particleData": []
+  },
+  {
+    "__type__": "SpineSetupData",
+    "spine": null,
+    "_spineName": 0,
+    "spineNameString": "",
+    "trackIndex": 0,
+    "timeScale": 1,
+    "delayTime": 0,
+    "isLoop": false,
+    "isResetSlots": false,
+    "isResetBones": false,
+    "isEndClose": false
+  },
+  {
+    "__type__": "AnimationSetupData",
+    "animation": null,
+    "_animationName": 0,
+    "animationNameString": "",
+    "delayTime": 0
+  },
+  {
+    "__type__": "TimelineSpineSetupData",
+    "spine": {
+      "__id__": 4
+    },
+    "_spineName": 30,
+    "spineNameString": "ScoreHit_13",
+    "trackIndex": 0,
+    "timeScale": 1,
+    "delayTime": 0,
+    "isLoop": false,
+    "isResetSlots": false,
+    "isResetBones": false,
+    "isEndClose": false,
+    "useSpine": false,
+    "useAnim": false,
+    "useParticle": false,
+    "spineSetupData": {
+      "__id__": 322
+    },
+    "animSetupData": {
+      "__id__": 323
+    },
+    "particleData": []
+  },
+  {
+    "__type__": "SpineSetupData",
+    "spine": null,
+    "_spineName": 0,
+    "spineNameString": "",
+    "trackIndex": 0,
+    "timeScale": 1,
+    "delayTime": 0,
+    "isLoop": false,
+    "isResetSlots": false,
+    "isResetBones": false,
+    "isEndClose": false
+  },
+  {
+    "__type__": "AnimationSetupData",
+    "animation": null,
+    "_animationName": 0,
+    "animationNameString": "",
+    "delayTime": 0
+  },
+  {
+    "__type__": "TimelineTimeSetupData",
+    "toNextStateTime": 0,
+    "useSpine": false,
+    "useAnim": false,
+    "useParticle": false,
+    "spineSetupData": {
+      "__id__": 325
+    },
+    "animSetupData": {
+      "__id__": 326
+    },
+    "particleData": []
+  },
+  {
+    "__type__": "SpineSetupData",
+    "spine": null,
+    "_spineName": 0,
+    "spineNameString": "",
+    "trackIndex": 0,
+    "timeScale": 1,
+    "delayTime": 0,
+    "isLoop": false,
+    "isResetSlots": false,
+    "isResetBones": false,
+    "isEndClose": false
+  },
+  {
+    "__type__": "AnimationSetupData",
+    "animation": null,
+    "_animationName": 0,
+    "animationNameString": "",
+    "delayTime": 0
+  },
+  {
+    "__type__": "Timeline",
+    "timelineName": "Score14",
+    "timelineData": [
+      {
+        "__id__": 328
+      }
+    ]
+  },
+  {
+    "__type__": "TimelineSetupData",
+    "timelineType": 0,
+    "timelineAnimation": {
+      "__id__": 329
+    },
+    "timelineSpine": {
+      "__id__": 332
+    },
+    "timelineTime": {
+      "__id__": 335
+    }
+  },
+  {
+    "__type__": "TimelineAnimationSetupData",
+    "animation": null,
+    "_animationName": 0,
+    "animationNameString": "",
+    "delayTime": 0,
+    "useSpine": false,
+    "useAnim": false,
+    "useParticle": false,
+    "spineSetupData": {
+      "__id__": 330
+    },
+    "animSetupData": {
+      "__id__": 331
+    },
+    "particleData": []
+  },
+  {
+    "__type__": "SpineSetupData",
+    "spine": null,
+    "_spineName": 0,
+    "spineNameString": "",
+    "trackIndex": 0,
+    "timeScale": 1,
+    "delayTime": 0,
+    "isLoop": false,
+    "isResetSlots": false,
+    "isResetBones": false,
+    "isEndClose": false
+  },
+  {
+    "__type__": "AnimationSetupData",
+    "animation": null,
+    "_animationName": 0,
+    "animationNameString": "",
+    "delayTime": 0
+  },
+  {
+    "__type__": "TimelineSpineSetupData",
+    "spine": {
+      "__id__": 4
+    },
+    "_spineName": 31,
+    "spineNameString": "ScoreHit_14",
+    "trackIndex": 0,
+    "timeScale": 1,
+    "delayTime": 0,
+    "isLoop": false,
+    "isResetSlots": false,
+    "isResetBones": false,
+    "isEndClose": false,
+    "useSpine": false,
+    "useAnim": false,
+    "useParticle": false,
+    "spineSetupData": {
+      "__id__": 333
+    },
+    "animSetupData": {
+      "__id__": 334
+    },
+    "particleData": []
+  },
+  {
+    "__type__": "SpineSetupData",
+    "spine": null,
+    "_spineName": 0,
+    "spineNameString": "",
+    "trackIndex": 0,
+    "timeScale": 1,
+    "delayTime": 0,
+    "isLoop": false,
+    "isResetSlots": false,
+    "isResetBones": false,
+    "isEndClose": false
+  },
+  {
+    "__type__": "AnimationSetupData",
+    "animation": null,
+    "_animationName": 0,
+    "animationNameString": "",
+    "delayTime": 0
+  },
+  {
+    "__type__": "TimelineTimeSetupData",
+    "toNextStateTime": 0,
+    "useSpine": false,
+    "useAnim": false,
+    "useParticle": false,
+    "spineSetupData": {
+      "__id__": 336
+    },
+    "animSetupData": {
+      "__id__": 337
+    },
+    "particleData": []
+  },
+  {
+    "__type__": "SpineSetupData",
+    "spine": null,
+    "_spineName": 0,
+    "spineNameString": "",
+    "trackIndex": 0,
+    "timeScale": 1,
+    "delayTime": 0,
+    "isLoop": false,
+    "isResetSlots": false,
+    "isResetBones": false,
+    "isEndClose": false
+  },
+  {
+    "__type__": "AnimationSetupData",
+    "animation": null,
+    "_animationName": 0,
+    "animationNameString": "",
+    "delayTime": 0
+  },
+  {
     "__type__": "4d158WPozxOyJOrBRIZm4NL",
     "_name": "",
     "_objFlags": 0,
@@ -3971,7 +4394,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 306
+      "__id__": 339
     },
     "_id": ""
   },
