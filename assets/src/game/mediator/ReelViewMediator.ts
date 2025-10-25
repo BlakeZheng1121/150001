@@ -433,7 +433,21 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
         let self = this;
         self.winData = WinData.concat();
         self.curIndex = -1;
-        self.reelView.createAnimSymbols(WinData.animationInfos);
+        // remove mystery symbol anims created previously
+        let animInfos: SymbolInfo[] = [];
+        WinData.animationInfos.forEach((info) => {
+            if (info.sid == SymbolId.MY) {
+                this.reelView.removeAnimSymbol(info);
+                let newInfo = Object.assign({}, info);
+                newInfo.sid = (
+                    this.gameDataProxy.curRoundResult as FreeGameOneRoundResult
+                ).extendInfoForFreeGameResult.mysterySymbol;
+                animInfos.push(newInfo);
+            } else {
+                animInfos.push(info);
+            }
+        });
+        self.reelView.createAnimSymbols(animInfos);
         this.view.setReelWinMask(true);
         this.playAllLoopWin();
         this.reelView.checkNextLoopWin = () => self.checkNextWin();
@@ -492,10 +506,19 @@ export class ReelViewMediator extends BaseReelViewMediator<GAME_ReelView> {
         for (let i in self.winData.wayInfos[wayInfoIndex].symbols) {
             let symbol: SymbolInfo = self.winData.wayInfos[wayInfoIndex].symbols[i];
             if (symbol.sid >= 0) {
-                if (symbol.sid == SymbolId.WILD && !self.isPlayedWildScoring) {
+                let playInfo = Object.assign({}, symbol);
+                if (symbol.sid == SymbolId.MY) {
+                    playInfo.sid = (
+                        this.gameDataProxy.curRoundResult as FreeGameOneRoundResult
+                    ).extendInfoForFreeGameResult.mysterySymbol;
+                }
+                if (playInfo.sid == SymbolId.WILD && !self.isPlayedWildScoring) {
                     self.isPlayedWildScoring = true;
                 }
-                this.reelView.showLoopWinSymbol(symbol, self.reelDataProxy.symbolFeature[symbol.x][symbol.y]);
+                this.reelView.showLoopWinSymbol(
+                    playInfo,
+                    self.reelDataProxy.symbolFeature[symbol.x][symbol.y]
+                );
             } else {
                 this.reelView.setAnimSymbolHide(symbol);
             }
